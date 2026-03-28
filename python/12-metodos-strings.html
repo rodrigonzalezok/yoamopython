@@ -1,221 +1,547 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 12</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 12</div><h1>Metodos Strings</h1><p>Subtítulo: dominá metodos strings desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 11</span><span class='badge'>Breadcrumb: Python > Lección 12</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Metodos Strings</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Metodos Strings</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de metodos strings</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Metodos Strings</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Metodos Strings</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Metodos Strings</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 12 · Métodos de strings</title>
+<meta name="description" content="Todos los métodos de strings en Python: transformación, búsqueda, split/join, validación, f-strings avanzado y limpieza de datos reales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 12 de 27</span>
+  <h1>Métodos de strings</h1>
+  <p>Los strings tienen más de 40 métodos incorporados para transformar, buscar, dividir, unir y validar texto. En análisis de datos, limpiar texto es fácilmente el 30% de tu trabajo. Esta lección te da todas las herramientas.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: 03 Tipos de datos, 04 Variables</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es un método?</h3>
+
+<p>Un <strong>método</strong> es una función que pertenece a un objeto. Se invoca con la sintaxis <code>objeto.metodo()</code>. Los strings tienen decenas de métodos incorporados que te permiten transformarlos sin necesidad de importar nada. Como los strings son <b>inmutables</b>, cada método devuelve un <b>nuevo string</b> — el original no se modifica.</p>
+
+<div class="concept"><strong>Regla de oro de strings:</strong> como son inmutables, <code>nombre.upper()</code> NO modifica <code>nombre</code>. Devuelve un nuevo string. Si querés guardar el resultado, tenés que reasignar: <code>nombre = nombre.upper()</code>.</div>
+
+<h3>Métodos de transformación de mayúsculas/minúsculas</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Método</th><th>Qué hace</th><th>Ejemplo</th><th>Resultado</th></tr>
+<tr><td><code>.upper()</code></td><td>Todo a mayúsculas</td><td><code>"hola".upper()</code></td><td><code>"HOLA"</code></td></tr>
+<tr><td><code>.lower()</code></td><td>Todo a minúsculas</td><td><code>"HOLA".lower()</code></td><td><code>"hola"</code></td></tr>
+<tr><td><code>.title()</code></td><td>Primera letra de cada palabra en mayúscula</td><td><code>"hola mundo".title()</code></td><td><code>"Hola Mundo"</code></td></tr>
+<tr><td><code>.capitalize()</code></td><td>Solo la primera letra del string</td><td><code>"hola mundo".capitalize()</code></td><td><code>"Hola mundo"</code></td></tr>
+<tr><td><code>.swapcase()</code></td><td>Intercambia mayúsculas y minúsculas</td><td><code>"HoLa".swapcase()</code></td><td><code>"hOlA"</code></td></tr>
+<tr><td><code>.casefold()</code></td><td>Minúsculas agresivo (para comparaciones)</td><td><code>"straße".casefold()</code></td><td><code>"strasse"</code></td></tr>
+</table>
+</div>
+
+<div class="realworld"><strong>En limpieza de datos:</strong> los campos de texto vienen en formatos caóticos: "GARCÍA", "garcía", "García", "  garcía  ". Normalizar con <code>.strip().title()</code> o <code>.strip().upper()</code> es el primer paso de cualquier pipeline de limpieza. En pandas: <code>df["nombre"] = df["nombre"].str.strip().str.title()</code>.</div>
+
+<h3>Métodos de limpieza (strip)</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Método</th><th>Qué hace</th><th>Ejemplo</th><th>Resultado</th></tr>
+<tr><td><code>.strip()</code></td><td>Elimina espacios al inicio y final</td><td><code>"  hola  ".strip()</code></td><td><code>"hola"</code></td></tr>
+<tr><td><code>.lstrip()</code></td><td>Elimina espacios a la izquierda</td><td><code>"  hola  ".lstrip()</code></td><td><code>"hola  "</code></td></tr>
+<tr><td><code>.rstrip()</code></td><td>Elimina espacios a la derecha</td><td><code>"  hola  ".rstrip()</code></td><td><code>"  hola"</code></td></tr>
+<tr><td><code>.strip("$")</code></td><td>Elimina carácter específico</td><td><code>"$$100$$".strip("$")</code></td><td><code>"100"</code></td></tr>
+</table>
+</div>
+
+<div class="warning"><strong>Error común:</strong> los datos de CSV/Excel suelen tener espacios invisibles al inicio o final. Si comparás <code>"García"</code> con <code>"García "</code> (con espacio), Python dice que son distintos. <code>.strip()</code> es la primera defensa contra este problema.</div>
+
+<h3>Métodos de búsqueda y reemplazo</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Método</th><th>Qué hace</th><th>Devuelve</th></tr>
+<tr><td><code>.find(sub)</code></td><td>Posición de la primera ocurrencia</td><td><code>int</code> (o <code>-1</code> si no existe)</td></tr>
+<tr><td><code>.rfind(sub)</code></td><td>Posición de la última ocurrencia</td><td><code>int</code> (o <code>-1</code>)</td></tr>
+<tr><td><code>.index(sub)</code></td><td>Como find, pero da error si no existe</td><td><code>int</code> (o <code>ValueError</code>)</td></tr>
+<tr><td><code>.count(sub)</code></td><td>Cuántas veces aparece</td><td><code>int</code></td></tr>
+<tr><td><code>.replace(old, new)</code></td><td>Reemplaza todas las ocurrencias</td><td>Nuevo string</td></tr>
+<tr><td><code>.startswith(prefix)</code></td><td>¿Empieza con este texto?</td><td><code>True/False</code></td></tr>
+<tr><td><code>.endswith(suffix)</code></td><td>¿Termina con este texto?</td><td><code>True/False</code></td></tr>
+</table>
+</div>
+
+<h3>Split y Join: dividir y unir</h3>
+
+<p>Probablemente los dos métodos de string más importantes para análisis de datos:</p>
+
+<ul>
+  <li><code><b>.split(separador)</b></code> — divide un string en una lista usando el separador. Si no pasás separador, divide por cualquier espacio en blanco.</li>
+  <li><code><b>separador.join(lista)</b></code> — une los elementos de una lista en un string usando el separador. Es el opuesto de split.</li>
+</ul>
+
+<p>Estos dos métodos son la base de todo parseo de texto: leer líneas de un CSV, extraer campos, reconstruir strings formateados.</p>
+
+<h3>Métodos de validación (is...)</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Método</th><th>True cuando…</th><th>Uso típico</th></tr>
+<tr><td><code>.isdigit()</code></td><td>Solo dígitos (0-9)</td><td>Validar que un campo es numérico</td></tr>
+<tr><td><code>.isalpha()</code></td><td>Solo letras</td><td>Validar nombres sin números</td></tr>
+<tr><td><code>.isalnum()</code></td><td>Letras y/o dígitos</td><td>Validar códigos alfanuméricos</td></tr>
+<tr><td><code>.isspace()</code></td><td>Solo espacios/tabs/newlines</td><td>Detectar campos "vacíos" con espacios</td></tr>
+<tr><td><code>.isupper()</code></td><td>Todo mayúsculas</td><td>Verificar formato de constantes</td></tr>
+<tr><td><code>.islower()</code></td><td>Todo minúsculas</td><td>Verificar normalización</td></tr>
+</table>
+</div>
+
+<h3>f-strings avanzado</h3>
+
+<p>Los f-strings no son un método de string, pero son la herramienta de formato más poderosa y la vas a usar constantemente:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Formato</th><th>Ejemplo</th><th>Resultado</th><th>Uso</th></tr>
+<tr><td><code>:,.2f</code></td><td><code>f"${1234567.8:,.2f}"</code></td><td><code>$1,234,567.80</code></td><td>Moneda</td></tr>
+<tr><td><code>:,.0f</code></td><td><code>f"${1234567:,.0f}"</code></td><td><code>$1,234,567</code></td><td>Moneda sin decimales</td></tr>
+<tr><td><code>:.1%</code></td><td><code>f"{0.153:.1%}"</code></td><td><code>15.3%</code></td><td>Porcentajes</td></tr>
+<tr><td><code>:>12</code></td><td><code>f"{'hola':>12}"</code></td><td><code>        hola</code></td><td>Alinear derecha</td></tr>
+<tr><td><code>:<12</code></td><td><code>f"{'hola':<12}"</code></td><td><code>hola        </code></td><td>Alinear izquierda</td></tr>
+<tr><td><code>:^12</code></td><td><code>f"{'hola':^12}"</code></td><td><code>    hola    </code></td><td>Centrar</td></tr>
+<tr><td><code>:05d</code></td><td><code>f"{42:05d}"</code></td><td><code>00042</code></td><td>IDs con padding</td></tr>
+<tr><td><code>:+.1f</code></td><td><code>f"{3.5:+.1f}"</code></td><td><code>+3.5</code></td><td>Mostrar signo siempre</td></tr>
+</table>
+</div>
+
+<div class="tip"><strong>Tip profesional:</strong> el combo definitivo para limpieza de datos textuales es: <code>.strip().lower()</code> para normalizar, <code>.replace()</code> para limpiar caracteres no deseados, <code>.split()</code> para separar campos, y <code>.join()</code> para reconstruir. Con estos 4 métodos resolvés el 90% de los problemas de texto.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Transformación de mayúsculas y limpieza</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_transformar.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">texto = "  ¡Hola Mundo! Esto es PYTHON  "
+
+print(f"Original:    '{texto}'")
+print(f"upper():     '{texto.upper()}'")
+print(f"lower():     '{texto.lower()}'")
+print(f"title():     '{texto.title()}'")
+print(f"strip():     '{texto.strip()}'")
+
+# Combo más común en limpieza de datos
+dato_sucio = "  RODRIGO GONZÁLEZ  "
+limpio = dato_sucio.strip().title()
+print(f"\nSucio:  '{dato_sucio}'")
+print(f"Limpio: '{limpio}'")
+
+# Limpiar una lista completa de nombres
+nombres_sucios = ["  ANA GARCÍA  ", "luis López", "MARTA   pérez ", "  carlos  "]
+limpios = [n.strip().title() for n in nombres_sucios]
+print(f"\nOriginales: {nombres_sucios}")
+print(f"Limpios:    {limpios}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Búsqueda, reemplazo y conteo</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_buscar.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">frase = "Python es genial, Python es poderoso, Python es libre"
+
+# Buscar
+print(f"find('poderoso'): posición {frase.find('poderoso')}")
+print(f"find('Java'): {frase.find('Java')}")  # -1 = no encontrado
+print(f"count('Python'): {frase.count('Python')} veces")
+
+# Reemplazar
+nueva = frase.replace("Python", "pandas")
+print(f"\nReplace: {nueva}")
+
+# Solo reemplazar N ocurrencias
+parcial = frase.replace("Python", "🐍", 2)  # solo las primeras 2
+print(f"Replace(2): {parcial}")
+
+# Verificar inicio/final
+archivo = "reporte_Q3_2025.csv"
+print(f"\n¿Empieza con 'reporte'? {archivo.startswith('reporte')}")
+print(f"¿Termina en '.csv'? {archivo.endswith('.csv')}")
+print(f"¿Termina en '.xlsx'? {archivo.endswith('.xlsx')}")
+
+# Limpiar montos financieros
+monto_crudo = "$1,250,000.50"
+monto_limpio = monto_crudo.replace("$", "").replace(",", "")
+print(f"\nCrudo: {monto_crudo} → Limpio: {monto_limpio} → Float: {float(monto_limpio)}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Split y Join — parsear datos</h3>
+<p>La combinación split/join es la base de todo procesamiento de texto y parseo de CSV.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_split_join.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Split: dividir string en lista
+csv_line = "García,35,Buenos Aires,720,$250,000"
+campos = csv_line.split(",")
+print(f"Split por coma: {campos}")
+
+# Split sin argumento: divide por CUALQUIER espacio
+texto = "  Python   es    genial  "
+palabras = texto.split()  # sin argumento = por espacios
+print(f"Split por espacio: {palabras}")
+
+# Split con maxsplit: limitar la cantidad de divisiones
+log = "2025-03-15 ERROR usuario no encontrado en base de datos"
+partes = log.split(" ", 2)  # divide en máximo 3 partes
+fecha, nivel, mensaje = partes
+print(f"\nFecha: {fecha}, Nivel: {nivel}")
+print(f"Mensaje: {mensaje}")
+
+# Join: unir lista en string
+nombres = ["García", "López", "Martínez"]
+print(f"\nJoin con ', ': {', '.join(nombres)}")
+print(f"Join con ' | ': {' | '.join(nombres)}")
+print(f"Join con '\\n': ")
+print('\n'.join(nombres))
+
+# Caso real: reconstruir un nombre de archivo
+partes_nombre = ["reporte", "ventas", "Q3", "2025"]
+archivo = "_".join(partes_nombre) + ".csv"
+print(f"\nArchivo: {archivo}")
+
+# Splitlines: dividir por saltos de línea
+multilinea = "Línea 1\nLínea 2\nLínea 3"
+lineas = multilinea.splitlines()
+print(f"\nSplitlines: {lineas}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Validación de datos con métodos is...</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_validacion.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Validar tipo de dato textual
+datos = ["12345", "abc", "abc123", "  ", "12.5", "", "CUIT-20-12345678-9"]
+
+print("=== Validación de campos ===")
+for d in datos:
+    checks = []
+    if d.isdigit(): checks.append("solo dígitos")
+    if d.isalpha(): checks.append("solo letras")
+    if d.isalnum(): checks.append("alfanumérico")
+    if d.isspace(): checks.append("solo espacios")
+    if not d: checks.append("vacío")
+    print(f"  '{d}' → {', '.join(checks) if checks else 'mixto/especial'}")
+
+# Caso práctico: validar un CUIT
+def validar_cuit(cuit):
+    partes = cuit.split("-")
+    if len(partes) != 3:
+        return False, "Debe tener 3 partes separadas por -"
+    if not partes[0].isdigit() or len(partes[0]) != 2:
+        return False, "Prefijo debe ser 2 dígitos"
+    if not partes[1].isdigit() or len(partes[1]) != 8:
+        return False, "Cuerpo debe ser 8 dígitos"
+    if not partes[2].isdigit() or len(partes[2]) != 1:
+        return False, "Verificador debe ser 1 dígito"
+    return True, "CUIT válido"
+
+cuits = ["20-12345678-9", "27-9876543-1", "abc-12345678-9", "20123456789"]
+print("\n=== Validación de CUITs ===")
+for c in cuits:
+    ok, msg = validar_cuit(c)
+    print(f"  {c}: {'✅' if ok else '❌'} {msg}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: f-strings avanzado — reportes profesionales</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_fstrings.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Formato de números en reportes financieros
+saldo = 2345678.9
+tasa = 0.0725
+cantidad = 42
+
+print(f"Moneda:      ${saldo:,.2f}")
+print(f"Sin decimal: ${saldo:,.0f}")
+print(f"Porcentaje:  {tasa:.2%}")
+print(f"Con signo:   {saldo:+,.0f}")
+print(f"Padding:     ID-{cantidad:06d}")
+
+# Tabla alineada
+print(f"\n{'─'*45}")
+print(f"{'Concepto':<20} {'Monto':>12} {'%':>8}")
+print(f"{'─'*45}")
+
+datos = [
+    ("Sueldo bruto", 950000),
+    ("Jubilación", -104500),
+    ("Obra social", -28500),
+    ("Ganancias", -161500),
 ]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Metodos Strings</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-12' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-12-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-12-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de metodos strings con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/11-sets.html'>← Anterior</a><a class='badge' href='/python/13-metodos-listas.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+bruto = datos[0][1]
+for concepto, monto in datos:
+    pct = abs(monto) / bruto * 100
+    signo = "+" if monto >= 0 else "-"
+    print(f"  {concepto:<18} {signo}${abs(monto):>10,} {pct:>7.1f}%")
+
+neto = sum(m for _, m in datos)
+print(f"{'─'*45}")
+print(f"  {'NETO':<18} ${neto:>11,}")
+
+# Expresiones dentro de f-strings
+edad = 28
+print(f"\n{edad} es {'par' if edad % 2 == 0 else 'impar'}")
+print(f"En 10 años: {edad + 10}")
+print(f"Nombre: {'RODRIGO':^20}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Categoría</th><th>Métodos</th><th>Uso principal</th></tr>
+<tr><td>Mayúsculas</td><td><code>upper lower title capitalize swapcase</code></td><td>Normalizar texto</td></tr>
+<tr><td>Limpieza</td><td><code>strip lstrip rstrip</code></td><td>Eliminar espacios/caracteres</td></tr>
+<tr><td>Búsqueda</td><td><code>find rfind index count</code></td><td>Localizar subcadenas</td></tr>
+<tr><td>Reemplazo</td><td><code>replace</code></td><td>Sustituir texto</td></tr>
+<tr><td>Inicio/Fin</td><td><code>startswith endswith</code></td><td>Verificar prefijo/sufijo</td></tr>
+<tr><td>Dividir/Unir</td><td><code>split rsplit splitlines join</code></td><td>Parsear y reconstruir</td></tr>
+<tr><td>Validar</td><td><code>isdigit isalpha isalnum isspace isupper islower</code></td><td>Verificar contenido</td></tr>
+<tr><td>Alinear</td><td><code>center ljust rjust zfill</code></td><td>Formatear ancho fijo</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Normalizar un nombre</h4>
+  <p>Dado <code>nombre = "  RODRIGO GONZÁLEZ  "</code>, limpialo y convertilo a formato título. Debe incluir <code>Rodrigo González</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-1" data-expected="Rodrigo González">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Rodrigo González"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">nombre = "  RODRIGO GONZÁLEZ  "
+
+# Limpiá y normalizá:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["nombre.strip() elimina espacios",".title() pone mayúscula inicial","print(nombre.strip().title())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Contar ocurrencias</h4>
+  <p>En <code>"Python es genial. Python es libre. Python es rápido."</code>, contá cuántas veces aparece <code>"Python"</code>. Debe incluir <code>3</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-2" data-expected="3">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "3"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">texto = "Python es genial. Python es libre. Python es rápido."
+
+# Contá las ocurrencias:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["texto.count(\"Python\")","print(texto.count(\"Python\"))","Aparece 3 veces"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: Split básico</h4>
+  <p>Dado <code>"García|35|Buenos Aires"</code>, splitteá por <code>"|"</code> e imprimí cada campo en una línea. Debe incluir <code>Buenos Aires</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-3" data-expected="Buenos Aires">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Buenos Aires"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">registro = "García|35|Buenos Aires"
+
+# Split e imprimí:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["campos = registro.split(\"|\")","for c in campos: print(c)","O: nombre, edad, ciudad = registro.split(\"|\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Limpiar monto financiero</h4>
+  <p>Dado <code>"$1,850,000.75"</code>, eliminá el <code>$</code> y las comas, convertí a float e imprimí. Debe incluir <code>1850000.75</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-4" data-expected="1850000.75">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "1850000.75"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">monto_crudo = "$1,850,000.75"
+
+# Limpiá y convertí:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='[".replace(\"$\",\"\").replace(\",\",\"\")","float() para convertir","print(float(monto_crudo.replace(\"$\",\"\").replace(\",\",\"\")))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Join para reconstruir</h4>
+  <p>Dada <code>partes = ["Buenos", "Aires", "Capital", "Federal"]</code>, unilas con espacio y con guión bajo. Debe incluir <code>Buenos_Aires_Capital_Federal</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-5" data-expected="Buenos_Aires_Capital_Federal">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Buenos_Aires_Capital_Federal"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">partes = ["Buenos", "Aires", "Capital", "Federal"]
+
+# Join con espacio y con _:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["\" \".join(partes) para espacio","\"_\".join(partes) para guión bajo","print(\"_\".join(partes))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Verificar extensión de archivo</h4>
+  <p>Dado <code>archivo = "reporte_ventas_Q3.xlsx"</code>, verificá si es un archivo Excel (termina en .xlsx o .xls) e imprimí el resultado. Debe incluir <code>Excel</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-6" data-expected="Excel">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Excel"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">archivo = "reporte_ventas_Q3.xlsx"
+
+# Verificá la extensión:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["archivo.endswith((\".xlsx\", \".xls\"))","Acepta tupla de sufijos","if es_excel: print(\"Es archivo Excel\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Limpiar lista de datos sucios</h4>
+  <p>Tenés <code>datos = ["  GARCÍA  ", "lópez", "  Martínez", "PÉREZ  ", "  fernández  "]</code>. Normalizalos todos a formato título sin espacios extra. Debe incluir <code>['García', 'López', 'Martínez', 'Pérez', 'Fernández']</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-7" data-expected="Fernández">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Fernández"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">datos = ["  GARCÍA  ", "lópez", "  Martínez", "PÉREZ  ", "  fernández  "]
+
+# Normalizá con list comprehension:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["[d.strip().title() for d in datos]","strip quita espacios, title capitaliza","print(limpios)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Parsear múltiples registros CSV</h4>
+  <p>Dado este CSV como string multilínea, parseá cada línea en un diccionario. Debe incluir <code>720</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-8" data-expected="720">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "720"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">csv_data = """nombre,edad,score
+García,35,720
+López,42,680
+Martínez,28,590"""
+
+# Parseá en lista de diccionarios:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["lineas = csv_data.strip().splitlines()","headers = lineas[0].split(\",\")","Para cada línea[1:]: dict(zip(headers, linea.split(\",\")))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Reporte formateado con f-strings</h4>
+  <p>Generá una tabla con estos datos alineados: 3 productos con nombre (izq, 20 chars), precio (der, $formato), y stock (der, 5 chars). Debe incluir <code>Total:</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-9" data-expected="Total:">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Total:"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">productos = [
+    ("Notebook", 920000, 15),
+    ("Mouse", 23000, 150),
+    ("Teclado", 46000, 80),
+]
+
+# Generá la tabla formateada:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["f\"{nombre:<20} ${precio:>10,} {stock:>5}\"","Recorré con for nombre, precio, stock in productos:","Al final: print(f\"Total: ${sum(p for _,p,_ in productos):,}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Pipeline de limpieza de datos completo</h4>
+  <p>Tenés registros crudos: <code>["  GARCÍA|35|$150,000  ", "  López|42|$320,000", "martínez|28|$45,000  "]</code>. Para cada uno: (1) strip, (2) split por |, (3) normalizar nombre a title, (4) convertir edad a int, (5) limpiar monto y convertir a float. Armá una lista de diccionarios e imprimila. Debe incluir <code>pipeline</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-12" data-exercise="ex-10" data-expected="pipeline">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "pipeline"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">registros_crudos = [
+    "  GARCÍA|35|$150,000  ",
+    "  López|42|$320,000",
+    "martínez|28|$45,000  "
+]
+
+# Pipeline de limpieza completo:
+print("=== Resultado del pipeline ===")
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["for r in registros_crudos: campos = r.strip().split(\"|\")","nombre = campos[0].strip().title()","monto = float(campos[2].strip().replace(\"$\",\"\").replace(\",\",\"\"))"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Los strings son inmutables — cada método devuelve un NUEVO string.</li>
+  <li><code>.strip().title()</code> o <code>.strip().lower()</code> es el combo #1 de normalización.</li>
+  <li><code>.split()</code> divide texto en lista, <code>.join()</code> une lista en texto — esenciales para parsear datos.</li>
+  <li><code>.replace()</code> limpia caracteres no deseados ($, comas, espacios).</li>
+  <li><code>.find()</code> busca sin error, <code>.count()</code> cuenta ocurrencias, <code>.startswith()/.endswith()</code> verifican.</li>
+  <li>f-strings con <code>:,.2f</code> (moneda), <code>:.1%</code> (porcentaje), <code>:>12</code> (alineación) profesionalizan tus reportes.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>13 · Métodos de listas</strong>) vas a dominar todas las formas de agregar, eliminar, ordenar, buscar y transformar listas — incluyendo list comprehensions avanzadas.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/library/stdtypes.html#string-methods" target="_blank">Python docs — String Methods</a> · <a href="https://docs.python.org/3/reference/lexical_analysis.html#f-strings" target="_blank">f-strings</a></p>
+
+<div class="footer-nav">
+  <a href="/python/11-sets.html">← Sets</a>
+  <a class="next" href="/python/13-metodos-listas.html">Métodos de listas →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
