@@ -1,221 +1,504 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 11</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 11</div><h1>Sets</h1><p>Subtítulo: dominá sets desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 10</span><span class='badge'>Breadcrumb: Python > Lección 11</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Sets</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Sets</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de sets</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Sets</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Sets</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Sets</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Sets</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-11' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-11-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-11-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de sets con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/10-diccionarios.html'>← Anterior</a><a class='badge' href='/python/12-metodos-strings.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 11 · Sets</title>
+<meta name="description" content="Aprendé sets en Python: sin duplicados, operaciones de conjuntos, deduplicación y búsqueda O(1).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 11 de 27</span>
+  <h1>Sets (conjuntos)</h1>
+  <p>Los sets son colecciones sin duplicados y sin orden. Son la herramienta ideal para deduplicar datos, verificar pertenencia instantáneamente y hacer operaciones matemáticas de conjuntos (unión, intersección, diferencia).</p>
+  <div class="badges">
+    <span class="badge">⏱ 60–80 min</span>
+    <span class="badge">Prerrequisitos: 08 Listas, 10 Diccionarios</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es un set?</h3>
+
+<p>Un <strong>set</strong> (conjunto) es una colección <b>desordenada</b> de elementos <b>únicos</b>. Cuando agregás un elemento que ya existe, el set simplemente lo ignora. Se crean con llaves <code>{}</code> o con la función <code>set()</code>.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">colores = {"rojo", "azul", "verde", "rojo", "azul"}
+print(colores)  # {"rojo", "azul", "verde"} — sin duplicados
+
+# ¡CUIDADO! {} crea un dict vacío, NO un set
+vacio_dict = {}      # esto es un diccionario vacío
+vacio_set = set()    # esto es un set vacío</pre>
+
+<div class="concept"><strong>Las 3 propiedades clave de los sets:</strong> (1) <b>Sin duplicados</b> — automáticamente elimina repetidos. (2) <b>Sin orden</b> — no podés acceder por índice (<code>s[0]</code> da error). (3) <b>Pertenencia O(1)</b> — verificar si un elemento está es instantáneo, sin importar el tamaño del set. En una lista de 1 millón de elementos, buscar con <code>in</code> recorre toda la lista (O(n)). En un set, es O(1).</div>
+
+<h3>¿Para qué sirven en análisis de datos?</h3>
+
+<ul>
+  <li><b>Deduplicar:</b> <code>unicos = set(lista_con_duplicados)</code> — elimina duplicados al instante. ¿Cuántos clientes únicos hay? <code>len(set(lista_clientes))</code></li>
+  <li><b>Buscar rápido:</b> si tenés una lista negra de CUITs y necesitás verificar millones de transacciones, convertir la lista a set hace la búsqueda 10,000x más rápida.</li>
+  <li><b>Comparar grupos:</b> ¿qué clientes tienen tarjeta Y préstamo? (intersección). ¿Qué clientes tienen tarjeta PERO NO préstamo? (diferencia). Sets resuelven esto en una línea.</li>
+  <li><b>Validar datos:</b> ¿todos los valores de una columna están en una lista de valores permitidos? Sets te dan la respuesta instantánea.</li>
+</ul>
+
+<div class="analogy"><strong>Analogía:</strong> pensá en un set como la <b>lista de asistencia</b> de una reunión. Si alguien firma dos veces, no cuenta doble — el nombre aparece una sola vez. Y para ver si alguien asistió, no necesitás recorrer toda la lista: buscás directamente por su nombre.</div>
+
+<h3>Operaciones de conjuntos</h3>
+
+<p>Los sets soportan las operaciones matemáticas clásicas de teoría de conjuntos. Esto es extremadamente poderoso para análisis de datos:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>Operador</th><th>Método</th><th>Resultado</th></tr>
+<tr><td>Unión</td><td><code>A | B</code></td><td><code>A.union(B)</code></td><td>Elementos que están en A O en B (o ambos)</td></tr>
+<tr><td>Intersección</td><td><code>A & B</code></td><td><code>A.intersection(B)</code></td><td>Elementos que están en A Y en B</td></tr>
+<tr><td>Diferencia</td><td><code>A - B</code></td><td><code>A.difference(B)</code></td><td>Elementos que están en A pero NO en B</td></tr>
+<tr><td>Diferencia simétrica</td><td><code>A ^ B</code></td><td><code>A.symmetric_difference(B)</code></td><td>Elementos que están en A o B, pero NO en ambos</td></tr>
+<tr><td>Subconjunto</td><td><code>A <= B</code></td><td><code>A.issubset(B)</code></td><td>True si todos los elementos de A están en B</td></tr>
+</table>
+</div>
+
+<div class="realworld"><strong>Caso real en banca:</strong> tenés el set de clientes con tarjeta de crédito y el set con préstamo personal. <code>tarjeta & prestamo</code> te da los que tienen ambos productos (cross-sell existente). <code>tarjeta - prestamo</code> te da a quiénes ofrecerles un préstamo (oportunidad de cross-sell). Esto se resuelve con pandas también, pero el concepto de base son sets.</div>
+
+<h3>Mutabilidad y frozenset</h3>
+
+<p>Los sets normales son <b>mutables</b>: podés agregar con <code>.add()</code> y eliminar con <code>.remove()</code> o <code>.discard()</code>. La diferencia entre <code>remove</code> y <code>discard</code>: <code>remove</code> da error si el elemento no existe; <code>discard</code> no.</p>
+
+<p><code>frozenset</code> es la versión inmutable: una vez creado, no se puede modificar. Se puede usar como clave de diccionario o como elemento de otro set.</p>
+
+<div class="warning"><strong>Error común:</strong> crear un set vacío con <code>{}</code>. Eso crea un DICCIONARIO vacío. Para un set vacío usá <code>set()</code>. Es una trampa de sintaxis de Python que confunde a todos al principio.</div>
+
+<div class="tip"><strong>Tip de performance:</strong> si necesitás hacer muchas verificaciones de pertenencia (¿este ID está en mi lista?), SIEMPRE convertí la lista a set primero. <code>if id in lista_de_10mil</code> es lento. <code>if id in set_de_10mil</code> es instantáneo. Esta optimización puede transformar un script de minutos a segundos.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Crear sets y deduplicar</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_crear.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Crear sets — los duplicados se eliminan automáticamente
+numeros = {1, 2, 3, 2, 1, 4, 3, 5}
+print(f"Set: {numeros}")  # {1, 2, 3, 4, 5}
+
+# Deduplicar una lista
+clientes_con_repetidos = ["García", "López", "García", "Pérez", "López", "García", "Sosa"]
+print(f"\nLista original: {len(clientes_con_repetidos)} elementos")
+clientes_unicos = set(clientes_con_repetidos)
+print(f"Set (únicos): {len(clientes_unicos)} elementos → {clientes_unicos}")
+
+# Contar valores únicos (muy común en análisis)
+ciudades = ["BsAs", "Córdoba", "BsAs", "Rosario", "BsAs", "Córdoba", "Mendoza", "BsAs"]
+print(f"\nCiudades únicas: {len(set(ciudades))}")
+print(f"Cuáles: {set(ciudades)}")
+
+# Set vacío — ¡CUIDADO con {}!
+set_vacio = set()     # ✅ correcto
+dict_vacio = {}       # ❌ esto es un dict, no un set
+print(f"\nset(): {type(set_vacio).__name__}")
+print(f"{{}}: {type(dict_vacio).__name__}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Operaciones de conjuntos</h3>
+<p>Resolvé preguntas de negocio con operaciones de conjuntos.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_operaciones.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Clientes por producto
+tarjeta = {"García", "López", "Martínez", "Pérez", "Fernández"}
+prestamo = {"López", "Pérez", "Sosa", "Luna", "Martínez"}
+plazo_fijo = {"García", "Pérez", "Luna"}
+
+# UNIÓN: todos los clientes (con al menos un producto)
+todos = tarjeta | prestamo | plazo_fijo
+print(f"Total clientes únicos: {len(todos)} → {todos}")
+
+# INTERSECCIÓN: clientes con tarjeta Y préstamo
+ambos = tarjeta & prestamo
+print(f"\nTarjeta Y Préstamo: {ambos}")
+
+# Los tres productos
+tres = tarjeta & prestamo & plazo_fijo
+print(f"Los tres productos: {tres}")
+
+# DIFERENCIA: tienen tarjeta pero NO préstamo (oportunidad de venta)
+oportunidad = tarjeta - prestamo
+print(f"\nOportunidad cross-sell (tarjeta sin préstamo): {oportunidad}")
+
+# DIFERENCIA SIMÉTRICA: tienen uno u otro, pero NO ambos
+exclusivos = tarjeta ^ prestamo
+print(f"Solo un producto (tarjeta XOR préstamo): {exclusivos}")
+
+# SUBCONJUNTO: ¿todos los de plazo fijo tienen tarjeta?
+print(f"\n¿Plazo fijo ⊆ Tarjeta? {plazo_fijo <= tarjeta}")
+print(f"¿Plazo fijo ⊆ Todos? {plazo_fijo <= todos}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Agregar, eliminar y modificar</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_modificar.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Agregar elementos
+clientes = {"García", "López"}
+clientes.add("Pérez")         # Agrega uno
+clientes.add("García")        # Ya existe → lo ignora
+print(f"Después de add: {clientes}")
+
+# Agregar múltiples
+clientes.update(["Sosa", "Luna", "García"])  # update con iterable
+print(f"Después de update: {clientes}")
+
+# Eliminar
+clientes.remove("Sosa")       # Elimina. KeyError si no existe
+clientes.discard("NoExiste")   # Elimina. NO da error si no existe
+print(f"Después de eliminar: {clientes}")
+
+eliminado = clientes.pop()     # Elimina y devuelve uno aleatorio
+print(f"Pop eliminó: {eliminado}")
+
+# Copiar
+copia = clientes.copy()
+copia.add("NuevoCliente")
+print(f"\nOriginal: {clientes}")
+print(f"Copia: {copia}")  # La copia es independiente
+
+# Vaciar
+copia.clear()
+print(f"Después de clear: {copia}")
+print(f"Largo: {len(copia)}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Pertenencia O(1) vs O(n) — performance real</h3>
+<p>Demostramos que buscar en un set es instantáneo vs buscar en una lista.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_performance.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import time
+
+# Crear lista y set con 100,000 elementos
+datos = list(range(100000))
+datos_set = set(datos)
+
+# Buscar el último elemento (peor caso para lista)
+objetivo = 99999
+
+# Búsqueda en LISTA
+inicio = time.time()
+for _ in range(1000):
+    _ = objetivo in datos
+t_lista = (time.time() - inicio) * 1000
+
+# Búsqueda en SET
+inicio = time.time()
+for _ in range(1000):
+    _ = objetivo in datos_set
+t_set = (time.time() - inicio) * 1000
+
+print(f"Buscar en lista (x1000): {t_lista:.1f} ms")
+print(f"Buscar en set   (x1000): {t_set:.1f} ms")
+print(f"Set es {t_lista/max(t_set, 0.001):.0f}x más rápido")
+
+# Ejemplo práctico: lista negra de CUITs
+lista_negra = set(["20-12345678-9", "27-98765432-1", "30-11111111-5"])
+cuit_a_verificar = "20-12345678-9"
+print(f"\n¿CUIT en lista negra? {cuit_a_verificar in lista_negra}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Validación de datos con sets</h3>
+<p>Verificar que los datos estén dentro de valores permitidos — un patrón clásico de calidad de datos.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_validacion.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Valores permitidos para una columna
+PROVINCIAS_VALIDAS = {
+    "Buenos Aires", "CABA", "Córdoba", "Santa Fe", "Mendoza",
+    "Tucumán", "Entre Ríos", "Salta", "Chaco", "Misiones",
+    "Corrientes", "Santiago del Estero", "San Juan", "Jujuy",
+    "Río Negro", "Neuquén", "Formosa", "Chubut", "San Luis",
+    "Catamarca", "La Rioja", "La Pampa", "Santa Cruz",
+    "Tierra del Fuego"
+}
+
+# Datos que llegaron de un formulario
+datos_crudos = ["Buenos Aires", "CABA", "buenos aires", "Bs As",
+                "Córdoba", "cordoba", "Santa Fe", "Mendosa"]
+
+# Validar
+validos = []
+invalidos = []
+for d in datos_crudos:
+    if d in PROVINCIAS_VALIDAS:
+        validos.append(d)
+    else:
+        invalidos.append(d)
+
+print(f"Válidos ({len(validos)}): {validos}")
+print(f"Inválidos ({len(invalidos)}): {invalidos}")
+
+# Los inválidos necesitan limpieza (normalización de texto)
+# Esto lo vas a hacer con .str.title() en pandas
+
+# Encontrar valores que están en los datos pero NO en los permitidos
+datos_unicos = set(datos_crudos)
+no_reconocidos = datos_unicos - PROVINCIAS_VALIDAS
+print(f"\nValores no reconocidos: {no_reconocidos}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>Sintaxis</th><th>Nota</th></tr>
+<tr><td>Crear</td><td><code>{1, 2, 3}</code> o <code>set([1,2,3])</code></td><td><code>{}</code> crea dict, no set</td></tr>
+<tr><td>Set vacío</td><td><code>set()</code></td><td>Nunca <code>{}</code></td></tr>
+<tr><td>Agregar uno</td><td><code>s.add(x)</code></td><td>Ignora si ya existe</td></tr>
+<tr><td>Agregar varios</td><td><code>s.update(iterable)</code></td><td>Desde lista, set, etc.</td></tr>
+<tr><td>Eliminar (error)</td><td><code>s.remove(x)</code></td><td>KeyError si no existe</td></tr>
+<tr><td>Eliminar (seguro)</td><td><code>s.discard(x)</code></td><td>No da error</td></tr>
+<tr><td>Pertenencia</td><td><code>x in s</code></td><td>O(1) — instantáneo</td></tr>
+<tr><td>Unión</td><td><code>A | B</code></td><td>En A o en B</td></tr>
+<tr><td>Intersección</td><td><code>A & B</code></td><td>En A y en B</td></tr>
+<tr><td>Diferencia</td><td><code>A - B</code></td><td>En A pero no en B</td></tr>
+<tr><td>Dif. simétrica</td><td><code>A ^ B</code></td><td>En A o B, no ambos</td></tr>
+<tr><td>Subconjunto</td><td><code>A <= B</code></td><td>A está contenido en B</td></tr>
+<tr><td>Deduplicar lista</td><td><code>list(set(lista))</code></td><td>Pierde el orden original</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Deduplicar una lista</h4>
+  <p>Dada <code>ids = [101, 203, 101, 305, 203, 101, 407, 305]</code>, encontrá cuántos IDs únicos hay. Debe incluir <code>4</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-1" data-expected="4">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "4"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">ids = [101, 203, 101, 305, 203, 101, 407, 305]
+
+# Encontrá los únicos:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["unicos = set(ids)","print(f\"Únicos: {len(unicos)}\")","len(set([101,203,101,305,203,101,407,305])) = 4"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Agregar y verificar pertenencia</h4>
+  <p>Creá un set <code>frutas</code> con 3 elementos. Agregá "mango" con <code>.add()</code>. Verificá si "banana" está en el set. Debe incluir <code>True</code> o <code>False</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-2" data-expected="False">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir True o False</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">frutas = {"manzana", "naranja", "uva"}
+
+# Agregá mango y verificá banana:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["frutas.add(\"mango\")","print(\"banana\" in frutas)","banana no está → False"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: Intersección de dos sets</h4>
+  <p>Dados <code>equipo_a = {"García", "López", "Pérez"}</code> y <code>equipo_b = {"López", "Sosa", "García"}</code>, encontrá los que están en ambos equipos. Debe incluir <code>López</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-3" data-expected="García">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "García"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">equipo_a = {"García", "López", "Pérez"}
+equipo_b = {"López", "Sosa", "García"}
+
+# Encontrá la intersección:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["ambos = equipo_a & equipo_b","print(ambos)","García y López están en ambos"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Diferencia — encontrar exclusivos</h4>
+  <p>Clientes con tarjeta: <code>{"García","López","Pérez","Sosa"}</code>. Con préstamo: <code>{"López","Luna","Pérez"}</code>. Encontrá los que tienen tarjeta pero NO préstamo (oportunidad de cross-sell). Debe incluir <code>Sosa</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-4" data-expected="Sosa">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Sosa"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">tarjeta = {"García", "López", "Pérez", "Sosa"}
+prestamo = {"López", "Luna", "Pérez"}
+
+# Tarjeta sin préstamo:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["oportunidad = tarjeta - prestamo","print(oportunidad)","García y Sosa tienen tarjeta pero no préstamo"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Valores únicos y conteo</h4>
+  <p>Dada <code>operaciones = ["compra","venta","compra","compra","transferencia","venta","compra","retiro"]</code>, encontrá cuántos tipos distintos de operación hay y cuáles son. Debe incluir <code>4</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-5" data-expected="4">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "4"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">operaciones = ["compra", "venta", "compra", "compra", "transferencia", "venta", "compra", "retiro"]
+
+# Tipos únicos:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["tipos = set(operaciones)","print(f\"Tipos: {len(tipos)}\")","compra, venta, transferencia, retiro = 4 tipos"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Unión de tres sets</h4>
+  <p>Tenés clientes por sucursal: BsAs = <code>{"A","B","C"}</code>, Córdoba = <code>{"C","D","E"}</code>, Rosario = <code>{"A","E","F"}</code>. Encontrá el total de clientes únicos y los que están en las 3 sucursales. Debe incluir <code>6</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-6" data-expected="6">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "6"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">bsas = {"A", "B", "C"}
+cordoba = {"C", "D", "E"}
+rosario = {"A", "E", "F"}
+
+# Total únicos y clientes en las 3:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["todos = bsas | cordoba | rosario → 6 únicos","en_tres = bsas & cordoba & rosario → set vacío (ninguno está en las 3)","print(f\"Total: {len(todos)}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Validar datos con set de permitidos</h4>
+  <p>Tenés <code>MONEDAS_VALIDAS = {"ARS","USD","EUR","BRL"}</code>. Validá estas transacciones: <code>["ARS","USD","GBP","ARS","JPY","EUR"]</code>. Imprimí cuáles son inválidas. Debe incluir <code>GBP</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-7" data-expected="GBP">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "GBP"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">MONEDAS_VALIDAS = {"ARS", "USD", "EUR", "BRL"}
+transacciones = ["ARS", "USD", "GBP", "ARS", "JPY", "EUR"]
+
+# Encontrá las monedas inválidas:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["usadas = set(transacciones)","invalidas = usadas - MONEDAS_VALIDAS","GBP y JPY no están en las válidas"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Análisis de productos por cliente</h4>
+  <p>Creá un diccionario donde las claves son nombres de clientes y los valores son sets de productos. Encontrá quién tiene más productos y cuál es el producto más popular (el que tiene más clientes). Debe incluir <code>popular</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-8" data-expected="popular">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "popular"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes_productos = {
+    "García": {"Cuenta", "Tarjeta", "Plazo fijo"},
+    "López": {"Cuenta", "Préstamo"},
+    "Pérez": {"Cuenta", "Tarjeta", "Préstamo", "Plazo fijo"},
+    "Sosa": {"Cuenta"},
+}
+
+# Encontrá el que tiene más productos y el producto más popular:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["max_cliente = max(clientes_productos, key=lambda c: len(clientes_productos[c]))","Para el más popular: contá en cuántos sets aparece cada producto","todos = [p for prods in clientes_productos.values() for p in prods]; luego Counter"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Set comprehension</h4>
+  <p>Dada <code>montos = [1500, -200, 3000, 1500, -200, 4500, 3000]</code>, creá un set comprehension con solo los montos positivos únicos y calculá su suma. Debe incluir <code>9000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-9" data-expected="9000">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "9000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">montos = [1500, -200, 3000, 1500, -200, 4500, 3000]
+
+# Set comprehension con positivos únicos:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["positivos = {m for m in montos if m > 0}","print(sum(positivos))","1500 + 3000 + 4500 = 9000"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Análisis completo de cross-sell bancario</h4>
+  <p>Tenés 4 sets de clientes por producto: cuenta_corriente, tarjeta_credito, prestamo_personal, plazo_fijo. Generá un reporte que incluya: total de clientes únicos, clientes con los 4 productos, clientes con solo cuenta (sin ningún otro producto), y la oportunidad de cross-sell más grande (el par de productos con más clientes que tienen uno pero no el otro). Debe incluir <code>CROSS-SELL</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-10" data-expected="CROSS-SELL">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "CROSS-SELL"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">cuenta = {"García", "López", "Martínez", "Pérez", "Fernández", "Sosa", "Luna"}
+tarjeta = {"García", "López", "Pérez", "Fernández"}
+prestamo = {"López", "Martínez", "Sosa"}
+plazo_fijo = {"García", "Pérez", "Luna"}
+
+# Reporte completo de cross-sell:
+print("=== REPORTE CROSS-SELL ===")
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["todos = cuenta | tarjeta | prestamo | plazo_fijo → total clientes","cuatro = cuenta & tarjeta & prestamo & plazo_fijo → con los 4","solo_cuenta = cuenta - tarjeta - prestamo - plazo_fijo → oportunidad"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Los sets guardan elementos <b>únicos</b> y <b>desordenados</b>. Se crean con <code>{}</code> o <code>set()</code>.</li>
+  <li><code>set()</code> para vacío — <code>{}</code> crea un dict, no un set.</li>
+  <li>Deduplicar: <code>set(lista)</code>. Contar únicos: <code>len(set(lista))</code>.</li>
+  <li>Operaciones de conjuntos: <code>|</code> (unión), <code>&</code> (intersección), <code>-</code> (diferencia), <code>^</code> (simétrica).</li>
+  <li>Buscar con <code>in</code> es O(1) en sets vs O(n) en listas — diferencia abismal en datos grandes.</li>
+  <li><code>.add()</code> agrega, <code>.discard()</code> elimina sin error, <code>.remove()</code> elimina con error si no existe.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>12 · Métodos de strings</strong>) vas a aprender todas las formas de transformar, buscar y formatear texto — habilidades esenciales para limpiar datos del mundo real.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/datastructures.html#sets" target="_blank">Python docs — Sets</a> · <a href="https://docs.python.org/3/library/stdtypes.html#set" target="_blank">Set methods</a></p>
+
+<div class="footer-nav">
+  <a href="/python/10-diccionarios.html">← Diccionarios</a>
+  <a class="next" href="/python/12-metodos-strings.html">Métodos de strings →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

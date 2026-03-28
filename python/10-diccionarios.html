@@ -1,221 +1,559 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 10</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 10</div><h1>Diccionarios</h1><p>Subtítulo: dominá diccionarios desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 09</span><span class='badge'>Breadcrumb: Python > Lección 10</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Diccionarios</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Diccionarios</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de diccionarios</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Diccionarios</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Diccionarios</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Diccionarios</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 10 · Diccionarios</title>
+<meta name="description" content="Dominá diccionarios en Python: pares clave-valor, .get(), .items(), anidación, dict comprehensions y patrones profesionales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 10 de 27</span>
+  <h1>Diccionarios</h1>
+  <p>Los diccionarios son la estructura de datos más importante para representar datos del mundo real. Cada fila de una base de datos, cada registro JSON de una API y cada fila de un CSV es esencialmente un diccionario: pares de clave y valor.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: 08 Listas, 09 Tuplas</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es un diccionario?</h3>
+
+<p>Un <strong>diccionario</strong> (<code>dict</code>) es una colección de pares <b>clave: valor</b>. Cada clave es un identificador único que apunta a un valor. Es como un diccionario real de idiomas: buscás una palabra (clave) y encontrás su definición (valor). En Python se crean con llaves <code>{}</code>.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">cliente = {
+    "nombre": "García",
+    "edad": 35,
+    "ciudad": "Buenos Aires",
+    "score": 720,
+    "saldo": 250000,
+    "activo": True
+}</pre>
+
+<p>A diferencia de las listas (que accedés por posición numérica), en los diccionarios accedés por <strong>clave</strong>: <code>cliente["nombre"]</code> devuelve <code>"García"</code>. Esto es mucho más legible y mantenible que <code>cliente[0]</code>.</p>
+
+<div class="concept"><strong>Punto clave:</strong> un diccionario es la versión Python de un registro (fila) de una base de datos. Cuando trabajés con pandas, cada fila de un DataFrame es convertible a diccionario con <code>.to_dict()</code>. Y cuando leas un JSON de una API, lo que recibís es un diccionario (o lista de diccionarios).</div>
+
+<h3>Características de los diccionarios</h3>
+
+<ul>
+  <li><b>Ordenados (desde Python 3.7+):</b> mantienen el orden de inserción. Antes de 3.7 no lo garantizaban.</li>
+  <li><b>Mutables:</b> podés agregar, modificar y eliminar pares clave-valor después de crear el diccionario.</li>
+  <li><b>Claves únicas:</b> si asignás dos veces la misma clave, la segunda sobreescribe la primera. No hay claves duplicadas.</li>
+  <li><b>Claves inmutables:</b> las claves deben ser hashables (strings, números, tuplas). Las listas NO pueden ser claves.</li>
+  <li><b>Valores de cualquier tipo:</b> el valor puede ser int, str, list, otro dict, función, lo que sea.</li>
+  <li><b>Acceso O(1):</b> buscar por clave es instantáneo (no importa si el diccionario tiene 10 o 10 millones de entradas). Las listas necesitan O(n) para buscar un valor.</li>
+</ul>
+
+<div class="analogy"><strong>Analogía:</strong> un diccionario es como una <b>guía telefónica</b>: buscás por nombre (clave) y encontrás el teléfono (valor). No necesitás recorrer toda la guía — vas directo al nombre que necesitás. Una lista sería como tener los teléfonos en orden de llegada, sin nombres: para encontrar uno tenés que recorrer todos.</div>
+
+<h3>Acceso: [] vs .get()</h3>
+
+<p>Hay dos formas de acceder a un valor:</p>
+
+<ul>
+  <li><code>dict["clave"]</code> — devuelve el valor. Si la clave NO existe, lanza <code>KeyError</code> (error).</li>
+  <li><code>dict.get("clave", default)</code> — devuelve el valor. Si la clave no existe, devuelve <code>default</code> (en vez de error). Si no pasás default, devuelve <code>None</code>.</li>
+</ul>
+
+<div class="warning"><strong>Regla profesional:</strong> usá <code>.get()</code> siempre que no estés 100% seguro de que la clave existe. En datos del mundo real, nunca sabés si un campo viene completo. Un <code>KeyError</code> en producción a las 3 AM te arruina el fin de semana. Un <code>.get("score", 0)</code> te devuelve un valor seguro.</div>
+
+<h3>Agregar, modificar y eliminar</h3>
+
+<p>Agregar y modificar usan la misma sintaxis: <code>dict["clave"] = valor</code>. Si la clave no existe, la crea. Si existe, la sobreescribe.</p>
+
+<p>Para eliminar: <code>del dict["clave"]</code> (lanza error si no existe) o <code>dict.pop("clave", default)</code> (seguro, devuelve el valor eliminado).</p>
+
+<h3>Recorrer diccionarios</h3>
+
+<p>Los tres métodos de iteración que usás constantemente:</p>
+
+<ul>
+  <li><code>.keys()</code> — devuelve las claves. <code>for k in dict.keys():</code> (o simplemente <code>for k in dict:</code>)</li>
+  <li><code>.values()</code> — devuelve los valores. <code>for v in dict.values():</code></li>
+  <li><code>.items()</code> — devuelve pares (clave, valor). <code>for k, v in dict.items():</code> — el más usado.</li>
+</ul>
+
+<h3>Diccionarios anidados</h3>
+
+<p>Un diccionario puede contener otros diccionarios como valores. Esto es la forma natural de representar datos JSON, que es el formato estándar de las APIs web:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">cliente = {
+    "nombre": "García",
+    "scoring": {"valor": 720, "fecha": "2025-01-15", "entidad": "BCRA"},
+    "cuentas": [
+        {"tipo": "CA$", "saldo": 150000},
+        {"tipo": "CA USD", "saldo": 5000}
+    ]
+}
+# Acceso anidado:
+print(cliente["scoring"]["valor"])     # 720
+print(cliente["cuentas"][0]["saldo"])   # 150000</pre>
+
+<div class="realworld"><strong>En el trabajo real:</strong> el 90% de los datos que vas a consumir vienen como JSON (APIs) o como DataFrames (pandas). Ambos son, en esencia, diccionarios o listas de diccionarios. Cada vez que hagas <code>df.to_dict('records')</code>, obtenés una lista de dicts. Cada vez que hagas <code>requests.get(url).json()</code>, obtenés un dict.</div>
+
+<h3>Dict comprehensions</h3>
+
+<p>Al igual que las list comprehensions, podés crear diccionarios en una línea:</p>
+<p><code>{clave: valor for item in iterable if condición}</code></p>
+
+<div class="tip"><strong>Tip profesional:</strong> los dict comprehensions son ideales para transformar datos rápidamente. Por ejemplo, invertir un diccionario (<code>{v: k for k, v in original.items()}</code>), filtrar pares (<code>{k: v for k, v in d.items() if v > 100000}</code>), o crear mappings (<code>{nombre: score for nombre, score in zip(nombres, scores)}</code>).</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Crear, acceder y modificar</h3>
+<p>Las operaciones CRUD (Create, Read, Update, Delete) básicas de un diccionario.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_crud.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Crear
+cliente = {
+    "nombre": "García",
+    "edad": 35,
+    "score": 720,
+    "saldo": 250000,
+}
+print(f"Cliente: {cliente}")
+
+# Leer (Read) — dos formas
+print(f"\nNombre: {cliente['nombre']}")
+print(f"Score: {cliente.get('score')}")
+print(f"Email: {cliente.get('email', 'No informado')}")  # seguro
+
+# Actualizar (Update) — misma sintaxis que crear
+cliente["saldo"] = 300000         # modificar existente
+cliente["email"] = "g@mail.com"   # agregar nuevo
+print(f"\nActualizado: {cliente}")
+
+# Eliminar (Delete)
+eliminado = cliente.pop("email")  # seguro, devuelve el valor
+print(f"Eliminé email: {eliminado}")
+
+# .update() para merge masivo
+nuevos_datos = {"score": 735, "ciudad": "Buenos Aires", "activo": True}
+cliente.update(nuevos_datos)
+print(f"\nDespués de update: {cliente}")
+print(f"Claves: {list(cliente.keys())}")
+print(f"Cantidad de campos: {len(cliente)}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Recorrer con .items() — el patrón más usado</h3>
+<p>El 80% de las veces que trabajás con diccionarios, los recorrés con <code>.items()</code>.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_recorrer.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">cliente = {
+    "nombre": "López",
+    "edad": 42,
+    "ciudad": "Córdoba",
+    "score": 680,
+    "saldo": 320000,
+    "productos": ["Cuenta", "Tarjeta", "Préstamo"]
+}
+
+# Recorrer con .items()
+print("=== Ficha del cliente ===")
+for clave, valor in cliente.items():
+    if isinstance(valor, list):
+        print(f"  {clave}: {', '.join(valor)}")
+    elif isinstance(valor, (int, float)) and clave == "saldo":
+        print(f"  {clave}: ${valor:,}")
+    else:
+        print(f"  {clave}: {valor}")
+
+# Solo claves
+print(f"\nCampos: {list(cliente.keys())}")
+
+# Solo valores numéricos
+numeros = {k: v for k, v in cliente.items() if isinstance(v, (int, float))}
+print(f"Valores numéricos: {numeros}")
+
+# Verificar existencia de clave
+print(f"\n¿Tiene email? {'email' in cliente}")
+print(f"¿Tiene nombre? {'nombre' in cliente}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Lista de diccionarios — la "base de datos en memoria"</h3>
+<p>Este es el patrón más importante del curso. Una lista de diccionarios es exactamente lo que devuelve <code>df.to_dict('records')</code> en pandas.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_tabla.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># "Base de datos" = lista de diccionarios
+clientes = [
+    {"nombre": "García", "ciudad": "BsAs", "score": 720, "saldo": 150000},
+    {"nombre": "López", "ciudad": "Córdoba", "score": 680, "saldo": 320000},
+    {"nombre": "Martínez", "ciudad": "Rosario", "score": 590, "saldo": 45000},
+    {"nombre": "Pérez", "ciudad": "BsAs", "score": 810, "saldo": 890000},
+    {"nombre": "Fernández", "ciudad": "Mendoza", "score": 645, "saldo": 72000},
 ]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Diccionarios</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-10' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-10-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-10-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de diccionarios con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/09-tuplas.html'>← Anterior</a><a class='badge' href='/python/11-sets.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+
+# Estadísticas
+total_saldos = sum(c["saldo"] for c in clientes)
+promedio = total_saldos / len(clientes)
+print(f"Total: ${total_saldos:,}")
+print(f"Promedio: ${promedio:,.0f}")
+
+# Filtrar: clientes con score >= 650
+aprobados = [c for c in clientes if c["score"] >= 650]
+print(f"\nAprobados ({len(aprobados)}):")
+for c in aprobados:
+    print(f"  {c['nombre']}: score {c['score']}, ${c['saldo']:,}")
+
+# Top cliente por saldo
+top = max(clientes, key=lambda c: c["saldo"])
+print(f"\nTop: {top['nombre']} con ${top['saldo']:,}")
+
+# Agrupar por ciudad (manual — después pandas lo hace automático)
+por_ciudad = {}
+for c in clientes:
+    ciudad = c["ciudad"]
+    if ciudad not in por_ciudad:
+        por_ciudad[ciudad] = []
+    por_ciudad[ciudad].append(c["nombre"])
+print(f"\nPor ciudad: {por_ciudad}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Dict comprehensions</h3>
+<p>Creá y transformá diccionarios en una sola línea.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_comprehension.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Crear desde dos listas con zip
+nombres = ["García", "López", "Martínez", "Pérez"]
+scores = [720, 680, 590, 810]
+scoring = {n: s for n, s in zip(nombres, scores)}
+print(f"Scoring: {scoring}")
+
+# Filtrar: solo score >= 650
+buenos = {n: s for n, s in scoring.items() if s >= 650}
+print(f"Buenos: {buenos}")
+
+# Transformar valores: aplicar un ajuste de +50 al score
+ajustados = {n: s + 50 for n, s in scoring.items()}
+print(f"Ajustados: {ajustados}")
+
+# Invertir clave-valor
+invertido = {s: n for n, s in scoring.items()}
+print(f"Invertido: {invertido}")
+
+# Contar frecuencias (patrón muy común)
+ciudades = ["BsAs", "Córdoba", "BsAs", "Rosario", "BsAs", "Córdoba"]
+frecuencias = {}
+for c in ciudades:
+    frecuencias[c] = frecuencias.get(c, 0) + 1
+print(f"\nFrecuencias: {frecuencias}")
+
+# Lo mismo pero con Counter (preview)
+from collections import Counter
+print(f"Con Counter: {dict(Counter(ciudades))}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Diccionarios anidados — simulando JSON</h3>
+<p>Los datos de APIs y bases de datos NoSQL vienen como diccionarios anidados. Aprender a navegar estas estructuras es esencial.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_anidado.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Estructura JSON típica de una API bancaria
+respuesta_api = {
+    "status": "ok",
+    "cliente": {
+        "id": 12345,
+        "nombre": "García",
+        "scoring": {
+            "valor": 720,
+            "fecha": "2025-01-15",
+            "fuente": "BCRA"
+        },
+        "cuentas": [
+            {"tipo": "CA$", "moneda": "ARS", "saldo": 150000},
+            {"tipo": "CA USD", "moneda": "USD", "saldo": 5000},
+        ]
+    }
+}
+
+# Navegar la estructura
+print(f"Status: {respuesta_api['status']}")
+print(f"Nombre: {respuesta_api['cliente']['nombre']}")
+print(f"Score: {respuesta_api['cliente']['scoring']['valor']}")
+print(f"Fuente: {respuesta_api['cliente']['scoring']['fuente']}")
+
+# Acceder a las cuentas
+print(f"\nCuentas:")
+total_ars = 0
+for cuenta in respuesta_api["cliente"]["cuentas"]:
+    print(f"  {cuenta['tipo']}: {cuenta['moneda']} {cuenta['saldo']:,}")
+    if cuenta["moneda"] == "ARS":
+        total_ars += cuenta["saldo"]
+print(f"Total ARS: ${total_ars:,}")
+
+# Acceso seguro con .get() encadenado
+email = respuesta_api.get("cliente", {}).get("email", "No informado")
+print(f"\nEmail: {email}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>Sintaxis</th><th>Nota</th></tr>
+<tr><td>Crear</td><td><code>{"k": v}</code> o <code>dict(k=v)</code></td><td>Las claves deben ser únicas</td></tr>
+<tr><td>Leer (inseguro)</td><td><code>d["clave"]</code></td><td>KeyError si no existe</td></tr>
+<tr><td>Leer (seguro)</td><td><code>d.get("clave", default)</code></td><td>Devuelve default si no existe</td></tr>
+<tr><td>Agregar/Modificar</td><td><code>d["clave"] = valor</code></td><td>Crea si no existe, sobreescribe si existe</td></tr>
+<tr><td>Eliminar (inseguro)</td><td><code>del d["clave"]</code></td><td>KeyError si no existe</td></tr>
+<tr><td>Eliminar (seguro)</td><td><code>d.pop("clave", default)</code></td><td>Devuelve el valor eliminado</td></tr>
+<tr><td>Merge</td><td><code>d.update(otro_dict)</code></td><td>Agrega/sobreescribe con otro dict</td></tr>
+<tr><td>Claves</td><td><code>d.keys()</code></td><td>Vista de claves</td></tr>
+<tr><td>Valores</td><td><code>d.values()</code></td><td>Vista de valores</td></tr>
+<tr><td>Pares</td><td><code>d.items()</code></td><td>Vista de (clave, valor)</td></tr>
+<tr><td>Pertenencia</td><td><code>"clave" in d</code></td><td><code>True/False</code> — O(1)</td></tr>
+<tr><td>Largo</td><td><code>len(d)</code></td><td>Cantidad de pares</td></tr>
+<tr><td>Copiar</td><td><code>d.copy()</code></td><td>Copia superficial</td></tr>
+<tr><td>Vaciar</td><td><code>d.clear()</code></td><td>Elimina todo</td></tr>
+<tr><td>Comprehension</td><td><code>{k:v for k,v in ...}</code></td><td>Crear dict en una línea</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Crear y acceder</h4>
+  <p>Creá un diccionario <code>producto</code> con claves <code>nombre</code>, <code>precio</code> y <code>stock</code>. Imprimí cada valor. Debe incluir el nombre del producto.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-1" data-expected="Notebook">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá el diccionario e imprimí:
+producto = {
+    "nombre": "Notebook",
+    # completá
+}
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["Agregá \"precio\": 850000, \"stock\": 15","print(producto[\"nombre\"])","print(f\"${producto[\\\"precio\\\"]:,}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: .get() seguro</h4>
+  <p>Dado un diccionario de cliente sin campo "email", usá <code>.get()</code> para acceder al email con default <code>"No informado"</code>. Debe incluir <code>No informado</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-2" data-expected="No informado">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "No informado"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">cliente = {"nombre": "García", "score": 720}
+
+# Accedé al email de forma segura:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["email = cliente.get(\"email\", \"No informado\")","print(f\"Email: {email}\")","El default se devuelve porque \"email\" no existe en el dict"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: Recorrer con .items()</h4>
+  <p>Dado <code>moneda = {"nombre": "Dólar", "código": "USD", "cotización": 1150}</code>, recorrelo con <code>.items()</code> e imprimí cada par. Debe incluir <code>USD</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-3" data-expected="USD">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "USD"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">moneda = {"nombre": "Dólar", "código": "USD", "cotización": 1150}
+
+# Recorré con .items():
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["for clave, valor in moneda.items():","    print(f\"{clave}: {valor}\")","código: USD va a aparecer en el output"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Agregar, modificar y eliminar</h4>
+  <p>Partiendo de <code>{"nombre": "López", "saldo": 100000}</code>: agregá <code>"ciudad": "Córdoba"</code>, modificá saldo a <code>150000</code>, eliminá ciudad con <code>.pop()</code>. Imprimí el dict final. Debe incluir <code>150000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-4" data-expected="150000">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "150000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">cliente = {"nombre": "López", "saldo": 100000}
+
+# Agregá, modificá, eliminá:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["cliente[\"ciudad\"] = \"Córdoba\" → agrega","cliente[\"saldo\"] = 150000 → modifica","cliente.pop(\"ciudad\") → elimina. print(cliente)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Dict comprehension desde listas</h4>
+  <p>Tenés <code>tickers = ["GGAL", "YPF", "PAMP"]</code> y <code>precios = [5200, 28000, 3100]</code>. Creá un diccionario con dict comprehension y zip. Imprimilo. Debe incluir <code>GGAL</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-5" data-expected="GGAL">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "GGAL"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">tickers = ["GGAL", "YPF", "PAMP"]
+precios = [5200, 28000, 3100]
+
+# Dict comprehension:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["cotizaciones = {t: p for t, p in zip(tickers, precios)}","print(cotizaciones)","Da: {\"GGAL\": 5200, \"YPF\": 28000, \"PAMP\": 3100}"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Contar frecuencias</h4>
+  <p>Dada <code>transacciones = ["compra", "venta", "compra", "compra", "venta", "transferencia", "compra"]</code>, contá cuántas veces aparece cada tipo usando un diccionario. Debe incluir <code>compra</code> y <code>4</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-6" data-expected="4">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "4"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">transacciones = ["compra", "venta", "compra", "compra", "venta", "transferencia", "compra"]
+
+# Contá frecuencias:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["freq = {} → diccionario vacío","for t in transacciones: freq[t] = freq.get(t, 0) + 1","compra aparece 4 veces"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Filtrar lista de diccionarios</h4>
+  <p>Dada una lista de 4 clientes (dict con nombre, score, saldo), filtrá los que tienen score >= 650 y calculá el saldo promedio de los filtrados. Debe incluir <code>Promedio</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-7" data-expected="Promedio">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Promedio"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = [
+    {"nombre": "García", "score": 720, "saldo": 150000},
+    {"nombre": "López", "score": 580, "saldo": 45000},
+    {"nombre": "Pérez", "score": 810, "saldo": 890000},
+    {"nombre": "Sosa", "score": 645, "saldo": 72000},
+]
+
+# Filtrá score >= 650 y calculá promedio de saldos:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["buenos = [c for c in clientes if c[\"score\"] >= 650]","prom = sum(c[\"saldo\"] for c in buenos) / len(buenos)","print(f\"Promedio: ${prom:,.0f}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Diccionario anidado</h4>
+  <p>Creá un diccionario <code>sucursal</code> con <code>"nombre"</code>, <code>"ciudad"</code> y <code>"empleados"</code> (lista de dicts con nombre y cargo). Imprimí el nombre del primer empleado accediendo a la estructura anidada. Debe incluir <code>Gerente</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-8" data-expected="Gerente">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Gerente"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá la estructura anidada:
+sucursal = {
+    # completá
+}
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["\"empleados\": [{\"nombre\": \"García\", \"cargo\": \"Gerente\"}, ...]","print(sucursal[\"empleados\"][0][\"cargo\"])","Accedés: dict → lista (índice) → dict → clave"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Transformar dict con comprehension</h4>
+  <p>Dado <code>precios_ars = {"Notebook": 920000, "Mouse": 23000, "Teclado": 46000}</code> y <code>DOLAR = 1150</code>, creá un nuevo diccionario con los precios en USD (dividir por DOLAR, redondear a 2 decimales). Debe incluir <code>USD</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-9" data-expected="USD">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "USD"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">precios_ars = {"Notebook": 920000, "Mouse": 23000, "Teclado": 46000}
+DOLAR = 1150
+
+# Convertí a USD con dict comprehension:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["precios_usd = {k: round(v/DOLAR, 2) for k, v in precios_ars.items()}","print(\"Precios en USD:\", precios_usd)","Notebook: 920000/1150 ≈ 800.0"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Reporte de cartera desde lista de dicts</h4>
+  <p>Dada una lista de 5 clientes (nombre, ciudad, score, saldo), generá un reporte que incluya: tabla con todos los clientes, total de la cartera, promedio por ciudad (agrupación manual), y el cliente con mayor saldo. Debe incluir <code>REPORTE</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-10" data-expected="REPORTE">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "REPORTE"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = [
+    {"nombre": "García", "ciudad": "BsAs", "score": 720, "saldo": 150000},
+    {"nombre": "López", "ciudad": "Córdoba", "score": 680, "saldo": 320000},
+    {"nombre": "Martínez", "ciudad": "BsAs", "score": 590, "saldo": 45000},
+    {"nombre": "Pérez", "ciudad": "BsAs", "score": 810, "saldo": 890000},
+    {"nombre": "Fernández", "ciudad": "Córdoba", "score": 645, "saldo": 72000},
+]
+
+# Generá el reporte completo:
+print("=== REPORTE DE CARTERA ===")
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["Para la tabla: for c in clientes: print(f\"{c[nombre]}...\")","Para agrupar por ciudad: recorré y acumulá saldos por ciudad en un dict","Top: max(clientes, key=lambda c: c[\"saldo\"])"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Los diccionarios guardan pares <code>clave: valor</code>. Se crean con <code>{}</code>. Acceso por clave, no por posición.</li>
+  <li>Usá <code>.get("clave", default)</code> para acceso seguro (sin KeyError).</li>
+  <li>Recorrer con <code>.items()</code> es el patrón más común: <code>for k, v in dict.items():</code></li>
+  <li>Una lista de diccionarios es la "base de datos en memoria" — el paso previo a DataFrames de pandas.</li>
+  <li>Dict comprehensions (<code>{k:v for ...}</code>) permiten crear y transformar dicts en una línea.</li>
+  <li>Los dicts anidados representan JSON — el formato estándar de APIs y datos web.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>11 · Sets</strong>) vas a aprender la última estructura de datos fundamental: conjuntos sin duplicados, ideales para deduplicar datos y hacer operaciones matemáticas de conjuntos.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries" target="_blank">Python docs — Dictionaries</a> · <a href="https://docs.python.org/3/library/stdtypes.html#dict" target="_blank">dict methods</a></p>
+
+<div class="footer-nav">
+  <a href="/python/09-tuplas.html">← Tuplas</a>
+  <a class="next" href="/python/11-sets.html">Sets →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
