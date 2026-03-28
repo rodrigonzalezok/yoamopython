@@ -1,221 +1,538 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 07</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 07</div><h1>Comentarios Indentacion</h1><p>Subtítulo: dominá comentarios indentacion desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 06</span><span class='badge'>Breadcrumb: Python > Lección 07</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Comentarios Indentacion</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Comentarios Indentacion</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de comentarios indentacion</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Comentarios Indentacion</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Comentarios Indentacion</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Comentarios Indentacion</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Comentarios Indentacion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-07' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-07-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-07-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de comentarios indentacion con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/06-condicionales.html'>← Anterior</a><a class='badge' href='/python/08-listas.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 07 · Comentarios e indentación</title>
+<meta name="description" content="Escribí código legible y profesional. Comentarios, docstrings, indentación obligatoria y convenciones PEP 8.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 07 de 27</span>
+  <h1>Comentarios e indentación</h1>
+  <p>El código se escribe una vez y se lee cientos de veces. Comentar bien e indentar correctamente es lo que convierte código funcional en código profesional y mantenible.</p>
+  <div class="badges">
+    <span class="badge">⏱ 50–70 min</span>
+    <span class="badge">Prerrequisitos: 06 Condicionales</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Para qué comentar?</h3>
+
+<p>Un <strong>comentario</strong> es texto que Python ignora al ejecutar. Existe exclusivamente para que los humanos (incluido tu yo del futuro) entiendan el código. Parece trivial, pero en el mundo profesional la diferencia entre un proyecto mantenible y uno que nadie quiere tocar suele ser la calidad de los comentarios.</p>
+
+<p>Hay una frase famosa en programación: <em>"El código dice CÓMO, los comentarios dicen POR QUÉ."</em> No comentes lo obvio (<code># sumo a + b</code> antes de <code>c = a + b</code>). Comentá las decisiones no evidentes: por qué usaste una fórmula y no otra, por qué tratás un caso especial, qué regla de negocio implementa ese bloque.</p>
+
+<div class="concept"><strong>Regla de oro:</strong> si necesitás un comentario para explicar QUÉ hace tu código, probablemente tu código sea demasiado complejo o tenga nombres poco claros. Los buenos nombres hacen que el código se explique solo. Los comentarios quedan para el POR QUÉ y el CONTEXTO.</div>
+
+<h3>Tipos de comentarios en Python</h3>
+
+<p><strong>Comentario de una línea:</strong> empieza con <code>#</code>. Todo lo que viene después del <code>#</code> en esa línea es ignorado por Python.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Esto es un comentario completo en una línea
+saldo = 50000  # También podés comentar al final de una línea de código</pre>
+
+<p><strong>Docstrings (documentación):</strong> son strings de triple comilla (<code>"""..."""</code> o <code>'''...'''</code>) que documentan funciones, clases y módulos. A diferencia de los comentarios comunes, los docstrings se almacenan en memoria y se pueden acceder con <code>help()</code> o <code>.__doc__</code>. Son la forma oficial de documentar en Python.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def calcular_iva(precio, tasa=0.21):
+    """
+    Calcula el precio con IVA incluido.
+    
+    Args:
+        precio (float): Precio sin IVA.
+        tasa (float): Tasa de IVA. Default: 0.21 (21%).
+    
+    Returns:
+        float: Precio con IVA incluido.
+    """
+    return precio * (1 + tasa)</pre>
+
+<div class="tip"><strong>Tip profesional:</strong> el estilo de docstrings más usado en la industria es el de Google (como el ejemplo de arriba). Otras opciones son NumPy style y Sphinx style. Lo importante es ser consistente en todo el proyecto.</div>
+
+<h3>¿Qué comentar y qué NO comentar?</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>✅ Comentá esto</th><th>❌ NO comentes esto</th></tr>
+<tr><td>Decisiones de diseño no obvias</td><td>Código que se explica solo</td></tr>
+<tr><td>Reglas de negocio: "BCRA exige ratio < 35%"</td><td><code># Sumo a más b</code> antes de <code>c = a + b</code></td></tr>
+<tr><td>Workarounds y sus razones</td><td>Cada línea individual</td></tr>
+<tr><td>TODOs y FIXMEs para el futuro</td><td>Código comentado que "por las dudas" dejás</td></tr>
+<tr><td>Fórmulas financieras con su fuente</td><td>Nombres de variables (si el nombre es bueno)</td></tr>
+<tr><td>Límites y supuestos del algoritmo</td><td>Getters y setters triviales</td></tr>
+</table>
+</div>
+
+<div class="warning"><strong>Antipatrón: código comentado.</strong> Si tenés líneas de código comentadas "por las dudas", borralas. Para eso existe Git (control de versiones) — siempre podés recuperar código viejo. Código comentado acumula ruido, confunde, y nadie sabe si está ahí por algo o es basura.</div>
+
+<h3>Indentación: la estructura de Python</h3>
+
+<p>En la mayoría de lenguajes (Java, C++, JavaScript), los bloques de código se delimitan con llaves <code>{}</code>. En Python, los bloques se delimitan con <strong>indentación</strong> (espacios al inicio de la línea). Esto NO es una preferencia estética — es <b>parte de la sintaxis del lenguaje</b>. Si indentás mal, tu programa hace otra cosa o directamente da error.</p>
+
+<p>La convención universal es usar <strong>4 espacios</strong> por nivel de indentación. No 2, no 3, no tabs — 4 espacios. Esto está documentado en PEP 8 y es lo que usan el 99% de los proyectos Python del mundo.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">if saldo > 0:
+    # Nivel 1: 4 espacios
+    print("Tenés saldo positivo")
+    if saldo > 100000:
+        # Nivel 2: 8 espacios
+        print("Saldo alto")
+        if saldo > 1000000:
+            # Nivel 3: 12 espacios
+            print("Sos millonario")
+# Nivel 0: sin espacios — fuera de todos los bloques
+print("Esto siempre se ejecuta")</pre>
+
+<div class="warning"><strong>IndentationError: el error más frustrante de principiante.</strong> Aparece cuando la indentación es inconsistente: mezclás tabs y espacios, o tenés 3 espacios donde deberían ser 4. VS Code con la extensión de Python resuelve esto automáticamente convirtiendo tabs a 4 espacios.</div>
+
+<h3>PEP 8: el estándar de estilo de Python</h3>
+
+<p><strong>PEP 8</strong> (Python Enhancement Proposal #8) es la guía oficial de estilo de Python. Seguirla no es obligatorio para que tu código funcione, pero sí es obligatorio en cualquier equipo profesional. Las reglas más importantes:</p>
+
+<ul>
+  <li><b>Indentación:</b> 4 espacios por nivel</li>
+  <li><b>Largo de línea:</b> máximo 79-120 caracteres</li>
+  <li><b>Espacios alrededor de operadores:</b> <code>x = 1</code>, no <code>x=1</code></li>
+  <li><b>Líneas en blanco:</b> 2 entre funciones de nivel superior, 1 entre métodos dentro de una clase</li>
+  <li><b>Imports:</b> uno por línea, al inicio del archivo, agrupados (stdlib → terceros → locales)</li>
+  <li><b>Trailing whitespace:</b> no dejar espacios al final de las líneas</li>
+</ul>
+
+<div class="realworld"><strong>En el trabajo real:</strong> los equipos profesionales usan herramientas automáticas para forzar PEP 8: <code>black</code> (formateador automático), <code>flake8</code> o <code>pylint</code> (verificadores de estilo), y los configuran en CI/CD para que el código que no cumple ni siquiera se pueda mergear. Aprender PEP 8 ahora te ahorra conflictos después.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Tipos de comentarios</h3>
+<p>Tres formas de comentar en Python: inline, de línea completa, y docstrings.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_comentarios.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Comentario de línea completa: describe el bloque que sigue
+# Autor: Rodrigo González Doldán
+# Propósito: demostrar los tipos de comentarios en Python
+
+saldo = 250000  # Comentario inline: explica esta línea específica
+
+# Los comentarios se usan para:
+# 1. Documentar decisiones de diseño
+# 2. Explicar fórmulas complejas
+# 3. Dejar notas (TODO, FIXME, HACK)
+
+# TODO: reemplazar tasa hardcodeada por parámetro
+TASA_PLAZO_FIJO = 0.065  # TEM del BCRA al 15/03/2025
+
+# Docstring: documenta una función
+def calcular_interes(capital, tasa=TASA_PLAZO_FIJO):
+    """
+    Calcula el interés simple de un período.
+    
+    Args:
+        capital (float): Monto invertido.
+        tasa (float): Tasa del período. Default: TEM BCRA.
+    
+    Returns:
+        float: Interés generado.
+    """
+    return capital * tasa
+
+interes = calcular_interes(saldo)
+print(f"Interés: ${interes:,.0f}")
+
+# Acceder al docstring
+print(f"\nDocumentación: {calcular_interes.__doc__}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Buenos vs malos comentarios</h3>
+<p>Compará comentarios que ayudan con comentarios que molestan.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_buenos_malos.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ❌ MALOS COMENTARIOS (dicen lo obvio, son ruido)
+x = 10  # Asigno 10 a x
+y = 20  # Asigno 20 a y
+z = x + y  # Sumo x e y
+print(z)  # Imprimo z
+
+print()
+
+# ✅ BUENOS COMENTARIOS (explican el POR QUÉ, no el QUÉ)
+# Ratio máximo regulado por BCRA Comunicación A-7876
+MAX_RATIO_CUOTA_INGRESO = 0.35
+
+ingreso_mensual = 350000
+cuota_solicitada = 98000
+
+# La regulación exige que la cuota no supere el 35% del ingreso
+ratio = cuota_solicitada / ingreso_mensual
+aprobado = ratio <= MAX_RATIO_CUOTA_INGRESO
+
+# FIXME: considerar otros ingresos declarados (no solo el principal)
+print(f"Ratio: {ratio:.1%} — {'Aprobado' if aprobado else 'Rechazado'}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: La indentación como estructura</h3>
+<p>Moviendo una sola línea de lugar (cambiando su indentación) cambia completamente el comportamiento del programa.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_indentacion.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 50000
+limite = 100000
+
+# VERSIÓN A: el "Reporte completo" está DENTRO del if
+print("=== Versión A ===")
+if saldo > 0:
+    print(f"Saldo positivo: ${saldo:,}")
+    if saldo > limite:
+        print("Superaste el límite")
+    else:
+        print(f"Te faltan ${limite - saldo:,} para el límite")
+    print("Reporte completo")  # ← dentro del if exterior
+
+# VERSIÓN B: el "Reporte completo" está FUERA del if
+print("\n=== Versión B ===")
+if saldo > 0:
+    print(f"Saldo positivo: ${saldo:,}")
+    if saldo > limite:
+        print("Superaste el límite")
+    else:
+        print(f"Te faltan ${limite - saldo:,} para el límite")
+print("Reporte completo")  # ← fuera del if (sin indentación)
+
+# La diferencia: en B, "Reporte completo" se imprime SIEMPRE.
+# En A, solo si saldo > 0. Una indentación cambia la lógica.</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Desactivar código temporalmente con comentarios</h3>
+<p>Un uso legítimo de comentarios: desactivar líneas durante debugging. Pero no lo dejes así para siempre.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_debug.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Pipeline de datos simplificado
+datos_crudos = ["$1,500", "$820", "$3,200", "N/A", "$950"]
+
+datos_limpios = []
+errores = 0
+
+for d in datos_crudos:
+    # Descomentá la siguiente línea para debugging:
+    # print(f"DEBUG - Procesando: '{d}'")
+    
+    if d == "N/A" or d == "" or d is None:
+        errores += 1
+        # print(f"DEBUG - Saltando valor inválido: '{d}'")
+        continue
+    
+    monto = float(d.replace("$", "").replace(",", ""))
+    datos_limpios.append(monto)
+
+print(f"Procesados: {len(datos_limpios)}")
+print(f"Errores: {errores}")
+print(f"Total: ${sum(datos_limpios):,.0f}")
+
+# TIP: cuando termines de debuggear, BORRÁ los print de debug.
+# No los dejes comentados "por las dudas".</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Código PEP 8 compliant vs no compliant</h3>
+<p>Las dos versiones funcionan igual, pero una es profesional y la otra no.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_pep8.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ❌ SIN PEP 8 (funciona pero es feo e inconsistente)
+import math,random
+x=math.sqrt(144)
+y=random.randint(1,100)
+def foo(a,b):return a+b
+if x>10:print("si")
+else :print("no")
+
+print(f"Sin PEP 8: x={x}, y={y}, foo={foo(3,4)}")
+
+# ✅ CON PEP 8 (profesional, legible, consistente)
+import math
+import random
+
+
+def sumar(a, b):
+    """Suma dos valores."""
+    return a + b
+
+
+raiz = math.sqrt(144)
+aleatorio = random.randint(1, 100)
+
+if raiz > 10:
+    print(f"\nCon PEP 8: raíz = {raiz}")
+else:
+    print("Raíz <= 10")
+
+resultado = sumar(3, 4)
+print(f"Suma: {resultado}")
+print(f"Aleatorio: {aleatorio}")
+
+# La diferencia: el segundo se lee como texto natural.
+# El primero hay que "descifrarlo".</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Elemento</th><th>Sintaxis</th><th>Uso</th></tr>
+<tr><td>Comentario inline</td><td><code>codigo  # comentario</code></td><td>Notas breves sobre una línea</td></tr>
+<tr><td>Comentario de línea</td><td><code># comentario</code></td><td>Explicar el bloque que sigue</td></tr>
+<tr><td>Docstring</td><td><code>"""texto"""</code></td><td>Documentar funciones/clases</td></tr>
+<tr><td>TODO</td><td><code># TODO: tarea pendiente</code></td><td>Marcar trabajo futuro</td></tr>
+<tr><td>FIXME</td><td><code># FIXME: bug conocido</code></td><td>Marcar problemas a resolver</td></tr>
+<tr><td>HACK</td><td><code># HACK: workaround temporal</code></td><td>Marcar soluciones temporales</td></tr>
+</table>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr><th>Regla PEP 8</th><th>✅ Correcto</th><th>❌ Incorrecto</th></tr>
+<tr><td>Indentación</td><td>4 espacios</td><td>Tabs, 2 espacios, mezcla</td></tr>
+<tr><td>Espacios en operadores</td><td><code>x = 1 + 2</code></td><td><code>x=1+2</code></td></tr>
+<tr><td>Imports</td><td>Uno por línea</td><td><code>import os, sys, math</code></td></tr>
+<tr><td>Largo de línea</td><td>≤ 79-120 chars</td><td>Líneas de 200+ chars</td></tr>
+<tr><td>Nombres</td><td><code>snake_case</code></td><td><code>camelCase</code>, <code>x</code></td></tr>
+<tr><td>Líneas en blanco</td><td>2 entre funciones top-level</td><td>0 o 5 entre funciones</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Agregar comentarios a código existente</h4>
+  <p>Agregá un comentario a cada línea explicando qué hace (pero hacelo bien — explicá el POR QUÉ, no el QUÉ). El output debe incluir <code>6050.0</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-1" data-expected="6050.0">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "6050.0"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">IVA = 0.21
+precio = 5000
+precio_final = precio * (1 + IVA)
+print(precio_final)</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["Agregá # después de cada línea","IVA = 0.21  # Tasa vigente según AFIP","No comentes lo obvio — decí POR QUÉ 0.21 y no otro valor"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Escribir un docstring</h4>
+  <p>Agregá un docstring a la función <code>calcular_neto</code> que explique qué hace, qué parámetros recibe y qué devuelve. Debe incluir <code>684500</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-2" data-expected="684500">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "684500"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">def calcular_neto(bruto, tasa_deduccion=0.315):
+    # Agregá un docstring acá
+    return bruto * (1 - tasa_deduccion)
+
+resultado = calcular_neto(1000000)
+print(resultado)</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["Después del def, escribí \"\"\"Calcula el sueldo neto...\"\"\"","Documentá: Args: bruto (float), tasa_deduccion (float)","El resultado de 1000000 * (1 - 0.315) = 685000. Revisá la tasa."]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: Arreglar indentación rota</h4>
+  <p>Este código tiene la indentación mal. Arreglalo para que funcione. Debe incluir <code>Saldo: positivo</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-3" data-expected="Saldo: positivo">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Saldo: positivo"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 50000
+if saldo > 0:
+print("Saldo: positivo")
+print(f"Monto: ${saldo:,}")
+else:
+print("Saldo: negativo")</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["Las líneas dentro del if necesitan 4 espacios de indentación","    print(\"Saldo: positivo\") ← 4 espacios adelante","Lo mismo para la línea dentro del else"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Código con bloques anidados correctos</h4>
+  <p>Escribí un programa con 3 niveles de indentación: un if que verifica edad >= 18, dentro otro if que verifica ingreso >= 100000, y dentro un print. Debe incluir <code>Aprobado nivel 3</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-4" data-expected="Aprobado nivel 3">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Aprobado nivel 3"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">edad = 25
+ingreso = 150000
+score = 720
+
+# Armá 3 niveles de anidación:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["if edad >= 18: (nivel 0, 4 espacios adentro)","    if ingreso >= 100000: (nivel 1, 8 espacios adentro)","        if score >= 700: (nivel 2) → print(\"Aprobado nivel 3\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Función documentada con docstring</h4>
+  <p>Creá una función <code>calcular_iva(precio, tasa=0.21)</code> con docstring completo (descripción, Args, Returns). Usala e imprimí el resultado. Debe incluir <code>12100</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-5" data-expected="12100">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "12100"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá la función con docstring:
+
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["def calcular_iva(precio, tasa=0.21):","    \"\"\"Calcula precio con IVA...\"\"\"","    return precio * (1 + tasa). Luego: print(calcular_iva(10000))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Identificar y corregir errores de estilo PEP 8</h4>
+  <p>Este código viola PEP 8 en al menos 5 formas. Corregilo. Debe incluir <code>Resultado: 30</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-6" data-expected="Resultado: 30">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Resultado: 30"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import math,random
+x=10;y=20
+z=x+y
+if z>0 :print(f"Resultado: {z}")
+else:print("negativo")</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["Imports en líneas separadas: import math\\nimport random","Espacios alrededor de =: x = 10","No poner ; para separar, usar líneas separadas. Indentar el print."]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Script profesional completo</h4>
+  <p>Escribí un script con: encabezado comentado (autor, fecha, descripción), constantes, una función con docstring, y uso formateado. Debe incluir <code>Autor:</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-7" data-expected="Autor:">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Autor:"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Armá un script profesional completo:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["# Autor: [tu nombre]\\n# Fecha: 2025\\n# Descripción: ...","Definí constantes en MAYÚSCULAS","Creá una función con docstring y usala"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Pipeline comentado</h4>
+  <p>Creá un mini pipeline que tome <code>datos = ["$1,200", "N/A", "$800", "", "$2,500"]</code>, limpie los inválidos, convierta a números y sume. Comentá cada paso explicando POR QUÉ. Debe incluir <code>4500</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-8" data-expected="4500">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "4500"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">datos = ["$1,200", "N/A", "$800", "", "$2,500"]
+
+# Armá el pipeline comentando cada paso:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["# Filtrar valores inválidos (N/A y vacíos no son montos)","validos = [d for d in datos if d and d != \"N/A\"]","# Limpiar símbolos y convertir. Sumar con sum()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Acceder a docstrings</h4>
+  <p>Creá 2 funciones con docstrings distintos. Usá <code>.__doc__</code> para imprimir la documentación de cada una. Debe incluir <code>Documentación</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-9" data-expected="Documentación">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Documentación"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá 2 funciones con docstrings y mostrá su documentación:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["def func1(): \"\"\"Mi primera función.\"\"\" return 1","def func2(): \"\"\"Mi segunda función.\"\"\" return 2","print(f\"Documentación: {func1.__doc__}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Refactoring completo — de código ilegible a profesional</h4>
+  <p>Reescribí este código para que sea 100% PEP 8 compliant: nombres descriptivos, comentarios útiles, indentación correcta, docstrings. El output numérico debe ser el mismo. Debe incluir <code>Neto: 655500</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-10" data-expected="Neto: 655500">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Neto: 655500"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Refactoreá este código ilegible:
+a=950000;b=0.11;c=0.03;d=0.17
+e=a*b;f=a*c;g=a*d
+h=a-e-f-g
+print(h)
+
+# Reescribilo acá abajo con:
+# - Nombres descriptivos
+# - Constantes en MAYÚSCULAS
+# - Comentarios que expliquen el POR QUÉ
+# - Formato de moneda
+# - Debe imprimir "Neto: 655500" (o similar con formato)
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["JUBILACION = 0.11, OBRA_SOCIAL = 0.03, GANANCIAS = 0.17","sueldo_bruto = 950000","Calculá deducciones con nombres claros y print(f\"Neto: {neto:,.0f}\") → Neto: 655,500"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Comentarios (<code>#</code>) explican el POR QUÉ, no el QUÉ. Docstrings (<code>"""..."""</code>) documentan funciones.</li>
+  <li>La indentación (4 espacios) es obligatoria en Python — define la estructura del programa.</li>
+  <li>PEP 8 es la guía de estilo oficial: snake_case, espacios en operadores, imports separados, 79-120 chars por línea.</li>
+  <li>Código comentado (desactivado) debe borrarse — para eso existe Git.</li>
+  <li>Los buenos nombres hacen que el código se explique solo. Los comentarios son para el contexto y las decisiones.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>08 · Listas</strong>) vas a aprender la primera estructura de datos de Python: colecciones ordenadas y modificables que te permiten guardar muchos valores bajo un solo nombre.</p>
+
+<p><strong>Recursos:</strong> <a href="https://peps.python.org/pep-0008/" target="_blank">PEP 8</a> · <a href="https://peps.python.org/pep-0257/" target="_blank">PEP 257 — Docstring Conventions</a></p>
+
+<div class="footer-nav">
+  <a href="/python/06-condicionales.html">← Condicionales</a>
+  <a class="next" href="/python/08-listas.html">Listas →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

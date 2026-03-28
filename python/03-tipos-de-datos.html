@@ -1,108 +1,521 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 03 · Tipos de datos</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 03</div><h1>Tipos de datos en Python</h1><p>Entendé int, float, str, bool y None: cómo Python clasifica información y por qué eso impacta directamente en tus análisis.</p><div class='badges'><span class='badge'>Tiempo estimado: 75-95 min</span><span class='badge'>Prerrequisitos: 01 Qué es Python, 02 Instalación</span><span class='badge'>Breadcrumb: Python > Lección 03</span></div></div>
-<section>
-<h2>1) Concepto teórico profundo</h2>
-<p>Cuando programás, no manejás “valores sueltos”: manejás <strong>datos con tipo</strong>. El tipo de dato le dice al intérprete cómo guardar un valor en memoria, qué operaciones están permitidas y cómo debería comportarse ese valor al combinarse con otros. Si pensás en finanzas, es parecido a clasificar instrumentos: no tratás un bono igual que una acción, aunque ambos tengan precio. Con los datos pasa igual: no tratás un texto igual que un número, aunque ambos se vean como caracteres en pantalla.</p>
-<p>Python tiene <strong>tipado dinámico</strong>: vos no declarás explícitamente el tipo antes de asignar (como sí pasa en Java o C++), sino que el intérprete infiere el tipo mirando el valor. Si escribís <code>edad = 35</code>, Python crea un objeto entero y hace que <code>edad</code> apunte a ese objeto. Si después hacés <code>edad = "treinta y cinco"</code>, la variable ahora apunta a un string. Esta flexibilidad acelera el desarrollo, pero te exige criterio para no mezclar peras con manzanas.</p>
-<div class='concept'><strong>Idea central:</strong> una variable en Python no “contiene” un valor rígido; referencia un objeto que tiene tipo.</div>
-<p><strong>int</strong> representa enteros y, a diferencia de lenguajes con límites fijos de 32 o 64 bits, Python puede crecer dinámicamente según memoria disponible. Esto evita overflows típicos de otros ecosistemas, aunque no evita errores lógicos. También podés escribir enteros en bases distintas: binario (<code>0b1010</code>), octal (<code>0o12</code>), hexadecimal (<code>0xA</code>) y usar separadores legibles (<code>1_000_000</code>).</p>
-<p><strong>float</strong> representa números con punto decimal en formato IEEE-754. Acá aparece el clásico <code>0.1 + 0.2 != 0.3</code>. No es un bug de Python: es una limitación de representación binaria de decimales. En contexto bancario o contable, esto importa mucho: un redondeo mal diseñado puede acumular diferencias en miles de transacciones.</p>
-<div class='warning'><strong>Error común:</strong> usar float para cálculos de plata “porque total son dos decimales”. Para montos críticos, conviene <code>Decimal</code> del módulo <code>decimal</code>.</div>
-<p><strong>str</strong> es cadena de texto. Podés usar comillas simples, dobles o triples. Los strings son inmutables: cada transformación crea una nueva cadena. Soporta Unicode nativamente en Python 3, así que nombres como “González”, “Muñoz” o “Ñandú” funcionan sin trucos. También existen escapes como <code>\n</code> (salto), <code>\t</code> (tab), <code>\\</code> (barra), <code>\"</code> (comilla) y raw strings <code>r"..."</code> útiles para regex y paths.</p>
-<p><strong>bool</strong> tiene dos valores: <code>True</code> y <code>False</code>. Técnicamente, en Python <code>bool</code> hereda de <code>int</code> (<code>True == 1</code>, <code>False == 0</code>). Además existe la lógica <em>truthy/falsy</em>: <code>0</code>, <code>0.0</code>, <code>""</code>, <code>[]</code>, <code>{}</code>, <code>set()</code> y <code>None</code> evalúan como falso; casi todo lo demás, verdadero.</p>
-<div class='analogy'><strong>Analogía de negocio:</strong> en scoring crediticio, no es lo mismo “no informado” que “cero”. <code>None</code> sería “dato ausente”, mientras que <code>0</code> es un valor válido. Confundirlos te rompe métricas.</div>
-<p><strong>None</strong> representa ausencia de valor. No significa cero, ni falso, ni string vacío: significa “no hay dato”. Para compararlo, lo correcto es <code>is None</code>, no <code>== None</code>, porque verificás identidad semántica del singleton.</p>
-<div class='realworld'><strong>¿Por qué esto importa?</strong> Porque en data analysis gran parte del trabajo es limpiar y tipar datos. Si un campo de ingresos queda como string con “$”, no podés agregar, calcular percentiles ni modelar. Tipar bien es la base de todo pipeline serio.</div>
-<div class='tip'><strong>Tip profesional:</strong> al cargar CSV/Excel, validá tipos explícitamente y registrá reglas de conversión. Eso vuelve tus análisis reproducibles y auditables.</div>
-<p>En resumen: tipos de datos no es teoría de manual, es control de calidad. Cuando entiendas bien tipos, vas a detectar más rápido errores de origen, castings peligrosos y resultados engañosos. Y eso es exactamente lo que diferencia a un/a analista junior que “hace correr código” de uno/a que genera confianza en negocio.</p>
-</section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-<h3>Ejemplo 1: crear variables y verificar type()</h3>
-<p>Línea por línea: definís una variable por tipo, luego imprimís valor y tipo para confirmar inferencia automática.</p>
-<div class='editor' data-mode='python'><div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>edad = 35
-precio = 1250.50
-cliente = "García"
-activo = True
-comentario = None
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 03 · Tipos de datos</title>
+<meta name="description" content="Dominá int, float, str, bool y None en Python. Entendé tipado dinámico, precisión float vs Decimal, truthy/falsy y conversiones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
 
-print(type(edad), type(precio), type(cliente), type(activo), type(comentario))</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div><pre class='output'>Esperando ejecución...</pre></div>
-<h3>Ejemplo 2: precisión float vs Decimal</h3>
-<p>Mostrás por qué float no siempre representa exacto y cómo Decimal evita desvíos en finanzas.</p>
-<div class='editor' data-mode='python'><div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>from decimal import Decimal
+<div class="hero">
+  <span class="track-label python">Python · Lección 03 de 27</span>
+  <h1>Tipos de datos</h1>
+  <p>Todo valor en Python tiene un tipo. El tipo determina qué podés hacer con ese valor, cuánta memoria ocupa y cómo se comporta al combinarse con otros. Entender tipos es la base de todo análisis de datos serio.</p>
+  <div class="badges">
+    <span class="badge">⏱ 80–100 min</span>
+    <span class="badge">Prerrequisitos: 01 Qué es Python, 02 Instalación</span>
+  </div>
+</div>
 
-print(0.1 + 0.2)
-print(Decimal('0.1') + Decimal('0.2'))</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div><pre class='output'>Esperando ejecución...</pre></div>
-<h3>Ejemplo 3: operaciones entre tipos</h3>
-<div class='editor' data-mode='python'><div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>print(10 + 2.5)       # int + float -> float
-print("YPF" + " Merval")
-print(3 * "AR$ ")</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div><pre class='output'>Esperando ejecución...</pre></div>
-<h3>Ejemplo 4: tabla truthy/falsy</h3>
-<div class='editor' data-mode='python'><div class='editor-top'><span>Ejemplo 4</span><span>Python</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>valores = [0, 1, 0.0, "", "hola", [], [1], {}, {"a":1}, None]
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es un tipo de dato y por qué importa?</h3>
+
+<p>Cuando guardás un valor en Python, el intérprete necesita saber <strong>qué clase de dato es</strong> para tres cosas: (1) cuánta memoria reservar, (2) qué operaciones están permitidas, y (3) cómo comportarse al combinar ese dato con otros. Si tenés el número <code>5</code> y el texto <code>"5"</code>, se ven iguales en pantalla, pero para Python son completamente distintos: con el primero podés sumar (<code>5 + 3 = 8</code>), con el segundo concatenás (<code>"5" + "3" = "53"</code>). Mismo operador, resultado diferente según el tipo.</p>
+
+<p>Python tiene <strong>tipado dinámico</strong>: no declarás el tipo explícitamente antes de asignar un valor (como sí pasa en Java con <code>int edad = 35;</code> o en C++ con <code>float precio = 99.5f;</code>). Simplemente escribís <code>edad = 35</code> y Python infiere automáticamente que es un entero. Si después hacés <code>edad = "treinta y cinco"</code>, la variable ahora apunta a un string sin quejarse. Esta flexibilidad acelera el desarrollo pero te exige criterio: si mezclás tipos sin querer, tu código va a fallar o, peor, va a dar resultados incorrectos sin que te des cuenta.</p>
+
+<div class="concept"><strong>Punto clave:</strong> una variable en Python no "contiene" un valor — referencia un objeto en memoria que tiene tipo, valor e identidad. Podés verificar el tipo de cualquier valor con <code>type(valor)</code>.</div>
+
+<h3>int — Enteros</h3>
+
+<p>Los <code>int</code> representan números enteros: positivos, negativos o cero. A diferencia de muchos lenguajes (C, Java, JavaScript) donde los enteros tienen un límite de 32 o 64 bits, en Python <strong>los enteros no tienen límite de tamaño</strong>. Podés tener un número de 1000 dígitos sin problema — Python le asigna memoria dinámicamente. Esto elimina los bugs de "integer overflow" que son comunes en otros lenguajes.</p>
+
+<p>Formas de escribir enteros:</p>
+<ul>
+  <li><b>Decimal (base 10):</b> <code>42</code>, <code>-15</code>, <code>0</code> — lo normal</li>
+  <li><b>Binario (base 2):</b> <code>0b1010</code> = 10 decimal — útil para operaciones bit a bit</li>
+  <li><b>Octal (base 8):</b> <code>0o12</code> = 10 decimal — raro, pero existe</li>
+  <li><b>Hexadecimal (base 16):</b> <code>0xFF</code> = 255 decimal — usado en colores, memoria</li>
+  <li><b>Separadores legibles:</b> <code>1_000_000</code> = 1000000 — Python ignora los guiones bajos, pero vos no. Un millón se lee mucho mejor con separadores.</li>
+</ul>
+
+<h3>float — Números decimales</h3>
+
+<p>Los <code>float</code> representan números con punto decimal. Internamente usan el estándar <strong>IEEE 754 de punto flotante de 64 bits</strong>. Esto les da una precisión de aproximadamente 15-17 dígitos significativos, pero NO son exactos. Esta es probablemente la trampa más importante de toda la programación:</p>
+
+<p><code>0.1 + 0.2</code> en Python da <code>0.30000000000000004</code>, no <code>0.3</code>.</p>
+
+<p>¿Por qué? Porque <code>0.1</code> en binario es un número periódico (como 1/3 en decimal es 0.333...). La computadora tiene que truncarlo, y ese error microscópico se acumula. Para la mayoría de cálculos científicos esto es irrelevante, pero para <strong>cálculos financieros</strong> puede ser catastrófico: si procesás 100,000 transacciones, esos errores de redondeo se acumulan y tu balance no cierra.</p>
+
+<div class="warning"><strong>Error crítico en finanzas:</strong> usar <code>float</code> para cálculos de dinero. Para montos financieros usá <code>Decimal</code> del módulo <code>decimal</code>, que trabaja en base 10 y es exacto. O trabajá en centavos con enteros: $150.50 = 15050 centavos (int). Los bancos usan esta segunda técnica internamente.</div>
+
+<p>Valores especiales de float:</p>
+<ul>
+  <li><code>float('inf')</code> — infinito positivo. Útil para inicializar "el mínimo" en búsquedas.</li>
+  <li><code>float('-inf')</code> — infinito negativo.</li>
+  <li><code>float('nan')</code> — Not a Number. Aparece cuando hacés operaciones inválidas. En pandas, los valores faltantes se representan como <code>NaN</code>.</li>
+  <li>Notación científica: <code>1.5e10</code> = 15,000,000,000. Útil para números muy grandes o muy pequeños.</li>
+</ul>
+
+<h3>str — Cadenas de texto</h3>
+
+<p>Los <code>str</code> (strings) son secuencias de caracteres. Podés usar comillas simples <code>'hola'</code>, dobles <code>"hola"</code> o triples <code>'''hola'''</code> / <code>"""hola"""</code>. Las triples permiten texto multilínea.</p>
+
+<p>Características importantes:</p>
+<ul>
+  <li><b>Inmutabilidad:</b> una vez creado, un string NO se puede modificar. Cada transformación (<code>.upper()</code>, <code>.replace()</code>) crea un string NUEVO.</li>
+  <li><b>Unicode nativo:</b> Python 3 maneja UTF-8 nativamente. Nombres como "González", "Muñoz" o "Ñandú" funcionan sin trucos.</li>
+  <li><b>Caracteres de escape:</b> <code>\n</code> (salto de línea), <code>\t</code> (tab), <code>\\</code> (barra literal), <code>\"</code> (comilla literal).</li>
+  <li><b>Raw strings:</b> <code>r"C:\Users\nombre"</code> — no interpreta escapes. Útil para paths de Windows y regex.</li>
+</ul>
+
+<h3>bool — Booleanos</h3>
+
+<p><code>bool</code> tiene solo dos valores: <code>True</code> y <code>False</code>. Son el resultado de comparaciones y la base de toda decisión en tu código. Dato curioso: en Python, <code>bool</code> es una subclase de <code>int</code>. Esto significa que <code>True == 1</code> y <code>False == 0</code>, y podés hacer aritmética con ellos: <code>True + True = 2</code>. Esto es útil para contar cuántos elementos cumplen una condición.</p>
+
+<p><strong>Truthy y falsy:</strong> en Python, CUALQUIER valor puede evaluarse como booleano. Los siguientes evalúan como <code>False</code> (son "falsy"):</p>
+<ul>
+  <li><code>False</code>, <code>0</code>, <code>0.0</code>, <code>0j</code></li>
+  <li><code>""</code> (string vacío), <code>[]</code> (lista vacía), <code>()</code> (tupla vacía), <code>{}</code> (dict vacío), <code>set()</code></li>
+  <li><code>None</code></li>
+</ul>
+<p><strong>Todo lo demás es truthy</strong> (evalúa como <code>True</code>). Esto incluye: <code>"0"</code> (string con un cero), <code>[0]</code> (lista con un elemento), <code>-1</code> (negativo), etc.</p>
+
+<h3>None — La ausencia de valor</h3>
+
+<p><code>None</code> representa explícitamente "no hay dato". No es lo mismo que <code>0</code> (cero es un valor), ni que <code>""</code> (string vacío es un valor), ni que <code>False</code>. <code>None</code> significa literalmente "ausencia".</p>
+
+<div class="analogy"><strong>Analogía financiera:</strong> en scoring crediticio, no es lo mismo "ingreso = 0" (la persona declaró que no tiene ingresos) que "ingreso = None" (la persona no contestó la pregunta). Confundir estos dos casos te rompe métricas y modelos. Un 0 se puede promediar; un None hay que decidir si lo excluís, lo imputás o lo marcás como dato faltante.</div>
+
+<p>Para comparar con None, usá <code>is None</code> en vez de <code>== None</code>. <code>is</code> verifica identidad (es el mismo objeto en memoria), mientras que <code>==</code> verifica igualdad de valor. <code>None</code> es un singleton — solo existe UNA instancia — por eso <code>is</code> es más correcto y más rápido.</p>
+
+<h3>Conversión entre tipos (casting)</h3>
+
+<p>Muchas veces necesitás convertir un tipo a otro. Los datos que llegan de un CSV, una API o un formulario web vienen casi siempre como strings y necesitás convertirlos al tipo correcto para operar.</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Función</th><th>Convierte a</th><th>Ejemplo</th><th>Resultado</th><th>¡Cuidado!</th></tr>
+<tr><td><code>int()</code></td><td>Entero</td><td><code>int("42")</code></td><td><code>42</code></td><td><code>int("42.5")</code> da error — primero float()</td></tr>
+<tr><td><code>float()</code></td><td>Decimal</td><td><code>float("3.14")</code></td><td><code>3.14</code></td><td><code>float("$100")</code> da error — limpiá el $</td></tr>
+<tr><td><code>str()</code></td><td>Texto</td><td><code>str(42)</code></td><td><code>"42"</code></td><td>Siempre funciona</td></tr>
+<tr><td><code>bool()</code></td><td>Booleano</td><td><code>bool(0)</code></td><td><code>False</code></td><td><code>bool("False")</code> es <code>True</code> (string no vacío)</td></tr>
+<tr><td><code>int(float)</code></td><td>Entero truncado</td><td><code>int(3.99)</code></td><td><code>3</code></td><td>Trunca, NO redondea. Usá round() si querés redondear</td></tr>
+</table>
+</div>
+
+<div class="realworld"><strong>En data analysis:</strong> cuando leés un CSV con pandas, todas las columnas empiezan como string u object. Tu primer paso siempre es tipar correctamente: <code>df["monto"] = pd.to_numeric(df["monto"])</code>, <code>df["fecha"] = pd.to_datetime(df["fecha"])</code>. Si no tipás bien, un <code>.sum()</code> concatena strings en vez de sumar números, y tu reporte tiene basura.</div>
+
+<div class="tip"><strong>Tip profesional:</strong> cuando cargás datos, validá tipos explícitamente y registrá las reglas de conversión. Si un campo "ingreso" viene como "$1,250.50", documentá que hay que sacar el $, reemplazar la coma, y convertir a float. Eso vuelve tu pipeline reproducible y auditable.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Crear variables de cada tipo y verificar con type()</h3>
+<p>La función <code>type()</code> te dice exactamente qué tipo tiene un valor. Usala constantemente cuando no estés seguro.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_tipos.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Los 5 tipos fundamentales de Python
+edad = 28                    # int
+precio = 1599.99             # float
+nombre = "Rodrigo González"  # str
+es_cliente = True            # bool
+comentario = None            # NoneType
+
+# Verificar cada tipo
+print(f"edad = {edad}, tipo: {type(edad).__name__}")
+print(f"precio = {precio}, tipo: {type(precio).__name__}")
+print(f"nombre = {nombre}, tipo: {type(nombre).__name__}")
+print(f"es_cliente = {es_cliente}, tipo: {type(es_cliente).__name__}")
+print(f"comentario = {comentario}, tipo: {type(comentario).__name__}")
+
+# Enteros en distintas bases
+decimal = 255
+binario = 0b11111111   # 255 en binario
+hexa = 0xFF            # 255 en hexadecimal
+print(f"\nDecimal: {decimal}, Binario: {binario}, Hexa: {hexa}")
+print(f"¿Son iguales? {decimal == binario == hexa}")
+
+# Separadores legibles
+poblacion = 45_808_747
+presupuesto = 1_250_000_000
+print(f"\nPoblación Argentina: {poblacion:,}")
+print(f"Presupuesto: ${presupuesto:,}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: El problema de precisión de float y la solución con Decimal</h3>
+<p>Este es probablemente el bug más famoso de la programación. Si trabajás con plata, tenés que entender esto.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_precision.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">from decimal import Decimal
+
+# El problema clásico
+print("=== Problema de precisión float ===")
+print(f"0.1 + 0.2 = {0.1 + 0.2}")  # 0.30000000000000004!
+print(f"¿0.1 + 0.2 == 0.3? {0.1 + 0.2 == 0.3}")  # False!
+
+# Solución 1: round() — simple pero no siempre suficiente
+print(f"\nCon round: {round(0.1 + 0.2, 1)}")
+
+# Solución 2: Decimal — exacto para finanzas
+print(f"\n=== Decimal (exacto) ===")
+a = Decimal('0.1')
+b = Decimal('0.2')
+print(f"Decimal('0.1') + Decimal('0.2') = {a + b}")
+print(f"¿Igual a 0.3? {a + b == Decimal('0.3')}")  # True!
+
+# Simulación bancaria: 10,000 transacciones de $0.10
+print(f"\n=== Acumulación de errores ===")
+total_float = sum(0.1 for _ in range(10000))
+total_decimal = sum(Decimal('0.1') for _ in range(10000))
+print(f"Float:   ${total_float}")      # 999.9999999999...
+print(f"Decimal: ${total_decimal}")     # 1000.0 exacto
+print(f"Diferencia: ${abs(float(total_decimal) - total_float):.15f}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Operaciones entre tipos y qué pasa al mezclar</h3>
+<p>Python tiene reglas claras sobre qué operaciones están permitidas entre tipos distintos.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_mezcla.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># int + float → siempre float (Python "promueve" al tipo más amplio)
+print(f"10 + 2.5 = {10 + 2.5} (tipo: {type(10 + 2.5).__name__})")
+
+# str + str → concatenación
+print(f"'YPF' + ' SA' = {'YPF' + ' SA'}")
+
+# int * str → repetición del string
+print(f"'AR$ ' * 3 = {'AR$ ' * 3}")
+print(f"'-' * 40 = {'-' * 40}")
+
+# Operaciones PROHIBIDAS que dan TypeError:
+# print("5" + 3)    # TypeError: no podés sumar str + int
+# print("5" - "3")  # TypeError: no podés restar strings
+# print("a" * "b")  # TypeError: no podés multiplicar str * str
+
+# ¿Cómo resolverlo? Convertí explícitamente:
+texto_monto = "1500"
+print(f"\n'1500' + 500 = ERROR (str + int)")
+print(f"int('1500') + 500 = {int(texto_monto) + 500}")  # 2000
+print(f"'1500' + str(500) = {texto_monto + str(500)}")   # "1500500"
+
+# bool como int (True=1, False=0)
+print(f"\nTrue + True = {True + True}")    # 2
+print(f"True * 100 = {True * 100}")        # 100
+print(f"False + 42 = {False + 42}")        # 42</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Tabla completa de truthy/falsy</h3>
+<p>Entender qué valores son "falsy" te evita bugs sutiles. En pandas, esto es crítico para filtrar datos.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_truthy.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># TODOS los valores falsy de Python
+print("=== Valores FALSY (evalúan como False) ===")
+falsys = [False, 0, 0.0, "", [], (), {}, set(), None]
+for v in falsys:
+    print(f"  {str(v):>10} ({type(v).__name__:>8}) → bool = {bool(v)}")
+
+# Valores que PARECEN falsy pero SON truthy
+print("\n=== Sorpresas TRUTHY ===")
+truthys = ["0", "False", " ", [0], (0,), {"": 0}, -1, 0.0001]
+for v in truthys:
+    print(f"  {str(v):>12} ({type(v).__name__:>8}) → bool = {bool(v)}")
+
+# Caso práctico: contar cuántos clientes son activos
+estados = [True, True, False, True, False, True, True, False]
+activos = sum(estados)  # True=1, False=0, sum cuenta los True
+print(f"\nClientes activos: {activos}/{len(estados)}")
+print(f"Tasa de actividad: {activos/len(estados):.0%}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Parsear datos reales — de string crudo a tipos correctos</h3>
+<p>Así se ven los datos en el mundo real: todo viene como texto y vos tenés que convertirlo. Este patrón lo vas a repetir cientos de veces como analista.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_parseo.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Dato crudo de un CSV o API (todo es string)
+registro_crudo = "García|35|Buenos Aires|720|$250,000.50|True"
+
+# Paso 1: separar por delimitador
+campos = registro_crudo.split("|")
+print(f"Campos crudos: {campos}")
+
+# Paso 2: convertir cada campo al tipo correcto
+nombre = campos[0]                              # ya es str
+edad = int(campos[1])                            # str → int
+ciudad = campos[2]                               # ya es str
+score = int(campos[3])                           # str → int
+ingreso = float(campos[4].replace("$", "").replace(",", ""))  # limpiar y convertir
+activo = campos[5] == "True"                     # str → bool
+
+# Paso 3: verificar tipos
+print(f"\n=== Registro parseado ===")
+print(f"Nombre:  {nombre} ({type(nombre).__name__})")
+print(f"Edad:    {edad} ({type(edad).__name__})")
+print(f"Ciudad:  {ciudad} ({type(ciudad).__name__})")
+print(f"Score:   {score} ({type(score).__name__})")
+print(f"Ingreso: ${ingreso:,.2f} ({type(ingreso).__name__})")
+print(f"Activo:  {activo} ({type(activo).__name__})")
+
+# Paso 4: ahora podemos operar con los datos tipados
+print(f"\n=== Cálculos ===")
+print(f"Ingreso mensual: ${ingreso/12:,.2f}")
+print(f"Ratio score/edad: {score/edad:.1f}")
+print(f"¿Mayor de edad? {edad >= 18}")
+print(f"¿Score alto? {score >= 700}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Tipo</th><th>Ejemplo</th><th>Verificar</th><th>Convertir a</th><th>Notas</th></tr>
+<tr><td><code>int</code></td><td><code>42</code>, <code>-7</code>, <code>0xFF</code></td><td><code>type(x) is int</code></td><td><code>int("42")</code></td><td>Sin límite de tamaño en Python</td></tr>
+<tr><td><code>float</code></td><td><code>3.14</code>, <code>1.5e10</code></td><td><code>type(x) is float</code></td><td><code>float("3.14")</code></td><td>Impreciso — usar Decimal para finanzas</td></tr>
+<tr><td><code>str</code></td><td><code>"hola"</code>, <code>'mundo'</code></td><td><code>type(x) is str</code></td><td><code>str(42)</code></td><td>Inmutable. Unicode nativo.</td></tr>
+<tr><td><code>bool</code></td><td><code>True</code>, <code>False</code></td><td><code>type(x) is bool</code></td><td><code>bool(0)</code></td><td>Subclase de int (True=1)</td></tr>
+<tr><td><code>None</code></td><td><code>None</code></td><td><code>x is None</code></td><td>—</td><td>Singleton. Usar <code>is</code>, no <code>==</code></td></tr>
+</table>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr><th>Valor</th><th>bool()</th><th>Categoría</th></tr>
+<tr><td><code>0</code>, <code>0.0</code>, <code>""</code>, <code>[]</code>, <code>{}</code>, <code>None</code>, <code>False</code></td><td><code>False</code></td><td>Falsy</td></tr>
+<tr><td>Todo lo demás (<code>1</code>, <code>"0"</code>, <code>[0]</code>, <code>-1</code>, <code>"False"</code>)</td><td><code>True</code></td><td>Truthy</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Crear variables y verificar tipos</h4>
+  <p>Creá 5 variables (una de cada tipo: int, float, str, bool, None) e imprimí cada una con su tipo usando <code>type().__name__</code>. El output debe incluir <code>NoneType</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-1" data-expected="NoneType">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "NoneType"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá 5 variables de tipos distintos:
+
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["Creá: a=42, b=3.14, c=\"hola\", d=True, e=None","Imprimí: print(a, type(a).__name__)","Repetí para las 5. None tiene tipo NoneType."]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Conversión string a número con IVA</h4>
+  <p>Tenés <code>precio_texto = "1000"</code>. Convertilo a float, calculá con IVA 21% e imprimí el resultado. Debe incluir <code>1210</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-2" data-expected="1210">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "1210"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">precio_texto = "1000"
+
+# Convertí y calculá IVA:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["precio = float(precio_texto)","precio_con_iva = precio * 1.21","print(precio_con_iva) → 1210.0"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: Truthy y falsy</h4>
+  <p>Creá una lista con estos valores: <code>[0, "", "YPF", 42, None, [], False, "0"]</code>. Recorrela e imprimí cada valor con su resultado de <code>bool()</code>. Debe incluir <code>False</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-3" data-expected="False">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "False"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">valores = [0, "", "YPF", 42, None, [], False, "0"]
+
+# Recorré e imprimí:
 for v in valores:
-    print(repr(v), '=>', bool(v))</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div><pre class='output'>Esperando ejecución...</pre></div>
-<h3>Ejemplo 5: parseo real de CSV</h3>
-<div class='editor' data-mode='python'><div class='editor-top'><span>Ejemplo 5</span><span>Python</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>fila = "García|35|Buenos Aires|720|$250,000.00|True"
-nombre, edad, ciudad, score, ingreso, activo = fila.split('|')
-registro = {
-  'nombre': nombre,
-  'edad': int(edad),
-  'ciudad': ciudad,
-  'score': int(score),
-  'ingreso': float(ingreso.replace('$','').replace(',','')),
-  'activo': activo == 'True'
-}
-print(registro)</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div><pre class='output'>Esperando ejecución...</pre></div>
-</section>
-<section><h2>3) Tabla de referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Tipo</th><th>Uso</th><th>Detalle clave</th></tr></thead><tbody><tr><td>int</td><td>Conteos, IDs, cantidades</td><td>Sin límite fijo práctico</td></tr><tr><td>float</td><td>Mediciones, ratios</td><td>Puede tener imprecisión binaria</td></tr><tr><td>Decimal</td><td>Montos monetarios</td><td>Precisión exacta decimal</td></tr><tr><td>str</td><td>Texto</td><td>Inmutable y Unicode</td></tr><tr><td>bool</td><td>Condiciones</td><td>True/False + truthy/falsy</td></tr><tr><td>None</td><td>Dato ausente</td><td>Comparar con <code>is None</code></td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-<div class='exercise'><h4>1) Crear una variable de cada tipo e imprimir su type()</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-1' data-expected='int'><div class='editor-top'><span>Starter</span><span>Valida que aparezca "int"</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>a = 1
-b = 2.0
-c = "hola"
-d = False
-e = None
-print(type(a), type(b), type(c), type(d), type(e))</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h1'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h1' class='hint-box' data-hints='["Definí 5 variables.","Usá print(type(...)).","Asegurate que una sea None."]'></div></div>
-<div class='exercise'><h4>2) Calcular IVA desde string</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-2' data-expected='1210'><div class='editor-top'><span>Starter</span><span>Output esperado contiene 1210</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>precio = "1000"
-# completá
-</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h2'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h2' class='hint-box' data-hints='["Convertí a float.","Multiplicá por 1.21.","Imprimí sin texto extra para validar más fácil."]'></div></div>
-<div class='exercise'><h4>3) Truthy y falsy con bool()</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-3' data-expected='False'><div class='editor-top'><span>Starter</span><span>Debe aparecer False</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>valores = [0, "", [], None, "YPF", 7]
-for v in valores:
-    print(v, bool(v))</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h3'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h3' class='hint-box' data-hints='["Recorré la lista con for.","Aplicá bool(v).","Mostrá resultado por línea."]'></div></div>
-<div class='exercise'><h4>4) Resolver 0.1+0.2 con round y Decimal</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-4' data-expected='0.3'><div class='editor-top'><span>Starter</span><span>Debe aparecer 0.3</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>from decimal import Decimal
-print(round(0.1+0.2,1))
-print(Decimal('0.1')+Decimal('0.2'))</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h4'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h4' class='hint-box' data-hints='["Probá primero con round.","Después con Decimal('0.1').","Compará outputs."]'></div></div>
-<div class='exercise'><h4>5) Celsius a Fahrenheit</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-5' data-expected='77'><div class='editor-top'><span>Starter</span><span>Con 25°C debe dar 77</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>c = 25
-# fórmula: (c*9/5)+32
-</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h5'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h5' class='hint-box' data-hints='["Aplicá la fórmula literal.","Guardá en variable f.","Imprimí f."]'></div></div>
-<div class='exercise'><h4>6) Extraer CUIT y pasar a int</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-6' data-expected='12345678'><div class='editor-top'><span>Starter</span><span>Debe aparecer 12345678</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>cuit = "20-12345678-9"
-# completá
-</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h6'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h6' class='hint-box' data-hints='["split por '-'.","Tomá el segundo bloque.","Convertí a int e imprimí."]'></div></div>
-<div class='exercise'><h4>7) Mini validador de tipo y truthy/falsy</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-7' data-expected='bool'><div class='editor-top'><span>Starter</span><span>Debe mostrar bool para algún caso</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>def validar(v):
-    print(type(v), bool(v))
+    pass  # reemplazá pass
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["Reemplazá pass por: print(v, bool(v))","Cada línea mostrará el valor y True/False","\"0\" es truthy (string no vacío), 0 es falsy"]'></div>
+</div>
 
-validar(False)
-validar("Galicia")</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h7'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h7' class='hint-box' data-hints='["Armá una función simple.","Usá type y bool.","Llamala con varios tipos."]'></div></div>
-<div class='exercise'><h4>8) Montos string a float y suma</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-8' data-expected='5520.5'><div class='editor-top'><span>Starter</span><span>Resultado esperado 5520.5</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>montos = ["$1,500.00", "$820.50", "$3,200.00"]
-limpios = [float(m.replace('$','').replace(',','')) for m in montos]
-print(sum(limpios))</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h8'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h8' class='hint-box' data-hints='["Limpia símbolos y comas.","Convertí cada string a float.","Sumá la lista."]'></div></div>
-<div class='exercise'><h4>9) Simulación bancaria float vs Decimal</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-9' data-expected='Decimal'><div class='editor-top'><span>Starter</span><span>Debe aparecer Decimal</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>from decimal import Decimal
-saldo_f = 100000.0
-for _ in range(12):
-    saldo_f *= 1.02
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Precisión float vs Decimal</h4>
+  <p>Demostrá el problema de <code>0.1 + 0.2</code> con float y resolvelo con <code>Decimal</code>. Imprimí ambos resultados. Debe incluir exactamente <code>0.3</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-4" data-expected="0.3">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "0.3"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">from decimal import Decimal
 
-saldo_d = Decimal('100000')
-for _ in range(12):
-    saldo_d *= Decimal('1.02')
+# Mostrá el problema y la solución:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["print(\"Float:\", 0.1 + 0.2)","print(\"Decimal:\", Decimal(\"0.1\") + Decimal(\"0.2\"))","El Decimal da exactamente 0.3"]'></div>
+</div>
 
-print(saldo_f)
-print('Decimal', saldo_d)</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h9'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h9' class='hint-box' data-hints='["Hacé dos loops iguales.","Uno con float, otro con Decimal.","Compará resultados."]'></div></div>
-<div class='exercise'><h4>10) Desafío: parsear registro completo a diccionario tipado</h4><div class='editor' data-mode='python' data-lesson='python-03' data-exercise='ex-10' data-expected='ingreso'><div class='editor-top'><span>Starter</span><span>Diccionario debe contener clave ingreso</span></div><div class='editor-area'><pre class='lines'></pre><textarea class='code'>registro = "García|35|Buenos Aires|720|$250,000.00|True"
-# completá parseo y print del diccionario
-</textarea></div><div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='h10'>💡 Pista</button></div><pre class='output'>Esperando...</pre></div><div id='h10' class='hint-box' data-hints='["Usá split('|').","Convertí edad/score/ingreso/activo al tipo correcto.","Construí dict con claves semánticas."]'></div></div>
-</section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Aprendiste qué son y para qué sirven los tipos base de Python.</li><li>Viste problemas reales de precisión y cómo resolverlos con Decimal.</li><li>Practicás conversiones clave para limpieza y modelado de datos.</li><li>Diferenciaste ausencia de dato (None) de cero o falso.</li></ul><p>En la próxima clase (<strong>04 Variables y constantes</strong>) vas a profundizar cómo nombrar, reutilizar y mantener estado sin generar deuda técnica.</p><p>Recursos recomendados: docs.python.org (built-in types, decimal), Real Python sobre type conversion, y práctica adicional en @yoamopython.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/02-instalacion.html'>← Anterior</a><a class='badge' href='/python/04-variables-constantes.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Celsius a Fahrenheit</h4>
+  <p>Convertí <code>celsius = 25</code> a Fahrenheit con la fórmula <code>(celsius * 9/5) + 32</code>. Verificá que el resultado sea float e imprimilo. Debe incluir <code>77</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-5" data-expected="77">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "77"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">celsius = 25
+
+# Convertí y verificá el tipo:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["fahrenheit = (celsius * 9/5) + 32","print(fahrenheit) da 77.0","print(type(fahrenheit).__name__) da float"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Extraer CUIT</h4>
+  <p>Dado <code>cuit = "20-12345678-9"</code>, extraé el cuerpo numérico central (el "12345678") y convertilo a int. Imprimilo. Debe incluir <code>12345678</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-6" data-expected="12345678">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "12345678"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">cuit = "20-12345678-9"
+
+# Extraé el cuerpo central y convertí a int:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["partes = cuit.split(\"-\")","cuerpo = partes[1] → \"12345678\"","print(int(cuerpo)) → 12345678"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Validador de tipo y truthy/falsy</h4>
+  <p>Creá una función <code>analizar(valor)</code> que imprima el valor, su tipo y si es truthy o falsy. Probala con: <code>False</code>, <code>"Galicia"</code>, <code>0</code>, <code>None</code>, <code>[1,2,3]</code>. Debe incluir <code>FALSY</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-7" data-expected="FALSY">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "FALSY"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">def analizar(valor):
+    # Imprimí: valor, tipo, TRUTHY o FALSY
+    pass
+
+analizar(False)
+analizar("Galicia")
+analizar(0)
+analizar(None)
+analizar([1, 2, 3])</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["estado = \"TRUTHY\" if bool(valor) else \"FALSY\"","tipo = type(valor).__name__","print(f\"{valor} | {tipo} | {estado}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Limpiar montos con símbolos</h4>
+  <p>Tenés <code>montos_str = ["$1,500.00", "$820.50", "$3,200.00"]</code>. Limpiá los símbolos, convertí a float, sumá e imprimí el total. Debe incluir <code>5520.5</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-8" data-expected="5520.5">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "5520.5"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">montos_str = ["$1,500.00", "$820.50", "$3,200.00"]
+
+# Limpiá, convertí y sumá:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["Para cada monto: sacar $ y comas con .replace()","float(m.replace(\"$\",\"\").replace(\",\",\"\"))","Lista comprehension + sum() para el total"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Simulación bancaria float vs Decimal</h4>
+  <p>Empezá con $100,000. Aplicá 2% de interés mensual durante 12 meses, una vez con float y otra con Decimal. Imprimí ambos resultados para mostrar la diferencia. Debe incluir <code>Decimal</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-9" data-expected="Decimal">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Decimal"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">from decimal import Decimal
+
+# Simulá con float y con Decimal:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["saldo_f = 100000.0; for _ in range(12): saldo_f *= 1.02","saldo_d = Decimal(\"100000\"); for _ in range(12): saldo_d *= Decimal(\"1.02\")","print(f\"Float: {saldo_f}\"); print(f\"Decimal: {saldo_d}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Parsear registro completo a diccionario tipado</h4>
+  <p>Dado <code>"López|42|Córdoba|680|$185,000.00|False"</code>, parseá cada campo al tipo correcto y creá un diccionario con claves <code>nombre</code>, <code>edad</code>, <code>ciudad</code>, <code>score</code>, <code>ingreso</code>, <code>activo</code>. Imprimí el diccionario. Debe incluir <code>ingreso</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-10" data-expected="ingreso">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "ingreso"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">registro = "López|42|Córdoba|680|$185,000.00|False"
+
+# Parseá y armá el diccionario:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["campos = registro.split(\"|\")","ingreso = float(campos[4].replace(\"$\",\"\").replace(\",\",\"\"))","activo = campos[5] == \"True\" (da False en este caso)"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Python tiene 5 tipos fundamentales: <code>int</code> (sin límite), <code>float</code> (impreciso), <code>str</code> (inmutable), <code>bool</code> (True/False), <code>None</code> (ausencia).</li>
+  <li>Python tiene tipado dinámico: infiere el tipo automáticamente del valor asignado.</li>
+  <li>Los float tienen problemas de precisión (0.1+0.2 ≠ 0.3). Para finanzas, usá <code>Decimal</code>.</li>
+  <li>Todo valor tiene un comportamiento truthy/falsy. Los "falsy" son: <code>0</code>, <code>""</code>, <code>[]</code>, <code>None</code>, <code>False</code>.</li>
+  <li>Comparar con None se hace con <code>is None</code>, no con <code>== None</code>.</li>
+  <li>Los datos reales vienen como strings — siempre necesitás limpiar y convertir antes de operar.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>04 · Variables y constantes</strong>) vas a aprender cómo nombrar, organizar y reutilizar estos valores que acabás de tipar. Las buenas prácticas de naming son lo que separa código amateur de código profesional.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/library/stdtypes.html" target="_blank">Python docs — Built-in Types</a> · <a href="https://docs.python.org/3/library/decimal.html" target="_blank">Módulo decimal</a></p>
+
+<div class="footer-nav">
+  <a href="/python/02-instalacion.html">← Instalación</a>
+  <a class="next" href="/python/04-variables-constantes.html">Variables y constantes →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
