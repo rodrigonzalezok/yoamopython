@@ -1,125 +1,187 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiero Programar · Aprendé Python, SQL y Data Analysis</title>
-    <meta
-      name="description"
-      content="Quiero Programar: plataforma de Rodrigo González Doldán para aprender Python, SQL y análisis de datos con foco real de negocio en Argentina."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
-  <body>
-    <div class="topbar">
-      <div class="brand">Quiero Programar <small>by Rodrigo González Doldán</small></div>
-      <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-      <div id="global-progress-text" class="top-stats"></div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · De cero a Data Analyst</title>
+<meta name="description" content="Plataforma educativa gratuita para aprender Python, SQL y Análisis de Datos desde cero. Por Rodrigo González Doldán.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>de cero a Data Analyst</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+
+<main class="main" style="margin-left:0; max-width:960px">
+
+<!-- ── HERO ── -->
+<section class="landing-hero">
+  <h1>Aprendé <em>Python</em>, <em>SQL</em> y Análisis de Datos desde cero.</h1>
+  <p>61 lecciones con explicaciones profundas, IDEs interactivos con Python y SQL corriendo en tu navegador, y ejercicios progresivos con validación automática. Todo gratis.</p>
+  <div class="badges">
+    <span class="badge">🐍 27 lecciones de Python</span>
+    <span class="badge">🗄️ 15 lecciones de SQL</span>
+    <span class="badge">📊 19 lecciones de Data Analysis</span>
+    <span class="badge">🏋️ 610+ ejercicios</span>
+  </div>
+</section>
+
+<!-- ── 01 · STATS ── -->
+<div class="section-num">01</div>
+<h2>Tu progreso</h2>
+<div class="stat-grid" id="stats-mount">
+  <div class="stat-card"><div class="num" id="st-lessons">0</div><div class="label">Lecciones</div></div>
+  <div class="stat-card"><div class="num" id="st-exercises">0</div><div class="label">Ejercicios</div></div>
+  <div class="stat-card"><div class="num" id="st-streak">0</div><div class="label">Días de racha</div></div>
+  <div class="stat-card"><div class="num" id="st-pct">0%</div><div class="label">Completado</div></div>
+</div>
+
+<!-- ── 02 · ROADMAP ── -->
+<div class="section-num">02</div>
+<h2>Roadmap completo</h2>
+<p>Seguí el camino en orden o saltá al tema que necesites. Cada lección tiene teoría profunda, múltiples ejemplos y 10 ejercicios progresivos.</p>
+
+<div class="roadmap">
+  <!-- PYTHON -->
+  <div class="roadmap-card python">
+    <h3>🐍 Python desde Cero</h3>
+    <p style="font-size:.82rem;color:var(--t3)">27 lecciones · ~20 horas</p>
+    <ul class="node-list">
+      <li><a href="/python/01-que-es-python.html">01. Qué es Python / Lenguajes</a></li>
+      <li><a href="/python/02-instalacion.html">02. Instalación VS Code & Python</a></li>
+      <li><a href="/python/03-tipos-de-datos.html">03. Tipos de datos</a></li>
+      <li><a href="/python/04-variables-constantes.html">04. Variables y constantes</a></li>
+      <li><a href="/python/05-operaciones.html">05. Operaciones básicas</a></li>
+      <li><a href="/python/06-condicionales.html">06. Condicionales (if/elif/else)</a></li>
+      <li><a href="/python/07-comentarios-indentacion.html">07. Comentarios e indentación</a></li>
+      <li><a href="/python/08-listas.html">08. Listas</a></li>
+      <li><a href="/python/09-tuplas.html">09. Tuplas</a></li>
+      <li><a href="/python/10-diccionarios.html">10. Diccionarios</a></li>
+      <li><a href="/python/11-sets.html">11. Sets</a></li>
+      <li><a href="/python/12-metodos-strings.html">12. Métodos de strings</a></li>
+      <li><a href="/python/13-metodos-listas.html">13. Métodos de listas</a></li>
+      <li><a href="/python/14-metodos-diccionarios.html">14. Métodos de diccionarios</a></li>
+      <li><a href="/python/15-anidacion.html">15. Anidación</a></li>
+      <li><a href="/python/16-while.html">16. Bucles while</a></li>
+      <li><a href="/python/17-for.html">17. Bucles for</a></li>
+      <li><a href="/python/18-funciones-basicas.html">18. Funciones básicas</a></li>
+      <li><a href="/python/19-funciones-avanzadas.html">19. Funciones avanzadas</a></li>
+      <li><a href="/python/20-modulos-stdlib.html">20. Módulos de la stdlib</a></li>
+      <li><a href="/python/21-modulos-pip.html">21. Módulos con pip</a></li>
+      <li><a href="/python/22-scope-variables.html">22. Scope de variables</a></li>
+      <li><a href="/python/23-strings-avanzado.html">23. Strings avanzado</a></li>
+      <li><a href="/python/24-archivos.html">24. Trabajo con archivos</a></li>
+      <li><a href="/python/25-excepciones-errores.html">25. Excepciones y errores</a></li>
+      <li><a href="/python/26-clases-objetos-intro.html">26. Clases y objetos (intro)</a></li>
+      <li><a href="/python/27-proyecto-integrador-python.html">27. Proyecto integrador</a></li>
+    </ul>
+  </div>
+
+  <!-- SQL -->
+  <div class="roadmap-card sql">
+    <h3>🗄️ SQL desde Cero</h3>
+    <p style="font-size:.82rem;color:var(--t3)">15 lecciones · ~12 horas</p>
+    <ul class="node-list">
+      <li><a href="/sql/01-que-es-sql.html">01. Qué es SQL</a></li>
+      <li><a href="/sql/02-select-from-where.html">02. SELECT, FROM, WHERE</a></li>
+      <li><a href="/sql/03-operadores-filtros.html">03. Operadores y filtros</a></li>
+      <li><a href="/sql/04-order-limit-distinct.html">04. ORDER BY, LIMIT, DISTINCT</a></li>
+      <li><a href="/sql/05-funciones-agregacion.html">05. Funciones de agregación</a></li>
+      <li><a href="/sql/06-group-by-having.html">06. GROUP BY y HAVING</a></li>
+      <li><a href="/sql/07-joins-inner.html">07. INNER JOIN</a></li>
+      <li><a href="/sql/08-joins-left-right-full.html">08. LEFT/RIGHT/FULL JOIN</a></li>
+      <li><a href="/sql/09-subconsultas.html">09. Subconsultas</a></li>
+      <li><a href="/sql/10-ctes-with.html">10. CTEs (WITH)</a></li>
+      <li><a href="/sql/11-window-functions.html">11. Window Functions</a></li>
+      <li><a href="/sql/12-insert-update-delete.html">12. INSERT, UPDATE, DELETE</a></li>
+      <li><a href="/sql/13-create-table-tipos.html">13. CREATE TABLE y tipos</a></li>
+      <li><a href="/sql/14-caso-practico-sql.html">14. Caso práctico completo</a></li>
+      <li><a href="/sql/15-proyecto-integrador-sql.html">15. Proyecto integrador SQL</a></li>
+    </ul>
+  </div>
+
+  <!-- DATA ANALYSIS -->
+  <div class="roadmap-card data">
+    <h3>📊 Análisis de Datos</h3>
+    <p style="font-size:.82rem;color:var(--t3)">19 lecciones · ~18 horas</p>
+    <ul class="node-list">
+      <li><a href="/data-analysis/01-que-es-data-analysis.html">01. Qué es Data Analysis</a></li>
+      <li><a href="/data-analysis/02-pandas-series-dataframes.html">02. pandas: Series y DataFrames</a></li>
+      <li><a href="/data-analysis/03-pandas-lectura-datos.html">03. pandas: lectura de datos</a></li>
+      <li><a href="/data-analysis/04-pandas-seleccion-filtrado.html">04. pandas: selección y filtrado</a></li>
+      <li><a href="/data-analysis/05-pandas-limpieza.html">05. pandas: limpieza</a></li>
+      <li><a href="/data-analysis/06-pandas-transformaciones.html">06. pandas: transformaciones</a></li>
+      <li><a href="/data-analysis/07-pandas-groupby-pivot.html">07. pandas: groupby y pivot</a></li>
+      <li><a href="/data-analysis/08-pandas-merge-join-concat.html">08. pandas: merge/join/concat</a></li>
+      <li><a href="/data-analysis/09-estadistica-descriptiva.html">09. Estadística descriptiva</a></li>
+      <li><a href="/data-analysis/10-matplotlib-basico.html">10. Matplotlib básico</a></li>
+      <li><a href="/data-analysis/11-seaborn-visualizacion.html">11. Seaborn visualización</a></li>
+      <li><a href="/data-analysis/12-eda-completo.html">12. EDA completo</a></li>
+      <li><a href="/data-analysis/13-numpy-fundamentos.html">13. NumPy fundamentos</a></li>
+      <li><a href="/data-analysis/14-intro-machine-learning.html">14. Intro a Machine Learning</a></li>
+      <li><a href="/data-analysis/15-regresion-clasificacion.html">15. Regresión y clasificación</a></li>
+      <li><a href="/data-analysis/16-power-bi-tableau-intro.html">16. Power BI / Tableau intro</a></li>
+      <li><a href="/data-analysis/17-sql-python-integracion.html">17. Integración SQL + Python</a></li>
+      <li><a href="/data-analysis/18-portfolio-proyecto-final.html">18. Portfolio y proyecto final</a></li>
+      <li><a href="/data-analysis/19-preparacion-entrevistas.html">19. Preparación para entrevistas</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── 03 · DESPUÉS ── -->
+<div class="section-num">03</div>
+<h2>¿Qué podés hacer después?</h2>
+<div class="card">
+  <p>Cuando completes las 3 rutas, vas a tener el stack técnico que piden el 90% de los puestos de <strong>Data Analyst</strong> en Argentina y LATAM. Tu camino después de acá:</p>
+  <ul>
+    <li><strong>Python básico + intermedio</strong> — variables, funciones, módulos, archivos, OOP intro ✓</li>
+    <li><strong>SQL profesional</strong> — JOINs, CTEs, Window Functions, DDL/DML ✓</li>
+    <li><strong>pandas + análisis exploratorio</strong> — limpieza, transformación, EDA, estadística ✓</li>
+    <li>→ <strong>Visualización</strong> — matplotlib, seaborn, y después Power BI o Tableau</li>
+    <li>→ <strong>Machine Learning básico</strong> — scikit-learn, regresión, clasificación, métricas</li>
+    <li>→ <strong>Portfolio de proyectos</strong> — 3-5 proyectos en GitHub con README y resultados</li>
+    <li>→ <strong>Entrevistas técnicas</strong> — SQL challenges, live coding con pandas, preguntas de negocio</li>
+  </ul>
+</div>
+
+<!-- ── 04 · SOBRE EL AUTOR ── -->
+<div class="section-num">04</div>
+<h2>Sobre el autor</h2>
+<div class="author-card">
+  <div class="author-avatar">RG</div>
+  <div class="author-info">
+    <strong>Rodrigo González Doldán</strong>
+    <span>Analista Financiero Sr · Python Developer · Data Analyst</span>
+    <p style="margin:8px 0 0;font-size:.84rem;color:var(--t2)">Financista de profesión, programador circunstancial y comediante frustrado. Diseño métricas, modelos y flujos de datos para inversiones. Este proyecto nació en @yoamopython y evoluciona como QuieroProgramar para formar analistas de datos con criterio profesional.</p>
+    <div class="author-links">
+      <a href="https://rodrigonzalez.com.ar" target="_blank">🌐 Portfolio</a>
+      <a href="https://instagram.com/yoamopython" target="_blank">📸 @YoAmoPython</a>
+      <a href="https://tiktok.com/@rodrigonzlez" target="_blank">🎵 TikTok</a>
+      <a href="https://linkedin.com/in/rodrigonzalezok" target="_blank">💼 LinkedIn</a>
+      <a href="https://github.com/rodrigonzalezok" target="_blank">🐙 GitHub</a>
     </div>
+  </div>
+</div>
 
-    <main class="main landing-main" style="margin-left: 0; max-width: 1200px">
-      <section class="hero hero-rg">
-        <p class="eyebrow">De @yoamopython a tu primera carrera en datos</p>
-        <h1>
-          Aprendé a programar de verdad,<br />
-          con criterio de negocio y práctica real.
-        </h1>
-        <p>
-          Esto no es un tutorial suelto. Es una ruta completa para convertirte en Data Analyst: Python + SQL + análisis + portfolio.
-          Hecho en español, con voseo y ejemplos del mundo financiero argentino.
-        </p>
-        <div class="cta-row">
-          <a class="btn-primary" href="/python/01-que-es-python.html">Empezar ahora (Python 01)</a>
-          <a class="btn-ghost" href="/data-analysis/19-preparacion-entrevistas.html">Ver meta final</a>
-        </div>
-        <div class="badges">
-          <a class="badge" href="https://rodrigonzalez.com.ar" target="_blank" rel="noreferrer">rodrigonzalez.com.ar ↗</a>
-          <a class="badge" href="https://www.instagram.com/yoamopython" target="_blank" rel="noreferrer">Instagram @yoamopython ↗</a>
-          <a class="badge" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-          <a class="badge" href="https://www.tiktok.com" target="_blank" rel="noreferrer">TikTok ↗</a>
-        </div>
-      </section>
+<p style="text-align:center;color:var(--t3);font-size:.75rem;margin-top:40px">© Rodrigo González Doldán · QuieroProgramar · Hecho con ❤️ en Argentina</p>
 
-      <section class="card">
-        <h2>Roadmap con personalidad (sin humo)</h2>
-        <p>
-          Vamos por bloques. Cada track tiene teoría, ejemplos ejecutables y ejercicios progresivos.
-          Tu objetivo no es “copiar código”: es pensar como analista.
-        </p>
-        <div class="roadmap">
-          <article class="block">
-            <h3>Track 1 · Python</h3>
-            <ul class="node-list">
-              <li><a href="/python/01-que-es-python.html">01 · Qué es Python</a></li>
-              <li><a href="/python/03-tipos-de-datos.html">03 · Tipos de datos (profundo)</a></li>
-              <li><a href="/python/18-funciones-basicas.html">18 · Funciones básicas</a></li>
-              <li><a href="/python/27-proyecto-integrador-python.html">27 · Proyecto integrador</a></li>
-            </ul>
-          </article>
-          <article class="block">
-            <h3>Track 2 · SQL</h3>
-            <ul class="node-list">
-              <li><a href="/sql/01-que-es-sql.html">01 · Qué es SQL</a></li>
-              <li><a href="/sql/07-joins-inner.html">07 · Joins</a></li>
-              <li><a href="/sql/11-window-functions.html">11 · Window functions</a></li>
-              <li><a href="/sql/15-proyecto-integrador-sql.html">15 · Proyecto integrador</a></li>
-            </ul>
-          </article>
-          <article class="block">
-            <h3>Track 3 · Data Analysis</h3>
-            <ul class="node-list">
-              <li><a href="/data-analysis/01-que-es-data-analysis.html">01 · Qué es Data Analysis</a></li>
-              <li><a href="/data-analysis/09-estadistica-descriptiva.html">09 · Estadística descriptiva</a></li>
-              <li><a href="/data-analysis/17-sql-python-integracion.html">17 · SQL + Python</a></li>
-              <li><a href="/data-analysis/19-preparacion-entrevistas.html">19 · Entrevistas técnicas</a></li>
-            </ul>
-          </article>
-        </div>
-      </section>
+</main>
 
-      <section class="card">
-        <h2>Tus estadísticas</h2>
-        <p id="stats-box">Cargando progreso...</p>
-        <div class="concept">
-          Una lección cuenta como completada cuando resolvés 7 de 10 ejercicios.
-          La plataforma guarda todo en tu navegador (localStorage).
-        </div>
-      </section>
-
-      <section class="card">
-        <h2>¿Qué sigue después?</h2>
-        <ul>
-          <li>✓ Python aplicado a datos</li>
-          <li>✓ SQL orientado a negocio</li>
-          <li>✓ pandas + EDA + visualización</li>
-          <li>→ Portfolio de proyectos reales</li>
-          <li>→ Preparación de entrevistas técnicas</li>
-          <li>→ Inserción laboral como Data Analyst</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Sobre Rodrigo</h2>
-        <p>
-          Soy Rodrigo González Doldán: financista, programador y creador de contenido.
-          Construí esta plataforma para enseñar sin vueltas, con ejemplos concretos y foco en empleabilidad.
-        </p>
-      </section>
-    </main>
-
-    <script type="module">
-      import { CATALOG } from '/js/nav.js';
-      import { computeStats } from '/js/progress.js';
-
-      const s = computeStats(CATALOG);
-      document.getElementById('global-progress-fill').style.width = `${s.pct}%`;
-      document.getElementById('global-progress-text').textContent = `${s.completedLessons}/${s.totalLessons} lecciones · ${s.solvedExercises}/${s.totalExercises} ejercicios · racha ${s.streak} días`;
-      document.getElementById('stats-box').textContent = `Lecciones completadas: ${s.completedLessons}. Ejercicios resueltos: ${s.solvedExercises}. Racha actual: ${s.streak} días.`;
-    </script>
-  </body>
+<script type="module">
+import { CATALOG } from '/js/nav.js';
+import { computeStats } from '/js/progress.js';
+const s = computeStats(CATALOG);
+document.getElementById('global-progress-fill').style.width = `${s.pct}%`;
+document.getElementById('global-progress-text').textContent = `${s.completedLessons}/${s.totalLessons} lecciones`;
+document.getElementById('st-lessons').textContent = `${s.completedLessons}/${s.totalLessons}`;
+document.getElementById('st-exercises').textContent = `${s.solvedExercises}/${s.totalExercises}`;
+document.getElementById('st-streak').textContent = s.streak;
+document.getElementById('st-pct').textContent = `${s.pct}%`;
+</script>
+</body>
 </html>
