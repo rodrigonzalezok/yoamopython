@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 04 · Variables y constantes</title>
+<meta name="description" content="Variables y constantes: Tipado dinámico, reasignación, naming, constantes por convención, asignación múltiple y f-strings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 04 de 27</span>
+  <h1>Variables y constantes</h1>
+  <p>Tipado dinámico, reasignación, naming, constantes por convención, asignación múltiple y f-strings.</p>
+  <div class="badges">
+    <span class="badge">⏱ 80 min</span>
+    <span class="badge">Prerrequisitos: Tipos de datos en Python</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+<p>Variables y constantes parece simple cuando ves un ejemplo corto, pero en un entorno real de trabajo define la calidad del análisis completo. Tipado dinámico, reasignación, naming, constantes por convención, asignación múltiple y f-strings. Si vos entendés este bloque de manera profunda, después podés resolver problemas más complejos sin depender de copiar y pegar soluciones ajenas.</p>
+<h3>De cero a profesional: cómo pensar este tema</h3><p>La mejor forma de aprender programación aplicada a datos es pasar de la sintaxis al criterio. La sintaxis te permite escribir instrucciones; el criterio te permite decidir <em>cuándo</em> conviene cada herramienta y cómo evitar errores que arruinan reportes. En equipos de negocio, nadie te evalúa por escribir código bonito: te evalúan por generar resultados confiables, explicables y accionables.</p>
+<div class="concept"><strong>Idea central:</strong> Variables y constantes no es un tema aislado; es un ladrillo de la arquitectura analítica. Si este ladrillo está flojo, todo lo que construyas arriba queda frágil.</div>
+<h3>Qué pasa por dentro</h3><p>Detrás de cada instrucción hay reglas internas: tipos de datos, orden de evaluación, alcance de variables, estrategia de ejecución y manejo de errores. Entender “qué pasa por dentro” te evita el clásico escenario de resultados que cambian sin que sepas por qué. En análisis de datos esto es crítico porque cualquier error silencioso puede terminar en decisiones de pricing, riesgo o presupuesto equivocadas.</p>
+<h3>Analogía de negocio argentino</h3><div class="analogy">Pensalo como un cierre contable: no alcanza con sumar números. Tenés que saber qué representa cada partida, qué criterio usaste y cómo auditarlo después. Programar para datos es igual: trazabilidad primero, improvisación nunca.</div>
+<h3>Errores comunes y cómo evitarlos</h3><div class="warning"><strong>Error típico:</strong> ejecutar código que “parece funcionar” sin validar supuestos. La práctica profesional exige chequear formatos, nulos, rangos y consistencia antes de confiar en un resultado.</div><p>Otro error común es mezclar lógica de negocio con lógica técnica sin documentación. Cuando un compañero revisa tu trabajo y no entiende de dónde salió una métrica, perdiste mantenibilidad. Comentá decisiones clave y nombrá variables/tablas con intención de negocio.</p>
+<h3>Buenas prácticas de industria</h3><div class="tip">Definí un mini checklist por ejercicio: (1) entendí el problema, (2) limpié/validé datos, (3) resolví, (4) contrasté resultado, (5) expliqué impacto de negocio. Si repetís este hábito, subís de junior a perfil sólido mucho más rápido.</div>
+<h3>Aplicación real en Data Analyst</h3><div class="realworld">En bancos, fintechs, retail y energía, estas habilidades se usan para segmentar clientes, estimar mora, optimizar campañas, detectar desvíos y reportar KPIs al directorio. Es código al servicio de decisiones reales.</div>
+<p>Además, trabajamos con datos y contextos de Argentina: IVA 21%, montos en pesos, CUIT/CBU, tasas TNA/TEM, empresas como YPF, GGAL, PAMP o MELI. Esto no solo hace más cercano el aprendizaje: también te prepara para entrevistas laborales locales, donde te van a pedir criterio aplicado y no ejercicios de laboratorio sin contexto.</p>
+<p>Antes de pasar a ejemplos, quedate con esto: dominar el tema significa poder explicarlo con tus palabras, implementarlo sin ayuda y detectar sus límites. Si podés hacer esas tres cosas, estás aprendiendo de verdad.</p>
+<div class='table-wrap'><table><thead><tr><th>Bloque</th><th>Qué resuelve</th><th>Pregunta de control</th></tr></thead><tbody><tr><td>Sintaxis</td><td>Te permite expresar la idea</td><td>¿Es correcta y legible?</td></tr><tr><td>Lógica</td><td>Transforma datos en resultado</td><td>¿Responde el problema de negocio?</td></tr><tr><td>Validación</td><td>Reduce errores silenciosos</td><td>¿Cómo sé que el resultado es confiable?</td></tr><tr><td>Comunicación</td><td>Hace útil tu análisis</td><td>¿Otra persona puede entender y replicar?</td></tr></tbody></table></div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<div class="card">
+  <h3>Ejemplo 1</h3>
+  <p>Este ejemplo te muestra la mecánica mínima del concepto.</p>
+  <div class="editor" data-mode="python">
+    <div class="editor-top"><span>ejemplo_1.py</span><span>Python</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">monto = 125000
+iva = 0.21
+total = monto * (1 + iva)
+print(f"Total con IVA: {total:.2f}")</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+</div>
+<div class="card">
+  <h3>Ejemplo 2</h3>
+  <p>Acá ves variantes para que no quedes atado a una sola forma de resolverlo.</p>
+  <div class="editor" data-mode="python">
+    <div class="editor-top"><span>ejemplo_2.py</span><span>Python</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = ["García", "López", "Fernández"]
+montos = [125000, 98000, 153500]
+for c, m in zip(clientes, montos):
+    print(f"{c}: ${m:,.0f}")</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+</div>
+<div class="card">
+  <h3>Ejemplo 3</h3>
+  <p>Ahora combinamos con contenidos previos para simular flujo real de trabajo.</p>
+  <div class="editor" data-mode="python">
+    <div class="editor-top"><span>ejemplo_3.py</span><span>Python</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">operaciones = [
+    {"empresa": "YPF", "monto": 120000},
+    {"empresa": "GGAL", "monto": 95000},
+    {"empresa": "PAMP", "monto": 140000}
+]
+print(sum(op["monto"] for op in operaciones))</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+</div>
+<div class="card">
+  <h3>Ejemplo 4</h3>
+  <p>Este caso replica una situación financiera/empresarial argentina.</p>
+  <div class="editor" data-mode="python">
+    <div class="editor-top"><span>ejemplo_4.py</span><span>Python</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">from decimal import Decimal
+base = Decimal('0.1') + Decimal('0.2')
+print('Decimal exacto:', base)
+print('Float aproximado:', 0.1 + 0.2)</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+</div>
+<div class="card">
+  <h3>Ejemplo 5</h3>
+  <p>Edge case: escenario donde suelen aparecer errores silenciosos.</p>
+  <div class="editor" data-mode="python">
+    <div class="editor-top"><span>ejemplo_5.py</span><span>Python</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">registro = "Fernández|GGAL|$153500|True"
+nombre, ticker, monto_raw, activo = registro.split('|')
+monto = float(monto_raw.replace('$',''))
+print(nombre, ticker, monto, activo == 'True')</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+<div class="table-wrap"><table><thead><tr><th>Componente</th><th>Uso rápido</th><th>Señal de buen uso</th></tr></thead><tbody><tr><td>Entrada</td><td>Datos originales</td><td>Tipos/formato validados</td></tr><tr><td>Transformación</td><td>Regla de negocio</td><td>Reproducible y auditable</td></tr><tr><td>Resultado</td><td>Métrica o salida</td><td>Responde la pregunta inicial</td></tr><tr><td>Control</td><td>Validación</td><td>Evita errores silenciosos</td></tr></tbody></table></div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise card">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h3>Ejercicio 1</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-1" data-expected="PYTHON-04-EX-1">
+    <div class="editor-top"><span>ejercicio_1.py</span><span>Debe incluir "PYTHON-04-EX-1"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Completá 1-3 líneas para llegar al resultado esperado
+valor = 100
+# tu código acá
+print(valor)</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h1">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-1 y el resultado real."]'></div>
+</div>
+<div class="exercise card">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h3>Ejercicio 2</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-2" data-expected="PYTHON-04-EX-2">
+    <div class="editor-top"><span>ejercicio_2.py</span><span>Debe incluir "PYTHON-04-EX-2"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Completá 1-3 líneas para llegar al resultado esperado
+valor = 100
+# tu código acá
+print(valor)</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h2">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-2 y el resultado real."]'></div>
+</div>
+<div class="exercise card">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h3>Ejercicio 3</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-3" data-expected="PYTHON-04-EX-3">
+    <div class="editor-top"><span>ejercicio_3.py</span><span>Debe incluir "PYTHON-04-EX-3"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Completá 1-3 líneas para llegar al resultado esperado
+valor = 100
+# tu código acá
+print(valor)</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h3">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-3 y el resultado real."]'></div>
+</div>
+<div class="exercise card">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h3>Ejercicio 4</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-4" data-expected="PYTHON-04-EX-4">
+    <div class="editor-top"><span>ejercicio_4.py</span><span>Debe incluir "PYTHON-04-EX-4"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Combiná tema actual + tema previo
+clientes = ['García','López','Fernández']
+montos = [120000, 98000, 153500]
+# tu código acá</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h4">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-4 y el resultado real."]'></div>
+</div>
+<div class="exercise card">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h3>Ejercicio 5</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-5" data-expected="PYTHON-04-EX-5">
+    <div class="editor-top"><span>ejercicio_5.py</span><span>Debe incluir "PYTHON-04-EX-5"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Combiná tema actual + tema previo
+clientes = ['García','López','Fernández']
+montos = [120000, 98000, 153500]
+# tu código acá</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h5">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-5 y el resultado real."]'></div>
+</div>
+<div class="exercise card">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h3>Ejercicio 6</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-6" data-expected="PYTHON-04-EX-6">
+    <div class="editor-top"><span>ejercicio_6.py</span><span>Debe incluir "PYTHON-04-EX-6"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Combiná tema actual + tema previo
+clientes = ['García','López','Fernández']
+montos = [120000, 98000, 153500]
+# tu código acá</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h6">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-6 y el resultado real."]'></div>
+</div>
+<div class="exercise card">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h3>Ejercicio 7</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-7" data-expected="PYTHON-04-EX-7">
+    <div class="editor-top"><span>ejercicio_7.py</span><span>Debe incluir "PYTHON-04-EX-7"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Problema avanzado multi-paso
+operaciones = [120000, 98000, 153500, 76000]
+# tu código acá</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h7">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-7 y el resultado real."]'></div>
+</div>
+<div class="exercise card">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h3>Ejercicio 8</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-8" data-expected="PYTHON-04-EX-8">
+    <div class="editor-top"><span>ejercicio_8.py</span><span>Debe incluir "PYTHON-04-EX-8"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Problema avanzado multi-paso
+operaciones = [120000, 98000, 153500, 76000]
+# tu código acá</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h8">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-8 y el resultado real."]'></div>
+</div>
+<div class="exercise card">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h3>Ejercicio 9</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-9" data-expected="PYTHON-04-EX-9">
+    <div class="editor-top"><span>ejercicio_9.py</span><span>Debe incluir "PYTHON-04-EX-9"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Problema avanzado multi-paso
+operaciones = [120000, 98000, 153500, 76000]
+# tu código acá</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h9">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-9 y el resultado real."]'></div>
+</div>
+<div class="exercise card">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h3>Ejercicio 10</h3>
+  <p>Resolvé una situación realista vinculada a <strong>Variables y constantes</strong>. Usá datos argentinos (clientes, montos, empresas, IVA/CUIT cuando aplique) y construí un resultado verificable.</p>
+  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-10" data-expected="PYTHON-04-EX-10">
+    <div class="editor-top"><span>ejercicio_10.py</span><span>Debe incluir "PYTHON-04-EX-10"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Desafío integrador tipo entrevista
+registro = '20-12345678-9|YPF|$250000|36'
+# tu solución completa acá</textarea></div>
+    <div class="editor-actions">
+      <button data-run>▶ Ejecutar</button>
+      <button class="secondary" data-reset>Reset</button>
+      <button class="hint" data-hint-btn="h10">💡 Pista</button>
+    </div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["Primero definí claramente entrada y salida de negocio.","Después armá la estructura: limpieza → cálculo → validación.","Incluí al final un print/select con el token PYTHON-04-EX-10 y el resultado real."]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+<ul>
+  <li>Construiste una base sólida de <strong>Variables y constantes</strong> con criterio técnico y de negocio.</li>
+  <li>Practicaste ejemplos progresivos desde lo básico hasta casos edge.</li>
+  <li>Aplicaste contexto argentino (pesos, empresas locales, métricas reales).</li>
+  <li>Entrenaste validación y trazabilidad para trabajo profesional.</li>
+  <li>Quedaste listo para enlazar este tema con la siguiente lección del track.</li>
+</ul>
+<p>Siguiente paso recomendado: <a href="/python/06-condicionales.html">Condicionales</a>. Documentación útil: <a href="https://docs.python.org/3/" target="_blank" rel="noreferrer">Python Docs</a>, <a href="https://www.sqlite.org/docs.html" target="_blank" rel="noreferrer">SQLite Docs</a>, <a href="https://pandas.pydata.org/docs/" target="_blank" rel="noreferrer">pandas Docs</a>.</p>
+
+<div class="footer-nav">
+  <a href="/python/03-tipos-de-datos.html">← Tipos de datos en Python</a>
+  <a class="next" href="/python/06-condicionales.html">Condicionales →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
