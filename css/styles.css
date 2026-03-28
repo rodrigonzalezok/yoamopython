@@ -30,7 +30,7 @@ html, body { margin: 0; padding: 0; }
 body { font-family: var(--ff); background: var(--bg); color: var(--t1); line-height: 1.7; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
-.layout { display: grid; grid-template-columns: var(--sidebar) 1fr; min-height: 100vh; }
+.layout { min-height: 100vh; }
 .topbar {
   position: fixed; top: 0; left: 0; right: 0; height: var(--topbar);
   background: rgba(9,12,20,.95); border-bottom: 1px solid var(--b1);
