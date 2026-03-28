@@ -1,11 +1,125 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Roadmap Data Analyst</title><meta name='description' content='Plataforma multipágina para aprender Python, SQL y Data Analysis desde cero.'/><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>de cero a Data Analyst</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<main class='main' style='margin-left:0;max-width:1200px'>
-<section class='hero'><h1>Roadmap completo para convertirte en Data Analyst</h1><p>Python → SQL → Data Analysis, con práctica interactiva, validaciones automáticas y enfoque real de negocio argentino.</p><div class='badges'><span class='badge'>Autor: Rodrigo González Doldán</span><span class='badge'>Instagram: @yoamopython</span><span class='badge'>Sitio: rodrigonzalez.com.ar</span></div></section>
-<section class='card'><h2>Learning Path</h2><div class='roadmap'><div class='block'><h3>Python</h3><ul class='node-list'><li><a href='/python/01-que-es-python.html'>01 Qué es Python</a></li><li><a href='/python/03-tipos-de-datos.html'>03 Tipos de datos</a></li><li><a href='/python/27-proyecto-integrador-python.html'>27 Proyecto integrador</a></li></ul></div><div class='block'><h3>SQL</h3><ul class='node-list'><li><a href='/sql/01-que-es-sql.html'>01 Qué es SQL</a></li><li><a href='/sql/11-window-functions.html'>11 Window Functions</a></li><li><a href='/sql/15-proyecto-integrador-sql.html'>15 Proyecto integrador SQL</a></li></ul></div><div class='block'><h3>Data Analysis</h3><ul class='node-list'><li><a href='/data-analysis/01-que-es-data-analysis.html'>01 Qué es Data Analysis</a></li><li><a href='/data-analysis/09-estadistica-descriptiva.html'>09 Estadística descriptiva</a></li><li><a href='/data-analysis/19-preparacion-entrevistas.html'>19 Preparación entrevistas</a></li></ul></div></div></section>
-<section class='card'><h2>Estadísticas</h2><p id='stats-box'>Cargando progreso...</p></section>
-<section class='card'><h2>¿Qué podés hacer después?</h2><ul><li>Python básico ✓</li><li>SQL ✓</li><li>pandas + análisis ✓</li><li>→ Visualización (Power BI / Tableau)</li><li>→ Machine Learning básico</li><li>→ Portfolio de proyectos</li><li>→ Preparación para entrevistas técnicas</li></ul></section>
-<section class='card'><h2>Sobre el autor</h2><p>Rodrigo González Doldán, financista y programador de Argentina. Este proyecto nació en @yoamopython y evoluciona como Quiero Programar para formar analistas de datos con criterio profesional.</p></section>
-</main>
-<script type='module'>import {CATALOG} from '/js/nav.js';import {computeStats} from '/js/progress.js';const s=computeStats(CATALOG);document.getElementById('global-progress-fill').style.width=`${s.pct}%`;document.getElementById('global-progress-text').textContent=`${s.completedLessons}/${s.totalLessons} lecciones · ${s.solvedExercises}/${s.totalExercises} ejercicios · racha ${s.streak} días`;document.getElementById('stats-box').textContent=`Lecciones completadas: ${s.completedLessons}. Ejercicios resueltos: ${s.solvedExercises}. Racha: ${s.streak} días.`;</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiero Programar · Aprendé Python, SQL y Data Analysis</title>
+    <meta
+      name="description"
+      content="Quiero Programar: plataforma de Rodrigo González Doldán para aprender Python, SQL y análisis de datos con foco real de negocio en Argentina."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="brand">Quiero Programar <small>by Rodrigo González Doldán</small></div>
+      <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+      <div id="global-progress-text" class="top-stats"></div>
+    </div>
+
+    <main class="main landing-main" style="margin-left: 0; max-width: 1200px">
+      <section class="hero hero-rg">
+        <p class="eyebrow">De @yoamopython a tu primera carrera en datos</p>
+        <h1>
+          Aprendé a programar de verdad,<br />
+          con criterio de negocio y práctica real.
+        </h1>
+        <p>
+          Esto no es un tutorial suelto. Es una ruta completa para convertirte en Data Analyst: Python + SQL + análisis + portfolio.
+          Hecho en español, con voseo y ejemplos del mundo financiero argentino.
+        </p>
+        <div class="cta-row">
+          <a class="btn-primary" href="/python/01-que-es-python.html">Empezar ahora (Python 01)</a>
+          <a class="btn-ghost" href="/data-analysis/19-preparacion-entrevistas.html">Ver meta final</a>
+        </div>
+        <div class="badges">
+          <a class="badge" href="https://rodrigonzalez.com.ar" target="_blank" rel="noreferrer">rodrigonzalez.com.ar ↗</a>
+          <a class="badge" href="https://www.instagram.com/yoamopython" target="_blank" rel="noreferrer">Instagram @yoamopython ↗</a>
+          <a class="badge" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a class="badge" href="https://www.tiktok.com" target="_blank" rel="noreferrer">TikTok ↗</a>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Roadmap con personalidad (sin humo)</h2>
+        <p>
+          Vamos por bloques. Cada track tiene teoría, ejemplos ejecutables y ejercicios progresivos.
+          Tu objetivo no es “copiar código”: es pensar como analista.
+        </p>
+        <div class="roadmap">
+          <article class="block">
+            <h3>Track 1 · Python</h3>
+            <ul class="node-list">
+              <li><a href="/python/01-que-es-python.html">01 · Qué es Python</a></li>
+              <li><a href="/python/03-tipos-de-datos.html">03 · Tipos de datos (profundo)</a></li>
+              <li><a href="/python/18-funciones-basicas.html">18 · Funciones básicas</a></li>
+              <li><a href="/python/27-proyecto-integrador-python.html">27 · Proyecto integrador</a></li>
+            </ul>
+          </article>
+          <article class="block">
+            <h3>Track 2 · SQL</h3>
+            <ul class="node-list">
+              <li><a href="/sql/01-que-es-sql.html">01 · Qué es SQL</a></li>
+              <li><a href="/sql/07-joins-inner.html">07 · Joins</a></li>
+              <li><a href="/sql/11-window-functions.html">11 · Window functions</a></li>
+              <li><a href="/sql/15-proyecto-integrador-sql.html">15 · Proyecto integrador</a></li>
+            </ul>
+          </article>
+          <article class="block">
+            <h3>Track 3 · Data Analysis</h3>
+            <ul class="node-list">
+              <li><a href="/data-analysis/01-que-es-data-analysis.html">01 · Qué es Data Analysis</a></li>
+              <li><a href="/data-analysis/09-estadistica-descriptiva.html">09 · Estadística descriptiva</a></li>
+              <li><a href="/data-analysis/17-sql-python-integracion.html">17 · SQL + Python</a></li>
+              <li><a href="/data-analysis/19-preparacion-entrevistas.html">19 · Entrevistas técnicas</a></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Tus estadísticas</h2>
+        <p id="stats-box">Cargando progreso...</p>
+        <div class="concept">
+          Una lección cuenta como completada cuando resolvés 7 de 10 ejercicios.
+          La plataforma guarda todo en tu navegador (localStorage).
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>¿Qué sigue después?</h2>
+        <ul>
+          <li>✓ Python aplicado a datos</li>
+          <li>✓ SQL orientado a negocio</li>
+          <li>✓ pandas + EDA + visualización</li>
+          <li>→ Portfolio de proyectos reales</li>
+          <li>→ Preparación de entrevistas técnicas</li>
+          <li>→ Inserción laboral como Data Analyst</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Sobre Rodrigo</h2>
+        <p>
+          Soy Rodrigo González Doldán: financista, programador y creador de contenido.
+          Construí esta plataforma para enseñar sin vueltas, con ejemplos concretos y foco en empleabilidad.
+        </p>
+      </section>
+    </main>
+
+    <script type="module">
+      import { CATALOG } from '/js/nav.js';
+      import { computeStats } from '/js/progress.js';
+
+      const s = computeStats(CATALOG);
+      document.getElementById('global-progress-fill').style.width = `${s.pct}%`;
+      document.getElementById('global-progress-text').textContent = `${s.completedLessons}/${s.totalLessons} lecciones · ${s.solvedExercises}/${s.totalExercises} ejercicios · racha ${s.streak} días`;
+      document.getElementById('stats-box').textContent = `Lecciones completadas: ${s.completedLessons}. Ejercicios resueltos: ${s.solvedExercises}. Racha actual: ${s.streak} días.`;
+    </script>
+  </body>
+</html>
