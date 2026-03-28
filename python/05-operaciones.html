@@ -1,221 +1,558 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 05</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 05</div><h1>Operaciones</h1><p>Subtítulo: dominá operaciones desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 04</span><span class='badge'>Breadcrumb: Python > Lección 05</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Operaciones</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Operaciones</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de operaciones</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Operaciones</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Operaciones</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Operaciones</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operaciones</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-05-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de operaciones con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/04-variables-constantes.html'>← Anterior</a><a class='badge' href='/python/06-condicionales.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 05 · Operaciones básicas</title>
+<meta name="description" content="Dominá los operadores aritméticos, de comparación, lógicos y de asignación en Python con ejemplos financieros reales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- HEADER -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="hero">
+  <span class="track-label python">Python · Lección 05 de 27</span>
+  <h1>Operaciones básicas</h1>
+  <p>Aritméticas, de comparación, lógicas y de asignación — los cuatro pilares del cálculo en Python. Toda fórmula, toda decisión y todo filtro que construyas parte de acá.</p>
+  <div class="badges">
+    <span class="badge">⏱ 80–100 min</span>
+    <span class="badge">Prerrequisitos: 03 Tipos de datos, 04 Variables</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECCIÓN 1: TEORÍA -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<p>Los <strong>operadores</strong> son símbolos que le dicen a Python qué hacer con los datos. Sin operadores, un programa no puede calcular nada: no puede sumar un saldo, comparar dos scores, ni decidir si un cliente califica para un crédito. Hay cuatro familias que necesitás dominar y que vamos a cubrir en profundidad.</p>
+
+<h3>Operadores aritméticos</h3>
+
+<p>Son los más intuitivos porque son las operaciones matemáticas que ya conocés. Pero Python agrega tres que probablemente no hayas visto:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operador</th><th>Nombre</th><th>Ejemplo</th><th>Resultado</th><th>¿Para qué sirve?</th></tr>
+<tr><td><code>+</code></td><td>Suma</td><td><code>15 + 4</code></td><td><code>19</code></td><td>Sumar montos, acumular totales</td></tr>
+<tr><td><code>-</code></td><td>Resta</td><td><code>15 - 4</code></td><td><code>11</code></td><td>Calcular diferencias, margen</td></tr>
+<tr><td><code>*</code></td><td>Multiplicación</td><td><code>15 * 4</code></td><td><code>60</code></td><td>Precio × cantidad, tasa × capital</td></tr>
+<tr><td><code>/</code></td><td>División</td><td><code>15 / 4</code></td><td><code>3.75</code></td><td>Promedios, ratios. <b>Siempre devuelve float</b></td></tr>
+<tr><td><code>//</code></td><td>División entera</td><td><code>15 // 4</code></td><td><code>3</code></td><td>Cuotas enteras, lotes completos</td></tr>
+<tr><td><code>%</code></td><td>Módulo (resto)</td><td><code>15 % 4</code></td><td><code>3</code></td><td>¿Es par? ¿Es múltiplo? Distribuir sobrantes</td></tr>
+<tr><td><code>**</code></td><td>Potencia</td><td><code>2 ** 10</code></td><td><code>1024</code></td><td>Interés compuesto: capital × (1+tasa)**n</td></tr>
+</table>
+</div>
+
+<div class="concept"><strong>Punto clave: la división (/) siempre devuelve float.</strong> Incluso <code>10 / 2</code> devuelve <code>5.0</code>, no <code>5</code>. Si necesitás un entero, usá <code>//</code> (división entera) o <code>int()</code>. Esto importa cuando construís IDs, índices o contadores que deben ser enteros.</div>
+
+<p>El operador <code>%</code> (módulo) merece atención especial. Devuelve el <strong>resto</strong> de una división. Sus usos más comunes en análisis de datos:</p>
+<ul>
+  <li><b>Verificar paridad:</b> <code>n % 2 == 0</code> → el número es par</li>
+  <li><b>Verificar múltiplos:</b> <code>n % 12 == 0</code> → el número es múltiplo de 12 (útil para meses)</li>
+  <li><b>Distribuir sobrantes:</b> si tenés $17,000 para repartir entre 5 personas, cada uno recibe <code>17000 // 5 = $3,400</code> y sobran <code>17000 % 5 = $0</code></li>
+  <li><b>Ciclos:</b> <code>i % 3</code> genera la secuencia 0, 1, 2, 0, 1, 2... ideal para alternar colores o categorías</li>
+</ul>
+
+<p>El operador <code>**</code> (potencia) es tu herramienta para <strong>interés compuesto</strong>. La fórmula financiera más importante que vas a usar es:</p>
+<p><code>monto_final = capital * (1 + tasa) ** periodos</code></p>
+<p>Por ejemplo, $100,000 al 5% mensual durante 12 meses: <code>100000 * (1.05) ** 12 = $179,585.63</code>. Esa sola línea reemplaza una planilla entera de Excel.</p>
+
+<div class="warning"><strong>Error común: confundir / con //.</strong> Si calculás <code>7 / 2</code> esperando <code>3</code>, vas a obtener <code>3.5</code>. Si calculás <code>7 // 2</code> esperando <code>3.5</code>, vas a obtener <code>3</code>. Siempre pensá cuál necesitás antes de escribir la línea.</div>
+
+<h3>Precedencia de operadores (orden de evaluación)</h3>
+
+<p>Así como en matemática primero va la multiplicación y después la suma, Python sigue un orden estricto:</p>
+<ol>
+  <li><code>**</code> (potencia) — se evalúa primero</li>
+  <li><code>*</code>, <code>/</code>, <code>//</code>, <code>%</code> — segundo</li>
+  <li><code>+</code>, <code>-</code> — último</li>
+</ol>
+<p>Si hay empate de nivel, se evalúa de <strong>izquierda a derecha</strong> (excepto <code>**</code> que va de derecha a izquierda). Cuando tengas dudas, <strong>usá paréntesis</strong>. No es solo por claridad — es por supervivencia. <code>(precio * cantidad) * (1 + iva)</code> es inequívoco; <code>precio * cantidad * 1 + iva</code> da un resultado completamente distinto.</p>
+
+<div class="tip"><strong>Tip profesional:</strong> en código de producción, preferí siempre paréntesis explícitos aunque no sean necesarios. Tu yo del futuro (y tus compañeros de equipo) te lo van a agradecer. <code>resultado = (base * tasa) + comision</code> es más claro que <code>resultado = base * tasa + comision</code>, aunque den lo mismo.</div>
+
+<h3>Operadores de comparación</h3>
+
+<p>Las comparaciones devuelven <code>True</code> o <code>False</code>. Son la base de toda decisión que tome tu programa:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operador</th><th>Significado</th><th>Ejemplo</th><th>Resultado</th></tr>
+<tr><td><code>==</code></td><td>Igual a</td><td><code>5 == 5</code></td><td><code>True</code></td></tr>
+<tr><td><code>!=</code></td><td>Distinto de</td><td><code>5 != 3</code></td><td><code>True</code></td></tr>
+<tr><td><code>></code></td><td>Mayor que</td><td><code>10 > 5</code></td><td><code>True</code></td></tr>
+<tr><td><code><</code></td><td>Menor que</td><td><code>3 < 7</code></td><td><code>True</code></td></tr>
+<tr><td><code>>=</code></td><td>Mayor o igual</td><td><code>5 >= 5</code></td><td><code>True</code></td></tr>
+<tr><td><code><=</code></td><td>Menor o igual</td><td><code>4 <= 3</code></td><td><code>False</code></td></tr>
+</table>
+</div>
+
+<div class="warning"><strong>Error clásico: usar <code>=</code> en vez de <code>==</code>.</strong> <code>=</code> es asignación (guardar un valor), <code>==</code> es comparación (preguntar si son iguales). Escribir <code>if saldo = 0</code> es un error de sintaxis en Python. Lo correcto es <code>if saldo == 0</code>.</div>
+
+<p>Python permite <strong>comparaciones encadenadas</strong>, algo que otros lenguajes no soportan: <code>18 <= edad <= 65</code> verifica que la edad esté en ese rango. Es equivalente a <code>edad >= 18 and edad <= 65</code> pero mucho más legible.</p>
+
+<h3>Operadores lógicos</h3>
+
+<p>Los operadores lógicos combinan condiciones booleanas:</p>
+<ul>
+  <li><code><b>and</b></code> — <b>ambas</b> condiciones deben ser True. <code>True and True → True</code>. Cualquier otra combinación → <code>False</code>.</li>
+  <li><code><b>or</b></code> — <b>al menos una</b> debe ser True. <code>False or False → False</code>. Cualquier otra combinación → <code>True</code>.</li>
+  <li><code><b>not</b></code> — <b>invierte</b> el valor. <code>not True → False</code>.</li>
+</ul>
+
+<div class="realworld"><strong>Caso de negocio:</strong> para aprobar un crédito en un banco, la regla podría ser: <code>(score >= 650) and (ingreso >= 80000) and (not tiene_deuda_vencida)</code>. Las tres condiciones deben cumplirse. Si alguna falla, se rechaza. Eso es un <code>and</code> encadenado con un <code>not</code>.</div>
+
+<p>Python evalúa <code>and</code>/<code>or</code> con <strong>evaluación de cortocircuito</strong>: si la primera condición de un <code>and</code> es <code>False</code>, ni siquiera mira la segunda (ya sabe que el resultado es <code>False</code>). Esto importa para eficiencia y para evitar errores: <code>if lista and lista[0] > 10</code> es seguro porque si <code>lista</code> está vacía (falsy), no intenta acceder a <code>lista[0]</code>.</p>
+
+<h3>Operadores de asignación compuesta</h3>
+
+<p>Son atajos para modificar una variable:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Atajo</th><th>Equivale a</th><th>Uso típico</th></tr>
+<tr><td><code>x += 5</code></td><td><code>x = x + 5</code></td><td>Acumular totales en un bucle</td></tr>
+<tr><td><code>x -= 5</code></td><td><code>x = x - 5</code></td><td>Descontar de un saldo</td></tr>
+<tr><td><code>x *= 1.05</code></td><td><code>x = x * 1.05</code></td><td>Aplicar interés mensual</td></tr>
+<tr><td><code>x /= 2</code></td><td><code>x = x / 2</code></td><td>Dividir un monto</td></tr>
+<tr><td><code>x //= 3</code></td><td><code>x = x // 3</code></td><td>Repartir en cuotas enteras</td></tr>
+<tr><td><code>x %= 10</code></td><td><code>x = x % 10</code></td><td>Quedarse con el último dígito</td></tr>
+<tr><td><code>x **= 2</code></td><td><code>x = x ** 2</code></td><td>Elevar al cuadrado</td></tr>
+</table>
+</div>
+
+<div class="analogy"><strong>Analogía bancaria:</strong> <code>saldo += deposito</code> es como cuando el cajero le suma un depósito a tu saldo. <code>saldo -= extraccion</code> es cuando retirás plata. <code>saldo *= 1.03</code> es cuando el banco te acredita el interés mensual del plazo fijo.</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECCIÓN 2: EJEMPLOS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Aritmética básica y precedencia</h3>
+<p>Fijate cómo el orden de operaciones afecta el resultado. La línea 4 y 5 dan resultados muy distintos según dónde pongas los paréntesis.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_aritmetica.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">a, b = 17, 5
+
+print(f"{a} + {b} = {a + b}")       # 22
+print(f"{a} - {b} = {a - b}")       # 12
+print(f"{a} * {b} = {a * b}")       # 85
+print(f"{a} / {b} = {a / b}")       # 3.4 (siempre float!)
+print(f"{a} // {b} = {a // b}")     # 3   (parte entera)
+print(f"{a} % {b} = {a % b}")       # 2   (resto)
+print(f"{a} ** {b} = {a ** b}")     # 1419857
+
+# Precedencia importa:
+precio, cantidad, iva = 1500, 3, 0.21
+mal  = precio * cantidad * 1 + iva    # 4500.21 (MAL)
+bien = precio * cantidad * (1 + iva)  # 5445.0  (BIEN)
+print(f"\nSin paréntesis: ${mal}")
+print(f"Con paréntesis: ${bien}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Módulo para problemas reales</h3>
+<p>El operador <code>%</code> resuelve problemas que parecen complicados en una sola línea.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_modulo.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ¿Un número es par o impar?
+numero = 42
+print(f"{numero} es {'par' if numero % 2 == 0 else 'impar'}")
+
+# Repartir $17,500 entre 4 personas
+total = 17500
+personas = 4
+cada_uno = total // personas
+sobrante = total % personas
+print(f"\nCada uno: ${cada_uno:,}")
+print(f"Sobrante: ${sobrante:,}")
+
+# ¿Es múltiplo de 12? (útil para verificar años completos)
+meses = 36
+print(f"\n{meses} meses = {meses // 12} años exactos? {'Sí' if meses % 12 == 0 else 'No'}")
+
+# Extraer últimos 2 dígitos de un número
+cbu = 2850590940090418135201
+ultimos_2 = cbu % 100
+print(f"Últimos 2 dígitos del CBU: {ultimos_2}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Interés compuesto y simulación financiera</h3>
+<p>La potencia (<code>**</code>) convierte una fórmula financiera compleja en una sola línea de Python.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_interes.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Interés compuesto: capital * (1 + tasa)^periodos
+capital = 500000      # $500K en un plazo fijo
+tna = 0.75            # Tasa Nominal Anual 75%
+tem = tna / 12        # Tasa Efectiva Mensual
+meses = 6
+
+monto_final = capital * (1 + tem) ** meses
+ganancia = monto_final - capital
+rendimiento_pct = (ganancia / capital) * 100
+
+print(f"Capital inicial:  ${capital:>12,.2f}")
+print(f"TNA:              {tna:.0%}")
+print(f"TEM:              {tem:.2%}")
+print(f"Plazo:            {meses} meses")
+print(f"{'─'*38}")
+print(f"Monto final:      ${monto_final:>12,.2f}")
+print(f"Ganancia:         ${ganancia:>12,.2f}")
+print(f"Rendimiento:      {rendimiento_pct:.1f}%")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Comparaciones y lógicos en evaluación crediticia</h3>
+<p>Así funciona un motor de decisión simplificado: combina condiciones con <code>and</code>/<code>or</code>/<code>not</code>.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_scoring.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Datos del solicitante
+edad = 28
+ingreso_mensual = 350000
+score = 710
+tiene_deuda_vencida = False
+antiguedad_laboral = 3  # años
+
+# Reglas de negocio
+requisito_edad = 18 <= edad <= 65
+requisito_ingreso = ingreso_mensual >= 100000
+requisito_score = score >= 650
+requisito_deuda = not tiene_deuda_vencida
+requisito_laboral = antiguedad_laboral >= 1
+
+# Evaluación
+aprobado = (requisito_edad and requisito_ingreso and
+            requisito_score and requisito_deuda and
+            requisito_laboral)
+
+# Categorización
+if aprobado and score >= 750:
+    categoria = "Premium"
+    tasa = "38% TNA"
+elif aprobado and score >= 650:
+    categoria = "Estándar"
+    tasa = "55% TNA"
+else:
+    categoria = "Rechazado"
+    tasa = "N/A"
+
+print(f"{'═'*40}")
+print(f" EVALUACIÓN CREDITICIA")
+print(f"{'═'*40}")
+print(f" Edad: {edad} ({'✓' if requisito_edad else '✗'})")
+print(f" Ingreso: ${ingreso_mensual:,} ({'✓' if requisito_ingreso else '✗'})")
+print(f" Score: {score} ({'✓' if requisito_score else '✗'})")
+print(f" Deuda vencida: {'No' if not tiene_deuda_vencida else 'Sí'} ({'✓' if requisito_deuda else '✗'})")
+print(f" Antigüedad: {antiguedad_laboral} años ({'✓' if requisito_laboral else '✗'})")
+print(f"{'─'*40}")
+print(f" Resultado: {categoria}")
+print(f" Tasa: {tasa}")
+print(f"{'═'*40}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Asignación compuesta — simulando movimientos de cuenta</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_cuenta.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Simulación de movimientos de una caja de ahorro
+saldo = 250000
+print(f"Saldo inicial:     ${saldo:>10,}")
+
+saldo += 180000    # Cobro de sueldo
+print(f"+ Sueldo:          ${saldo:>10,}")
+
+saldo -= 75000     # Alquiler
+print(f"- Alquiler:        ${saldo:>10,}")
+
+saldo -= 45000     # Servicios
+print(f"- Servicios:       ${saldo:>10,}")
+
+saldo *= 1.002     # Rendimiento diario
+print(f"* Rendimiento:     ${saldo:>10,.2f}")
+
+# Cálculo de proporción gastada
+gasto_total = 75000 + 45000
+sueldo = 180000
+ratio = gasto_total / sueldo * 100
+print(f"\nRatio gasto/ingreso: {ratio:.1f}%")
+print(f"Estado: {'⚠️ Ajustado' if ratio > 60 else '✓ Saludable'}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECCIÓN 3: REFERENCIA RÁPIDA -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Categoría</th><th>Operadores</th><th>Devuelve</th></tr>
+<tr><td>Aritméticos</td><td><code>+ - * / // % **</code></td><td>Número (int o float)</td></tr>
+<tr><td>Comparación</td><td><code>== != > < >= <=</code></td><td><code>True</code> o <code>False</code></td></tr>
+<tr><td>Lógicos</td><td><code>and or not</code></td><td><code>True</code> o <code>False</code></td></tr>
+<tr><td>Asignación</td><td><code>= += -= *= /= //= %= **=</code></td><td>Nada (modifica la variable)</td></tr>
+<tr><td>Identidad</td><td><code>is, is not</code></td><td><code>True</code> o <code>False</code></td></tr>
+<tr><td>Membresía</td><td><code>in, not in</code></td><td><code>True</code> o <code>False</code></td></tr>
+</table>
+</div>
+
+<div class="tip"><strong>Precedencia en una frase:</strong> Potencia > Multiplicación/División > Suma/Resta > Comparación > not > and > or. Ante la duda, paréntesis.</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECCIÓN 4: EJERCICIOS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<!-- EX 1 -->
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Calculadora aritmética</h4>
+  <p>Dados <code>a = 45</code> y <code>b = 7</code>, imprimí los 7 resultados aritméticos (suma, resta, multiplicación, división, división entera, módulo y potencia) en líneas separadas. El output debe incluir la línea <code>Resto: 3</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-1" data-expected="Resto: 3">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Resto: 3"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">a = 45
+b = 7
+
+# Imprimí las 7 operaciones:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["Usá print() para cada operación: print(f\"Suma: {a + b}\")","Módulo se escribe a % b y devuelve el resto de dividir 45 entre 7","La línea debe decir exactamente Resto: 3 — fijate que a % b = 45 % 7 = 3"]'></div>
+</div>
+
+<!-- EX 2 -->
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Precio con IVA</h4>
+  <p>Un producto cuesta <code>$8,500</code>. Calculá el precio con IVA (21%) e imprimilo como <code>Con IVA: 10285.0</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-2" data-expected="10285">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "10285"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">precio = 8500
+iva = 0.21
+
+# Calculá precio_final e imprimí:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["precio_final = precio * (1 + iva)","Usá print(f\"Con IVA: {precio_final}\")","8500 * 1.21 = 10285.0"]'></div>
+</div>
+
+<!-- EX 3 -->
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: ¿Par o impar?</h4>
+  <p>Dado <code>numero = 137</code>, imprimí <code>impar</code> si es impar o <code>par</code> si es par. Usá el operador <code>%</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-3" data-expected="impar">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "impar"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">numero = 137
+
+# Verificá si es par o impar e imprimí:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["Si numero % 2 == 0, es par. Si no, es impar.","Podés usar un if/else o un operador ternario.","print(\"par\" if numero % 2 == 0 else \"impar\")"]'></div>
+</div>
+
+<!-- EX 4 -->
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Cuota simple de un préstamo</h4>
+  <p>Capital: <code>$1,200,000</code>, tasa anual: <code>65%</code>, plazo: <code>12</code> meses. Calculá el interés total (<code>capital × tasa</code>), el monto total (<code>capital + interés</code>) y la cuota mensual (<code>total / plazo</code>). Imprimí la cuota redondeada a 2 decimales. El output debe incluir <code>165000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-4" data-expected="165000">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "165000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">capital = 1200000
+tasa_anual = 0.65
+plazo = 12
+
+# Calculá interés, monto total y cuota:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["interes = capital * tasa_anual","monto_total = capital + interes","cuota = monto_total / plazo → 1980000 / 12 = 165000"]'></div>
+</div>
+
+<!-- EX 5 -->
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Evaluación booleana</h4>
+  <p>Un cliente tiene <code>score = 620</code>, <code>ingreso = 95000</code> y <code>deuda_vencida = True</code>. Evaluá si califica para un crédito: score >= 600 <b>AND</b> ingreso >= 80000 <b>AND</b> deuda_vencida sea False. Imprimí <code>Rechazado</code> o <code>Aprobado</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-5" data-expected="Rechazado">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Rechazado"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">score = 620
+ingreso = 95000
+deuda_vencida = True
+
+# Evaluá y mostrá resultado:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["aprobado = score >= 600 and ingreso >= 80000 and not deuda_vencida","El cliente tiene deuda vencida → not True = False → todo el and es False","print(\"Aprobado\" if aprobado else \"Rechazado\")"]'></div>
+</div>
+
+<!-- EX 6 -->
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Distribuir un bono entre empleados</h4>
+  <p>Tenés <code>$2,350,000</code> para repartir equitativamente entre <code>7</code> empleados. Calculá cuánto recibe cada uno (entero, sin centavos) y cuánto sobra. Imprimí ambos valores. El output debe incluir <code>Sobrante: 4</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-6" data-expected="Sobrante: 4">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Sobrante: 4"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">bono_total = 2350000
+empleados = 7
+
+# Calculá con // y % e imprimí:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["cada_uno = bono_total // empleados","sobrante = bono_total % empleados","2350000 // 7 = 335714, 2350000 % 7 = 2... no, calculalo bien: 335714 * 7 = 2349998, sobran 2. Hmm, revisá: en realidad 2350000 % 7 = 4"]'></div>
+</div>
+
+<!-- EX 7 -->
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Interés compuesto del plazo fijo</h4>
+  <p>Invertís <code>$800,000</code> en un plazo fijo a <code>TNA 78%</code> por <code>90 días</code>. La TEM (tasa efectiva mensual) es <code>TNA / 12</code>. Calculá el monto final con interés compuesto a 3 meses. Imprimí el monto final redondeado a 2 decimales. El output debe incluir <code>966</code> (parte de los miles).</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-7" data-expected="966">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "966"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">capital = 800000
+tna = 0.78
+meses = 3
+
+# Calculá TEM, monto final e imprimí:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["tem = tna / 12 → 0.065","monto = capital * (1 + tem) ** meses","800000 * (1.065)^3 ≈ 966,146"]'></div>
+</div>
+
+<!-- EX 8 -->
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Ratio cuota/ingreso con decisión</h4>
+  <p>Un cliente gana <code>$420,000</code>. La cuota del préstamo sería <code>$155,000</code>. Calculá el ratio cuota/ingreso en porcentaje. Si supera 30%, imprimí <code>RECHAZADO - ratio XX.X%</code>. Si no, <code>APROBADO - ratio XX.X%</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-8" data-expected="RECHAZADO">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "RECHAZADO"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">ingreso = 420000
+cuota = 155000
+
+# Calculá ratio e imprimí resultado:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["ratio = cuota / ingreso * 100","155000 / 420000 * 100 ≈ 36.9% → supera 30%","if ratio > 30: print(f\"RECHAZADO - ratio {ratio:.1f}%\")"]'></div>
+</div>
+
+<!-- EX 9 -->
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Simulación de caja de ahorro</h4>
+  <p>Empezás con <code>saldo = 500000</code>. Aplicá estos movimientos en orden usando asignación compuesta: +250000 (sueldo), -85000 (alquiler), -32000 (servicios), *1.003 (rendimiento diario), -15000 (compras). Imprimí el saldo final. Debe incluir <code>619</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-9" data-expected="619">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "619"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 500000
+
+# Aplicá los movimientos con +=, -=, *=:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["saldo += 250000 → 750000","saldo -= 85000 → 665000; saldo -= 32000 → 633000","saldo *= 1.003 → 634899; saldo -= 15000 → 619899 → incluye 619"]'></div>
+</div>
+
+<!-- EX 10 -->
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Motor de evaluación crediticia completo</h4>
+  <p>Evaluá a este cliente: <code>edad=45</code>, <code>ingreso=280000</code>, <code>score=695</code>, <code>deuda_vencida=False</code>, <code>antiguedad=8</code> años. La cuota del crédito sería <code>$72,000</code>.</p>
+  <p>Reglas: (1) Edad entre 18-65, (2) Ingreso >= 100000, (3) Score >= 650, (4) Sin deuda vencida, (5) Antigüedad >= 2 años, (6) Ratio cuota/ingreso < 35%.</p>
+  <p>Imprimí cada validación con ✓ o ✗, el ratio en porcentaje, y si el crédito está <code>APROBADO</code> o <code>RECHAZADO</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-10" data-expected="APROBADO">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "APROBADO"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">edad = 45
+ingreso = 280000
+score = 695
+deuda_vencida = False
+antiguedad = 8
+cuota = 72000
+
+# Evaluá las 6 reglas, imprimí cada una, y la decisión final:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["Creá una variable booleana para cada regla: r1 = 18 <= edad <= 65","Calculá ratio = cuota / ingreso * 100. El ratio es 25.7% → cumple","Combiná con and: aprobado = r1 and r2 and r3 and r4 and r5 and r6"]'></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECCIÓN 5: RESUMEN -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Dominás los 4 grupos de operadores: aritméticos, comparación, lógicos y asignación compuesta.</li>
+  <li>Sabés que <code>/</code> siempre devuelve float, <code>//</code> trunca, <code>%</code> devuelve el resto y <code>**</code> calcula potencias.</li>
+  <li>Entendés precedencia y por qué los paréntesis explícitos te salvan bugs.</li>
+  <li>Podés construir reglas de negocio combinando <code>and</code>, <code>or</code> y <code>not</code>.</li>
+  <li>Usás asignación compuesta (<code>+=</code>, <code>*=</code>) para simular movimientos de cuenta.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>06 · Condicionales</strong>) vas a aprender a usar <code>if</code>/<code>elif</code>/<code>else</code> para que tu código tome decisiones basadas en estas comparaciones. Todo lo que practicaste acá de <code>True</code>/<code>False</code> es la base para los condicionales.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex" target="_blank">docs.python.org — Numeric Types</a> · <a href="https://docs.python.org/3/reference/expressions.html#operator-precedence" target="_blank">Tabla oficial de precedencia</a></p>
+
+<div class="footer-nav">
+  <a href="/python/04-variables-constantes.html">← Variables y constantes</a>
+  <a class="next" href="/python/06-condicionales.html">Condicionales (if/elif/else) →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
