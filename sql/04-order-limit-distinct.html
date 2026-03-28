@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Sql 04</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
+<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
+<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
+<div class='hero'><div class='badge'>Track: Sql · Lección 04</div><h1>Order Limit Distinct</h1><p>Subtítulo: dominá order limit distinct desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 03</span><span class='badge'>Breadcrumb: Sql > Lección 04</span></div></div>
+<section><h2>1) Concepto teórico profundo</h2>
+    <p>En esta lección trabajamos <strong>Order Limit Distinct</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
+    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
+    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
+    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Order Limit Distinct</strong> te da una base robusta para no improvisar.</p>
+    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
+    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
+    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
+    </section>
+<section><h2>2) Ejemplos explicados paso a paso</h2>
+      <article class='card'>
+        <h3>Ejemplo 1: Base de order limit distinct</h3>
+        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
+        <ol>
+          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
+          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Order Limit Distinct</em>.</li>
+          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
+        </ol>
+        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
+        <div class='editor' data-mode='sql'>
+          <div class='editor-top'><span>Ejemplo 1</span><span>SQL</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>CREATE TABLE IF NOT EXISTS ventas (cliente TEXT, monto INTEGER, canal TEXT);
+INSERT INTO ventas VALUES
+('García', 250000, 'Sucursal'),
+('Pérez', 180000, 'Online'),
+('Sosa', 320000, 'Sucursal');
+SELECT * FROM ventas;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
+          <pre class='output'>Motor pendiente...</pre>
+        </div>
+      </article>
+      
+      <article class='card'>
+        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
+        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
+        <ol>
+          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
+          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Order Limit Distinct</em>.</li>
+          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
+        </ol>
+        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
+        <div class='editor' data-mode='sql'>
+          <div class='editor-top'><span>Ejemplo 2</span><span>SQL</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, COUNT(*) AS operaciones, SUM(monto) AS total
+FROM ventas
+GROUP BY canal
+ORDER BY total DESC;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
+          <pre class='output'>Motor pendiente...</pre>
+        </div>
+      </article>
+      
+      <article class='card'>
+        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
+        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
+        <ol>
+          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
+          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Order Limit Distinct</em>.</li>
+          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
+        </ol>
+        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
+        <div class='editor' data-mode='sql'>
+          <div class='editor-top'><span>Ejemplo 3</span><span>SQL</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto,
+       ROUND(monto * 0.03, 2) AS comision,
+       monto + ROUND(monto * 0.03, 2) AS total_con_comision
+FROM ventas
+ORDER BY total_con_comision DESC;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
+          <pre class='output'>Motor pendiente...</pre>
+        </div>
+      </article>
+      </section>
+<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
+<section><h2>4) Ejercicios (10)</h2>
+      <div class='exercise'>
+        <h4>Ejercicio 1 — Nivel Básico</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-1' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-1'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 2 — Nivel Básico</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-2' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-2'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 3 — Nivel Básico</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-3' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-3'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 4 — Nivel Intermedio</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-4' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-4'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 5 — Nivel Intermedio</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-5' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-5'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 6 — Nivel Intermedio</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-6' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-6'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 7 — Nivel Avanzado</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-7' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-7'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 8 — Nivel Avanzado</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-8' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-8'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 9 — Nivel Avanzado</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-9' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-9'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 10 — Nivel Desafío</h4>
+        <p><strong>Contexto:</strong> aplicá <em>Order Limit Distinct</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
+        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
+        <div class='editor' data-mode='sql' data-lesson='sql-04' data-exercise='ex-10' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-04-10'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-sql-04-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
+      </div>
+      </section>
+<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de order limit distinct con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
+<div class='footer-nav'><a class='badge' href='/sql/03-operadores-filtros.html'>← Anterior</a><a class='badge' href='/sql/05-funciones-agregacion.html'>Siguiente →</a></div>
+</main></div>
+<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
+</body></html>
