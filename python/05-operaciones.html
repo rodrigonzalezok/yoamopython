@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 05</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
+<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
+<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
+<div class='hero'><div class='badge'>Track: Python · Lección 05</div><h1>Operaciones</h1><p>Subtítulo: aprendé operaciones desde cero con foco de Data Analyst.</p><div class='badges'><span class='badge'>Tiempo estimado: 55-75 min</span><span class='badge'>Prerrequisito: Lección 04</span><span class='badge'>Breadcrumb: Python > Lección 05</span></div></div>
+<section><h2>1) Concepto teórico profundo</h2><p>En esta clase trabajás <strong>Operaciones</strong> con lógica de negocio real. No alcanza con memorizar sintaxis: necesitás criterio para transformar datos en decisiones. Por eso vamos de lo básico a lo profesional, siempre con ejemplos de Argentina: cartera de clientes, tasas, ticket promedio, inflación y reportes ejecutivos.</p><p>Un concepto técnico tiene valor cuando lo podés defender ante alguien de negocio. Si te preguntan por qué elegiste una métrica, un filtro o una estructura de datos, tenés que poder justificar impacto, riesgo y límites.</p><div class='realworld'><strong>¿Por qué esto importa?</strong> Porque en un equipo real te pagan por resolver problemas, no por escribir código suelto.</div><div class='warning'><strong>Error común:</strong> ejecutar sin validar supuestos ni calidad de datos.</div><div class='tip'><strong>Tip profesional:</strong> guardá un checklist de validación y repetilo en todos tus análisis.</div></section>
+<section><h2>2) Ejemplos explicados paso a paso</h2>
+      <h3>Ejemplo 1: Lo más básico</h3>
+      <p>Descomponé línea por línea: entrada, procesamiento y salida.</p>
+      <div class='editor' data-mode='python'>
+        <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
+        <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("Saldo proyectado:", round(150000 * 1.04, 2))</textarea></div>
+        <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
+        <pre class='output'>Motor pendiente...</pre>
+      </div>
+      
+      <h3>Ejemplo 2: Caso intermedio</h3>
+      <p>Descomponé línea por línea: entrada, procesamiento y salida.</p>
+      <div class='editor' data-mode='python'>
+        <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
+        <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("Saldo proyectado:", round(150000 * 1.04, 2))</textarea></div>
+        <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
+        <pre class='output'>Motor pendiente...</pre>
+      </div>
+      
+      <h3>Ejemplo 3: Caso real financiero</h3>
+      <p>Descomponé línea por línea: entrada, procesamiento y salida.</p>
+      <div class='editor' data-mode='python'>
+        <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
+        <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("Saldo proyectado:", round(150000 * 1.04, 2))</textarea></div>
+        <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
+        <pre class='output'>Motor pendiente...</pre>
+      </div>
+      </section>
+<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Bloque</th><th>Descripción</th><th>Uso recomendado</th></tr></thead><tbody><tr><td>Concepto</td><td>Base teórica del tema</td><td>Antes de escribir código</td></tr><tr><td>Ejemplo</td><td>Aplicación guiada</td><td>Para consolidar criterio</td></tr><tr><td>Ejercicio</td><td>Práctica con validación</td><td>Hasta lograr 7/10 resueltos</td></tr></tbody></table></div></section>
+<section><h2>4) Ejercicios (10)</h2>
+      <div class='exercise'>
+        <h4>Ejercicio 1 — Nivel Básico</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-1' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-1'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-1' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 2 — Nivel Básico</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-2' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-2'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-2' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 3 — Nivel Básico</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-3' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-3'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-3' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 4 — Nivel Intermedio</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-4' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-4'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-4' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 5 — Nivel Intermedio</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-5' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-5'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-5' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 6 — Nivel Intermedio</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-6' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-6'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-6' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 7 — Nivel Avanzado</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-7' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-7'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-7' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 8 — Nivel Avanzado</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-8' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-8'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-8' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 9 — Nivel Avanzado</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-9' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-9'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-9' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      
+      <div class='exercise'>
+        <h4>Ejercicio 10 — Nivel Desafío</h4>
+        <p>Resuelvé un caso de negocio con datos argentinos y validá que el output contenga <code>ok</code>.</p>
+        <div class='editor' data-mode='python' data-lesson='python-05' data-exercise='ex-10' data-expected='ok'>
+          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
+          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
+          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-05-10'>💡 Pista</button></div>
+          <pre class='output'>Esperando ejecución...</pre>
+        </div>
+        <div id='hint-python-05-10' class='hint-box' data-hints='["Pensá primero qué debería mostrar el output.","Armá la lógica en 3 pasos: dato, cálculo y salida.","Parcial: asegurate de imprimir/seleccionar un alias ok."]'></div>
+      </div>
+      </section>
+<section><h2>5) Resumen y conexión</h2><ul><li>Entendiste la lógica central de operaciones.</li><li>Lo aplicaste en casos realistas con feedback inmediato.</li><li>La próxima clase profundiza y combina este tema con otros.</li></ul><p>Recursos externos: documentación oficial, tutoriales de referencia y comunidad @yoamopython.</p></section>
+<div class='footer-nav'><a class='badge' href='/python/04-variables-constantes.html'>← Anterior</a><a class='badge' href='/python/06-condicionales.html'>Siguiente →</a></div>
+</main></div>
+<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
+</body></html>
