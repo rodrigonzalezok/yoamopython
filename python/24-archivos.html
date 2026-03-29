@@ -1,221 +1,473 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 24</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 24</div><h1>Archivos</h1><p>Subtítulo: dominá archivos desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 23</span><span class='badge'>Breadcrumb: Python > Lección 24</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Archivos</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Archivos</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de archivos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Archivos</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Archivos</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Archivos</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 24 · Archivos</title>
+<meta name="description" content="Leer y escribir archivos en Python: open/with, modos r/w/a, CSV, JSON, pathlib y manejo de encoding para datos argentinos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 24 de 27</span>
+  <h1>Archivos</h1>
+  <p>Hasta ahora tus datos vivían solo en memoria — al cerrar el programa, desaparecían. Con archivos, podés leer datos de CSVs y JSONs, guardar resultados, y construir pipelines que procesen datos reales del disco.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">Prerrequisitos: 20 Módulos stdlib, 23 Strings avanzado</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>open() y el context manager with</h3>
+
+<p>La función <code>open()</code> abre un archivo y devuelve un objeto que podés leer o escribir. El patrón <code>with</code> garantiza que el archivo se cierre correctamente incluso si hay un error:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># ✅ SIEMPRE usá with (cierra automáticamente)
+with open("datos.txt", "r", encoding="utf-8") as f:
+    contenido = f.read()
+
+# ❌ NUNCA hagas esto (puede no cerrar si hay error)
+# f = open("datos.txt")
+# contenido = f.read()
+# f.close()</pre>
+
+<div class="concept"><strong>Regla absoluta:</strong> SIEMPRE usá <code>with open(...) as f:</code>. Nunca abras archivos sin <code>with</code>. El context manager garantiza que el archivo se cierra al salir del bloque, incluso si el código lanza una excepción. Archivos no cerrados pueden corromper datos o consumir recursos del sistema.</div>
+
+<h3>Modos de apertura</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Modo</th><th>Significado</th><th>Si el archivo no existe</th><th>Contenido previo</th></tr>
+<tr><td><code>"r"</code></td><td>Read (lectura)</td><td>Error (FileNotFoundError)</td><td>Se lee</td></tr>
+<tr><td><code>"w"</code></td><td>Write (escritura)</td><td>Se crea</td><td><b>SE BORRA TODO</b></td></tr>
+<tr><td><code>"a"</code></td><td>Append (agregar al final)</td><td>Se crea</td><td>Se conserva</td></tr>
+<tr><td><code>"r+"</code></td><td>Lectura + escritura</td><td>Error</td><td>Se conserva</td></tr>
+<tr><td><code>"rb"</code> / <code>"wb"</code></td><td>Binario (imágenes, PDFs)</td><td>Según r/w</td><td>Según r/w</td></tr>
+</table>
+</div>
+
+<div class="warning"><strong>PELIGRO con modo "w":</strong> <code>open("datos.csv", "w")</code> BORRA TODO el contenido del archivo existente al abrirlo. Si querés agregar sin borrar, usá <code>"a"</code>. Este error ha destruido datos de producción en empresas reales.</div>
+
+<h3>Métodos de lectura</h3>
+
+<ul>
+  <li><code>.read()</code> — lee TODO el archivo como un solo string. Cuidado con archivos grandes (carga todo en RAM).</li>
+  <li><code>.readline()</code> — lee UNA línea (hasta el <code>\n</code>).</li>
+  <li><code>.readlines()</code> — lee TODAS las líneas como lista de strings.</li>
+  <li><code>for linea in f:</code> — itera línea por línea SIN cargar todo en memoria (lo más eficiente para archivos grandes).</li>
+</ul>
+
+<h3>CSV con el módulo csv</h3>
+
+<p>CSV (Comma-Separated Values) es el formato más común en análisis de datos. Python tiene un módulo <code>csv</code> incorporado, pero en la práctica casi siempre usás <code>pandas.read_csv()</code> que es más poderoso.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">import csv
+# Leer CSV
+with open("datos.csv", "r", encoding="utf-8") as f:
+    reader = csv.DictReader(f)  # cada fila es un dict
+    for fila in reader:
+        print(fila["nombre"], fila["saldo"])
+
+# Escribir CSV
+with open("salida.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=["nombre", "saldo"])
+    writer.writeheader()
+    writer.writerow({"nombre": "García", "saldo": 150000})</pre>
+
+<h3>JSON con archivos</h3>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">import json
+# Leer JSON
+with open("config.json", "r") as f:
+    datos = json.load(f)       # archivo → dict
+
+# Escribir JSON
+with open("resultado.json", "w") as f:
+    json.dump(datos, f, indent=2, ensure_ascii=False)</pre>
+
+<h3>pathlib — manejo moderno de rutas</h3>
+
+<p><code>pathlib</code> es la forma moderna y recomendada de trabajar con rutas de archivos (reemplaza <code>os.path</code>):</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">from pathlib import Path
+
+ruta = Path("datos") / "clientes" / "2025" / "q1.csv"  # construir rutas con /
+print(ruta.exists())       # ¿existe?
+print(ruta.suffix)         # extensión: .csv
+print(ruta.stem)           # nombre sin extensión: q1
+print(ruta.parent)         # directorio padre
+list(Path(".").glob("*.py"))  # todos los .py en directorio actual</pre>
+
+<div class="realworld"><strong>En el trabajo:</strong> un pipeline típico de datos es: (1) leer CSVs de una carpeta, (2) limpiar y procesar con pandas, (3) guardar resultados en CSV/JSON/Excel. Con <code>pathlib</code> manejás las rutas, con <code>open()</code> los archivos de texto, con <code>pandas</code> los DataFrames. Entender archivos "a mano" con open/csv/json te da control total cuando pandas no alcanza.</div>
+
+<div class="tip"><strong>Encoding para datos argentinos:</strong> siempre especificá <code>encoding="utf-8"</code> al abrir archivos. Si falla (UnicodeDecodeError), probá <code>encoding="latin-1"</code>. Los exports de sistemas bancarios legacy, MERCAP y SINENSUP suelen venir en Latin-1.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Escribir y leer un archivo de texto</h3>
+<p>Nota: en Pyodide (navegador) los archivos se crean en memoria virtual. En tu PC, se crean en disco real.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_texto.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ESCRIBIR un archivo
+with open("reporte.txt", "w", encoding="utf-8") as f:
+    f.write("=== REPORTE DIARIO ===\n")
+    f.write(f"Fecha: 2025-03-15\n")
+    f.write(f"Total clientes: 5\n")
+    f.write(f"Saldo total: $1,477,000\n")
+    f.write(f"{'─'*25}\n")
+    
+    clientes = [("García", 150000), ("López", 320000), ("Pérez", 890000)]
+    for nombre, saldo in clientes:
+        f.write(f"{nombre}: ${saldo:,}\n")
+
+print("Archivo escrito ✅")
+
+# LEER el archivo completo
+with open("reporte.txt", "r", encoding="utf-8") as f:
+    contenido = f.read()
+print(contenido)
+
+# LEER línea por línea (más eficiente para archivos grandes)
+print("=== Línea por línea ===")
+with open("reporte.txt", "r", encoding="utf-8") as f:
+    for i, linea in enumerate(f, 1):
+        print(f"  L{i}: {linea.rstrip()}")  # rstrip quita el \n</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: CSV — leer y escribir con csv.DictReader/DictWriter</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_csv.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import csv
+
+# ESCRIBIR CSV
+clientes = [
+    {"nombre": "García", "score": 720, "saldo": 150000},
+    {"nombre": "López", "score": 680, "saldo": 320000},
+    {"nombre": "Martínez", "score": 590, "saldo": 45000},
+    {"nombre": "Pérez", "score": 810, "saldo": 890000},
 ]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Archivos</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-24' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-24-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-24-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de archivos con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/23-strings-avanzado.html'>← Anterior</a><a class='badge' href='/python/25-excepciones-errores.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+
+with open("clientes.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=["nombre", "score", "saldo"])
+    writer.writeheader()
+    writer.writerows(clientes)
+print("CSV escrito ✅")
+
+# LEER CSV
+print("\n=== Lectura del CSV ===")
+with open("clientes.csv", "r", encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+    datos = list(reader)  # convertir a lista de dicts
+
+for d in datos:
+    print(f"  {d['nombre']}: score {d['score']}, ${int(d['saldo']):,}")
+
+# Nota: csv.DictReader devuelve strings — hay que convertir tipos
+total = sum(int(d["saldo"]) for d in datos)
+print(f"\nTotal: ${total:,}")
+print(f"(En la práctica usás pd.read_csv() que convierte tipos automáticamente)")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: JSON — persistir datos estructurados</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_json_archivo.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+
+# ESCRIBIR JSON
+config = {
+    "proyecto": "Análisis de cartera",
+    "version": "1.0",
+    "parametros": {
+        "score_minimo": 650,
+        "tasa_iva": 0.21,
+        "moneda": "ARS"
+    },
+    "sucursales": ["Centro", "Norte", "Sur"]
+}
+
+with open("config.json", "w", encoding="utf-8") as f:
+    json.dump(config, f, indent=2, ensure_ascii=False)
+print("JSON escrito ✅")
+
+# LEER JSON
+with open("config.json", "r", encoding="utf-8") as f:
+    datos = json.load(f)
+
+print(f"\nProyecto: {datos['proyecto']}")
+print(f"Score mínimo: {datos['parametros']['score_minimo']}")
+print(f"Sucursales: {', '.join(datos['sucursales'])}")
+
+# Modificar y volver a guardar
+datos["parametros"]["score_minimo"] = 700
+datos["version"] = "1.1"
+
+with open("config.json", "w", encoding="utf-8") as f:
+    json.dump(datos, f, indent=2, ensure_ascii=False)
+print(f"\nActualizado a v{datos['version']} con score mínimo {datos['parametros']['score_minimo']}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Append — agregar al final sin perder datos</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_append.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">from datetime import datetime
+
+# Simular un log de operaciones
+def registrar_operacion(tipo, monto, archivo="operaciones.log"):
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    linea = f"[{timestamp}] {tipo.upper():>15}: ${monto:>12,.0f}\n"
+    with open(archivo, "a", encoding="utf-8") as f:  # "a" = append
+        f.write(linea)
+
+# Registrar varias operaciones
+registrar_operacion("depósito", 250000)
+registrar_operacion("extracción", 50000)
+registrar_operacion("transferencia", 80000)
+registrar_operacion("depósito", 150000)
+print("Operaciones registradas ✅")
+
+# Leer el log completo
+print("\n=== Log de operaciones ===")
+with open("operaciones.log", "r", encoding="utf-8") as f:
+    print(f.read())
+
+# Contar operaciones por tipo
+with open("operaciones.log", "r", encoding="utf-8") as f:
+    lineas = f.readlines()
+    depositos = sum(1 for l in lineas if "DEPÓSITO" in l.upper())
+    print(f"Total líneas: {len(lineas)}")
+    print(f"Depósitos: {depositos}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: pathlib + procesamiento de múltiples archivos</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_pathlib.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">from pathlib import Path
+import json
+
+# Crear estructura de directorios
+datos_dir = Path("proyecto_datos")
+datos_dir.mkdir(exist_ok=True)
+
+# Crear varios archivos JSON (simulando exports mensuales)
+meses = {
+    "enero": [150000, 320000, 45000],
+    "febrero": [180000, 290000, 52000],
+    "marzo": [210000, 350000, 48000],
+}
+
+for mes, saldos in meses.items():
+    archivo = datos_dir / f"saldos_{mes}.json"
+    with open(archivo, "w") as f:
+        json.dump({"mes": mes, "saldos": saldos}, f)
+
+print(f"Directorio: {datos_dir}")
+print(f"Existe: {datos_dir.exists()}")
+
+# Listar archivos JSON del directorio
+print(f"\nArchivos JSON:")
+archivos_json = sorted(datos_dir.glob("*.json"))
+for a in archivos_json:
+    print(f"  {a.name} ({a.stat().st_size} bytes)")
+
+# Procesar todos los archivos
+print(f"\n=== Consolidado ===")
+total_general = 0
+for archivo in archivos_json:
+    with open(archivo, "r") as f:
+        datos = json.load(f)
+    total_mes = sum(datos["saldos"])
+    total_general += total_mes
+    print(f"  {datos['mes'].title()}: ${total_mes:,} ({len(datos['saldos'])} clientes)")
+
+print(f"  {'─'*35}")
+print(f"  Total general: ${total_general:,}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>Código</th><th>Nota</th></tr>
+<tr><td>Leer todo</td><td><code>f.read()</code></td><td>Cuidado con archivos grandes</td></tr>
+<tr><td>Leer líneas</td><td><code>f.readlines()</code></td><td>Devuelve lista con \n</td></tr>
+<tr><td>Iterar líneas</td><td><code>for linea in f:</code></td><td>Más eficiente en memoria</td></tr>
+<tr><td>Escribir</td><td><code>f.write(texto)</code></td><td>No agrega \n automático</td></tr>
+<tr><td>CSV leer</td><td><code>csv.DictReader(f)</code></td><td>Filas como dicts (strings)</td></tr>
+<tr><td>CSV escribir</td><td><code>csv.DictWriter(f, fields)</code></td><td>Usar <code>newline=""</code></td></tr>
+<tr><td>JSON leer</td><td><code>json.load(f)</code></td><td>Archivo → dict/list</td></tr>
+<tr><td>JSON escribir</td><td><code>json.dump(d, f, indent=2)</code></td><td>Dict → archivo</td></tr>
+<tr><td>Ruta</td><td><code>Path("a") / "b" / "c.csv"</code></td><td>pathlib moderno</td></tr>
+<tr><td>Listar</td><td><code>Path(".").glob("*.csv")</code></td><td>Buscar archivos</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Escribir y leer texto</h4><p>Escribí 3 líneas en <code>saludo.txt</code> y después leé e imprimí el contenido. Debe incluir <code>Hola</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-1" data-expected="Hola"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Hola"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Escribí y después leé:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["with open(\"saludo.txt\", \"w\") as f: f.write(\"Hola\\n\")","with open(\"saludo.txt\", \"r\") as f: print(f.read())","Recordá usar encoding=\"utf-8\""]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Contar líneas de un archivo</h4><p>Escribí 5 líneas en un archivo y después contá cuántas tiene con <code>readlines()</code>. Debe incluir <code>5</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-2" data-expected="5"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "5"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Escribí 5 líneas y contá:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["with open(\"test.txt\",\"w\") as f: for i in range(5): f.write(f\"Línea {i+1}\\n\")","with open(\"test.txt\") as f: lineas = f.readlines()","print(len(lineas)) → 5"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: Escribir y leer JSON</h4><p>Guardá un diccionario como JSON y después leelo. Debe incluir <code>García</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-3" data-expected="García"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "García"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+cliente = {"nombre": "García", "score": 720}
+
+# Guardá y leé:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["with open(\"c.json\",\"w\") as f: json.dump(cliente, f)","with open(\"c.json\") as f: datos = json.load(f)","print(datos[\"nombre\"]) → García"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: CSV con DictWriter y DictReader</h4><p>Escribí 3 clientes en un CSV y después leelos e imprimí el total de saldos. Debe incluir <code>515000</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-4" data-expected="515000"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "515000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import csv
+clientes = [
+    {"nombre": "García", "saldo": 150000},
+    {"nombre": "López", "saldo": 320000},
+    {"nombre": "Pérez", "saldo": 45000},
+]
+
+# Escribí CSV, leé y sumá saldos:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["writer = csv.DictWriter(f, fieldnames=[\"nombre\",\"saldo\"])","Al leer: total = sum(int(r[\"saldo\"]) for r in reader)","150000+320000+45000 = 515000"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Append al log</h4><p>Creá una función <code>log(mensaje)</code> que agregue al final de <code>app.log</code> con timestamp. Llamala 3 veces. Debe incluir <code>log</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-5" data-expected="registros"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "registros"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from datetime import datetime
+
+def log(mensaje):
+    pass  # completá con mode "a"
+
+log("Inicio del proceso")
+log("Datos cargados")
+log("3 registros procesados")
+
+# Leé e imprimí:
+with open("app.log") as f:
+    print(f.read())</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["with open(\"app.log\", \"a\") as f:","    f.write(f\"[{datetime.now()}] {mensaje}\\n\")","Cada llamada AGREGA al final sin borrar"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: pathlib para listar archivos</h4><p>Creá 3 archivos .txt en un directorio y después listalos con <code>Path.glob()</code>. Debe incluir <code>.txt</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-6" data-expected=".txt"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir ".txt"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from pathlib import Path
+
+carpeta = Path("mis_datos")
+carpeta.mkdir(exist_ok=True)
+
+# Creá 3 archivos y listalos:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["for i in range(3): (carpeta/f\"archivo_{i}.txt\").write_text(f\"datos {i}\")","for a in carpeta.glob(\"*.txt\"): print(a)","Path tiene .write_text() como atajo de open+write"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Pipeline leer CSV → procesar → guardar JSON</h4><p>Escribí un CSV de 4 clientes, leelo, filtrá score >= 650, y guardá los aprobados como JSON. Debe incluir <code>aprobados</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-7" data-expected="aprobados"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "aprobados"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import csv, json
+
+clientes = [
+    {"nombre": "García", "score": "720", "saldo": "150000"},
+    {"nombre": "López", "score": "580", "saldo": "320000"},
+    {"nombre": "Pérez", "score": "810", "saldo": "890000"},
+    {"nombre": "Sosa", "score": "620", "saldo": "72000"},
+]
+
+# CSV → filtrar → JSON:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["Escribí CSV, leé con DictReader, filtrá int(r[\"score\"]) >= 650","aprobados = [r for r in datos if int(r[\"score\"]) >= 650]","json.dump(aprobados, f, indent=2); print(f\"{len(aprobados)} aprobados\")"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Leer archivo línea por línea y procesar</h4><p>Creá un archivo con 1000 números (uno por línea), después leelo línea por línea calculando suma y promedio SIN cargar todo en memoria. Debe incluir <code>promedio</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-8" data-expected="promedio"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "promedio"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import random
+random.seed(42)
+
+# Escribí 1000 números:
+with open("numeros.txt", "w") as f:
+    for _ in range(1000):
+        f.write(f"{random.randint(1, 100)}\n")
+
+# Leé línea por línea sin cargar todo:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["total = 0; count = 0","with open(\"numeros.txt\") as f: for linea in f: total += int(linea); count += 1","print(f\"promedio: {total/count:.1f}\")"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Consolidar múltiples JSONs</h4><p>Creá 3 archivos JSON (uno por mes con lista de saldos). Después leé los 3 con <code>glob</code> y consolidá el total. Debe incluir <code>consolidado</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-9" data-expected="consolidado"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "consolidado"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+from pathlib import Path
+
+datos_dir = Path("consolidar")
+datos_dir.mkdir(exist_ok=True)
+
+# Creá 3 JSONs y consolidá:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["Creá: json.dump({\"mes\":\"ene\",\"saldos\":[100,200]}, open(path,\"w\"))","for arch in datos_dir.glob(\"*.json\"): datos = json.load(open(arch))","Sumá todos los saldos → print(f\"consolidado: ${total:,}\")"]'></div></div>
+
+<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Sistema de persistencia completo</h4><p>Creá un mini sistema CRUD que guarde clientes en un JSON: funciones <code>cargar()</code>, <code>guardar()</code>, <code>agregar_cliente()</code>, <code>listar()</code>. Los datos deben persistir entre llamadas. Debe incluir <code>PERSISTENCIA</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-10" data-expected="PERSISTENCIA"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "PERSISTENCIA"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+ARCHIVO = "clientes_db.json"
+
+def cargar():
+    """Carga clientes desde JSON. Si no existe, devuelve lista vacía."""
+    pass
+
+def guardar(clientes):
+    """Guarda la lista de clientes en JSON."""
+    pass
+
+def agregar(nombre, score, saldo):
+    """Agrega un cliente y guarda."""
+    pass
+
+# Probá:
+agregar("García", 720, 150000)
+agregar("López", 680, 320000)
+
+datos = cargar()
+print(f"=== PERSISTENCIA ({len(datos)} clientes) ===")
+for c in datos:
+    print(f"  {c['nombre']}: score {c['score']}")
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["cargar: try open+json.load except: return []","guardar: open(\"w\")+json.dump","agregar: clientes = cargar(); clientes.append({...}); guardar(clientes)"]'></div></div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>SIEMPRE usá <code>with open(...) as f:</code> — nunca open() sin context manager.</li>
+  <li>Modos: <code>"r"</code> (leer), <code>"w"</code> (escribir — BORRA), <code>"a"</code> (append).</li>
+  <li><code>csv.DictReader/DictWriter</code> para CSV. <code>json.load/dump</code> para JSON.</li>
+  <li><code>for linea in f:</code> es la forma más eficiente de leer archivos grandes.</li>
+  <li><code>pathlib.Path</code> es la forma moderna de manejar rutas (reemplaza os.path).</li>
+  <li>Siempre especificá <code>encoding="utf-8"</code>. Si falla, probá <code>"latin-1"</code>.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>25 · Excepciones y errores</strong>) vas a aprender a manejar errores de forma profesional: try/except, tipos de errores, raise y patrones EAFP vs LBYL.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files" target="_blank">Python docs — Files</a> · <a href="https://docs.python.org/3/library/pathlib.html" target="_blank">pathlib</a></p>
+
+<div class="footer-nav">
+  <a href="/python/23-strings-avanzado.html">← Strings avanzado</a>
+  <a class="next" href="/python/25-excepciones-errores.html">Excepciones y errores →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
