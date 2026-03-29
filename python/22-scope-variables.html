@@ -1,221 +1,468 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 22</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 22</div><h1>Scope Variables</h1><p>Subtítulo: dominá scope variables desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 21</span><span class='badge'>Breadcrumb: Python > Lección 22</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Scope Variables</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Scope Variables</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de scope variables</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Scope Variables</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Scope Variables</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Scope Variables</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Scope Variables</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-22' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-22-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-22-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de scope variables con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/21-modulos-pip.html'>← Anterior</a><a class='badge' href='/python/23-strings-avanzado.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 22 · Scope de variables</title>
+<meta name="description" content="Entendé cómo Python resuelve variables: regla LEGB, scope local vs global, nonlocal, closures y errores comunes de scope.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 22 de 27</span>
+  <h1>Scope de variables</h1>
+  <p>Cuando escribís <code>x = 10</code> dentro de una función, ¿es la misma <code>x</code> que la de afuera? No. Python tiene reglas estrictas sobre dónde "vive" cada variable. Entender el scope te evita bugs invisibles y te permite escribir funciones seguras.</p>
+  <div class="badges">
+    <span class="badge">⏱ 60–80 min</span>
+    <span class="badge">Prerrequisitos: 18-19 Funciones</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es el scope?</h3>
+
+<p>El <strong>scope</strong> (ámbito) de una variable es la zona del código donde esa variable es visible y accesible. Cuando usás un nombre (<code>x</code>, <code>saldo</code>, <code>print</code>), Python busca en un orden específico hasta encontrarlo. Si no lo encuentra en ningún nivel, da <code>NameError</code>.</p>
+
+<h3>La regla LEGB</h3>
+
+<p>Python busca nombres en este orden estricto (de más interno a más externo):</p>
+
+<ol>
+  <li><b>L — Local:</b> variables definidas DENTRO de la función actual</li>
+  <li><b>E — Enclosing:</b> variables de funciones externas (en funciones anidadas / closures)</li>
+  <li><b>G — Global:</b> variables definidas a nivel del módulo (fuera de toda función)</li>
+  <li><b>B — Built-in:</b> nombres integrados de Python (<code>print</code>, <code>len</code>, <code>range</code>, <code>True</code>)</li>
+</ol>
+
+<div class="concept"><strong>Regla de oro:</strong> Python SIEMPRE busca de adentro hacia afuera: L → E → G → B. Usa la primera coincidencia que encuentra. Si definís <code>print = 42</code> en tu código, sobreescribís el built-in <code>print</code> y ya no podés imprimir (¡no lo hagas!).</div>
+
+<h3>Scope local — variables dentro de funciones</h3>
+
+<p>Cada función crea su propio scope local. Las variables definidas dentro de una función <b>solo existen dentro de esa función</b>. Cuando la función termina, desaparecen:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def calcular():
+    resultado = 42    # LOCAL a calcular()
+    return resultado
+
+calcular()
+# print(resultado)  # NameError: resultado no existe acá afuera</pre>
+
+<p>Esto es una VENTAJA: cada función trabaja con sus propias variables sin interferir con el resto del programa. Es como oficinas privadas — lo que pasa adentro no afecta a las demás.</p>
+
+<h3>Scope global — variables del módulo</h3>
+
+<p>Las variables definidas fuera de toda función son <b>globales</b>. Se pueden LEER desde cualquier función, pero NO se pueden MODIFICAR sin declarar <code>global</code>:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">IVA = 0.21  # global
+
+def con_iva(precio):
+    return precio * (1 + IVA)  # ✅ LEER global: funciona
+
+def cambiar_iva():
+    # IVA = 0.27  ← esto crea una LOCAL nueva, no modifica la global
+    global IVA   # ← esto SÍ permite modificar la global
+    IVA = 0.27</pre>
+
+<div class="warning"><strong>Evitá <code>global</code> siempre que puedas.</strong> Las variables globales mutables son una fuente de bugs porque cualquier función puede cambiarlas en cualquier momento. Es como tener una planilla de Excel compartida sin control de cambios. Preferí pasar valores como parámetros y devolver resultados con return.</div>
+
+<h3>Nonlocal — closures y funciones anidadas</h3>
+
+<p><code>nonlocal</code> permite que una función interna modifique variables de la función externa (scope Enclosing). Se usa en closures con estado:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def crear_contador():
+    cuenta = 0          # scope Enclosing
+    def incrementar():
+        nonlocal cuenta  # sin esto, Python crea una local nueva
+        cuenta += 1
+        return cuenta
+    return incrementar
+
+cont = crear_contador()
+print(cont())  # 1
+print(cont())  # 2 — recuerda el estado</pre>
+
+<h3>Errores comunes de scope</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Error</th><th>Causa</th><th>Solución</th></tr>
+<tr><td><code>UnboundLocalError</code></td><td>Asignás a una variable que Python ya interpretó como local</td><td>Usá <code>global</code> o pasá como parámetro</td></tr>
+<tr><td><code>NameError</code></td><td>La variable no existe en ningún scope</td><td>Verificá el nombre, ¿la definiste?</td></tr>
+<tr><td>Sobreescribir built-in</td><td><code>list = [1,2]</code> oculta <code>list()</code></td><td>Nunca uses nombres de built-ins</td></tr>
+<tr><td>Mutación accidental</td><td>Modificar una lista global desde una función</td><td>Trabajá con copias o pasá explícitamente</td></tr>
+</table>
+</div>
+
+<div class="analogy"><strong>Analogía:</strong> el scope es como la organización de una empresa. Una variable local es una nota en tu escritorio (solo vos la ves). Una global es un memo en el pizarrón de la oficina (todos lo leen). <code>global</code> es como editar el pizarrón directamente. <code>nonlocal</code> es como editar el post-it de tu jefe directo. Lo ideal es que cada uno trabaje con sus propias notas y las comparta mediante reportes (return).</div>
+
+<div class="realworld"><strong>En el trabajo:</strong> el 90% de los bugs de scope se evitan con una regla simple: las funciones reciben datos por parámetro y devuelven resultados por return. No lean ni escriban globales directamente. Esto hace tu código testeable, predecible y libre de efectos secundarios.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: LEGB en acción</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_legb.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># B — Built-in: print, len, etc. siempre disponibles
+# G — Global
+x = "global"
+
+def externa():
+    # E — Enclosing
+    x = "enclosing"
+    
+    def interna():
+        # L — Local
+        x = "local"
+        print(f"  Dentro de interna: x = {x}")  # L → "local"
+    
+    interna()
+    print(f"  Dentro de externa: x = {x}")  # E → "enclosing"
+
+externa()
+print(f"Fuera de todo: x = {x}")  # G → "global"
+
+# Cada x es INDEPENDIENTE — son variables distintas
+# con el mismo nombre en scopes distintos
+
+# Sin reasignación local, Python busca hacia afuera
+print(f"\n=== Busca hacia afuera ===")
+mensaje = "soy global"
+
+def leer():
+    print(f"  Función lee: {mensaje}")  # no hay local → busca global
+
+leer()</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: El error UnboundLocalError</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_error.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 100000
+
+# ❌ Esto falla con UnboundLocalError
+def depositar_mal(monto):
+    # Python VE que saldo se asigna más abajo → la marca como LOCAL
+    # Pero intentamos leerla ANTES de asignarla → error
+    try:
+        saldo = saldo + monto  # UnboundLocalError!
+        return saldo
+    except UnboundLocalError as e:
+        print(f"  ❌ Error: {e}")
+        return None
+
+print("=== Sin global (error) ===")
+depositar_mal(50000)
+
+# ✅ Solución 1: global (funciona pero no es ideal)
+def depositar_global(monto):
+    global saldo
+    saldo = saldo + monto
+    return saldo
+
+saldo = 100000
+print(f"\n=== Con global ===")
+print(f"  Antes: ${saldo:,}")
+depositar_global(50000)
+print(f"  Después: ${saldo:,}")
+
+# ✅ Solución 2: pasar como parámetro (MEJOR)
+def depositar_correcto(saldo_actual, monto):
+    return saldo_actual + monto
+
+saldo = 100000
+print(f"\n=== Con parámetro (mejor) ===")
+nuevo_saldo = depositar_correcto(saldo, 50000)
+print(f"  Original: ${saldo:,} (no se modificó)")
+print(f"  Nuevo: ${nuevo_saldo:,}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: nonlocal en closures con estado</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_nonlocal.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Closure con estado: simulación de cuenta bancaria
+def crear_cuenta(saldo_inicial):
+    saldo = saldo_inicial  # scope Enclosing
+    movimientos = []
+    
+    def operar(tipo, monto):
+        nonlocal saldo  # permitir modificar el saldo del scope externo
+        if tipo == "deposito":
+            saldo += monto
+            movimientos.append(f"+${monto:,}")
+        elif tipo == "extraccion":
+            if monto > saldo:
+                return f"Fondos insuficientes (saldo: ${saldo:,})"
+            saldo -= monto
+            movimientos.append(f"-${monto:,}")
+        return f"Saldo: ${saldo:,}"
+    
+    def ver_movimientos():
+        return movimientos.copy(), saldo
+    
+    return operar, ver_movimientos
+
+# Crear una cuenta
+operar, ver = crear_cuenta(100000)
+print(operar("deposito", 50000))
+print(operar("extraccion", 30000))
+print(operar("deposito", 80000))
+print(operar("extraccion", 500000))  # insuficiente
+
+movs, saldo_final = ver()
+print(f"\nMovimientos: {movs}")
+print(f"Saldo final: ${saldo_final:,}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Peligro de sobreescribir built-ins</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_builtins.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ❌ NUNCA hagas esto: sobreescribir nombres built-in
+# list = [1, 2, 3]         # ahora list() no funciona más
+# dict = {"a": 1}           # ahora dict() no funciona más
+# print = "hola"            # ahora print() no funciona más
+# type = "cliente"          # ahora type() no funciona más
+# id = 12345                # ahora id() no funciona más
+# input = "datos"           # ahora input() no funciona más
+
+# Nombres built-in que la gente sobreescribe sin querer:
+nombres_peligrosos = ["list", "dict", "set", "type", "id", "input",
+                       "print", "len", "min", "max", "sum", "map",
+                       "filter", "range", "str", "int", "float", "bool"]
+print(f"Nombres que NUNCA debés usar como variable:")
+print(f"  {', '.join(nombres_peligrosos[:9])}")
+print(f"  {', '.join(nombres_peligrosos[9:])}")
+
+# ✅ Alternativas seguras
+mi_lista = [1, 2, 3]         # en vez de list = ...
+datos_dict = {"a": 1}        # en vez de dict = ...
+tipo_cliente = "Premium"     # en vez de type = ...
+id_cliente = 12345           # en vez de id = ...
+
+# Verificar qué es built-in
+import builtins
+total_builtins = len(dir(builtins))
+print(f"\nTotal built-ins: {total_builtins}")
+print(f"Algunos: {dir(builtins)[-10:]}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Scope y mutabilidad — la trampa de las listas globales</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_mutabilidad.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Las listas globales se pueden MUTAR desde funciones sin global
+# Esto es porque no estás reasignando, sino modificando el objeto
+datos = [100, 200, 300]
+
+def agregar(valor):
+    datos.append(valor)  # ✅ funciona sin 'global' (muta, no reasigna)
+
+def resetear():
+    # datos = []  # ❌ esto crea una LOCAL nueva, no resetea la global
+    global datos
+    datos = []     # ✅ con global SÍ reasigna
+
+print(f"Original: {datos}")
+agregar(400)
+print(f"Después de agregar: {datos}")  # [100, 200, 300, 400]
+
+# ⚠️ Esto es PELIGROSO: una función modifica datos globales silenciosamente
+# MEJOR: recibir la lista como parámetro y devolver nueva lista
+
+def agregar_seguro(lista, valor):
+    nueva = lista.copy()  # no mutar la original
+    nueva.append(valor)
+    return nueva
+
+original = [100, 200, 300]
+resultado = agregar_seguro(original, 400)
+print(f"\nOriginal: {original}")     # no cambió
+print(f"Resultado: {resultado}")      # nueva lista
+
+# Moraleja: SIEMPRE trabajá con copias si no querés efectos secundarios</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Scope</th><th>Dónde vive</th><th>Leer</th><th>Modificar</th></tr>
+<tr><td><b>L</b>ocal</td><td>Dentro de la función</td><td>Directo</td><td>Directo</td></tr>
+<tr><td><b>E</b>nclosing</td><td>Función externa (closure)</td><td>Directo</td><td>Con <code>nonlocal</code></td></tr>
+<tr><td><b>G</b>lobal</td><td>Nivel del módulo</td><td>Directo</td><td>Con <code>global</code></td></tr>
+<tr><td><b>B</b>uilt-in</td><td>Python interno</td><td>Directo</td><td>No (no lo hagas)</td></tr>
+</table>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr><th>Buena práctica</th><th>Mala práctica</th></tr>
+<tr><td>Pasar datos como parámetros</td><td>Leer variables globales dentro de funciones</td></tr>
+<tr><td>Devolver resultados con return</td><td>Modificar globales con <code>global</code></td></tr>
+<tr><td>Trabajar con copias de listas/dicts</td><td>Mutar argumentos mutables silenciosamente</td></tr>
+<tr><td>Usar nombres descriptivos</td><td>Sobreescribir built-ins (list, dict, type)</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Identificar scopes</h4><p>Dado el código, predecí qué imprime ANTES de ejecutar. Después ejecutá para verificar. Debe incluir <code>local</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-1" data-expected="local"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "local"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">x = "global"
+
+def f():
+    x = "local"
+    print(x)
+
+f()
+print(x)</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["Dentro de f(), x = \"local\" crea una LOCAL","f() imprime \"local\"","Afuera, x sigue siendo \"global\""]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Leer global desde función</h4><p>Definí <code>IVA = 0.21</code> como global. Creá una función <code>con_iva(precio)</code> que la USE (sin global). Debe incluir <code>12100</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-2" data-expected="12100"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "12100"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">IVA = 0.21
+
+def con_iva(precio):
+    # Usá IVA (se lee desde global):
+    pass
+
+print(con_iva(10000))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["return precio * (1 + IVA)","Python busca IVA: no está en L, va a G y la encuentra","10000 * 1.21 = 12100"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: UnboundLocalError</h4><p>Reproducí el error <code>UnboundLocalError</code> y después arreglalo pasando el valor como parámetro. Debe incluir <code>150000</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-3" data-expected="150000"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "150000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 100000
+
+# ❌ Versión que falla:
+# def depositar(monto):
+#     saldo = saldo + monto
+#     return saldo
+
+# ✅ Versión correcta (con parámetro):
+def depositar(saldo_actual, monto):
+    pass  # completá
+
+print(depositar(100000, 50000))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["return saldo_actual + monto","Pasar como parámetro evita el error de scope","100000 + 50000 = 150000"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Global keyword</h4><p>Creá un contador global <code>operaciones = 0</code> y una función <code>registrar()</code> que lo incremente con <code>global</code>. Llamala 5 veces e imprimí. Debe incluir <code>5</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-4" data-expected="5"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "5"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">operaciones = 0
+
+def registrar():
+    pass  # usá global
+
+for _ in range(5):
+    registrar()
+
+print(f"Operaciones: {operaciones}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["global operaciones dentro de la función","operaciones += 1","Después de 5 llamadas: operaciones = 5"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Nonlocal en closure</h4><p>Creá un closure <code>crear_acumulador()</code> que devuelva una función <code>agregar(monto)</code> que acumule un total con <code>nonlocal</code>. Debe incluir <code>300</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-5" data-expected="300"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "300"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">def crear_acumulador():
+    total = 0
+    def agregar(monto):
+        pass  # usá nonlocal
+    return agregar
+
+acc = crear_acumulador()
+print(acc(100))
+print(acc(200))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["nonlocal total","total += monto","return total → 100 la primera vez, 300 la segunda"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: Evitar sobreescribir built-ins</h4><p>Corregí este código que sobreescribe <code>list</code> y <code>sum</code>. Después usá los verdaderos <code>list()</code> y <code>sum()</code>. Debe incluir <code>15</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-6" data-expected="15"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "15"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># ❌ Corregí estos nombres:
+# list = [1, 2, 3, 4, 5]
+# sum = 0
+# for x in list:
+#     sum += x
+# print(sum)
+
+# ✅ Versión correcta (sin sobreescribir built-ins):
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["numeros = [1, 2, 3, 4, 5] en vez de list = ...","total = sum(numeros) en vez de calcular manualmente","print(total) → 15"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Función pura vs impura</h4><p>Creá una versión "impura" (modifica global) y una "pura" (parámetro + return) de una función que aplique descuento a un precio. La pura debe devolver el resultado sin modificar nada. Debe incluir <code>8500</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-7" data-expected="8500"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "8500"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Versión PURA (solo parámetros y return):
+def aplicar_descuento(precio, descuento=0.15):
+    pass  # completá
+
+print(aplicar_descuento(10000))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["return precio * (1 - descuento)","10000 * (1 - 0.15) = 8500","No toca ninguna variable externa = pura"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Scope en comprehensions</h4><p>Las variables de for en list comprehensions tienen scope local (Python 3+). Demostralo: creá <code>x = "global"</code>, después <code>resultado = [x for x in range(5)]</code>, e imprimí <code>x</code> para ver que sigue siendo "global". Debe incluir <code>global</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-8" data-expected="global"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "global"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">x = "global"
+
+# La x del comprehension NO afecta la x global:
+resultado = [x for x in range(5)]
+
+print(f"resultado: {resultado}")
+print(f"x: {x}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["El comprehension crea su propio scope en Python 3","x de afuera sigue siendo \"global\"","En Python 2 esto NO era así (la x se sobreescribía)"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Closure con scope aislado</h4><p>Creá una fábrica de funciones <code>crear_filtro(umbral)</code> que devuelva una función que filtre elementos mayores al umbral de una lista. Creá dos filtros con umbrales distintos. Debe incluir <code>[890000]</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-9" data-expected="[890000]"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "[890000]"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">def crear_filtro(umbral):
+    pass  # completá
+
+filtro_100k = crear_filtro(100000)
+filtro_500k = crear_filtro(500000)
+
+saldos = [150000, 320000, 45000, 890000, 72000]
+print(f"> $100K: {filtro_100k(saldos)}")
+print(f"> $500K: {filtro_500k(saldos)}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["def crear_filtro(umbral):","    def filtrar(datos): return [d for d in datos if d > umbral]","    return filtrar"]'></div></div>
+
+<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Mini sistema bancario con closures</h4><p>Creá <code>crear_cuenta(titular, saldo_inicial)</code> que devuelva 3 funciones: <code>depositar(monto)</code>, <code>extraer(monto)</code> y <code>consultar()</code>. Usá <code>nonlocal</code> para manejar el saldo. Probá con operaciones. Debe incluir <code>Saldo:</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-10" data-expected="Saldo:"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Saldo:"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá el sistema:
+def crear_cuenta(titular, saldo_inicial):
+    pass  # completá
+
+depositar, extraer, consultar = crear_cuenta("García", 100000)
+
+depositar(50000)
+extraer(20000)
+depositar(80000)
+print(consultar())</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["saldo = saldo_inicial dentro de crear_cuenta","def depositar(m): nonlocal saldo; saldo += m","def consultar(): return f\"Saldo: ${saldo:,}\""]'></div></div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Python busca variables en orden LEGB: Local → Enclosing → Global → Built-in.</li>
+  <li>Variables locales solo existen dentro de su función. Al terminar, desaparecen.</li>
+  <li><code>global</code> permite modificar una global desde una función. Evitalo siempre que puedas.</li>
+  <li><code>nonlocal</code> permite modificar variables del scope Enclosing (closures).</li>
+  <li>NUNCA sobreescribas built-ins (<code>list</code>, <code>dict</code>, <code>type</code>, <code>id</code>, <code>sum</code>).</li>
+  <li>Funciones puras (parámetro → return) son más seguras que funciones que mutan globales.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>23 · Strings avanzado</strong>) vas a profundizar en slicing, regex con <code>re</code>, encoding UTF-8 y patrones avanzados de procesamiento de texto.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces" target="_blank">Python docs — Scopes</a></p>
+
+<div class="footer-nav">
+  <a href="/python/21-modulos-pip.html">← Módulos pip</a>
+  <a class="next" href="/python/23-strings-avanzado.html">Strings avanzado →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

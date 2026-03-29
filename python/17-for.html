@@ -1,221 +1,563 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 17</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 17</div><h1>For</h1><p>Subtítulo: dominá for desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 16</span><span class='badge'>Breadcrumb: Python > Lección 17</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>For</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>For</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de for</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>For</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>For</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>For</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 17 · For</title>
+<meta name="description" content="Dominá el bucle for en Python: range, iteración sobre listas/dicts/strings, enumerate, zip, break/continue y for/else.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 17 de 27</span>
+  <h1>For (bucle de iteración)</h1>
+  <p>El bucle <code>for</code> es la estructura de repetición más usada en Python. Recorre cualquier colección — listas, strings, diccionarios, rangos — ejecutando un bloque para cada elemento. Es tu herramienta principal para procesar datos.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">Prerrequisitos: 08 Listas, 10 Diccionarios, 16 While</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es el bucle for?</h3>
+
+<p>El <code>for</code> de Python es diferente al de otros lenguajes. No es un for clásico de C (<code>for(i=0; i<n; i++)</code>). Es un <strong>for-each</strong>: recorre cada elemento de un <b>iterable</b> (cualquier objeto que se pueda recorrer) y ejecuta el bloque una vez por cada elemento.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">for elemento in iterable:
+    # se ejecuta una vez por cada elemento
+    hacer_algo(elemento)</pre>
+
+<p><strong>¿Qué es un iterable?</strong> Cualquier cosa que Python pueda recorrer: listas, tuplas, strings, diccionarios, sets, ranges, archivos, generadores. Básicamente, si podés poner algo después de <code>in</code>, es un iterable.</p>
+
+<div class="concept"><strong>Diferencia clave con while:</strong> en un <code>while</code>, vos controlás la condición de salida (y podés generar loops infinitos). En un <code>for</code>, Python sabe exactamente cuántos elementos tiene el iterable y para solo cuando los recorrió todos. No hay riesgo de loop infinito con for (excepto con generadores infinitos, algo avanzado).</div>
+
+<h3>range() — generar secuencias numéricas</h3>
+
+<p>Cuando necesitás repetir algo N veces o generar una secuencia de números, usás <code>range()</code>:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Sintaxis</th><th>Genera</th><th>Ejemplo</th></tr>
+<tr><td><code>range(n)</code></td><td>0, 1, 2, ..., n-1</td><td><code>range(5)</code> → 0,1,2,3,4</td></tr>
+<tr><td><code>range(a, b)</code></td><td>a, a+1, ..., b-1</td><td><code>range(3, 8)</code> → 3,4,5,6,7</td></tr>
+<tr><td><code>range(a, b, paso)</code></td><td>a, a+paso, ...</td><td><code>range(0, 20, 5)</code> → 0,5,10,15</td></tr>
+<tr><td><code>range(b, a, -1)</code></td><td>b, b-1, ..., a+1</td><td><code>range(5, 0, -1)</code> → 5,4,3,2,1</td></tr>
+</table>
+</div>
+
+<div class="warning"><strong>Error común:</strong> <code>range(1, 5)</code> genera 1, 2, 3, 4 — NO incluye el 5. El límite superior siempre está excluido, igual que en slicing. Si querés 1 a 5 inclusive, usá <code>range(1, 6)</code>.</div>
+
+<h3>For sobre distintos iterables</h3>
+
+<ul>
+  <li><b>Lista:</b> <code>for item in lista:</code> — recorre cada elemento</li>
+  <li><b>String:</b> <code>for char in "hola":</code> — recorre cada carácter (h, o, l, a)</li>
+  <li><b>Diccionario:</b> <code>for k in dict:</code> recorre claves. <code>for k, v in dict.items():</code> recorre pares.</li>
+  <li><b>Set:</b> <code>for elem in mi_set:</code> — recorre elementos (orden impredecible)</li>
+  <li><b>Tupla:</b> <code>for elem in tupla:</code> — igual que lista</li>
+  <li><b>Range:</b> <code>for i in range(10):</code> — números del 0 al 9</li>
+</ul>
+
+<h3>Patrones esenciales: enumerate, zip, unpacking</h3>
+
+<p>Ya los viste en lecciones anteriores, pero acá los consolidamos como los tres compañeros inseparables del for:</p>
+
+<ul>
+  <li><code><b>enumerate(iterable, start=0)</b></code> — te da (índice, elemento) en cada iteración. NUNCA uses <code>for i in range(len(lista)):</code> cuando podés usar enumerate.</li>
+  <li><code><b>zip(iter1, iter2, ...)</b></code> — recorre múltiples iterables en paralelo. Para cuando los datos están repartidos en listas separadas.</li>
+  <li><b>Unpacking en for:</b> <code>for nombre, score in lista_de_tuplas:</code> — desempaquetá directamente en el for.</li>
+</ul>
+
+<h3>break, continue y for/else</h3>
+
+<p><code>break</code> y <code>continue</code> funcionan igual que en while. Pero for tiene un extra exclusivo: <code>else</code>.</p>
+
+<p><code><b>for/else</b></code>: el bloque <code>else</code> se ejecuta solo si el for terminó <b>sin break</b>. Si hubo break, else NO se ejecuta. Es útil para búsquedas: "si encontré algo, break; si no encontré nada, el else se activa".</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">for cliente in clientes:
+    if cliente["score"] > 800:
+        print(f"Premium encontrado: {cliente['nombre']}")
+        break
+else:
+    print("Ningún cliente premium")</pre>
+
+<div class="tip"><strong>Tip sobre for/else:</strong> leelo como "for ... si no hubo break, else ...". Es un patrón poco conocido pero muy elegante para búsquedas. En la práctica, la mayoría de la gente usa una variable flag (encontrado = False/True) en su lugar, pero for/else es más pythónico.</div>
+
+<div class="realworld"><strong>En análisis de datos:</strong> el for es la base de TODA iteración sobre datos. Cada <code>df.apply()</code>, cada <code>df.iterrows()</code>, cada comprehension, cada <code>map()</code> y cada <code>filter()</code> son internamente un for. Dominar el for básico te da la base para entender las abstracciones de pandas.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: For sobre distintos iterables</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_iterables.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># For sobre LISTA
+print("=== Lista ===")
+frutas = ["manzana", "banana", "naranja"]
+for f in frutas:
+    print(f"  🍎 {f}")
+
+# For sobre STRING (cada carácter)
+print("\n=== String ===")
+cuit = "20-12345678-9"
+digitos = 0
+for char in cuit:
+    if char.isdigit():
+        digitos += 1
+print(f"  CUIT: {cuit} tiene {digitos} dígitos")
+
+# For sobre DICCIONARIO
+print("\n=== Diccionario ===")
+cotizaciones = {"USD": 1150, "EUR": 1250, "BRL": 230}
+for moneda, precio in cotizaciones.items():
+    print(f"  {moneda}: ${precio:,}")
+
+# For sobre RANGE
+print("\n=== Range ===")
+for i in range(1, 6):
+    print(f"  Cuota {i}/5")
+
+# For sobre SET (orden impredecible)
+print("\n=== Set ===")
+ciudades = {"BsAs", "Córdoba", "Rosario", "Mendoza"}
+for c in ciudades:
+    print(f"  📍 {c}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: range() en profundidad</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_range.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># range(n): 0 a n-1
+print("range(5):", list(range(5)))
+
+# range(inicio, fin): inicio a fin-1
+print("range(3, 8):", list(range(3, 8)))
+
+# range(inicio, fin, paso)
+print("range(0, 50, 10):", list(range(0, 50, 10)))
+print("range(100, 0, -20):", list(range(100, 0, -20)))
+
+# Caso real: generar IDs de factura
+print("\n=== Facturas ===")
+for num in range(1, 6):
+    print(f"  FAC-2025-{num:05d}")
+
+# Caso real: tabla de interés compuesto
+capital = 100000
+tasa = 0.05
+print(f"\n{'Mes':>4} {'Saldo':>14}")
+print(f"{'─'*20}")
+saldo = capital
+for mes in range(1, 13):
+    saldo *= (1 + tasa)
+    if mes <= 4 or mes == 12:
+        print(f"  {mes:>2}  ${saldo:>11,.0f}")
+    elif mes == 5:
+        print(f"  ...")
+
+# Pares del 2 al 20
+pares = list(range(2, 21, 2))
+print(f"\nPares: {pares}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: enumerate y zip — los mejores amigos del for</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_enum_zip.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = ["García", "López", "Martínez", "Pérez", "Fernández"]
+scores = [720, 680, 590, 810, 645]
+saldos = [150000, 320000, 45000, 890000, 72000]
+
+# enumerate: índice + valor
+print("=== Con enumerate ===")
+for i, nombre in enumerate(clientes, start=1):
+    print(f"  {i}. {nombre}")
+
+# zip: combinar listas en paralelo
+print("\n=== Con zip ===")
+for nombre, score in zip(clientes, scores):
+    estado = "✅" if score >= 650 else "❌"
+    print(f"  {estado} {nombre}: {score}")
+
+# enumerate + zip: el combo completo
+print("\n=== enumerate + zip ===")
+print(f"{'#':>3} {'Nombre':<12} {'Score':>6} {'Saldo':>12}")
+print(f"{'─'*36}")
+for i, (nombre, score, saldo) in enumerate(zip(clientes, scores, saldos), 1):
+    print(f"  {i} {nombre:<12} {score:>6} ${saldo:>10,}")
+
+print(f"{'─'*36}")
+print(f"    {'Total':<12} {'':>6} ${sum(saldos):>10,}")
+
+# Crear dict desde for + zip (patrón muy común)
+scoring = {}
+for nombre, score in zip(clientes, scores):
+    scoring[nombre] = score
+print(f"\nDict: {scoring}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: break, continue y for/else</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_break_continue.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = [
+    {"nombre": "García", "score": 720, "activo": True},
+    {"nombre": "López", "score": 680, "activo": False},
+    {"nombre": "Martínez", "score": 590, "activo": True},
+    {"nombre": "Pérez", "score": 810, "activo": True},
 ]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>For</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-17' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-17-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-17-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de for con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/16-while.html'>← Anterior</a><a class='badge' href='/python/18-funciones-basicas.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+
+# continue: saltar clientes inactivos
+print("=== Solo activos (continue) ===")
+for c in clientes:
+    if not c["activo"]:
+        continue       # saltear inactivos
+    print(f"  {c['nombre']}: score {c['score']}")
+
+# break: encontrar el primer premium (score > 750)
+print("\n=== Primer premium (break) ===")
+for c in clientes:
+    if c["score"] > 750 and c["activo"]:
+        print(f"  Premium: {c['nombre']} ({c['score']})")
+        break
+
+# for/else: buscar un score específico
+print("\n=== Buscar score > 900 (for/else) ===")
+for c in clientes:
+    if c["score"] > 900:
+        print(f"  Encontrado: {c['nombre']}")
+        break
+else:
+    # Se ejecuta SOLO si no hubo break
+    print("  Ningún cliente con score > 900")
+
+# Patrón acumulador con continue para filtrar
+print("\n=== Total de activos ===")
+total = 0
+count = 0
+for c in clientes:
+    if not c["activo"]:
+        continue
+    total += c["score"]
+    count += 1
+print(f"  Promedio score activos: {total/count:.0f} ({count} clientes)")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: For anidados — procesar tablas y matrices</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_anidados.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># For anidado sobre lista de dicts con sublistas
+sucursales = [
+    {
+        "nombre": "Centro",
+        "clientes": [
+            {"nombre": "García", "saldo": 150000},
+            {"nombre": "Pérez", "saldo": 890000},
+        ]
+    },
+    {
+        "nombre": "Norte",
+        "clientes": [
+            {"nombre": "López", "saldo": 320000},
+            {"nombre": "Sosa", "saldo": 72000},
+        ]
+    },
+]
+
+print("=== Reporte por sucursal ===")
+total_general = 0
+for sucursal in sucursales:             # for externo: sucursales
+    total_suc = 0
+    print(f"\n📍 Sucursal {sucursal['nombre']}:")
+    for cliente in sucursal["clientes"]:  # for interno: clientes
+        print(f"    {cliente['nombre']}: ${cliente['saldo']:,}")
+        total_suc += cliente["saldo"]
+    print(f"    Subtotal: ${total_suc:,}")
+    total_general += total_suc
+
+print(f"\n{'═'*30}")
+print(f"TOTAL GENERAL: ${total_general:,}")
+
+# For anidado para crear tabla de multiplicar
+print(f"\n=== Tabla del 1 al 5 ===")
+for i in range(1, 6):
+    fila = ""
+    for j in range(1, 6):
+        fila += f"{i*j:>4}"
+    print(fila)</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Patrón</th><th>Sintaxis</th><th>Uso</th></tr>
+<tr><td>For básico</td><td><code>for x in lista:</code></td><td>Recorrer cualquier iterable</td></tr>
+<tr><td>Con range</td><td><code>for i in range(n):</code></td><td>Repetir N veces</td></tr>
+<tr><td>Con enumerate</td><td><code>for i, x in enumerate(lst):</code></td><td>Índice + valor</td></tr>
+<tr><td>Con zip</td><td><code>for a, b in zip(l1, l2):</code></td><td>Recorrer en paralelo</td></tr>
+<tr><td>Sobre dict</td><td><code>for k, v in d.items():</code></td><td>Clave + valor</td></tr>
+<tr><td>Con unpacking</td><td><code>for a, b in lista_tuplas:</code></td><td>Desempaquetar en el for</td></tr>
+<tr><td>For anidado</td><td><code>for x in ext: for y in int:</code></td><td>Tablas, matrices, estructuras profundas</td></tr>
+<tr><td>For/else</td><td><code>for x in l: ... else:</code></td><td>Verificar si no hubo break</td></tr>
+</table>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr><th>Anti-patrón ❌</th><th>Patrón pythónico ✅</th></tr>
+<tr><td><code>for i in range(len(lst)): lst[i]</code></td><td><code>for elem in lst:</code></td></tr>
+<tr><td><code>i=0; for x in lst: i+=1</code></td><td><code>for i, x in enumerate(lst):</code></td></tr>
+<tr><td><code>for i in range(len(a)): a[i], b[i]</code></td><td><code>for x, y in zip(a, b):</code></td></tr>
+<tr><td><code>for k in dict: dict[k]</code></td><td><code>for k, v in dict.items():</code></td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Recorrer lista de nombres</h4>
+  <p>Dada <code>nombres = ["García","López","Martínez","Pérez"]</code>, imprimí cada nombre con un saludo. Debe incluir <code>Martínez</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-1" data-expected="Martínez">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Martínez"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">nombres = ["García", "López", "Martínez", "Pérez"]
+
+# Recorré e imprimí:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["for n in nombres:","    print(f\"Hola, {n}\")","Cada iteración n toma el siguiente nombre"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Sumar con for</h4>
+  <p>Dada <code>ventas = [45000, 72000, 38000, 91000, 55000]</code>, sumá todas usando un acumulador con for (sin usar <code>sum()</code>). Debe incluir <code>301000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-2" data-expected="301000">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "301000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">ventas = [45000, 72000, 38000, 91000, 55000]
+total = 0
+
+# Sumá con for:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["for v in ventas: total += v","print(total)","45000+72000+38000+91000+55000 = 301000"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: range para generar secuencia</h4>
+  <p>Imprimí los múltiplos de 5 del 5 al 50 usando <code>range(5, 51, 5)</code>. Debe incluir <code>50</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-3" data-expected="50">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "50"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Múltiplos de 5 del 5 al 50:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["for n in range(5, 51, 5):","    print(n)","range(5, 51, 5) genera 5, 10, 15, ..., 50"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: enumerate para ranking</h4>
+  <p>Ordená <code>scores = [720,680,810,590,750]</code> de mayor a menor e imprimilos con posición (1ro, 2do, etc.) usando enumerate. Debe incluir <code>1. 810</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-4" data-expected="1. 810">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "1. 810"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">scores = [720, 680, 810, 590, 750]
+
+# Ordená desc e imprimí con enumerate:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["desc = sorted(scores, reverse=True)","for i, s in enumerate(desc, 1):","    print(f\"{i}. {s}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: zip para tabla combinada</h4>
+  <p>Combiná <code>tickers=["GGAL","YPF","PAMP"]</code> y <code>precios=[5200,28000,3100]</code> con zip. Imprimí una tabla y el precio total. Debe incluir <code>36300</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-5" data-expected="36300">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "36300"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">tickers = ["GGAL", "YPF", "PAMP"]
+precios = [5200, 28000, 3100]
+
+# Tabla con zip y total:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["for t, p in zip(tickers, precios):","    print(f\"{t}: ${p:,}\")","print(f\"Total: ${sum(precios):,}\") → 36300"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: for sobre diccionario</h4>
+  <p>Dado <code>saldos = {"García": 150000, "López": 320000, "Pérez": 890000}</code>, recorrelo con <code>.items()</code> e imprimí cada cliente con formato de moneda. Debe incluir <code>890,000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-6" data-expected="890,000">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "890,000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldos = {"García": 150000, "López": 320000, "Pérez": 890000}
+
+# Recorré con .items():
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["for nombre, saldo in saldos.items():","    print(f\"{nombre}: ${saldo:,}\")","El formato :, agrega separador de miles"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: for con continue para limpiar datos</h4>
+  <p>Dada <code>datos = ["$1,500", "N/A", "$3,200", "", "$800", "error"]</code>, recorrela, saltá los inválidos con continue, convertí los válidos a float y sumá. Debe incluir <code>5500</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-7" data-expected="5500">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "5500"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">datos = ["$1,500", "N/A", "$3,200", "", "$800", "error"]
+total = 0
+
+# Procesá con continue para saltar inválidos:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["for d in datos:","    if not d.startswith(\"$\"): continue","    total += float(d.replace(\"$\",\"\").replace(\",\",\"\"))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: for/else para búsqueda</h4>
+  <p>Buscá en una lista de clientes si alguno tiene score > 900. Si lo encontrás, imprimí su nombre con break. Si no, imprimí <code>Ninguno encontrado</code> usando for/else. Debe incluir <code>Ninguno encontrado</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-8" data-expected="Ninguno encontrado">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Ninguno encontrado"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = [
+    {"nombre": "García", "score": 720},
+    {"nombre": "López", "score": 680},
+    {"nombre": "Pérez", "score": 810},
+]
+
+# Buscá score > 900 con for/else:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["for c in clientes:","    if c[\"score\"] > 900: print(c[\"nombre\"]); break","else: print(\"Ninguno encontrado\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: For anidado — reporte por sucursal</h4>
+  <p>Dada una lista de sucursales (cada una con lista de clientes), imprimí un reporte agrupado y el total general. Debe incluir <code>TOTAL</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-9" data-expected="TOTAL">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "TOTAL"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">sucursales = [
+    {"nombre": "Centro", "saldos": [150000, 890000]},
+    {"nombre": "Norte", "saldos": [320000, 72000, 45000]},
+]
+
+# Reporte con for anidado:
+total_general = 0
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["for suc in sucursales: print(suc[\"nombre\"])","    for s in suc[\"saldos\"]: total_general += s","Al final: print(f\"TOTAL: ${total_general:,}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Pipeline completo de procesamiento</h4>
+  <p>Tenés registros crudos. Para cada uno: (1) split por |, (2) convertir tipos, (3) clasificar score en Alto/Medio/Bajo, (4) acumular estadísticas. Imprimí tabla formateada + resumen. Debe incluir <code>RESUMEN</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-10" data-expected="RESUMEN">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "RESUMEN"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">registros = [
+    "García|720|$150,000",
+    "López|680|$320,000",
+    "Martínez|590|$45,000",
+    "Pérez|810|$890,000",
+    "Fernández|645|$72,000",
+]
+
+total_saldo = 0
+categorias = {"Alto": 0, "Medio": 0, "Bajo": 0}
+
+# Procesá cada registro con for:
+for reg in registros:
+    pass  # completá
+
+print(f"\n=== RESUMEN ===")
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["campos = reg.split(\"|\"); nombre, score, saldo = campos","score = int(score); saldo = float(saldo.replace(\"$\",\"\").replace(\",\",\"\"))","cat = \"Alto\" if score>=700 else \"Medio\" if score>=600 else \"Bajo\"; categorias[cat] += 1"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>for x in iterable:</code> recorre cada elemento de cualquier iterable (lista, dict, string, range, set).</li>
+  <li><code>range(start, stop, step)</code> genera secuencias numéricas. El stop está excluido.</li>
+  <li><code>enumerate()</code> da índice + valor. <code>zip()</code> combina iterables en paralelo.</li>
+  <li><code>break</code> sale, <code>continue</code> salta a la siguiente iteración, <code>else</code> se ejecuta si no hubo break.</li>
+  <li>For anidados procesan estructuras profundas (listas de listas, dicts con sublistas).</li>
+  <li>Los anti-patrones (<code>range(len())</code>) se reemplazan con <code>enumerate</code> y <code>zip</code>.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>18 · Funciones básicas</strong>) vas a aprender a crear tus propias funciones con <code>def</code>: parámetros, return, docstrings, valores por defecto y el principio DRY que hace tu código reutilizable.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/controlflow.html#for-statements" target="_blank">Python docs — for</a> · <a href="https://docs.python.org/3/library/functions.html#func-range" target="_blank">range</a></p>
+
+<div class="footer-nav">
+  <a href="/python/16-while.html">← While</a>
+  <a class="next" href="/python/18-funciones-basicas.html">Funciones básicas →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

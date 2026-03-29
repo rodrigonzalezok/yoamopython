@@ -1,221 +1,564 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 18</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 18</div><h1>Funciones Basicas</h1><p>Subtítulo: dominá funciones basicas desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 17</span><span class='badge'>Breadcrumb: Python > Lección 18</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Funciones Basicas</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Funciones Basicas</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de funciones basicas</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Funciones Basicas</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Funciones Basicas</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Funciones Basicas</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 18 · Funciones básicas</title>
+<meta name="description" content="Creá funciones en Python con def: parámetros, return, valores por defecto, docstrings, type hints y el principio DRY.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 18 de 27</span>
+  <h1>Funciones básicas</h1>
+  <p>Las funciones te permiten encapsular lógica reutilizable bajo un nombre descriptivo. En vez de copiar y pegar código, lo definís una vez y lo llamás cuantas veces quieras. Es el salto de "scripts sueltos" a "código profesional".</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">Prerrequisitos: 06 Condicionales, 16-17 Bucles</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es una función?</h3>
+
+<p>Una <strong>función</strong> es un bloque de código con nombre que recibe datos (parámetros), los procesa y opcionalmente devuelve un resultado (return). Definís la función una vez con <code>def</code> y después la <b>llamás</b> cuantas veces quieras pasándole distintos datos.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def nombre_funcion(parametro1, parametro2):
+    """Docstring: qué hace la función."""
+    # lógica
+    resultado = parametro1 + parametro2
+    return resultado
+
+# Llamar la función
+x = nombre_funcion(10, 20)  # x = 30</pre>
+
+<div class="concept"><strong>Principio DRY — Don't Repeat Yourself:</strong> si copiás y pegás el mismo bloque de código más de una vez, necesitás una función. Cada vez que dupliques código, duplicás los bugs potenciales. Con una función, corregís en un solo lugar y la corrección se aplica en todos los puntos donde se llama.</div>
+
+<h3>Anatomía de una función</h3>
+
+<ul>
+  <li><code><b>def</b></code> — keyword que indica "acá defino una función"</li>
+  <li><b>Nombre:</b> en <code>snake_case</code>, descriptivo. <code>calcular_iva</code>, no <code>f1</code></li>
+  <li><b>Parámetros:</b> variables que la función recibe entre paréntesis. Puede ser 0, 1 o muchos</li>
+  <li><b>Docstring:</b> texto entre <code>"""triple comillas"""</code> que documenta qué hace. Accesible con <code>help(funcion)</code></li>
+  <li><b>Cuerpo:</b> el código indentado que se ejecuta cuando llamás la función</li>
+  <li><code><b>return</b></code> — devuelve un valor al llamador. Sin return, la función devuelve <code>None</code></li>
+</ul>
+
+<h3>Parámetros vs argumentos</h3>
+
+<p>Técnicamente: los <b>parámetros</b> son los nombres en la definición (<code>def f(x, y)</code>); los <b>argumentos</b> son los valores que pasás al llamar (<code>f(10, 20)</code>). En la práctica, la gente usa ambos términos indistintamente.</p>
+
+<p>Python soporta dos formas de pasar argumentos:</p>
+
+<ul>
+  <li><b>Posicionales:</b> el orden importa. <code>f(10, 20)</code> → x=10, y=20</li>
+  <li><b>Nombrados (keyword):</b> usás el nombre del parámetro. <code>f(y=20, x=10)</code> → mismo resultado. Más legible cuando hay muchos parámetros.</li>
+</ul>
+
+<h3>Valores por defecto</h3>
+
+<p>Podés darle valores por defecto a los parámetros. Si el llamador no los pasa, se usa el default:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def calcular_iva(precio, tasa=0.21):
+    return precio * (1 + tasa)
+
+calcular_iva(1000)           # usa tasa=0.21 → 1210.0
+calcular_iva(1000, 0.105)    # usa tasa=0.105 → 1105.0</pre>
+
+<div class="warning"><strong>Regla de oro:</strong> los parámetros con default siempre van DESPUÉS de los que no tienen default. <code>def f(a, b=10)</code> ✅. <code>def f(a=10, b)</code> ❌ SyntaxError.</div>
+
+<div class="warning"><strong>Trampa peligrosa:</strong> NUNCA uses un objeto mutable (lista, dict) como valor por defecto. <code>def f(datos=[])</code> es un bug clásico: la lista se comparte entre todas las llamadas. Usá <code>def f(datos=None): if datos is None: datos = []</code>.</div>
+
+<h3>Return: devolver valores</h3>
+
+<p><code>return</code> hace dos cosas: (1) devuelve un valor al llamador, y (2) termina la ejecución de la función inmediatamente. Todo lo que haya después del return NO se ejecuta.</p>
+
+<p>Una función puede devolver múltiples valores como tupla: <code>return a, b, c</code>. El llamador los desempaqueta: <code>x, y, z = funcion()</code>.</p>
+
+<p>Si no hay return (o hay return sin valor), la función devuelve <code>None</code>.</p>
+
+<div class="analogy"><strong>Analogía financiera:</strong> una función es como una <b>fórmula de Excel con nombre</b>. <code>=CALCULAR_IVA(A1, 0.21)</code> recibe una celda y una tasa, procesa internamente, y devuelve el resultado. No necesitás saber cómo calcula — solo sabés que funciona. Encapsulación.</div>
+
+<h3>Type hints: documentar tipos</h3>
+
+<p>Python permite anotar los tipos esperados de parámetros y retorno. No fuerzan nada (Python sigue siendo dinámico), pero documentan la intención y habilitan herramientas como Pylance para detectar errores:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def calcular_cuota(capital: float, tasa: float, meses: int) -> float:
+    """Calcula cuota simple."""
+    return (capital * (1 + tasa)) / meses</pre>
+
+<div class="realworld"><strong>En el trabajo real:</strong> en equipos profesionales, las funciones son la unidad básica de organización del código. Un pipeline de datos se estructura como una cadena de funciones: <code>leer_csv() → limpiar_datos() → calcular_metricas() → generar_reporte()</code>. Cada función hace UNA cosa bien (principio de responsabilidad única).</div>
+
+<div class="tip"><strong>Tip de naming:</strong> las funciones hacen algo, así que nombralas con verbos: <code>calcular_iva()</code>, <code>filtrar_clientes()</code>, <code>generar_reporte()</code>. Las variables son sustantivos: <code>saldo</code>, <code>cliente</code>, <code>tasa</code>. Verbos para funciones, sustantivos para datos.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Definir y llamar funciones básicas</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_basico.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Función sin parámetros ni return
+def saludar():
+    print("¡Hola desde una función!")
+
+saludar()  # llamar
+
+# Función con parámetros
+def saludar_a(nombre):
+    print(f"¡Hola, {nombre}!")
+
+saludar_a("García")
+saludar_a("López")
+
+# Función con return
+def calcular_iva(precio, tasa=0.21):
+    return precio * (1 + tasa)
+
+resultado = calcular_iva(10000)
+print(f"\nPrecio con IVA: ${resultado:,.0f}")
+
+# Con tasa distinta (argumento nombrado)
+resultado_2 = calcular_iva(10000, tasa=0.105)
+print(f"Con IVA reducido: ${resultado_2:,.0f}")
+
+# Sin return → devuelve None
+def solo_imprime(msg):
+    print(msg)
+
+x = solo_imprime("Hola")
+print(f"Retorno: {x}")  # None</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Return múltiple y docstrings</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_return_docs.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">def analizar_cartera(saldos):
+    """
+    Analiza una lista de saldos y devuelve estadísticas.
+    
+    Args:
+        saldos (list): Lista de saldos numéricos.
+    
+    Returns:
+        tuple: (total, promedio, minimo, maximo, cantidad)
+    """
+    total = sum(saldos)
+    cantidad = len(saldos)
+    promedio = total / cantidad
+    return total, promedio, min(saldos), max(saldos), cantidad
+
+# Llamar y desempaquetar
+datos = [150000, 320000, 45000, 890000, 72000]
+total, prom, mini, maxi, n = analizar_cartera(datos)
+
+print(f"Cartera de {n} clientes:")
+print(f"  Total:    ${total:>12,}")
+print(f"  Promedio: ${prom:>12,.0f}")
+print(f"  Mínimo:   ${mini:>12,}")
+print(f"  Máximo:   ${maxi:>12,}")
+
+# Acceder al docstring
+print(f"\nDocumentación:")
+print(analizar_cartera.__doc__)</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: DRY — de código repetido a funciones</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_dry.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ❌ SIN DRY — código repetido 3 veces
+print("=== Sin DRY (repetido) ===")
+sueldo_1 = 450000
+neto_1 = sueldo_1 - sueldo_1*0.11 - sueldo_1*0.03 - sueldo_1*0.17
+print(f"García: ${neto_1:,.0f}")
+
+sueldo_2 = 800000
+neto_2 = sueldo_2 - sueldo_2*0.11 - sueldo_2*0.03 - sueldo_2*0.17
+print(f"López: ${neto_2:,.0f}")
+
+sueldo_3 = 350000
+neto_3 = sueldo_3 - sueldo_3*0.11 - sueldo_3*0.03 - sueldo_3*0.17
+print(f"Pérez: ${neto_3:,.0f}")
+
+# ✅ CON DRY — función reutilizable
+print("\n=== Con DRY (función) ===")
+def calcular_sueldo_neto(bruto, jub=0.11, os=0.03, gan=0.17):
+    """Calcula sueldo neto descontando jubilación, obra social y ganancias."""
+    deducciones = bruto * (jub + os + gan)
+    return bruto - deducciones
+
+# Una línea por empleado — cambiar la fórmula requiere editar UN solo lugar
+empleados = [("García", 450000), ("López", 800000), ("Pérez", 350000)]
+for nombre, bruto in empleados:
+    neto = calcular_sueldo_neto(bruto)
+    print(f"{nombre}: ${neto:,.0f}")
+
+# Bonus: si cambian las tasas, se cambia en UN solo lugar
+print(f"\nCon nueva tasa ganancias 20%:")
+for nombre, bruto in empleados:
+    neto = calcular_sueldo_neto(bruto, gan=0.20)
+    print(f"  {nombre}: ${neto:,.0f}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Funciones con type hints y validación</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_typehints.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">def evaluar_credito(score: int, ingreso: float, deuda: bool = False) -> dict:
+    """
+    Evalúa si un cliente califica para un crédito.
+    
+    Args:
+        score: Score crediticio (300-900).
+        ingreso: Ingreso mensual en pesos.
+        deuda: Si tiene deuda vencida.
+    
+    Returns:
+        dict con 'aprobado' (bool), 'categoria' (str), 'motivo' (str).
+    """
+    if deuda:
+        return {"aprobado": False, "categoria": "Rechazado", "motivo": "Deuda vencida"}
+    if score < 500:
+        return {"aprobado": False, "categoria": "Rechazado", "motivo": f"Score bajo ({score})"}
+    if ingreso < 80000:
+        return {"aprobado": False, "categoria": "Rechazado", "motivo": f"Ingreso bajo (${ingreso:,.0f})"}
+    
+    # Pasó todas las validaciones
+    if score >= 750:
+        categoria = "Premium"
+    elif score >= 650:
+        categoria = "Estándar"
+    else:
+        categoria = "Básico"
+    
+    return {"aprobado": True, "categoria": categoria, "motivo": "Cumple requisitos"}
+
+# Probar con distintos clientes
+clientes = [
+    ("García", 720, 350000, False),
+    ("López", 480, 200000, False),
+    ("Martínez", 810, 500000, True),
+    ("Pérez", 680, 60000, False),
 ]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Funciones Basicas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-18' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-18-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-18-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de funciones basicas con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/17-for.html'>← Anterior</a><a class='badge' href='/python/19-funciones-avanzadas.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+
+print(f"{'Nombre':<12} {'Resultado':<12} {'Categoría':<12} {'Motivo'}")
+print(f"{'─'*60}")
+for nombre, score, ingreso, deuda in clientes:
+    r = evaluar_credito(score, ingreso, deuda)
+    emoji = "✅" if r["aprobado"] else "❌"
+    print(f"{emoji} {nombre:<10} {str(r['aprobado']):<12} {r['categoria']:<12} {r['motivo']}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Funciones como pipeline</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_pipeline.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Pipeline de procesamiento: cada paso es una función
+def limpiar_monto(texto: str) -> float:
+    """Convierte '$1,500.00' a 1500.0"""
+    return float(texto.replace("$", "").replace(",", ""))
+
+def clasificar_monto(monto: float) -> str:
+    """Clasifica un monto en categorías."""
+    if monto > 100000: return "Grande"
+    if monto > 10000: return "Mediano"
+    return "Chico"
+
+def formatear_reporte(nombre: str, monto: float, categoria: str) -> str:
+    """Formatea una línea de reporte."""
+    return f"  {nombre:<12} ${monto:>10,.0f}  [{categoria}]"
+
+# Datos crudos
+registros = [
+    ("García", "$150,000"),
+    ("López", "$8,500"),
+    ("Pérez", "$320,000"),
+    ("Sosa", "$2,100"),
+]
+
+# Pipeline: limpiar → clasificar → formatear
+print("=== REPORTE ===")
+total = 0
+for nombre, monto_str in registros:
+    monto = limpiar_monto(monto_str)           # paso 1
+    categoria = clasificar_monto(monto)          # paso 2
+    linea = formatear_reporte(nombre, monto, categoria)  # paso 3
+    print(linea)
+    total += monto
+
+print(f"{'─'*38}")
+print(f"  {'TOTAL':<12} ${total:>10,.0f}")
+
+# Cada función hace UNA cosa. Podés testear, reutilizar y
+# modificar cada paso de forma independiente.</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Concepto</th><th>Sintaxis</th><th>Ejemplo</th></tr>
+<tr><td>Definir</td><td><code>def nombre(params):</code></td><td><code>def sumar(a, b):</code></td></tr>
+<tr><td>Llamar</td><td><code>nombre(args)</code></td><td><code>sumar(3, 5)</code></td></tr>
+<tr><td>Return</td><td><code>return valor</code></td><td><code>return a + b</code></td></tr>
+<tr><td>Return múltiple</td><td><code>return a, b</code></td><td>Devuelve tupla</td></tr>
+<tr><td>Default</td><td><code>def f(x, y=10):</code></td><td>y es opcional, vale 10</td></tr>
+<tr><td>Keyword arg</td><td><code>f(y=20, x=5)</code></td><td>Nombrás el parámetro</td></tr>
+<tr><td>Docstring</td><td><code>"""Descripción."""</code></td><td>Primera línea del cuerpo</td></tr>
+<tr><td>Type hint</td><td><code>def f(x: int) -> str:</code></td><td>Documentar tipos</td></tr>
+<tr><td>Sin return</td><td>—</td><td>Devuelve <code>None</code></td></tr>
+</table>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr><th>Buena práctica</th><th>Ejemplo</th></tr>
+<tr><td>Nombres con verbos</td><td><code>calcular_iva</code>, <code>filtrar_clientes</code></td></tr>
+<tr><td>Una responsabilidad</td><td>Cada función hace UNA cosa</td></tr>
+<tr><td>DRY: no repetir código</td><td>Si copiás un bloque, creá una función</td></tr>
+<tr><td>Docstring siempre</td><td>Args, Returns, descripción</td></tr>
+<tr><td>No mutar argumentos</td><td>No modificar listas/dicts que te pasan</td></tr>
+<tr><td>Return temprano</td><td><code>if error: return None</code> al inicio</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Función con IVA</h4>
+  <p>Creá <code>con_iva(precio)</code> que devuelva el precio + 21%. Probá con $10,000. Debe incluir <code>12100</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-1" data-expected="12100">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "12100"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí con_iva():
+
+# Probá:
+print(con_iva(10000))</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["def con_iva(precio):","    return precio * 1.21","10000 * 1.21 = 12100.0"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Función con parámetro default</h4>
+  <p>Creá <code>saludar(nombre, saludo="Hola")</code> que imprima <code>"{saludo}, {nombre}!"</code>. Probá con y sin saludo. Debe incluir <code>Hola, García</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-2" data-expected="Hola, García">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Hola, García"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí saludar():
+
+# Probá:
+saludar("García")
+saludar("López", "Buenos días")</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["def saludar(nombre, saludo=\"Hola\"):","    print(f\"{saludo}, {nombre}!\")","Sin segundo arg usa \"Hola\" por defecto"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: Return múltiple</h4>
+  <p>Creá <code>min_max(numeros)</code> que devuelva el mínimo y máximo como tupla. Probá con <code>[45, 72, 38, 91, 55]</code>. Debe incluir <code>38</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-3" data-expected="38">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "38"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí min_max():
+
+datos = [45, 72, 38, 91, 55]
+mi, ma = min_max(datos)
+print(f"Min: {mi}, Max: {ma}")</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["def min_max(numeros):","    return min(numeros), max(numeros)","Devuelve una tupla que desempaquetás"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Sueldo neto con función</h4>
+  <p>Creá <code>sueldo_neto(bruto, jub=0.11, os=0.03, gan=0.17)</code>. Calculá el neto de $750,000. Debe incluir <code>517500</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-4" data-expected="517500">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "517500"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí sueldo_neto():
+
+print(sueldo_neto(750000))</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["def sueldo_neto(bruto, jub=0.11, os=0.03, gan=0.17):","    return bruto * (1 - jub - os - gan)","750000 * 0.69 = 517500"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Función con docstring completo</h4>
+  <p>Creá <code>interes_simple(capital, tasa, meses)</code> con docstring que incluya Args y Returns. Calculá para $200,000 al 5% por 6 meses. Debe incluir <code>60000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-5" data-expected="60000">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "60000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí con docstring completo:
+
+print(interes_simple(200000, 0.05, 6))</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["def interes_simple(capital, tasa, meses):","    \"\"\"Calcula interés simple. Args: capital, tasa, meses. Returns: float.\"\"\"","    return capital * tasa * meses → 200000*0.05*6 = 60000"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Función clasificadora</h4>
+  <p>Creá <code>clasificar_score(score)</code> que devuelva "Excelente" (>=800), "Bueno" (>=700), "Regular" (>=600) o "Malo". Probá con 720. Debe incluir <code>Bueno</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-6" data-expected="Bueno">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Bueno"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí clasificar_score():
+
+print(clasificar_score(720))</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["if score >= 800: return \"Excelente\"","elif score >= 700: return \"Bueno\"","elif score >= 600: return \"Regular\" else: return \"Malo\""]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Función que procesa lista</h4>
+  <p>Creá <code>limpiar_montos(lista_str)</code> que reciba <code>["$1,500","N/A","$3,200"]</code> y devuelva una lista de floats (saltando inválidos). Debe incluir <code>4700</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-7" data-expected="4700">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "4700"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí limpiar_montos():
+
+datos = ["$1,500", "N/A", "$3,200", "", "$-100"]
+limpios = limpiar_montos(datos)
+print(f"Limpios: {limpios}")
+print(f"Total: {sum(limpios)}")</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["Recorré la lista, si empieza con $ limpiá y convertí","Usá continue para saltar N/A y vacíos","1500 + 3200 = 4700 (sin el negativo si lo filtrás)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Función que devuelve diccionario</h4>
+  <p>Creá <code>analizar(saldos)</code> que devuelva un dict con total, promedio, min, max, cantidad. Debe incluir <code>promedio</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-8" data-expected="promedio">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "promedio"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí analizar():
+
+datos = [150000, 320000, 45000, 890000]
+resultado = analizar(datos)
+for k, v in resultado.items():
+    print(f"  {k}: {v:,.0f}" if isinstance(v, float) else f"  {k}: {v}")</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["return {\"total\": sum(s), \"promedio\": sum(s)/len(s), ...}","Incluí min, max, cantidad","Los valores se acceden como resultado[\"promedio\"]"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Funciones como pipeline</h4>
+  <p>Creá 3 funciones: <code>limpiar(texto)</code> que stripee y titlece, <code>validar(nombre)</code> que verifique que tiene al menos 2 caracteres, y <code>formatear(nombre, i)</code> que devuelva <code>"N. Nombre"</code>. Aplicá las 3 a una lista sucia. Debe incluir <code>García</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-9" data-expected="García">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "García"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí las 3 funciones:
+
+nombres_sucios = ["  GARCÍA  ", "", "  lópez  ", " a ", "  PÉREZ  "]
+
+# Aplicá el pipeline:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["def limpiar(t): return t.strip().title()","def validar(n): return len(n) >= 2","for i, n in enumerate(nombres_sucios, 1): limpio = limpiar(n); if validar(limpio): print(formatear(limpio, i))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Motor de evaluación crediticia como funciones</h4>
+  <p>Creá un mini motor de crédito con funciones: <code>validar_edad(e)</code>, <code>validar_ingreso(i)</code>, <code>validar_score(s)</code>, <code>calcular_ratio(cuota, ingreso)</code>, y <code>evaluar_cliente(nombre, edad, ingreso, score, cuota)</code> que las use todas. Probá con 3 clientes. Debe incluir <code>EVALUACIÓN</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-10" data-expected="EVALUACIÓN">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "EVALUACIÓN"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí las funciones de validación:
+
+# Definí evaluar_cliente() que las use:
+
+# Probá:
+clientes = [
+    ("García", 35, 350000, 720, 85000),
+    ("López", 17, 200000, 680, 50000),
+    ("Pérez", 45, 500000, 810, 200000),
+]
+print("=== EVALUACIÓN CREDITICIA ===")
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["def validar_edad(e): return 18 <= e <= 65","def calcular_ratio(cuota, ingreso): return cuota/ingreso*100","evaluar_cliente usa todas y devuelve dict con resultado"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>def nombre(params):</code> define una función. <code>return</code> devuelve un valor.</li>
+  <li>Los parámetros con default van al final: <code>def f(a, b=10):</code>.</li>
+  <li>Return múltiple (<code>return a, b</code>) devuelve una tupla que podés desempaquetar.</li>
+  <li>Sin return, la función devuelve <code>None</code>.</li>
+  <li>Docstrings (<code>"""..."""</code>) documentan funciones. Type hints (<code>x: int</code>) documentan tipos.</li>
+  <li>Principio DRY: si copiás código, creá una función. Nombra funciones con verbos.</li>
+  <li>Las funciones como pipeline (<code>limpiar → validar → procesar</code>) son el patrón profesional.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>19 · Funciones avanzadas</strong>) vas a aprender *args/**kwargs, lambda, funciones como objetos, closures, decoradores y generators — las herramientas que separan código junior de código senior.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions" target="_blank">Python docs — Functions</a> · <a href="https://peps.python.org/pep-0257/" target="_blank">PEP 257 — Docstrings</a></p>
+
+<div class="footer-nav">
+  <a href="/python/17-for.html">← For</a>
+  <a class="next" href="/python/19-funciones-avanzadas.html">Funciones avanzadas →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

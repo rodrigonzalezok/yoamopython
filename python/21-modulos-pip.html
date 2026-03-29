@@ -1,221 +1,451 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 21</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 21</div><h1>Modulos Pip</h1><p>Subtítulo: dominá modulos pip desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 20</span><span class='badge'>Breadcrumb: Python > Lección 21</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Modulos Pip</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Modulos Pip</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de modulos pip</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Modulos Pip</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Modulos Pip</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Modulos Pip</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 21 · Módulos de pip</title>
+<meta name="description" content="Instalá paquetes con pip: pandas, numpy, requests, matplotlib. Entornos virtuales, requirements.txt y cómo leer documentación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 21 de 27</span>
+  <h1>Módulos externos (pip)</h1>
+  <p>La biblioteca estándar cubre lo básico, pero el verdadero poder de Python viene de su ecosistema: más de 400,000 paquetes en PyPI que instalás con <code>pip</code>. Esta lección cubre pip, entornos virtuales y los paquetes que necesitás como Data Analyst.</p>
+  <div class="badges">
+    <span class="badge">⏱ 70–90 min</span>
+    <span class="badge">Prerrequisitos: 20 Módulos stdlib</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es pip?</h3>
+
+<p><strong>pip</strong> (Package Installer for Python) es la herramienta oficial para instalar paquetes de <b>PyPI</b> (Python Package Index), el repositorio central con más de 400,000 paquetes. Viene incluido con Python 3.4+ — no necesitás instalarlo por separado.</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Comando</th><th>Qué hace</th><th>Ejemplo</th></tr>
+<tr><td><code>pip install paquete</code></td><td>Instala un paquete</td><td><code>pip install pandas</code></td></tr>
+<tr><td><code>pip install paquete==version</code></td><td>Instala versión específica</td><td><code>pip install pandas==2.1.0</code></td></tr>
+<tr><td><code>pip install -U paquete</code></td><td>Actualiza a la última</td><td><code>pip install -U pandas</code></td></tr>
+<tr><td><code>pip uninstall paquete</code></td><td>Desinstala</td><td><code>pip uninstall pandas</code></td></tr>
+<tr><td><code>pip list</code></td><td>Lista paquetes instalados</td><td>—</td></tr>
+<tr><td><code>pip freeze</code></td><td>Lista con versiones exactas</td><td>Para <code>requirements.txt</code></td></tr>
+<tr><td><code>pip install -r req.txt</code></td><td>Instala desde archivo</td><td><code>pip install -r requirements.txt</code></td></tr>
+</table>
+</div>
+
+<h3>Entornos virtuales (venv) — aislar proyectos</h3>
+
+<p>Cada proyecto puede necesitar versiones diferentes de los mismos paquetes. Un <strong>entorno virtual</strong> es una copia aislada de Python con sus propios paquetes, independiente del sistema. Es como tener una "burbuja" por proyecto.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Crear entorno virtual
+python -m venv .venv
+
+# Activar (Windows)
+.venv\Scripts\activate
+
+# Activar (Mac/Linux)
+source .venv/bin/activate
+
+# Instalar paquetes dentro del entorno
+pip install pandas numpy matplotlib
+
+# Guardar dependencias
+pip freeze > requirements.txt
+
+# Otro desarrollador replica tu entorno:
+pip install -r requirements.txt</pre>
+
+<div class="warning"><strong>Regla profesional:</strong> SIEMPRE usá entornos virtuales para proyectos. Nunca instales paquetes globalmente. Si dos proyectos necesitan versiones distintas de pandas, los entornos virtuales te salvan. En VS Code, la extensión de Python detecta el venv automáticamente.</div>
+
+<h3>requirements.txt — reproducibilidad</h3>
+
+<p>Un archivo <code>requirements.txt</code> lista todos los paquetes que tu proyecto necesita con sus versiones exactas. Es el contrato que garantiza que cualquiera pueda reproducir tu entorno:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">pandas==2.1.4
+numpy==1.26.2
+matplotlib==3.8.2
+scikit-learn==1.3.2
+openpyxl==3.1.2
+requests==2.31.0</pre>
+
+<div class="concept"><strong>¿Por qué versiones exactas?</strong> Porque una actualización menor de pandas puede romper tu código. Si tu script funciona con pandas 2.1.4, fijá esa versión. Cuando tengas tiempo de testear con la nueva versión, actualizá deliberadamente.</div>
+
+<h3>Los paquetes que todo Data Analyst necesita</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Paquete</th><th>¿Para qué?</th><th>Instalar</th></tr>
+<tr><td><code>pandas</code></td><td>DataFrames, limpieza, análisis tabular</td><td><code>pip install pandas</code></td></tr>
+<tr><td><code>numpy</code></td><td>Arrays numéricos, operaciones vectorizadas</td><td><code>pip install numpy</code></td></tr>
+<tr><td><code>matplotlib</code></td><td>Gráficos y visualizaciones</td><td><code>pip install matplotlib</code></td></tr>
+<tr><td><code>seaborn</code></td><td>Visualizaciones estadísticas (sobre matplotlib)</td><td><code>pip install seaborn</code></td></tr>
+<tr><td><code>scikit-learn</code></td><td>Machine Learning</td><td><code>pip install scikit-learn</code></td></tr>
+<tr><td><code>openpyxl</code></td><td>Leer/escribir archivos Excel (.xlsx)</td><td><code>pip install openpyxl</code></td></tr>
+<tr><td><code>requests</code></td><td>Consumir APIs HTTP</td><td><code>pip install requests</code></td></tr>
+<tr><td><code>sqlalchemy</code></td><td>Conexión a bases de datos SQL</td><td><code>pip install sqlalchemy</code></td></tr>
+<tr><td><code>jupyter</code></td><td>Notebooks interactivos</td><td><code>pip install jupyter</code></td></tr>
+</table>
+</div>
+
+<div class="realworld"><strong>En el trabajo:</strong> cuando empezás en un equipo, lo primero que hacés es: <code>git clone proyecto</code>, <code>python -m venv .venv</code>, <code>pip install -r requirements.txt</code>. En 3 comandos tenés exactamente el mismo entorno que tus compañeros. Sin venv ni requirements, cada persona tiene versiones distintas y los bugs son imposibles de reproducir.</div>
+
+<h3>Cómo leer documentación de un paquete nuevo</h3>
+
+<p>Cuando encontrás un paquete nuevo, seguí esta secuencia:</p>
+<ol>
+  <li><b>README / Getting Started:</b> ejemplo mínimo de uso</li>
+  <li><b>API Reference:</b> lista de funciones con parámetros</li>
+  <li><b>Examples / Tutorials:</b> casos de uso reales</li>
+  <li><b>Changelog:</b> qué cambió en cada versión</li>
+</ol>
+
+<div class="tip"><strong>Tip:</strong> en el intérprete de Python, <code>help(pandas.read_csv)</code> muestra la documentación completa de cualquier función. <code>dir(objeto)</code> lista todos los métodos disponibles. Son tus herramientas de exploración rápida.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: pandas — primer contacto</h3>
+<p>Pandas está disponible en Pyodide (este editor). Podés probarlo directamente.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_pandas.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+# Crear DataFrame desde lista de diccionarios
+clientes = [
+    {"nombre": "García", "score": 720, "saldo": 150000},
+    {"nombre": "López", "score": 680, "saldo": 320000},
+    {"nombre": "Martínez", "score": 590, "saldo": 45000},
+    {"nombre": "Pérez", "score": 810, "saldo": 890000},
+    {"nombre": "Fernández", "score": 645, "saldo": 72000},
 ]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Pip</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-21' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-21-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-21-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de modulos pip con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/20-modulos-stdlib.html'>← Anterior</a><a class='badge' href='/python/22-scope-variables.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+df = pd.DataFrame(clientes)
+print(df)
+
+print(f"\n=== Estadísticas ===")
+print(f"Filas: {len(df)}")
+print(f"Saldo total: ${df['saldo'].sum():,}")
+print(f"Saldo promedio: ${df['saldo'].mean():,.0f}")
+print(f"Score máximo: {df['score'].max()}")
+
+# Filtrar
+aprobados = df[df["score"] >= 650]
+print(f"\nAprobados (score >= 650):")
+print(aprobados[["nombre", "score"]])</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: numpy — operaciones vectorizadas</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_numpy.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+
+# Array desde lista
+saldos = np.array([150000, 320000, 45000, 890000, 72000])
+
+# Operaciones vectorizadas (sin for loops!)
+print(f"Saldos: {saldos}")
+print(f"Con 5% interés: {saldos * 1.05}")
+print(f"En USD (÷1150): {np.round(saldos / 1150, 2)}")
+
+# Estadísticas
+print(f"\nMedia: ${np.mean(saldos):,.0f}")
+print(f"Mediana: ${np.median(saldos):,.0f}")
+print(f"Desvío: ${np.std(saldos):,.0f}")
+print(f"Percentil 75: ${np.percentile(saldos, 75):,.0f}")
+
+# Filtrado booleano (como pandas)
+grandes = saldos[saldos > 100000]
+print(f"\nSaldos > $100K: {grandes}")
+
+# Generar datos: 100 retornos normales
+np.random.seed(42)
+retornos = np.random.normal(loc=0.005, scale=0.02, size=100)
+print(f"\nSimulación 100 retornos:")
+print(f"  Media: {np.mean(retornos):.4f}")
+print(f"  Desvío: {np.std(retornos):.4f}")
+print(f"  Min: {np.min(retornos):.4f}")
+print(f"  Max: {np.max(retornos):.4f}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: pandas + numpy combinados</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_pd_np.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+# Crear DataFrame con datos generados
+np.random.seed(42)
+n = 100
+df = pd.DataFrame({
+    "cliente_id": range(1, n + 1),
+    "score": np.random.randint(400, 900, n),
+    "ingreso": np.random.uniform(50000, 800000, n).round(0),
+    "antiguedad_meses": np.random.randint(1, 120, n),
+})
+
+print(f"Shape: {df.shape}")
+print(f"\nPrimeras 5 filas:")
+print(df.head())
+
+print(f"\n=== Estadísticas ===")
+print(df.describe().round(0))
+
+# Crear columna derivada
+df["categoria"] = np.where(df["score"] >= 700, "Premium", "Estándar")
+print(f"\nConteo por categoría:")
+print(df["categoria"].value_counts())</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: json + requests simulado (consumir API)</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_api.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+
+# Simulamos respuesta de API (en tu PC usarías requests.get())
+# import requests
+# response = requests.get("https://api.banco.com/clientes/12345")
+# data = response.json()
+
+# Simulación de la respuesta
+api_response = json.dumps({
+    "status": "ok",
+    "data": {
+        "id": 12345,
+        "nombre": "García",
+        "cuentas": [
+            {"tipo": "CA$", "saldo": 150000},
+            {"tipo": "CA USD", "saldo": 5000}
+        ]
+    }
+})
+
+# Parsear JSON → dict
+data = json.loads(api_response)
+
+# Procesar
+print(f"Status: {data['status']}")
+print(f"Cliente: {data['data']['nombre']}")
+print(f"\nCuentas:")
+for cta in data["data"]["cuentas"]:
+    print(f"  {cta['tipo']}: ${cta['saldo']:,}")
+
+total = sum(c["saldo"] for c in data["data"]["cuentas"] if c["tipo"] == "CA$")
+print(f"Total ARS: ${total:,}")
+
+# En tu PC, el flujo real sería:
+# response = requests.get(url, headers={"Authorization": "Bearer TOKEN"})
+# if response.status_code == 200:
+#     data = response.json()
+#     procesar(data)
+print("\n(En tu PC: pip install requests, luego requests.get(url).json())")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Explorar paquetes con help() y dir()</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_explorar.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+# dir(): listar todo lo disponible en un módulo/objeto
+print("=== Métodos de un DataFrame ===")
+df = pd.DataFrame({"a": [1, 2, 3]})
+metodos = [m for m in dir(df) if not m.startswith("_")]
+print(f"Total métodos públicos: {len(metodos)}")
+print(f"Primeros 15: {metodos[:15]}")
+
+# type(): verificar qué tipo es algo
+print(f"\nTipo de df: {type(df)}")
+print(f"Tipo de df['a']: {type(df['a'])}")
+print(f"Tipo de np.array([1]): {type(np.array([1]))}")
+
+# Inspeccionar un método específico
+print(f"\n=== Ayuda de pd.DataFrame.describe ===")
+# help(df.describe)  # Descomentá para ver la doc completa
+
+# Verificar versiones instaladas
+print(f"\npandas: {pd.__version__}")
+print(f"numpy: {np.__version__}")
+
+# Bonus: listar todos los módulos de la stdlib disponibles
+import sys
+print(f"\nMódulos cargados: {len(sys.modules)}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Comando pip</th><th>Acción</th></tr>
+<tr><td><code>pip install pandas</code></td><td>Instalar paquete</td></tr>
+<tr><td><code>pip install pandas==2.1.4</code></td><td>Versión específica</td></tr>
+<tr><td><code>pip install -U pandas</code></td><td>Actualizar</td></tr>
+<tr><td><code>pip uninstall pandas</code></td><td>Desinstalar</td></tr>
+<tr><td><code>pip list</code></td><td>Ver instalados</td></tr>
+<tr><td><code>pip freeze > requirements.txt</code></td><td>Exportar dependencias</td></tr>
+<tr><td><code>pip install -r requirements.txt</code></td><td>Instalar desde archivo</td></tr>
+</table>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr><th>Comando venv</th><th>Acción</th></tr>
+<tr><td><code>python -m venv .venv</code></td><td>Crear entorno virtual</td></tr>
+<tr><td><code>.venv\Scripts\activate</code> (Win)</td><td>Activar</td></tr>
+<tr><td><code>source .venv/bin/activate</code> (Mac/Linux)</td><td>Activar</td></tr>
+<tr><td><code>deactivate</code></td><td>Desactivar</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Crear DataFrame</h4><p>Creá un DataFrame con 3 productos (nombre, precio, stock) e imprimilo. Debe incluir <code>Notebook</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-1" data-expected="Notebook"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+# Creá el DataFrame:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["datos = [{\"nombre\":\"Notebook\",\"precio\":920000,\"stock\":15}, ...]","df = pd.DataFrame(datos)","print(df)"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Array de numpy</h4><p>Creá un array <code>np.array([100, 200, 300, 400, 500])</code> y multiplicalo por 1.21 (IVA). Debe incluir <code>121</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-2" data-expected="121"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "121"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+precios = np.array([100, 200, 300, 400, 500])
+
+# Multiplicá por 1.21:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["con_iva = precios * 1.21","print(con_iva)","[121. 242. 363. 484. 605.]"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: Estadísticas con numpy</h4><p>Dado <code>np.array([150000,320000,45000,890000,72000])</code>, calculá media, mediana y desvío. Debe incluir <code>295400</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-3" data-expected="295400"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "295400"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+saldos = np.array([150000, 320000, 45000, 890000, 72000])
+
+# Calculá estadísticas:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["print(f\"Media: {np.mean(saldos):.0f}\")","np.mean([150000,320000,45000,890000,72000]) = 295400","np.median, np.std para mediana y desvío"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: DataFrame con filtrado</h4><p>Creá un DataFrame de 5 clientes, filtrá los que tienen score >= 700 e imprimí solo sus nombres. Debe incluir <code>Premium</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-4" data-expected="Premium"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Premium"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    "nombre": ["García","López","Martínez","Pérez","Sosa"],
+    "score": [720, 680, 590, 810, 750],
+})
+
+# Filtrá y clasificá:
+df["categoria"] = np.where(df["score"] >= 700, "Premium", "Estándar")
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["premium = df[df[\"categoria\"] == \"Premium\"]","print(premium)","García, Pérez y Sosa son Premium"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: describe() del DataFrame</h4><p>Generá un DataFrame con 50 valores aleatorios de score (400-900) usando numpy. Mostrá <code>describe()</code>. Debe incluir <code>mean</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-5" data-expected="mean"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "mean"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+# Generá DataFrame con 50 scores aleatorios:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400, 900, 50)})","print(df.describe())","describe() muestra count, mean, std, min, 25%, 50%, 75%, max"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: value_counts()</h4><p>Creá un DataFrame con 20 transacciones de tipo aleatorio ("compra","venta","transferencia"). Mostrá <code>value_counts()</code>. Debe incluir <code>compra</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-6" data-expected="compra"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "compra"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+tipos = ["compra", "venta", "transferencia"]
+
+# Generá 20 transacciones aleatorias:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["df = pd.DataFrame({\"tipo\": np.random.choice(tipos, 20)})","print(df[\"tipo\"].value_counts())","value_counts() cuenta frecuencias automáticamente"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: groupby básico</h4><p>Creá un DataFrame con clientes, ciudad y saldo. Agrupá por ciudad y mostrá el saldo promedio. Debe incluir <code>BsAs</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-7" data-expected="BsAs"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "BsAs"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "nombre": ["García","López","Martínez","Pérez","Fernández"],
+    "ciudad": ["BsAs","Córdoba","BsAs","BsAs","Córdoba"],
+    "saldo": [150000, 320000, 45000, 890000, 72000],
+})
+
+# Agrupá por ciudad:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["print(df.groupby(\"ciudad\")[\"saldo\"].mean())","O: print(df.groupby(\"ciudad\").agg({\"saldo\": [\"sum\",\"mean\",\"count\"]}))","BsAs promedio: (150000+45000+890000)/3"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Operaciones vectorizadas</h4><p>Creá un array de 10 precios con numpy. Aplicá descuento 15% vectorizado y calculá el ahorro total. Debe incluir <code>Ahorro</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-8" data-expected="Ahorro"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Ahorro"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+np.random.seed(42)
+
+precios = np.random.uniform(1000, 50000, 10).round(0)
+
+# Aplicá descuento 15% y calculá ahorro:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["con_descuento = precios * 0.85","ahorro = np.sum(precios - con_descuento)","print(f\"Ahorro total: ${ahorro:,.0f}\")"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Escribir y leer requirements.txt simulado</h4><p>Creá una lista de paquetes con versiones y generá un string con formato requirements.txt. Debe incluir <code>pandas</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-9" data-expected="pandas"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "pandas"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">paquetes = [
+    ("pandas", "2.1.4"),
+    ("numpy", "1.26.2"),
+    ("scikit-learn", "1.3.2"),
+    ("matplotlib", "3.8.2"),
+]
+
+# Generá requirements.txt como string:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["lineas = [f\"{pkg}=={ver}\" for pkg, ver in paquetes]","req = \"\\n\".join(lineas)","print(req)"]'></div></div>
+
+<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Pipeline con pandas + numpy</h4><p>Generá un DataFrame de 100 clientes (seed 42) con score, ingreso y ciudad aleatorios. Agregá columna "categoria" (Premium/Estándar), agrupá por ciudad y mostrá estadísticas. Debe incluir <code>PIPELINE</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-10" data-expected="PIPELINE"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "PIPELINE"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+ciudades = ["BsAs", "Córdoba", "Rosario", "Mendoza"]
+
+# Generá 100 clientes y procesá:
+print("=== PIPELINE DE DATOS ===")
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400,900,100), ...})","\"ciudad\": np.random.choice(ciudades, 100)","df.groupby(\"ciudad\").agg({\"score\":\"mean\", \"ingreso\":\"sum\"})"]'></div></div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>pip install paquete</code> instala desde PyPI. <code>pip freeze > requirements.txt</code> guarda dependencias.</li>
+  <li>SIEMPRE usá entornos virtuales (<code>python -m venv .venv</code>) para aislar proyectos.</li>
+  <li><code>pandas</code> para DataFrames y análisis tabular. <code>numpy</code> para arrays y operaciones vectorizadas.</li>
+  <li><code>requests</code> para consumir APIs. <code>openpyxl</code> para Excel. <code>matplotlib</code>/<code>seaborn</code> para gráficos.</li>
+  <li><code>help()</code> y <code>dir()</code> son tus herramientas de exploración de cualquier paquete.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>22 · Scope de variables</strong>) vas a entender cómo Python maneja la visibilidad de las variables: local, enclosing, global y built-in.</p>
+
+<p><strong>Recursos:</strong> <a href="https://pypi.org/" target="_blank">PyPI</a> · <a href="https://pandas.pydata.org/docs/" target="_blank">pandas docs</a> · <a href="https://numpy.org/doc/" target="_blank">numpy docs</a></p>
+
+<div class="footer-nav">
+  <a href="/python/20-modulos-stdlib.html">← Módulos stdlib</a>
+  <a class="next" href="/python/22-scope-variables.html">Scope de variables →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

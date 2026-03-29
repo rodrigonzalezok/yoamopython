@@ -1,221 +1,577 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Python 20</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Python · Lección 20</div><h1>Modulos Stdlib</h1><p>Subtítulo: dominá modulos stdlib desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 19</span><span class='badge'>Breadcrumb: Python > Lección 20</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Modulos Stdlib</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Modulos Stdlib</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de modulos stdlib</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Modulos Stdlib</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Modulos Stdlib</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Modulos Stdlib</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Python 20 · Módulos de la stdlib</title>
+<meta name="description" content="Explorá la biblioteca estándar de Python: math, datetime, random, json, os y collections. Herramientas que vienen incluidas y usás todos los días.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label python">Python · Lección 20 de 27</span>
+  <h1>Módulos de la biblioteca estándar</h1>
+  <p>Python viene con "baterías incluidas": una colección enorme de módulos listos para usar sin instalar nada. Esta lección cubre los 6 que vas a usar todos los días como analista: math, datetime, random, json, os y collections.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: 18 Funciones básicas</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es un módulo y cómo se importa?</h3>
+
+<p>Un <strong>módulo</strong> es un archivo <code>.py</code> que contiene funciones, clases y variables que podés reutilizar. La <strong>biblioteca estándar</strong> (stdlib) son los módulos que vienen con Python — no necesitás instalar nada con pip. Hay tres formas de importar:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">import math                    # importar el módulo completo → math.sqrt()
+from math import sqrt, pi     # importar solo lo que necesitás → sqrt()
+from math import sqrt as raiz # importar con alias → raiz()</pre>
+
+<div class="tip"><strong>Convención PEP 8:</strong> los imports van SIEMPRE al inicio del archivo, uno por línea, agrupados en 3 bloques: (1) stdlib, (2) terceros (pandas, numpy), (3) propios. Separados por una línea en blanco.</div>
+
+<h3>math — funciones matemáticas</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Función</th><th>Qué hace</th><th>Ejemplo</th><th>Resultado</th></tr>
+<tr><td><code>math.sqrt(x)</code></td><td>Raíz cuadrada</td><td><code>sqrt(144)</code></td><td><code>12.0</code></td></tr>
+<tr><td><code>math.ceil(x)</code></td><td>Redondeo hacia arriba</td><td><code>ceil(3.1)</code></td><td><code>4</code></td></tr>
+<tr><td><code>math.floor(x)</code></td><td>Redondeo hacia abajo</td><td><code>floor(3.9)</code></td><td><code>3</code></td></tr>
+<tr><td><code>math.log(x)</code></td><td>Logaritmo natural (ln)</td><td><code>log(math.e)</code></td><td><code>1.0</code></td></tr>
+<tr><td><code>math.log10(x)</code></td><td>Logaritmo base 10</td><td><code>log10(1000)</code></td><td><code>3.0</code></td></tr>
+<tr><td><code>math.pi</code></td><td>Constante π</td><td><code>math.pi</code></td><td><code>3.14159...</code></td></tr>
+<tr><td><code>math.e</code></td><td>Constante e (Euler)</td><td><code>math.e</code></td><td><code>2.71828...</code></td></tr>
+<tr><td><code>math.pow(x, y)</code></td><td>x elevado a y (float)</td><td><code>pow(2, 10)</code></td><td><code>1024.0</code></td></tr>
+<tr><td><code>math.factorial(n)</code></td><td>Factorial de n</td><td><code>factorial(5)</code></td><td><code>120</code></td></tr>
+</table>
+</div>
+
+<div class="realworld"><strong>Uso en finanzas:</strong> <code>math.log()</code> se usa para calcular retornos logarítmicos en series financieras: <code>retorno = math.log(precio_hoy / precio_ayer)</code>. <code>math.ceil()</code> sirve para redondear cuotas hacia arriba (nunca le cobrás de menos al banco). <code>math.sqrt()</code> aparece en cálculos de volatilidad y desvío estándar.</div>
+
+<h3>datetime — fechas y horas</h3>
+
+<p>El módulo <code>datetime</code> es fundamental para análisis de datos. Los campos de fecha aparecen en CADA dataset (fecha de transacción, fecha de alta, fecha de vencimiento). Sus clases principales:</p>
+
+<ul>
+  <li><code><b>datetime.datetime</b></code> — fecha + hora: <code>2025-03-15 10:30:00</code></li>
+  <li><code><b>datetime.date</b></code> — solo fecha: <code>2025-03-15</code></li>
+  <li><code><b>datetime.timedelta</b></code> — diferencia entre fechas: <code>30 days</code></li>
+</ul>
+
+<p>Los métodos clave: <code>.now()</code> (fecha actual), <code>.strftime(formato)</code> (fecha → string), <code>.strptime(string, formato)</code> (string → fecha), y aritmética con <code>timedelta</code>.</p>
+
+<div class="warning"><strong>Error común:</strong> confundir <code>strftime</code> (format → convierte fecha a string) con <code>strptime</code> (parse → convierte string a fecha). El truco: <b>f</b>ormat tiene <b>f</b>, <b>p</b>arse tiene <b>p</b>.</div>
+
+<h3>random — números aleatorios</h3>
+
+<p>Útil para simulaciones, muestreo, y generación de datos de prueba:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Función</th><th>Qué hace</th><th>Ejemplo</th></tr>
+<tr><td><code>random.randint(a, b)</code></td><td>Entero aleatorio entre a y b (incluidos)</td><td><code>randint(1, 100)</code></td></tr>
+<tr><td><code>random.random()</code></td><td>Float entre 0.0 y 1.0</td><td><code>random()</code></td></tr>
+<tr><td><code>random.uniform(a, b)</code></td><td>Float entre a y b</td><td><code>uniform(100, 200)</code></td></tr>
+<tr><td><code>random.choice(seq)</code></td><td>Elemento aleatorio de una secuencia</td><td><code>choice(["A","B","C"])</code></td></tr>
+<tr><td><code>random.sample(seq, k)</code></td><td>k elementos sin repetición</td><td><code>sample(range(100), 5)</code></td></tr>
+<tr><td><code>random.shuffle(lista)</code></td><td>Mezcla in-place</td><td><code>shuffle(mi_lista)</code></td></tr>
+<tr><td><code>random.seed(n)</code></td><td>Fija la semilla (reproducibilidad)</td><td><code>seed(42)</code></td></tr>
+</table>
+</div>
+
+<div class="concept"><strong>Reproducibilidad con seed:</strong> si fijás <code>random.seed(42)</code> antes de generar números, SIEMPRE obtenés la misma secuencia. Esto es crítico en ciencia de datos: si tu análisis depende de aleatoriedad, necesitás que sea reproducible. En sklearn: <code>train_test_split(X, y, random_state=42)</code> usa este mismo principio.</div>
+
+<h3>json — leer y escribir JSON</h3>
+
+<p>JSON (JavaScript Object Notation) es el formato estándar de las APIs web. En Python, JSON se mapea directamente a diccionarios y listas:</p>
+
+<ul>
+  <li><code>json.dumps(dict)</code> — dict/list → string JSON (con <code>indent=2</code> para formato legible)</li>
+  <li><code>json.loads(string)</code> — string JSON → dict/list</li>
+  <li><code>json.dump(dict, archivo)</code> — dict → archivo JSON</li>
+  <li><code>json.load(archivo)</code> — archivo JSON → dict</li>
+</ul>
+
+<h3>os — interacción con el sistema operativo</h3>
+
+<p>Para manejar archivos, carpetas y rutas. Los más usados: <code>os.path.exists()</code>, <code>os.listdir()</code>, <code>os.getcwd()</code>, <code>os.path.join()</code>, <code>os.makedirs()</code>.</p>
+
+<h3>collections — estructuras de datos especializadas</h3>
+
+<p>Ya viste <code>Counter</code>, <code>defaultdict</code> y <code>namedtuple</code>. Son las herramientas de collections que usás constantemente en análisis de datos.</p>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: math para cálculos financieros</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_math.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import math
+
+# Raíz cuadrada — volatilidad anualizada
+varianza_diaria = 0.0004
+vol_diaria = math.sqrt(varianza_diaria)
+vol_anual = vol_diaria * math.sqrt(252)  # 252 días hábiles
+print(f"Volatilidad diaria: {vol_diaria:.4f}")
+print(f"Volatilidad anual: {vol_anual:.2%}")
+
+# Redondeo bancario: ceil para cuotas (nunca cobrar de menos)
+monto = 157333.33
+print(f"\nCuota exacta: ${monto:,.2f}")
+print(f"ceil: ${math.ceil(monto):,}")     # 157334
+print(f"floor: ${math.floor(monto):,}")   # 157333
+print(f"round: ${round(monto):,}")        # 157333
+
+# Logaritmo — retorno logarítmico
+precio_ayer = 5200
+precio_hoy = 5350
+retorno_log = math.log(precio_hoy / precio_ayer)
+print(f"\nGGAL: ${precio_ayer:,} → ${precio_hoy:,}")
+print(f"Retorno log: {retorno_log:.4f} ({retorno_log*100:.2f}%)")
+
+# Factorial y combinatoria
+n, k = 10, 3
+combinaciones = math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
+print(f"\nC({n},{k}) = {combinaciones} combinaciones posibles")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: datetime — fechas en el mundo real</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_datetime.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">from datetime import datetime, date, timedelta
+
+# Fecha y hora actual
+ahora = datetime.now()
+print(f"Ahora: {ahora}")
+print(f"Formateado: {ahora.strftime('%d/%m/%Y %H:%M')}")
+print(f"Solo fecha: {ahora.date()}")
+print(f"Año: {ahora.year}, Mes: {ahora.month}, Día: {ahora.day}")
+
+# Parsear fecha desde string (formato argentino)
+fecha_str = "15/01/2025"
+fecha = datetime.strptime(fecha_str, "%d/%m/%Y")
+print(f"\nParseado: '{fecha_str}' → {fecha}")
+
+# Aritmética de fechas con timedelta
+vencimiento = fecha + timedelta(days=30)
+print(f"Fecha + 30 días: {vencimiento.strftime('%d/%m/%Y')}")
+
+# Diferencia entre fechas
+alta = date(2020, 3, 15)
+hoy = date.today()
+antiguedad = hoy - alta
+print(f"\nAlta: {alta}")
+print(f"Antigüedad: {antiguedad.days} días ({antiguedad.days // 365} años)")
+
+# Vencimientos de cuotas
+print(f"\nVencimientos mensuales:")
+fecha_base = date(2025, 1, 15)
+for i in range(1, 7):
+    venc = fecha_base + timedelta(days=30 * i)
+    print(f"  Cuota {i}: {venc.strftime('%d/%m/%Y')}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: random — simulaciones y muestreo</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_random.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import random
+
+# Fijar semilla para reproducibilidad
+random.seed(42)
+
+# Generar datos de prueba (simulación de clientes)
+nombres = ["García", "López", "Martínez", "Pérez", "Fernández",
+           "Sosa", "Luna", "Rodríguez", "Díaz", "Torres"]
+ciudades = ["BsAs", "Córdoba", "Rosario", "Mendoza", "Tucumán"]
+
+clientes = []
+for _ in range(8):
+    cliente = {
+        "nombre": random.choice(nombres),
+        "ciudad": random.choice(ciudades),
+        "score": random.randint(400, 900),
+        "saldo": round(random.uniform(10000, 500000), 2),
+    }
+    clientes.append(cliente)
+
+print("=== Clientes simulados ===")
+for c in clientes:
+    print(f"  {c['nombre']:<12} {c['ciudad']:<10} Score:{c['score']} ${c['saldo']:>10,.0f}")
+
+# Muestreo: seleccionar 3 clientes al azar para auditoría
+muestra = random.sample(clientes, 3)
+print(f"\nMuestra para auditoría:")
+for c in muestra:
+    print(f"  {c['nombre']}")
+
+# Simulación Monte Carlo simplificada: retornos de inversión
+random.seed(123)
+capital = 100000
+retornos = [random.gauss(0.005, 0.03) for _ in range(12)]  # media 0.5%, desvío 3%
+saldo = capital
+for i, r in enumerate(retornos, 1):
+    saldo *= (1 + r)
+print(f"\nSimulación 12 meses: ${capital:,} → ${saldo:,.0f} ({(saldo/capital-1)*100:+.1f}%)")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: json — serializar y parsear datos</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_json.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+
+# Dict → JSON string
+cliente = {
+    "nombre": "García",
+    "edad": 35,
+    "score": 720,
+    "activo": True,
+    "productos": ["Cuenta", "Tarjeta"],
+    "saldo": None  # None → null en JSON
+}
+
+# Serializar (dict → string JSON)
+json_str = json.dumps(cliente, indent=2, ensure_ascii=False)
+print("=== Dict → JSON ===")
+print(json_str)
+
+# Deserializar (string JSON → dict)
+json_input = '{"ticker": "GGAL", "precio": 5200, "variacion": -1.5}'
+datos = json.loads(json_input)
+print(f"\n=== JSON → Dict ===")
+print(f"Ticker: {datos['ticker']}")
+print(f"Precio: ${datos['precio']:,}")
+print(f"Tipo: {type(datos)}")
+
+# Lista de dicts → JSON (como una API devolvería)
+cartera = [
+    {"ticker": "GGAL", "cantidad": 100, "precio": 5200},
+    {"ticker": "YPF", "cantidad": 50, "precio": 28000},
+    {"ticker": "PAMP", "cantidad": 200, "precio": 3100},
 ]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Modulos Stdlib</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='python-20' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-python-20-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-python-20-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de modulos stdlib con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/python/19-funciones-avanzadas.html'>← Anterior</a><a class='badge' href='/python/21-modulos-pip.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+print(f"\n=== Cartera como JSON ===")
+print(json.dumps(cartera, indent=2))
+
+# Calcular valor total
+total = sum(a["cantidad"] * a["precio"] for a in cartera)
+print(f"\nValor total cartera: ${total:,}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: os y collections combinados</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_os_collections.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import os
+from collections import Counter, defaultdict, namedtuple
+
+# os: información del sistema
+print(f"Directorio actual: {os.getcwd()}")
+print(f"Separador de rutas: '{os.sep}'")
+
+# os.path: construir rutas de forma portable
+ruta = os.path.join("datos", "clientes", "2025", "q1.csv")
+print(f"Ruta construida: {ruta}")
+print(f"Nombre archivo: {os.path.basename(ruta)}")
+print(f"Directorio: {os.path.dirname(ruta)}")
+print(f"¿Extensión? {os.path.splitext(ruta)}")
+
+# Counter: contar frecuencias (repaso)
+transacciones = ["compra", "venta", "compra", "compra", "venta",
+                 "transferencia", "compra", "venta"]
+freq = Counter(transacciones)
+print(f"\nFrecuencias: {dict(freq)}")
+print(f"Top 2: {freq.most_common(2)}")
+
+# defaultdict: agrupar (repaso)
+ops = [("García", 50000), ("López", 30000), ("García", 45000),
+       ("López", 60000), ("Pérez", 80000)]
+por_cliente = defaultdict(list)
+for nombre, monto in ops:
+    por_cliente[nombre].append(monto)
+print(f"\nPor cliente: {dict(por_cliente)}")
+
+# namedtuple: registros legibles
+Cotizacion = namedtuple("Cotizacion", ["ticker", "precio", "variacion"])
+ggal = Cotizacion("GGAL", 5200, -1.5)
+print(f"\n{ggal.ticker}: ${ggal.precio:,} ({ggal.variacion:+.1f}%)")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Módulo</th><th>Funciones clave</th><th>Uso principal</th></tr>
+<tr><td><code>math</code></td><td><code>sqrt ceil floor log pi e factorial</code></td><td>Cálculos matemáticos y financieros</td></tr>
+<tr><td><code>datetime</code></td><td><code>now strftime strptime timedelta</code></td><td>Fechas, vencimientos, antigüedad</td></tr>
+<tr><td><code>random</code></td><td><code>randint choice sample seed gauss</code></td><td>Simulaciones, muestreo, datos de prueba</td></tr>
+<tr><td><code>json</code></td><td><code>dumps loads dump load</code></td><td>Serializar/parsear datos JSON/APIs</td></tr>
+<tr><td><code>os</code></td><td><code>path.join listdir getcwd makedirs</code></td><td>Archivos, rutas, sistema</td></tr>
+<tr><td><code>collections</code></td><td><code>Counter defaultdict namedtuple</code></td><td>Conteo, agrupación, registros</td></tr>
+</table>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr><th>Formato datetime</th><th>Significado</th><th>Ejemplo</th></tr>
+<tr><td><code>%d</code></td><td>Día (01-31)</td><td><code>15</code></td></tr>
+<tr><td><code>%m</code></td><td>Mes (01-12)</td><td><code>03</code></td></tr>
+<tr><td><code>%Y</code></td><td>Año 4 dígitos</td><td><code>2025</code></td></tr>
+<tr><td><code>%H</code></td><td>Hora 24h</td><td><code>14</code></td></tr>
+<tr><td><code>%M</code></td><td>Minutos</td><td><code>30</code></td></tr>
+<tr><td><code>%A</code></td><td>Día de la semana</td><td><code>Saturday</code></td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: math.ceil para cuotas</h4>
+  <p>Un préstamo de $157,000 se divide en 6 cuotas. Usá <code>math.ceil()</code> para redondear la cuota hacia arriba. Debe incluir <code>26167</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-1" data-expected="26167">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "26167"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import math
+capital = 157000
+cuotas = 6
+
+# Calculá y redondeá:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["cuota = capital / cuotas → 26166.666...","math.ceil(cuota) → 26167","Siempre redondeás para arriba en cuotas"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Fecha actual formateada</h4>
+  <p>Imprimí la fecha actual en formato argentino <code>dd/mm/yyyy</code> usando <code>strftime</code>. Debe incluir <code>/</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-2" data-expected="/">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "/"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">from datetime import datetime
+
+# Imprimí fecha actual dd/mm/yyyy:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["ahora = datetime.now()","print(ahora.strftime(\"%d/%m/%Y\"))","El formato usa %d día, %m mes, %Y año"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: random.choice</h4>
+  <p>Usá <code>random.seed(42)</code> y <code>random.choice()</code> para elegir un ticker de <code>["GGAL","YPF","PAMP","MELI"]</code>. Imprimí el elegido. Debe incluir el nombre del ticker.</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-3" data-expected="MELI">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Reproducible con seed(42)</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import random
+random.seed(42)
+tickers = ["GGAL", "YPF", "PAMP", "MELI"]
+
+# Elegí uno al azar:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["elegido = random.choice(tickers)","print(f\"Elegido: {elegido}\")","Con seed(42) siempre sale el mismo"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Calcular antigüedad en días</h4>
+  <p>Un cliente se dio de alta el <code>"15/03/2020"</code>. Parseá la fecha con <code>strptime</code>, calculá los días de antigüedad respecto a hoy e imprimí. Debe incluir <code>días</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-4" data-expected="días">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "días"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">from datetime import datetime
+
+fecha_alta_str = "15/03/2020"
+
+# Parseá y calculá antigüedad:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["alta = datetime.strptime(fecha_alta_str, \"%d/%m/%Y\")","diff = datetime.now() - alta","print(f\"Antigüedad: {diff.days} días\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: json.dumps con formato</h4>
+  <p>Creá un dict de cotización (ticker, precio, volumen, fecha) y convertilo a JSON con <code>indent=2</code>. Debe incluir <code>"ticker"</code> (con comillas, formato JSON).</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-5" data-expected="ticker">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "ticker"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+
+cotizacion = {
+    "ticker": "GGAL",
+    # completá
+}
+
+# Convertí a JSON e imprimí:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["Agregá: \"precio\": 5200, \"volumen\": 1500000, \"fecha\": \"2025-03-15\"","print(json.dumps(cotizacion, indent=2))","JSON usa comillas dobles para las claves"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Generar vencimientos mensuales</h4>
+  <p>Desde <code>date(2025, 1, 10)</code>, generá 6 vencimientos mensuales (sumando 30 días cada vez) e imprimí en formato dd/mm/yyyy. Debe incluir <code>10/03/2025</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-6" data-expected="10/03/2025">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "10/03/2025"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">from datetime import date, timedelta
+
+primera_cuota = date(2025, 1, 10)
+
+# Generá 6 vencimientos:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["for i in range(6):","    venc = primera_cuota + timedelta(days=30 * i)","    print(venc.strftime(\"%d/%m/%Y\"))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Simulación con random y seed</h4>
+  <p>Con <code>seed(123)</code>, simulá 12 meses de retornos con <code>random.gauss(0.005, 0.02)</code> sobre capital $100,000. Imprimí saldo final. Debe incluir <code>Final</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-7" data-expected="Final">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Final"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import random
+random.seed(123)
+capital = 100000
+
+# Simulá 12 meses:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["saldo = capital","for _ in range(12): saldo *= (1 + random.gauss(0.005, 0.02))","print(f\"Final: ${saldo:,.0f}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Parsear JSON de API simulada</h4>
+  <p>Dado un string JSON, parsealo, extraé los datos y calculá el valor total de la cartera. Debe incluir <code>2120000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-8" data-expected="2120000">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "2120000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+
+json_str = '[{"ticker":"GGAL","cantidad":100,"precio":5200},{"ticker":"YPF","cantidad":50,"precio":28000}]'
+
+# Parseá y calculá valor total:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["cartera = json.loads(json_str)","total = sum(a[\"cantidad\"] * a[\"precio\"] for a in cartera)","100*5200 + 50*28000 = 520000 + 1600000 = 2120000"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Generar dataset de prueba</h4>
+  <p>Con <code>seed(0)</code>, generá 5 clientes con nombre aleatorio de una lista, score entre 400-900, saldo entre 10K-500K. Guardá como lista de dicts. Debe incluir <code>score</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-9" data-expected="score">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "score"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import random
+random.seed(0)
+nombres = ["García", "López", "Martínez", "Pérez", "Fernández"]
+
+# Generá 5 clientes aleatorios:
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["for _ in range(5): cliente = {\"nombre\": random.choice(nombres), ...}","\"score\": random.randint(400, 900)","\"saldo\": round(random.uniform(10000, 500000), 2)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Reporte completo con todos los módulos</h4>
+  <p>Combiná math, datetime, random, json y collections: (1) generá 10 transacciones aleatorias (seed 42) con fecha, tipo, monto, (2) contá tipos con Counter, (3) calculá estadísticas con math, (4) serializá a JSON, (5) imprimí reporte con fecha formateada. Debe incluir <code>REPORTE</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="python-20" data-exercise="ex-10" data-expected="REPORTE">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "REPORTE"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import math, json, random
+from datetime import datetime, timedelta
+from collections import Counter
+
+random.seed(42)
+tipos = ["compra", "venta", "transferencia"]
+base = datetime(2025, 1, 1)
+
+# Generá 10 transacciones y armá reporte:
+print("=== REPORTE DE TRANSACCIONES ===")
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["fecha = base + timedelta(days=random.randint(0,90))","tipo = random.choice(tipos); monto = round(random.uniform(1000, 50000))","Counter([t[\"tipo\"] for t in transacciones]).most_common()"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>math</code>: sqrt, ceil, floor, log, pi — cálculos matemáticos y financieros.</li>
+  <li><code>datetime</code>: now, strftime/strptime, timedelta — fechas, vencimientos, antigüedad.</li>
+  <li><code>random</code>: randint, choice, sample, seed — simulaciones reproducibles y muestreo.</li>
+  <li><code>json</code>: dumps/loads — serializar y parsear datos para APIs y archivos.</li>
+  <li><code>os</code>: path.join, listdir, getcwd — manejar archivos y rutas.</li>
+  <li><code>collections</code>: Counter, defaultdict, namedtuple — estructuras de datos especializadas.</li>
+  <li>Imports al inicio del archivo, uno por línea, agrupados (stdlib → terceros → propios).</li>
+</ul>
+
+<p>En la siguiente lección (<strong>21 · Módulos de pip</strong>) vas a aprender a instalar paquetes externos como pandas, numpy y requests — el ecosistema que hace de Python el lenguaje #1 para datos.</p>
+
+<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/library/" target="_blank">Python Standard Library</a></p>
+
+<div class="footer-nav">
+  <a href="/python/19-funciones-avanzadas.html">← Funciones avanzadas</a>
+  <a class="next" href="/python/21-modulos-pip.html">Módulos de pip →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
