@@ -1,214 +1,237 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Sql 15</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Sql · Lección 15</div><h1>Proyecto Integrador SQL</h1><p>Subtítulo: dominá proyecto integrador sql desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 14</span><span class='badge'>Breadcrumb: Sql > Lección 15</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Proyecto Integrador SQL</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Proyecto Integrador SQL</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de proyecto integrador sql</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Proyecto Integrador SQL</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>CREATE TABLE IF NOT EXISTS ventas (cliente TEXT, monto INTEGER, canal TEXT);
-INSERT INTO ventas VALUES
-('García', 250000, 'Sucursal'),
-('Pérez', 180000, 'Online'),
-('Sosa', 320000, 'Sucursal');
-SELECT * FROM ventas;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Proyecto Integrador SQL</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, COUNT(*) AS operaciones, SUM(monto) AS total
-FROM ventas
-GROUP BY canal
-ORDER BY total DESC;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Proyecto Integrador SQL</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto,
-       ROUND(monto * 0.03, 2) AS comision,
-       monto + ROUND(monto * 0.03, 2) AS total_con_comision
-FROM ventas
-ORDER BY total_con_comision DESC;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Proyecto Integrador SQL</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-15' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-15-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-15-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de proyecto integrador sql con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/sql/14-caso-practico-sql.html'>← Anterior</a><a class='badge' href='/index.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · SQL 15 · Proyecto integrador</title>
+<meta name="description" content="Proyecto final SQL: diseñá un esquema bancario, poblalo con datos y generá análisis completos combinando todas las herramientas SQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+</head>
+<body>
+<div class="topbar"><button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button><div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div><div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div><div id="global-progress-text" class="top-stats"></div></div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label sql">SQL · Lección 15 de 15 · FINAL</span>
+  <h1>Proyecto integrador SQL</h1>
+  <p>Cierre del track SQL. Construís desde cero: diseñar el esquema, crear tablas con constraints, poblar datos, y generar 10 análisis que combinan todo lo aprendido. Es la prueba de que dominás SQL a nivel de Data Analyst.</p>
+  <div class="badges">
+    <span class="badge">⏱ 150–180 min</span>
+    <span class="badge">Prerrequisitos: TODAS las lecciones SQL</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>El proyecto</h2>
+
+<p>Construís un sistema de análisis de cartera de inversiones para una sociedad de bolsa. El esquema tiene 3 tablas: <b>inversores</b>, <b>portafolios</b> (tenencias) y <b>operaciones</b> (compras/ventas).</p>
+
+<h3>Paso 1: Crear el esquema completo (ejecutá esto primero)</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>setup_esquema.sql</span><span>SQL — Ejecutá primero</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">-- ESQUEMA: Sociedad de Bolsa
+CREATE TABLE inversores (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    perfil TEXT CHECK (perfil IN ('Conservador','Moderado','Agresivo')),
+    ciudad TEXT DEFAULT 'Buenos Aires',
+    fecha_alta TEXT,
+    activo INTEGER DEFAULT 1
+);
+CREATE TABLE portafolios (
+    id INTEGER PRIMARY KEY, inversor_id INTEGER NOT NULL,
+    ticker TEXT NOT NULL, cantidad INTEGER NOT NULL, precio_compra REAL,
+    FOREIGN KEY (inversor_id) REFERENCES inversores(id)
+);
+CREATE TABLE operaciones (
+    id INTEGER PRIMARY KEY, inversor_id INTEGER NOT NULL,
+    ticker TEXT NOT NULL, tipo TEXT CHECK (tipo IN ('compra','venta')),
+    cantidad INTEGER, precio REAL, fecha TEXT,
+    FOREIGN KEY (inversor_id) REFERENCES inversores(id)
+);
+
+-- DATOS
+INSERT INTO inversores VALUES
+(1,'García','Moderado','Buenos Aires','2023-06-15',1),
+(2,'López','Conservador','Córdoba','2024-01-10',1),
+(3,'Pérez','Agresivo','Buenos Aires','2022-03-20',1),
+(4,'Sosa','Conservador','Rosario','2023-11-05',0),
+(5,'Fernández','Moderado','Buenos Aires','2024-06-01',1),
+(6,'Luna','Agresivo','Córdoba','2023-08-22',1),
+(7,'Díaz','Moderado','Mendoza','2024-03-15',1),
+(8,'Torres','Conservador','Buenos Aires','2022-09-10',1);
+
+INSERT INTO portafolios VALUES
+(1,1,'GGAL',200,4800),(2,1,'YPF',50,25000),(3,1,'AL30',100,28000),
+(4,2,'AL30',500,27500),(5,2,'GD30',200,35000),
+(6,3,'GGAL',1000,4500),(7,3,'PAMP',500,2800),(8,3,'YPF',100,24000),(9,3,'MELI',10,85000),
+(10,4,'AL30',200,29000),(11,5,'GGAL',300,5000),(12,5,'AL30',150,28500),
+(13,6,'PAMP',800,2600),(14,6,'GGAL',500,4700),(15,6,'YPF',80,26000),
+(16,7,'AL30',300,27000),(17,7,'GD30',100,34000),(18,8,'AL30',400,28000),(19,8,'GD30',150,35500);
+
+INSERT INTO operaciones VALUES
+(1,1,'GGAL','compra',200,4800,'2024-01-15'),(2,1,'YPF','compra',50,25000,'2024-02-20'),
+(3,3,'GGAL','compra',500,4500,'2024-01-10'),(4,3,'GGAL','compra',500,4600,'2024-03-05'),
+(5,2,'AL30','compra',500,27500,'2024-02-01'),(6,3,'PAMP','compra',500,2800,'2024-04-15'),
+(7,6,'PAMP','compra',800,2600,'2024-03-20'),(8,6,'GGAL','compra',500,4700,'2024-05-10'),
+(9,1,'AL30','compra',100,28000,'2024-06-01'),(10,5,'GGAL','compra',300,5000,'2024-07-15'),
+(11,3,'YPF','compra',100,24000,'2024-08-01'),(12,7,'AL30','compra',300,27000,'2024-09-10'),
+(13,8,'AL30','compra',400,28000,'2024-10-01'),(14,6,'YPF','compra',80,26000,'2024-11-15'),
+(15,3,'MELI','compra',10,85000,'2024-12-01');
+
+SELECT 'Esquema creado: ' || COUNT(*) || ' inversores, ' ||
+       (SELECT COUNT(*) FROM portafolios) || ' tenencias, ' ||
+       (SELECT COUNT(*) FROM operaciones) || ' operaciones'
+AS status FROM inversores;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">02</div>
+<h2>Ejercicios del proyecto</h2>
+
+<p>Cada ejercicio recrea el esquema automáticamente. Escribí tu consulta al final.</p>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Exploración básica</h4><p>¿Cuántos inversores hay, cuántos activos, cuántas ciudades distintas? Debe incluir <code>8</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-1" data-expected="8"><div class="editor-top"><span>proyecto_01.sql</span><span>Debe incluir "8"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE inversores (id INTEGER PRIMARY KEY, nombre TEXT, perfil TEXT, ciudad TEXT, activo INTEGER);
+INSERT INTO inversores VALUES (1,'García','Moderado','Buenos Aires',1),(2,'López','Conservador','Córdoba',1),
+(3,'Pérez','Agresivo','Buenos Aires',1),(4,'Sosa','Conservador','Rosario',0),
+(5,'Fernández','Moderado','Buenos Aires',1),(6,'Luna','Agresivo','Córdoba',1),
+(7,'Díaz','Moderado','Mendoza',1),(8,'Torres','Conservador','Buenos Aires',1);
+
+-- Exploración:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["COUNT(*) AS total, SUM(CASE WHEN activo=1 THEN 1 ELSE 0 END) AS activos","COUNT(DISTINCT ciudad) AS ciudades","8 total, 7 activos, 4 ciudades"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Distribución por perfil de riesgo</h4><p>Contá inversores activos por perfil. Debe incluir <code>Moderado</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-2" data-expected="Moderado"><div class="editor-top"><span>proyecto_02.sql</span><span>Debe incluir "Moderado"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE inversores (id INTEGER PRIMARY KEY, nombre TEXT, perfil TEXT, activo INTEGER);
+INSERT INTO inversores VALUES (1,'García','Moderado',1),(2,'López','Conservador',1),(3,'Pérez','Agresivo',1),
+(4,'Sosa','Conservador',0),(5,'Fernández','Moderado',1),(6,'Luna','Agresivo',1),(7,'Díaz','Moderado',1),(8,'Torres','Conservador',1);
+
+-- Distribución por perfil:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["WHERE activo = 1 GROUP BY perfil","COUNT(*) para cada perfil","Moderado: 3, Conservador: 2, Agresivo: 2"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 3: Valor del portafolio de cada inversor</h4><p>Calculá cantidad × precio_compra por cada tenencia, sumá por inversor. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-3" data-expected="Pérez"><div class="editor-top"><span>proyecto_03.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE inversores (id INTEGER PRIMARY KEY, nombre TEXT, perfil TEXT);
+CREATE TABLE portafolios (id INTEGER, inversor_id INTEGER, ticker TEXT, cantidad INTEGER, precio_compra REAL);
+INSERT INTO inversores VALUES (1,'García','Moderado'),(2,'López','Conservador'),(3,'Pérez','Agresivo'),
+(5,'Fernández','Moderado'),(6,'Luna','Agresivo');
+INSERT INTO portafolios VALUES (1,1,'GGAL',200,4800),(2,1,'YPF',50,25000),(3,1,'AL30',100,28000),
+(4,2,'AL30',500,27500),(5,2,'GD30',200,35000),(6,3,'GGAL',1000,4500),(7,3,'PAMP',500,2800),
+(8,3,'YPF',100,24000),(9,3,'MELI',10,85000),(10,5,'GGAL',300,5000),(11,5,'AL30',150,28500),
+(12,6,'PAMP',800,2600),(13,6,'GGAL',500,4700),(14,6,'YPF',80,26000);
+
+-- Valor del portafolio por inversor:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["SUM(cantidad * precio_compra) AS valor_portafolio","JOIN inversores + portafolios, GROUP BY inversor","ORDER BY valor_portafolio DESC"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Top 5 tickers más populares</h4><p>¿Cuántos inversores tienen cada ticker? Debe incluir <code>GGAL</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-4" data-expected="GGAL"><div class="editor-top"><span>proyecto_04.sql</span><span>Debe incluir "GGAL"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE portafolios (id INTEGER, inversor_id INTEGER, ticker TEXT, cantidad INTEGER);
+INSERT INTO portafolios VALUES (1,1,'GGAL',200),(2,1,'YPF',50),(3,1,'AL30',100),
+(4,2,'AL30',500),(5,2,'GD30',200),(6,3,'GGAL',1000),(7,3,'PAMP',500),(8,3,'YPF',100),
+(9,3,'MELI',10),(10,5,'GGAL',300),(11,5,'AL30',150),(12,6,'PAMP',800),(13,6,'GGAL',500),(14,6,'YPF',80);
+
+-- Top tickers por cantidad de inversores:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["GROUP BY ticker, COUNT(DISTINCT inversor_id)","ORDER BY inversores DESC LIMIT 5","GGAL es el más popular"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Operaciones por mes</h4><p>Agrupá operaciones por mes, mostrá cantidad y monto total. Debe incluir <code>2024-01</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-5" data-expected="2024-01"><div class="editor-top"><span>proyecto_05.sql</span><span>Debe incluir "2024-01"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE operaciones (id INTEGER, inversor_id INTEGER, ticker TEXT, tipo TEXT, cantidad INTEGER, precio REAL, fecha TEXT);
+INSERT INTO operaciones VALUES (1,1,'GGAL','compra',200,4800,'2024-01-15'),(2,1,'YPF','compra',50,25000,'2024-02-20'),
+(3,3,'GGAL','compra',500,4500,'2024-01-10'),(4,3,'GGAL','compra',500,4600,'2024-03-05'),
+(5,2,'AL30','compra',500,27500,'2024-02-01'),(6,3,'PAMP','compra',500,2800,'2024-04-15'),
+(7,6,'PAMP','compra',800,2600,'2024-03-20'),(8,6,'GGAL','compra',500,4700,'2024-05-10');
+
+-- Operaciones por mes:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["substr(fecha, 1, 7) AS mes","GROUP BY mes, COUNT(*), SUM(cantidad * precio)","ORDER BY mes"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 6: Ranking de inversores por valor con PARTITION BY perfil</h4><p>Ranking dentro de cada perfil de riesgo. Debe incluir <code>ranking</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-6" data-expected="ranking"><div class="editor-top"><span>proyecto_06.sql</span><span>Debe incluir "ranking"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE inversores (id INTEGER PRIMARY KEY, nombre TEXT, perfil TEXT);
+CREATE TABLE portafolios (id INTEGER, inversor_id INTEGER, cantidad INTEGER, precio_compra REAL);
+INSERT INTO inversores VALUES (1,'García','Moderado'),(2,'López','Conservador'),(3,'Pérez','Agresivo'),
+(5,'Fernández','Moderado'),(6,'Luna','Agresivo'),(8,'Torres','Conservador');
+INSERT INTO portafolios VALUES (1,1,200,4800),(2,1,50,25000),(3,1,100,28000),
+(4,2,500,27500),(5,2,200,35000),(6,3,1000,4500),(7,3,500,2800),(8,3,100,24000),
+(10,5,300,5000),(11,5,150,28500),(12,6,800,2600),(13,6,500,4700),(14,8,400,28000);
+
+-- CTE + ROW_NUMBER PARTITION BY perfil:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["CTE con JOIN + GROUP BY para valor total por inversor","ROW_NUMBER() OVER (PARTITION BY perfil ORDER BY valor DESC) AS ranking","Cada perfil tiene su propio 1, 2, 3"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Concentración del portafolio</h4><p>Para cada inversor, ¿qué % de su portafolio es el ticker más grande? Debe incluir <code>concentracion</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-7" data-expected="concentracion"><div class="editor-top"><span>proyecto_07.sql</span><span>Debe incluir "concentracion"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE inversores (id INTEGER PRIMARY KEY, nombre TEXT);
+CREATE TABLE portafolios (id INTEGER, inversor_id INTEGER, ticker TEXT, cantidad INTEGER, precio_compra REAL);
+INSERT INTO inversores VALUES (1,'García'),(3,'Pérez'),(6,'Luna');
+INSERT INTO portafolios VALUES (1,1,'GGAL',200,4800),(2,1,'YPF',50,25000),(3,1,'AL30',100,28000),
+(6,3,'GGAL',1000,4500),(7,3,'PAMP',500,2800),(8,3,'YPF',100,24000),(9,3,'MELI',10,85000),
+(12,6,'PAMP',800,2600),(13,6,'GGAL',500,4700),(14,6,'YPF',80,26000);
+
+-- % del mayor ticker en cada portafolio:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["cantidad * precio_compra AS valor por cada posición","MAX(valor) * 100.0 / SUM(valor) por inversor = concentracion","Window functions o CTE + GROUP BY"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Actividad operativa con LAG</h4><p>Mostrá operaciones por trimestre con variación vs trimestre anterior. Debe incluir <code>trimestre</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-8" data-expected="trimestre"><div class="editor-top"><span>proyecto_08.sql</span><span>Debe incluir "trimestre"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE operaciones (id INTEGER, cantidad INTEGER, precio REAL, fecha TEXT);
+INSERT INTO operaciones VALUES (1,200,4800,'2024-01-15'),(2,50,25000,'2024-02-20'),
+(3,500,4500,'2024-01-10'),(4,500,4600,'2024-03-05'),(5,500,27500,'2024-02-01'),
+(6,500,2800,'2024-04-15'),(7,800,2600,'2024-03-20'),(8,500,4700,'2024-05-10'),
+(9,100,28000,'2024-06-01'),(10,300,5000,'2024-07-15'),(11,100,24000,'2024-08-01'),
+(12,300,27000,'2024-09-10'),(13,400,28000,'2024-10-01'),(14,80,26000,'2024-11-15'),(15,10,85000,'2024-12-01');
+
+-- Por trimestre + variación con LAG:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["CASE WHEN substr(fecha,6,2) IN (\\x2701\\x27,\\x2702\\x27,\\x2703\\x27) THEN \\x27Q1\\x27 ... END AS trimestre","CTE con GROUP BY trimestre → LAG en la consulta final","Variación % vs trimestre anterior"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Diversificación por perfil</h4><p>Promedio de tickers distintos por perfil de riesgo. ¿Los agresivos están más diversificados? Debe incluir <code>Agresivo</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-9" data-expected="Agresivo"><div class="editor-top"><span>proyecto_09.sql</span><span>Debe incluir "Agresivo"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE inversores (id INTEGER PRIMARY KEY, nombre TEXT, perfil TEXT);
+CREATE TABLE portafolios (id INTEGER, inversor_id INTEGER, ticker TEXT);
+INSERT INTO inversores VALUES (1,'García','Moderado'),(2,'López','Conservador'),(3,'Pérez','Agresivo'),
+(5,'Fernández','Moderado'),(6,'Luna','Agresivo'),(8,'Torres','Conservador');
+INSERT INTO portafolios VALUES (1,1,'GGAL'),(2,1,'YPF'),(3,1,'AL30'),
+(4,2,'AL30'),(5,2,'GD30'),(6,3,'GGAL'),(7,3,'PAMP'),(8,3,'YPF'),(9,3,'MELI'),
+(10,5,'GGAL'),(11,5,'AL30'),(12,6,'PAMP'),(13,6,'GGAL'),(14,6,'YPF'),(15,8,'AL30'),(16,8,'GD30');
+
+-- Diversificación por perfil:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["CTE: tickers por inversor = COUNT(DISTINCT ticker) GROUP BY inversor_id","JOIN con inversores para traer el perfil","GROUP BY perfil, AVG(tickers_unicos)"]'></div></div>
+
+<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Reporte ejecutivo final</h4><p>Dashboard completo: métricas globales, distribución por perfil, top 3 inversores, ticker más popular, concentración promedio. Usá múltiples CTEs. Debe incluir <code>PROYECTO COMPLETO</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-15" data-exercise="ex-10" data-expected="PROYECTO COMPLETO"><div class="editor-top"><span>proyecto_10.sql</span><span>Debe incluir "PROYECTO COMPLETO"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE inversores (id INTEGER PRIMARY KEY, nombre TEXT, perfil TEXT, ciudad TEXT, activo INTEGER);
+CREATE TABLE portafolios (id INTEGER, inversor_id INTEGER, ticker TEXT, cantidad INTEGER, precio_compra REAL);
+INSERT INTO inversores VALUES (1,'García','Moderado','Buenos Aires',1),(2,'López','Conservador','Córdoba',1),
+(3,'Pérez','Agresivo','Buenos Aires',1),(5,'Fernández','Moderado','Buenos Aires',1),
+(6,'Luna','Agresivo','Córdoba',1),(8,'Torres','Conservador','Buenos Aires',1);
+INSERT INTO portafolios VALUES (1,1,'GGAL',200,4800),(2,1,'YPF',50,25000),(3,1,'AL30',100,28000),
+(4,2,'AL30',500,27500),(5,2,'GD30',200,35000),(6,3,'GGAL',1000,4500),(7,3,'PAMP',500,2800),
+(8,3,'YPF',100,24000),(9,3,'MELI',10,85000),(10,5,'GGAL',300,5000),(11,5,'AL30',150,28500),
+(12,6,'PAMP',800,2600),(13,6,'GGAL',500,4700),(14,6,'YPF',80,26000),(15,8,'AL30',400,28000),(16,8,'GD30',150,35500);
+
+SELECT 'PROYECTO COMPLETO' AS titulo;
+
+-- Construí el dashboard con CTEs:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["WITH valores AS (SELECT inversor_id, SUM(cantidad*precio_compra) AS valor FROM portafolios GROUP BY inversor_id),","perfil_stats AS (SELECT i.perfil, COUNT(*), SUM(v.valor), AVG(v.valor) FROM inversores i JOIN valores v ... GROUP BY perfil)","Múltiples SELECTs para cada sección del dashboard"]'></div></div>
+
+<div class="section-num">03</div>
+<h2>Resumen final del track SQL</h2>
+
+<ul>
+  <li><b>15 lecciones completadas</b> — de "¿qué es SQL?" hasta análisis de carteras de inversión.</li>
+  <li><b>Fundamentos:</b> SELECT, FROM, WHERE, ORDER BY, LIMIT, DISTINCT (lecciones 01-04).</li>
+  <li><b>Agregación:</b> COUNT, SUM, AVG, GROUP BY, HAVING, CASE WHEN (lecciones 05-06).</li>
+  <li><b>Relaciones:</b> INNER JOIN, LEFT JOIN, FOREIGN KEY, multi-tabla (lecciones 07-08, 13).</li>
+  <li><b>Avanzado:</b> Subconsultas, CTEs, Window Functions (lecciones 09-11).</li>
+  <li><b>Modificación:</b> INSERT, UPDATE, DELETE, CREATE TABLE (lecciones 12-13).</li>
+  <li><b>Integración:</b> Caso práctico y proyecto final (lecciones 14-15).</li>
+</ul>
+
+<p>🎉 <strong>¡Felicitaciones!</strong> Completaste el track de SQL. Ahora tenés las herramientas para consultar cualquier base de datos relacional. El siguiente paso es <strong>Data Analysis</strong> — pandas, matplotlib, EDA y todo el ecosistema de análisis en Python.</p>
+
+<p><strong>Próximos pasos:</strong> <a href="/data-analysis/01-que-es-data-analysis.html">Track de Data Analysis →</a></p>
+
+<div class="footer-nav">
+  <a href="/sql/14-caso-practico-sql.html">← Caso práctico</a>
+  <a class="next" href="/data-analysis/01-que-es-data-analysis.html">Empezar Data Analysis →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
