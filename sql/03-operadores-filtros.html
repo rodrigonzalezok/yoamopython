@@ -1,214 +1,326 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Sql 03</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Sql · Lección 03</div><h1>Operadores Filtros</h1><p>Subtítulo: dominá operadores filtros desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 02</span><span class='badge'>Breadcrumb: Sql > Lección 03</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Operadores Filtros</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Operadores Filtros</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de operadores filtros</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Operadores Filtros</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>CREATE TABLE IF NOT EXISTS ventas (cliente TEXT, monto INTEGER, canal TEXT);
-INSERT INTO ventas VALUES
-('García', 250000, 'Sucursal'),
-('Pérez', 180000, 'Online'),
-('Sosa', 320000, 'Sucursal');
-SELECT * FROM ventas;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Operadores Filtros</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, COUNT(*) AS operaciones, SUM(monto) AS total
-FROM ventas
-GROUP BY canal
-ORDER BY total DESC;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Operadores Filtros</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto,
-       ROUND(monto * 0.03, 2) AS comision,
-       monto + ROUND(monto * 0.03, 2) AS total_con_comision
-FROM ventas
-ORDER BY total_con_comision DESC;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Operadores Filtros</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-03' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-03-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-03-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de operadores filtros con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/sql/02-select-from-where.html'>← Anterior</a><a class='badge' href='/sql/04-order-limit-distinct.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · SQL 03 · Operadores y filtros</title>
+<meta name="description" content="CASE WHEN, COALESCE, NULLIF, CAST y columnas calculadas en SQL para transformar datos dentro del SELECT.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+</head>
+<body>
+<div class="topbar"><button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button><div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div><div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div><div id="global-progress-text" class="top-stats"></div></div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label sql">SQL · Lección 03 de 15</span>
+  <h1>Operadores y filtros avanzados</h1>
+  <p>CASE WHEN te permite crear columnas condicionales (como if/else de Python). COALESCE reemplaza NULLs. CAST convierte tipos. Estas herramientas transforman datos directamente en la consulta, sin necesidad de programar fuera de SQL.</p>
+  <div class="badges">
+    <span class="badge">⏱ 80–100 min</span>
+    <span class="badge">Prerrequisitos: SQL 02</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>CASE WHEN — el if/else de SQL</h3>
+
+<p><code>CASE WHEN</code> evalúa condiciones y devuelve valores distintos según cuál se cumpla. Es la herramienta más poderosa para clasificar datos dentro de una consulta:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT nombre,
+       score,
+       CASE
+           WHEN score >= 800 THEN 'Excelente'
+           WHEN score >= 700 THEN 'Bueno'
+           WHEN score >= 600 THEN 'Regular'
+           ELSE 'Bajo'
+       END AS categoria
+FROM clientes;</pre>
+
+<div class="concept"><strong>Equivalencia con Python:</strong> CASE WHEN es exactamente como los if/elif/else que escribiste en la lección 06 de Python. La diferencia es que acá lo hacés DENTRO del SELECT — no necesitás procesar los datos fuera de la base. Esto es más rápido y más eficiente que traer los datos crudos y clasificar en Python.</div>
+
+<p>CASE WHEN se puede usar en:</p>
+<ul>
+  <li><b>SELECT:</b> para crear columnas calculadas</li>
+  <li><b>WHERE:</b> para filtros condicionales (menos común)</li>
+  <li><b>ORDER BY:</b> para ordenar por lógica custom</li>
+  <li><b>Dentro de funciones de agregación:</b> <code>SUM(CASE WHEN ... THEN 1 ELSE 0 END)</code> para contar condicionalmente</li>
+</ul>
+
+<h3>COALESCE — reemplazar NULLs</h3>
+
+<p><code>COALESCE(valor1, valor2, ...)</code> devuelve el primer valor que NO sea NULL. Es la forma estándar de manejar datos faltantes:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Si email es NULL, mostrar 'sin email'
+SELECT nombre, COALESCE(email, 'sin email') AS contacto
+FROM clientes;</pre>
+
+<h3>NULLIF — convertir valores a NULL</h3>
+
+<p><code>NULLIF(a, b)</code> devuelve NULL si a = b, o devuelve a si son distintos. Útil para evitar divisiones por cero:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Evitar división por cero: si cantidad es 0, NULLIF la convierte a NULL
+SELECT total / NULLIF(cantidad, 0) AS precio_unitario FROM ventas;</pre>
+
+<h3>CAST — convertir tipos</h3>
+
+<p><code>CAST(valor AS tipo)</code> convierte entre tipos. Útil cuando un campo numérico está guardado como texto:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT CAST('42' AS INTEGER);     -- texto → entero
+SELECT CAST(3.14 AS INTEGER);     -- decimal → entero (trunca)
+SELECT CAST(42 AS TEXT);          -- entero → texto
+SELECT ROUND(precio, 2);         -- redondear a 2 decimales</pre>
+
+<h3>Columnas calculadas</h3>
+
+<p>Podés hacer cálculos directamente en el SELECT. El resultado aparece como una nueva columna:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT nombre,
+       saldo,
+       saldo * 0.21 AS iva,
+       saldo * 1.21 AS con_iva,
+       ROUND(cuota * 100.0 / ingreso, 1) AS ratio_pct
+FROM clientes;</pre>
+
+<div class="warning"><strong>División entera en SQLite:</strong> <code>5 / 2</code> da <code>2</code> (no 2.5) porque ambos son enteros. Para obtener decimal, multiplicá por <code>1.0</code>: <code>5 * 1.0 / 2</code> da <code>2.5</code>. O usá <code>CAST(5 AS REAL) / 2</code>.</div>
+
+<div class="realworld"><strong>En el trabajo:</strong> CASE WHEN es probablemente la herramienta SQL que más usás después de WHERE. "Clasificá los clientes por segmento", "marcá las transacciones sospechosas", "categorizá la mora por tramos" — todo es CASE WHEN. COALESCE es el segundo más usado: "si no tiene email, mostrar 'sin dato'".</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: CASE WHEN para clasificar</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_01_case.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
+INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),
+(3,'Martínez',590,45000),(4,'Pérez',810,890000),(5,'Fernández',645,72000);
+
+SELECT nombre,
+       score,
+       CASE
+           WHEN score >= 800 THEN 'Excelente'
+           WHEN score >= 700 THEN 'Bueno'
+           WHEN score >= 600 THEN 'Regular'
+           ELSE 'Bajo'
+       END AS categoria,
+       CASE WHEN score >= 650 THEN 'Aprobado' ELSE 'Rechazado' END AS credito
+FROM clientes;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: COALESCE para reemplazar NULLs</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_02_coalesce.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT, telefono TEXT);
+INSERT INTO clientes VALUES (1,'García','garcia@mail.com','+5411234567');
+INSERT INTO clientes VALUES (2,'López',NULL,'+5435123456');
+INSERT INTO clientes VALUES (3,'Martínez','martinez@mail.com',NULL);
+INSERT INTO clientes VALUES (4,'Pérez',NULL,NULL);
+
+-- COALESCE: primer valor no-NULL
+SELECT nombre,
+       COALESCE(email, 'sin email') AS email,
+       COALESCE(telefono, 'sin teléfono') AS telefono,
+       COALESCE(email, telefono, 'sin contacto') AS contacto_principal
+FROM clientes;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Columnas calculadas y ROUND</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_03_calculadas.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE prestamos (id INTEGER, cliente TEXT, capital REAL, cuota REAL, ingreso REAL);
+INSERT INTO prestamos VALUES (1,'García',500000,42000,350000);
+INSERT INTO prestamos VALUES (2,'López',300000,28000,250000);
+INSERT INTO prestamos VALUES (3,'Pérez',800000,65000,500000);
+
+SELECT cliente,
+       capital,
+       cuota,
+       ingreso,
+       ROUND(cuota * 100.0 / ingreso, 1) AS ratio_pct,
+       CASE
+           WHEN cuota * 100.0 / ingreso > 30 THEN 'EXCEDE'
+           ELSE 'OK'
+       END AS estado_ratio
+FROM prestamos;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: CASE WHEN dentro de agregación (contar condicionalmente)</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_04_count_case.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, activo INTEGER);
+INSERT INTO clientes VALUES (1,'García',720,1),(2,'López',680,1),
+(3,'Martínez',590,0),(4,'Pérez',810,1),(5,'Fernández',645,1),(6,'Sosa',520,0);
+
+-- Contar por categoría usando SUM + CASE
+SELECT
+    COUNT(*) AS total,
+    SUM(CASE WHEN activo = 1 THEN 1 ELSE 0 END) AS activos,
+    SUM(CASE WHEN activo = 0 THEN 1 ELSE 0 END) AS inactivos,
+    SUM(CASE WHEN score >= 700 THEN 1 ELSE 0 END) AS premium,
+    ROUND(SUM(CASE WHEN score >= 700 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1) AS pct_premium
+FROM clientes;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: NULLIF para evitar división por cero + CAST</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_05_nullif.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE productos (id INTEGER, nombre TEXT, ventas INTEGER, stock INTEGER, precio_texto TEXT);
+INSERT INTO productos VALUES (1,'Notebook',120,15,'920000');
+INSERT INTO productos VALUES (2,'Mouse',0,150,'23000');
+INSERT INTO productos VALUES (3,'Teclado',85,0,'46000');
+
+-- NULLIF: evitar división por cero
+SELECT nombre,
+       ventas,
+       stock,
+       ROUND(ventas * 1.0 / NULLIF(stock, 0), 1) AS rotacion,
+       CAST(precio_texto AS INTEGER) AS precio_num,
+       CASE WHEN stock = 0 THEN 'SIN STOCK' ELSE 'OK' END AS estado
+FROM productos;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Función</th><th>Sintaxis</th><th>Uso</th></tr>
+<tr><td>CASE WHEN</td><td><code>CASE WHEN cond THEN val ELSE val END</code></td><td>Clasificar, condicional</td></tr>
+<tr><td>COALESCE</td><td><code>COALESCE(v1, v2, ...)</code></td><td>Primer no-NULL</td></tr>
+<tr><td>NULLIF</td><td><code>NULLIF(a, b)</code></td><td>NULL si a=b (evitar /0)</td></tr>
+<tr><td>CAST</td><td><code>CAST(val AS tipo)</code></td><td>Convertir tipos</td></tr>
+<tr><td>ROUND</td><td><code>ROUND(val, decimales)</code></td><td>Redondear</td></tr>
+<tr><td>Cálculos</td><td><code>col1 * col2 AS resultado</code></td><td>Columnas derivadas</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: CASE WHEN simple</h4><p>Clasificá cada cliente como 'Premium' (score>=700) o 'Estándar'. Debe incluir <code>Premium</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-1" data-expected="Premium"><div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "Premium"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Pérez',810);
+
+-- CASE WHEN:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT nombre, CASE WHEN score >= 700 THEN \\x27Premium\\x27 ELSE \\x27Estándar\\x27 END AS cat","No olvides END al final del CASE","García y Pérez son Premium"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: COALESCE</h4><p>Reemplazá NULLs de email por 'no registrado'. Debe incluir <code>no registrado</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-2" data-expected="no registrado"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "no registrado"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT);
+INSERT INTO clientes VALUES (1,'García','garcia@mail.com');
+INSERT INTO clientes VALUES (2,'López',NULL);
+INSERT INTO clientes VALUES (3,'Pérez','perez@mail.com');
+
+-- COALESCE:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["SELECT nombre, COALESCE(email, \\x27no registrado\\x27) AS email FROM clientes;","COALESCE devuelve el primer valor no-NULL","López muestra \\x27no registrado\\x27"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: Columna calculada</h4><p>Mostrá cada producto con su precio con IVA (precio * 1.21). Debe incluir <code>1113200</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-3" data-expected="1113200"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "1113200"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE productos (id INTEGER, nombre TEXT, precio REAL);
+INSERT INTO productos VALUES (1,'Notebook',920000),(2,'Mouse',23000),(3,'Teclado',46000);
+
+-- Precio con IVA:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["SELECT nombre, precio, precio * 1.21 AS con_iva FROM productos;","920000 * 1.21 = 1113200","Usá ROUND() si querés redondear"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: CASE WHEN con múltiples niveles</h4><p>Clasificá scores en 4 categorías: Excelente (>=800), Bueno (>=700), Regular (>=600), Bajo. Debe incluir <code>Excelente</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-4" data-expected="Excelente"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "Excelente"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Martínez',590),(4,'Pérez',810),(5,'Fernández',645);
+
+-- CASE WHEN con 4 niveles:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["CASE WHEN score >= 800 THEN \\x27Excelente\\x27 WHEN score >= 700 THEN \\x27Bueno\\x27...","WHEN score >= 600 THEN \\x27Regular\\x27 ELSE \\x27Bajo\\x27 END","Pérez es Excelente, García es Bueno"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Ratio cuota/ingreso con ROUND</h4><p>Calculá el ratio cuota/ingreso en porcentaje con 1 decimal. Debe incluir <code>12.0</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-5" data-expected="12.0"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "12.0"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE prestamos (id INTEGER, cliente TEXT, cuota REAL, ingreso REAL);
+INSERT INTO prestamos VALUES (1,'García',42000,350000);
+INSERT INTO prestamos VALUES (2,'López',28000,250000);
+INSERT INTO prestamos VALUES (3,'Pérez',65000,500000);
+
+-- Ratio en porcentaje:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["ROUND(cuota * 100.0 / ingreso, 1) AS ratio_pct","García: 42000*100/350000 = 12.0%","No olvides multiplicar por 100.0 (con .0 para obtener decimal)"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: NULLIF para evitar /0</h4><p>Calculá rotación (ventas/stock) evitando división por cero con NULLIF. Debe incluir <code>8.0</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-6" data-expected="8.0"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "8.0"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE productos (id INTEGER, nombre TEXT, ventas INTEGER, stock INTEGER);
+INSERT INTO productos VALUES (1,'Notebook',120,15);
+INSERT INTO productos VALUES (2,'Mouse',0,150);
+INSERT INTO productos VALUES (3,'Teclado',80,0);
+
+-- Rotación sin error de división:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["ROUND(ventas * 1.0 / NULLIF(stock, 0), 1) AS rotacion","Teclado tiene stock 0 → NULLIF lo convierte a NULL → resultado NULL","Notebook: 120/15 = 8.0"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: SUM + CASE para contar categorías</h4><p>Contá cuántos clientes son Premium (score>=700) y cuántos no, en una sola fila. Debe incluir <code>3</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-7" data-expected="3"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "3"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Martínez',590),(4,'Pérez',810),(5,'Sosa',750);
+
+-- SUM + CASE para contar:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["SUM(CASE WHEN score >= 700 THEN 1 ELSE 0 END) AS premium","SUM(CASE WHEN score < 700 THEN 1 ELSE 0 END) AS estandar","García, Pérez, Sosa = 3 premium"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: CASE WHEN + COALESCE combinados</h4><p>Creá columna "contacto" que use email si existe, teléfono si no, o "SIN CONTACTO" si ninguno. Clasificá clientes según si tienen contacto o no. Debe incluir <code>SIN CONTACTO</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-8" data-expected="SIN CONTACTO"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "SIN CONTACTO"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT, telefono TEXT);
+INSERT INTO clientes VALUES (1,'García','garcia@mail.com',NULL);
+INSERT INTO clientes VALUES (2,'López',NULL,'+5411234567');
+INSERT INTO clientes VALUES (3,'Pérez',NULL,NULL);
+
+-- COALESCE + CASE:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["COALESCE(email, telefono, \\x27SIN CONTACTO\\x27) AS contacto","Pérez no tiene ni email ni teléfono → SIN CONTACTO","Podés agregar un CASE para clasificar"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Ratio + CASE para decisión de crédito</h4><p>Calculá ratio cuota/ingreso y clasificá en APROBADO (<=30%) o RECHAZADO (>30%). Debe incluir <code>APROBADO</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-9" data-expected="APROBADO"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "APROBADO"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE solicitudes (id INTEGER, cliente TEXT, cuota REAL, ingreso REAL, score INTEGER);
+INSERT INTO solicitudes VALUES (1,'García',42000,350000,720);
+INSERT INTO solicitudes VALUES (2,'López',95000,250000,680);
+INSERT INTO solicitudes VALUES (3,'Pérez',65000,500000,810);
+
+-- Ratio + decisión:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["ROUND(cuota*100.0/ingreso, 1) AS ratio","CASE WHEN cuota*100.0/ingreso <= 30 THEN \\x27APROBADO\\x27 ELSE \\x27RECHAZADO\\x27 END","García 12% y Pérez 13% → APROBADO, López 38% → RECHAZADO"]'></div></div>
+
+<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Reporte completo con todas las herramientas</h4><p>Generá un reporte que muestre: nombre, score, categoría (CASE WHEN 4 niveles), email limpio (COALESCE), saldo con IVA, y el % que cada saldo representa del total. Debe incluir <code>Excelente</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-10" data-expected="Excelente"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "Excelente"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL, email TEXT);
+INSERT INTO clientes VALUES (1,'García',720,150000,'garcia@mail.com');
+INSERT INTO clientes VALUES (2,'López',680,320000,NULL);
+INSERT INTO clientes VALUES (3,'Pérez',810,890000,'perez@mail.com');
+INSERT INTO clientes VALUES (4,'Sosa',590,45000,NULL);
+
+-- Reporte completo:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["SELECT nombre, score, CASE WHEN ... END AS categoria","COALESCE(email, \\x27sin email\\x27), ROUND(saldo * 1.21) AS con_iva","ROUND(saldo * 100.0 / (SELECT SUM(saldo) FROM clientes), 1) AS pct"]'></div></div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>CASE WHEN ... THEN ... ELSE ... END</code> es el if/else de SQL — clasificar datos en la consulta.</li>
+  <li><code>COALESCE(v1, v2)</code> devuelve el primer valor no-NULL — reemplazar datos faltantes.</li>
+  <li><code>NULLIF(a, b)</code> devuelve NULL si a=b — evitar divisiones por cero.</li>
+  <li><code>CAST(val AS tipo)</code> convierte tipos. <code>ROUND(val, n)</code> redondea.</li>
+  <li>Columnas calculadas (<code>col * 1.21 AS con_iva</code>) crean datos derivados sin tocar la tabla original.</li>
+  <li><code>SUM(CASE WHEN ... THEN 1 ELSE 0 END)</code> cuenta condicionalmente.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>04 · ORDER BY, LIMIT, DISTINCT</strong>) vas a aprender a ordenar, paginar y deduplicar resultados.</p>
+
+<div class="footer-nav">
+  <a href="/sql/02-select-from-where.html">← SELECT, FROM, WHERE</a>
+  <a class="next" href="/sql/04-order-limit-distinct.html">ORDER BY, LIMIT, DISTINCT →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

@@ -1,214 +1,375 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Sql 02</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Sql · Lección 02</div><h1>Select From Where</h1><p>Subtítulo: dominá select from where desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 01</span><span class='badge'>Breadcrumb: Sql > Lección 02</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Select From Where</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Select From Where</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de select from where</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Select From Where</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>CREATE TABLE IF NOT EXISTS ventas (cliente TEXT, monto INTEGER, canal TEXT);
-INSERT INTO ventas VALUES
-('García', 250000, 'Sucursal'),
-('Pérez', 180000, 'Online'),
-('Sosa', 320000, 'Sucursal');
-SELECT * FROM ventas;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Select From Where</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, COUNT(*) AS operaciones, SUM(monto) AS total
-FROM ventas
-GROUP BY canal
-ORDER BY total DESC;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Select From Where</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto,
-       ROUND(monto * 0.03, 2) AS comision,
-       monto + ROUND(monto * 0.03, 2) AS total_con_comision
-FROM ventas
-ORDER BY total_con_comision DESC;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Select From Where</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-02' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-02-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-02-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de select from where con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/sql/01-que-es-sql.html'>← Anterior</a><a class='badge' href='/sql/03-operadores-filtros.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · SQL 02 · SELECT, FROM, WHERE</title>
+<meta name="description" content="Filtrado avanzado en SQL: BETWEEN, IN, LIKE con wildcards, IS NULL/IS NOT NULL, NOT y combinaciones de condiciones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label sql">SQL · Lección 02 de 15</span>
+  <h1>SELECT, FROM y WHERE en profundidad</h1>
+  <p>WHERE es donde ocurre la magia del filtrado. En esta lección dominás todas las formas de filtrar datos: rangos, listas, patrones de texto, valores nulos y combinaciones lógicas.</p>
+  <div class="badges">
+    <span class="badge">⏱ 80–100 min</span>
+    <span class="badge">Prerrequisitos: SQL 01</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>Anatomía completa del SELECT</h3>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT columnas          -- qué querés ver
+FROM tabla               -- de dónde
+WHERE condiciones        -- filtro de filas
+ORDER BY columna         -- orden (próxima lección)
+LIMIT n;                 -- cantidad máxima</pre>
+
+<p>El orden de las cláusulas es <b>fijo</b>. No podés poner WHERE antes de FROM ni LIMIT antes de ORDER BY. SQL exige este orden exacto.</p>
+
+<h3>Operadores de comparación en WHERE</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operador</th><th>Significado</th><th>Ejemplo</th></tr>
+<tr><td><code>=</code></td><td>Igual a</td><td><code>WHERE ciudad = 'Buenos Aires'</code></td></tr>
+<tr><td><code>!= o &lt;&gt;</code></td><td>Distinto de</td><td><code>WHERE estado &lt;&gt; 'inactivo'</code></td></tr>
+<tr><td><code>&gt; &gt;= &lt; &lt;=</code></td><td>Mayor, menor</td><td><code>WHERE score >= 650</code></td></tr>
+<tr><td><code>BETWEEN a AND b</code></td><td>Rango inclusivo</td><td><code>WHERE score BETWEEN 600 AND 800</code></td></tr>
+<tr><td><code>IN (v1, v2, ...)</code></td><td>Pertenece a lista</td><td><code>WHERE ciudad IN ('BsAs', 'Córdoba')</code></td></tr>
+<tr><td><code>LIKE 'patrón'</code></td><td>Coincide con patrón</td><td><code>WHERE nombre LIKE 'Gar%'</code></td></tr>
+<tr><td><code>IS NULL</code></td><td>Es nulo</td><td><code>WHERE email IS NULL</code></td></tr>
+<tr><td><code>IS NOT NULL</code></td><td>No es nulo</td><td><code>WHERE email IS NOT NULL</code></td></tr>
+<tr><td><code>NOT</code></td><td>Niega condición</td><td><code>WHERE NOT activo = 1</code></td></tr>
+</table>
+</div>
+
+<h3>BETWEEN — rangos inclusivos</h3>
+
+<p><code>BETWEEN a AND b</code> equivale a <code>columna >= a AND columna <= b</code>. Incluye ambos extremos. Es más legible para rangos:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Score entre 600 y 800 (inclusive)
+WHERE score BETWEEN 600 AND 800
+-- Equivale a: WHERE score >= 600 AND score <= 800</pre>
+
+<h3>IN — lista de valores</h3>
+
+<p><code>IN (v1, v2, v3)</code> reemplaza múltiples condiciones OR. Es mucho más limpio:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- En vez de:
+WHERE ciudad = 'BsAs' OR ciudad = 'Córdoba' OR ciudad = 'Rosario'
+-- Usá:
+WHERE ciudad IN ('BsAs', 'Córdoba', 'Rosario')</pre>
+
+<h3>LIKE — búsqueda por patrón</h3>
+
+<p>LIKE permite buscar texto que coincida con un patrón usando <b>wildcards</b>:</p>
+<ul>
+  <li><code>%</code> — coincide con cualquier cantidad de caracteres (0 o más)</li>
+  <li><code>_</code> — coincide con exactamente UN carácter</li>
+</ul>
+
+<div class="table-wrap">
+<table>
+<tr><th>Patrón</th><th>Match</th><th>No match</th></tr>
+<tr><td><code>'Gar%'</code></td><td>García, Garza, Gar</td><td>Agarro, Pegar</td></tr>
+<tr><td><code>'%ez'</code></td><td>Pérez, López, Fernández</td><td>Pérezito</td></tr>
+<tr><td><code>'%an%'</code></td><td>Fernández, Banco, Manzana</td><td>Pedro</td></tr>
+<tr><td><code>'_ópez'</code></td><td>López</td><td>Gómez (no tiene 5 letras con ópez)</td></tr>
+</table>
+</div>
+
+<h3>IS NULL — valores faltantes</h3>
+
+<div class="warning"><strong>NUNCA uses <code>= NULL</code>.</strong> En SQL, NULL no es un valor — es la ausencia de valor. La comparación <code>columna = NULL</code> SIEMPRE da NULL (ni True ni False). Tenés que usar <code>IS NULL</code> o <code>IS NOT NULL</code>.</div>
+
+<div class="concept"><strong>NULL en análisis de datos:</strong> NULL es el equivalente al NaN de pandas. Representa "dato faltante" y tiene comportamiento especial: cualquier operación con NULL da NULL. <code>5 + NULL = NULL</code>, <code>NULL = NULL</code> es NULL (no True). Por eso existe IS NULL como operador especial.</div>
+
+<div class="realworld"><strong>En el trabajo:</strong> el 80% de tus consultas SQL van a tener WHERE. Saber filtrar eficientemente es la habilidad #1. "Dame los clientes activos de Buenos Aires con score entre 650 y 800 que tengan email registrado" es una consulta que combina =, BETWEEN, AND e IS NOT NULL — todo lo de esta lección.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: BETWEEN para rangos</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_01_between.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, email TEXT);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,'garcia@mail.com');
+INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000,NULL);
+INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000,'martinez@mail.com');
+INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810,890000,NULL);
+INSERT INTO clientes VALUES (5,'Fernández','Mendoza',645,72000,'fernandez@mail.com');
+INSERT INTO clientes VALUES (6,'Sosa','Buenos Aires',750,210000,'sosa@mail.com');
+
+-- BETWEEN: score entre 650 y 750 (inclusivo)
+SELECT nombre, score
+FROM clientes
+WHERE score BETWEEN 650 AND 750;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: IN para listas de valores</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_02_in.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000);
+INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000);
+INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000);
+INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810,890000);
+INSERT INTO clientes VALUES (5,'Fernández','Mendoza',645,72000);
+INSERT INTO clientes VALUES (6,'Sosa','Tucumán',700,95000);
+
+-- IN: clientes de ciertas ciudades
+SELECT nombre, ciudad, score
+FROM clientes
+WHERE ciudad IN ('Buenos Aires', 'Córdoba', 'Rosario');
+
+-- NOT IN: excluir ciudades
+-- SELECT nombre, ciudad FROM clientes
+-- WHERE ciudad NOT IN ('Buenos Aires');</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: LIKE para búsqueda de texto</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_03_like.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, email TEXT);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires','garcia@banco.com');
+INSERT INTO clientes VALUES (2,'González','Córdoba','gonzalez@gmail.com');
+INSERT INTO clientes VALUES (3,'Gómez','Rosario','gomez@banco.com');
+INSERT INTO clientes VALUES (4,'López','Buenos Aires','lopez@yahoo.com');
+INSERT INTO clientes VALUES (5,'Pérez','Mendoza',NULL);
+
+-- Nombres que empiezan con 'G'
+SELECT nombre FROM clientes WHERE nombre LIKE 'G%';
+
+-- Emails del dominio banco.com
+-- SELECT nombre, email FROM clientes WHERE email LIKE '%@banco.com';
+
+-- Nombres de exactamente 5 letras
+-- SELECT nombre FROM clientes WHERE nombre LIKE '_____';</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: IS NULL / IS NOT NULL</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_04_null.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT, telefono TEXT, score INTEGER);
+INSERT INTO clientes VALUES (1,'García','garcia@mail.com','+5411234567',720);
+INSERT INTO clientes VALUES (2,'López',NULL,'+5435123456',680);
+INSERT INTO clientes VALUES (3,'Martínez','martinez@mail.com',NULL,590);
+INSERT INTO clientes VALUES (4,'Pérez',NULL,NULL,810);
+INSERT INTO clientes VALUES (5,'Fernández','fernandez@mail.com','+5426112233',645);
+
+-- Clientes SIN email (dato faltante)
+SELECT nombre, email FROM clientes WHERE email IS NULL;
+
+-- Clientes CON email registrado
+-- SELECT nombre, email FROM clientes WHERE email IS NOT NULL;
+
+-- Clientes sin NINGÚN dato de contacto
+-- SELECT nombre FROM clientes
+-- WHERE email IS NULL AND telefono IS NULL;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Combinación compleja de filtros</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_05_combinado.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, email TEXT, activo INTEGER);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,'garcia@mail.com',1);
+INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000,NULL,1);
+INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000,'martinez@mail.com',0);
+INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810,890000,NULL,1);
+INSERT INTO clientes VALUES (5,'Fernández','Mendoza',645,72000,'fernandez@mail.com',1);
+INSERT INTO clientes VALUES (6,'Sosa','Buenos Aires',750,210000,'sosa@mail.com',1);
+
+-- Consulta compleja: clientes activos de BsAs con score >= 700 y email registrado
+SELECT nombre, score, saldo, email
+FROM clientes
+WHERE activo = 1
+  AND ciudad = 'Buenos Aires'
+  AND score >= 700
+  AND email IS NOT NULL;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operador</th><th>Uso</th><th>Ejemplo</th></tr>
+<tr><td><code>BETWEEN a AND b</code></td><td>Rango inclusivo</td><td><code>WHERE score BETWEEN 600 AND 800</code></td></tr>
+<tr><td><code>IN (lista)</code></td><td>Pertenece a lista</td><td><code>WHERE ciudad IN ('BsAs','Cba')</code></td></tr>
+<tr><td><code>NOT IN (lista)</code></td><td>No pertenece</td><td><code>WHERE ciudad NOT IN ('BsAs')</code></td></tr>
+<tr><td><code>LIKE '%texto%'</code></td><td>Contiene texto</td><td><code>WHERE email LIKE '%banco%'</code></td></tr>
+<tr><td><code>LIKE 'texto%'</code></td><td>Empieza con</td><td><code>WHERE nombre LIKE 'Gar%'</code></td></tr>
+<tr><td><code>LIKE '%texto'</code></td><td>Termina con</td><td><code>WHERE nombre LIKE '%ez'</code></td></tr>
+<tr><td><code>IS NULL</code></td><td>Es nulo</td><td><code>WHERE email IS NULL</code></td></tr>
+<tr><td><code>IS NOT NULL</code></td><td>No es nulo</td><td><code>WHERE email IS NOT NULL</code></td></tr>
+<tr><td><code>NOT</code></td><td>Niega condición</td><td><code>WHERE NOT score > 700</code></td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: BETWEEN</h4><p>Traé clientes con score entre 650 y 750. Debe incluir <code>García</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-1" data-expected="García"><div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "García"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
+INSERT INTO clientes VALUES (1,'García',720,150000);
+INSERT INTO clientes VALUES (2,'López',680,320000);
+INSERT INTO clientes VALUES (3,'Martínez',590,45000);
+INSERT INTO clientes VALUES (4,'Pérez',810,890000);
+INSERT INTO clientes VALUES (5,'Fernández',645,72000);
+
+-- Score entre 650 y 750:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT * FROM clientes WHERE score BETWEEN 650 AND 750;","García (720), López (680), Fernández (645) caen en el rango","BETWEEN incluye ambos extremos"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: IN</h4><p>Traé clientes de Buenos Aires, Córdoba o Rosario usando IN. Debe incluir <code>Martínez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-2" data-expected="Martínez"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "Martínez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',720);
+INSERT INTO clientes VALUES (2,'López','Córdoba',680);
+INSERT INTO clientes VALUES (3,'Martínez','Rosario',590);
+INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810);
+INSERT INTO clientes VALUES (5,'Fernández','Mendoza',645);
+
+-- Usando IN:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["WHERE ciudad IN (\\x27Buenos Aires\\x27, \\x27Córdoba\\x27, \\x27Rosario\\x27)","IN reemplaza múltiples OR","Fernández (Mendoza) queda afuera"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: LIKE con %</h4><p>Traé clientes cuyo nombre empiece con 'P'. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-3" data-expected="Pérez"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+INSERT INTO clientes VALUES (1,'García',720);
+INSERT INTO clientes VALUES (2,'López',680);
+INSERT INTO clientes VALUES (3,'Martínez',590);
+INSERT INTO clientes VALUES (4,'Pérez',810);
+INSERT INTO clientes VALUES (5,'Palacios',700);
+
+-- Nombres que empiezan con P:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["WHERE nombre LIKE \\x27P%\\x27","% significa cualquier cantidad de caracteres después","Pérez y Palacios matchean"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: IS NULL</h4><p>Traé clientes que NO tengan email. Debe incluir <code>López</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-4" data-expected="López"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "López"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT, score INTEGER);
+INSERT INTO clientes VALUES (1,'García','garcia@mail.com',720);
+INSERT INTO clientes VALUES (2,'López',NULL,680);
+INSERT INTO clientes VALUES (3,'Martínez','martinez@mail.com',590);
+INSERT INTO clientes VALUES (4,'Pérez',NULL,810);
+
+-- Sin email:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["WHERE email IS NULL","NUNCA uses = NULL, siempre IS NULL","López y Pérez no tienen email"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: NOT IN</h4><p>Traé clientes que NO sean de Buenos Aires ni de Córdoba. Debe incluir <code>Fernández</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-5" data-expected="Fernández"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "Fernández"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',720);
+INSERT INTO clientes VALUES (2,'López','Córdoba',680);
+INSERT INTO clientes VALUES (3,'Martínez','Rosario',590);
+INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810);
+INSERT INTO clientes VALUES (5,'Fernández','Mendoza',645);
+
+-- NOT IN:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["WHERE ciudad NOT IN (\\x27Buenos Aires\\x27, \\x27Córdoba\\x27)","Martínez (Rosario) y Fernández (Mendoza) quedan","NOT IN excluye los que están en la lista"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: LIKE con % al inicio y final</h4><p>Traé clientes cuyo email contenga "banco". Debe incluir <code>garcia</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-6" data-expected="garcia"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "garcia"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT);
+INSERT INTO clientes VALUES (1,'García','garcia@banco.com');
+INSERT INTO clientes VALUES (2,'López','lopez@gmail.com');
+INSERT INTO clientes VALUES (3,'Pérez','perez@banco.com.ar');
+INSERT INTO clientes VALUES (4,'Sosa','sosa@yahoo.com');
+
+-- Emails que contienen "banco":
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["WHERE email LIKE \\x27%banco%\\x27","% al inicio y final = contiene en cualquier posición","García y Pérez tienen banco en su email"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Combinación AND + BETWEEN + IS NOT NULL</h4><p>Traé clientes activos con score entre 600 y 800 que tengan email. Debe incluir <code>Sosa</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-7" data-expected="Sosa"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "Sosa"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, email TEXT, activo INTEGER);
+INSERT INTO clientes VALUES (1,'García',720,'garcia@mail.com',1);
+INSERT INTO clientes VALUES (2,'López',680,NULL,1);
+INSERT INTO clientes VALUES (3,'Martínez',590,'martinez@mail.com',0);
+INSERT INTO clientes VALUES (4,'Pérez',810,NULL,1);
+INSERT INTO clientes VALUES (5,'Sosa',750,'sosa@mail.com',1);
+
+-- Combiná condiciones:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["WHERE activo = 1 AND score BETWEEN 600 AND 800 AND email IS NOT NULL","García (720, email, activo) y Sosa (750, email, activo)","3 condiciones con AND"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: OR con paréntesis</h4><p>Traé clientes que: (sean de BsAs Y tengan score > 700) O (tengan saldo > 300000). Debe incluir <code>López</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-8" data-expected="López"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "López"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000);
+INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000);
+INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000);
+INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810,890000);
+
+-- Usá paréntesis:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["WHERE (ciudad = \\x27Buenos Aires\\x27 AND score > 700) OR saldo > 300000","Sin paréntesis, AND se evalúa antes que OR","García, López y Pérez cumplen"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: LIKE + IN + IS NOT NULL</h4><p>Traé clientes con nombre que termine en 'ez', de BsAs o Córdoba, que tengan email. Debe incluir <code>Pérez</code> o <code>López</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-9" data-expected="ez"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "ez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, email TEXT);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires','garcia@mail.com');
+INSERT INTO clientes VALUES (2,'López','Córdoba','lopez@mail.com');
+INSERT INTO clientes VALUES (3,'Pérez','Buenos Aires',NULL);
+INSERT INTO clientes VALUES (4,'Martínez','Rosario','martinez@mail.com');
+INSERT INTO clientes VALUES (5,'Gómez','Córdoba','gomez@mail.com');
+
+-- LIKE + IN + IS NOT NULL:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["WHERE nombre LIKE \\x27%ez\\x27 AND ciudad IN (\\x27Buenos Aires\\x27, \\x27Córdoba\\x27) AND email IS NOT NULL","López (Cba, email) y Gómez (Cba, email) cumplen","Pérez no tiene email → excluido"]'></div></div>
+
+<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Consulta de análisis completa</h4><p>Contá cuántos clientes activos de Buenos Aires tienen score >= 700 y email registrado. Debe incluir <code>2</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-10" data-expected="2"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "2"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, email TEXT, activo INTEGER);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,'garcia@mail.com',1);
+INSERT INTO clientes VALUES (2,'López','Córdoba',680,NULL,1);
+INSERT INTO clientes VALUES (3,'Martínez','Buenos Aires',590,'martinez@mail.com',0);
+INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810,NULL,1);
+INSERT INTO clientes VALUES (5,'Sosa','Buenos Aires',750,'sosa@mail.com',1);
+INSERT INTO clientes VALUES (6,'Luna','Mendoza',700,'luna@mail.com',1);
+
+-- COUNT con múltiples filtros:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["SELECT COUNT(*) FROM clientes WHERE activo = 1 AND ciudad = \\x27Buenos Aires\\x27 AND score >= 700 AND email IS NOT NULL","García (720, email, activo, BsAs) y Sosa (750, email, activo, BsAs)","Pérez tiene score 810 pero NO tiene email"]'></div></div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>BETWEEN a AND b</code> filtra rangos (inclusivo). Más legible que <code>>= AND <=</code>.</li>
+  <li><code>IN (v1, v2)</code> reemplaza múltiples OR. <code>NOT IN</code> excluye.</li>
+  <li><code>LIKE</code> con <code>%</code> (cualquier chars) y <code>_</code> (un char) busca patrones de texto.</li>
+  <li><code>IS NULL</code> / <code>IS NOT NULL</code> para valores faltantes. NUNCA <code>= NULL</code>.</li>
+  <li>Los paréntesis controlan la precedencia de AND/OR (AND se evalúa antes que OR).</li>
+</ul>
+
+<p>En la siguiente lección (<strong>03 · Operadores y filtros avanzados</strong>) vas a aprender CASE WHEN, COALESCE, NULLIF y CAST — las herramientas para transformar datos dentro del SELECT.</p>
+
+<p><strong>Recursos:</strong> <a href="https://www.w3schools.com/sql/sql_where.asp" target="_blank">W3Schools — WHERE</a></p>
+
+<div class="footer-nav">
+  <a href="/sql/01-que-es-sql.html">← ¿Qué es SQL?</a>
+  <a class="next" href="/sql/03-operadores-filtros.html">Operadores y filtros →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
