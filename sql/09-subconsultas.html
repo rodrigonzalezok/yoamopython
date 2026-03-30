@@ -1,214 +1,301 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Sql 09</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Sql · Lección 09</div><h1>Subconsultas</h1><p>Subtítulo: dominá subconsultas desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 08</span><span class='badge'>Breadcrumb: Sql > Lección 09</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Subconsultas</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Subconsultas</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de subconsultas</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Subconsultas</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>CREATE TABLE IF NOT EXISTS ventas (cliente TEXT, monto INTEGER, canal TEXT);
-INSERT INTO ventas VALUES
-('García', 250000, 'Sucursal'),
-('Pérez', 180000, 'Online'),
-('Sosa', 320000, 'Sucursal');
-SELECT * FROM ventas;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Subconsultas</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, COUNT(*) AS operaciones, SUM(monto) AS total
-FROM ventas
-GROUP BY canal
-ORDER BY total DESC;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Subconsultas</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='sql'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>SQL</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto,
-       ROUND(monto * 0.03, 2) AS comision,
-       monto + ROUND(monto * 0.03, 2) AS total_con_comision
-FROM ventas
-ORDER BY total_con_comision DESC;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT 1 AS ok;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT cliente, monto FROM ventas WHERE monto > 200000;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Subconsultas</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='sql' data-lesson='sql-09' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>SELECT canal, AVG(monto) AS promedio FROM ventas GROUP BY canal;</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-sql-09-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-sql-09-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de subconsultas con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/sql/08-joins-left-right-full.html'>← Anterior</a><a class='badge' href='/sql/10-ctes-with.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · SQL 09 · Subconsultas</title>
+<meta name="description" content="Subconsultas en SQL: subqueries en WHERE, FROM y SELECT. Subconsultas correlacionadas y EXISTS para consultas avanzadas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+</head>
+<body>
+<div class="topbar"><button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button><div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div><div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div><div id="global-progress-text" class="top-stats"></div></div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label sql">SQL · Lección 09 de 15</span>
+  <h1>Subconsultas</h1>
+  <p>Una subconsulta (subquery) es un SELECT dentro de otro SELECT. Te permite resolver problemas que no se pueden expresar con un solo SELECT: "clientes con saldo superior al promedio", "ciudades con más clientes que Córdoba", "el último movimiento de cada cuenta".</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">Prerrequisitos: SQL 08</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Dónde van las subconsultas?</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Ubicación</th><th>Qué devuelve</th><th>Ejemplo</th></tr>
+<tr><td><b>WHERE</b></td><td>Un valor o una lista</td><td><code>WHERE saldo > (SELECT AVG(saldo) FROM ...)</code></td></tr>
+<tr><td><b>FROM</b></td><td>Una tabla temporal</td><td><code>FROM (SELECT ...) AS sub</code></td></tr>
+<tr><td><b>SELECT</b></td><td>Un valor escalar</td><td><code>SELECT (SELECT COUNT(*) FROM ...)</code></td></tr>
+</table>
+</div>
+
+<h3>Subconsulta escalar en WHERE</h3>
+
+<p>La más común: una subconsulta que devuelve UN solo valor y se usa para comparar:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Clientes con saldo mayor al promedio
+SELECT nombre, saldo
+FROM clientes
+WHERE saldo > (SELECT AVG(saldo) FROM clientes);</pre>
+
+<h3>Subconsulta con IN</h3>
+
+<p>Devuelve una lista de valores para filtrar:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Clientes que tienen al menos una cuenta premium
+SELECT nombre FROM clientes
+WHERE id IN (SELECT cliente_id FROM cuentas WHERE tipo = 'PF');</pre>
+
+<h3>Subconsulta en FROM (tabla derivada)</h3>
+
+<p>Creás una "tabla temporal" con un SELECT y la usás como fuente de otro SELECT:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT ciudad, total_saldo
+FROM (
+    SELECT ciudad, SUM(saldo) AS total_saldo
+    FROM clientes GROUP BY ciudad
+) AS resumen
+WHERE total_saldo > 500000;</pre>
+
+<h3>Subconsulta en SELECT (escalar)</h3>
+
+<p>Calculás un valor por fila usando una subconsulta:</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT nombre, saldo,
+       ROUND(saldo * 100.0 / (SELECT SUM(saldo) FROM clientes), 1) AS pct_total
+FROM clientes;</pre>
+
+<div class="concept"><strong>Subconsulta vs JOIN:</strong> muchas subconsultas se pueden reescribir como JOINs (y viceversa). En general, los JOINs son más eficientes para combinar tablas. Las subconsultas brillan cuando necesitás un valor calculado (promedio, total) para comparar, o cuando la lógica es más clara con anidación.</div>
+
+<div class="realworld"><strong>En el trabajo:</strong> "clientes que gastan más que el promedio de su segmento", "sucursales que superaron su meta del mes anterior", "productos que vendieron más que la mediana". Todas requieren subconsultas o CTEs (próxima lección).</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Subconsulta escalar en WHERE</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_01_escalar.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
+INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),
+(3,'Martínez',590,45000),(4,'Pérez',810,890000),(5,'Fernández',645,72000);
+
+-- ¿Cuál es el promedio?
+SELECT ROUND(AVG(saldo), 0) AS promedio FROM clientes;
+
+-- Clientes con saldo MAYOR al promedio
+SELECT nombre, saldo FROM clientes
+WHERE saldo > (SELECT AVG(saldo) FROM clientes)
+ORDER BY saldo DESC;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Subconsulta con IN</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_02_in.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT);
+CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, tipo TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires'),(2,'López','Córdoba'),
+(3,'Pérez','Buenos Aires'),(4,'Sosa','Rosario');
+INSERT INTO cuentas VALUES (101,1,'CA$',150000),(102,1,'PF',500000),
+(103,2,'CA$',320000),(104,3,'CA$',890000);
+
+-- Clientes que tienen plazo fijo (PF)
+SELECT nombre, ciudad FROM clientes
+WHERE id IN (SELECT cliente_id FROM cuentas WHERE tipo = 'PF');
+
+-- Clientes que NO tienen cuenta (NOT IN)
+-- SELECT nombre FROM clientes
+-- WHERE id NOT IN (SELECT cliente_id FROM cuentas);</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Subconsulta en FROM (tabla derivada)</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_03_from.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
+(3,'Pérez','Buenos Aires',890000),(4,'Sosa','Rosario',45000),(5,'Luna','Buenos Aires',210000);
+
+-- Primero agrupamos por ciudad, después filtramos ciudades con total > 300K
+SELECT ciudad, total_saldo, cantidad
+FROM (
+    SELECT ciudad, SUM(saldo) AS total_saldo, COUNT(*) AS cantidad
+    FROM clientes
+    GROUP BY ciudad
+) AS resumen
+WHERE total_saldo > 300000
+ORDER BY total_saldo DESC;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Subconsulta en SELECT — % del total</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_04_select.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),
+(3,'Pérez',890000),(4,'Fernández',72000);
+
+-- Cada cliente con su % del saldo total
+SELECT nombre, saldo,
+       ROUND(saldo * 100.0 / (SELECT SUM(saldo) FROM clientes), 1) AS pct_total
+FROM clientes
+ORDER BY saldo DESC;</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Subconsulta con MAX — encontrar el registro máximo</h3>
+
+<div class="editor" data-mode="sql">
+  <div class="editor-top"><span>ejemplo_05_max.sql</span><span>SQL</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
+(3,'Pérez','Buenos Aires',890000),(4,'Sosa','Rosario',45000);
+
+-- El cliente con el saldo máximo
+SELECT nombre, saldo FROM clientes
+WHERE saldo = (SELECT MAX(saldo) FROM clientes);
+
+-- Clientes con saldo mayor al máximo de Córdoba
+-- SELECT nombre, saldo FROM clientes
+-- WHERE saldo > (SELECT MAX(saldo) FROM clientes WHERE ciudad = 'Córdoba');</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Tipo</th><th>Sintaxis</th><th>Cuándo usar</th></tr>
+<tr><td>Escalar en WHERE</td><td><code>WHERE col > (SELECT AVG(col) ...)</code></td><td>Comparar con un valor calculado</td></tr>
+<tr><td>Lista con IN</td><td><code>WHERE id IN (SELECT id FROM ...)</code></td><td>Filtrar por pertenencia</td></tr>
+<tr><td>NOT IN</td><td><code>WHERE id NOT IN (SELECT ...)</code></td><td>Excluir por pertenencia</td></tr>
+<tr><td>En FROM</td><td><code>FROM (SELECT ...) AS sub</code></td><td>Crear tabla temporal</td></tr>
+<tr><td>En SELECT</td><td><code>SELECT (SELECT COUNT(*) ...)</code></td><td>Valor por fila</td></tr>
+<tr><td>EXISTS</td><td><code>WHERE EXISTS (SELECT 1 ...)</code></td><td>Verificar existencia</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Mayor al promedio</h4><p>Traé clientes con score mayor al promedio. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-1" data-expected="Pérez"><div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Martínez',590),(4,'Pérez',810);
+
+-- Score mayor al promedio:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["WHERE score > (SELECT AVG(score) FROM clientes)","Promedio: (720+680+590+810)/4 = 700","García (720) y Pérez (810) superan 700"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: El máximo</h4><p>Encontrá el cliente con saldo máximo usando subconsulta. Debe incluir <code>890000</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-2" data-expected="890000"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "890000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000);
+
+-- Cliente con saldo máximo:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["WHERE saldo = (SELECT MAX(saldo) FROM clientes)","La subconsulta devuelve 890000","Pérez tiene ese saldo"]'></div></div>
+
+<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: IN con subconsulta</h4><p>Clientes que tienen plazo fijo. Debe incluir <code>García</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-3" data-expected="García"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "García"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT);
+CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, tipo TEXT);
+INSERT INTO clientes VALUES (1,'García'),(2,'López'),(3,'Pérez');
+INSERT INTO cuentas VALUES (101,1,'CA$'),(102,1,'PF'),(103,2,'CA$'),(104,3,'CA$');
+
+-- Clientes CON plazo fijo:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["WHERE id IN (SELECT cliente_id FROM cuentas WHERE tipo = \\x27PF\\x27)","Solo García tiene PF","La subconsulta devuelve [1]"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: NOT IN</h4><p>Clientes que NO tienen ninguna cuenta. Debe incluir <code>Sosa</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-4" data-expected="Sosa"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "Sosa"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT);
+CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER);
+INSERT INTO clientes VALUES (1,'García'),(2,'López'),(3,'Sosa');
+INSERT INTO cuentas VALUES (101,1),(102,2);
+
+-- Clientes SIN cuenta:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["WHERE id NOT IN (SELECT cliente_id FROM cuentas)","La subconsulta devuelve [1, 2]","Sosa (id=3) no está en esa lista"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Subconsulta en SELECT — % del total</h4><p>Mostrá cada cliente con su % del saldo total. Debe incluir <code>pct</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-5" data-expected="pct"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "pct"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000);
+
+-- % del total:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["ROUND(saldo * 100.0 / (SELECT SUM(saldo) FROM clientes), 1) AS pct","La subconsulta calcula el total una vez","Se ejecuta para cada fila del SELECT externo"]'></div></div>
+
+<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: Subconsulta en FROM</h4><p>Creá una tabla derivada con saldo total por ciudad y filtrá las que superan $300K. Debe incluir <code>Buenos Aires</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-6" data-expected="Buenos Aires"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "Buenos Aires"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
+(3,'Pérez','Buenos Aires',890000),(4,'Sosa','Rosario',45000);
+
+-- Subconsulta en FROM:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["FROM (SELECT ciudad, SUM(saldo) AS total FROM clientes GROUP BY ciudad) AS sub","WHERE total > 300000","BsAs: 1040000, Córdoba: 320000"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Mayor al promedio de su ciudad</h4><p>Clientes con saldo mayor al promedio de su propia ciudad (subconsulta correlacionada). Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-7" data-expected="Pérez"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
+(3,'Pérez','Buenos Aires',890000),(4,'Sosa','Buenos Aires',210000);
+
+-- Saldo > promedio de SU ciudad:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["WHERE saldo > (SELECT AVG(saldo) FROM clientes c2 WHERE c2.ciudad = c1.ciudad)","Correlacionada: la subconsulta usa c1.ciudad del SELECT externo","Promedio BsAs: (150K+890K+210K)/3 = 416K → Pérez supera"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: EXISTS</h4><p>Clientes que tienen al menos una transacción > $50K. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-8" data-expected="Pérez"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT);
+CREATE TABLE transacciones (id INTEGER, cliente_id INTEGER, monto REAL);
+INSERT INTO clientes VALUES (1,'García'),(2,'López'),(3,'Pérez');
+INSERT INTO transacciones VALUES (1,1,30000),(2,2,15000),(3,3,80000),(4,1,25000);
+
+-- EXISTS:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["WHERE EXISTS (SELECT 1 FROM transacciones t WHERE t.cliente_id = c.id AND t.monto > 50000)","EXISTS verifica si la subconsulta devuelve al menos 1 fila","Solo Pérez tiene transacción > 50K"]'></div></div>
+
+<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Subconsulta con ranking manual</h4><p>Mostrá cada cliente con su posición relativa: cuántos tienen saldo MAYOR que él. Debe incluir <code>posicion</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-9" data-expected="posicion"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "posicion"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000),(4,'Sosa',45000);
+
+-- Ranking manual con subconsulta:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["1 + (SELECT COUNT(*) FROM clientes c2 WHERE c2.saldo > c1.saldo) AS posicion","Pérez: 0 mayores → posición 1","García: 2 mayores → posición 3"]'></div></div>
+
+<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Análisis comparativo completo</h4><p>Para cada cliente mostrá: nombre, saldo, promedio general, diferencia vs promedio, y si está por encima o debajo. Debe incluir <code>encima</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-09" data-exercise="ex-10" data-expected="encima"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "encima"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000),(4,'Sosa',45000);
+
+-- Análisis comparativo:
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["(SELECT ROUND(AVG(saldo),0) FROM clientes) AS promedio","saldo - (SELECT AVG(saldo) FROM clientes) AS diferencia","CASE WHEN saldo > (SELECT AVG(saldo)...) THEN \\x27encima\\x27 ELSE \\x27debajo\\x27 END"]'></div></div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Subconsultas en WHERE: comparar con valores calculados (<code>> (SELECT AVG(...))</code>).</li>
+  <li>Subconsultas con IN/NOT IN: filtrar por pertenencia a una lista dinámica.</li>
+  <li>Subconsultas en FROM: crear tablas temporales para consultas de dos pasos.</li>
+  <li>Subconsultas en SELECT: calcular un valor por fila (% del total).</li>
+  <li>EXISTS: verificar si existe al menos un registro relacionado.</li>
+  <li>Subconsultas correlacionadas: la subconsulta usa valores del SELECT externo.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>10 · CTEs con WITH</strong>) vas a aprender la alternativa más legible a las subconsultas: Common Table Expressions, que son el estándar en equipos profesionales.</p>
+
+<div class="footer-nav">
+  <a href="/sql/08-joins-left-right-full.html">← LEFT, RIGHT, FULL JOIN</a>
+  <a class="next" href="/sql/10-ctes-with.html">CTEs con WITH →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
