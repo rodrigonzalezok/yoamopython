@@ -5,7 +5,7 @@ export async function ensurePyodide() {
   if (pyodideReady) return pyodideReady;
   pyodideReady = (async () => {
     const pyodide = await loadPyodide();
-    await pyodide.loadPackage(['pandas', 'numpy']);
+    await pyodide.loadPackage(['pandas', 'numpy', 'matplotlib', 'scikit-learn', 'seaborn']);
     return pyodide;
   })();
   return pyodideReady;
@@ -18,16 +18,38 @@ export async function runPython(code) {
   } catch (err) {
     return '⏳ El motor Python aún se está cargando. Esperá unos segundos e intentá de nuevo.';
   }
-  py.runPython(`import sys, io\n_buf = io.StringIO()\nsys.stdout = _buf\nsys.stderr = _buf`);
+  const setupCode = `
+import sys, io, base64
+_buf = io.StringIO()
+sys.stdout = _buf
+sys.stderr = _buf
+`;
+  py.runPython(setupCode);
   try {
     py.runPython(code);
-    const out = py.runPython('_buf.getvalue()');
-    return out || '✅ Ejecutado sin salida';
+    
+    // Check for matplotlib figures and render to base64
+    const renderCode = `
+_b64 = None
+if 'matplotlib.pyplot' in sys.modules:
+    import matplotlib.pyplot as plt
+    if plt.get_fignums():
+        _img_buf = io.BytesIO()
+        plt.savefig(_img_buf, format='png', bbox_inches='tight')
+        plt.close('all')
+        _b64 = base64.b64encode(_img_buf.getvalue()).decode('utf-8')
+`;
+    py.runPython(renderCode);
+
+    const outText = py.runPython('_buf.getvalue()') || '✅ Ejecutado sin salida';
+    const outImg = py.runPython('_b64');
+    
+    return { text: outText, image: outImg };
   } catch (err) {
     const msg = String(err.message || err);
     // Clean up Pyodide internals from error message
     const lines = msg.split('\n').filter(l => !l.includes('pyodide') && !l.includes('wasm'));
-    return `❌ ${lines.join('\n') || msg}`;
+    return { text: `❌ ${lines.join('\n') || msg}`, image: null };
   } finally {
     py.runPython('sys.stdout = sys.__stdout__\nsys.stderr = sys.__stderr__');
   }

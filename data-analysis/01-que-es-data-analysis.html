@@ -1,221 +1,231 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 01</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 01</div><h1>Que Es Data Analysis</h1><p>Subtítulo: dominá que es data analysis desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Ninguno</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 01</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Que Es Data Analysis</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Que Es Data Analysis</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de que es data analysis</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Que Es Data Analysis</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Que Es Data Analysis</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Que Es Data Analysis</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Que Es Data Analysis</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-01' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-01-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-01-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de que es data analysis con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/index.html'>← Anterior</a><a class='badge' href='/data-analysis/02-pandas-series-dataframes.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 01 · Qué es Data Analysis</title>
+<meta name="description" content="Introducción al Análisis de Datos. Descubrí qué hace un Data Analyst, las etapas del proceso y tu primer contacto con pandas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 01 de 19</span>
+  <h1>¿Qué es Data Analysis?</h1>
+  <p>El mercado está lleno de datos, pero los datos crudos no sirven para tomar decisiones. Un Data Analyst es el puente entre una base de datos caótica y la decisión de negocios de un gerente. En esta ruta vas a aprender la herramienta profesional número uno: <strong>pandas</strong>.</p>
+  <div class="badges">
+    <span class="badge">⏱ 45–60 min</span>
+    <span class="badge">Prerrequisitos: Fundamentos de Python</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>El rol del Data Analyst</h2>
+
+<h3>¿Qué hacemos realmente?</h3>
+
+<p>Existe el mito de que un analista de datos está todo el día escribiendo algoritmos de inteligencia artificial. La realidad del <strong>90% de los roles de Data Analyst</strong> (especialmente en LATAM) es muy distinta. El ciclo de vida de nuestro trabajo suele ser:</p>
+
+<ol>
+  <li><strong>Entiende el problema comercial:</strong> Negocio pregunta <em>"¿Por qué cayeron las ventas cruzadas este mes?"</em>.</li>
+  <li><strong>Extracción (SQL):</strong> Te conectás a la base de datos de la empresa y extraés las tablas de ventas, clientes y campañas.</li>
+  <li><strong>Limpieza y Transformación (Python / pandas):</strong> Limpiás los nulos, corregís formatos de fechas y unís las tablas. Esta es la parte que más tiempo lleva.</li>
+  <li><strong>Análisis Exploratorio (EDA):</strong> Buscás patrones. Descubrís que un segmento etario específico dejó de comprar porque el medio de pago fallaba.</li>
+  <li><strong>Comunicación (BI / Viz):</strong> Armás un gráfico claro o un dashboard en Power BI para mostrarle a negocio dónde está el problema y proponer una solución.</li>
+</ol>
+
+<div class="concept"><strong>Tu objetivo final:</strong> Convertir millones de filas incomprensibles en <strong>insights</strong> (hallazgos accionables) que generen o ahorren plata a la empresa. Nada más y nada menos.</div>
+
+<h3>El Stack de Herramientas</h3>
+
+<p>Para lograr todo eso, la caja de herramientas estándar de la industria se compone de tres pilares, que son exactamente los que vas a dominar en esta plataforma:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Herramienta</th><th>Propósito</th><th>Analogía</th></tr>
+<tr><td><strong>SQL</strong></td><td>Extraer datos masivos de la base.</td><td>Es el camión de minería extrayendo la tierra con oro de la montaña.</td></tr>
+<tr><td><strong>Python (pandas)</strong></td><td>Limpiar, filtrar, agrupar y analizar.</td><td>Es la planta refinadora que separa la tierra y pule el oro.</td></tr>
+<tr><td><strong>Power BI / Tableau</strong></td><td>Visualización interactiva y reportes.</td><td>Es la vidriera iluminada de la joyería donde el cliente ve el oro brillando.</td></tr>
+</table>
+</div>
+
+<p>Acá nos vamos a enfocar fuertemente en el corazón del análisis: <strong>Python a través de la librería <code>pandas</code></strong>.</p>
+
+<div class="section-num">02</div>
+<h2>Primer contacto con pandas</h2>
+
+<p><code>pandas</code> es una librería externa de Python. No viene por defecto, hay que instalarla e importarla. Cuando trabajamos en entornos locales usamos `pip install pandas`, pero acá en nuestro navegador ya la tenemos lista para usar.</p>
+
+<div class="warning"><strong>El formato sagrado:</strong> Por convención mundial, <code>pandas</code> siempre se importa con el alias <code>pd</code>. Vas a ver <code>import pandas as pd</code> en literalmente todos los scripts de datos corporativos. No ofendas a los dioses del código usando otro alias.</div>
+
+<h3>Ejemplo en vivo: Tu primer DataFrame</h3>
+<p>Un <strong>DataFrame</strong> es la estructura clave de pandas. Imaginalo simplemente como una tabla de Excel potenciada con esteroides, que vive en la memoria de tu computadora.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>hola_pandas.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Importamos la librería con su alias oficial
+import pandas as pd
+
+# 1. Creamos un diccionario normal de Python con datos simulados de ventas
+datos = {
+    "Cliente": ["García", "López", "Martínez", "Pérez"],
+    "Canal": ["Web", "App", "App", "Sucursal"],
+    "Venta_USD": [150.5, 400.0, 85.0, 1100.0]
+}
+
+# 2. Convertimos ese diccionario en un DataFrame de pandas
+df = pd.DataFrame(datos)
+
+# 3. Lo mostramos en pantalla
+print("=== Mi primer DataFrame ===")
+print(df)
+
+# pandas automáticamente le asigna "índices" (0, 1, 2, 3) 
+# a la izquierda de la tabla.</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>El poder oculto de pandas: Estadísticas en 1 línea</h3>
+<p>Lo genial de tener los datos en un DataFrame no es imprimirlos, sino analizarlos velozmente sin necesidad de hacer bucles <code>for</code> manuales.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>poder_analitico.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+datos = {
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa"],
+    "Canal": ["Web", "App", "App", "Sucursal", "Web"],
+    "Venta_USD": [150.5, 400.0, 85.0, 1100.0, 320.0]
+}
+df = pd.DataFrame(datos)
+
+# Operaciones que llevarían múltiples líneas en Python puro:
+print(f"Total vendido: USD {df['Venta_USD'].sum()}")
+print(f"Venta máxima: USD {df['Venta_USD'].max()}")
+print(f"Promedio de venta: USD {df['Venta_USD'].mean()}")
+
+# ¿Cuántas ventas hubo por cada canal logístico?
+print("\n=== Ventas por Canal ===")
+print(df['Canal'].value_counts())
+</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="tip"><strong>Tip profesional:</strong> Fijate cómo <code>df['Canal'].value_counts()</code> nos devolvió un conteo instantáneo de categorías. Esta función la vas a usar millones de veces en tu carrera para entender cómo se distribuyen tus bases de datos.</div>
+
+<div class="section-num">03</div>
+<h2>Ejercicios</h2>
+
+<p>Ya es momento de soltar las manos. Estos primeros ejercicios son para familiarizarte con el entorno de <code>pandas</code>. Recordá, siempre el alias debe ser <code>pd</code>.</p>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Tu primer import y sumatoria</h4>
+  <p>Creá un DataFrame llamado <code>df_kpis</code> utilizando el diccionario provisto. Luego, usando pandas, imprimí la <strong>suma</strong> de la columna `'Ingresos'`. Utilizá la función <code>.sum()</code>. Recordá importar la librería adecuadamente. (El resultado esperado debe ser <code>2800</code>).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-01" data-exercise="ex-1" data-expected="2800">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "2800"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Importá pandas acá
+
+
+datos_empresa = {
+    "Mes": ["Enero", "Febrero", "Marzo"],
+    "Ingresos": [800, 1100, 900]
+}
+
+# Convertí a DataFrame e imprimí la suma
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["import pandas as pd","df_kpis = pd.DataFrame(datos_empresa)","print(df_kpis[\"Ingresos\"].sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 2: Estadísticas descriptivas simples</h4>
+  <p>A partir del dataset de salarios, utilizá <code>.max()</code> y <code>.mean()</code> para imprimir en pantalla el salario más alto y el salario promedio. El resultado numérico del máximo (380) debe verse en tu output.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-01" data-exercise="ex-2" data-expected="380">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "380"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+empleados = {
+    "Nombre": ["Ana", "Juan", "Pedro", "Maria", "Laura"],
+    "Salario_k": [250, 180, 210, 380, 420]
+}
+
+# Crear DataFrame
+
+# Imprimir maximo y promedio
+
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["df = pd.DataFrame(empleados)","maximo = df[\"Salario_k\"].max()","print(\"Max:\", maximo)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 3: Frecuencias con value_counts</h4>
+  <p>En el área de riesgo crediticio es crucial saber cuántos préstamos fueron Aprobados vs Rechazados. Usando <code>.value_counts()</code>, imprimí la cantidad de ocurrencias de cada "Estado". Deben verse los valores "Aprobado" y la cantidad "3".</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-01" data-exercise="ex-3" data-expected="3">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir la cantidad "3" y "Aprobado"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+riesgo = {
+    "ID_Cliente": [101, 102, 103, 104, 105],
+    "Estado": ["Aprobado", "Aprobado", "Rechazado", "Aprobado", "Rechazado"]
+}
+
+# 1. Crear DataFrame
+# 2. Imprimir value_counts de la columna "Estado"
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["df = pd.DataFrame(riesgo)","conteo = df[\"Estado\"].value_counts()","print(conteo)"]'></div>
+</div>
+
+<div class="section-num">04</div>
+<h2>Resumen rápido</h2>
+
+<ul>
+  <li>Un <strong>Data Analyst</strong> extrae datos, los limpia, los explora y genera insights de negocio.</li>
+  <li><strong>pandas</strong> es la herramienta principal en Python, y siempre se importa como <code>pd</code>.</li>
+  <li>Un <strong>DataFrame</strong> es la representación en tabla (filas y columnas) que usamos para trabajar con pandas.</li>
+  <li>Métodos geniales: <code>.sum()</code> (sumatoria), <code>.mean()</code> (promedio), <code>.max()</code> (máximo), y <code>.value_counts()</code> (para contar repeticiones de categorías).</li>
+</ul>
+
+<p>En la siguiente lección (<strong>02 · pandas: Series y DataFrames</strong>) nos meteremos de lleno en las dos estructuras fundamentales de la librería para dominar su anatomía interna por completo.</p>
+
+<div class="footer-nav">
+  <a class="next" href="/data-analysis/02-pandas-series-dataframes.html">pandas: Series y DataFrames →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

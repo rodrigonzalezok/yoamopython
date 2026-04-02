@@ -56,11 +56,15 @@ export function mountEditors() {
 
       const mode = el.dataset.mode;
       const code = textarea.value;
-      const result = mode === 'sql' ? await runSql(code) : await runPython(code);
-      output.textContent = result;
+      let rawResult = mode === 'sql' ? await runSql(code) : await runPython(code);
+      
+      let outText = typeof rawResult === 'string' ? rawResult : rawResult.text;
+      let outImage = typeof rawResult === 'object' ? rawResult.image : null;
+      
+      output.textContent = outText;
 
       // Color output on error
-      if (result.startsWith('❌')) {
+      if (outText.startsWith('❌')) {
         output.style.color = 'var(--red)';
       } else {
         output.style.color = '';
@@ -68,11 +72,22 @@ export function mountEditors() {
 
       // Validate exercise
       const expected = el.dataset.expected;
-      if (expected && result.includes(expected)) {
+      if (expected && outText.includes(expected)) {
         output.textContent += '\n\n🎉 ¡Correcto!';
         const lesson = el.dataset.lesson;
         const exercise = el.dataset.exercise;
         if (lesson && exercise) markExerciseDone(lesson, exercise);
+      }
+
+      // Render image if matplotlib output was captured
+      if (outImage) {
+        const img = document.createElement('img');
+        img.src = 'data:image/png;base64,' + outImage;
+        img.style.marginTop = '15px';
+        img.style.display = 'block';
+        img.style.maxWidth = '100%';
+        img.style.borderRadius = '4px';
+        output.appendChild(img);
       }
 
       runBtn.disabled = false;
