@@ -1,221 +1,552 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 04</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 04</div><h1>pandas Seleccion Filtrado</h1><p>Subtítulo: dominá pandas seleccion filtrado desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 03</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 04</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>pandas Seleccion Filtrado</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>pandas Seleccion Filtrado</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de pandas seleccion filtrado</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Seleccion Filtrado</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Seleccion Filtrado</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Seleccion Filtrado</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 04 · pandas: selección y filtrado</title>
+<meta name="description" content="Dominá loc, iloc y máscaras booleanas en pandas. Aprendé a seleccionar filas, columnas y filtrar datos como lo hacen los analistas profesionales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 04 de 19</span>
+  <h1>pandas: Selección y Filtrado</h1>
+  <p>Cuando un gerente te dice <em>"Dame los clientes de CABA con más de $500K de saldo"</em>, necesitás extraer filas y columnas específicas de una tabla de millones de registros. Esa capacidad de consultar datos se llama <strong>selección y filtrado</strong>, y es lo que más vas a hacer en tu día a día como Data Analyst.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: Lección 03 (Lectura de datos)</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>Las 3 formas de acceder a datos en pandas</h3>
+
+<p>Pandas te ofrece tres mecanismos principales para acceder a datos dentro de un DataFrame. Entender cuándo usar cada uno es fundamental:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Mecanismo</th><th>Selecciona por</th><th>Ejemplo</th><th>¿Cuándo usarlo?</th></tr>
+<tr><td><code>df["col"]</code></td><td>Nombre de columna</td><td><code>df["Nombre"]</code></td><td>Cuando solo necesitás una o varias columnas</td></tr>
+<tr><td><code>df.loc[fila, col]</code></td><td>Etiqueta (nombre)</td><td><code>df.loc[0, "Nombre"]</code></td><td>Cuando sabés el nombre de fila y/o columna</td></tr>
+<tr><td><code>df.iloc[fila, col]</code></td><td>Posición (número)</td><td><code>df.iloc[0, 2]</code></td><td>Cuando querés acceder por posición numérica</td></tr>
+</table>
+</div>
+
+<div class="analogy"><strong>Analogía:</strong> Pensá en una planilla de Excel. <code>df["col"]</code> es como seleccionar una columna entera haciendo click en la letra "C". <code>df.loc</code> es como ir a la celda por nombre: "fila García, columna Saldo". <code>df.iloc</code> es como ir por coordenadas: "fila 3, columna 2" sin importar cómo se llamen.</div>
+
+<h3>Selección de columnas</h3>
+
+<p>La operación más básica. Podés seleccionar <strong>una columna</strong> (te devuelve una Serie) o <strong>varias columnas</strong> (te devuelve un DataFrame).</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Una columna → Serie
+df["Nombre"]
+
+# Varias columnas → DataFrame (nota los dobles corchetes [[ ]])
+df[["Nombre", "Saldo"]]</pre>
+
+<div class="warning"><strong>Error clásico: dobles corchetes.</strong> <code>df["Nombre", "Saldo"]</code> da <code>KeyError</code>. Para varias columnas necesitás pasar una <em>lista</em> dentro de los corchetes: <code>df[["Nombre", "Saldo"]]</code>. Los corchetes exteriores son del DataFrame, los interiores son de la lista Python.</div>
+
+<h3>Filtrado con máscaras booleanas</h3>
+
+<p>Acá es donde pandas se vuelve brutalmente poderoso. Una <strong>máscara booleana</strong> es una Serie de <code>True/False</code> que le dice a pandas "quedate con las filas que son True, descartá las que son False".</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Paso 1: Crear la máscara (Serie booleana)
+mascara = df["Saldo"] > 500000    # True donde Saldo > 500K
+
+# Paso 2: Aplicar la máscara al DataFrame
+resultado = df[mascara]           # Solo las filas donde mascara es True
+
+# O en una sola línea (lo más común):
+resultado = df[df["Saldo"] > 500000]</pre>
+
+<div class="concept"><strong>¿Por qué se repite <code>df</code> dos veces?</strong> Porque el <code>df</code> interno genera la máscara booleana, y el <code>df</code> externo la usa para filtrar. Es como decirle al DataFrame "filtrarte a vos mismo según esta condición sobre vos mismo".</div>
+
+<h3>Combinando condiciones: & (AND), | (OR), ~ (NOT)</h3>
+
+<p>Para filtros complejos combinás condiciones. <strong>Atención:</strong> en pandas se usan <code>&</code> y <code>|</code> (operadores bitwise), NO <code>and</code> y <code>or</code> (operadores lógicos de Python). Y cada condición debe ir entre paréntesis obligatoriamente.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># AND: ambas condiciones deben ser True
+df[(df["Saldo"] > 500000) & (df["Ciudad"] == "CABA")]
+
+# OR: al menos una condición True
+df[(df["Canal"] == "Web") | (df["Canal"] == "App")]
+
+# NOT: invertir la condición
+df[~(df["Estado"] == "Inactivo")]</pre>
+
+<div class="warning"><strong>Error mortal: olvidar los paréntesis.</strong> <code>df[df["Saldo"] > 500000 & df["Ciudad"] == "CABA"]</code> explota porque <code>&</code> tiene mayor precedencia que <code>></code> y <code>==</code>. Siempre encerrá cada condición entre paréntesis.</div>
+
+<div class="realworld"><strong>En el trabajo real:</strong> cuando el área de Marketing te pide "clientes activos de CABA con saldo mayor a 500K que compraron en los últimos 30 días", estás combinando 4 filtros con <code>&</code>. Dominar esta sintaxis es el 80% del trabajo diario de un analista.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Seleccionar columnas y filas básicas</h3>
+<p>Operaciones fundamentales de extracción sobre un DataFrame de clientes bancarios.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_seleccion.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa", "Luna"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA", "Mendoza"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000, 450000],
+    "Activo": [True, True, False, True, True, False]
+})
+
+# 1. Una columna (Serie)
+print("=== Columna Saldo ===")
+print(df["Saldo"])
+
+# 2. Varias columnas (DataFrame)
+print("\n=== Cliente + Saldo ===")
+print(df[["Cliente", "Saldo"]])
+
+# 3. Una fila por posición con iloc
+print("\n=== Fila 0 (iloc) ===")
+print(df.iloc[0])
+
+# 4. Un rango de filas con iloc
+print("\n=== Filas 1 a 3 (iloc) ===")
+print(df.iloc[1:4])
+
+# 5. Celda específica con loc
+print("\n=== Celda [2, Cliente] (loc) ===")
+print(df.loc[2, "Cliente"])</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Filtrado con una condición</h3>
+<p>El caso más habitual: necesitamos solo las filas que cumplen una condición. Observá cómo creamos la máscara booleana y la aplicamos.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_filtro_simple.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa", "Luna"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA", "Mendoza"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000, 450000],
+    "Activo": [True, True, False, True, True, False]
+})
+
+# Paso 1: La máscara booleana (True/False por fila)
+mascara = df["Saldo"] > 500000
+print("=== Máscara booleana ===")
+print(mascara)
+
+# Paso 2: Aplicar la máscara al DataFrame
+ricos = df[mascara]
+print("\n=== Clientes con saldo > 500K ===")
+print(ricos)
+print(f"\nTotal encontrados: {len(ricos)}")
+print(f"Saldo total de ese segmento: ${ricos['Saldo'].sum():,}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Múltiples condiciones con & y |</h3>
+<p>El gerente necesita: <em>clientes activos de CABA con saldo mayor a 600K</em>. Tres filtros combinados.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_multi_filtro.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa", "Luna"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA", "Mendoza"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000, 450000],
+    "Activo": [True, True, False, True, True, False]
+})
+
+# AND: clientes activos de CABA con saldo > 600K
+segmento = df[
+    (df["Ciudad"] == "CABA") &
+    (df["Activo"] == True) &
+    (df["Saldo"] > 600000)
 ]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Seleccion Filtrado</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-04' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-04-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-04-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de pandas seleccion filtrado con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/data-analysis/03-pandas-lectura-datos.html'>← Anterior</a><a class='badge' href='/data-analysis/05-pandas-limpieza.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+print("=== Activos de CABA con saldo > 600K ===")
+print(segmento)
+
+# OR: clientes de CABA o Rosario
+print("\n=== CABA o Rosario ===")
+caba_ros = df[(df["Ciudad"] == "CABA") | (df["Ciudad"] == "Rosario")]
+print(caba_ros)
+
+# Alternativa elegante con .isin()
+print("\n=== Mismo resultado con isin() ===")
+caba_ros_v2 = df[df["Ciudad"].isin(["CABA", "Rosario"])]
+print(caba_ros_v2)</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: loc vs iloc en acción</h3>
+<p>La diferencia entre acceder por etiqueta (<code>loc</code>) y por posición numérica (<code>iloc</code>) es sutil pero crítica.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_loc_iloc.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Producto": ["Plazo Fijo", "FCI", "Acciones", "Cripto", "Bonos"],
+    "Rendimiento": [85.0, 72.5, 120.3, -15.4, 95.0],
+    "Riesgo": ["Bajo", "Bajo", "Alto", "Alto", "Medio"]
+}, index=["PF", "FCI", "ACC", "CRP", "BON"])  # Índice personalizado
+
+print("=== DataFrame con índice personalizado ===")
+print(df)
+
+# loc: por etiqueta (nombre del índice y columna)
+print("\n=== loc['ACC', 'Rendimiento'] ===")
+print(df.loc["ACC", "Rendimiento"])  # → 120.3
+
+# iloc: por posición numérica (fila 2, columna 1)
+print("\n=== iloc[2, 1] ===")
+print(df.iloc[2, 1])  # → 120.3 (mismo dato, distinto acceso)
+
+# loc con slicing → INCLUYE ambos extremos
+print("\n=== loc['FCI':'CRP'] (incluye CRP) ===")
+print(df.loc["FCI":"CRP"])
+
+# iloc con slicing → EXCLUYE el extremo final (como Python)
+print("\n=== iloc[1:4] (excluye posición 4) ===")
+print(df.iloc[1:4])</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="tip"><strong>Regla de oro:</strong> <code>.loc</code> incluye ambos extremos del rango (como decir "desde A hasta B, incluyendo B"). <code>.iloc</code> excluye el final (como el slicing estándar de Python). Memorizá esto o te va a generar bugs silenciosos.</div>
+
+<h3>Ejemplo 5: Filtro + selección de columnas (query compuesta)</h3>
+<p>El patrón más potente: filtrar filas Y seleccionar solo las columnas que necesitás. Es el equivalente al <code>SELECT col1, col2 FROM tabla WHERE condicion</code> de SQL.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_query_compuesta.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa", "Luna"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA", "Mendoza"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000, 450000],
+    "Activo": [True, True, False, True, True, False]
+})
+
+# Query compuesta: filtrar filas + seleccionar columnas
+# "Dame nombre y saldo de los activos con saldo > 300K"
+resultado = df.loc[
+    (df["Activo"] == True) & (df["Saldo"] > 300000),
+    ["Cliente", "Saldo"]
+]
+print("=== SELECT Cliente, Saldo WHERE Activo AND Saldo > 300K ===")
+print(resultado)
+
+# Equivalente SQL: SELECT Cliente, Saldo FROM df WHERE Activo = True AND Saldo > 300000
+
+# Ordenar por saldo descendente
+print("\n=== Ordenados por Saldo (desc) ===")
+print(resultado.sort_values("Saldo", ascending=False))</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>Sintaxis</th><th>Devuelve</th></tr>
+<tr><td>Una columna</td><td><code>df["col"]</code></td><td>Serie</td></tr>
+<tr><td>Varias columnas</td><td><code>df[["c1","c2"]]</code></td><td>DataFrame</td></tr>
+<tr><td>Fila por etiqueta</td><td><code>df.loc[etiqueta]</code></td><td>Serie</td></tr>
+<tr><td>Fila por posición</td><td><code>df.iloc[n]</code></td><td>Serie</td></tr>
+<tr><td>Celda específica</td><td><code>df.loc[fila, col]</code></td><td>Valor escalar</td></tr>
+<tr><td>Rango de filas</td><td><code>df.iloc[a:b]</code></td><td>DataFrame</td></tr>
+<tr><td>Filtro booleano</td><td><code>df[df["col"] > x]</code></td><td>DataFrame filtrado</td></tr>
+<tr><td>AND</td><td><code>(cond1) & (cond2)</code></td><td>Máscara combinada</td></tr>
+<tr><td>OR</td><td><code>(cond1) | (cond2)</code></td><td>Máscara combinada</td></tr>
+<tr><td>NOT</td><td><code>~(cond)</code></td><td>Máscara invertida</td></tr>
+<tr><td>Pertenencia</td><td><code>df["col"].isin([...])</code></td><td>Máscara booleana</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Seleccionar una columna</h4>
+  <p>Del DataFrame provisto, extraé la columna <code>"Producto"</code> e imprimila. El output debe contener <code>Galletas</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-1" data-expected="Galletas">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Galletas"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Producto": ["Galletas", "Vino", "Detergente", "Arroz"],
+    "Precio": [350, 2800, 900, 480],
+    "Stock": [150, 80, 200, 300]
+})
+
+# Extraé la columna Producto e imprimila
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["print(df[\"Producto\"])"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Seleccionar varias columnas</h4>
+  <p>Seleccioná las columnas <code>"Producto"</code> y <code>"Precio"</code> simultáneamente usando doble corchete e imprimí el resultado. Debe incluir <code>2800</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-2" data-expected="2800">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "2800"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Producto": ["Galletas", "Vino", "Detergente", "Arroz"],
+    "Precio": [350, 2800, 900, 480],
+    "Stock": [150, 80, 200, 300]
+})
+
+# Seleccioná Producto y Precio (doble corchete [[ ]])
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["print(df[[\"Producto\", \"Precio\"]])","Recordá: los corchetes externos son del df, los internos son la lista"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: Filtro simple con una condición</h4>
+  <p>Filtrá los productos con <code>Precio > 500</code> e imprimí el resultado. Debe mostrar <code>Vino</code> y <code>Detergente</code>. Tu output debe incluir <code>Detergente</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-3" data-expected="Detergente">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Detergente"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Producto": ["Galletas", "Vino", "Detergente", "Arroz"],
+    "Precio": [350, 2800, 900, 480],
+    "Stock": [150, 80, 200, 300]
+})
+
+# Filtrá donde Precio > 500
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["caros = df[df[\"Precio\"] > 500]","print(caros)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Filtro con dos condiciones AND</h4>
+  <p>Del dataset de clientes, filtrá los que sean de <code>"CABA"</code> <strong>Y</strong> tengan <code>Saldo > 500000</code>. Imprimí solo las columnas <code>Cliente</code> y <code>Saldo</code>. Debe incluir <code>García</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-4" data-expected="García">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "García"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000],
+    "Activo": [True, True, False, True, True]
+})
+
+# Filtrá CABA AND Saldo > 500K, mostrá solo Cliente y Saldo
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["filtro = (df[\"Ciudad\"] == \"CABA\") & (df[\"Saldo\"] > 500000)","resultado = df.loc[filtro, [\"Cliente\", \"Saldo\"]]","print(resultado)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Filtro con isin()</h4>
+  <p>Filtrá los clientes que sean de <code>"CABA"</code> o <code>"Rosario"</code> usando <code>.isin()</code>. Imprimí cuántos encontraste con <code>len()</code>. Debe incluir el número <code>4</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-5" data-expected="4">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "4"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000]
+})
+
+# Usá .isin() para filtrar CABA y Rosario, imprimí len()
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["filtro = df[\"Ciudad\"].isin([\"CABA\", \"Rosario\"])","resultado = df[filtro]","print(len(resultado))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Acceso con iloc</h4>
+  <p>Usando <code>iloc</code>, extraé las filas de la 1 a la 3 (inclusive) y las columnas de la 0 a la 1 (inclusive). Imprimí el resultado. Debe incluir <code>López</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-6" data-expected="López">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "López"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000]
+})
+
+# iloc filas 1:4, columnas 0:2
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["print(df.iloc[1:4, 0:2])","iloc excluye el extremo final: 1:4 = filas 1,2,3"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Negación con ~ (NOT)</h4>
+  <p>Filtrá todos los clientes que <strong>NO</strong> estén en CABA usando el operador <code>~</code>. Imprimí solo los nombres. Debe incluir <code>Pérez</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-7" data-expected="Pérez">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Pérez"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000]
+})
+
+# Filtrá los que NO son de CABA con ~ e imprimí solo la columna Cliente
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["no_caba = df[~(df[\"Ciudad\"] == \"CABA\")]","print(no_caba[\"Cliente\"])"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Query compuesta con loc</h4>
+  <p>Usando <code>.loc</code>, filtrá clientes activos con saldo > 300K y seleccioná solo las columnas <code>Cliente</code> y <code>Saldo</code>. Imprimí el saldo promedio de ese segmento con <code>.mean()</code>. Debe incluir <code>613333</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-8" data-expected="613333">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "613333"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000],
+    "Activo": [True, True, False, True, True]
+})
+
+# Filtrá activos con saldo > 300K, mostrá Cliente y Saldo, calculá promedio
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["filtro = (df[\"Activo\"]) & (df[\"Saldo\"] > 300000)","segmento = df.loc[filtro, [\"Cliente\", \"Saldo\"]]","print(round(segmento[\"Saldo\"].mean()))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Filtro + sort + head</h4>
+  <p>Filtrá los clientes activos, ordenalos por saldo descendente con <code>sort_values()</code>, y mostrá solo los top 2 con <code>.head(2)</code>. Debe incluir <code>García</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-9" data-expected="García">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "García"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000],
+    "Activo": [True, True, False, True, True]
+})
+
+# Filtrar activos, ordenar por Saldo desc, top 2
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["activos = df[df[\"Activo\"]]","top2 = activos.sort_values(\"Saldo\", ascending=False).head(2)","print(top2)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Reporte segmentado completo</h4>
+  <p>Generá un mini reporte: (1) Contá cuántos clientes son de CABA, (2) Cuántos están activos, (3) Cuál es el saldo promedio de los activos de CABA. Debe incluir <code>760000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-10" data-expected="760000">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "760000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "CABA"],
+    "Saldo": [850000, 320000, 1200000, 95000, 670000],
+    "Activo": [True, True, False, True, True]
+})
+
+# 1. Clientes de CABA
+# 2. Clientes activos
+# 3. Saldo promedio de activos de CABA (García 850K + Sosa 670K) / 2 = 760K
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["caba = df[df[\"Ciudad\"] == \"CABA\"]","activos_caba = df[(df[\"Ciudad\"] == \"CABA\") & (df[\"Activo\"])]","print(round(activos_caba[\"Saldo\"].mean()))"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>df["col"]</code> selecciona columnas. <code>df[["c1","c2"]]</code> selecciona varias.</li>
+  <li><code>df.loc</code> accede por etiqueta (nombre). <code>df.iloc</code> accede por posición numérica.</li>
+  <li>Las <strong>máscaras booleanas</strong> (<code>df[df["col"] > x]</code>) son el mecanismo de filtrado más poderoso.</li>
+  <li>Usá <code>&</code> (AND), <code>|</code> (OR), <code>~</code> (NOT) para combinar condiciones. Siempre con paréntesis.</li>
+  <li><code>.isin()</code> es la alternativa elegante para filtrar por múltiples valores.</li>
+  <li>Combiná filtros con <code>.loc[filtro, columnas]</code> para queries compuestas estilo SQL.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>05 · pandas: limpieza</strong>) vas a aprender a enfrentar el caos real de los datos: valores nulos, duplicados, tipos inconsistentes y formatos rotos. Sin limpieza, todo el análisis posterior está contaminado.</p>
+
+<p><strong>Recursos:</strong> <a href="https://pandas.pydata.org/docs/user_guide/indexing.html" target="_blank">pandas docs — Indexing and Selecting Data</a></p>
+
+<div class="footer-nav">
+  <a href="/data-analysis/03-pandas-lectura-datos.html">← Lectura de datos</a>
+  <a class="next" href="/data-analysis/05-pandas-limpieza.html">pandas: limpieza →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

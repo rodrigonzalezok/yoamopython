@@ -1,221 +1,534 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 05</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 05</div><h1>pandas Limpieza</h1><p>Subtítulo: dominá pandas limpieza desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 04</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 05</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>pandas Limpieza</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>pandas Limpieza</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de pandas limpieza</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Limpieza</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Limpieza</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Limpieza</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Limpieza</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-05' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-05-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-05-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de pandas limpieza con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/data-analysis/04-pandas-seleccion-filtrado.html'>← Anterior</a><a class='badge' href='/data-analysis/06-pandas-transformaciones.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 05 · pandas: limpieza</title>
+<meta name="description" content="Aprendé a limpiar datos con pandas: nulos, duplicados, tipos incorrectos, strings sucios. La limpieza es el 80% del trabajo real de un Data Analyst.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 05 de 19</span>
+  <h1>pandas: Limpieza de Datos</h1>
+  <p>En el mundo de fantasía, los datos llegan perfectos. En el mundo real, llegan <em>sucios, incompletos, duplicados y llenos de formatos inconsistentes</em>. La limpieza consume el <strong>60-80% del tiempo</strong> de un Data Analyst. Si no limpiás, tu análisis es basura — <em>"garbage in, garbage out"</em>.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: Lección 04 (Selección y filtrado)</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>Los 4 jinetes del caos en datos</h3>
+
+<p>Casi todos los problemas de calidad de datos en tu carrera van a caer en estas cuatro categorías:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Problema</th><th>Ejemplo real</th><th>Herramienta pandas</th></tr>
+<tr><td><strong>Valores nulos (NaN)</strong></td><td>Cliente sin email, saldo sin informar</td><td><code>isna()</code>, <code>fillna()</code>, <code>dropna()</code></td></tr>
+<tr><td><strong>Duplicados</strong></td><td>Mismo cliente cargado 2 veces</td><td><code>duplicated()</code>, <code>drop_duplicates()</code></td></tr>
+<tr><td><strong>Tipos incorrectos</strong></td><td>Saldo guardado como texto "150000"</td><td><code>astype()</code>, <code>pd.to_numeric()</code></td></tr>
+<tr><td><strong>Strings sucios</strong></td><td>"  GARCÍA  " vs "garcía" vs "Garcia"</td><td><code>.str.strip()</code>, <code>.str.lower()</code>, <code>.str.replace()</code></td></tr>
+</table>
+</div>
+
+<div class="analogy"><strong>Analogía del restaurant:</strong> Antes de cocinar (analizar), el chef lava y pela los vegetales (limpia los datos). Si no lo hacés, la comida sale con tierra y cáscaras. Lo mismo con los datos: si un campo "Monto" tiene el símbolo "$" como texto, pandas no puede sumar. Necesitás limpiar primero.</div>
+
+<h3>NaN: El fantasma de pandas</h3>
+
+<p><code>NaN</code> (Not a Number) es la representación universal de "dato faltante" en pandas. Viene del módulo <code>numpy</code>. Tiene un comportamiento especial que causa bugs silenciosos si no lo conocés:</p>
+
+<ul>
+  <li><code>NaN == NaN</code> da <code>False</code> (¡un NaN nunca es igual a sí mismo!)</li>
+  <li>Cualquier operación aritmética con NaN da NaN (<code>5 + NaN = NaN</code>)</li>
+  <li>Para detectar NaN usás <code>isna()</code> o <code>isnull()</code>, NUNCA <code>== NaN</code></li>
+</ul>
+
+<div class="warning"><strong>El bug silencioso más peligroso:</strong> si calculás un promedio y tu columna tiene NaN, pandas los ignora automáticamente en <code>.mean()</code>. Esto puede ser bueno o malo: si el 40% de tus datos son nulos, tu promedio se basa en el 60% restante y puede no ser representativo. Siempre revisá <code>isna().sum()</code> antes de calcular estadísticas.</div>
+
+<h3>Estrategias para manejar nulos</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Estrategia</th><th>Método</th><th>Cuándo usarla</th></tr>
+<tr><td>Eliminar filas</td><td><code>df.dropna()</code></td><td>Pocos nulos, perder filas es aceptable</td></tr>
+<tr><td>Rellenar con valor fijo</td><td><code>df.fillna(0)</code></td><td>Nulo significa "cero" (ej: ventas sin registrar)</td></tr>
+<tr><td>Rellenar con estadístico</td><td><code>df.fillna(df.mean())</code></td><td>Preservar la distribución general</td></tr>
+<tr><td>Rellenar con el anterior</td><td><code>df.ffill()</code></td><td>Series temporales (usar último valor conocido)</td></tr>
+</table>
+</div>
+
+<div class="realworld"><strong>En el trabajo real:</strong> la decisión de "eliminar vs rellenar" la toman juntos el analista y el área de negocios. No es una decisión técnica pura. Si un banco elimina clientes sin email, puede estar tirando el segmento de adultos mayores que no usan email pero tienen saldos altísimos. Siempre documentá tu decisión.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Detectar y contar nulos</h3>
+<p>Antes de limpiar, necesitás un diagnóstico. <code>isna()</code> te muestra dónde están los huecos.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_detectar.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", None, "Pérez", "Sosa"],
+    "Ciudad": ["CABA", None, "CABA", "Córdoba", "CABA"],
+    "Saldo": [850000, 320000, np.nan, 95000, np.nan],
+    "Email": ["g@mail.com", None, None, "p@mail.com", "s@mail.com"]
+})
+
+print("=== DataFrame con nulos ===")
+print(df)
+
+# Detectar nulos (True donde hay NaN)
+print("\n=== Mapa de nulos ===")
+print(df.isna())
+
+# Contar nulos por columna (lo más útil)
+print("\n=== Nulos por columna ===")
+print(df.isna().sum())
+
+# Porcentaje de nulos
+total_filas = len(df)
+print("\n=== % de nulos por columna ===")
+print(round(df.isna().sum() / total_filas * 100, 1))</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Eliminar vs rellenar nulos</h3>
+<p>Las dos estrategias principales y cuándo usar cada una.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_limpiar_nulos.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    "Mes": ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
+    "Ventas": [50000, np.nan, 62000, np.nan, 71000],
+    "Gastos": [30000, 28000, np.nan, 35000, 32000]
+})
+
+print("=== Original ===")
+print(df)
+
+# Estrategia 1: Eliminar filas con CUALQUIER nulo
+limpio_drop = df.dropna()
+print(f"\n=== dropna() → quedan {len(limpio_drop)} filas ===")
+print(limpio_drop)
+
+# Estrategia 2: Rellenar con 0
+limpio_cero = df.fillna(0)
+print("\n=== fillna(0) ===")
+print(limpio_cero)
+
+# Estrategia 3: Rellenar con el promedio de cada columna
+limpio_media = df.fillna(df.mean(numeric_only=True))
+print("\n=== fillna(media) ===")
+print(limpio_media)
+print(f"\nMedia Ventas usada: {df['Ventas'].mean():,.0f}")
+print(f"Media Gastos usada: {df['Gastos'].mean():,.0f}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Eliminar duplicados</h3>
+<p>Los duplicados engañan tus métricas. Si un cliente aparece 3 veces, tu conteo de clientes está inflado un 200%. Detectálos y eliminá los sobrantes.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_duplicados.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "DNI": [30555111, 28444222, 30555111, 35666333, 28444222],
+    "Nombre": ["García", "López", "García", "Pérez", "López"],
+    "Saldo": [850000, 320000, 850000, 95000, 320000]
+})
+
+print("=== Original (con duplicados) ===")
+print(df)
+
+# Detectar duplicados
+print("\n=== ¿Está duplicado? ===")
+print(df.duplicated())
+print(f"\nTotal duplicados: {df.duplicated().sum()}")
+
+# Eliminar duplicados (se queda con la primera aparición)
+df_unico = df.drop_duplicates()
+print(f"\n=== Sin duplicados ({len(df_unico)} filas) ===")
+print(df_unico)
+
+# Eliminar duplicados basándose solo en una columna
+df_unico_dni = df.drop_duplicates(subset="DNI", keep="last")
+print("\n=== Únicos por DNI (keep=last) ===")
+print(df_unico_dni)</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Corregir tipos de datos</h3>
+<p>Un clásico: el campo "Saldo" vino como texto porque el CSV lo exportaron mal. Si no convertís, <code>sum()</code> concatena strings en vez de sumar números.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_tipos.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Pérez"],
+    "Saldo_Texto": ["850000", "320000", "95000"],  # ¡Son strings!
+    "Activo_Texto": ["1", "0", "1"]                 # ¡También strings!
+})
+
+print("=== Tipos ANTES ===")
+print(df.dtypes)
+print(f"\nSuma de 'Saldo_Texto': {df['Saldo_Texto'].sum()}")  # Concatena!
+
+# Convertir tipos
+df["Saldo"] = df["Saldo_Texto"].astype(int)
+df["Activo"] = df["Activo_Texto"].astype(bool)
+
+print("\n=== Tipos DESPUÉS ===")
+print(df.dtypes)
+print(f"\nSuma de 'Saldo' (numérico): {df['Saldo'].sum():,}")  # Ahora sí suma</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="tip"><strong>Tip profesional:</strong> siempre revisá <code>df.dtypes</code> inmediatamente después de importar un CSV. Si una columna numérica dice <code>object</code>, significa que pandas la interpretó como texto. Significa que hay algún caracter extraño en alguna fila que impidió la conversión automática.</div>
+
+<h3>Ejemplo 5: Limpiar strings sucios</h3>
+<p>Los nombres de ciudades escritos de 10 formas distintas son el dolor de cabeza de todo analista. El accessor <code>.str</code> de pandas permite operaciones de limpieza vectorizadas sobre columnas de texto.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_strings.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Ciudad_Sucia": ["  CABA  ", "caba", "Buenos Aires", "Bs As", "  rosario", "ROSARIO  "],
+    "Monto_Sucio": ["$1,500.00", "$820.50", "$3,200.00", "$950.00", "$2,100.00", "$4,800.00"]
+})
+
+print("=== Original SUCIO ===")
+print(df)
+
+# Limpiar ciudades: strip espacios, convertir a mayúsculas
+df["Ciudad_Limpia"] = df["Ciudad_Sucia"].str.strip().str.upper()
+
+# Reemplazar variantes
+df["Ciudad_Limpia"] = df["Ciudad_Limpia"].replace({
+    "BUENOS AIRES": "CABA",
+    "BS AS": "CABA"
+})
+
+# Limpiar montos: sacar $ y comas, convertir a float
+df["Monto"] = (df["Monto_Sucio"]
+    .str.replace("$", "", regex=False)
+    .str.replace(",", "", regex=False)
+    .astype(float))
+
+print("\n=== LIMPIO ===")
+print(df[["Ciudad_Limpia", "Monto"]])
+print(f"\nConteo por ciudad: ")
+print(df["Ciudad_Limpia"].value_counts())</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Método</th><th>Qué hace</th><th>Modifica el original?</th></tr>
+<tr><td><code>df.isna()</code></td><td>Máscara True donde hay NaN</td><td>No (devuelve nuevo)</td></tr>
+<tr><td><code>df.isna().sum()</code></td><td>Cuenta nulos por columna</td><td>No</td></tr>
+<tr><td><code>df.dropna()</code></td><td>Elimina filas con nulos</td><td>No (devuelve nuevo)</td></tr>
+<tr><td><code>df.fillna(valor)</code></td><td>Reemplaza NaN con valor</td><td>No (devuelve nuevo)</td></tr>
+<tr><td><code>df.duplicated()</code></td><td>Máscara True en duplicados</td><td>No</td></tr>
+<tr><td><code>df.drop_duplicates()</code></td><td>Elimina filas repetidas</td><td>No (devuelve nuevo)</td></tr>
+<tr><td><code>df["col"].astype(tipo)</code></td><td>Convierte tipo de dato</td><td>No (devuelve nuevo)</td></tr>
+<tr><td><code>df["col"].str.strip()</code></td><td>Elimina espacios extremos</td><td>No (devuelve nuevo)</td></tr>
+<tr><td><code>df["col"].str.upper()</code></td><td>Todo a mayúsculas</td><td>No (devuelve nuevo)</td></tr>
+<tr><td><code>df["col"].str.replace()</code></td><td>Reemplaza texto</td><td>No (devuelve nuevo)</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Contar nulos</h4>
+  <p>El dataset tiene valores faltantes. Usá <code>.isna().sum()</code> para contar cuántos nulos hay por columna. El output debe incluir el número <code>2</code> (la columna Email tiene 2 nulos).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-1" data-expected="2">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "2"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    "Nombre": ["Ana", "Luis", "Pedro", "María"],
+    "Email": ["ana@mail.com", None, None, "m@mail.com"],
+    "Saldo": [500, 300, np.nan, 800]
+})
+
+# Contá nulos por columna
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["print(df.isna().sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Eliminar filas con nulos</h4>
+  <p>Usá <code>.dropna()</code> para quedarte solo con filas completas. Imprimí cuántas filas quedan usando <code>len()</code>. Deben quedar <code>2</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-2" data-expected="2">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "2"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    "Nombre": ["Ana", "Luis", "Pedro", "María"],
+    "Email": ["ana@mail.com", None, None, "m@mail.com"],
+    "Saldo": [500, 300, np.nan, 800]
+})
+
+# Eliminá filas con nulos e imprimí cuántas quedan
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["limpio = df.dropna()","print(len(limpio))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: Rellenar nulos con cero</h4>
+  <p>La columna <code>Saldo</code> tiene un NaN. Rellenalo con <code>0</code> usando <code>fillna()</code> e imprimí la suma total de saldos. Debe dar <code>1600</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-3" data-expected="1600">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "1600"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    "Nombre": ["Ana", "Luis", "Pedro", "María"],
+    "Saldo": [500, 300, np.nan, 800]
+})
+
+# Rellená los nulos de Saldo con 0 y sumá
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["df[\"Saldo\"] = df[\"Saldo\"].fillna(0)","print(int(df[\"Saldo\"].sum()))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Detectar y contar duplicados</h4>
+  <p>El dataset tiene clientes repetidos. Usá <code>.duplicated().sum()</code> para contar cuántos duplicados hay. Debe dar <code>2</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-4" data-expected="2">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "2"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "DNI": [30111, 28222, 30111, 35333, 28222],
+    "Nombre": ["García", "López", "García", "Pérez", "López"],
+    "Saldo": [850, 320, 850, 95, 320]
+})
+
+# Contá duplicados
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["print(df.duplicated().sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Eliminar duplicados por columna clave</h4>
+  <p>Eliminá duplicados basándote en la columna <code>"DNI"</code>, quedándote con la primera aparición. Imprimí cuántas filas únicas quedan. Deben ser <code>3</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-5" data-expected="3">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "3"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "DNI": [30111, 28222, 30111, 35333, 28222],
+    "Nombre": ["García", "López", "García", "Pérez", "López"],
+    "Saldo": [850, 320, 850, 95, 320]
+})
+
+# Eliminá duplicados por DNI e imprimí cantidad de filas
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["df_unico = df.drop_duplicates(subset=\"DNI\")","print(len(df_unico))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Convertir tipo de dato</h4>
+  <p>La columna <code>"Monto"</code> es un string. Convertila a <code>int</code> con <code>astype()</code> e imprimí la suma. Debe dar <code>2850</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-6" data-expected="2850">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "2850"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Producto": ["A", "B", "C"],
+    "Monto": ["1200", "850", "800"]  # Son strings
+})
+
+print("Tipo antes:", df["Monto"].dtype)
+
+# Convertí a int y sumá
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["df[\"Monto\"] = df[\"Monto\"].astype(int)","print(df[\"Monto\"].sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Limpiar strings con strip y upper</h4>
+  <p>Las ciudades se cargaron con inconsistencias de mayúsculas y espacios. Limpiá la columna usando <code>.str.strip().str.upper()</code>. Luego contá cuántos son <code>"CABA"</code>. Debe dar <code>3</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-7" data-expected="3">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "3"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Ciudad": ["  caba", "CABA  ", "Rosario", "  Caba ", "Mendoza"]
+})
+
+# Limpiá y contá cuántos son CABA
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["df[\"Ciudad\"] = df[\"Ciudad\"].str.strip().str.upper()","caba = df[df[\"Ciudad\"] == \"CABA\"]","print(len(caba))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Limpiar montos con símbolos</h4>
+  <p>Los montos tienen <code>$</code> y <code>,</code>. Limpiálos y convertílos a <code>float</code>, luego imprimí el total. Debe dar <code>6470.5</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-8" data-expected="6470.5">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "6470.5"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Item": ["Notebook", "Mouse", "Monitor"],
+    "Precio": ["$3,200.50", "$270.00", "$3,000.00"]
+})
+
+# Limpiá $ y comas, convertí a float, sumá
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["df[\"Precio_Limpio\"] = df[\"Precio\"].str.replace(\"$\",\"\", regex=False).str.replace(\",\",\"\", regex=False).astype(float)","print(df[\"Precio_Limpio\"].sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Pipeline de limpieza completo</h4>
+  <p>El dataset tiene nulos en <code>Saldo</code> y duplicados por <code>DNI</code>. Primero rellenálos con la media, después eliminá duplicados. Imprimí la suma final de saldos. Debe incluir <code>1520000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-9" data-expected="1520000">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "1520000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    "DNI": [30111, 28222, 30111, 35333],
+    "Nombre": ["García", "López", "García", "Pérez"],
+    "Saldo": [850000, np.nan, 850000, 670000]
+})
+
+# 1. Rellená nulos de Saldo con la media
+# 2. Eliminá duplicados por DNI
+# 3. Imprimí la suma de Saldo
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["La media de Saldo es (850000+850000+670000)/3 = 790000","df[\"Saldo\"] = df[\"Saldo\"].fillna(df[\"Saldo\"].mean())","df = df.drop_duplicates(subset=\"DNI\") → García(850K), López(790K), Pérez(670K) = no... revisar cálculos"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Diagnóstico de salud de datos</h4>
+  <p>Escribí un mini reporte que imprima: (1) Total de filas, (2) Nulos por columna, (3) Duplicados, (4) Tipos de dato. Debe incluir la palabra <code>object</code> (tipo de las columnas de texto).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-10" data-expected="object">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "object"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    "DNI": [30111, 28222, 30111, 35333, 28222],
+    "Nombre": ["García", "López", "García", "Pérez", "López"],
+    "Saldo": [850000, np.nan, 850000, 95000, np.nan]
+})
+
+# Imprimí un reporte completo de diagnóstico
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["print(f\"Filas: {len(df)}\")","print(f\"Nulos:\\n{df.isna().sum()}\")","print(f\"Tipos:\\n{df.dtypes}\")"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Siempre empezá revisando <code>df.isna().sum()</code> y <code>df.duplicated().sum()</code>.</li>
+  <li><code>dropna()</code> elimina filas con nulos; <code>fillna()</code> los reemplaza.</li>
+  <li><code>drop_duplicates(subset="col")</code> limpia registros repetidos por clave.</li>
+  <li><code>astype()</code> corrige tipos. Si la columna dice <code>object</code> pero debería ser número, convertíla.</li>
+  <li>El accessor <code>.str</code> te da <code>strip()</code>, <code>upper()</code>, <code>replace()</code> para limpiar texto.</li>
+  <li>Documentá siempre <strong>qué</strong> limpiaste y <strong>por qué</strong> — es parte del proceso profesional.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>06 · pandas: transformaciones</strong>) vas a aprender a crear nuevas columnas, aplicar funciones, mapear valores y realizar los cálculos que convierten datos crudos en métricas de negocio.</p>
+
+<p><strong>Recursos:</strong> <a href="https://pandas.pydata.org/docs/user_guide/missing_data.html" target="_blank">pandas docs — Working with missing data</a></p>
+
+<div class="footer-nav">
+  <a href="/data-analysis/04-pandas-seleccion-filtrado.html">← Selección y filtrado</a>
+  <a class="next" href="/data-analysis/06-pandas-transformaciones.html">pandas: transformaciones →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
