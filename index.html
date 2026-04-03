@@ -370,24 +370,7 @@
     <!-- ── 01 · TU PROGRESO ── -->
     <div class="section-num">01</div>
     <h2>Tu progreso</h2>
-    <div class="stat-grid" id="stats-mount">
-      <div class="stat-card">
-        <div class="num" id="st-lessons">0</div>
-        <div class="label">Lecciones</div>
-      </div>
-      <div class="stat-card">
-        <div class="num" id="st-exercises">0</div>
-        <div class="label">Ejercicios</div>
-      </div>
-      <div class="stat-card">
-        <div class="num" id="st-streak">0</div>
-        <div class="label">Días de racha</div>
-      </div>
-      <div class="stat-card">
-        <div class="num" id="st-pct">0%</div>
-        <div class="label">Completado</div>
-      </div>
-    </div>
+    <div id="dashboard-mount"></div>
 
     <!-- ── 02 · CÓMO FUNCIONA ── -->
     <div class="section-num">02</div>
@@ -572,17 +555,94 @@
 
   <script type="module">
     import { CATALOG } from '/js/nav.js';
-    import { computeStats } from '/js/progress.js';
+    import { getDashboardProps, exportProgress, importProgress } from '/js/progress.js';
     import { initTheme } from '/js/theme.js';
     initTheme();
-    const s = computeStats(CATALOG);
-    document.getElementById('global-progress-fill').style.width = `${s.pct}%`;
-    document.getElementById('global-progress-text').textContent = `${s.completedLessons}/${s.totalLessons} lecciones`;
-    document.getElementById('st-lessons').textContent = `${s.completedLessons}/${s.totalLessons}`;
-    document.getElementById('st-exercises').textContent = `${s.solvedExercises}/${s.totalExercises}`;
-    document.getElementById('st-streak').textContent = s.streak;
-    document.getElementById('st-pct').textContent = `${s.pct}%`;
+    
+    const dashProps = getDashboardProps(CATALOG);
+    
+    // Topbar
+    document.getElementById('global-progress-fill').style.width = `${dashProps.stats.pct}%`;
+    document.getElementById('global-progress-text').textContent = `${dashProps.stats.completedLessons}/${dashProps.stats.totalLessons} lecciones`;
+
+    // Dashboard HTML
+    const dashHTML = \`
+      <div class="dashboard">
+        <div class="dashboard-main">
+          <div class="dash-card continue-card">
+            <h3>Continuar aprendiendo</h3>
+            <p>\${dashProps.nextLesson.label}</p>
+            <a href="\${dashProps.nextLesson.url}" class="cta cta-primary">Retomar curso</a>
+          </div>
+          
+          \${dashProps.recentLessons.length ? \`
+          <div class="dash-card recent-card">
+            <h3>Últimas lecciones aprendidas</h3>
+            <ul class="recent-list">
+              \${dashProps.recentLessons.map(l => \`<li><a href="\${l.url}">✔️ \${l.label.replace(/^\\d+\\.\\s/, '')}</a></li>\`).join('')}
+            </ul>
+          </div>
+          \` : \`
+          <div class="dash-card recent-card empty-recent">
+            <p style="color:var(--t3);font-size:.85rem;">Aún no completaste ninguna lección. ¡Empezá hoy!</p>
+          </div>
+          \`}
+        </div>
+
+        <div class="dashboard-side">
+          <div class="dash-card streak-card \${dashProps.streakActive ? 'active' : ''}">
+            <div class="streak-icon">🔥</div>
+            <div class="streak-info">
+              <strong>\${dashProps.stats.streak} días</strong>
+              <span>de racha actual</span>
+            </div>
+          </div>
+          
+          <div class="dash-card stats-overview">
+            <div class="stat-mini">
+              <strong>\${dashProps.stats.completedLessons}/\${dashProps.stats.totalLessons}</strong>
+              <span>Lecciones</span>
+            </div>
+            <div class="stat-mini">
+              <strong>\${dashProps.stats.solvedExercises}/\${dashProps.stats.totalExercises}</strong>
+              <span>Ejercicios</span>
+            </div>
+            <div class="stat-mini">
+              <strong>\${dashProps.stats.pct}%</strong>
+              <span>Completado</span>
+            </div>
+          </div>
+
+          <div class="dash-card actions-card">
+            <button id="btn-export" class="cta-secondary btn-sm" style="width:100%;text-align:center;justify-content:center;">💾 Guardar progreso (Exportar)</button>
+            <label for="btn-import" class="cta-secondary btn-sm" style="width:100%;text-align:center;margin-top:8px; display:inline-block; cursor:pointer;">📂 Cargar progreso (Importar)</label>
+            <input type="file" id="btn-import" accept=".json" style="display:none;">
+          </div>
+        </div>
+      </div>
+    \`;
+
+    document.getElementById('dashboard-mount').innerHTML = dashHTML;
+
+    // Attach functionality
+    document.getElementById('btn-export').addEventListener('click', exportProgress);
+    document.getElementById('btn-import').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = (re) => {
+          if(importProgress(re.target.result)) {
+            alert('Progreso cargado con éxito. Refrescando la página...');
+            location.reload();
+          } else {
+            alert('Error: Archivo de progreso no válido.');
+          }
+        };
+        reader.readAsText(file);
+      }
+    });
   </script>
+
 </body>
 
 </html>

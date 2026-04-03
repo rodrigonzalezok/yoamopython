@@ -52,3 +52,63 @@ export function computeStats(catalog) {
     state,
   };
 }
+
+export function exportProgress() {
+  const state = readProgress();
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
+  const dlAnchorElem = document.createElement('a');
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", "quiero_programar_progreso.json");
+  document.body.appendChild(dlAnchorElem);
+  dlAnchorElem.click();
+  document.body.removeChild(dlAnchorElem);
+}
+
+export function importProgress(jsonString) {
+  try {
+    const data = JSON.parse(jsonString);
+    if (data && typeof data === 'object' && data.lessons && data.exercises && data.streak) {
+      saveProgress(data);
+      return true;
+    }
+  } catch (e) {
+    console.error("Invalid progress file");
+  }
+  return false;
+}
+
+export function getDashboardProps(catalog) {
+  const state = readProgress();
+  const stats = computeStats(catalog);
+  
+  let nextLesson = catalog[0];
+  for (let i = 0; i < catalog.length; i++) {
+    if (!state.lessons[catalog[i].id]) {
+      nextLesson = catalog[i];
+      break;
+    }
+  }
+
+  const completedIds = Object.keys(state.lessons).filter(k => state.lessons[k]);
+  const recentIds = completedIds.slice(-3).reverse();
+  const recentLessons = recentIds.map(id => catalog.find(c => c.id === id)).filter(Boolean);
+
+  const today = new Date().toISOString().slice(0, 10);
+  let streakActive = false;
+  if (state.streak.last) {
+    const last = state.streak.last;
+    if (last === today) {
+      streakActive = true;
+    } else {
+      const diff = Math.round((new Date(today) - new Date(last)) / (1000 * 60 * 60 * 24));
+      streakActive = diff === 1;
+    }
+  }
+
+  return {
+    nextLesson,
+    recentLessons,
+    streakActive,
+    stats
+  };
+}
