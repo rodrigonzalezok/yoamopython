@@ -563,44 +563,44 @@
         <div class="dashboard-main">
           <div class="dash-card continue-card">
             <h3>Continuar aprendiendo</h3>
-            <p>\${dashProps.nextLesson.label}</p>
-            <a href="\${dashProps.nextLesson.url}" class="cta cta-primary">Retomar curso</a>
+            <p>${dashProps.nextLesson.label}</p>
+            <a href="${dashProps.nextLesson.url}" class="cta cta-primary">Retomar curso</a>
           </div>
           
-          \${dashProps.recentLessons.length ? \`
+          ${dashProps.recentLessons.length ? `
           <div class="dash-card recent-card">
             <h3>Últimas lecciones aprendidas</h3>
             <ul class="recent-list">
-              \${dashProps.recentLessons.map(l => \`<li><a href="\${l.url}">✔️ \${l.label.replace(/^\\d+\\.\\s/, '')}</a></li>\`).join('')}
+              ${dashProps.recentLessons.map(l => `<li><a href="${l.url}">✔️ ${l.label.replace(/^\d+\.\s/, '')}</a></li>`).join('')}
             </ul>
           </div>
-          \` : \`
+          ` : `
           <div class="dash-card recent-card empty-recent">
             <p style="color:var(--t3);font-size:.85rem;">Aún no completaste ninguna lección. ¡Empezá hoy!</p>
           </div>
-          \`}
+          `}
         </div>
 
         <div class="dashboard-side">
-          <div class="dash-card streak-card \${dashProps.streakActive ? 'active' : ''}">
+          <div class="dash-card streak-card ${dashProps.streakActive ? 'active' : ''}">
             <div class="streak-icon">🔥</div>
             <div class="streak-info">
-              <strong>\${dashProps.stats.streak} días</strong>
+              <strong>${dashProps.stats.streak} días</strong>
               <span>de racha actual</span>
             </div>
           </div>
           
           <div class="dash-card stats-overview">
             <div class="stat-mini">
-              <strong>\${dashProps.stats.completedLessons}/\${dashProps.stats.totalLessons}</strong>
+              <strong>${dashProps.stats.completedLessons}/${dashProps.stats.totalLessons}</strong>
               <span>Lecciones</span>
             </div>
             <div class="stat-mini">
-              <strong>\${dashProps.stats.solvedExercises}/\${dashProps.stats.totalExercises}</strong>
+              <strong>${dashProps.stats.solvedExercises}/${dashProps.stats.totalExercises}</strong>
               <span>Ejercicios</span>
             </div>
             <div class="stat-mini">
-              <strong>\${dashProps.stats.pct}%</strong>
+              <strong>${dashProps.stats.pct}%</strong>
               <span>Completado</span>
             </div>
           </div>
