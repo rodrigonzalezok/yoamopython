@@ -1643,3 +1643,13 @@ button.hint:hover {
   font-size: .78rem;
   border-radius: var(--radius-sm);
 }
+
+/* Footer text */
+.footer-text {
+  text-align: center;
+  color: var(--t3);
+  font-size: .72rem;
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--b1);
+}
