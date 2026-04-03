@@ -1,14 +1,40 @@
 let pyodideReady = null;
 let sqlReady = null;
+// Track which optional packages have already been loaded
+const loadedOptional = new Set();
 
 export async function ensurePyodide() {
   if (pyodideReady) return pyodideReady;
   pyodideReady = (async () => {
     const pyodide = await loadPyodide();
-    await pyodide.loadPackage(['pandas', 'numpy', 'matplotlib', 'scikit-learn', 'seaborn']);
+    // Only load core packages at startup (fast: ~10-15s)
+    await pyodide.loadPackage(['pandas', 'numpy']);
     return pyodide;
   })();
   return pyodideReady;
+}
+
+/**
+ * Lazily load optional heavy packages only when user code imports them.
+ * This keeps initial load fast while still supporting matplotlib/seaborn/sklearn.
+ */
+const OPTIONAL_PACKAGES = {
+  'matplotlib': 'matplotlib',
+  'seaborn': 'seaborn',
+  'sklearn': 'scikit-learn',
+};
+
+async function ensureOptionalPackages(code, py) {
+  const needed = [];
+  for (const [importName, pkgName] of Object.entries(OPTIONAL_PACKAGES)) {
+    if (!loadedOptional.has(pkgName) && code.includes(importName)) {
+      needed.push(pkgName);
+    }
+  }
+  if (needed.length > 0) {
+    await py.loadPackage(needed);
+    needed.forEach(p => loadedOptional.add(p));
+  }
 }
 
 export async function runPython(code) {
@@ -16,8 +42,10 @@ export async function runPython(code) {
   try {
     py = await ensurePyodide();
   } catch (err) {
-    return '⏳ El motor Python aún se está cargando. Esperá unos segundos e intentá de nuevo.';
+    return { text: '⏳ El motor Python aún se está cargando. Esperá unos segundos e intentá de nuevo.', image: null };
   }
+  // Load optional heavy packages only if user code references them
+  await ensureOptionalPackages(code, py);
   const setupCode = `
 import sys, io, base64
 _buf = io.StringIO()
