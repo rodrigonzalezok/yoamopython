@@ -1,9 +1,9 @@
 /* ═══════════════════════════════════════════════
    QuieroProgramar · Design System v2
-   ☾ LIGHT / ☼ LIGHT mode · Red + Grey palette
+   ☾ DARK / ☼ LIGHT mode · Red + Grey palette
    ═══════════════════════════════════════════════ */
 
-/* ── ☾ LIGHT MODE (default) ── */
+/* ── ☾ DARK MODE (default) ── */
 :root {
   --bg: #0b0b0f;
   --bg2: #111116;
