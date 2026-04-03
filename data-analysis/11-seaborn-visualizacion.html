@@ -1,83 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 11 · Seaborn: visualización estadística</title>
-<meta name="description" content="Creá gráficos estadísticos profesionales con Seaborn. Box plots, violin plots, heatmaps, pair plots y mucho más con código mínimo.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 11 · Seaborn: visualización estadística</title>
+  <meta name="description"
+    content="Creá gráficos estadísticos profesionales con Seaborn. Box plots, violin plots, heatmaps, pair plots y mucho más con código mínimo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 11 de 19</span>
-  <h1>Seaborn: Visualización Estadística</h1>
-  <p>Seaborn es una biblioteca construida <strong>sobre Matplotlib</strong> que automatiza la creación de gráficos estadísticos complejos. Lo que en Matplotlib requiere 15 líneas de código, en Seaborn se hace en 1. Está diseñada para trabajar directamente con DataFrames de pandas, lo que la convierte en la herramienta de visualización favorita de los Data Analysts.</p>
-  <div class="badges">
-    <span class="badge">90–120 min</span>
-    <span class="badge">Prerrequisitos: Lección 10 (Matplotlib básico)</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 11 de 19</span>
+        <h1>Seaborn: Visualización Estadística</h1>
+        <p>Seaborn es una biblioteca construida <strong>sobre Matplotlib</strong> que automatiza la creación de gráficos
+          estadísticos complejos. Lo que en Matplotlib requiere 15 líneas de código, en Seaborn se hace en 1. Está
+          diseñada para trabajar directamente con DataFrames de pandas, lo que la convierte en la herramienta de
+          visualización favorita de los Data Analysts.</p>
+        <div class="badges">
+          <span class="badge">90–120 min</span>
+          <span class="badge">Prerrequisitos: Lección 10 (Matplotlib básico)</span>
+        </div>
+      </div>
 
-<h3>¿Por qué Seaborn si ya tenemos Matplotlib?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Aspecto</th><th>Matplotlib</th><th>Seaborn</th></tr>
-<tr><td>Nivel</td><td>Bajo nivel (control total)</td><td>Alto nivel (resultados rápidos)</td></tr>
-<tr><td>Input</td><td>Arrays/listas</td><td>DataFrames directamente</td></tr>
-<tr><td>Estética</td><td>Hay que configurar todo</td><td>Temas profesionales incorporados</td></tr>
-<tr><td>Gráficos estadísticos</td><td>Manual</td><td>Automáticos (boxplot, violin, etc)</td></tr>
-<tr><td>¿Cuándo usarlo?</td><td>Personalización extrema</td><td>Exploración y reportes rápidos</td></tr>
-</table>
-</div>
+      <h3>¿Por qué Seaborn si ya tenemos Matplotlib?</h3>
 
-<div class="concept"><strong>No es Seaborn vs Matplotlib — es Seaborn + Matplotlib.</strong> Seaborn genera los gráficos, y podés usar Matplotlib para ajustar detalles. Todo gráfico de Seaborn <b>es</b> un gráfico de Matplotlib por debajo, así que <code>plt.title()</code>, <code>plt.xlabel()</code>, etc. funcionan sobre los gráficos de Seaborn.</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Aspecto</th>
+            <th>Matplotlib</th>
+            <th>Seaborn</th>
+          </tr>
+          <tr>
+            <td>Nivel</td>
+            <td>Bajo nivel (control total)</td>
+            <td>Alto nivel (resultados rápidos)</td>
+          </tr>
+          <tr>
+            <td>Input</td>
+            <td>Arrays/listas</td>
+            <td>DataFrames directamente</td>
+          </tr>
+          <tr>
+            <td>Estética</td>
+            <td>Hay que configurar todo</td>
+            <td>Temas profesionales incorporados</td>
+          </tr>
+          <tr>
+            <td>Gráficos estadísticos</td>
+            <td>Manual</td>
+            <td>Automáticos (boxplot, violin, etc)</td>
+          </tr>
+          <tr>
+            <td>¿Cuándo usarlo?</td>
+            <td>Personalización extrema</td>
+            <td>Exploración y reportes rápidos</td>
+          </tr>
+        </table>
+      </div>
 
-<h3>Los gráficos clave de Seaborn</h3>
+      <div class="concept"><strong>No es Seaborn vs Matplotlib — es Seaborn + Matplotlib.</strong> Seaborn genera los
+        gráficos, y podés usar Matplotlib para ajustar detalles. Todo gráfico de Seaborn <b>es</b> un gráfico de
+        Matplotlib por debajo, así que <code>plt.title()</code>, <code>plt.xlabel()</code>, etc. funcionan sobre los
+        gráficos de Seaborn.</div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Gráfico</th><th>Función</th><th>Qué muestra</th><th>Úsalo para</th></tr>
-<tr><td><strong>Box Plot</strong></td><td><code>sns.boxplot()</code></td><td>Mediana, cuartiles, outliers</td><td>Comparar distribuciones por categoría</td></tr>
-<tr><td><strong>Violin Plot</strong></td><td><code>sns.violinplot()</code></td><td>Distribución completa + densidad</td><td>Distribuciones con forma visible</td></tr>
-<tr><td><strong>Count Plot</strong></td><td><code>sns.countplot()</code></td><td>Conteo de categorías</td><td>Distribución categórica</td></tr>
-<tr><td><strong>Heatmap</strong></td><td><code>sns.heatmap()</code></td><td>Matriz con colores</td><td>Correlaciones, pivot tables</td></tr>
-<tr><td><strong>Scatter + tendencia</strong></td><td><code>sns.regplot()</code></td><td>Puntos + regresión lineal</td><td>Relación entre variables</td></tr>
-<tr><td><strong>Histograma + KDE</strong></td><td><code>sns.histplot()</code></td><td>Distribución + curva suavizada</td><td>Forma de la distribución</td></tr>
-<tr><td><strong>Bar con error</strong></td><td><code>sns.barplot()</code></td><td>Media + intervalo de confianza</td><td>Comparar medias con incertidumbre</td></tr>
-</table>
-</div>
+      <h3>Los gráficos clave de Seaborn</h3>
 
-<div class="analogy"><strong>Analogía:</strong> Matplotlib es como tener un taller de carpintería completo — podés construir cualquier mueble, pero todo lo hacés a mano. Seaborn es como IKEA — viene con diseños profesionales pre-armados que se montan rápido. Y si necesitás un ajuste extra, siempre podés usar las herramientas del taller (Matplotlib) sobre el mueble de IKEA (Seaborn).</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Gráfico</th>
+            <th>Función</th>
+            <th>Qué muestra</th>
+            <th>Úsalo para</th>
+          </tr>
+          <tr>
+            <td><strong>Box Plot</strong></td>
+            <td><code>sns.boxplot()</code></td>
+            <td>Mediana, cuartiles, outliers</td>
+            <td>Comparar distribuciones por categoría</td>
+          </tr>
+          <tr>
+            <td><strong>Violin Plot</strong></td>
+            <td><code>sns.violinplot()</code></td>
+            <td>Distribución completa + densidad</td>
+            <td>Distribuciones con forma visible</td>
+          </tr>
+          <tr>
+            <td><strong>Count Plot</strong></td>
+            <td><code>sns.countplot()</code></td>
+            <td>Conteo de categorías</td>
+            <td>Distribución categórica</td>
+          </tr>
+          <tr>
+            <td><strong>Heatmap</strong></td>
+            <td><code>sns.heatmap()</code></td>
+            <td>Matriz con colores</td>
+            <td>Correlaciones, pivot tables</td>
+          </tr>
+          <tr>
+            <td><strong>Scatter + tendencia</strong></td>
+            <td><code>sns.regplot()</code></td>
+            <td>Puntos + regresión lineal</td>
+            <td>Relación entre variables</td>
+          </tr>
+          <tr>
+            <td><strong>Histograma + KDE</strong></td>
+            <td><code>sns.histplot()</code></td>
+            <td>Distribución + curva suavizada</td>
+            <td>Forma de la distribución</td>
+          </tr>
+          <tr>
+            <td><strong>Bar con error</strong></td>
+            <td><code>sns.barplot()</code></td>
+            <td>Media + intervalo de confianza</td>
+            <td>Comparar medias con incertidumbre</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="realworld"><strong>En el trabajo real:</strong> en la fase de exploración usás Seaborn porque es rapidísimo. En 5 minutos generás 10 gráficos que te muestran patrones. Cuando necesitás un gráfico final para una presentación ejecutiva con estilos corporativos específicos, pulís con Matplotlib.</div>
+      <div class="analogy"><strong>Analogía:</strong> Matplotlib es como tener un taller de carpintería completo — podés
+        construir cualquier mueble, pero todo lo hacés a mano. Seaborn es como IKEA — viene con diseños profesionales
+        pre-armados que se montan rápido. Y si necesitás un ajuste extra, siempre podés usar las herramientas del taller
+        (Matplotlib) sobre el mueble de IKEA (Seaborn).</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="realworld"><strong>En el trabajo real:</strong> en la fase de exploración usás Seaborn porque es
+        rapidísimo. En 5 minutos generás 10 gráficos que te muestran patrones. Cuando necesitás un gráfico final para
+        una presentación ejecutiva con estilos corporativos específicos, pulís con Matplotlib.</div>
 
-<h3>Ejemplo 1: Box Plot — Distribución por segmento</h3>
-<p>El box plot muestra mediana, cuartiles e identifica outliers automáticamente. Es la forma más eficiente de comparar distribuciones entre categorías.</p>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_boxplot.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <h3>Ejemplo 1: Box Plot — Distribución por segmento</h3>
+      <p>El box plot muestra mediana, cuartiles e identifica outliers automáticamente. Es la forma más eficiente de
+        comparar distribuciones entre categorías.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_boxplot.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -107,19 +193,26 @@ plt.show()
 # Interpretación
 for seg in ["Premium", "Estándar", "Básico"]:
     med = df[df["Segmento"]==seg]["Saldo"].median()
-    print(f"{seg}: mediana ${med:,.0f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"{seg}: mediana ${med:,.0f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="tip"><strong>Cómo leer un box plot:</strong> la línea del medio es la <strong>mediana</strong>. La caja va de Q1 a Q3 (50% central de los datos). Los "bigotes" se extienden hasta 1.5×IQR. Los puntos fuera de los bigotes son <strong>outliers</strong>. Si la mediana no está centrada en la caja, la distribución es asimétrica.</div>
+      <div class="tip"><strong>Cómo leer un box plot:</strong> la línea del medio es la <strong>mediana</strong>. La
+        caja va de Q1 a Q3 (50% central de los datos). Los "bigotes" se extienden hasta 1.5×IQR. Los puntos fuera de los
+        bigotes son <strong>outliers</strong>. Si la mediana no está centrada en la caja, la distribución es asimétrica.
+      </div>
 
-<h3>Ejemplo 2: Histograma con KDE — Forma de la distribución</h3>
-<p>Seaborn combina histograma con una curva de densidad suavizada (KDE) que muestra la "forma" de la distribución sin el ruido de los bins.</p>
+      <h3>Ejemplo 2: Histograma con KDE — Forma de la distribución</h3>
+      <p>Seaborn combina histograma con una curva de densidad suavizada (KDE) que muestra la "forma" de la distribución
+        sin el ruido de los bins.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_histplot.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_histplot.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -150,17 +243,21 @@ plt.tight_layout()
 plt.show()
 
 print(f"La KDE muestra 2 picos → distribución bimodal")
-print(f"Hay 2 grupos distintos de ingresos")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Hay 2 grupos distintos de ingresos")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Heatmap — Matriz de correlaciones</h3>
-<p>El heatmap visualiza una matriz numérica con colores. El uso más habitual es mostrar las correlaciones entre todas las variables numéricas de tu dataset.</p>
+      <h3>Ejemplo 3: Heatmap — Matriz de correlaciones</h3>
+      <p>El heatmap visualiza una matriz numérica con colores. El uso más habitual es mostrar las correlaciones entre
+        todas las variables numéricas de tu dataset.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_heatmap.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_heatmap.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -192,19 +289,26 @@ sns.heatmap(corr, annot=True, cmap="RdYlBu_r", center=0,
 
 plt.title("Correlación entre Variables", fontsize=14, fontweight="bold")
 plt.tight_layout()
-plt.show()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+plt.show()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="concept"><strong>Cómo leer el heatmap de correlaciones:</strong> valores cercanos a <strong>+1</strong> (rojo) indican correlación positiva fuerte (cuando una sube, la otra también). Valores cercanos a <strong>-1</strong> (azul) indican correlación negativa. Valores cercanos a <strong>0</strong> indican que no hay relación lineal.</div>
+      <div class="concept"><strong>Cómo leer el heatmap de correlaciones:</strong> valores cercanos a
+        <strong>+1</strong> (rojo) indican correlación positiva fuerte (cuando una sube, la otra también). Valores
+        cercanos a <strong>-1</strong> (azul) indican correlación negativa. Valores cercanos a <strong>0</strong>
+        indican que no hay relación lineal.</div>
 
-<h3>Ejemplo 4: Count Plot y Bar Plot — Distribución categórica</h3>
-<p>Dos formas de visualizar datos categóricos: countplot cuenta automáticamente, barplot calcula la media con intervalo de confianza.</p>
+      <h3>Ejemplo 4: Count Plot y Bar Plot — Distribución categórica</h3>
+      <p>Dos formas de visualizar datos categóricos: countplot cuenta automáticamente, barplot calcula la media con
+        intervalo de confianza.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_categoricos.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_categoricos.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -235,17 +339,21 @@ plt.tight_layout()
 plt.show()
 
 print("Count: cuántas operaciones hay de cada tipo")
-print("Bar: cuál es el monto promedio (las líneas son la desv. estándar)")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("Bar: cuál es el monto promedio (las líneas son la desv. estándar)")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Scatter con regresión — regplot</h3>
-<p>Seaborn automatiza la línea de tendencia (regresión lineal) sobre un scatter plot, incluyendo el intervalo de confianza.</p>
+      <h3>Ejemplo 5: Scatter con regresión — regplot</h3>
+      <p>Seaborn automatiza la línea de tendencia (regresión lineal) sobre un scatter plot, incluyendo el intervalo de
+        confianza.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_regplot.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_regplot.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -272,38 +380,78 @@ plt.show()
 
 corr = df["Antiguedad"].corr(df["Ingreso"])
 print(f"Correlación: {corr:.2f}")
-print(f"Cada año de antigüedad ≈ +$35K de ingreso")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Cada año de antigüedad ≈ +$35K de ingreso")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Función Seaborn</th><th>Tipo de gráfico</th><th>Parámetros clave</th></tr>
-<tr><td><code>sns.boxplot()</code></td><td>Box plot</td><td><code>data, x, y, palette, order</code></td></tr>
-<tr><td><code>sns.violinplot()</code></td><td>Violin plot</td><td><code>data, x, y, inner="box"</code></td></tr>
-<tr><td><code>sns.histplot()</code></td><td>Histograma + KDE</td><td><code>data, x, bins, kde</code></td></tr>
-<tr><td><code>sns.countplot()</code></td><td>Conteo categórico</td><td><code>data, x, hue, order</code></td></tr>
-<tr><td><code>sns.barplot()</code></td><td>Media + error</td><td><code>data, x, y, errorbar</code></td></tr>
-<tr><td><code>sns.heatmap()</code></td><td>Mapa de calor</td><td><code>data, annot, cmap, center</code></td></tr>
-<tr><td><code>sns.regplot()</code></td><td>Scatter + regresión</td><td><code>data, x, y</code></td></tr>
-<tr><td><code>sns.set_theme()</code></td><td>Estilo global</td><td><code>style, palette, font_scale</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Función Seaborn</th>
+            <th>Tipo de gráfico</th>
+            <th>Parámetros clave</th>
+          </tr>
+          <tr>
+            <td><code>sns.boxplot()</code></td>
+            <td>Box plot</td>
+            <td><code>data, x, y, palette, order</code></td>
+          </tr>
+          <tr>
+            <td><code>sns.violinplot()</code></td>
+            <td>Violin plot</td>
+            <td><code>data, x, y, inner="box"</code></td>
+          </tr>
+          <tr>
+            <td><code>sns.histplot()</code></td>
+            <td>Histograma + KDE</td>
+            <td><code>data, x, bins, kde</code></td>
+          </tr>
+          <tr>
+            <td><code>sns.countplot()</code></td>
+            <td>Conteo categórico</td>
+            <td><code>data, x, hue, order</code></td>
+          </tr>
+          <tr>
+            <td><code>sns.barplot()</code></td>
+            <td>Media + error</td>
+            <td><code>data, x, y, errorbar</code></td>
+          </tr>
+          <tr>
+            <td><code>sns.heatmap()</code></td>
+            <td>Mapa de calor</td>
+            <td><code>data, annot, cmap, center</code></td>
+          </tr>
+          <tr>
+            <td><code>sns.regplot()</code></td>
+            <td>Scatter + regresión</td>
+            <td><code>data, x, y</code></td>
+          </tr>
+          <tr>
+            <td><code>sns.set_theme()</code></td>
+            <td>Estilo global</td>
+            <td><code>style, palette, font_scale</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Box plot simple</h4>
-  <p>Creá un box plot de <code>Saldo</code> por <code>Segmento</code>. Imprimí <code>Boxplot OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-1" data-expected="Boxplot OK">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe imprimir "Boxplot OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Box plot simple</h4>
+        <p>Creá un box plot de <code>Saldo</code> por <code>Segmento</code>. Imprimí <code>Boxplot OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-1"
+          data-expected="Boxplot OK">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe imprimir "Boxplot OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -315,20 +463,26 @@ df = pd.DataFrame({
 })
 
 # sns.boxplot + show + print
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["sns.boxplot(data=df, x=\"Segmento\", y=\"Saldo\")","plt.show(); print(\"Boxplot OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["sns.boxplot(data=df, x=\"Segmento\", y=\"Saldo\")","plt.show(); print(\"Boxplot OK\")"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Histograma con KDE</h4>
-  <p>Creá un histograma de <code>Ingreso</code> con <code>kde=True</code>. Imprimí <code>Histograma Seaborn OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-2" data-expected="Histograma Seaborn OK">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe imprimir "Histograma Seaborn OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Histograma con KDE</h4>
+        <p>Creá un histograma de <code>Ingreso</code> con <code>kde=True</code>. Imprimí
+          <code>Histograma Seaborn OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-2"
+          data-expected="Histograma Seaborn OK">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe imprimir "Histograma Seaborn OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -339,20 +493,26 @@ np.random.seed(42)
 df = pd.DataFrame({"Ingreso": np.random.normal(400000, 100000, 100)})
 
 # sns.histplot con kde=True
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["sns.histplot(data=df, x=\"Ingreso\", kde=True, bins=20)","plt.title(\"Distribución\"); plt.show(); print(\"Histograma Seaborn OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["sns.histplot(data=df, x=\"Ingreso\", kde=True, bins=20)","plt.title(\"Distribución\"); plt.show(); print(\"Histograma Seaborn OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Count plot</h4>
-  <p>Creá un count plot para ver cuántos clientes hay por <code>Canal</code>. Imprimí <code>Conteo OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-3" data-expected="Conteo OK">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe imprimir "Conteo OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Count plot</h4>
+        <p>Creá un count plot para ver cuántos clientes hay por <code>Canal</code>. Imprimí <code>Conteo OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-3"
+          data-expected="Conteo OK">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe imprimir "Conteo OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -363,20 +523,27 @@ df = pd.DataFrame({
 })
 
 # sns.countplot
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["sns.countplot(data=df, x=\"Canal\", palette=\"Set2\")","plt.title(\"Clientes por Canal\"); plt.show(); print(\"Conteo OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["sns.countplot(data=df, x=\"Canal\", palette=\"Set2\")","plt.title(\"Clientes por Canal\"); plt.show(); print(\"Conteo OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Heatmap de correlación</h4>
-  <p>Calculá la matriz de correlación del DataFrame y visualizala con <code>sns.heatmap()</code>. Imprimí <code>Heatmap OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-4" data-expected="Heatmap OK">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe imprimir "Heatmap OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Heatmap de correlación</h4>
+        <p>Calculá la matriz de correlación del DataFrame y visualizala con <code>sns.heatmap()</code>. Imprimí
+          <code>Heatmap OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-4"
+          data-expected="Heatmap OK">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe imprimir "Heatmap OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -389,20 +556,26 @@ df = pd.DataFrame({
 })
 
 # Correlación + heatmap
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["corr = df.corr()","sns.heatmap(corr, annot=True, cmap=\"RdYlBu_r\", center=0)","plt.title(\"Correlaciones\"); plt.show(); print(\"Heatmap OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["corr = df.corr()","sns.heatmap(corr, annot=True, cmap=\"RdYlBu_r\", center=0)","plt.title(\"Correlaciones\"); plt.show(); print(\"Heatmap OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: regplot — Scatter con regresión</h4>
-  <p>Graficá la relación entre <code>Edad</code> e <code>Ingreso</code> con <code>sns.regplot()</code>. Imprimí la correlación, debe incluir <code>0.99</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-5" data-expected="0.99">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "0.99"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: regplot — Scatter con regresión</h4>
+        <p>Graficá la relación entre <code>Edad</code> e <code>Ingreso</code> con <code>sns.regplot()</code>. Imprimí la
+          correlación, debe incluir <code>0.99</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-5" data-expected="0.99">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "0.99"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -414,20 +587,27 @@ df = pd.DataFrame({
 })
 
 # sns.regplot + correlación
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["sns.regplot(data=df, x=\"Edad\", y=\"Ingreso\")","plt.show()","print(f\"Correlación: {df[\\\"Edad\\\"].corr(df[\\\"Ingreso\\\"]):.2f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["sns.regplot(data=df, x=\"Edad\", y=\"Ingreso\")","plt.show()","print(f\"Correlación: {df[\\\"Edad\\\"].corr(df[\\\"Ingreso\\\"]):.2f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: barplot con error bars</h4>
-  <p>Creá un barplot del monto promedio por segmento con <code>errorbar="sd"</code>. Imprimí <code>Barplot Seaborn OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-6" data-expected="Barplot Seaborn OK">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe imprimir "Barplot Seaborn OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: barplot con error bars</h4>
+        <p>Creá un barplot del monto promedio por segmento con <code>errorbar="sd"</code>. Imprimí
+          <code>Barplot Seaborn OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-6"
+          data-expected="Barplot Seaborn OK">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe imprimir "Barplot Seaborn OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -439,20 +619,27 @@ df = pd.DataFrame({
 })
 
 # sns.barplot con errorbar
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["sns.barplot(data=df, x=\"Segmento\", y=\"Monto\", errorbar=\"sd\", palette=\"Set2\")","plt.title(\"Monto por Segmento\"); plt.show(); print(\"Barplot Seaborn OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["sns.barplot(data=df, x=\"Segmento\", y=\"Monto\", errorbar=\"sd\", palette=\"Set2\")","plt.title(\"Monto por Segmento\"); plt.show(); print(\"Barplot Seaborn OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Boxplot + título + ylabel</h4>
-  <p>Creá un boxplot de Ingreso por Ciudad con título, ylabel y <code>palette="Set2"</code>. Imprimí <code>Box profesional</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-7" data-expected="Box profesional">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe imprimir "Box profesional"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Boxplot + título + ylabel</h4>
+        <p>Creá un boxplot de Ingreso por Ciudad con título, ylabel y <code>palette="Set2"</code>. Imprimí
+          <code>Box profesional</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-7"
+          data-expected="Box profesional">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe imprimir "Box profesional"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -470,20 +657,28 @@ df = pd.DataFrame({
 })
 
 # Boxplot profesional completo
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["plt.figure(figsize=(8,5))","sns.boxplot(data=df, x=\"Ciudad\", y=\"Ingreso\", palette=\"Set2\")","plt.title(\"Ingreso por Ciudad\", fontweight=\"bold\"); plt.ylabel(\"Ingreso ($)\"); plt.show(); print(\"Box profesional\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["plt.figure(figsize=(8,5))","sns.boxplot(data=df, x=\"Ciudad\", y=\"Ingreso\", palette=\"Set2\")","plt.title(\"Ingreso por Ciudad\", fontweight=\"bold\"); plt.ylabel(\"Ingreso ($)\"); plt.show(); print(\"Box profesional\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Histograma comparativo con hue</h4>
-  <p>Creá un histograma de Saldo separado por Segmento usando <code>hue</code>. Imprimí <code>Histograma comparativo OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-8" data-expected="Histograma comparativo OK">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe imprimir "Histograma comparativo OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Histograma comparativo con hue</h4>
+        <p>Creá un histograma de Saldo separado por Segmento usando <code>hue</code>. Imprimí
+          <code>Histograma comparativo OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-8"
+          data-expected="Histograma comparativo OK">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe imprimir "Histograma comparativo OK"</span>
+          </div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -500,20 +695,27 @@ df = pd.DataFrame({
 })
 
 # histplot con hue para comparar distribuciones
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["sns.histplot(data=df, x=\"Saldo\", hue=\"Segmento\", kde=True, bins=15)","plt.title(\"Distribución por Segmento\"); plt.show()","print(\"Histograma comparativo OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["sns.histplot(data=df, x=\"Saldo\", hue=\"Segmento\", kde=True, bins=15)","plt.title(\"Distribución por Segmento\"); plt.show()","print(\"Histograma comparativo OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Heatmap de pivot table</h4>
-  <p>Creá una pivot_table (Sucursal × Canal, suma de Monto) y visualizala como heatmap. Imprimí <code>Pivot heatmap OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-9" data-expected="Pivot heatmap OK">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe imprimir "Pivot heatmap OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Heatmap de pivot table</h4>
+        <p>Creá una pivot_table (Sucursal × Canal, suma de Monto) y visualizala como heatmap. Imprimí
+          <code>Pivot heatmap OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-9"
+          data-expected="Pivot heatmap OK">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe imprimir "Pivot heatmap OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -526,20 +728,28 @@ df = pd.DataFrame({
 })
 
 # pivot_table + heatmap
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["tabla = pd.pivot_table(df, values=\"Monto\", index=\"Sucursal\", columns=\"Canal\", aggfunc=\"sum\")","sns.heatmap(tabla, annot=True, fmt=\",.0f\", cmap=\"YlOrRd\")","plt.title(\"Ventas\"); plt.show(); print(\"Pivot heatmap OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["tabla = pd.pivot_table(df, values=\"Monto\", index=\"Sucursal\", columns=\"Canal\", aggfunc=\"sum\")","sns.heatmap(tabla, annot=True, fmt=\",.0f\", cmap=\"YlOrRd\")","plt.title(\"Ventas\"); plt.show(); print(\"Pivot heatmap OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Dashboard con 4 gráficos Seaborn</h4>
-  <p>Creá 4 subplots: (1) boxplot, (2) histplot con kde, (3) countplot, (4) barplot. Usá <code>fig, axes = plt.subplots(2, 2)</code>. Imprimí <code>Dashboard completo</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-10" data-expected="Dashboard completo">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Dashboard completo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Dashboard con 4 gráficos Seaborn</h4>
+        <p>Creá 4 subplots: (1) boxplot, (2) histplot con kde, (3) countplot, (4) barplot. Usá
+          <code>fig, axes = plt.subplots(2, 2)</code>. Imprimí <code>Dashboard completo</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-11" data-exercise="ex-10"
+          data-expected="Dashboard completo">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Dashboard completo"</span>
+          </div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -555,47 +765,58 @@ df = pd.DataFrame({
 
 # fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 # 4 gráficos Seaborn en una sola figura
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 10))","sns.boxplot(data=df, x=\"Segmento\", y=\"Monto\", ax=axes[0,0])","sns.histplot(data=df, x=\"Monto\", kde=True, ax=axes[0,1]); sns.countplot(data=df, x=\"Canal\", ax=axes[1,0]); sns.barplot(data=df, x=\"Segmento\", y=\"Monto\", ax=axes[1,1]); plt.tight_layout(); plt.show(); print(\"Dashboard completo\")"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>Seaborn trabaja directamente con DataFrames — pasás <code>data=df, x="col", y="col"</code>.</li>
+        <li><strong>Box plot</strong> muestra mediana + cuartiles + outliers en un solo gráfico.</li>
+        <li><strong>histplot con kde=True</strong> muestra distribución + curva de densidad suavizada.</li>
+        <li><strong>heatmap</strong> visualiza matrices numéricas (correlaciones, pivot tables).</li>
+        <li><strong>countplot</strong> cuenta frecuencias; <strong>barplot</strong> calcula la media con intervalos de
+          confianza.</li>
+        <li><strong>regplot</strong> agrega regresión lineal automática sobre un scatter.</li>
+        <li>El parámetro <code>hue</code> colorea por categoría en casi todos los gráficos.</li>
+        <li>Podés usar <code>plt.title()</code> y <code>plt.xlabel()</code> porque Seaborn se construye sobre
+          Matplotlib.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>12 · EDA Completo</strong>) vas a combinar todo lo aprendido hasta ahora —
+        pandas, estadística, matplotlib y seaborn — en un proceso estructurado de Análisis Exploratorio de Datos de
+        principio a fin.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://seaborn.pydata.org/tutorial.html" target="_blank">Seaborn
+          Tutorial</a> · <a href="https://seaborn.pydata.org/examples/index.html" target="_blank">Galería de
+          ejemplos</a></p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/10-matplotlib-basico.html">← Matplotlib básico</a>
+        <a class="next" href="/data-analysis/12-eda-completo.html">EDA completo →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 10))","sns.boxplot(data=df, x=\"Segmento\", y=\"Monto\", ax=axes[0,0])","sns.histplot(data=df, x=\"Monto\", kde=True, ax=axes[0,1]); sns.countplot(data=df, x=\"Canal\", ax=axes[1,0]); sns.barplot(data=df, x=\"Segmento\", y=\"Monto\", ax=axes[1,1]); plt.tight_layout(); plt.show(); print(\"Dashboard completo\")"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>Seaborn trabaja directamente con DataFrames — pasás <code>data=df, x="col", y="col"</code>.</li>
-  <li><strong>Box plot</strong> muestra mediana + cuartiles + outliers en un solo gráfico.</li>
-  <li><strong>histplot con kde=True</strong> muestra distribución + curva de densidad suavizada.</li>
-  <li><strong>heatmap</strong> visualiza matrices numéricas (correlaciones, pivot tables).</li>
-  <li><strong>countplot</strong> cuenta frecuencias; <strong>barplot</strong> calcula la media con intervalos de confianza.</li>
-  <li><strong>regplot</strong> agrega regresión lineal automática sobre un scatter.</li>
-  <li>El parámetro <code>hue</code> colorea por categoría en casi todos los gráficos.</li>
-  <li>Podés usar <code>plt.title()</code> y <code>plt.xlabel()</code> porque Seaborn se construye sobre Matplotlib.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>12 · EDA Completo</strong>) vas a combinar todo lo aprendido hasta ahora — pandas, estadística, matplotlib y seaborn — en un proceso estructurado de Análisis Exploratorio de Datos de principio a fin.</p>
-
-<p><strong>Recursos:</strong> <a href="https://seaborn.pydata.org/tutorial.html" target="_blank">Seaborn Tutorial</a> · <a href="https://seaborn.pydata.org/examples/index.html" target="_blank">Galería de ejemplos</a></p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/10-matplotlib-basico.html">← Matplotlib básico</a>
-  <a class="next" href="/data-analysis/12-eda-completo.html">EDA completo →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

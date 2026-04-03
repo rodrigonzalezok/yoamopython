@@ -1,38 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · SQL 12 · INSERT, UPDATE, DELETE</title>
-<meta name="description" content="Modificar datos en SQL: INSERT INTO para agregar, UPDATE SET para modificar, DELETE FROM para eliminar, y concepto de transacciones.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · SQL 12 · INSERT, UPDATE, DELETE</title>
+  <meta name="description"
+    content="Modificar datos en SQL: INSERT INTO para agregar, UPDATE SET para modificar, DELETE FROM para eliminar, y concepto de transacciones.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
 </head>
+
 <body>
-<div class="topbar"><button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button><div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div><div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div><div id="global-progress-text" class="top-stats"></div></div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label sql">SQL · Lección 12 de 15</span>
-  <h1>INSERT, UPDATE y DELETE</h1>
-  <p>Hasta ahora solo consultaste datos (SELECT). Ahora aprendés a modificarlos: agregar registros nuevos, actualizar valores existentes y eliminar filas. Estas operaciones forman el <b>DML</b> (Data Manipulation Language).</p>
-  <div class="badges">
-    <span class="badge">80–100 min</span>
-    <span class="badge">Prerrequisitos: SQL 08</span>
+  <div class="topbar"><button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label sql">SQL · Lección 12 de 15</span>
+        <h1>INSERT, UPDATE y DELETE</h1>
+        <p>Hasta ahora solo consultaste datos (SELECT). Ahora aprendés a modificarlos: agregar registros nuevos,
+          actualizar valores existentes y eliminar filas. Estas operaciones forman el <b>DML</b> (Data Manipulation
+          Language).</p>
+        <div class="badges">
+          <span class="badge">80–100 min</span>
+          <span class="badge">Prerrequisitos: SQL 08</span>
+        </div>
+      </div>
 
-<h3>INSERT INTO — agregar registros</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Forma explícita (recomendada): nombrar columnas
+      <h3>INSERT INTO — agregar registros</h3>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Forma explícita (recomendada): nombrar columnas
 INSERT INTO clientes (nombre, ciudad, score, saldo)
 VALUES ('García', 'Buenos Aires', 720, 150000);
 
@@ -49,9 +64,9 @@ INSERT INTO clientes (nombre, score) VALUES
 INSERT INTO clientes_premium (nombre, score)
 SELECT nombre, score FROM clientes WHERE score >= 700;</pre>
 
-<h3>UPDATE SET — modificar registros existentes</h3>
+      <h3>UPDATE SET — modificar registros existentes</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Actualizar un campo específico
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Actualizar un campo específico
 UPDATE clientes SET score = 750 WHERE nombre = 'García';
 
 -- Actualizar múltiples campos
@@ -60,50 +75,62 @@ UPDATE clientes SET score = 750, ciudad = 'Córdoba' WHERE id = 1;
 -- Actualizar con cálculo
 UPDATE cuentas SET saldo = saldo * 1.05 WHERE tipo = 'PF';  -- +5% a plazos fijos</pre>
 
-<div class="warning"><strong>PELIGRO MÁXIMO: UPDATE sin WHERE.</strong> <code>UPDATE clientes SET score = 0;</code> sin WHERE modifica TODOS los registros. Es el error más destructivo en SQL. <b>SIEMPRE verificá tu WHERE con un SELECT primero:</b> <code>SELECT * FROM clientes WHERE condicion;</code> → si las filas son las correctas, convertí el SELECT en UPDATE.</div>
+      <div class="warning"><strong>PELIGRO MÁXIMO: UPDATE sin WHERE.</strong>
+        <code>UPDATE clientes SET score = 0;</code> sin WHERE modifica TODOS los registros. Es el error más destructivo
+        en SQL. <b>SIEMPRE verificá tu WHERE con un SELECT primero:</b>
+        <code>SELECT * FROM clientes WHERE condicion;</code> → si las filas son las correctas, convertí el SELECT en
+        UPDATE.</div>
 
-<h3>DELETE FROM — eliminar registros</h3>
+      <h3>DELETE FROM — eliminar registros</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Eliminar registros que cumplen una condición
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Eliminar registros que cumplen una condición
 DELETE FROM clientes WHERE activo = 0;
 
 -- Eliminar TODOS los registros (la tabla queda vacía)
 DELETE FROM clientes;  -- ⚠️ sin WHERE = borrar TODO</pre>
 
-<div class="warning"><strong>PELIGRO MÁXIMO: DELETE sin WHERE.</strong> <code>DELETE FROM clientes;</code> borra TODOS los registros de la tabla. La misma regla: primero verificá con SELECT, después convertí en DELETE.</div>
+      <div class="warning"><strong>PELIGRO MÁXIMO: DELETE sin WHERE.</strong> <code>DELETE FROM clientes;</code> borra
+        TODOS los registros de la tabla. La misma regla: primero verificá con SELECT, después convertí en DELETE.</div>
 
-<h3>Patrón seguro: SELECT → UPDATE/DELETE</h3>
+      <h3>Patrón seguro: SELECT → UPDATE/DELETE</h3>
 
-<div class="concept"><strong>Antes de UPDATE o DELETE, SIEMPRE hacé un SELECT con la misma condición WHERE.</strong> Si el SELECT muestra las filas correctas, reemplazá SELECT por UPDATE SET o DELETE FROM. Este hábito te salva de errores catastróficos.
+      <div class="concept"><strong>Antes de UPDATE o DELETE, SIEMPRE hacé un SELECT con la misma condición
+          WHERE.</strong> Si el SELECT muestra las filas correctas, reemplazá SELECT por UPDATE SET o DELETE FROM. Este
+        hábito te salva de errores catastróficos.
 
-<pre style="color:var(--t2);font-size:.82rem;background:transparent;padding:4px 0;margin:4px 0">-- Paso 1: verificar
+        <pre style="color:var(--t2);font-size:.82rem;background:transparent;padding:4px 0;margin:4px 0">-- Paso 1: verificar
 SELECT * FROM clientes WHERE score < 500;
 -- → Si las filas son las correctas...
 
 -- Paso 2: ejecutar
 DELETE FROM clientes WHERE score < 500;</pre>
-</div>
+      </div>
 
-<h3>Concepto de transacciones</h3>
+      <h3>Concepto de transacciones</h3>
 
-<p>Una <strong>transacción</strong> agrupa operaciones para que se ejecuten todas o ninguna (atomicidad). Si algo falla, podés hacer ROLLBACK (deshacer todo):</p>
+      <p>Una <strong>transacción</strong> agrupa operaciones para que se ejecuten todas o ninguna (atomicidad). Si algo
+        falla, podés hacer ROLLBACK (deshacer todo):</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">BEGIN TRANSACTION;
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">BEGIN TRANSACTION;
   UPDATE cuentas SET saldo = saldo - 50000 WHERE id = 101;
   UPDATE cuentas SET saldo = saldo + 50000 WHERE id = 102;
 COMMIT;  -- todo bien → confirmar
 -- ROLLBACK;  -- algo falló → deshacer todo</pre>
 
-<div class="realworld"><strong>En el trabajo:</strong> como Data Analyst, usás INSERT/UPDATE/DELETE con menos frecuencia que SELECT (tal vez 5% de tu trabajo). Pero cuando lo hacés, los riesgos son altos: un UPDATE mal escrito puede corromper datos de producción. Por eso los equipos profesionales usan controles: transacciones, backups previos, y la regla "SELECT primero".</div>
+      <div class="realworld"><strong>En el trabajo:</strong> como Data Analyst, usás INSERT/UPDATE/DELETE con menos
+        frecuencia que SELECT (tal vez 5% de tu trabajo). Pero cuando lo hacés, los riesgos son altos: un UPDATE mal
+        escrito puede corromper datos de producción. Por eso los equipos profesionales usan controles: transacciones,
+        backups previos, y la regla "SELECT primero".</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: INSERT — agregar registros</h3>
+      <h3>Ejemplo 1: INSERT — agregar registros</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_01_insert.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_01_insert.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
 
 -- Insertar uno
 INSERT INTO clientes (id, nombre, ciudad, score, saldo)
@@ -115,16 +142,19 @@ INSERT INTO clientes VALUES
     (3, 'Pérez', 'Buenos Aires', 810, 890000);
 
 -- Verificar
-SELECT * FROM clientes;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+SELECT * FROM clientes;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: UPDATE — modificar registros</h3>
+      <h3>Ejemplo 2: UPDATE — modificar registros</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_02_update.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, saldo REAL, activo INTEGER);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_02_update.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García',720,150000,1),(2,'López',680,320000,1),
 (3,'Pérez',810,890000,1),(4,'Sosa',590,45000,0);
 
@@ -138,16 +168,19 @@ UPDATE clientes SET score = 750 WHERE nombre = 'García';
 UPDATE clientes SET saldo = ROUND(saldo * 1.05) WHERE activo = 1;
 
 -- DESPUÉS del update
-SELECT 'DESPUÉS' AS estado, nombre, score, saldo FROM clientes;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+SELECT 'DESPUÉS' AS estado, nombre, score, saldo FROM clientes;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: DELETE — eliminar registros</h3>
+      <h3>Ejemplo 3: DELETE — eliminar registros</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_03_delete.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, activo INTEGER);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_03_delete.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García',720,1),(2,'López',680,1),
 (3,'Martínez',590,0),(4,'Sosa',520,0),(5,'Pérez',810,1);
 
@@ -159,16 +192,19 @@ FROM clientes WHERE activo = 0;
 DELETE FROM clientes WHERE activo = 0;
 
 -- Paso 3: verificar resultado
-SELECT 'QUEDAN' AS estado, nombre, score FROM clientes;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+SELECT 'QUEDAN' AS estado, nombre, score FROM clientes;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: INSERT desde SELECT</h3>
+      <h3>Ejemplo 4: INSERT desde SELECT</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_04_insert_select.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, saldo REAL);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_04_insert_select.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),
 (3,'Pérez',810,890000),(4,'Sosa',590,45000);
 
@@ -180,16 +216,19 @@ INSERT INTO clientes_premium (nombre, score, saldo)
 SELECT nombre, score, saldo FROM clientes WHERE score >= 700;
 
 -- Verificar
-SELECT 'PREMIUM' AS tabla, * FROM clientes_premium;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+SELECT 'PREMIUM' AS tabla, * FROM clientes_premium;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: UPDATE con CASE — actualización condicional</h3>
+      <h3>Ejemplo 5: UPDATE con CASE — actualización condicional</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_05_update_case.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, categoria TEXT);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_05_update_case.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, categoria TEXT);
 INSERT INTO clientes VALUES (1,'García',720,NULL),(2,'López',680,NULL),
 (3,'Pérez',810,NULL),(4,'Sosa',590,NULL),(5,'Fernández',645,NULL);
 
@@ -201,69 +240,172 @@ UPDATE clientes SET categoria = CASE
     ELSE 'Bajo'
 END;
 
-SELECT nombre, score, categoria FROM clientes ORDER BY score DESC;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+SELECT nombre, score, categoria FROM clientes ORDER BY score DESC;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Operación</th><th>Sintaxis</th><th>Riesgo sin WHERE</th></tr>
-<tr><td>INSERT</td><td><code>INSERT INTO t (cols) VALUES (vals)</code></td><td>N/A (agrega)</td></tr>
-<tr><td>INSERT multi</td><td><code>INSERT INTO t VALUES (...), (...)</code></td><td>N/A</td></tr>
-<tr><td>INSERT SELECT</td><td><code>INSERT INTO t SELECT ... FROM ...</code></td><td>Puede duplicar</td></tr>
-<tr><td>UPDATE</td><td><code>UPDATE t SET col = val WHERE cond</code></td><td><b>Modifica TODO</b></td></tr>
-<tr><td>DELETE</td><td><code>DELETE FROM t WHERE cond</code></td><td><b>Borra TODO</b></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Operación</th>
+            <th>Sintaxis</th>
+            <th>Riesgo sin WHERE</th>
+          </tr>
+          <tr>
+            <td>INSERT</td>
+            <td><code>INSERT INTO t (cols) VALUES (vals)</code></td>
+            <td>N/A (agrega)</td>
+          </tr>
+          <tr>
+            <td>INSERT multi</td>
+            <td><code>INSERT INTO t VALUES (...), (...)</code></td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>INSERT SELECT</td>
+            <td><code>INSERT INTO t SELECT ... FROM ...</code></td>
+            <td>Puede duplicar</td>
+          </tr>
+          <tr>
+            <td>UPDATE</td>
+            <td><code>UPDATE t SET col = val WHERE cond</code></td>
+            <td><b>Modifica TODO</b></td>
+          </tr>
+          <tr>
+            <td>DELETE</td>
+            <td><code>DELETE FROM t WHERE cond</code></td>
+            <td><b>Borra TODO</b></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Patrón seguro</th><th>Pasos</th></tr>
-<tr><td>Antes de UPDATE</td><td><code>SELECT * FROM t WHERE condición</code> → verificar → <code>UPDATE t SET ... WHERE condición</code></td></tr>
-<tr><td>Antes de DELETE</td><td><code>SELECT * FROM t WHERE condición</code> → verificar → <code>DELETE FROM t WHERE condición</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Patrón seguro</th>
+            <th>Pasos</th>
+          </tr>
+          <tr>
+            <td>Antes de UPDATE</td>
+            <td><code>SELECT * FROM t WHERE condición</code> → verificar → <code>UPDATE t SET ... WHERE condición</code>
+            </td>
+          </tr>
+          <tr>
+            <td>Antes de DELETE</td>
+            <td><code>SELECT * FROM t WHERE condición</code> → verificar → <code>DELETE FROM t WHERE condición</code>
+            </td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: INSERT básico</h4><p>Insertá 3 clientes y verificá con SELECT *. Debe incluir <code>García</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-1" data-expected="García"><div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "García"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: INSERT básico</h4>
+        <p>Insertá 3 clientes y verificá con SELECT *. Debe incluir <code>García</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-1" data-expected="García">
+          <div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "García"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER);
 
 -- Insertá 3 clientes:
 
 
 -- Verificá:
-SELECT * FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["INSERT INTO clientes VALUES (1, \\x27García\\x27, 720);","INSERT INTO clientes VALUES (2, \\x27López\\x27, 680);","INSERT INTO clientes VALUES (3, \\x27Pérez\\x27, 810);"]'></div></div>
+SELECT * FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["INSERT INTO clientes VALUES (1, \\x27García\\x27, 720);","INSERT INTO clientes VALUES (2, \\x27López\\x27, 680);","INSERT INTO clientes VALUES (3, \\x27Pérez\\x27, 810);"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: UPDATE simple</h4><p>Actualizá el score de García a 750. Debe incluir <code>750</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-2" data-expected="750"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "750"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: UPDATE simple</h4>
+        <p>Actualizá el score de García a 750. Debe incluir <code>750</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-2" data-expected="750">
+          <div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "750"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Pérez',810);
 
 -- Actualizá García a 750:
 
 
-SELECT * FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["UPDATE clientes SET score = 750 WHERE nombre = \\x27García\\x27;","SIEMPRE poné WHERE","Sin WHERE cambiaría TODOS a 750"]'></div></div>
+SELECT * FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["UPDATE clientes SET score = 750 WHERE nombre = \\x27García\\x27;","SIEMPRE poné WHERE","Sin WHERE cambiaría TODOS a 750"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: DELETE con WHERE</h4><p>Eliminá clientes con score < 600 y verificá. Debe incluir <code>García</code> (que queda).</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-3" data-expected="García"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "García"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: DELETE con WHERE</h4>
+        <p>Eliminá clientes con score < 600 y verificá. Debe incluir <code>García</code> (que queda).</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-3" data-expected="García">
+          <div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "García"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Martínez',590),(4,'Sosa',520);
 
 -- Eliminá score < 600:
 
 
-SELECT * FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["DELETE FROM clientes WHERE score < 600;","Martínez (590) y Sosa (520) se eliminan","Quedan García y López"]'></div></div>
+SELECT * FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["DELETE FROM clientes WHERE score < 600;","Martínez (590) y Sosa (520) se eliminan","Quedan García y López"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: UPDATE con cálculo</h4><p>Aplicá 5% de interés (saldo * 1.05) a todas las cuentas tipo PF. Debe incluir <code>525000</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-4" data-expected="525000"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "525000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE cuentas (id INTEGER, tipo TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: UPDATE con cálculo</h4>
+        <p>Aplicá 5% de interés (saldo * 1.05) a todas las cuentas tipo PF. Debe incluir <code>525000</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-4" data-expected="525000">
+          <div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "525000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE cuentas (id INTEGER, tipo TEXT, saldo REAL);
 INSERT INTO cuentas VALUES (1,'CA$',150000),(2,'PF',500000),(3,'CA$',320000);
 
 -- +5% a plazos fijos:
 
 
-SELECT * FROM cuentas;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["UPDATE cuentas SET saldo = saldo * 1.05 WHERE tipo = \\x27PF\\x27;","500000 * 1.05 = 525000","Las CA$ no se modifican"]'></div></div>
+SELECT * FROM cuentas;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["UPDATE cuentas SET saldo = saldo * 1.05 WHERE tipo = \\x27PF\\x27;","500000 * 1.05 = 525000","Las CA$ no se modifican"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: INSERT desde SELECT</h4><p>Copiá los clientes premium (score >= 700) a una nueva tabla. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-5" data-expected="Pérez"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: INSERT desde SELECT</h4>
+        <p>Copiá los clientes premium (score >= 700) a una nueva tabla. Debe incluir <code>Pérez</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-5" data-expected="Pérez">
+          <div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "Pérez"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Pérez',810),(4,'Sosa',590);
 
 CREATE TABLE premium (nombre TEXT, score INTEGER);
@@ -271,17 +413,48 @@ CREATE TABLE premium (nombre TEXT, score INTEGER);
 -- INSERT desde SELECT:
 
 
-SELECT * FROM premium;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["INSERT INTO premium (nombre, score) SELECT nombre, score FROM clientes WHERE score >= 700;","García (720) y Pérez (810) se copian","López y Sosa quedan afuera"]'></div></div>
+SELECT * FROM premium;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["INSERT INTO premium (nombre, score) SELECT nombre, score FROM clientes WHERE score >= 700;","García (720) y Pérez (810) se copian","López y Sosa quedan afuera"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: UPDATE con CASE WHEN</h4><p>Asigná categoría a cada cliente según score (4 niveles). Debe incluir <code>Excelente</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-6" data-expected="Excelente"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "Excelente"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, categoria TEXT);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: UPDATE con CASE WHEN</h4>
+        <p>Asigná categoría a cada cliente según score (4 niveles). Debe incluir <code>Excelente</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-6" data-expected="Excelente">
+          <div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "Excelente"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, categoria TEXT);
 INSERT INTO clientes VALUES (1,'García',720,NULL),(2,'López',680,NULL),(3,'Pérez',810,NULL),(4,'Sosa',590,NULL);
 
 -- UPDATE con CASE:
 
 
-SELECT nombre, score, categoria FROM clientes ORDER BY score DESC;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["UPDATE clientes SET categoria = CASE WHEN score >= 800 THEN \\x27Excelente\\x27 ...","WHEN score >= 700 THEN \\x27Bueno\\x27 ... ELSE \\x27Bajo\\x27 END","No necesita WHERE porque afecta a todos"]'></div></div>
+SELECT nombre, score, categoria FROM clientes ORDER BY score DESC;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["UPDATE clientes SET categoria = CASE WHEN score >= 800 THEN \\x27Excelente\\x27 ...","WHEN score >= 700 THEN \\x27Bueno\\x27 ... ELSE \\x27Bajo\\x27 END","No necesita WHERE porque afecta a todos"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Patrón SELECT → DELETE</h4><p>Primero mostrá los inactivos que vas a borrar, después borralos, después verificá. Debe incluir <code>quedan</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-7" data-expected="quedan"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "quedan"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, activo INTEGER);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Patrón SELECT → DELETE</h4>
+        <p>Primero mostrá los inactivos que vas a borrar, después borralos, después verificá. Debe incluir
+          <code>quedan</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-7" data-expected="quedan">
+          <div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "quedan"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García',1),(2,'López',1),(3,'Martínez',0),(4,'Sosa',0),(5,'Pérez',1);
 
 -- Paso 1: verificar
@@ -290,9 +463,25 @@ SELECT 'a borrar' AS accion, nombre FROM clientes WHERE activo = 0;
 -- Paso 2: borrar
 
 -- Paso 3: verificar resultado
-SELECT 'quedan' AS estado, nombre FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["DELETE FROM clientes WHERE activo = 0;","Martínez y Sosa se eliminan","Quedan García, López y Pérez"]'></div></div>
+SELECT 'quedan' AS estado, nombre FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["DELETE FROM clientes WHERE activo = 0;","Martínez y Sosa se eliminan","Quedan García, López y Pérez"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: INSERT múltiple + UPDATE masivo</h4><p>Insertá 5 clientes, después actualizá el saldo de todos aplicando rendimiento 3%. Debe incluir <code>154500</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-8" data-expected="154500"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "154500"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: INSERT múltiple + UPDATE masivo</h4>
+        <p>Insertá 5 clientes, después actualizá el saldo de todos aplicando rendimiento 3%. Debe incluir
+          <code>154500</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-8" data-expected="154500">
+          <div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "154500"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
 
 -- Insertá 5 clientes:
 INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),
@@ -301,18 +490,49 @@ INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),
 -- Aplicá 3%:
 
 
-SELECT nombre, saldo FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["UPDATE clientes SET saldo = ROUND(saldo * 1.03);","Sin WHERE aplica a todos","García: 150000 * 1.03 = 154500"]'></div></div>
+SELECT nombre, saldo FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["UPDATE clientes SET saldo = ROUND(saldo * 1.03);","Sin WHERE aplica a todos","García: 150000 * 1.03 = 154500"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: DELETE + reconteo</h4><p>Borrá clientes con saldo < $100K y mostrá cuántos quedaron. Debe incluir <code>3</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-9" data-expected="3"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "3"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: DELETE + reconteo</h4>
+        <p>Borrá clientes con saldo < $100K y mostrá cuántos quedaron. Debe incluir <code>3</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-9" data-expected="3">
+          <div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000),
 (4,'Sosa',45000),(5,'Luna',72000);
 
 -- Borrar saldo < 100K y contar:
 
 
-SELECT COUNT(*) AS quedan FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["DELETE FROM clientes WHERE saldo < 100000;","Sosa (45K) y Luna (72K) se eliminan","Quedan 3: García, López, Pérez"]'></div></div>
+SELECT COUNT(*) AS quedan FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["DELETE FROM clientes WHERE saldo < 100000;","Sosa (45K) y Luna (72K) se eliminan","Quedan 3: García, López, Pérez"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Pipeline completo INSERT → UPDATE → DELETE → reporte</h4><p>Creá tabla, insertá 6 clientes, actualizá categoría con CASE, eliminá los "Bajo" (<600), y generá reporte final. Debe incluir <code>REPORTE</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-10" data-expected="REPORTE"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "REPORTE"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL, categoria TEXT);
+      <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Pipeline completo INSERT → UPDATE → DELETE → reporte</h4>
+        <p>Creá tabla, insertá 6 clientes, actualizá categoría con CASE, eliminá los "Bajo" (<600), y generá reporte
+            final. Debe incluir <code>REPORTE</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-10" data-expected="REPORTE">
+          <div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "REPORTE"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL, categoria TEXT);
 
 -- 1. INSERT 6 clientes
 INSERT INTO clientes VALUES (1,'García',720,150000,NULL),(2,'López',680,320000,NULL),
@@ -325,38 +545,49 @@ INSERT INTO clientes VALUES (1,'García',720,150000,NULL),(2,'López',680,320000
 -- 4. REPORTE final
 SELECT 'REPORTE' AS titulo;
 SELECT nombre, score, saldo, categoria FROM clientes ORDER BY score DESC;
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["UPDATE clientes SET categoria = CASE WHEN score>=800 THEN \\x27Excelente\\x27 ... END","Sosa (520) es \\x27Bajo\\x27 → DELETE WHERE categoria = \\x27Bajo\\x27","Torres (590) es Regular, no se borra"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["UPDATE clientes SET categoria = CASE WHEN score>=800 THEN \\x27Excelente\\x27 ... END","Sosa (520) es \\x27Bajo\\x27 → DELETE WHERE categoria = \\x27Bajo\\x27","Torres (590) es Regular, no se borra"]'>
+        </div>
+      </div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
 
-<ul>
-  <li><code>INSERT INTO t (cols) VALUES (vals)</code> agrega registros. Podés insertar desde un SELECT.</li>
-  <li><code>UPDATE t SET col = val WHERE cond</code> modifica registros. <b>SIEMPRE con WHERE.</b></li>
-  <li><code>DELETE FROM t WHERE cond</code> elimina registros. <b>SIEMPRE con WHERE.</b></li>
-  <li>Patrón seguro: <b>SELECT primero → verificar → UPDATE/DELETE después.</b></li>
-  <li>UPDATE con CASE WHEN permite actualizaciones condicionales en una sola sentencia.</li>
-  <li>Las transacciones (BEGIN/COMMIT/ROLLBACK) garantizan atomicidad.</li>
-</ul>
+      <ul>
+        <li><code>INSERT INTO t (cols) VALUES (vals)</code> agrega registros. Podés insertar desde un SELECT.</li>
+        <li><code>UPDATE t SET col = val WHERE cond</code> modifica registros. <b>SIEMPRE con WHERE.</b></li>
+        <li><code>DELETE FROM t WHERE cond</code> elimina registros. <b>SIEMPRE con WHERE.</b></li>
+        <li>Patrón seguro: <b>SELECT primero → verificar → UPDATE/DELETE después.</b></li>
+        <li>UPDATE con CASE WHEN permite actualizaciones condicionales en una sola sentencia.</li>
+        <li>Las transacciones (BEGIN/COMMIT/ROLLBACK) garantizan atomicidad.</li>
+      </ul>
 
-<p>En la siguiente lección (<strong>13 · CREATE TABLE y tipos</strong>) vas a aprender a crear tablas, definir tipos de datos, constraints (PRIMARY KEY, NOT NULL, UNIQUE) y diseñar esquemas.</p>
+      <p>En la siguiente lección (<strong>13 · CREATE TABLE y tipos</strong>) vas a aprender a crear tablas, definir
+        tipos de datos, constraints (PRIMARY KEY, NOT NULL, UNIQUE) y diseñar esquemas.</p>
 
-<div class="footer-nav">
-  <a href="/sql/11-window-functions.html">← Window Functions</a>
-  <a class="next" href="/sql/13-create-table-tipos.html">CREATE TABLE y tipos →</a>
-</div>
+      <div class="footer-nav">
+        <a href="/sql/11-window-functions.html">← Window Functions</a>
+        <a class="next" href="/sql/13-create-table-tipos.html">CREATE TABLE y tipos →</a>
+      </div>
 
-</main>
-</div>
+    </main>
+  </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

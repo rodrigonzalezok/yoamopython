@@ -1,88 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 18 · Portfolio y Proyecto Final</title>
-<meta name="description" content="Construí tu portfolio de Data Analyst con un proyecto completo de análisis de principio a fin. Aplicá todo lo aprendido: pandas, estadística, visualización, ML y SQL.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 18 · Portfolio y Proyecto Final</title>
+  <meta name="description"
+    content="Construí tu portfolio de Data Analyst con un proyecto completo de análisis de principio a fin. Aplicá todo lo aprendido: pandas, estadística, visualización, ML y SQL.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 18 de 19</span>
-  <h1>Portfolio y Proyecto Final</h1>
-  <p>Llegó el momento de <strong>integrar todo</strong>. En esta lección vas a construir un proyecto completo de Data Analysis de principio a fin, siguiendo la metodología profesional que usarías en un trabajo real. Este proyecto es tu carta de presentación — tu <strong>portfolio</strong> — para demostrar a reclutadores y empleadores lo que sabés hacer.</p>
-  <div class="badges">
-    <span class="badge">180–240 min</span>
-    <span class="badge">Prerrequisitos: Todas las lecciones anteriores</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>El portfolio de un Data Analyst</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 18 de 19</span>
+        <h1>Portfolio y Proyecto Final</h1>
+        <p>Llegó el momento de <strong>integrar todo</strong>. En esta lección vas a construir un proyecto completo de
+          Data Analysis de principio a fin, siguiendo la metodología profesional que usarías en un trabajo real. Este
+          proyecto es tu carta de presentación — tu <strong>portfolio</strong> — para demostrar a reclutadores y
+          empleadores lo que sabés hacer.</p>
+        <div class="badges">
+          <span class="badge">180–240 min</span>
+          <span class="badge">Prerrequisitos: Todas las lecciones anteriores</span>
+        </div>
+      </div>
 
-<h3>¿Por qué necesitás un portfolio?</h3>
+      <div class="section-num">01</div>
+      <h2>El portfolio de un Data Analyst</h2>
 
-<p>Los certificados dicen que <em>estudiaste</em>. El portfolio demuestra que <em>sabés hacer</em>. Un buen portfolio te diferencia del 90% de los candidatos que solo tienen cursos en su CV.</p>
+      <h3>¿Por qué necesitás un portfolio?</h3>
 
-<div class="concept"><strong>Un portfolio de Data Analyst profesional contiene:</strong>
-<br>1. <strong>2-3 proyectos completos</strong> con datos reales o realistas
-<br>2. Notebooks o scripts bien documentados y organizados
-<br>3. <strong>Visualizaciones</strong> que comunican hallazgos con claridad
-<br>4. <strong>GitHub</strong> con código limpio, README profesional, y commits descriptivos
-<br>5. (Opcional) Dashboard en Power BI / Tableau publicado online</div>
+      <p>Los certificados dicen que <em>estudiaste</em>. El portfolio demuestra que <em>sabés hacer</em>. Un buen
+        portfolio te diferencia del 90% de los candidatos que solo tienen cursos en su CV.</p>
 
-<h3>¿Dónde publicar tu portfolio?</h3>
+      <div class="concept"><strong>Un portfolio de Data Analyst profesional contiene:</strong>
+        <br>1. <strong>2-3 proyectos completos</strong> con datos reales o realistas
+        <br>2. Notebooks o scripts bien documentados y organizados
+        <br>3. <strong>Visualizaciones</strong> que comunican hallazgos con claridad
+        <br>4. <strong>GitHub</strong> con código limpio, README profesional, y commits descriptivos
+        <br>5. (Opcional) Dashboard en Power BI / Tableau publicado online
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Plataforma</th><th>Ventaja</th><th>Para qué</th></tr>
-<tr><td><strong>GitHub</strong></td><td>Estándar de la industria</td><td>Código, notebooks, README</td></tr>
-<tr><td><strong>Kaggle</strong></td><td>Comunidad de Data Science</td><td>Notebooks interactivos, datasets</td></tr>
-<tr><td><strong>LinkedIn</strong></td><td>Red profesional #1</td><td>Posts con hallazgos, links al código</td></tr>
-<tr><td><strong>Tableau Public</strong></td><td>Dashboards interactivos gratis</td><td>Visualizaciones publicadas</td></tr>
-<tr><td><strong>Blog personal</strong></td><td>Control total del contenido</td><td>Artículos explicando tu proceso</td></tr>
-</table>
-</div>
+      <h3>¿Dónde publicar tu portfolio?</h3>
 
-<h3>Estructura de un proyecto de portfolio</h3>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Plataforma</th>
+            <th>Ventaja</th>
+            <th>Para qué</th>
+          </tr>
+          <tr>
+            <td><strong>GitHub</strong></td>
+            <td>Estándar de la industria</td>
+            <td>Código, notebooks, README</td>
+          </tr>
+          <tr>
+            <td><strong>Kaggle</strong></td>
+            <td>Comunidad de Data Science</td>
+            <td>Notebooks interactivos, datasets</td>
+          </tr>
+          <tr>
+            <td><strong>LinkedIn</strong></td>
+            <td>Red profesional #1</td>
+            <td>Posts con hallazgos, links al código</td>
+          </tr>
+          <tr>
+            <td><strong>Tableau Public</strong></td>
+            <td>Dashboards interactivos gratis</td>
+            <td>Visualizaciones publicadas</td>
+          </tr>
+          <tr>
+            <td><strong>Blog personal</strong></td>
+            <td>Control total del contenido</td>
+            <td>Artículos explicando tu proceso</td>
+          </tr>
+        </table>
+      </div>
 
-<ol>
-  <li><strong>Título claro:</strong> "Análisis de Churn Bancario: predicción de cancelación de clientes"</li>
-  <li><strong>Pregunta de negocio:</strong> "¿Qué características tienen los clientes que cancelan?"</li>
-  <li><strong>Dataset:</strong> de dónde vienen los datos, qué contienen (puede ser Kaggle o datos simulados)</li>
-  <li><strong>EDA:</strong> exploración completa con gráficos e insights</li>
-  <li><strong>Análisis / Modelo:</strong> estadísticas, correlaciones, ML si aplica</li>
-  <li><strong>Conclusiones:</strong> hallazgos accionables para el negocio</li>
-  <li><strong>README profesional</strong> en GitHub</li>
-</ol>
+      <h3>Estructura de un proyecto de portfolio</h3>
 
-<div class="realworld"><strong>Lo que buscan los reclutadores:</strong> no buscan el modelo con más accuracy. Buscan: (1) que puedas formular una pregunta de negocio, (2) que tu código sea limpio y reproducible, (3) que tus visualizaciones comuniquen con claridad, y (4) que puedas extraer insights accionables. El proceso importa más que el resultado.</div>
+      <ol>
+        <li><strong>Título claro:</strong> "Análisis de Churn Bancario: predicción de cancelación de clientes"</li>
+        <li><strong>Pregunta de negocio:</strong> "¿Qué características tienen los clientes que cancelan?"</li>
+        <li><strong>Dataset:</strong> de dónde vienen los datos, qué contienen (puede ser Kaggle o datos simulados)</li>
+        <li><strong>EDA:</strong> exploración completa con gráficos e insights</li>
+        <li><strong>Análisis / Modelo:</strong> estadísticas, correlaciones, ML si aplica</li>
+        <li><strong>Conclusiones:</strong> hallazgos accionables para el negocio</li>
+        <li><strong>README profesional</strong> en GitHub</li>
+      </ol>
 
-<div class="section-num">02</div>
-<h2>Proyecto Final: Análisis de Churn Bancario</h2>
+      <div class="realworld"><strong>Lo que buscan los reclutadores:</strong> no buscan el modelo con más accuracy.
+        Buscan: (1) que puedas formular una pregunta de negocio, (2) que tu código sea limpio y reproducible, (3) que
+        tus visualizaciones comuniquen con claridad, y (4) que puedas extraer insights accionables. El proceso importa
+        más que el resultado.</div>
 
-<p>Vamos a construir un proyecto completo paso a paso. Cada bloque de código es un paso del proceso.</p>
+      <div class="section-num">02</div>
+      <h2>Proyecto Final: Análisis de Churn Bancario</h2>
 
-<h3>Paso 1: Definir el problema y crear el dataset</h3>
+      <p>Vamos a construir un proyecto completo paso a paso. Cada bloque de código es un paso del proceso.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>proyecto_paso01.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <h3>Paso 1: Definir el problema y crear el dataset</h3>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>proyecto_paso01.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 np.random.seed(42)
@@ -132,16 +174,19 @@ print(f"   ¿Qué características tienen los clientes que cancelan?")
 print(f"   ¿Podemos predecir quiénes están en riesgo?")
 print(f"\nDataset: {df.shape[0]} clientes × {df.shape[1]} variables")
 print(f"   Tasa de churn: {df['Churn'].mean()*100:.1f}%")
-print(f"\n{df.head()}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\n{df.head()}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Paso 2: EDA — Calidad de datos</h3>
+      <h3>Paso 2: EDA — Calidad de datos</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>proyecto_paso02.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>proyecto_paso02.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 np.random.seed(42)
@@ -178,16 +223,19 @@ for col in ["Saldo","Ingreso"]:
 
 # Resumen estadístico
 print(f"\nEstadísticas post-limpieza:")
-print(df.describe().round(0))</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(df.describe().round(0))</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Paso 3: EDA — Análisis visual</h3>
+      <h3>Paso 3: EDA — Análisis visual</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>proyecto_paso03.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>proyecto_paso03.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -236,16 +284,19 @@ plt.tight_layout()
 plt.show()
 
 print("Hallazgo 1: Clientes con menos antigüedad tienen más churn")
-print("Hallazgo 2: Menor cantidad de productos → mayor riesgo")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("Hallazgo 2: Menor cantidad de productos → mayor riesgo")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Paso 4: Modelo predictivo</h3>
+      <h3>Paso 4: Modelo predictivo</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>proyecto_paso04.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>proyecto_paso04.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -291,16 +342,19 @@ for nombre, mod in modelos.items():
         mejor_recall, mejor_modelo, mejor_nombre = rec, mod, nombre
 
 print(f"\nMejor modelo (por recall): {mejor_nombre}")
-print(f"   Recall = {mejor_recall*100:.1f}% → captura el {mejor_recall*100:.0f}% de los churners")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"   Recall = {mejor_recall*100:.1f}% → captura el {mejor_recall*100:.0f}% de los churners")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Paso 5: Conclusiones y recomendaciones</h3>
+      <h3>Paso 5: Conclusiones y recomendaciones</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>proyecto_paso05.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">print("=" * 60)
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>proyecto_paso05.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">print("=" * 60)
 print("CONCLUSIONES Y RECOMENDACIONES DE NEGOCIO")
 print("=" * 60)
 
@@ -343,19 +397,22 @@ HALLAZGOS PRINCIPALES:
    • Presentación ejecutiva (5 slides)
 """)
 
-print("✅ Proyecto final completado")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("✅ Proyecto final completado")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Cómo armar tu GitHub profesional</h2>
+      <div class="section-num">03</div>
+      <h2>Cómo armar tu GitHub profesional</h2>
 
-<h3>Estructura de un repositorio de portfolio</h3>
+      <h3>Estructura de un repositorio de portfolio</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>estructura_github.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">estructura = """
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>estructura_github.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">estructura = """
 📁 churn-analysis/
 │
 ├── 📄 README.md          ← Descripción, hallazgos, cómo ejecutar
@@ -410,21 +467,25 @@ jupyter notebook notebooks/01_eda.ipynb
 ## Autor
 Tu Nombre — [LinkedIn](link) — [Email](mailto:)
 """
-print(readme)</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(readme)</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios del Proyecto Final</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios del Proyecto Final</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Diagnóstico rápido del dataset</h4>
-  <p>Imprimí las dimensiones, tipos de datos y nulos del dataset. Debe incluir <code>shape</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-1" data-expected="shape">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "shape"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Diagnóstico rápido del dataset</h4>
+        <p>Imprimí las dimensiones, tipos de datos y nulos del dataset. Debe incluir <code>shape</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-1"
+          data-expected="shape">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "shape"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -437,20 +498,25 @@ df = pd.DataFrame({
 df.loc[np.random.choice(100, 5), "Saldo"] = np.nan
 
 # Diagnóstico: shape, dtypes, nulos
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["print(f\"shape: {df.shape}\")","print(f\"\\nTipos:\\n{df.dtypes}\")","print(f\"\\nNulos:\\n{df.isna().sum()}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["print(f\"shape: {df.shape}\")","print(f\"\\nTipos:\\n{df.dtypes}\")","print(f\"\\nNulos:\\n{df.isna().sum()}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Tasa de churn</h4>
-  <p>Calculá la tasa de churn (% de clientes que cancelaron). Debe incluir <code>%</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-2" data-expected="%">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "%"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Tasa de churn</h4>
+        <p>Calculá la tasa de churn (% de clientes que cancelaron). Debe incluir <code>%</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-2" data-expected="%">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "%"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -459,20 +525,25 @@ df = pd.DataFrame({
 })
 
 # Tasa de churn
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["tasa = df[\"Churn\"].mean() * 100","print(f\"Tasa de churn: {tasa:.1f}%\")","print(f\"Cancelaron: {df[\\\"Churn\\\"].sum()} de {len(df)}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["tasa = df[\"Churn\"].mean() * 100","print(f\"Tasa de churn: {tasa:.1f}%\")","print(f\"Cancelaron: {df[\\\"Churn\\\"].sum()} de {len(df)}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Estadísticas por grupo</h4>
-  <p>Calculá la media de Productos y Saldo agrupando por Churn (0 vs 1). Debe incluir <code>mean</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-3" data-expected="mean">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "mean"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Estadísticas por grupo</h4>
+        <p>Calculá la media de Productos y Saldo agrupando por Churn (0 vs 1). Debe incluir <code>mean</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-3" data-expected="mean">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "mean"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -483,20 +554,25 @@ df = pd.DataFrame({
 })
 
 # groupby Churn → media
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["print(df.groupby(\"Churn\")[[\"Productos\",\"Saldo\"]].mean().round(0))"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["print(df.groupby(\"Churn\")[[\"Productos\",\"Saldo\"]].mean().round(0))"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Gráfico de churn por segmento</h4>
-  <p>Graficá la tasa de churn por segmento con un barplot. Imprimí <code>Gráfico churn OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-4" data-expected="Gráfico churn OK">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe imprimir "Gráfico churn OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Gráfico de churn por segmento</h4>
+        <p>Graficá la tasa de churn por segmento con un barplot. Imprimí <code>Gráfico churn OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-4"
+          data-expected="Gráfico churn OK">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe imprimir "Gráfico churn OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -509,20 +585,25 @@ df = pd.DataFrame({
 })
 
 # Tasa de churn por segmento → barplot
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["tasa = df.groupby(\"Segmento\")[\"Churn\"].mean()*100","tasa.plot(kind=\"bar\", color=[\"#4CAF50\",\"#FF9800\",\"#F44336\"])","plt.title(\"Tasa churn por segmento\"); plt.ylabel(\"%\"); plt.show(); print(\"Gráfico churn OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["tasa = df.groupby(\"Segmento\")[\"Churn\"].mean()*100","tasa.plot(kind=\"bar\", color=[\"#4CAF50\",\"#FF9800\",\"#F44336\"])","plt.title(\"Tasa churn por segmento\"); plt.ylabel(\"%\"); plt.show(); print(\"Gráfico churn OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Imputar nulos con mediana por grupo</h4>
-  <p>Rellenálos nulos de Saldo con la mediana de cada Segmento. Debe incluir <code>0</code> (nulos restantes).</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-5" data-expected="0">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Imputar nulos con mediana por grupo</h4>
+        <p>Rellenálos nulos de Saldo con la mediana de cada Segmento. Debe incluir <code>0</code> (nulos restantes).</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-5" data-expected="0">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -534,20 +615,25 @@ df.loc[np.random.choice(50, 8, replace=False), "Saldo"] = np.nan
 print(f"Antes: {df['Saldo'].isna().sum()} nulos")
 
 # fillna con mediana por segmento
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["df[\"Saldo\"] = df.groupby(\"Segmento\")[\"Saldo\"].transform(lambda x: x.fillna(x.median()))","print(f\"Después: {df[\\\"Saldo\\\"].isna().sum()} nulos\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["df[\"Saldo\"] = df.groupby(\"Segmento\")[\"Saldo\"].transform(lambda x: x.fillna(x.median()))","print(f\"Después: {df[\\\"Saldo\\\"].isna().sum()} nulos\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Train/Test + modelo simple</h4>
-  <p>Entrenáun modelo de churn y mostrá el accuracy. Debe incluir <code>%</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-6" data-expected="%">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "%"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Train/Test + modelo simple</h4>
+        <p>Entrenáun modelo de churn y mostrá el accuracy. Debe incluir <code>%</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-6" data-expected="%">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "%"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
@@ -563,20 +649,27 @@ ruido = np.random.choice(n, 20, replace=False)
 y[ruido] = 1 - y[ruido]
 
 # Split + entrenar + accuracy
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)","m = DecisionTreeClassifier(max_depth=3, random_state=42).fit(X_tr, y_tr)","print(f\"Accuracy: {accuracy_score(y_te, m.predict(X_te))*100:.1f}%\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)","m = DecisionTreeClassifier(max_depth=3, random_state=42).fit(X_tr, y_tr)","print(f\"Accuracy: {accuracy_score(y_te, m.predict(X_te))*100:.1f}%\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Dashboard EDA de 4 gráficos</h4>
-  <p>Creá un dashboard con 4 gráficos del proyecto: boxplot, histograma, countplot y heatmap. Imprimí <code>EDA completo</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-7" data-expected="EDA completo">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe imprimir "EDA completo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Dashboard EDA de 4 gráficos</h4>
+        <p>Creá un dashboard con 4 gráficos del proyecto: boxplot, histograma, countplot y heatmap. Imprimí
+          <code>EDA completo</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-7"
+          data-expected="EDA completo">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe imprimir "EDA completo"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -595,20 +688,27 @@ df = pd.DataFrame({
 
 # fig, axes = plt.subplots(2, 2, figsize=(12, 9))
 # 4 gráficos profesionales
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 9))","sns.boxplot(data=df, x=\"Churn\", y=\"Antigüedad\", ax=axes[0,0])","sns.histplot(data=df, x=\"Productos\", hue=\"Churn\", ax=axes[0,1])","sns.countplot(data=df, x=\"Segmento\", ax=axes[1,0]); sns.heatmap(df.select_dtypes(\"number\").corr(), annot=True, ax=axes[1,1])","plt.tight_layout(); plt.show(); print(\"EDA completo\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 9))","sns.boxplot(data=df, x=\"Churn\", y=\"Antigüedad\", ax=axes[0,0])","sns.histplot(data=df, x=\"Productos\", hue=\"Churn\", ax=axes[0,1])","sns.countplot(data=df, x=\"Segmento\", ax=axes[1,0]); sns.heatmap(df.select_dtypes(\"number\").corr(), annot=True, ax=axes[1,1])","plt.tight_layout(); plt.show(); print(\"EDA completo\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Comparar 2 modelos con métricas completas</h4>
-  <p>Compará Árbol y Logística. Imprimí accuracy, precision y recall de ambos. Debe incluir <code>Recall</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-8" data-expected="Recall">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Recall"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Comparar 2 modelos con métricas completas</h4>
+        <p>Compará Árbol y Logística. Imprimí accuracy, precision y recall de ambos. Debe incluir <code>Recall</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-8"
+          data-expected="Recall">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Recall"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
@@ -620,20 +720,27 @@ y = (X[:,0] + X[:,1]*0.5 > 0.8).astype(int)
 X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)
 
 # 2 modelos, 3 métricas cada uno
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["for n,m in [(\"Árbol\",DecisionTreeClassifier(max_depth=3,random_state=42)),(\"LogReg\",LogisticRegression(random_state=42))]:","    m.fit(X_tr,y_tr); p=m.predict(X_te)","    print(f\"{n}: Acc={accuracy_score(y_te,p)*100:.1f}% Prec={precision_score(y_te,p)*100:.1f}% Recall={recall_score(y_te,p)*100:.1f}%\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["for n,m in [(\"Árbol\",DecisionTreeClassifier(max_depth=3,random_state=42)),(\"LogReg\",LogisticRegression(random_state=42))]:","    m.fit(X_tr,y_tr); p=m.predict(X_te)","    print(f\"{n}: Acc={accuracy_score(y_te,p)*100:.1f}% Prec={precision_score(y_te,p)*100:.1f}% Recall={recall_score(y_te,p)*100:.1f}%\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Generar tabla de recomendaciones</h4>
-  <p>Basándote en los datos, imprimí 3 recomendaciones accionables para el negocio. Debe incluir <code>Recomendación</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-9" data-expected="Recomendación">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Recomendación"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Generar tabla de recomendaciones</h4>
+        <p>Basándote en los datos, imprimí 3 recomendaciones accionables para el negocio. Debe incluir
+          <code>Recomendación</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-9"
+          data-expected="Recomendación">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Recomendación"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -646,20 +753,28 @@ df = pd.DataFrame({
 
 # Analizar datos + imprimir recomendaciones
 # Tip: calculá tasa churn por antigüedad (<3 vs >=3) y por productos (<2 vs >=2)
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["churn_nuevo = df[df[\"Antigüedad\"]<3][\"Churn\"].mean()","churn_viejo = df[df[\"Antigüedad\"]>=3][\"Churn\"].mean()","print(f\"Churn nuevos: {churn_nuevo*100:.0f}% vs antiguos: {churn_viejo*100:.0f}%\")","print(\"Recomendación 1: Programa de retención para clientes < 3 años\")","print(\"Recomendación 2: Cross-selling temprano\")","print(\"Recomendación 3: Scoring mensual automático\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["churn_nuevo = df[df[\"Antigüedad\"]<3][\"Churn\"].mean()","churn_viejo = df[df[\"Antigüedad\"]>=3][\"Churn\"].mean()","print(f\"Churn nuevos: {churn_nuevo*100:.0f}% vs antiguos: {churn_viejo*100:.0f}%\")","print(\"Recomendación 1: Programa de retención para clientes < 3 años\")","print(\"Recomendación 2: Cross-selling temprano\")","print(\"Recomendación 3: Scoring mensual automático\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Pipeline completo mini-proyecto</h4>
-  <p>Pipeline end-to-end: crear datos → limpiar → EDA → modelo → insight. Debe incluir <code>Proyecto finalizado</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-10" data-expected="Proyecto finalizado">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Proyecto finalizado"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Pipeline completo mini-proyecto</h4>
+        <p>Pipeline end-to-end: crear datos → limpiar → EDA → modelo → insight. Debe incluir
+          <code>Proyecto finalizado</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-18" data-exercise="ex-10"
+          data-expected="Proyecto finalizado">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Proyecto finalizado"</span>
+          </div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -674,42 +789,48 @@ n = 200
 # 3. EDA rápido (describe + tasa churn)
 # 4. Modelo + accuracy + recall
 # 5. print("Proyecto finalizado")
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["df = pd.DataFrame({\"Ant\":np.random.randint(0,20,n).astype(float),\"Prod\":np.random.randint(1,6,n).astype(float),\"Churn\":np.random.choice([0,1],n,p=[0.75,0.25])})","df.loc[np.random.choice(n,10),:]=np.nan; df=df.fillna(df.median())","X=df[[\"Ant\",\"Prod\"]].values; y=df[\"Churn\"].astype(int).values","X_tr,X_te,y_tr,y_te=train_test_split(X,y,test_size=0.2,random_state=42)","m=DecisionTreeClassifier(max_depth=3,random_state=42).fit(X_tr,y_tr); p=m.predict(X_te)","print(f\"Acc: {accuracy_score(y_te,p)*100:.1f}% Recall: {recall_score(y_te,p,zero_division=0)*100:.1f}%\")","print(\"Proyecto finalizado\")"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>Tu portfolio demuestra lo que <strong>sabés hacer</strong> — es más valioso que cualquier certificado.</li>
+        <li>Un proyecto completo incluye: pregunta de negocio → datos → EDA → modelo → conclusiones.</li>
+        <li>GitHub con README profesional es el estándar para presentar proyectos.</li>
+        <li>El proceso importa más que el resultado — código limpio, visualizaciones claras, insights accionables.</li>
+        <li>2-3 proyectos bien hechos valen más que 10 mediocres.</li>
+      </ul>
+
+      <p>En la lección final (<strong>19 · Preparación para entrevistas</strong>) vas a aprender qué te van a preguntar
+        en entrevistas de Data Analyst, cómo prepararte y cómo presentar tu portfolio profesionalmente.</p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/17-sql-python-integracion.html">← Integración SQL + Python</a>
+        <a class="next" href="/data-analysis/19-preparacion-entrevistas.html">Preparación para entrevistas →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["df = pd.DataFrame({\"Ant\":np.random.randint(0,20,n).astype(float),\"Prod\":np.random.randint(1,6,n).astype(float),\"Churn\":np.random.choice([0,1],n,p=[0.75,0.25])})","df.loc[np.random.choice(n,10),:]=np.nan; df=df.fillna(df.median())","X=df[[\"Ant\",\"Prod\"]].values; y=df[\"Churn\"].astype(int).values","X_tr,X_te,y_tr,y_te=train_test_split(X,y,test_size=0.2,random_state=42)","m=DecisionTreeClassifier(max_depth=3,random_state=42).fit(X_tr,y_tr); p=m.predict(X_te)","print(f\"Acc: {accuracy_score(y_te,p)*100:.1f}% Recall: {recall_score(y_te,p,zero_division=0)*100:.1f}%\")","print(\"Proyecto finalizado\")"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>Tu portfolio demuestra lo que <strong>sabés hacer</strong> — es más valioso que cualquier certificado.</li>
-  <li>Un proyecto completo incluye: pregunta de negocio → datos → EDA → modelo → conclusiones.</li>
-  <li>GitHub con README profesional es el estándar para presentar proyectos.</li>
-  <li>El proceso importa más que el resultado — código limpio, visualizaciones claras, insights accionables.</li>
-  <li>2-3 proyectos bien hechos valen más que 10 mediocres.</li>
-</ul>
-
-<p>En la lección final (<strong>19 · Preparación para entrevistas</strong>) vas a aprender qué te van a preguntar en entrevistas de Data Analyst, cómo prepararte y cómo presentar tu portfolio profesionalmente.</p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/17-sql-python-integracion.html">← Integración SQL + Python</a>
-  <a class="next" href="/data-analysis/19-preparacion-entrevistas.html">Preparación para entrevistas →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

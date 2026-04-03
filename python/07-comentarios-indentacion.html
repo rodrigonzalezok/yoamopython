@@ -1,58 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 07 · Comentarios e indentación</title>
-<meta name="description" content="Escribí código legible y profesional. Comentarios, docstrings, indentación obligatoria y convenciones PEP 8.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 07 · Comentarios e indentación</title>
+  <meta name="description"
+    content="Escribí código legible y profesional. Comentarios, docstrings, indentación obligatoria y convenciones PEP 8.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 07 de 27</span>
-  <h1>Comentarios e indentación</h1>
-  <p>El código se escribe una vez y se lee cientos de veces. Comentar bien e indentar correctamente es lo que convierte código funcional en código profesional y mantenible.</p>
-  <div class="badges">
-    <span class="badge">50–70 min</span>
-    <span class="badge">Prerrequisitos: 06 Condicionales</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 07 de 27</span>
+        <h1>Comentarios e indentación</h1>
+        <p>El código se escribe una vez y se lee cientos de veces. Comentar bien e indentar correctamente es lo que
+          convierte código funcional en código profesional y mantenible.</p>
+        <div class="badges">
+          <span class="badge">50–70 min</span>
+          <span class="badge">Prerrequisitos: 06 Condicionales</span>
+        </div>
+      </div>
 
-<h3>¿Para qué comentar?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Un <strong>comentario</strong> es texto que Python ignora al ejecutar. Existe exclusivamente para que los humanos (incluido tu yo del futuro) entiendan el código. Parece trivial, pero en el mundo profesional la diferencia entre un proyecto mantenible y uno que nadie quiere tocar suele ser la calidad de los comentarios.</p>
+      <h3>¿Para qué comentar?</h3>
 
-<p>Hay una frase famosa en programación: <em>"El código dice CÓMO, los comentarios dicen POR QUÉ."</em> No comentes lo obvio (<code># sumo a + b</code> antes de <code>c = a + b</code>). Comentá las decisiones no evidentes: por qué usaste una fórmula y no otra, por qué tratás un caso especial, qué regla de negocio implementa ese bloque.</p>
+      <p>Un <strong>comentario</strong> es texto que Python ignora al ejecutar. Existe exclusivamente para que los
+        humanos (incluido tu yo del futuro) entiendan el código. Parece trivial, pero en el mundo profesional la
+        diferencia entre un proyecto mantenible y uno que nadie quiere tocar suele ser la calidad de los comentarios.
+      </p>
 
-<div class="concept"><strong>Regla de oro:</strong> si necesitás un comentario para explicar QUÉ hace tu código, probablemente tu código sea demasiado complejo o tenga nombres poco claros. Los buenos nombres hacen que el código se explique solo. Los comentarios quedan para el POR QUÉ y el CONTEXTO.</div>
+      <p>Hay una frase famosa en programación: <em>"El código dice CÓMO, los comentarios dicen POR QUÉ."</em> No
+        comentes lo obvio (<code># sumo a + b</code> antes de <code>c = a + b</code>). Comentá las decisiones no
+        evidentes: por qué usaste una fórmula y no otra, por qué tratás un caso especial, qué regla de negocio
+        implementa ese bloque.</p>
 
-<h3>Tipos de comentarios en Python</h3>
+      <div class="concept"><strong>Regla de oro:</strong> si necesitás un comentario para explicar QUÉ hace tu código,
+        probablemente tu código sea demasiado complejo o tenga nombres poco claros. Los buenos nombres hacen que el
+        código se explique solo. Los comentarios quedan para el POR QUÉ y el CONTEXTO.</div>
 
-<p><strong>Comentario de una línea:</strong> empieza con <code>#</code>. Todo lo que viene después del <code>#</code> en esa línea es ignorado por Python.</p>
+      <h3>Tipos de comentarios en Python</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Esto es un comentario completo en una línea
+      <p><strong>Comentario de una línea:</strong> empieza con <code>#</code>. Todo lo que viene después del
+        <code>#</code> en esa línea es ignorado por Python.</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Esto es un comentario completo en una línea
 saldo = 50000  # También podés comentar al final de una línea de código</pre>
 
-<p><strong>Docstrings (documentación):</strong> son strings de triple comilla (<code>"""..."""</code> o <code>'''...'''</code>) que documentan funciones, clases y módulos. A diferencia de los comentarios comunes, los docstrings se almacenan en memoria y se pueden acceder con <code>help()</code> o <code>.__doc__</code>. Son la forma oficial de documentar en Python.</p>
+      <p><strong>Docstrings (documentación):</strong> son strings de triple comilla (<code>"""..."""</code> o
+        <code>'''...'''</code>) que documentan funciones, clases y módulos. A diferencia de los comentarios comunes, los
+        docstrings se almacenan en memoria y se pueden acceder con <code>help()</code> o <code>.__doc__</code>. Son la
+        forma oficial de documentar en Python.</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def calcular_iva(precio, tasa=0.21):
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def calcular_iva(precio, tasa=0.21):
     """
     Calcula el precio con IVA incluido.
     
@@ -65,31 +87,60 @@ saldo = 50000  # También podés comentar al final de una línea de código</pre
     """
     return precio * (1 + tasa)</pre>
 
-<div class="tip"><strong>Tip profesional:</strong> el estilo de docstrings más usado en la industria es el de Google (como el ejemplo de arriba). Otras opciones son NumPy style y Sphinx style. Lo importante es ser consistente en todo el proyecto.</div>
+      <div class="tip"><strong>Tip profesional:</strong> el estilo de docstrings más usado en la industria es el de
+        Google (como el ejemplo de arriba). Otras opciones son NumPy style y Sphinx style. Lo importante es ser
+        consistente en todo el proyecto.</div>
 
-<h3>¿Qué comentar y qué NO comentar?</h3>
+      <h3>¿Qué comentar y qué NO comentar?</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>✅ Comentá esto</th><th>❌ NO comentes esto</th></tr>
-<tr><td>Decisiones de diseño no obvias</td><td>Código que se explica solo</td></tr>
-<tr><td>Reglas de negocio: "BCRA exige ratio < 35%"</td><td><code># Sumo a más b</code> antes de <code>c = a + b</code></td></tr>
-<tr><td>Workarounds y sus razones</td><td>Cada línea individual</td></tr>
-<tr><td>TODOs y FIXMEs para el futuro</td><td>Código comentado que "por las dudas" dejás</td></tr>
-<tr><td>Fórmulas financieras con su fuente</td><td>Nombres de variables (si el nombre es bueno)</td></tr>
-<tr><td>Límites y supuestos del algoritmo</td><td>Getters y setters triviales</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>✅ Comentá esto</th>
+            <th>❌ NO comentes esto</th>
+          </tr>
+          <tr>
+            <td>Decisiones de diseño no obvias</td>
+            <td>Código que se explica solo</td>
+          </tr>
+          <tr>
+            <td>Reglas de negocio: "BCRA exige ratio < 35%"</td>
+            <td><code># Sumo a más b</code> antes de <code>c = a + b</code></td>
+          </tr>
+          <tr>
+            <td>Workarounds y sus razones</td>
+            <td>Cada línea individual</td>
+          </tr>
+          <tr>
+            <td>TODOs y FIXMEs para el futuro</td>
+            <td>Código comentado que "por las dudas" dejás</td>
+          </tr>
+          <tr>
+            <td>Fórmulas financieras con su fuente</td>
+            <td>Nombres de variables (si el nombre es bueno)</td>
+          </tr>
+          <tr>
+            <td>Límites y supuestos del algoritmo</td>
+            <td>Getters y setters triviales</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="warning"><strong>Antipatrón: código comentado.</strong> Si tenés líneas de código comentadas "por las dudas", borralas. Para eso existe Git (control de versiones) — siempre podés recuperar código viejo. Código comentado acumula ruido, confunde, y nadie sabe si está ahí por algo o es basura.</div>
+      <div class="warning"><strong>Antipatrón: código comentado.</strong> Si tenés líneas de código comentadas "por las
+        dudas", borralas. Para eso existe Git (control de versiones) — siempre podés recuperar código viejo. Código
+        comentado acumula ruido, confunde, y nadie sabe si está ahí por algo o es basura.</div>
 
-<h3>Indentación: la estructura de Python</h3>
+      <h3>Indentación: la estructura de Python</h3>
 
-<p>En la mayoría de lenguajes (Java, C++, JavaScript), los bloques de código se delimitan con llaves <code>{}</code>. En Python, los bloques se delimitan con <strong>indentación</strong> (espacios al inicio de la línea). Esto NO es una preferencia estética — es <b>parte de la sintaxis del lenguaje</b>. Si indentás mal, tu programa hace otra cosa o directamente da error.</p>
+      <p>En la mayoría de lenguajes (Java, C++, JavaScript), los bloques de código se delimitan con llaves
+        <code>{}</code>. En Python, los bloques se delimitan con <strong>indentación</strong> (espacios al inicio de la
+        línea). Esto NO es una preferencia estética — es <b>parte de la sintaxis del lenguaje</b>. Si indentás mal, tu
+        programa hace otra cosa o directamente da error.</p>
 
-<p>La convención universal es usar <strong>4 espacios</strong> por nivel de indentación. No 2, no 3, no tabs — 4 espacios. Esto está documentado en PEP 8 y es lo que usan el 99% de los proyectos Python del mundo.</p>
+      <p>La convención universal es usar <strong>4 espacios</strong> por nivel de indentación. No 2, no 3, no tabs — 4
+        espacios. Esto está documentado en PEP 8 y es lo que usan el 99% de los proyectos Python del mundo.</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">if saldo > 0:
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">if saldo > 0:
     # Nivel 1: 4 espacios
     print("Tenés saldo positivo")
     if saldo > 100000:
@@ -101,33 +152,41 @@ saldo = 50000  # También podés comentar al final de una línea de código</pre
 # Nivel 0: sin espacios — fuera de todos los bloques
 print("Esto siempre se ejecuta")</pre>
 
-<div class="warning"><strong>IndentationError: el error más frustrante de principiante.</strong> Aparece cuando la indentación es inconsistente: mezclás tabs y espacios, o tenés 3 espacios donde deberían ser 4. VS Code con la extensión de Python resuelve esto automáticamente convirtiendo tabs a 4 espacios.</div>
+      <div class="warning"><strong>IndentationError: el error más frustrante de principiante.</strong> Aparece cuando la
+        indentación es inconsistente: mezclás tabs y espacios, o tenés 3 espacios donde deberían ser 4. VS Code con la
+        extensión de Python resuelve esto automáticamente convirtiendo tabs a 4 espacios.</div>
 
-<h3>PEP 8: el estándar de estilo de Python</h3>
+      <h3>PEP 8: el estándar de estilo de Python</h3>
 
-<p><strong>PEP 8</strong> (Python Enhancement Proposal #8) es la guía oficial de estilo de Python. Seguirla no es obligatorio para que tu código funcione, pero sí es obligatorio en cualquier equipo profesional. Las reglas más importantes:</p>
+      <p><strong>PEP 8</strong> (Python Enhancement Proposal #8) es la guía oficial de estilo de Python. Seguirla no es
+        obligatorio para que tu código funcione, pero sí es obligatorio en cualquier equipo profesional. Las reglas más
+        importantes:</p>
 
-<ul>
-  <li><b>Indentación:</b> 4 espacios por nivel</li>
-  <li><b>Largo de línea:</b> máximo 79-120 caracteres</li>
-  <li><b>Espacios alrededor de operadores:</b> <code>x = 1</code>, no <code>x=1</code></li>
-  <li><b>Líneas en blanco:</b> 2 entre funciones de nivel superior, 1 entre métodos dentro de una clase</li>
-  <li><b>Imports:</b> uno por línea, al inicio del archivo, agrupados (stdlib → terceros → locales)</li>
-  <li><b>Trailing whitespace:</b> no dejar espacios al final de las líneas</li>
-</ul>
+      <ul>
+        <li><b>Indentación:</b> 4 espacios por nivel</li>
+        <li><b>Largo de línea:</b> máximo 79-120 caracteres</li>
+        <li><b>Espacios alrededor de operadores:</b> <code>x = 1</code>, no <code>x=1</code></li>
+        <li><b>Líneas en blanco:</b> 2 entre funciones de nivel superior, 1 entre métodos dentro de una clase</li>
+        <li><b>Imports:</b> uno por línea, al inicio del archivo, agrupados (stdlib → terceros → locales)</li>
+        <li><b>Trailing whitespace:</b> no dejar espacios al final de las líneas</li>
+      </ul>
 
-<div class="realworld"><strong>En el trabajo real:</strong> los equipos profesionales usan herramientas automáticas para forzar PEP 8: <code>black</code> (formateador automático), <code>flake8</code> o <code>pylint</code> (verificadores de estilo), y los configuran en CI/CD para que el código que no cumple ni siquiera se pueda mergear. Aprender PEP 8 ahora te ahorra conflictos después.</div>
+      <div class="realworld"><strong>En el trabajo real:</strong> los equipos profesionales usan herramientas
+        automáticas para forzar PEP 8: <code>black</code> (formateador automático), <code>flake8</code> o
+        <code>pylint</code> (verificadores de estilo), y los configuran en CI/CD para que el código que no cumple ni
+        siquiera se pueda mergear. Aprender PEP 8 ahora te ahorra conflictos después.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: Tipos de comentarios</h3>
-<p>Tres formas de comentar en Python: inline, de línea completa, y docstrings.</p>
+      <h3>Ejemplo 1: Tipos de comentarios</h3>
+      <p>Tres formas de comentar en Python: inline, de línea completa, y docstrings.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_comentarios.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Comentario de línea completa: describe el bloque que sigue
-# Autor: Rodrigo González Doldán
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_comentarios.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Comentario de línea completa: describe el bloque que sigue
+# Autor: Rodri Gonzalez
 # Propósito: demostrar los tipos de comentarios en Python
 
 saldo = 250000  # Comentario inline: explica esta línea específica
@@ -158,17 +217,20 @@ interes = calcular_interes(saldo)
 print(f"Interés: ${interes:,.0f}")
 
 # Acceder al docstring
-print(f"\nDocumentación: {calcular_interes.__doc__}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nDocumentación: {calcular_interes.__doc__}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Buenos vs malos comentarios</h3>
-<p>Compará comentarios que ayudan con comentarios que molestan.</p>
+      <h3>Ejemplo 2: Buenos vs malos comentarios</h3>
+      <p>Compará comentarios que ayudan con comentarios que molestan.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_buenos_malos.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ❌ MALOS COMENTARIOS (dicen lo obvio, son ruido)
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_buenos_malos.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># ❌ MALOS COMENTARIOS (dicen lo obvio, son ruido)
 x = 10  # Asigno 10 a x
 y = 20  # Asigno 20 a y
 z = x + y  # Sumo x e y
@@ -188,17 +250,21 @@ ratio = cuota_solicitada / ingreso_mensual
 aprobado = ratio <= MAX_RATIO_CUOTA_INGRESO
 
 # FIXME: considerar otros ingresos declarados (no solo el principal)
-print(f"Ratio: {ratio:.1%} — {'Aprobado' if aprobado else 'Rechazado'}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Ratio: {ratio:.1%} — {'Aprobado' if aprobado else 'Rechazado'}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: La indentación como estructura</h3>
-<p>Moviendo una sola línea de lugar (cambiando su indentación) cambia completamente el comportamiento del programa.</p>
+      <h3>Ejemplo 3: La indentación como estructura</h3>
+      <p>Moviendo una sola línea de lugar (cambiando su indentación) cambia completamente el comportamiento del
+        programa.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_indentacion.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 50000
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_indentacion.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">saldo = 50000
 limite = 100000
 
 # VERSIÓN A: el "Reporte completo" está DENTRO del if
@@ -222,17 +288,20 @@ if saldo > 0:
 print("Reporte completo")  # ← fuera del if (sin indentación)
 
 # La diferencia: en B, "Reporte completo" se imprime SIEMPRE.
-# En A, solo si saldo > 0. Una indentación cambia la lógica.</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+# En A, solo si saldo > 0. Una indentación cambia la lógica.</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Desactivar código temporalmente con comentarios</h3>
-<p>Un uso legítimo de comentarios: desactivar líneas durante debugging. Pero no lo dejes así para siempre.</p>
+      <h3>Ejemplo 4: Desactivar código temporalmente con comentarios</h3>
+      <p>Un uso legítimo de comentarios: desactivar líneas durante debugging. Pero no lo dejes así para siempre.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_debug.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Pipeline de datos simplificado
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_debug.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Pipeline de datos simplificado
 datos_crudos = ["$1,500", "$820", "$3,200", "N/A", "$950"]
 
 datos_limpios = []
@@ -255,17 +324,20 @@ print(f"Errores: {errores}")
 print(f"Total: ${sum(datos_limpios):,.0f}")
 
 # TIP: cuando termines de debuggear, BORRÁ los print de debug.
-# No los dejes comentados "por las dudas".</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+# No los dejes comentados "por las dudas".</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Código PEP 8 compliant vs no compliant</h3>
-<p>Las dos versiones funcionan igual, pero una es profesional y la otra no.</p>
+      <h3>Ejemplo 5: Código PEP 8 compliant vs no compliant</h3>
+      <p>Las dos versiones funcionan igual, pero una es profesional y la otra no.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_pep8.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ❌ SIN PEP 8 (funciona pero es feo e inconsistente)
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_pep8.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># ❌ SIN PEP 8 (funciona pero es feo e inconsistente)
 import math,random
 x=math.sqrt(144)
 y=random.randint(1,100)
@@ -298,194 +370,314 @@ print(f"Suma: {resultado}")
 print(f"Aleatorio: {aleatorio}")
 
 # La diferencia: el segundo se lee como texto natural.
-# El primero hay que "descifrarlo".</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+# El primero hay que "descifrarlo".</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Elemento</th><th>Sintaxis</th><th>Uso</th></tr>
-<tr><td>Comentario inline</td><td><code>codigo  # comentario</code></td><td>Notas breves sobre una línea</td></tr>
-<tr><td>Comentario de línea</td><td><code># comentario</code></td><td>Explicar el bloque que sigue</td></tr>
-<tr><td>Docstring</td><td><code>"""texto"""</code></td><td>Documentar funciones/clases</td></tr>
-<tr><td>TODO</td><td><code># TODO: tarea pendiente</code></td><td>Marcar trabajo futuro</td></tr>
-<tr><td>FIXME</td><td><code># FIXME: bug conocido</code></td><td>Marcar problemas a resolver</td></tr>
-<tr><td>HACK</td><td><code># HACK: workaround temporal</code></td><td>Marcar soluciones temporales</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Elemento</th>
+            <th>Sintaxis</th>
+            <th>Uso</th>
+          </tr>
+          <tr>
+            <td>Comentario inline</td>
+            <td><code>codigo  # comentario</code></td>
+            <td>Notas breves sobre una línea</td>
+          </tr>
+          <tr>
+            <td>Comentario de línea</td>
+            <td><code># comentario</code></td>
+            <td>Explicar el bloque que sigue</td>
+          </tr>
+          <tr>
+            <td>Docstring</td>
+            <td><code>"""texto"""</code></td>
+            <td>Documentar funciones/clases</td>
+          </tr>
+          <tr>
+            <td>TODO</td>
+            <td><code># TODO: tarea pendiente</code></td>
+            <td>Marcar trabajo futuro</td>
+          </tr>
+          <tr>
+            <td>FIXME</td>
+            <td><code># FIXME: bug conocido</code></td>
+            <td>Marcar problemas a resolver</td>
+          </tr>
+          <tr>
+            <td>HACK</td>
+            <td><code># HACK: workaround temporal</code></td>
+            <td>Marcar soluciones temporales</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Regla PEP 8</th><th>✅ Correcto</th><th>❌ Incorrecto</th></tr>
-<tr><td>Indentación</td><td>4 espacios</td><td>Tabs, 2 espacios, mezcla</td></tr>
-<tr><td>Espacios en operadores</td><td><code>x = 1 + 2</code></td><td><code>x=1+2</code></td></tr>
-<tr><td>Imports</td><td>Uno por línea</td><td><code>import os, sys, math</code></td></tr>
-<tr><td>Largo de línea</td><td>≤ 79-120 chars</td><td>Líneas de 200+ chars</td></tr>
-<tr><td>Nombres</td><td><code>snake_case</code></td><td><code>camelCase</code>, <code>x</code></td></tr>
-<tr><td>Líneas en blanco</td><td>2 entre funciones top-level</td><td>0 o 5 entre funciones</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Regla PEP 8</th>
+            <th>✅ Correcto</th>
+            <th>❌ Incorrecto</th>
+          </tr>
+          <tr>
+            <td>Indentación</td>
+            <td>4 espacios</td>
+            <td>Tabs, 2 espacios, mezcla</td>
+          </tr>
+          <tr>
+            <td>Espacios en operadores</td>
+            <td><code>x = 1 + 2</code></td>
+            <td><code>x=1+2</code></td>
+          </tr>
+          <tr>
+            <td>Imports</td>
+            <td>Uno por línea</td>
+            <td><code>import os, sys, math</code></td>
+          </tr>
+          <tr>
+            <td>Largo de línea</td>
+            <td>≤ 79-120 chars</td>
+            <td>Líneas de 200+ chars</td>
+          </tr>
+          <tr>
+            <td>Nombres</td>
+            <td><code>snake_case</code></td>
+            <td><code>camelCase</code>, <code>x</code></td>
+          </tr>
+          <tr>
+            <td>Líneas en blanco</td>
+            <td>2 entre funciones top-level</td>
+            <td>0 o 5 entre funciones</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Agregar comentarios a código existente</h4>
-  <p>Agregá un comentario a cada línea explicando qué hace (pero hacelo bien — explicá el POR QUÉ, no el QUÉ). El output debe incluir <code>6050.0</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-1" data-expected="6050.0">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "6050.0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">IVA = 0.21
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Agregar comentarios a código existente</h4>
+        <p>Agregá un comentario a cada línea explicando qué hace (pero hacelo bien — explicá el POR QUÉ, no el QUÉ). El
+          output debe incluir <code>6050.0</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-1" data-expected="6050.0">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "6050.0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">IVA = 0.21
 precio = 5000
 precio_final = precio * (1 + IVA)
-print(precio_final)</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["Agregá # después de cada línea","IVA = 0.21  # Tasa vigente según AFIP","No comentes lo obvio — decí POR QUÉ 0.21 y no otro valor"]'></div>
-</div>
+print(precio_final)</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["Agregá # después de cada línea","IVA = 0.21  # Tasa vigente según AFIP","No comentes lo obvio — decí POR QUÉ 0.21 y no otro valor"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Escribir un docstring</h4>
-  <p>Agregá un docstring a la función <code>calcular_neto</code> que explique qué hace, qué parámetros recibe y qué devuelve. Debe incluir <code>684500</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-2" data-expected="684500">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "684500"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">def calcular_neto(bruto, tasa_deduccion=0.315):
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Escribir un docstring</h4>
+        <p>Agregá un docstring a la función <code>calcular_neto</code> que explique qué hace, qué parámetros recibe y
+          qué devuelve. Debe incluir <code>684500</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-2" data-expected="684500">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "684500"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">def calcular_neto(bruto, tasa_deduccion=0.315):
     # Agregá un docstring acá
     return bruto * (1 - tasa_deduccion)
 
 resultado = calcular_neto(1000000)
-print(resultado)</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["Después del def, escribí \"\"\"Calcula el sueldo neto...\"\"\"","Documentá: Args: bruto (float), tasa_deduccion (float)","El resultado de 1000000 * (1 - 0.315) = 685000. Revisá la tasa."]'></div>
-</div>
+print(resultado)</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["Después del def, escribí \"\"\"Calcula el sueldo neto...\"\"\"","Documentá: Args: bruto (float), tasa_deduccion (float)","El resultado de 1000000 * (1 - 0.315) = 685000. Revisá la tasa."]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Arreglar indentación rota</h4>
-  <p>Este código tiene la indentación mal. Arreglalo para que funcione. Debe incluir <code>Saldo: positivo</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-3" data-expected="Saldo: positivo">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Saldo: positivo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 50000
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Arreglar indentación rota</h4>
+        <p>Este código tiene la indentación mal. Arreglalo para que funcione. Debe incluir <code>Saldo: positivo</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-3"
+          data-expected="Saldo: positivo">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Saldo: positivo"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">saldo = 50000
 if saldo > 0:
 print("Saldo: positivo")
 print(f"Monto: ${saldo:,}")
 else:
-print("Saldo: negativo")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["Las líneas dentro del if necesitan 4 espacios de indentación","    print(\"Saldo: positivo\") ← 4 espacios adelante","Lo mismo para la línea dentro del else"]'></div>
-</div>
+print("Saldo: negativo")</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["Las líneas dentro del if necesitan 4 espacios de indentación","    print(\"Saldo: positivo\") ← 4 espacios adelante","Lo mismo para la línea dentro del else"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Código con bloques anidados correctos</h4>
-  <p>Escribí un programa con 3 niveles de indentación: un if que verifica edad >= 18, dentro otro if que verifica ingreso >= 100000, y dentro un print. Debe incluir <code>Aprobado nivel 3</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-4" data-expected="Aprobado nivel 3">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Aprobado nivel 3"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">edad = 25
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Código con bloques anidados correctos</h4>
+        <p>Escribí un programa con 3 niveles de indentación: un if que verifica edad >= 18, dentro otro if que verifica
+          ingreso >= 100000, y dentro un print. Debe incluir <code>Aprobado nivel 3</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-4"
+          data-expected="Aprobado nivel 3">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Aprobado nivel 3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">edad = 25
 ingreso = 150000
 score = 720
 
 # Armá 3 niveles de anidación:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["if edad >= 18: (nivel 0, 4 espacios adentro)","    if ingreso >= 100000: (nivel 1, 8 espacios adentro)","        if score >= 700: (nivel 2) → print(\"Aprobado nivel 3\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["if edad >= 18: (nivel 0, 4 espacios adentro)","    if ingreso >= 100000: (nivel 1, 8 espacios adentro)","        if score >= 700: (nivel 2) → print(\"Aprobado nivel 3\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Función documentada con docstring</h4>
-  <p>Creá una función <code>calcular_iva(precio, tasa=0.21)</code> con docstring completo (descripción, Args, Returns). Usala e imprimí el resultado. Debe incluir <code>12100</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-5" data-expected="12100">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "12100"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá la función con docstring:
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Función documentada con docstring</h4>
+        <p>Creá una función <code>calcular_iva(precio, tasa=0.21)</code> con docstring completo (descripción, Args,
+          Returns). Usala e imprimí el resultado. Debe incluir <code>12100</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-5" data-expected="12100">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "12100"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Creá la función con docstring:
 
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["def calcular_iva(precio, tasa=0.21):","    \"\"\"Calcula precio con IVA...\"\"\"","    return precio * (1 + tasa). Luego: print(calcular_iva(10000))"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["def calcular_iva(precio, tasa=0.21):","    \"\"\"Calcula precio con IVA...\"\"\"","    return precio * (1 + tasa). Luego: print(calcular_iva(10000))"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Identificar y corregir errores de estilo PEP 8</h4>
-  <p>Este código viola PEP 8 en al menos 5 formas. Corregilo. Debe incluir <code>Resultado: 30</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-6" data-expected="Resultado: 30">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Resultado: 30"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import math,random
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Identificar y corregir errores de estilo PEP 8</h4>
+        <p>Este código viola PEP 8 en al menos 5 formas. Corregilo. Debe incluir <code>Resultado: 30</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-6"
+          data-expected="Resultado: 30">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Resultado: 30"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import math,random
 x=10;y=20
 z=x+y
 if z>0 :print(f"Resultado: {z}")
-else:print("negativo")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["Imports en líneas separadas: import math\\nimport random","Espacios alrededor de =: x = 10","No poner ; para separar, usar líneas separadas. Indentar el print."]'></div>
-</div>
+else:print("negativo")</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["Imports en líneas separadas: import math\\nimport random","Espacios alrededor de =: x = 10","No poner ; para separar, usar líneas separadas. Indentar el print."]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Script profesional completo</h4>
-  <p>Escribí un script con: encabezado comentado (autor, fecha, descripción), constantes, una función con docstring, y uso formateado. Debe incluir <code>Autor:</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-7" data-expected="Autor:">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Autor:"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Armá un script profesional completo:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["# Autor: [tu nombre]\\n# Fecha: 2025\\n# Descripción: ...","Definí constantes en MAYÚSCULAS","Creá una función con docstring y usala"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Script profesional completo</h4>
+        <p>Escribí un script con: encabezado comentado (autor, fecha, descripción), constantes, una función con
+          docstring, y uso formateado. Debe incluir <code>Autor:</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-7" data-expected="Autor:">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Autor:"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Armá un script profesional completo:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["# Autor: [tu nombre]\\n# Fecha: 2025\\n# Descripción: ...","Definí constantes en MAYÚSCULAS","Creá una función con docstring y usala"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Pipeline comentado</h4>
-  <p>Creá un mini pipeline que tome <code>datos = ["$1,200", "N/A", "$800", "", "$2,500"]</code>, limpie los inválidos, convierta a números y sume. Comentá cada paso explicando POR QUÉ. Debe incluir <code>4500</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-8" data-expected="4500">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "4500"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">datos = ["$1,200", "N/A", "$800", "", "$2,500"]
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Pipeline comentado</h4>
+        <p>Creá un mini pipeline que tome <code>datos = ["$1,200", "N/A", "$800", "", "$2,500"]</code>, limpie los
+          inválidos, convierta a números y sume. Comentá cada paso explicando POR QUÉ. Debe incluir <code>4500</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-8" data-expected="4500">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "4500"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">datos = ["$1,200", "N/A", "$800", "", "$2,500"]
 
 # Armá el pipeline comentando cada paso:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["# Filtrar valores inválidos (N/A y vacíos no son montos)","validos = [d for d in datos if d and d != \"N/A\"]","# Limpiar símbolos y convertir. Sumar con sum()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["# Filtrar valores inválidos (N/A y vacíos no son montos)","validos = [d for d in datos if d and d != \"N/A\"]","# Limpiar símbolos y convertir. Sumar con sum()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Acceder a docstrings</h4>
-  <p>Creá 2 funciones con docstrings distintos. Usá <code>.__doc__</code> para imprimir la documentación de cada una. Debe incluir <code>Documentación</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-9" data-expected="Documentación">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Documentación"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá 2 funciones con docstrings y mostrá su documentación:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["def func1(): \"\"\"Mi primera función.\"\"\" return 1","def func2(): \"\"\"Mi segunda función.\"\"\" return 2","print(f\"Documentación: {func1.__doc__}\")"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Acceder a docstrings</h4>
+        <p>Creá 2 funciones con docstrings distintos. Usá <code>.__doc__</code> para imprimir la documentación de cada
+          una. Debe incluir <code>Documentación</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-9"
+          data-expected="Documentación">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Documentación"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Creá 2 funciones con docstrings y mostrá su documentación:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["def func1(): \"\"\"Mi primera función.\"\"\" return 1","def func2(): \"\"\"Mi segunda función.\"\"\" return 2","print(f\"Documentación: {func1.__doc__}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Refactoring completo — de código ilegible a profesional</h4>
-  <p>Reescribí este código para que sea 100% PEP 8 compliant: nombres descriptivos, comentarios útiles, indentación correcta, docstrings. El output numérico debe ser el mismo. Debe incluir <code>Neto: 655500</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-10" data-expected="Neto: 655500">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Neto: 655500"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Refactoreá este código ilegible:
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Refactoring completo — de código ilegible a profesional</h4>
+        <p>Reescribí este código para que sea 100% PEP 8 compliant: nombres descriptivos, comentarios útiles,
+          indentación correcta, docstrings. El output numérico debe ser el mismo. Debe incluir
+          <code>Neto: 655500</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-10"
+          data-expected="Neto: 655500">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Neto: 655500"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Refactoreá este código ilegible:
 a=950000;b=0.11;c=0.03;d=0.17
 e=a*b;f=a*c;g=a*d
 h=a-e-f-g
@@ -497,44 +689,54 @@ print(h)
 # - Comentarios que expliquen el POR QUÉ
 # - Formato de moneda
 # - Debe imprimir "Neto: 655500" (o similar con formato)
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["JUBILACION = 0.11, OBRA_SOCIAL = 0.03, GANANCIAS = 0.17","sueldo_bruto = 950000","Calculá deducciones con nombres claros y print(f\"Neto: {neto:,.0f}\") → Neto: 655,500"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>Comentarios (<code>#</code>) explican el POR QUÉ, no el QUÉ. Docstrings (<code>"""..."""</code>) documentan
+          funciones.</li>
+        <li>La indentación (4 espacios) es obligatoria en Python — define la estructura del programa.</li>
+        <li>PEP 8 es la guía de estilo oficial: snake_case, espacios en operadores, imports separados, 79-120 chars por
+          línea.</li>
+        <li>Código comentado (desactivado) debe borrarse — para eso existe Git.</li>
+        <li>Los buenos nombres hacen que el código se explique solo. Los comentarios son para el contexto y las
+          decisiones.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>08 · Listas</strong>) vas a aprender la primera estructura de datos de Python:
+        colecciones ordenadas y modificables que te permiten guardar muchos valores bajo un solo nombre.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://peps.python.org/pep-0008/" target="_blank">PEP 8</a> · <a
+          href="https://peps.python.org/pep-0257/" target="_blank">PEP 257 — Docstring Conventions</a></p>
+
+      <div class="footer-nav">
+        <a href="/python/06-condicionales.html">← Condicionales</a>
+        <a class="next" href="/python/08-listas.html">Listas →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["JUBILACION = 0.11, OBRA_SOCIAL = 0.03, GANANCIAS = 0.17","sueldo_bruto = 950000","Calculá deducciones con nombres claros y print(f\"Neto: {neto:,.0f}\") → Neto: 655,500"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>Comentarios (<code>#</code>) explican el POR QUÉ, no el QUÉ. Docstrings (<code>"""..."""</code>) documentan funciones.</li>
-  <li>La indentación (4 espacios) es obligatoria en Python — define la estructura del programa.</li>
-  <li>PEP 8 es la guía de estilo oficial: snake_case, espacios en operadores, imports separados, 79-120 chars por línea.</li>
-  <li>Código comentado (desactivado) debe borrarse — para eso existe Git.</li>
-  <li>Los buenos nombres hacen que el código se explique solo. Los comentarios son para el contexto y las decisiones.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>08 · Listas</strong>) vas a aprender la primera estructura de datos de Python: colecciones ordenadas y modificables que te permiten guardar muchos valores bajo un solo nombre.</p>
-
-<p><strong>Recursos:</strong> <a href="https://peps.python.org/pep-0008/" target="_blank">PEP 8</a> · <a href="https://peps.python.org/pep-0257/" target="_blank">PEP 257 — Docstring Conventions</a></p>
-
-<div class="footer-nav">
-  <a href="/python/06-condicionales.html">← Condicionales</a>
-  <a class="next" href="/python/08-listas.html">Listas →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

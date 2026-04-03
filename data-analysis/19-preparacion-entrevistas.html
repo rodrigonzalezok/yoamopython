@@ -1,76 +1,140 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 19 · Preparación para Entrevistas</title>
-<meta name="description" content="Preparate para entrevistas de Data Analyst: preguntas técnicas, ejercicios prácticos, SQL live coding, casos de negocio y cómo presentar tu portfolio.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 19 · Preparación para Entrevistas</title>
+  <meta name="description"
+    content="Preparate para entrevistas de Data Analyst: preguntas técnicas, ejercicios prácticos, SQL live coding, casos de negocio y cómo presentar tu portfolio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 19 de 19</span>
-  <h1>Preparación para Entrevistas</h1>
-  <p>Sabés Python, SQL, pandas, visualización y ML. Ahora viene la parte que define si conseguís el puesto: <strong>la entrevista</strong>. Esta lección te prepara con las preguntas reales que hacen en entrevistas de Data Analyst, ejercicios de live coding, casos de negocio y estrategias para destacarte.</p>
-  <div class="badges">
-    <span class="badge">90–120 min</span>
-    <span class="badge">Lección final del track</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>El proceso de entrevista para Data Analyst</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 19 de 19</span>
+        <h1>Preparación para Entrevistas</h1>
+        <p>Sabés Python, SQL, pandas, visualización y ML. Ahora viene la parte que define si conseguís el puesto:
+          <strong>la entrevista</strong>. Esta lección te prepara con las preguntas reales que hacen en entrevistas de
+          Data Analyst, ejercicios de live coding, casos de negocio y estrategias para destacarte.</p>
+        <div class="badges">
+          <span class="badge">90–120 min</span>
+          <span class="badge">Lección final del track</span>
+        </div>
+      </div>
 
-<h3>Las 4 etapas típicas</h3>
+      <div class="section-num">01</div>
+      <h2>El proceso de entrevista para Data Analyst</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Etapa</th><th>Formato</th><th>Qué evalúan</th><th>Duración</th></tr>
-<tr><td><strong>1. Screening</strong></td><td>Llamada con RRHH</td><td>Fit cultural, expectativas, experiencia general</td><td>15-30 min</td></tr>
-<tr><td><strong>2. Técnica</strong></td><td>Interview con el equipo</td><td>SQL, Python, estadística, herramientas</td><td>45-60 min</td></tr>
-<tr><td><strong>3. Case Study</strong></td><td>Ejercicio práctico</td><td>Resolver un problema de negocio con datos</td><td>60-90 min</td></tr>
-<tr><td><strong>4. Final</strong></td><td>Con el hiring manager</td><td>Fit técnico y de equipo, presentar portfolio</td><td>30-45 min</td></tr>
-</table>
-</div>
+      <h3>Las 4 etapas típicas</h3>
 
-<h3>Las 5 áreas que te van a preguntar</h3>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Etapa</th>
+            <th>Formato</th>
+            <th>Qué evalúan</th>
+            <th>Duración</th>
+          </tr>
+          <tr>
+            <td><strong>1. Screening</strong></td>
+            <td>Llamada con RRHH</td>
+            <td>Fit cultural, expectativas, experiencia general</td>
+            <td>15-30 min</td>
+          </tr>
+          <tr>
+            <td><strong>2. Técnica</strong></td>
+            <td>Interview con el equipo</td>
+            <td>SQL, Python, estadística, herramientas</td>
+            <td>45-60 min</td>
+          </tr>
+          <tr>
+            <td><strong>3. Case Study</strong></td>
+            <td>Ejercicio práctico</td>
+            <td>Resolver un problema de negocio con datos</td>
+            <td>60-90 min</td>
+          </tr>
+          <tr>
+            <td><strong>4. Final</strong></td>
+            <td>Con el hiring manager</td>
+            <td>Fit técnico y de equipo, presentar portfolio</td>
+            <td>30-45 min</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Área</th><th>Peso</th><th>Preguntas típicas</th></tr>
-<tr><td><strong>SQL</strong></td><td>30%</td><td>JOINs, GROUP BY, subqueries, window functions</td></tr>
-<tr><td><strong>Python/pandas</strong></td><td>25%</td><td>Limpieza, transformaciones, groupby, merge</td></tr>
-<tr><td><strong>Estadística</strong></td><td>20%</td><td>Media vs mediana, correlación, distribuciones, probabilidad</td></tr>
-<tr><td><strong>Negocio/Caso</strong></td><td>15%</td><td>"¿Cómo medirías el éxito de X?", "Bajaron las ventas, ¿qué harías?"</td></tr>
-<tr><td><strong>Herramientas/Soft skills</strong></td><td>10%</td><td>Excel, Power BI, comunicación, trabajo en equipo</td></tr>
-</table>
-</div>
+      <h3>Las 5 áreas que te van a preguntar</h3>
 
-<div class="realworld"><strong>Realidad del mercado:</strong> las empresas buscan analistas que puedan hacer 3 cosas: (1) <strong>extraer datos</strong> (SQL), (2) <strong>analizarlos</strong> (Python + estadística), y (3) <strong>comunicar hallazgos</strong> (visualización + storytelling). Si demostrás esas 3 cosas en la entrevista, tenés una ventaja enorme.</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Área</th>
+            <th>Peso</th>
+            <th>Preguntas típicas</th>
+          </tr>
+          <tr>
+            <td><strong>SQL</strong></td>
+            <td>30%</td>
+            <td>JOINs, GROUP BY, subqueries, window functions</td>
+          </tr>
+          <tr>
+            <td><strong>Python/pandas</strong></td>
+            <td>25%</td>
+            <td>Limpieza, transformaciones, groupby, merge</td>
+          </tr>
+          <tr>
+            <td><strong>Estadística</strong></td>
+            <td>20%</td>
+            <td>Media vs mediana, correlación, distribuciones, probabilidad</td>
+          </tr>
+          <tr>
+            <td><strong>Negocio/Caso</strong></td>
+            <td>15%</td>
+            <td>"¿Cómo medirías el éxito de X?", "Bajaron las ventas, ¿qué harías?"</td>
+          </tr>
+          <tr>
+            <td><strong>Herramientas/Soft skills</strong></td>
+            <td>10%</td>
+            <td>Excel, Power BI, comunicación, trabajo en equipo</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">02</div>
-<h2>Preguntas de SQL — Live Coding</h2>
+      <div class="realworld"><strong>Realidad del mercado:</strong> las empresas buscan analistas que puedan hacer 3
+        cosas: (1) <strong>extraer datos</strong> (SQL), (2) <strong>analizarlos</strong> (Python + estadística), y (3)
+        <strong>comunicar hallazgos</strong> (visualización + storytelling). Si demostrás esas 3 cosas en la entrevista,
+        tenés una ventaja enorme.</div>
 
-<h3>Pregunta 1: "Encontrá los clientes top y su ticket promedio"</h3>
-<p>Este tipo de pregunta aparece en el 80% de las entrevistas. Testea JOINs, GROUP BY y ORDER BY.</p>
+      <div class="section-num">02</div>
+      <h2>Preguntas de SQL — Live Coding</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>sql_pregunta_01.py</span><span>Interview SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <h3>Pregunta 1: "Encontrá los clientes top y su ticket promedio"</h3>
+      <p>Este tipo de pregunta aparece en el 80% de las entrevistas. Testea JOINs, GROUP BY y ORDER BY.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>sql_pregunta_01.py</span><span>Interview SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 
@@ -108,17 +172,20 @@ LIMIT 5
 
 print("=== Top 5 clientes por facturación ===")
 print(pd.read_sql(query, conn))
-conn.close()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+conn.close()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Pregunta 2: "Calculá la variación mensual de ventas"</h3>
-<p>Testea GROUP BY con funciones de fecha y análisis temporal — muy común en roles de BI.</p>
+      <h3>Pregunta 2: "Calculá la variación mensual de ventas"</h3>
+      <p>Testea GROUP BY con funciones de fecha y análisis temporal — muy común en roles de BI.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>sql_pregunta_02.py</span><span>Interview SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>sql_pregunta_02.py</span><span>Interview SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 
@@ -149,20 +216,23 @@ df["var_pct"] = df["total"].pct_change() * 100
 
 print("=== Ventas mensuales con variación ===")
 print(df.round(1).to_string(index=False))
-conn.close()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+conn.close()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Preguntas de Python/pandas</h2>
+      <div class="section-num">03</div>
+      <h2>Preguntas de Python/pandas</h2>
 
-<h3>Pregunta 3: "Limpiá este dataset y extraé insights"</h3>
-<p>Te dan un dataset sucio y esperan que lo limpies, explores y saques conclusiones — todo en 20 minutos.</p>
+      <h3>Pregunta 3: "Limpiá este dataset y extraé insights"</h3>
+      <p>Te dan un dataset sucio y esperan que lo limpies, explores y saques conclusiones — todo en 20 minutos.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>pandas_pregunta_03.py</span><span>Interview pandas</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>pandas_pregunta_03.py</span><span>Interview pandas</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 np.random.seed(42)
@@ -195,32 +265,61 @@ print(f"\n=== Dataset limpio ===")
 print(df)
 print(f"\n=== Insights ===")
 print(df.groupby("Segmento")[["Edad","Ingreso"]].mean().round(0))
-print(f"\nIngreso promedio global: ${df['Ingreso'].mean():,.0f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nIngreso promedio global: ${df['Ingreso'].mean():,.0f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Preguntas de estadística</h2>
+      <div class="section-num">04</div>
+      <h2>Preguntas de estadística</h2>
 
-<h3>Las preguntas conceptuales más frecuentes</h3>
+      <h3>Las preguntas conceptuales más frecuentes</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Pregunta</th><th>Respuesta esperada</th></tr>
-<tr><td>"¿Cuándo usarías la mediana en vez de la media?"</td><td>Cuando hay outliers. La media es sensible a valores extremos (ej: sueldos de una empresa con un CEO que gana 100x más). La mediana es más representativa del "valor típico".</td></tr>
-<tr><td>"¿Qué es la correlación? ¿Implica causalidad?"</td><td>Correlación mide la fuerza de la relación lineal entre 2 variables (-1 a +1). <strong>No implica causalidad</strong>. Las ventas de helado y los ahogamientos correlacionan, pero la causa es el verano.</td></tr>
-<tr><td>"Explicá la diferencia entre precision y recall"</td><td>Precision: ¿de los que dije positivos, cuántos son realmente positivos? Recall: ¿de los positivos reales, cuántos capturé? En fraude, querés alto recall (no perder ningún fraude). En marketing, querés alta precision (no molestar clientes equivocados).</td></tr>
-<tr><td>"¿Qué es overfitting?"</td><td>Cuando un modelo memoriza los datos de entrenamiento en vez de aprender patrones generales. Se detecta cuando la accuracy en train es alta pero en test baja. Se soluciona con regularización, menos features o más datos.</td></tr>
-<tr><td>"¿Qué distribucion usarías para modelar cantidad de llamadas al call center por hora?"</td><td>Poisson — modela la cantidad de eventos en un intervalo de tiempo. Es discreta, solo valores ≥ 0, y tiene un solo parámetro λ (promedio).</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Pregunta</th>
+            <th>Respuesta esperada</th>
+          </tr>
+          <tr>
+            <td>"¿Cuándo usarías la mediana en vez de la media?"</td>
+            <td>Cuando hay outliers. La media es sensible a valores extremos (ej: sueldos de una empresa con un CEO que
+              gana 100x más). La mediana es más representativa del "valor típico".</td>
+          </tr>
+          <tr>
+            <td>"¿Qué es la correlación? ¿Implica causalidad?"</td>
+            <td>Correlación mide la fuerza de la relación lineal entre 2 variables (-1 a +1). <strong>No implica
+                causalidad</strong>. Las ventas de helado y los ahogamientos correlacionan, pero la causa es el verano.
+            </td>
+          </tr>
+          <tr>
+            <td>"Explicá la diferencia entre precision y recall"</td>
+            <td>Precision: ¿de los que dije positivos, cuántos son realmente positivos? Recall: ¿de los positivos
+              reales, cuántos capturé? En fraude, querés alto recall (no perder ningún fraude). En marketing, querés
+              alta precision (no molestar clientes equivocados).</td>
+          </tr>
+          <tr>
+            <td>"¿Qué es overfitting?"</td>
+            <td>Cuando un modelo memoriza los datos de entrenamiento en vez de aprender patrones generales. Se detecta
+              cuando la accuracy en train es alta pero en test baja. Se soluciona con regularización, menos features o
+              más datos.</td>
+          </tr>
+          <tr>
+            <td>"¿Qué distribucion usarías para modelar cantidad de llamadas al call center por hora?"</td>
+            <td>Poisson — modela la cantidad de eventos en un intervalo de tiempo. Es discreta, solo valores ≥ 0, y
+              tiene un solo parámetro λ (promedio).</td>
+          </tr>
+        </table>
+      </div>
 
-<h3>Pregunta práctica de estadística</h3>
+      <h3>Pregunta práctica de estadística</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>stats_pregunta_04.py</span><span>Interview estadística</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>stats_pregunta_04.py</span><span>Interview estadística</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 import pandas as pd
 
 np.random.seed(42)
@@ -248,19 +347,22 @@ print(f"La media (${np.mean(sueldos):,.0f}) es mayor que la mediana (${np.median
 print("→ distribución asimétrica a la derecha (right-skewed)")
 print("→ hay outliers altos (CEO/CFO) que inflan la media")
 print("→ para '¿cuánto gana un empleado típico?' → usá la MEDIANA")
-print(f"→ el sueldo típico es ~${np.median(sueldos):,.0f}, NO ${np.mean(sueldos):,.0f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"→ el sueldo típico es ~${np.median(sueldos):,.0f}, NO ${np.mean(sueldos):,.0f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">05</div>
-<h2>Preguntas de caso de negocio</h2>
+      <div class="section-num">05</div>
+      <h2>Preguntas de caso de negocio</h2>
 
-<h3>Caso: "Las ventas del e-commerce bajaron un 15% este mes. ¿Qué harías?"</h3>
+      <h3>Caso: "Las ventas del e-commerce bajaron un 15% este mes. ¿Qué harías?"</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>caso_negocio.py</span><span>Interview caso</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">print("""
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>caso_negocio.py</span><span>Interview caso</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">print("""
 === FRAMEWORK PARA CASOS DE NEGOCIO ===
 
 Usá este framework ante cualquier pregunta tipo "bajaron las ventas":
@@ -300,17 +402,20 @@ Usá este framework ante cualquier pregunta tipo "bajaron las ventas":
 """)
 
 print("💡 TIP: el entrevistador no busca LA respuesta correcta.")
-print("   Busca cómo PENSÁS y ESTRUCTURÁS el problema.")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("   Busca cómo PENSÁS y ESTRUCTURÁS el problema.")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">06</div>
-<h2>Cómo presentar tu portfolio</h2>
+      <div class="section-num">06</div>
+      <h2>Cómo presentar tu portfolio</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>presentar_portfolio.py</span><span>Tips de presentación</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">print("""
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>presentar_portfolio.py</span><span>Tips de presentación</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">print("""
 === CÓMO PRESENTAR TU PORTFOLIO EN 5 MINUTOS ===
 
 ESTRUCTURA (la que usan consultoras como McKinsey):
@@ -359,21 +464,25 @@ ESTRUCTURA (la que usan consultoras como McKinsey):
 ✅ Terminar con recomendaciones accionables
 ✅ Conectar con la empresa: "esto podría aplicarse a..."
 """)
-print("Preparación completada ✅")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("Preparación completada ✅")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">07</div>
-<h2>Ejercicios de práctica de entrevista</h2>
+      <div class="section-num">07</div>
+      <h2>Ejercicios de práctica de entrevista</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: SQL — Total por categoría</h4>
-  <p>Escribí una query que calcule el total de ventas por producto. Debe incluir <code>total</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-1" data-expected="total">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "total"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: SQL — Total por categoría</h4>
+        <p>Escribí una query que calcule el total de ventas por producto. Debe incluir <code>total</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-1"
+          data-expected="total">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "total"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -385,20 +494,26 @@ pd.DataFrame({
 }).to_sql("ventas", conn, index=False)
 
 # SQL: total por producto
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT producto, SUM(monto) as total FROM ventas GROUP BY producto ORDER BY total DESC\", conn)","print(df); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT producto, SUM(monto) as total FROM ventas GROUP BY producto ORDER BY total DESC\", conn)","print(df); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: pandas — Limpieza rápida</h4>
-  <p>Normalizá strings, eliminá duplicados, contá nulos. Debe incluir <code>Limpio</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-2" data-expected="Limpio">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Limpio"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: pandas — Limpieza rápida</h4>
+        <p>Normalizá strings, eliminá duplicados, contá nulos. Debe incluir <code>Limpio</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-2"
+          data-expected="Limpio">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Limpio"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 df = pd.DataFrame({
@@ -407,40 +522,53 @@ df = pd.DataFrame({
 })
 
 # Strip+title, drop_duplicates, contar nulos
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["df[\"Ciudad\"] = df[\"Ciudad\"].str.strip().str.title()","df = df.drop_duplicates()","print(f\"Nulos: {df.isna().sum().sum()}\")","print(f\"Filas: {len(df)}\"); print(\"Limpio\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["df[\"Ciudad\"] = df[\"Ciudad\"].str.strip().str.title()","df = df.drop_duplicates()","print(f\"Nulos: {df.isna().sum().sum()}\")","print(f\"Filas: {len(df)}\"); print(\"Limpio\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Estadística — Media vs Mediana</h4>
-  <p>Calculá media y mediana de los datos. Explicá cuál es más representativa. Debe incluir <code>mediana</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-3" data-expected="mediana">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "mediana"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Estadística — Media vs Mediana</h4>
+        <p>Calculá media y mediana de los datos. Explicá cuál es más representativa. Debe incluir <code>mediana</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-3"
+          data-expected="mediana">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "mediana"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 # Sueldos con outliers
 sueldos = np.array([80, 85, 90, 75, 95, 82, 88, 78, 500, 1200])
 # en miles de $
 
 # Calculá media y mediana, decidí cuál es más representativa
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["print(f\"Media: ${np.mean(sueldos):,.0f}K\")","print(f\"Mediana: ${np.median(sueldos):,.0f}K\")","print(\"La mediana es más representativa porque hay outliers\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["print(f\"Media: ${np.mean(sueldos):,.0f}K\")","print(f\"Mediana: ${np.median(sueldos):,.0f}K\")","print(\"La mediana es más representativa porque hay outliers\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: SQL — JOIN + GROUP BY + HAVING</h4>
-  <p>Encontrá los clientes con más de 3 operaciones. Debe incluir <code>operaciones</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-4" data-expected="operaciones">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "operaciones"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: SQL — JOIN + GROUP BY + HAVING</h4>
+        <p>Encontrá los clientes con más de 3 operaciones. Debe incluir <code>operaciones</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-4"
+          data-expected="operaciones">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "operaciones"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -450,20 +578,26 @@ pd.DataFrame({"id":[1,2,3,4,5],"nombre":["Ana","Luis","Marta","Carlos","María"]
 pd.DataFrame({"cliente_id": np.random.choice([1,2,3,4,5], 20), "monto": np.random.randint(100,1000,20)}).to_sql("txn", conn, index=False)
 
 # SQL: JOIN + GROUP BY + HAVING > 3
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT c.nombre, COUNT(*) as operaciones, SUM(t.monto) as total FROM txn t JOIN clientes c ON t.cliente_id=c.id GROUP BY c.nombre HAVING COUNT(*)>3 ORDER BY operaciones DESC\", conn)","print(df); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT c.nombre, COUNT(*) as operaciones, SUM(t.monto) as total FROM txn t JOIN clientes c ON t.cliente_id=c.id GROUP BY c.nombre HAVING COUNT(*)>3 ORDER BY operaciones DESC\", conn)","print(df); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: pandas — groupby + múltiples agregaciones</h4>
-  <p>Calculá media, mediana y conteo por Segmento. Debe incluir <code>median</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-5" data-expected="median">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "median"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: pandas — groupby + múltiples agregaciones</h4>
+        <p>Calculá media, mediana y conteo por Segmento. Debe incluir <code>median</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-5"
+          data-expected="median">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "median"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -473,20 +607,26 @@ df = pd.DataFrame({
 })
 
 # groupby + agg(mean, median, count)
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["res = df.groupby(\"Segmento\")[\"Monto\"].agg([\"mean\",\"median\",\"count\"]).round(0)","print(res)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["res = df.groupby(\"Segmento\")[\"Monto\"].agg([\"mean\",\"median\",\"count\"]).round(0)","print(res)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: "¿Correlación implica causalidad?"</h4>
-  <p>Mostrá dos variables que correlacionan pero no tienen causalidad. Imprimí la correlación y la explicación. Debe incluir <code>No</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-6" data-expected="No">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "No"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: "¿Correlación implica causalidad?"</h4>
+        <p>Mostrá dos variables que correlacionan pero no tienen causalidad. Imprimí la correlación y la explicación.
+          Debe incluir <code>No</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-6" data-expected="No">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "No"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 np.random.seed(42)
 # Simulación: en verano sube el helado Y los ahogamientos
@@ -495,20 +635,27 @@ helados = temperatura * 50 + np.random.normal(0, 100, 100)
 ahogamientos = temperatura * 2 + np.random.normal(0, 5, 100)
 
 # Correlación + explicación
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["corr = np.corrcoef(helados, ahogamientos)[0,1]","print(f\"Correlación helados-ahogamientos: {corr:.2f}\")","print(\"¿Causalidad? No. Ambos dependen de la temperatura (variable confusora).\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["corr = np.corrcoef(helados, ahogamientos)[0,1]","print(f\"Correlación helados-ahogamientos: {corr:.2f}\")","print(\"¿Causalidad? No. Ambos dependen de la temperatura (variable confusora).\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Pipeline SQL → pandas → insight</h4>
-  <p>Extraé datos con SQL, calculá participación % en pandas, y generá un insight. Debe incluir <code>Insight</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-7" data-expected="Insight">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Insight"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Pipeline SQL → pandas → insight</h4>
+        <p>Extraé datos con SQL, calculá participación % en pandas, y generá un insight. Debe incluir
+          <code>Insight</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-7"
+          data-expected="Insight">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Insight"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -520,20 +667,27 @@ pd.DataFrame({
 }).to_sql("ventas", conn, index=False)
 
 # SQL: agrupar por canal → pandas: % participación → insight
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT canal, SUM(monto) as total FROM ventas GROUP BY canal\", conn)","df[\"pct\"] = round(df[\"total\"]/df[\"total\"].sum()*100, 1)","print(df)","top = df.loc[df[\"total\"].idxmax()]","print(f\"Insight: {top[\\\"canal\\\"]} lidera con {top[\\\"pct\\\"]}% del total\"); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT canal, SUM(monto) as total FROM ventas GROUP BY canal\", conn)","df[\"pct\"] = round(df[\"total\"]/df[\"total\"].sum()*100, 1)","print(df)","top = df.loc[df[\"total\"].idxmax()]","print(f\"Insight: {top[\\\"canal\\\"]} lidera con {top[\\\"pct\\\"]}% del total\"); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Modelo + interpretación para el negocio</h4>
-  <p>Entrenáun modelo, mostrá las métricas y explicá qué significan para el negocio. Debe incluir <code>Negocio</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-8" data-expected="Negocio">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Negocio"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Modelo + interpretación para el negocio</h4>
+        <p>Entrenáun modelo, mostrá las métricas y explicá qué significan para el negocio. Debe incluir
+          <code>Negocio</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-8"
+          data-expected="Negocio">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Negocio"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, recall_score
@@ -544,20 +698,27 @@ y = (X[:,0] + X[:,1] > 1).astype(int)
 X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)
 
 # Entrenar + métricas + interpretación de negocio
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["m = DecisionTreeClassifier(max_depth=3,random_state=42).fit(X_tr,y_tr); p=m.predict(X_te)","rec = recall_score(y_te,p)","print(f\"Recall: {rec*100:.0f}% → capturamos {rec*100:.0f}% de los churners\")","print(f\"Negocio: de cada 100 clientes en riesgo, identificamos {rec*100:.0f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["m = DecisionTreeClassifier(max_depth=3,random_state=42).fit(X_tr,y_tr); p=m.predict(X_te)","rec = recall_score(y_te,p)","print(f\"Recall: {rec*100:.0f}% → capturamos {rec*100:.0f}% de los churners\")","print(f\"Negocio: de cada 100 clientes en riesgo, identificamos {rec*100:.0f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Análisis de caso — "bajaron las ventas"</h4>
-  <p>Segmentá la caída de ventas por canal y mes. Identificá dónde está el problema. Debe incluir <code>concentra</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-9" data-expected="concentra">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "concentra"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Análisis de caso — "bajaron las ventas"</h4>
+        <p>Segmentá la caída de ventas por canal y mes. Identificá dónde está el problema. Debe incluir
+          <code>concentra</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-9"
+          data-expected="concentra">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "concentra"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -572,20 +733,27 @@ df = pd.DataFrame({
 })
 
 # Segmentar la caída: ¿dónde se concentra?
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["pivot = df.pivot_table(values=\"Monto\", index=\"Canal\", columns=\"Mes\", aggfunc=\"sum\")","pivot[\"Var_%\"] = round((pivot[\"Marzo\"]/pivot[\"Febrero\"]-1)*100,1)","print(pivot)","canal_peor = pivot[\"Var_%\"].idxmin()","print(f\"La caída se concentra en el canal {canal_peor}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["pivot = df.pivot_table(values=\"Monto\", index=\"Canal\", columns=\"Mes\", aggfunc=\"sum\")","pivot[\"Var_%\"] = round((pivot[\"Marzo\"]/pivot[\"Febrero\"]-1)*100,1)","print(pivot)","canal_peor = pivot[\"Var_%\"].idxmin()","print(f\"La caída se concentra en el canal {canal_peor}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Simulación de entrevista completa</h4>
-  <p>Simulá una mini-entrevista: (1) limpiar datos, (2) EDA rápido con gráfico, (3) insight con recomendación. Debe incluir <code>Recomiendo</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-10" data-expected="Recomiendo">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Recomiendo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Simulación de entrevista completa</h4>
+        <p>Simulá una mini-entrevista: (1) limpiar datos, (2) EDA rápido con gráfico, (3) insight con recomendación.
+          Debe incluir <code>Recomiendo</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-19" data-exercise="ex-10"
+          data-expected="Recomiendo">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Recomiendo"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -601,63 +769,126 @@ df = pd.DataFrame({
 df.loc[np.random.choice(100, 5), "Monto"] = np.nan
 
 # Mini entrevista: limpiar → EDA → gráfico → insight → recomendación
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["df[\"Canal\"]=df[\"Canal\"].str.strip().str.title(); df[\"Monto\"]=df[\"Monto\"].fillna(df[\"Monto\"].median())","res = df.groupby(\"Canal\").agg(Monto_Prom=(\"Monto\",\"mean\"),Satisf=(\"Satisfaccion\",\"mean\")).round(1)","print(res)","peor = res[\"Satisf\"].idxmin()","print(f\"Recomiendo: mejorar la experiencia de {peor} (satisfacción más baja)\")"]'>
+        </div>
+      </div>
+
+      <div class="section-num">08</div>
+      <h2>Resumen final del track completo</h2>
+
+      <div class="concept"><strong>¡Felicitaciones!</strong> Completaste las 19 lecciones del track de Data Analysis.
+        Esto es lo que ahora sabés hacer:</div>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>#</th>
+            <th>Habilidad</th>
+            <th>Herramienta</th>
+          </tr>
+          <tr>
+            <td>1-3</td>
+            <td>Fundamentos de pandas: Series, DataFrames, lectura de datos</td>
+            <td>pandas</td>
+          </tr>
+          <tr>
+            <td>4-6</td>
+            <td>Selección, filtrado, limpieza y transformaciones</td>
+            <td>pandas</td>
+          </tr>
+          <tr>
+            <td>7-8</td>
+            <td>GroupBy, Pivot Tables, Merge, Join, Concat</td>
+            <td>pandas</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Estadística descriptiva: centralidad, dispersión, distribuciones</td>
+            <td>numpy, pandas</td>
+          </tr>
+          <tr>
+            <td>10-11</td>
+            <td>Visualización con Matplotlib y Seaborn</td>
+            <td>matplotlib, seaborn</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>EDA completo: proceso de 6 pasos profesional</td>
+            <td>todo combinado</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>NumPy: arrays, vectorización, broadcasting</td>
+            <td>numpy</td>
+          </tr>
+          <tr>
+            <td>14-15</td>
+            <td>Machine Learning: clasificación, regresión, métricas</td>
+            <td>scikit-learn</td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>Business Intelligence: Power BI, Tableau, dashboards</td>
+            <td>conceptual + pandas</td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td>Integración SQL + Python: pipelines completos</td>
+            <td>sqlite3, pandas</td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td>Portfolio profesional y proyecto final</td>
+            <td>todo el stack</td>
+          </tr>
+          <tr>
+            <td>19</td>
+            <td>Preparación para entrevistas técnicas</td>
+            <td>todo el stack</td>
+          </tr>
+        </table>
+      </div>
+
+      <ul>
+        <li>Tenés las herramientas para aplicar a puestos de <strong>Data Analyst Junior/Semi-senior</strong>.</li>
+        <li>Tu próximo paso: construir tu portfolio con 2-3 proyectos y publicarlos en <strong>GitHub</strong>.</li>
+        <li>Practicá SQL y pandas diariamente — <a href="https://leetcode.com/problemset/database/"
+            target="_blank">LeetCode SQL</a>, <a href="https://www.kaggle.com/datasets" target="_blank">Kaggle
+            Datasets</a>.</li>
+        <li>Mantené tu LinkedIn actualizado y compartí tus proyectos.</li>
+      </ul>
+
+      <p><strong>¡Éxitos en tu carrera como Data Analyst!</strong></p>
+
+      <p><strong>Recursos:</strong> <a href="https://www.kaggle.com/" target="_blank">Kaggle</a> · <a
+          href="https://leetcode.com/problemset/database/" target="_blank">LeetCode SQL</a> · <a
+          href="https://github.com/" target="_blank">GitHub</a> · <a href="https://powerbi.microsoft.com/"
+          target="_blank">Power BI</a></p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/18-portfolio-proyecto-final.html">← Portfolio y proyecto final</a>
+        <a class="next" href="/">Volver al inicio →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["df[\"Canal\"]=df[\"Canal\"].str.strip().str.title(); df[\"Monto\"]=df[\"Monto\"].fillna(df[\"Monto\"].median())","res = df.groupby(\"Canal\").agg(Monto_Prom=(\"Monto\",\"mean\"),Satisf=(\"Satisfaccion\",\"mean\")).round(1)","print(res)","peor = res[\"Satisf\"].idxmin()","print(f\"Recomiendo: mejorar la experiencia de {peor} (satisfacción más baja)\")"]'></div>
-</div>
 
-<div class="section-num">08</div>
-<h2>Resumen final del track completo</h2>
-
-<div class="concept"><strong>¡Felicitaciones!</strong> Completaste las 19 lecciones del track de Data Analysis. Esto es lo que ahora sabés hacer:</div>
-
-<div class="table-wrap">
-<table>
-<tr><th>#</th><th>Habilidad</th><th>Herramienta</th></tr>
-<tr><td>1-3</td><td>Fundamentos de pandas: Series, DataFrames, lectura de datos</td><td>pandas</td></tr>
-<tr><td>4-6</td><td>Selección, filtrado, limpieza y transformaciones</td><td>pandas</td></tr>
-<tr><td>7-8</td><td>GroupBy, Pivot Tables, Merge, Join, Concat</td><td>pandas</td></tr>
-<tr><td>9</td><td>Estadística descriptiva: centralidad, dispersión, distribuciones</td><td>numpy, pandas</td></tr>
-<tr><td>10-11</td><td>Visualización con Matplotlib y Seaborn</td><td>matplotlib, seaborn</td></tr>
-<tr><td>12</td><td>EDA completo: proceso de 6 pasos profesional</td><td>todo combinado</td></tr>
-<tr><td>13</td><td>NumPy: arrays, vectorización, broadcasting</td><td>numpy</td></tr>
-<tr><td>14-15</td><td>Machine Learning: clasificación, regresión, métricas</td><td>scikit-learn</td></tr>
-<tr><td>16</td><td>Business Intelligence: Power BI, Tableau, dashboards</td><td>conceptual + pandas</td></tr>
-<tr><td>17</td><td>Integración SQL + Python: pipelines completos</td><td>sqlite3, pandas</td></tr>
-<tr><td>18</td><td>Portfolio profesional y proyecto final</td><td>todo el stack</td></tr>
-<tr><td>19</td><td>Preparación para entrevistas técnicas</td><td>todo el stack</td></tr>
-</table>
-</div>
-
-<ul>
-  <li>Tenés las herramientas para aplicar a puestos de <strong>Data Analyst Junior/Semi-senior</strong>.</li>
-  <li>Tu próximo paso: construir tu portfolio con 2-3 proyectos y publicarlos en <strong>GitHub</strong>.</li>
-  <li>Practicá SQL y pandas diariamente — <a href="https://leetcode.com/problemset/database/" target="_blank">LeetCode SQL</a>, <a href="https://www.kaggle.com/datasets" target="_blank">Kaggle Datasets</a>.</li>
-  <li>Mantené tu LinkedIn actualizado y compartí tus proyectos.</li>
-</ul>
-
-<p><strong>¡Éxitos en tu carrera como Data Analyst!</strong></p>
-
-<p><strong>Recursos:</strong> <a href="https://www.kaggle.com/" target="_blank">Kaggle</a> · <a href="https://leetcode.com/problemset/database/" target="_blank">LeetCode SQL</a> · <a href="https://github.com/" target="_blank">GitHub</a> · <a href="https://powerbi.microsoft.com/" target="_blank">Power BI</a></p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/18-portfolio-proyecto-final.html">← Portfolio y proyecto final</a>
-  <a class="next" href="/">Volver al inicio →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

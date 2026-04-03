@@ -1,95 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 13 · NumPy Fundamentos</title>
-<meta name="description" content="Dominá NumPy: arrays, operaciones vectorizadas, broadcasting, indexación avanzada y álgebra lineal. La base matemática de pandas, matplotlib y scikit-learn.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 13 · NumPy Fundamentos</title>
+  <meta name="description"
+    content="Dominá NumPy: arrays, operaciones vectorizadas, broadcasting, indexación avanzada y álgebra lineal. La base matemática de pandas, matplotlib y scikit-learn.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 13 de 19</span>
-  <h1>NumPy Fundamentos</h1>
-  <p>NumPy (<em>Numerical Python</em>) es la <strong>piedra angular</strong> de todo el ecosistema de Data Science en Python. Pandas, Matplotlib, Seaborn, scikit-learn — todos están construidos sobre NumPy. Cuando pandas calcula una media, por debajo está usando un array de NumPy. Entender NumPy te da el poder de escribir código numérico que es <strong>hasta 100x más rápido</strong> que los bucles de Python puro.</p>
-  <div class="badges">
-    <span class="badge">90–120 min</span>
-    <span class="badge">Prerrequisitos: Lección 12 (EDA completo)</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 13 de 19</span>
+        <h1>NumPy Fundamentos</h1>
+        <p>NumPy (<em>Numerical Python</em>) es la <strong>piedra angular</strong> de todo el ecosistema de Data Science
+          en Python. Pandas, Matplotlib, Seaborn, scikit-learn — todos están construidos sobre NumPy. Cuando pandas
+          calcula una media, por debajo está usando un array de NumPy. Entender NumPy te da el poder de escribir código
+          numérico que es <strong>hasta 100x más rápido</strong> que los bucles de Python puro.</p>
+        <div class="badges">
+          <span class="badge">90–120 min</span>
+          <span class="badge">Prerrequisitos: Lección 12 (EDA completo)</span>
+        </div>
+      </div>
 
-<h3>¿Por qué NumPy es tan rápido?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Una lista de Python es un contenedor genérico: cada elemento puede ser de cualquier tipo (int, string, lista…), y cada uno se almacena en una ubicación de memoria distinta. Un array de NumPy es un <strong>bloque contiguo de memoria</strong> donde todos los elementos son del mismo tipo. Esto permite:</p>
+      <h3>¿Por qué NumPy es tan rápido?</h3>
 
-<ol>
-  <li><strong>Operaciones vectorizadas:</strong> en vez de recorrer elemento por elemento con un bucle, NumPy aplica la operación a todo el array de golpe (internamente usa C compilado).</li>
-  <li><strong>Broadcasting:</strong> operaciones entre arrays de distinto tamaño se expanden automáticamente sin copiar datos.</li>
-  <li><strong>Memoria eficiente:</strong> un array de 1 millón de enteros ocupa ~4MB. Una lista de Python con los mismos números ocupa ~28MB.</li>
-</ol>
+      <p>Una lista de Python es un contenedor genérico: cada elemento puede ser de cualquier tipo (int, string, lista…),
+        y cada uno se almacena en una ubicación de memoria distinta. Un array de NumPy es un <strong>bloque contiguo de
+          memoria</strong> donde todos los elementos son del mismo tipo. Esto permite:</p>
 
-<div class="analogy"><strong>Analogía:</strong> una lista de Python es como un estante donde cada libro está envuelto en una caja individual con etiqueta de tipo. Un array de NumPy es como una estantería de libros del mismo tamaño, perfectamente alineados, sin cajas — podés recorrerlos con la mano de un solo movimiento.</div>
+      <ol>
+        <li><strong>Operaciones vectorizadas:</strong> en vez de recorrer elemento por elemento con un bucle, NumPy
+          aplica la operación a todo el array de golpe (internamente usa C compilado).</li>
+        <li><strong>Broadcasting:</strong> operaciones entre arrays de distinto tamaño se expanden automáticamente sin
+          copiar datos.</li>
+        <li><strong>Memoria eficiente:</strong> un array de 1 millón de enteros ocupa ~4MB. Una lista de Python con los
+          mismos números ocupa ~28MB.</li>
+      </ol>
 
-<h3>ndarray: el objeto central</h3>
+      <div class="analogy"><strong>Analogía:</strong> una lista de Python es como un estante donde cada libro está
+        envuelto en una caja individual con etiqueta de tipo. Un array de NumPy es como una estantería de libros del
+        mismo tamaño, perfectamente alineados, sin cajas — podés recorrerlos con la mano de un solo movimiento.</div>
 
-<p>Todo en NumPy gira alrededor del <code>ndarray</code> (N-dimensional array). Sus atributos clave:</p>
+      <h3>ndarray: el objeto central</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Atributo</th><th>Qué dice</th><th>Ejemplo</th></tr>
-<tr><td><code>.shape</code></td><td>Dimensiones</td><td><code>(3, 4)</code> → 3 filas × 4 columnas</td></tr>
-<tr><td><code>.ndim</code></td><td>Número de dimensiones</td><td><code>2</code> → es una matriz 2D</td></tr>
-<tr><td><code>.dtype</code></td><td>Tipo de datos</td><td><code>float64</code>, <code>int32</code></td></tr>
-<tr><td><code>.size</code></td><td>Total de elementos</td><td><code>12</code> (3 × 4)</td></tr>
-<tr><td><code>.nbytes</code></td><td>Memoria en bytes</td><td><code>96</code> (12 × 8 bytes)</td></tr>
-</table>
-</div>
+      <p>Todo en NumPy gira alrededor del <code>ndarray</code> (N-dimensional array). Sus atributos clave:</p>
 
-<h3>Formas de crear arrays</h3>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Atributo</th>
+            <th>Qué dice</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><code>.shape</code></td>
+            <td>Dimensiones</td>
+            <td><code>(3, 4)</code> → 3 filas × 4 columnas</td>
+          </tr>
+          <tr>
+            <td><code>.ndim</code></td>
+            <td>Número de dimensiones</td>
+            <td><code>2</code> → es una matriz 2D</td>
+          </tr>
+          <tr>
+            <td><code>.dtype</code></td>
+            <td>Tipo de datos</td>
+            <td><code>float64</code>, <code>int32</code></td>
+          </tr>
+          <tr>
+            <td><code>.size</code></td>
+            <td>Total de elementos</td>
+            <td><code>12</code> (3 × 4)</td>
+          </tr>
+          <tr>
+            <td><code>.nbytes</code></td>
+            <td>Memoria en bytes</td>
+            <td><code>96</code> (12 × 8 bytes)</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Función</th><th>Qué crea</th><th>Ejemplo</th></tr>
-<tr><td><code>np.array([1,2,3])</code></td><td>Desde una lista</td><td><code>[1, 2, 3]</code></td></tr>
-<tr><td><code>np.zeros((3,4))</code></td><td>Matriz de ceros</td><td>3×4 de 0.0</td></tr>
-<tr><td><code>np.ones((2,3))</code></td><td>Matriz de unos</td><td>2×3 de 1.0</td></tr>
-<tr><td><code>np.arange(0, 10, 2)</code></td><td>Secuencia con paso</td><td><code>[0, 2, 4, 6, 8]</code></td></tr>
-<tr><td><code>np.linspace(0, 1, 5)</code></td><td>N puntos equidistantes</td><td><code>[0, .25, .5, .75, 1]</code></td></tr>
-<tr><td><code>np.random.normal(0,1,100)</code></td><td>Distribución normal</td><td>100 valores con μ=0, σ=1</td></tr>
-<tr><td><code>np.eye(3)</code></td><td>Matriz identidad</td><td>3×3 con 1s en la diagonal</td></tr>
-</table>
-</div>
+      <h3>Formas de crear arrays</h3>
 
-<div class="warning"><strong>Diferencia mortal con listas:</strong> las operaciones aritméticas funcionan distinto. <code>[1,2,3] * 3</code> en Python da <code>[1,2,3,1,2,3,1,2,3]</code> (repetición). <code>np.array([1,2,3]) * 3</code> da <code>[3, 6, 9]</code> (multiplicación elemento a elemento). Esto es fundamental y fuente de bugs cuando mezclas listas y arrays.</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Función</th>
+            <th>Qué crea</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><code>np.array([1,2,3])</code></td>
+            <td>Desde una lista</td>
+            <td><code>[1, 2, 3]</code></td>
+          </tr>
+          <tr>
+            <td><code>np.zeros((3,4))</code></td>
+            <td>Matriz de ceros</td>
+            <td>3×4 de 0.0</td>
+          </tr>
+          <tr>
+            <td><code>np.ones((2,3))</code></td>
+            <td>Matriz de unos</td>
+            <td>2×3 de 1.0</td>
+          </tr>
+          <tr>
+            <td><code>np.arange(0, 10, 2)</code></td>
+            <td>Secuencia con paso</td>
+            <td><code>[0, 2, 4, 6, 8]</code></td>
+          </tr>
+          <tr>
+            <td><code>np.linspace(0, 1, 5)</code></td>
+            <td>N puntos equidistantes</td>
+            <td><code>[0, .25, .5, .75, 1]</code></td>
+          </tr>
+          <tr>
+            <td><code>np.random.normal(0,1,100)</code></td>
+            <td>Distribución normal</td>
+            <td>100 valores con μ=0, σ=1</td>
+          </tr>
+          <tr>
+            <td><code>np.eye(3)</code></td>
+            <td>Matriz identidad</td>
+            <td>3×3 con 1s en la diagonal</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="realworld"><strong>En el trabajo real:</strong> aunque trabajes principalmente con pandas, NumPy aparece constantemente: cuando usás <code>np.where()</code>, <code>np.random</code> para simulaciones, <code>np.log()</code> para transformaciones, o cuando un modelo de scikit-learn te devuelve un array de predicciones. Entender NumPy te hace más eficiente con todas estas herramientas.</div>
+      <div class="warning"><strong>Diferencia mortal con listas:</strong> las operaciones aritméticas funcionan
+        distinto. <code>[1,2,3] * 3</code> en Python da <code>[1,2,3,1,2,3,1,2,3]</code> (repetición).
+        <code>np.array([1,2,3]) * 3</code> da <code>[3, 6, 9]</code> (multiplicación elemento a elemento). Esto es
+        fundamental y fuente de bugs cuando mezclas listas y arrays.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="realworld"><strong>En el trabajo real:</strong> aunque trabajes principalmente con pandas, NumPy
+        aparece constantemente: cuando usás <code>np.where()</code>, <code>np.random</code> para simulaciones,
+        <code>np.log()</code> para transformaciones, o cuando un modelo de scikit-learn te devuelve un array de
+        predicciones. Entender NumPy te hace más eficiente con todas estas herramientas.</div>
 
-<h3>Ejemplo 1: Crear arrays y explorar sus atributos</h3>
-<p>Conocer la forma, tipo y tamaño de un array es como el <code>.shape</code> y <code>.dtypes</code> del EDA pero a nivel atómico.</p>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_crear.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <h3>Ejemplo 1: Crear arrays y explorar sus atributos</h3>
+      <p>Conocer la forma, tipo y tamaño de un array es como el <code>.shape</code> y <code>.dtypes</code> del EDA pero
+        a nivel atómico.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_crear.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 
 # Desde una lista
 a = np.array([10, 20, 30, 40, 50])
@@ -111,17 +194,20 @@ print(f"linspace(0,1,5): {np.linspace(0, 1, 5)}")
 # Random
 np.random.seed(42)
 normal = np.random.normal(100, 15, 5)
-print(f"\nnormal(μ=100, σ=15): {normal.round(1)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nnormal(μ=100, σ=15): {normal.round(1)}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Operaciones vectorizadas — Adiós a los bucles</h3>
-<p>La gran ventaja de NumPy: aplicar operaciones matemáticas a millones de elementos sin escribir for loops.</p>
+      <h3>Ejemplo 2: Operaciones vectorizadas — Adiós a los bucles</h3>
+      <p>La gran ventaja de NumPy: aplicar operaciones matemáticas a millones de elementos sin escribir for loops.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_vectorizadas.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_vectorizadas.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 
 precios = np.array([100, 250, 80, 340, 190])
 cantidades = np.array([5, 2, 10, 1, 3])
@@ -149,17 +235,21 @@ arr = np.random.random(1_000_000)
 t0 = time.time()
 resultado = arr * 2 + 1
 t1 = time.time()
-print(f"\n1M de operaciones en {(t1-t0)*1000:.1f} ms (vectorizado)")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\n1M de operaciones en {(t1-t0)*1000:.1f} ms (vectorizado)")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Indexación y slicing</h3>
-<p>NumPy extiende el slicing de Python con indexación avanzada: booleana, fancy indexing y slicing multidimensional.</p>
+      <h3>Ejemplo 3: Indexación y slicing</h3>
+      <p>NumPy extiende el slicing de Python con indexación avanzada: booleana, fancy indexing y slicing
+        multidimensional.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_indexacion.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_indexacion.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 
 m = np.array([[10, 20, 30, 40],
               [50, 60, 70, 80],
@@ -184,19 +274,25 @@ print(f"Filas 0 y 2:\n{m[[0, 2]]}")
 arr = np.array([85, 42, 91, 67, 55])
 resultado = np.where(arr >= 60, "Aprobado", "Desaprobado")
 print(f"\nNotas: {arr}")
-print(f"State: {resultado}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"State: {resultado}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="tip"><strong>Tip profesional — slicing 2D:</strong> la sintaxis <code>m[filas, columnas]</code> es la clave. <code>m[:, 0]</code> = todas las filas, columna 0. <code>m[1:3, :]</code> = filas 1 y 2, todas las columnas. Practicá esta notación hasta que sea natural — la vas a usar constantemente.</div>
+      <div class="tip"><strong>Tip profesional — slicing 2D:</strong> la sintaxis <code>m[filas, columnas]</code> es la
+        clave. <code>m[:, 0]</code> = todas las filas, columna 0. <code>m[1:3, :]</code> = filas 1 y 2, todas las
+        columnas. Practicá esta notación hasta que sea natural — la vas a usar constantemente.</div>
 
-<h3>Ejemplo 4: Estadísticas y agregaciones</h3>
-<p>NumPy tiene funciones estadísticas optimizadas que son las mismas que pandas usa internamente. También podés agregar por eje (fila o columna).</p>
+      <h3>Ejemplo 4: Estadísticas y agregaciones</h3>
+      <p>NumPy tiene funciones estadísticas optimizadas que son las mismas que pandas usa internamente. También podés
+        agregar por eje (fila o columna).</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_estadisticas.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_estadisticas.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 
 np.random.seed(42)
 # Matriz de ventas: 4 sucursales × 6 meses
@@ -223,19 +319,27 @@ for j, mes in enumerate(meses):
 # Funciones útiles
 print(f"\nMax global: ${ventas.max():,} (suc {sucursales[ventas.max(axis=1).argmax()]})")
 print(f"Min global: ${ventas.min():,}")
-print(f"Percentil 90: ${np.percentile(ventas, 90):,.0f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Percentil 90: ${np.percentile(ventas, 90):,.0f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="concept"><strong>axis=0 vs axis=1:</strong> esta es la confusión más común de NumPy/pandas. <code>axis=0</code> opera <em>a lo largo de las filas</em> (el resultado tiene una columna). <code>axis=1</code> opera <em>a lo largo de las columnas</em> (el resultado tiene una fila). Pensalo así: <code>axis=0</code> "colapsa" las filas → resultado por columna. <code>axis=1</code> "colapsa" las columnas → resultado por fila.</div>
+      <div class="concept"><strong>axis=0 vs axis=1:</strong> esta es la confusión más común de NumPy/pandas.
+        <code>axis=0</code> opera <em>a lo largo de las filas</em> (el resultado tiene una columna). <code>axis=1</code>
+        opera <em>a lo largo de las columnas</em> (el resultado tiene una fila). Pensalo así: <code>axis=0</code>
+        "colapsa" las filas → resultado por columna. <code>axis=1</code> "colapsa" las columnas → resultado por fila.
+      </div>
 
-<h3>Ejemplo 5: Reshape y broadcasting</h3>
-<p>Reshape cambia la forma de un array sin copiar datos. Broadcasting permite operar arrays de distinto tamaño automáticamente.</p>
+      <h3>Ejemplo 5: Reshape y broadcasting</h3>
+      <p>Reshape cambia la forma de un array sin copiar datos. Broadcasting permite operar arrays de distinto tamaño
+        automáticamente.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_reshape_broadcast.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_reshape_broadcast.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 
 # Reshape: cambiar la forma sin cambiar los datos
 a = np.arange(12)
@@ -261,206 +365,309 @@ print(f"\nVentas:\n{ventas}")
 print(f"Descuento por producto: {descuento}")
 print(f"Neto (con broadcasting):\n{neto}")
 
-print("\nBroadcasting expandió el vector [0.10, 0.15, 0.20] a cada fila")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("\nBroadcasting expandió el vector [0.10, 0.15, 0.20] a cada fila")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Operación</th><th>Función</th><th>Ejemplo</th></tr>
-<tr><td>Crear array</td><td><code>np.array()</code></td><td><code>np.array([1,2,3])</code></td></tr>
-<tr><td>Ceros / Unos</td><td><code>np.zeros() / ones()</code></td><td><code>np.zeros((3,4))</code></td></tr>
-<tr><td>Secuencia</td><td><code>np.arange() / linspace()</code></td><td><code>np.arange(0,10,2)</code></td></tr>
-<tr><td>Random</td><td><code>np.random.normal()</code></td><td><code>np.random.normal(0,1,100)</code></td></tr>
-<tr><td>Forma</td><td><code>.shape / .reshape()</code></td><td><code>a.reshape(3,4)</code></td></tr>
-<tr><td>Suma / Media</td><td><code>.sum() / .mean()</code></td><td><code>a.mean(axis=0)</code></td></tr>
-<tr><td>Min / Max</td><td><code>.min() / .max()</code></td><td><code>a.max(axis=1)</code></td></tr>
-<tr><td>Desv. std</td><td><code>.std()</code></td><td><code>a.std()</code></td></tr>
-<tr><td>Filtro booleano</td><td><code>a[a > 5]</code></td><td>Elementos mayores a 5</td></tr>
-<tr><td>IF vectorizado</td><td><code>np.where(cond, si, no)</code></td><td><code>np.where(a>0,"pos","neg")</code></td></tr>
-<tr><td>Operaciones</td><td><code>+ - * / **</code></td><td>Elemento a elemento</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Operación</th>
+            <th>Función</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td>Crear array</td>
+            <td><code>np.array()</code></td>
+            <td><code>np.array([1,2,3])</code></td>
+          </tr>
+          <tr>
+            <td>Ceros / Unos</td>
+            <td><code>np.zeros() / ones()</code></td>
+            <td><code>np.zeros((3,4))</code></td>
+          </tr>
+          <tr>
+            <td>Secuencia</td>
+            <td><code>np.arange() / linspace()</code></td>
+            <td><code>np.arange(0,10,2)</code></td>
+          </tr>
+          <tr>
+            <td>Random</td>
+            <td><code>np.random.normal()</code></td>
+            <td><code>np.random.normal(0,1,100)</code></td>
+          </tr>
+          <tr>
+            <td>Forma</td>
+            <td><code>.shape / .reshape()</code></td>
+            <td><code>a.reshape(3,4)</code></td>
+          </tr>
+          <tr>
+            <td>Suma / Media</td>
+            <td><code>.sum() / .mean()</code></td>
+            <td><code>a.mean(axis=0)</code></td>
+          </tr>
+          <tr>
+            <td>Min / Max</td>
+            <td><code>.min() / .max()</code></td>
+            <td><code>a.max(axis=1)</code></td>
+          </tr>
+          <tr>
+            <td>Desv. std</td>
+            <td><code>.std()</code></td>
+            <td><code>a.std()</code></td>
+          </tr>
+          <tr>
+            <td>Filtro booleano</td>
+            <td><code>a[a > 5]</code></td>
+            <td>Elementos mayores a 5</td>
+          </tr>
+          <tr>
+            <td>IF vectorizado</td>
+            <td><code>np.where(cond, si, no)</code></td>
+            <td><code>np.where(a>0,"pos","neg")</code></td>
+          </tr>
+          <tr>
+            <td>Operaciones</td>
+            <td><code>+ - * / **</code></td>
+            <td>Elemento a elemento</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Crear un array y explorar atributos</h4>
-  <p>Creá un array 2D de forma <code>(3, 4)</code> con <code>np.arange(12).reshape(3,4)</code>. Imprimí su shape. Debe incluir <code>(3, 4)</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-1" data-expected="(3, 4)">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "(3, 4)"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Crear un array y explorar atributos</h4>
+        <p>Creá un array 2D de forma <code>(3, 4)</code> con <code>np.arange(12).reshape(3,4)</code>. Imprimí su shape.
+          Debe incluir <code>(3, 4)</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-1"
+          data-expected="(3, 4)">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "(3, 4)"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 # Creá un array de 0 a 11, luego reshape a (3,4)
 # Imprimí el array y su shape
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["m = np.arange(12).reshape(3, 4)","print(m)","print(f\"Shape: {m.shape}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["m = np.arange(12).reshape(3, 4)","print(m)","print(f\"Shape: {m.shape}\")"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Operaciones vectorizadas</h4>
-  <p>Calculá el total de ventas (<code>precios * cantidades</code>) y la suma total. Debe incluir <code>2300</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-2" data-expected="2300">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "2300"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Operaciones vectorizadas</h4>
+        <p>Calculá el total de ventas (<code>precios * cantidades</code>) y la suma total. Debe incluir
+          <code>2300</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-2" data-expected="2300">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "2300"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 precios = np.array([100, 200, 300])
 cantidades = np.array([5, 2, 3])
 
 # Calculá totales = precios * cantidades, luego suma total
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["totales = precios * cantidades","print(f\"Totales: {totales}\")","print(f\"Suma: {totales.sum()}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["totales = precios * cantidades","print(f\"Totales: {totales}\")","print(f\"Suma: {totales.sum()}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Filtrado booleano</h4>
-  <p>Filtrá los valores mayores a 50 del array. Imprimí cuántos son. Debe incluir <code>3</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-3" data-expected="3">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "3"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Filtrado booleano</h4>
+        <p>Filtrá los valores mayores a 50 del array. Imprimí cuántos son. Debe incluir <code>3</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-3" data-expected="3">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 datos = np.array([10, 85, 42, 91, 30, 67])
 
 # Filtrá > 50 y contá cuántos son
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["filtrados = datos[datos > 50]","print(f\"Mayores a 50: {filtrados}\")","print(f\"Cantidad: {len(filtrados)}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["filtrados = datos[datos > 50]","print(f\"Mayores a 50: {filtrados}\")","print(f\"Cantidad: {len(filtrados)}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Estadísticas con axis</h4>
-  <p>Dada una matriz 3×4 de ventas, calculá el promedio por fila (<code>axis=1</code>). Imprimí el promedio de la primera fila, debe incluir <code>25.0</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-4" data-expected="25.0">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "25.0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Estadísticas con axis</h4>
+        <p>Dada una matriz 3×4 de ventas, calculá el promedio por fila (<code>axis=1</code>). Imprimí el promedio de la
+          primera fila, debe incluir <code>25.0</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-4" data-expected="25.0">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "25.0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 ventas = np.array([[10, 20, 30, 40],
                    [50, 60, 70, 80],
                    [15, 25, 35, 45]])
 
 # Promedio por fila (axis=1) e imprimí el resultado
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["promedios = ventas.mean(axis=1)","print(f\"Promedios por fila: {promedios}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["promedios = ventas.mean(axis=1)","print(f\"Promedios por fila: {promedios}\")"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: np.where() — IF vectorizado</h4>
-  <p>Usá <code>np.where()</code> para clasificar notas en "Aprobado" (≥60) o "Desaprobado". Debe incluir <code>Aprobado</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-5" data-expected="Aprobado">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Aprobado"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: np.where() — IF vectorizado</h4>
+        <p>Usá <code>np.where()</code> para clasificar notas en "Aprobado" (≥60) o "Desaprobado". Debe incluir
+          <code>Aprobado</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-5"
+          data-expected="Aprobado">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Aprobado"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 notas = np.array([85, 42, 91, 55, 60, 38, 73])
 
 # np.where para clasificar
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["estado = np.where(notas >= 60, \"Aprobado\", \"Desaprobado\")","print(estado)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["estado = np.where(notas >= 60, \"Aprobado\", \"Desaprobado\")","print(estado)"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Broadcasting — aplicar IVA</h4>
-  <p>Multiplicá un array de precios por 1.21 (IVA). Imprimí el primer precio con IVA. Debe incluir <code>121.0</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-6" data-expected="121.0">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "121.0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Broadcasting — aplicar IVA</h4>
+        <p>Multiplicá un array de precios por 1.21 (IVA). Imprimí el primer precio con IVA. Debe incluir
+          <code>121.0</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-6"
+          data-expected="121.0">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "121.0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 precios = np.array([100, 250, 80, 340])
 
 # Multiplicá por 1.21 (broadcasting con escalar)
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["con_iva = precios * 1.21","print(f\"Con IVA: {con_iva}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box" data-hints='["con_iva = precios * 1.21","print(f\"Con IVA: {con_iva}\")"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Slicing 2D</h4>
-  <p>De una matriz 4×5, extraé la submatriz de las filas 1 a 2 y columnas 2 a 4 con slicing. Imprimí su shape. Debe incluir <code>(2, 3)</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-7" data-expected="(2, 3)">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "(2, 3)"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Slicing 2D</h4>
+        <p>De una matriz 4×5, extraé la submatriz de las filas 1 a 2 y columnas 2 a 4 con slicing. Imprimí su shape.
+          Debe incluir <code>(2, 3)</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-7"
+          data-expected="(2, 3)">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "(2, 3)"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 m = np.arange(20).reshape(4, 5)
 print(f"Matriz original:\n{m}")
 
 # Extraé filas 1:3, columnas 2:5
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["sub = m[1:3, 2:5]","print(f\"Submatriz:\\n{sub}\")","print(f\"Shape: {sub.shape}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["sub = m[1:3, 2:5]","print(f\"Submatriz:\\n{sub}\")","print(f\"Shape: {sub.shape}\")"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Generar datos aleatorios y estadísticas</h4>
-  <p>Generá 1000 valores con distribución normal (μ=500, σ=100). Imprimí media, std y percentil 95. Debe incluir un valor cercano a <code>500</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-8" data-expected="500">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir algo cercano a "500"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Generar datos aleatorios y estadísticas</h4>
+        <p>Generá 1000 valores con distribución normal (μ=500, σ=100). Imprimí media, std y percentil 95. Debe incluir
+          un valor cercano a <code>500</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-8" data-expected="500">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir algo cercano a "500"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 np.random.seed(42)
 
 # Generá 1000 valores normales con μ=500, σ=100
 # Imprimí media, std, percentil 95
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["datos = np.random.normal(500, 100, 1000)","print(f\"Media: {datos.mean():.1f}\")","print(f\"Std: {datos.std():.1f}\")","print(f\"P95: {np.percentile(datos, 95):.1f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["datos = np.random.normal(500, 100, 1000)","print(f\"Media: {datos.mean():.1f}\")","print(f\"Std: {datos.std():.1f}\")","print(f\"P95: {np.percentile(datos, 95):.1f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Reshape y operaciones por eje</h4>
-  <p>Reshape un array de 12 elementos a (3,4). Calculá la suma por columna (<code>axis=0</code>). Imprimí el resultado. Debe incluir <code>15</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-9" data-expected="15">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "15"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Reshape y operaciones por eje</h4>
+        <p>Reshape un array de 12 elementos a (3,4). Calculá la suma por columna (<code>axis=0</code>). Imprimí el
+          resultado. Debe incluir <code>15</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-9" data-expected="15">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "15"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 
 arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 # Reshape a (3,4), sumá por columna
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["m = arr.reshape(3, 4)","print(f\"Matriz:\\n{m}\")","print(f\"Suma por columna: {m.sum(axis=0)}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["m = arr.reshape(3, 4)","print(f\"Matriz:\\n{m}\")","print(f\"Suma por columna: {m.sum(axis=0)}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Simulación Montecarlo del IVA</h4>
-  <p>Simulá 10,000 ventas con precios aleatorios (normal μ=500, σ=200, mínimo 50). Calculá IVA (21%), filtrá ventas >$800 y contá qué porcentaje del total representan. Debe incluir <code>%</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-10" data-expected="%">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "%"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Simulación Montecarlo del IVA</h4>
+        <p>Simulá 10,000 ventas con precios aleatorios (normal μ=500, σ=200, mínimo 50). Calculá IVA (21%), filtrá
+          ventas >$800 y contá qué porcentaje del total representan. Debe incluir <code>%</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-10" data-expected="%">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "%"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 np.random.seed(42)
 
 # 1. Generá 10000 precios (normal, μ=500, σ=200)
@@ -468,45 +675,57 @@ np.random.seed(42)
 # 3. Calculá precios con IVA (* 1.21)
 # 4. Filtrá los que superan $800
 # 5. Imprimí qué % del total son
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["precios = np.clip(np.random.normal(500, 200, 10000), 50, None)","con_iva = precios * 1.21","altos = con_iva[con_iva > 800]","print(f\"Ventas > $800: {len(altos)} ({len(altos)/len(con_iva)*100:.1f}%)\")"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>NumPy arrays son <strong>bloques contiguos de memoria</strong> con tipo homogéneo → operaciones 10-100x más
+          rápidas que listas.</li>
+        <li><strong>Operaciones vectorizadas</strong> eliminan los bucles: <code>a * b</code> multiplica elemento a
+          elemento sin <code>for</code>.</li>
+        <li><strong>Broadcasting</strong> expande arrays de distinto tamaño automáticamente para operar juntos.</li>
+        <li><strong>axis=0</strong> colapsa filas (resultado por columna), <strong>axis=1</strong> colapsa columnas
+          (resultado por fila).</li>
+        <li><strong>Indexación booleana</strong> (<code>arr[arr > 50]</code>) es la forma más eficiente de filtrar datos
+          numéricos.</li>
+        <li><code>np.where()</code> es el IF vectorizado — la base del <code>np.where</code> que usaste en pandas.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>14 · Intro a Machine Learning</strong>) vas a descubrir cómo las máquinas
+        aprenden de los datos. NumPy es la base sobre la que se construyen todos los modelos — los datos siempre
+        terminan como arrays numéricos.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://numpy.org/doc/stable/user/quickstart.html" target="_blank">NumPy
+          Quick Start</a> · <a href="https://numpy.org/doc/stable/reference/" target="_blank">API Reference</a></p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/12-eda-completo.html">← EDA completo</a>
+        <a class="next" href="/data-analysis/14-intro-machine-learning.html">Intro a Machine Learning →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["precios = np.clip(np.random.normal(500, 200, 10000), 50, None)","con_iva = precios * 1.21","altos = con_iva[con_iva > 800]","print(f\"Ventas > $800: {len(altos)} ({len(altos)/len(con_iva)*100:.1f}%)\")"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>NumPy arrays son <strong>bloques contiguos de memoria</strong> con tipo homogéneo → operaciones 10-100x más rápidas que listas.</li>
-  <li><strong>Operaciones vectorizadas</strong> eliminan los bucles: <code>a * b</code> multiplica elemento a elemento sin <code>for</code>.</li>
-  <li><strong>Broadcasting</strong> expande arrays de distinto tamaño automáticamente para operar juntos.</li>
-  <li><strong>axis=0</strong> colapsa filas (resultado por columna), <strong>axis=1</strong> colapsa columnas (resultado por fila).</li>
-  <li><strong>Indexación booleana</strong> (<code>arr[arr > 50]</code>) es la forma más eficiente de filtrar datos numéricos.</li>
-  <li><code>np.where()</code> es el IF vectorizado — la base del <code>np.where</code> que usaste en pandas.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>14 · Intro a Machine Learning</strong>) vas a descubrir cómo las máquinas aprenden de los datos. NumPy es la base sobre la que se construyen todos los modelos — los datos siempre terminan como arrays numéricos.</p>
-
-<p><strong>Recursos:</strong> <a href="https://numpy.org/doc/stable/user/quickstart.html" target="_blank">NumPy Quick Start</a> · <a href="https://numpy.org/doc/stable/reference/" target="_blank">API Reference</a></p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/12-eda-completo.html">← EDA completo</a>
-  <a class="next" href="/data-analysis/14-intro-machine-learning.html">Intro a Machine Learning →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

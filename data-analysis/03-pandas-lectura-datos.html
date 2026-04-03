@@ -1,63 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 03 · pandas lectura de datos</title>
-<meta name="description" content="Aprende a importar y leer datasets en pandas usando read_csv y otros comandos de I/O desde fuentes como bases crudas simuladas.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 03 · pandas lectura de datos</title>
+  <meta name="description"
+    content="Aprende a importar y leer datasets en pandas usando read_csv y otros comandos de I/O desde fuentes como bases crudas simuladas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 03 de 19</span>
-  <h1>Lectura de Datos (I/O)</h1>
-  <p>En el trabajo corporativo no creamos diccionarios a mano: abrimos bases crudas de miles o millones de filas. Estas bases suelen ser archivos CSV o respuestas SQL. Aquí dominarás <code>read_csv()</code>, la función estrella para ingerir datos.</p>
-  <div class="badges">
-    <span class="badge">50–70 min</span>
-    <span class="badge">Prerrequisitos: Series y DataFrames</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Teoría: El Input/Output de pandas</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 03 de 19</span>
+        <h1>Lectura de Datos (I/O)</h1>
+        <p>En el trabajo corporativo no creamos diccionarios a mano: abrimos bases crudas de miles o millones de filas.
+          Estas bases suelen ser archivos CSV o respuestas SQL. Aquí dominarás <code>read_csv()</code>, la función
+          estrella para ingerir datos.</p>
+        <div class="badges">
+          <span class="badge">50–70 min</span>
+          <span class="badge">Prerrequisitos: Series y DataFrames</span>
+        </div>
+      </div>
 
-<p>La sigla <strong>I/O</strong> (Input/Output o Entrada/Salida) se refiere a cómo la máquina virtual de Python recibe datos del exterior (Input) y los exporta modificados (Output).</p>
+      <div class="section-num">01</div>
+      <h2>Teoría: El Input/Output de pandas</h2>
 
-<p>A diferencia de Excel, donde tenés que dar <em>Doble Clic</em> sobre un ícono y esperar a que la computadora cargue una interfaz pesada y visual, pandas puede ingerir archivos ridículamente grandes ("millones de registros") silenciosamente en de un instante.</p>
+      <p>La sigla <strong>I/O</strong> (Input/Output o Entrada/Salida) se refiere a cómo la máquina virtual de Python
+        recibe datos del exterior (Input) y los exporta modificados (Output).</p>
 
-<h3>La familia read_*()</h3>
-<p>Todos los comandos de lectura en pandas empiezan con <code>pd.read_</code> seguido de la extensión/formato. Los más usados son:</p>
-<ul>
-    <li><code>pd.read_csv("archivo.csv")</code>: Para la gran mayoría de datos exportados de DBs o sistemas. (CSV = Comma Separated Values).</li>
-    <li><code>pd.read_excel("ventas.xlsx")</code>: Para archivos puros de Excel con pestañas.</li>
-    <li><code>pd.read_sql()</code>: Para ir a buscar la tabla directamente usando una query contra un motor en vivo.</li>
-    <li><code>pd.read_json()</code>: Muy usado cuando consultamos un endpoint web/API.</li>
-</ul>
+      <p>A diferencia de Excel, donde tenés que dar <em>Doble Clic</em> sobre un ícono y esperar a que la computadora
+        cargue una interfaz pesada y visual, pandas puede ingerir archivos ridículamente grandes ("millones de
+        registros") silenciosamente en de un instante.</p>
 
-<div class="concept"><strong>En este curso interactivo</strong> (al estar corriendo Python en tu navegador por seguridad) no tendrías forma de darle la ruta en C:\Mis Documentos\dataset.csv" al entorno. Por ello, vas a ver que utilizamos un pequeño truco con <code>io.StringIO</code> que hace que Python crea que un simple texto largo escrito en el código es un archivo real. En tu trabajo de escritorio esto no será necesario (basta con poner la URL local).</div>
+      <h3>La familia read_*()</h3>
+      <p>Todos los comandos de lectura en pandas empiezan con <code>pd.read_</code> seguido de la extensión/formato. Los
+        más usados son:</p>
+      <ul>
+        <li><code>pd.read_csv("archivo.csv")</code>: Para la gran mayoría de datos exportados de DBs o sistemas. (CSV =
+          Comma Separated Values).</li>
+        <li><code>pd.read_excel("ventas.xlsx")</code>: Para archivos puros de Excel con pestañas.</li>
+        <li><code>pd.read_sql()</code>: Para ir a buscar la tabla directamente usando una query contra un motor en vivo.
+        </li>
+        <li><code>pd.read_json()</code>: Muy usado cuando consultamos un endpoint web/API.</li>
+      </ul>
 
-<div class="section-num">02</div>
-<h2>Ejemplo: Tu primer read_csv()</h2>
+      <div class="concept"><strong>En este curso interactivo</strong> (al estar corriendo Python en tu navegador por
+        seguridad) no tendrías forma de darle la ruta en C:\Mis Documentos\dataset.csv" al entorno. Por ello, vas a ver
+        que utilizamos un pequeño truco con <code>io.StringIO</code> que hace que Python crea que un simple texto largo
+        escrito en el código es un archivo real. En tu trabajo de escritorio esto no será necesario (basta con poner la
+        URL local).</div>
 
-<p>A continuación vamos a simular un archivo CSV extraído de las ventas regionales en sucursales en Argentina. Observá cómo transformamos el texto separado por comas directamente al poderoso DataFrame.</p>
+      <div class="section-num">02</div>
+      <h2>Ejemplo: Tu primer read_csv()</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>leyendo_csv.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <p>A continuación vamos a simular un archivo CSV extraído de las ventas regionales en sucursales en Argentina.
+        Observá cómo transformamos el texto separado por comas directamente al poderoso DataFrame.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>leyendo_csv.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import io
 
 # Simulamos que esto proviene de un archivo físico "ventas.csv"
@@ -75,20 +98,26 @@ df_ventas = pd.read_csv(buffer)
 
 print("=== Imprimiendo el DataFrame ingestado ===")
 print(df_ventas)
-</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>El clásico problema de delimitadores</h3>
+      <h3>El clásico problema de delimitadores</h3>
 
-<p>En USA/Europa las bases de datos separan las columnas con comas (<code>,</code>). Pero en Argentina usamos la coma para los decimales (ej <code>$15,50</code>), entonces nuestros sistemas viejos exportan CSVs separados por puntos y comas (<code>;</code>) u otros caracteres.</p>
+      <p>En USA/Europa las bases de datos separan las columnas con comas (<code>,</code>). Pero en Argentina usamos la
+        coma para los decimales (ej <code>$15,50</code>), entonces nuestros sistemas viejos exportan CSVs separados por
+        puntos y comas (<code>;</code>) u otros caracteres.</p>
 
-<p>Si intentás leer eso con "read_csv" estandar, todo colapsará. Para evitarlo la función tiene el mejor parámetro salva-vidas: <code>sep=";"</code>.</p>
+      <p>Si intentás leer eso con "read_csv" estandar, todo colapsará. Para evitarlo la función tiene el mejor parámetro
+        salva-vidas: <code>sep=";"</code>.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>separadores.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>separadores.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import io
 
 # Ojo: Múltiples columnas pegadas mediante un punto y coma y la barra vertical `|`
@@ -105,25 +134,31 @@ print("\n\nAhora indicando explícitamente el separador adecuado sep='|':")
 # El parámetro sep toma lo que le envies.
 df_bueno = pd.read_csv(io.StringIO(archivo_espeso), sep="|")
 print(df_bueno)
-</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
 
-<div class="section-num">03</div>
-<h2>Observar la cabecera: .head() y .tail()</h2>
+      <div class="section-num">03</div>
+      <h2>Observar la cabecera: .head() y .tail()</h2>
 
-<p>Cuando ingestás millones de filas de datos, si imprimís usando <code>print(df)</code>, la pantalla se colgaría o te mostraría tanto texto que tu cerebro se tilda. A los Data Analysts les encantan dos funciones para "ver rapidito qué nos trajo la base de datos":</p>
+      <p>Cuando ingestás millones de filas de datos, si imprimís usando <code>print(df)</code>, la pantalla se colgaría
+        o te mostraría tanto texto que tu cerebro se tilda. A los Data Analysts les encantan dos funciones para "ver
+        rapidito qué nos trajo la base de datos":</p>
 
-<ul>
-    <li><code>df.head(n)</code> (Devuelve las primeras "n" filas. Por omisión: 5)</li>
-    <li><code>df.tail(n)</code> (Devuelve las últimas "n" filas. Excelente para ver si el reporte llegó al final adecuadamente)</li>
-</ul>
+      <ul>
+        <li><code>df.head(n)</code> (Devuelve las primeras "n" filas. Por omisión: 5)</li>
+        <li><code>df.tail(n)</code> (Devuelve las últimas "n" filas. Excelente para ver si el reporte llegó al final
+          adecuadamente)</li>
+      </ul>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>head_tail.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>head_tail.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import io
 
 dataset_largo = """Rango,Monto
@@ -143,26 +178,35 @@ print(df_tiempo.head(3))
 
 print("\n=== Las ultimas 2 filas (tail) ===")
 print(df_tiempo.tail(2))
-</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="tip"><strong>Tip profesional:</strong> Usar <code>df.head()</code> al iniciar tus scripts (o Notebooks) permite validar rápidamente que a) El separador esté correcto, b) Las columnas mantengan nombres sanos, c) No haya filas de basura.</div>
+      <div class="tip"><strong>Tip profesional:</strong> Usar <code>df.head()</code> al iniciar tus scripts (o
+        Notebooks) permite validar rápidamente que a) El separador esté correcto, b) Las columnas mantengan nombres
+        sanos, c) No haya filas de basura.</div>
 
 
-<div class="section-num">04</div>
-<h2>Ejercicios interactivos</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios interactivos</h2>
 
-<p>Manos al bloque. Practicá la ingesta del sistema simulado.</p>
+      <p>Manos al bloque. Practicá la ingesta del sistema simulado.</p>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Tu primera lectura con separador</h4>
-  <p>El sistema te devuelve un texto separado por tabulaciones o barras. Acá usaremos la coma. Dejá el separador default, decile a Pandas que lea el buffer usando <code>read_csv()</code> y guardalo en la variable `df_empleados`. Luego imprimí TODO usando `print()`.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-03" data-exercise="ex-1" data-expected="Soporte">
-    <div class="editor-top"><span>ej_01_read.py</span><span>Debe contener la palabra "Soporte" del print</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Tu primera lectura con separador</h4>
+        <p>El sistema te devuelve un texto separado por tabulaciones o barras. Acá usaremos la coma. Dejá el separador
+          default, decile a Pandas que lea el buffer usando <code>read_csv()</code> y guardalo en la variable
+          `df_empleados`. Luego imprimí TODO usando `print()`.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-03" data-exercise="ex-1"
+          data-expected="Soporte">
+          <div class="editor-top"><span>ej_01_read.py</span><span>Debe contener la palabra "Soporte" del print</span>
+          </div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import io
 
 rrhh_data = """Nombre,Area,Salario
@@ -174,20 +218,26 @@ buffer = io.StringIO(rrhh_data)
 # Utilizá pd.read_csv(buffer) y guardalo en df_empleados:
 
 
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["df_empleados = pd.read_csv(buffer)","print(df_empleados)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box" data-hints='["df_empleados = pd.read_csv(buffer)","print(df_empleados)"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 2: Exigiendo separadores estrictos</h4>
-  <p>Trabajás en un banco, y el sistema <i>Cobis</i> viejo reporta los balances de las cuentas usando el símbolo ampersand <code>&</code>. Modificá el parámetro <code>sep</code> para que lea bien la base de datos y mostrá solamente el <strong>promedio</strong> (usando <code>.mean()</code>) de los Saldos.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-03" data-exercise="ex-2" data-expected="260.0">
-    <div class="editor-top"><span>ej_02_separadores.py</span><span>Debe dar un promedio de "260.0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 2: Exigiendo separadores estrictos</h4>
+        <p>Trabajás en un banco, y el sistema <i>Cobis</i> viejo reporta los balances de las cuentas usando el símbolo
+          ampersand <code>&</code>. Modificá el parámetro <code>sep</code> para que lea bien la base de datos y mostrá
+          solamente el <strong>promedio</strong> (usando <code>.mean()</code>) de los Saldos.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-03" data-exercise="ex-2"
+          data-expected="260.0">
+          <div class="editor-top"><span>ej_02_separadores.py</span><span>Debe dar un promedio de "260.0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import io
 
 cobis_data = """Cuenta&Saldo_Nominal
@@ -201,20 +251,27 @@ df_banco = pd.read_csv(buffer) # Corregir acá
 
 # Calcula e imprime el promedio de Saldo_Nominal
 
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["df_banco = pd.read_csv(buffer, sep=\"&\")","prom = df_banco[\"Saldo_Nominal\"].mean()","print(prom)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["df_banco = pd.read_csv(buffer, sep=\"&\")","prom = df_banco[\"Saldo_Nominal\"].mean()","print(prom)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 3: Extracción exploratoria con Head</h4>
-  <p>Usá <code>.head(2)</code> en un print para validar las primeras 2 filas. El output debe contar con la presencia de "Apple" validándose que leímos el top 2 exitosamente.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-03" data-exercise="ex-3" data-expected="Apple">
-    <div class="editor-top"><span>ej_03_head.py</span><span>La palabra Apple debe estar visible</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 3: Extracción exploratoria con Head</h4>
+        <p>Usá <code>.head(2)</code> en un print para validar las primeras 2 filas. El output debe contar con la
+          presencia de "Apple" validándose que leímos el top 2 exitosamente.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-03" data-exercise="ex-3"
+          data-expected="Apple">
+          <div class="editor-top"><span>ej_03_head.py</span><span>La palabra Apple debe estar visible</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import io
 
 stock_data = """Ticker,Nombre,Precio
@@ -229,37 +286,44 @@ df_acciones = pd.read_csv(buffer)
 
 # Mostrá únicamente las 2 primeras filas utilizando head
 
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box" data-hints='["print(df_acciones.head(2))"]'></div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Reflexión Final</h2>
+
+      <p>Leer datos parece un paso simple, pero configurar correctamente <code>read_csv()</code> va a evitar que pierdas
+        horas limpiando caracteres fantasmas en el futuro.</p>
+      <p>Ahora que las bases de datos externas ya están en nuestro entorno local formadas como DataFrames perfectos,
+        comienza el verdadero trabajo: cómo encontrar exactamente los clientes, fechas o productos que el gerente nos
+        está exigiendo buscar.</p>
+
+      <p>Avanzá a la siguiente lección (<strong>04 · pandas: selección y filtrado</strong>) para aprender la parte de
+        Queries y filtros.</p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/02-pandas-series-dataframes.html">← Series y DataFrames</a>
+        <a class="next" href="/data-analysis/04-pandas-seleccion-filtrado.html">Selección y filtrado →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h3" class="hint-box" data-hints='["print(df_acciones.head(2))"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Reflexión Final</h2>
-
-<p>Leer datos parece un paso simple, pero configurar correctamente <code>read_csv()</code> va a evitar que pierdas horas limpiando caracteres fantasmas en el futuro.</p>
-<p>Ahora que las bases de datos externas ya están en nuestro entorno local formadas como DataFrames perfectos, comienza el verdadero trabajo: cómo encontrar exactamente los clientes, fechas o productos que el gerente nos está exigiendo buscar.</p>
-
-<p>Avanzá a la siguiente lección (<strong>04 · pandas: selección y filtrado</strong>) para aprender la parte de Queries y filtros.</p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/02-pandas-series-dataframes.html">← Series y DataFrames</a>
-  <a class="next" href="/data-analysis/04-pandas-seleccion-filtrado.html">Selección y filtrado →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

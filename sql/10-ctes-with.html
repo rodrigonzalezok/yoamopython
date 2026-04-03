@@ -1,40 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · SQL 10 · CTEs con WITH</title>
-<meta name="description" content="Common Table Expressions (CTEs) con WITH: la forma moderna y legible de escribir subconsultas complejas en SQL.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · SQL 10 · CTEs con WITH</title>
+  <meta name="description"
+    content="Common Table Expressions (CTEs) con WITH: la forma moderna y legible de escribir subconsultas complejas en SQL.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
 </head>
+
 <body>
-<div class="topbar"><button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button><div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div><div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div><div id="global-progress-text" class="top-stats"></div></div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label sql">SQL · Lección 10 de 15</span>
-  <h1>CTEs con WITH</h1>
-  <p>Las <strong>Common Table Expressions</strong> (CTEs) te permiten definir "tablas temporales" con nombre al inicio de tu consulta usando <code>WITH</code>. Son la alternativa moderna y legible a las subconsultas anidadas. En equipos profesionales, las CTEs son el estándar.</p>
-  <div class="badges">
-    <span class="badge">80–100 min</span>
-    <span class="badge">Prerrequisitos: SQL 09</span>
+  <div class="topbar"><button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label sql">SQL · Lección 10 de 15</span>
+        <h1>CTEs con WITH</h1>
+        <p>Las <strong>Common Table Expressions</strong> (CTEs) te permiten definir "tablas temporales" con nombre al
+          inicio de tu consulta usando <code>WITH</code>. Son la alternativa moderna y legible a las subconsultas
+          anidadas. En equipos profesionales, las CTEs son el estándar.</p>
+        <div class="badges">
+          <span class="badge">80–100 min</span>
+          <span class="badge">Prerrequisitos: SQL 09</span>
+        </div>
+      </div>
 
-<h3>¿Qué es una CTE?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Una CTE es un SELECT con nombre que definís al inicio con <code>WITH</code> y después usás como si fuera una tabla:</p>
+      <h3>¿Qué es una CTE?</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">WITH resumen_ciudad AS (
+      <p>Una CTE es un SELECT con nombre que definís al inicio con <code>WITH</code> y después usás como si fuera una
+        tabla:</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">WITH resumen_ciudad AS (
     SELECT ciudad, SUM(saldo) AS total, COUNT(*) AS cantidad
     FROM clientes
     GROUP BY ciudad
@@ -43,13 +59,15 @@ SELECT ciudad, total, cantidad
 FROM resumen_ciudad
 WHERE total > 300000;</pre>
 
-<div class="concept"><strong>CTE vs Subconsulta:</strong> hacen lo mismo, pero las CTEs son mucho más legibles. En vez de anidar paréntesis, definís cada paso con un nombre descriptivo arriba y los usás abajo. Es como definir funciones en Python antes de usarlas.</div>
+      <div class="concept"><strong>CTE vs Subconsulta:</strong> hacen lo mismo, pero las CTEs son mucho más legibles. En
+        vez de anidar paréntesis, definís cada paso con un nombre descriptivo arriba y los usás abajo. Es como definir
+        funciones en Python antes de usarlas.</div>
 
-<h3>Múltiples CTEs</h3>
+      <h3>Múltiples CTEs</h3>
 
-<p>Podés definir varias CTEs separadas por coma, y cada una puede referenciar las anteriores:</p>
+      <p>Podés definir varias CTEs separadas por coma, y cada una puede referenciar las anteriores:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">WITH
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">WITH
 saldos AS (
     SELECT cliente_id, SUM(saldo) AS total
     FROM cuentas GROUP BY cliente_id
@@ -63,18 +81,24 @@ SELECT segmento, COUNT(*), AVG(total)
 FROM clasificados
 GROUP BY segmento;</pre>
 
-<div class="realworld"><strong>En el trabajo:</strong> las CTEs son el estándar en Databricks, BigQuery y cualquier motor moderno. Cuando escribís una consulta de 50+ líneas con 3 subconsultas anidadas, nadie la entiende. Con CTEs, cada paso tiene un nombre y se lee como un pipeline: <code>datos_crudos → limpieza → agrupación → resultado</code>.</div>
+      <div class="realworld"><strong>En el trabajo:</strong> las CTEs son el estándar en Databricks, BigQuery y
+        cualquier motor moderno. Cuando escribís una consulta de 50+ líneas con 3 subconsultas anidadas, nadie la
+        entiende. Con CTEs, cada paso tiene un nombre y se lee como un pipeline:
+        <code>datos_crudos → limpieza → agrupación → resultado</code>.</div>
 
-<div class="tip"><strong>Buenas prácticas con CTEs:</strong> (1) Nombralas descriptivamente: <code>saldos_por_cliente</code>, no <code>tmp1</code>. (2) Cada CTE hace UNA operación. (3) La consulta final al fondo es simple y legible.</div>
+      <div class="tip"><strong>Buenas prácticas con CTEs:</strong> (1) Nombralas descriptivamente:
+        <code>saldos_por_cliente</code>, no <code>tmp1</code>. (2) Cada CTE hace UNA operación. (3) La consulta final al
+        fondo es simple y legible.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: CTE básica — reemplazar subconsulta en FROM</h3>
+      <h3>Ejemplo 1: CTE básica — reemplazar subconsulta en FROM</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_01_cte.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_01_cte.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
 (3,'Pérez','Buenos Aires',890000),(4,'Sosa','Rosario',45000),(5,'Luna','Buenos Aires',210000);
 
@@ -86,16 +110,19 @@ WITH resumen AS (
 SELECT ciudad, total, cantidad, promedio
 FROM resumen
 WHERE total > 200000
-ORDER BY total DESC;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+ORDER BY total DESC;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Múltiples CTEs — pipeline de datos</h3>
+      <h3>Ejemplo 2: Múltiples CTEs — pipeline de datos</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_02_multi.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_02_multi.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, tipo TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720),(2,'López','Córdoba',680),
 (3,'Pérez','Buenos Aires',810),(4,'Sosa','Rosario',590);
@@ -114,16 +141,19 @@ perfil_completo AS (
     FROM clientes c
     INNER JOIN saldos_cliente s ON c.id = s.cliente_id
 )
-SELECT * FROM perfil_completo ORDER BY saldo_total DESC;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+SELECT * FROM perfil_completo ORDER BY saldo_total DESC;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: CTE para comparar con promedios</h3>
+      <h3>Ejemplo 3: CTE para comparar con promedios</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_03_promedios.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_03_promedios.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
 (3,'Pérez','Buenos Aires',890000),(4,'Sosa','Rosario',45000),(5,'Luna','Buenos Aires',210000);
 
@@ -136,16 +166,19 @@ SELECT c.nombre, c.saldo, s.promedio,
        ROUND(c.saldo * 100.0 / s.total, 1) AS pct_total,
        CASE WHEN c.saldo > s.promedio THEN '↑ encima' ELSE '↓ debajo' END AS posicion
 FROM clientes c, stats s
-ORDER BY c.saldo DESC;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+ORDER BY c.saldo DESC;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: CTE para reporte gerencial</h3>
+      <h3>Ejemplo 4: CTE para reporte gerencial</h3>
 
-<div class="editor" data-mode="sql">
-  <div name="ejemplo_04_reporte.sql" class="editor-top"><span>ejemplo_04_reporte.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
+      <div class="editor" data-mode="sql">
+        <div name="ejemplo_04_reporte.sql" class="editor-top"><span>ejemplo_04_reporte.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720),(2,'López','Córdoba',680),
 (3,'Pérez','Buenos Aires',810),(4,'Fernández','Córdoba',645),(5,'Sosa','Rosario',590);
@@ -163,16 +196,19 @@ por_ciudad AS (
     FROM datos GROUP BY ciudad
 )
 SELECT *, ROUND(premium * 100.0 / clientes, 0) AS pct_premium
-FROM por_ciudad ORDER BY total DESC;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+FROM por_ciudad ORDER BY total DESC;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: CTE recursiva — generar secuencia de meses</h3>
+      <h3>Ejemplo 5: CTE recursiva — generar secuencia de meses</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_05_recursiva.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">-- CTE recursiva: generar una secuencia de números
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_05_recursiva.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">-- CTE recursiva: generar una secuencia de números
 WITH RECURSIVE meses(n) AS (
     SELECT 1               -- caso base
     UNION ALL
@@ -182,125 +218,299 @@ SELECT n AS mes,
        'Mes ' || n AS nombre,
        CASE WHEN n <= 3 THEN 'Q1' WHEN n <= 6 THEN 'Q2'
             WHEN n <= 9 THEN 'Q3' ELSE 'Q4' END AS trimestre
-FROM meses;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+FROM meses;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Patrón</th><th>Sintaxis</th></tr>
-<tr><td>CTE simple</td><td><code>WITH nombre AS (SELECT ...) SELECT ... FROM nombre</code></td></tr>
-<tr><td>Múltiples CTEs</td><td><code>WITH a AS (...), b AS (...) SELECT ... FROM b</code></td></tr>
-<tr><td>CTE recursiva</td><td><code>WITH RECURSIVE n AS (base UNION ALL paso) SELECT ...</code></td></tr>
-<tr><td>CTE + JOIN</td><td>Usá la CTE como cualquier tabla en un JOIN</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Patrón</th>
+            <th>Sintaxis</th>
+          </tr>
+          <tr>
+            <td>CTE simple</td>
+            <td><code>WITH nombre AS (SELECT ...) SELECT ... FROM nombre</code></td>
+          </tr>
+          <tr>
+            <td>Múltiples CTEs</td>
+            <td><code>WITH a AS (...), b AS (...) SELECT ... FROM b</code></td>
+          </tr>
+          <tr>
+            <td>CTE recursiva</td>
+            <td><code>WITH RECURSIVE n AS (base UNION ALL paso) SELECT ...</code></td>
+          </tr>
+          <tr>
+            <td>CTE + JOIN</td>
+            <td>Usá la CTE como cualquier tabla en un JOIN</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: CTE simple</h4><p>Creá una CTE que agrupe por ciudad y después filtrá ciudades con total > $300K. Debe incluir <code>Buenos Aires</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-1" data-expected="Buenos Aires"><div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "Buenos Aires"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: CTE simple</h4>
+        <p>Creá una CTE que agrupe por ciudad y después filtrá ciudades con total > $300K. Debe incluir
+          <code>Buenos Aires</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-1" data-expected="Buenos Aires">
+          <div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "Buenos Aires"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
 (3,'Pérez','Buenos Aires',890000),(4,'Sosa','Rosario',45000);
 
 -- CTE + filtro:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["WITH resumen AS (SELECT ciudad, SUM(saldo) AS total FROM clientes GROUP BY ciudad)","SELECT * FROM resumen WHERE total > 300000","BsAs: 1040000, Córdoba: 320000"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["WITH resumen AS (SELECT ciudad, SUM(saldo) AS total FROM clientes GROUP BY ciudad)","SELECT * FROM resumen WHERE total > 300000","BsAs: 1040000, Córdoba: 320000"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: CTE con promedio</h4><p>Usá una CTE para calcular el promedio y después mostrá clientes por encima de ese promedio. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-2" data-expected="Pérez"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: CTE con promedio</h4>
+        <p>Usá una CTE para calcular el promedio y después mostrá clientes por encima de ese promedio. Debe incluir
+          <code>Pérez</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-2" data-expected="Pérez">
+          <div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "Pérez"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000),(4,'Sosa',45000);
 
 -- CTE con promedio:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["WITH prom AS (SELECT AVG(saldo) AS valor FROM clientes)","SELECT c.nombre, c.saldo FROM clientes c, prom p WHERE c.saldo > p.valor","López y Pérez superan el promedio"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["WITH prom AS (SELECT AVG(saldo) AS valor FROM clientes)","SELECT c.nombre, c.saldo FROM clientes c, prom p WHERE c.saldo > p.valor","López y Pérez superan el promedio"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: CTE con conteo</h4><p>CTE que cuente clientes por ciudad y muestre solo las que tengan 2+. Debe incluir <code>2</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-3" data-expected="2"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "2"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: CTE con conteo</h4>
+        <p>CTE que cuente clientes por ciudad y muestre solo las que tengan 2+. Debe incluir <code>2</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-3" data-expected="2">
+          <div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "2"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires'),(2,'López','Córdoba'),
 (3,'Pérez','Buenos Aires'),(4,'Fernández','Córdoba'),(5,'Sosa','Rosario');
 
 -- CTE con conteo:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["WITH conteo AS (SELECT ciudad, COUNT(*) AS n FROM clientes GROUP BY ciudad)","SELECT * FROM conteo WHERE n >= 2","BsAs: 2, Córdoba: 2"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["WITH conteo AS (SELECT ciudad, COUNT(*) AS n FROM clientes GROUP BY ciudad)","SELECT * FROM conteo WHERE n >= 2","BsAs: 2, Córdoba: 2"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Múltiples CTEs</h4><p>CTE 1: saldo total por cliente (JOIN cuentas). CTE 2: clasificar en Alto/Normal. Consulta final: listar. Debe incluir <code>Alto</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-4" data-expected="Alto"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "Alto"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Múltiples CTEs</h4>
+        <p>CTE 1: saldo total por cliente (JOIN cuentas). CTE 2: clasificar en Alto/Normal. Consulta final: listar. Debe
+          incluir <code>Alto</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-4" data-expected="Alto">
+          <div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "Alto"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García'),(2,'López'),(3,'Pérez');
 INSERT INTO cuentas VALUES (101,1,150000),(102,1,500000),(103,2,320000),(104,3,890000);
 
 -- Dos CTEs encadenadas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["WITH saldos AS (...JOIN + GROUP BY...), clasificados AS (... CASE WHEN total > 500000 THEN \\x27Alto\\x27...)","La segunda CTE usa la primera","SELECT * FROM clasificados"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["WITH saldos AS (...JOIN + GROUP BY...), clasificados AS (... CASE WHEN total > 500000 THEN \\x27Alto\\x27...)","La segunda CTE usa la primera","SELECT * FROM clasificados"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: CTE + % del total</h4><p>CTE con total general. Consulta principal muestra cada cliente con su %. Debe incluir <code>pct</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-5" data-expected="pct"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "pct"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: CTE + % del total</h4>
+        <p>CTE con total general. Consulta principal muestra cada cliente con su %. Debe incluir <code>pct</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-5" data-expected="pct">
+          <div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "pct"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000);
 
 -- CTE con total + porcentaje:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["WITH total AS (SELECT SUM(saldo) AS suma FROM clientes)","ROUND(c.saldo * 100.0 / t.suma, 1) AS pct","FROM clientes c, total t"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["WITH total AS (SELECT SUM(saldo) AS suma FROM clientes)","ROUND(c.saldo * 100.0 / t.suma, 1) AS pct","FROM clientes c, total t"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: CTE recursiva — secuencia</h4><p>Generá una secuencia del 1 al 6 representando cuotas de un préstamo. Debe incluir <code>Cuota</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-6" data-expected="Cuota"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "Cuota"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">-- CTE recursiva para cuotas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["WITH RECURSIVE cuotas(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM cuotas WHERE n < 6)","SELECT n, \\x27Cuota \\x27 || n AS descripcion FROM cuotas","Genera 6 filas: 1 a 6"]'></div></div>
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: CTE recursiva — secuencia</h4>
+        <p>Generá una secuencia del 1 al 6 representando cuotas de un préstamo. Debe incluir <code>Cuota</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-6" data-expected="Cuota">
+          <div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "Cuota"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">-- CTE recursiva para cuotas:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["WITH RECURSIVE cuotas(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM cuotas WHERE n < 6)","SELECT n, \\x27Cuota \\x27 || n AS descripcion FROM cuotas","Genera 6 filas: 1 a 6"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Pipeline de 3 CTEs</h4><p>CTE1: saldos por cliente. CTE2: promedio general. CTE3: comparación. Final: los que superan el promedio. Debe incluir <code>encima</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-7" data-expected="encima"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "encima"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Pipeline de 3 CTEs</h4>
+        <p>CTE1: saldos por cliente. CTE2: promedio general. CTE3: comparación. Final: los que superan el promedio. Debe
+          incluir <code>encima</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-7" data-expected="encima">
+          <div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "encima"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García'),(2,'López'),(3,'Pérez');
 INSERT INTO cuentas VALUES (101,1,650000),(102,2,320000),(103,3,890000);
 
 -- 3 CTEs:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["WITH saldos AS (...), promedio AS (SELECT AVG(saldo_total) AS val FROM saldos),","comparacion AS (SELECT s.*, CASE WHEN s.saldo_total > p.val THEN \\x27encima\\x27 ... FROM saldos s, promedio p)","SELECT * FROM comparacion"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["WITH saldos AS (...), promedio AS (SELECT AVG(saldo_total) AS val FROM saldos),","comparacion AS (SELECT s.*, CASE WHEN s.saldo_total > p.val THEN \\x27encima\\x27 ... FROM saldos s, promedio p)","SELECT * FROM comparacion"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: CTE + LEFT JOIN para penetración</h4><p>CTE con clientes y cuentas. Mostrar penetración por ciudad. Debe incluir <code>penetracion</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-8" data-expected="penetracion"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "penetracion"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, ciudad TEXT);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: CTE + LEFT JOIN para penetración</h4>
+        <p>CTE con clientes y cuentas. Mostrar penetración por ciudad. Debe incluir <code>penetracion</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-8" data-expected="penetracion">
+          <div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "penetracion"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, ciudad TEXT);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires'),(2,'López','Córdoba'),
 (3,'Pérez','Buenos Aires'),(4,'Sosa','Buenos Aires');
 INSERT INTO cuentas VALUES (101,1),(102,2),(103,3);
 
 -- CTE + penetración:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["WITH base AS (SELECT c.ciudad, COUNT(*) AS total, COUNT(cu.id) AS con_cuenta FROM clientes c LEFT JOIN cuentas cu ON ...)","ROUND(con_cuenta*100.0/total, 0) AS penetracion","GROUP BY c.ciudad"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["WITH base AS (SELECT c.ciudad, COUNT(*) AS total, COUNT(cu.id) AS con_cuenta FROM clientes c LEFT JOIN cuentas cu ON ...)","ROUND(con_cuenta*100.0/total, 0) AS penetracion","GROUP BY c.ciudad"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: CTE para ranking</h4><p>CTE que ordene clientes por saldo y muestre top 3. Debe incluir <code>ranking</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-9" data-expected="ranking"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "ranking"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: CTE para ranking</h4>
+        <p>CTE que ordene clientes por saldo y muestre top 3. Debe incluir <code>ranking</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-9" data-expected="ranking">
+          <div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "ranking"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),
 (3,'Pérez',890000),(4,'Sosa',45000),(5,'Luna',210000);
 
 -- CTE con ranking (simulado con subconsulta correlacionada):
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["WITH ranked AS (SELECT nombre, saldo, 1+(SELECT COUNT(*) FROM clientes c2 WHERE c2.saldo > c1.saldo) AS ranking FROM clientes c1)","SELECT * FROM ranked WHERE ranking <= 3","ORDER BY ranking"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["WITH ranked AS (SELECT nombre, saldo, 1+(SELECT COUNT(*) FROM clientes c2 WHERE c2.saldo > c1.saldo) AS ranking FROM clientes c1)","SELECT * FROM ranked WHERE ranking <= 3","ORDER BY ranking"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Dashboard ejecutivo completo con CTEs</h4><p>Construí un dashboard con 3 CTEs: base de datos completa, estadísticas por ciudad, y clasificación. Mostrá el resumen final con totales y porcentajes. Debe incluir <code>DASHBOARD</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-10" data-expected="DASHBOARD"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "DASHBOARD"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
+      <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Dashboard ejecutivo completo con CTEs</h4>
+        <p>Construí un dashboard con 3 CTEs: base de datos completa, estadísticas por ciudad, y clasificación. Mostrá el
+          resumen final con totales y porcentajes. Debe incluir <code>DASHBOARD</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-10" data-exercise="ex-10" data-expected="DASHBOARD">
+          <div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "DASHBOARD"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000),(2,'López','Córdoba',680,320000),
 (3,'Pérez','Buenos Aires',810,890000),(4,'Sosa','Rosario',590,45000),(5,'Luna','Buenos Aires',700,210000);
 
 -- DASHBOARD con CTEs:
 SELECT 'DASHBOARD' AS titulo;
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["WITH base AS (...), por_ciudad AS (SELECT ciudad, COUNT(*), SUM(saldo) ... GROUP BY ciudad),","global AS (SELECT COUNT(*) AS total, SUM(saldo) AS saldo ... FROM base)","Combiná todo en el SELECT final"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["WITH base AS (...), por_ciudad AS (SELECT ciudad, COUNT(*), SUM(saldo) ... GROUP BY ciudad),","global AS (SELECT COUNT(*) AS total, SUM(saldo) AS saldo ... FROM base)","Combiná todo en el SELECT final"]'>
+        </div>
+      </div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
 
-<ul>
-  <li><code>WITH nombre AS (SELECT ...)</code> define una CTE — tabla temporal con nombre.</li>
-  <li>Múltiples CTEs: <code>WITH a AS (...), b AS (...)</code> — cada una puede usar las anteriores.</li>
-  <li>Las CTEs son más legibles que subconsultas anidadas — estándar en equipos profesionales.</li>
-  <li><code>WITH RECURSIVE</code> genera secuencias y recorre estructuras jerárquicas.</li>
-  <li>CTE + JOIN + GROUP BY + CASE WHEN = reporte gerencial completo y mantenible.</li>
-</ul>
+      <ul>
+        <li><code>WITH nombre AS (SELECT ...)</code> define una CTE — tabla temporal con nombre.</li>
+        <li>Múltiples CTEs: <code>WITH a AS (...), b AS (...)</code> — cada una puede usar las anteriores.</li>
+        <li>Las CTEs son más legibles que subconsultas anidadas — estándar en equipos profesionales.</li>
+        <li><code>WITH RECURSIVE</code> genera secuencias y recorre estructuras jerárquicas.</li>
+        <li>CTE + JOIN + GROUP BY + CASE WHEN = reporte gerencial completo y mantenible.</li>
+      </ul>
 
-<p>En la siguiente lección (<strong>11 · Window Functions</strong>) vas a aprender ROW_NUMBER, RANK, LAG/LEAD y funciones de ventana — las herramientas más avanzadas de SQL para análisis.</p>
+      <p>En la siguiente lección (<strong>11 · Window Functions</strong>) vas a aprender ROW_NUMBER, RANK, LAG/LEAD y
+        funciones de ventana — las herramientas más avanzadas de SQL para análisis.</p>
 
-<div class="footer-nav">
-  <a href="/sql/09-subconsultas.html">← Subconsultas</a>
-  <a class="next" href="/sql/11-window-functions.html">Window Functions →</a>
-</div>
+      <div class="footer-nav">
+        <a href="/sql/09-subconsultas.html">← Subconsultas</a>
+        <a class="next" href="/sql/11-window-functions.html">Window Functions →</a>
+      </div>
 
-</main>
-</div>
+    </main>
+  </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

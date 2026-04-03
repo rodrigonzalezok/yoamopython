@@ -1,96 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 17 · Integración SQL + Python</title>
-<meta name="description" content="Conectá Python con bases de datos SQL. Ejecutá queries desde pandas, cargá resultados en DataFrames y automatizá pipelines de análisis completos.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 17 · Integración SQL + Python</title>
+  <meta name="description"
+    content="Conectá Python con bases de datos SQL. Ejecutá queries desde pandas, cargá resultados en DataFrames y automatizá pipelines de análisis completos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 17 de 19</span>
-  <h1>Integración SQL + Python</h1>
-  <p>Ya dominás SQL para consultar bases de datos y Python/pandas para analizar datos. Ahora aprendé a <strong>conectar ambos mundos</strong>: ejecutar queries SQL desde Python, cargar resultados directamente en DataFrames y escribir pipelines automatizados que combinen lo mejor de cada tecnología.</p>
-  <div class="badges">
-    <span class="badge">90–120 min</span>
-    <span class="badge">Prerrequisitos: SQL (sección completa) + pandas</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 17 de 19</span>
+        <h1>Integración SQL + Python</h1>
+        <p>Ya dominás SQL para consultar bases de datos y Python/pandas para analizar datos. Ahora aprendé a
+          <strong>conectar ambos mundos</strong>: ejecutar queries SQL desde Python, cargar resultados directamente en
+          DataFrames y escribir pipelines automatizados que combinen lo mejor de cada tecnología.</p>
+        <div class="badges">
+          <span class="badge">90–120 min</span>
+          <span class="badge">Prerrequisitos: SQL (sección completa) + pandas</span>
+        </div>
+      </div>
 
-<h3>¿Por qué integrar SQL + Python?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>SQL es excelente para extraer y filtrar datos de millones de filas en el servidor. Python es excelente para análisis estadístico, visualización y ML en tu máquina local. La integración te da <strong>lo mejor de ambos</strong>:</p>
+      <h3>¿Por qué integrar SQL + Python?</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Tarea</th><th>Mejor herramienta</th><th>¿Por qué?</th></tr>
-<tr><td>Filtrar millones de filas</td><td><strong>SQL</strong></td><td>El motor SQL está optimizado para esto</td></tr>
-<tr><td>JOINs complejos</td><td><strong>SQL</strong></td><td>Indexado del servidor es mucho más rápido</td></tr>
-<tr><td>Análisis estadístico</td><td><strong>Python</strong></td><td>scipy, statsmodels, pandas</td></tr>
-<tr><td>Visualización</td><td><strong>Python</strong></td><td>matplotlib, seaborn</td></tr>
-<tr><td>Machine Learning</td><td><strong>Python</strong></td><td>scikit-learn, TensorFlow</td></tr>
-<tr><td>Automatizar reportes</td><td><strong>Python</strong></td><td>Scripts programables</td></tr>
-<tr><td>Data cleaning complejo</td><td><strong>Python</strong></td><td>pandas es más flexible que SQL procesales</td></tr>
-</table>
-</div>
+      <p>SQL es excelente para extraer y filtrar datos de millones de filas en el servidor. Python es excelente para
+        análisis estadístico, visualización y ML en tu máquina local. La integración te da <strong>lo mejor de
+          ambos</strong>:</p>
 
-<div class="analogy"><strong>Analogía del restaurante:</strong> SQL es la cocina — tiene los hornos industriales, las heladeras con toda la materia prima, puede servir 1000 platos. Python es el sommelier — toma el plato ya preparado (los datos filtrados) y le agrega el toque final: maridaje con vino (visualización), evaluación de calidad (estadísticas), y la recomendación al comensal (el insight). Cada uno en lo suyo.</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Tarea</th>
+            <th>Mejor herramienta</th>
+            <th>¿Por qué?</th>
+          </tr>
+          <tr>
+            <td>Filtrar millones de filas</td>
+            <td><strong>SQL</strong></td>
+            <td>El motor SQL está optimizado para esto</td>
+          </tr>
+          <tr>
+            <td>JOINs complejos</td>
+            <td><strong>SQL</strong></td>
+            <td>Indexado del servidor es mucho más rápido</td>
+          </tr>
+          <tr>
+            <td>Análisis estadístico</td>
+            <td><strong>Python</strong></td>
+            <td>scipy, statsmodels, pandas</td>
+          </tr>
+          <tr>
+            <td>Visualización</td>
+            <td><strong>Python</strong></td>
+            <td>matplotlib, seaborn</td>
+          </tr>
+          <tr>
+            <td>Machine Learning</td>
+            <td><strong>Python</strong></td>
+            <td>scikit-learn, TensorFlow</td>
+          </tr>
+          <tr>
+            <td>Automatizar reportes</td>
+            <td><strong>Python</strong></td>
+            <td>Scripts programables</td>
+          </tr>
+          <tr>
+            <td>Data cleaning complejo</td>
+            <td><strong>Python</strong></td>
+            <td>pandas es más flexible que SQL procesales</td>
+          </tr>
+        </table>
+      </div>
 
-<h3>Las librerías de conexión</h3>
+      <div class="analogy"><strong>Analogía del restaurante:</strong> SQL es la cocina — tiene los hornos industriales,
+        las heladeras con toda la materia prima, puede servir 1000 platos. Python es el sommelier — toma el plato ya
+        preparado (los datos filtrados) y le agrega el toque final: maridaje con vino (visualización), evaluación de
+        calidad (estadísticas), y la recomendación al comensal (el insight). Cada uno en lo suyo.</div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Librería</th><th>Base de datos</th><th>Tipo</th></tr>
-<tr><td><code>sqlite3</code></td><td>SQLite</td><td>Incluida en Python (no necesita instalar)</td></tr>
-<tr><td><code>psycopg2</code></td><td>PostgreSQL</td><td>Más usada en producción</td></tr>
-<tr><td><code>pymysql</code></td><td>MySQL/MariaDB</td><td>Empresas legacy</td></tr>
-<tr><td><code>pyodbc</code></td><td>SQL Server</td><td>Ecosistema Microsoft</td></tr>
-<tr><td><code>sqlalchemy</code></td><td>Cualquiera (ORM)</td><td>Capa de abstracción universal</td></tr>
-</table>
-</div>
+      <h3>Las librerías de conexión</h3>
 
-<div class="concept"><strong>El flujo estándar:</strong>
-<br>1. <code>conn = sqlite3.connect("mi_base.db")</code> → abrir conexión
-<br>2. <code>df = pd.read_sql("SELECT ...", conn)</code> → query → DataFrame
-<br>3. Analizar, visualizar, modelar con pandas/seaborn/sklearn
-<br>4. (Opcional) <code>df.to_sql("tabla", conn)</code> → guardar resultados de vuelta
-<br>5. <code>conn.close()</code> → cerrar conexión</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Librería</th>
+            <th>Base de datos</th>
+            <th>Tipo</th>
+          </tr>
+          <tr>
+            <td><code>sqlite3</code></td>
+            <td>SQLite</td>
+            <td>Incluida en Python (no necesita instalar)</td>
+          </tr>
+          <tr>
+            <td><code>psycopg2</code></td>
+            <td>PostgreSQL</td>
+            <td>Más usada en producción</td>
+          </tr>
+          <tr>
+            <td><code>pymysql</code></td>
+            <td>MySQL/MariaDB</td>
+            <td>Empresas legacy</td>
+          </tr>
+          <tr>
+            <td><code>pyodbc</code></td>
+            <td>SQL Server</td>
+            <td>Ecosistema Microsoft</td>
+          </tr>
+          <tr>
+            <td><code>sqlalchemy</code></td>
+            <td>Cualquiera (ORM)</td>
+            <td>Capa de abstracción universal</td>
+          </tr>
+        </table>
+      </div>
 
-<h3>pd.read_sql(): el puente mágico</h3>
+      <div class="concept"><strong>El flujo estándar:</strong>
+        <br>1. <code>conn = sqlite3.connect("mi_base.db")</code> → abrir conexión
+        <br>2. <code>df = pd.read_sql("SELECT ...", conn)</code> → query → DataFrame
+        <br>3. Analizar, visualizar, modelar con pandas/seaborn/sklearn
+        <br>4. (Opcional) <code>df.to_sql("tabla", conn)</code> → guardar resultados de vuelta
+        <br>5. <code>conn.close()</code> → cerrar conexión
+      </div>
 
-<p>Esta función es la llave maestra: ejecuta una query SQL y devuelve el resultado directamente como DataFrame de pandas. Todo lo que sabés de SQL funciona dentro del string de la query.</p>
+      <h3>pd.read_sql(): el puente mágico</h3>
 
-<div class="warning"><strong>Regla de oro:</strong> filtrá y agregá en SQL lo que puedas, y traé a Python solo los datos que vas a analizar. Si tu base tiene 50 millones de filas, <em>no hagas</em> <code>pd.read_sql("SELECT * FROM tabla", conn)</code>. Hacé <code>SELECT</code> con <code>WHERE</code>, <code>GROUP BY</code> y <code>LIMIT</code> para traer lo necesario.</div>
+      <p>Esta función es la llave maestra: ejecuta una query SQL y devuelve el resultado directamente como DataFrame de
+        pandas. Todo lo que sabés de SQL funciona dentro del string de la query.</p>
 
-<div class="realworld"><strong>En el trabajo real:</strong> el día a día de un Data Analyst es: (1) abrir Jupyter Notebook, (2) conectarse al data warehouse con <code>sqlalchemy + psycopg2</code>, (3) ejecutar queries, (4) explorar en pandas, (5) generar visualizaciones y presentar. Todo en un mismo flujo, de forma reproducible.</div>
+      <div class="warning"><strong>Regla de oro:</strong> filtrá y agregá en SQL lo que puedas, y traé a Python solo los
+        datos que vas a analizar. Si tu base tiene 50 millones de filas, <em>no hagas</em>
+        <code>pd.read_sql("SELECT * FROM tabla", conn)</code>. Hacé <code>SELECT</code> con <code>WHERE</code>,
+        <code>GROUP BY</code> y <code>LIMIT</code> para traer lo necesario.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="realworld"><strong>En el trabajo real:</strong> el día a día de un Data Analyst es: (1) abrir Jupyter
+        Notebook, (2) conectarse al data warehouse con <code>sqlalchemy + psycopg2</code>, (3) ejecutar queries, (4)
+        explorar en pandas, (5) generar visualizaciones y presentar. Todo en un mismo flujo, de forma reproducible.
+      </div>
 
-<h3>Ejemplo 1: Crear una base SQLite y cargar datos desde pandas</h3>
-<p>SQLite está incluida en Python — no necesitás instalar nada. Es perfecta para aprender y para proyectos locales.</p>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_crear_db.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <h3>Ejemplo 1: Crear una base SQLite y cargar datos desde pandas</h3>
+      <p>SQLite está incluida en Python — no necesitás instalar nada. Es perfecta para aprender y para proyectos
+        locales.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_crear_db.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 
@@ -127,17 +209,20 @@ for tabla in ["clientes", "transacciones"]:
     n = pd.read_sql(f"SELECT COUNT(*) as filas FROM {tabla}", conn)
     print(f"  {tabla}: {n['filas'][0]} filas")
 
-conn.close()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+conn.close()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: pd.read_sql() — ejecutar queries y obtener DataFrames</h3>
-<p>El flujo principal: escribís SQL, obtenés un DataFrame. Lo mejor de los dos mundos.</p>
+      <h3>Ejemplo 2: pd.read_sql() — ejecutar queries y obtener DataFrames</h3>
+      <p>El flujo principal: escribís SQL, obtenés un DataFrame. Lo mejor de los dos mundos.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_read_sql.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_read_sql.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 
@@ -187,17 +272,21 @@ df3 = pd.read_sql("""
 """, conn)
 print(df3)
 
-conn.close()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+conn.close()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: SQL para filtrar + pandas para analizar</h3>
-<p>El patrón profesional: dejá que SQL haga el trabajo pesado (filtrar, JOINs), y usá pandas para lo que hace mejor (estadísticas, EDA).</p>
+      <h3>Ejemplo 3: SQL para filtrar + pandas para analizar</h3>
+      <p>El patrón profesional: dejá que SQL haga el trabajo pesado (filtrar, JOINs), y usá pandas para lo que hace
+        mejor (estadísticas, EDA).</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_sql_pandas.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_sql_pandas.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 
@@ -241,19 +330,25 @@ top_seg = resumen["mean"].idxmax()
 print(f"\n💡 Insight: '{top_seg}' tiene el ticket promedio más alto")
 print(f"   Ticket: ${resumen.loc[top_seg, 'mean']:,.0f}")
 
-conn.close()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+conn.close()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="tip"><strong>Tip pro — queries parametrizadas:</strong> nunca concatená variables en un string SQL (<code>f"WHERE id = {id}"</code>) — es vulnerable a SQL injection. Usá parámetros: <code>pd.read_sql("SELECT * FROM t WHERE id = ?", conn, params=[id])</code>.</div>
+      <div class="tip"><strong>Tip pro — queries parametrizadas:</strong> nunca concatená variables en un string SQL
+        (<code>f"WHERE id = {id}"</code>) — es vulnerable a SQL injection. Usá parámetros:
+        <code>pd.read_sql("SELECT * FROM t WHERE id = ?", conn, params=[id])</code>.</div>
 
-<h3>Ejemplo 4: Guardar resultados de vuelta en SQL</h3>
-<p>Después de procesar datos en pandas, podés guardar los resultados en una tabla SQL para que otros los consuman.</p>
+      <h3>Ejemplo 4: Guardar resultados de vuelta en SQL</h3>
+      <p>Después de procesar datos en pandas, podés guardar los resultados en una tabla SQL para que otros los consuman.
+      </p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_to_sql.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_to_sql.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 
@@ -295,17 +390,20 @@ top3 = pd.read_sql("""
 print(f"\n=== Top 3 clientes con ≥5 operaciones ===")
 print(top3)
 
-conn.close()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+conn.close()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Pipeline completo — SQL → pandas → visualización</h3>
-<p>Un pipeline de análisis real: extraer de SQL, procesar en pandas, visualizar con matplotlib.</p>
+      <h3>Ejemplo 5: Pipeline completo — SQL → pandas → visualización</h3>
+      <p>Un pipeline de análisis real: extraer de SQL, procesar en pandas, visualizar con matplotlib.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_pipeline.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_pipeline.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import sqlite3
@@ -358,37 +456,65 @@ plt.tight_layout()
 plt.show()
 
 print("\nPipeline: SQL (extracción) → pandas (transformación) → matplotlib (visualización)")
-conn.close()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+conn.close()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Operación</th><th>Código</th></tr>
-<tr><td>Conectar (SQLite)</td><td><code>conn = sqlite3.connect("base.db")</code></td></tr>
-<tr><td>Conectar en memoria</td><td><code>conn = sqlite3.connect(":memory:")</code></td></tr>
-<tr><td>Query → DataFrame</td><td><code>pd.read_sql("SELECT ...", conn)</code></td></tr>
-<tr><td>Query parametrizada</td><td><code>pd.read_sql("... WHERE id=?", conn, params=[id])</code></td></tr>
-<tr><td>DataFrame → SQL</td><td><code>df.to_sql("tabla", conn, if_exists="replace")</code></td></tr>
-<tr><td>Listar tablas</td><td><code>pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'", conn)</code></td></tr>
-<tr><td>Cerrar conexión</td><td><code>conn.close()</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Operación</th>
+            <th>Código</th>
+          </tr>
+          <tr>
+            <td>Conectar (SQLite)</td>
+            <td><code>conn = sqlite3.connect("base.db")</code></td>
+          </tr>
+          <tr>
+            <td>Conectar en memoria</td>
+            <td><code>conn = sqlite3.connect(":memory:")</code></td>
+          </tr>
+          <tr>
+            <td>Query → DataFrame</td>
+            <td><code>pd.read_sql("SELECT ...", conn)</code></td>
+          </tr>
+          <tr>
+            <td>Query parametrizada</td>
+            <td><code>pd.read_sql("... WHERE id=?", conn, params=[id])</code></td>
+          </tr>
+          <tr>
+            <td>DataFrame → SQL</td>
+            <td><code>df.to_sql("tabla", conn, if_exists="replace")</code></td>
+          </tr>
+          <tr>
+            <td>Listar tablas</td>
+            <td><code>pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'", conn)</code></td>
+          </tr>
+          <tr>
+            <td>Cerrar conexión</td>
+            <td><code>conn.close()</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Crear tabla y consultar</h4>
-  <p>Creá una tabla SQL con <code>to_sql</code> y leéla con <code>read_sql</code>. Debe incluir <code>CABA</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-1" data-expected="CABA">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "CABA"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Crear tabla y consultar</h4>
+        <p>Creá una tabla SQL con <code>to_sql</code> y leéla con <code>read_sql</code>. Debe incluir <code>CABA</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-1" data-expected="CABA">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "CABA"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 
 df = pd.DataFrame({
@@ -398,20 +524,26 @@ df = pd.DataFrame({
 
 conn = sqlite3.connect(":memory:")
 # Guardar en SQL y leer de vuelta
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["df.to_sql(\"personas\", conn, index=False)","resultado = pd.read_sql(\"SELECT * FROM personas\", conn)","print(resultado); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["df.to_sql(\"personas\", conn, index=False)","resultado = pd.read_sql(\"SELECT * FROM personas\", conn)","print(resultado); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: SELECT con WHERE</h4>
-  <p>Consultá los clientes de Rosario. Debe incluir <code>Rosario</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-2" data-expected="Rosario">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Rosario"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: SELECT con WHERE</h4>
+        <p>Consultá los clientes de Rosario. Debe incluir <code>Rosario</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-2"
+          data-expected="Rosario">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Rosario"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -424,20 +556,26 @@ df = pd.DataFrame({
 df.to_sql("clientes", conn, index=False)
 
 # SELECT WHERE ciudad = 'Rosario'
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["ros = pd.read_sql(\"SELECT * FROM clientes WHERE ciudad = \\\"Rosario\\\"\", conn)","print(ros); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["ros = pd.read_sql(\"SELECT * FROM clientes WHERE ciudad = \\\"Rosario\\\"\", conn)","print(ros); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: COUNT y SUM en SQL</h4>
-  <p>Contá cuántas transacciones hay y sumá los montos con SQL. Debe incluir <code>total</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-3" data-expected="total">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "total"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: COUNT y SUM en SQL</h4>
+        <p>Contá cuántas transacciones hay y sumá los montos con SQL. Debe incluir <code>total</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-3"
+          data-expected="total">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "total"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -448,20 +586,27 @@ pd.DataFrame({
 }).to_sql("ventas", conn, index=False)
 
 # COUNT y SUM con SQL
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["result = pd.read_sql(\"SELECT COUNT(*) as cantidad, SUM(monto) as total FROM ventas\", conn)","print(result); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["result = pd.read_sql(\"SELECT COUNT(*) as cantidad, SUM(monto) as total FROM ventas\", conn)","print(result); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: JOIN en SQL → DataFrame</h4>
-  <p>Hacé un JOIN entre clientes y transacciones. Imprimí el DataFrame resultante. Debe incluir <code>ciudad</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-4" data-expected="ciudad">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "ciudad"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: JOIN en SQL → DataFrame</h4>
+        <p>Hacé un JOIN entre clientes y transacciones. Imprimí el DataFrame resultante. Debe incluir
+          <code>ciudad</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-4"
+          data-expected="ciudad">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "ciudad"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -473,20 +618,26 @@ clientes.to_sql("clientes", conn, index=False)
 txn.to_sql("transacciones", conn, index=False)
 
 # JOIN
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT t.*, c.nombre, c.ciudad FROM transacciones t JOIN clientes c ON t.cliente_id = c.id\", conn)","print(df); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT t.*, c.nombre, c.ciudad FROM transacciones t JOIN clientes c ON t.cliente_id = c.id\", conn)","print(df); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: GROUP BY en SQL + análisis en pandas</h4>
-  <p>Hacé GROUP BY por ciudad en SQL, luego calculá el % de participación en pandas. Debe incluir <code>%</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-5" data-expected="%">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "%"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: GROUP BY en SQL + análisis en pandas</h4>
+        <p>Hacé GROUP BY por ciudad en SQL, luego calculá el % de participación en pandas. Debe incluir <code>%</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-5" data-expected="%">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "%"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -498,20 +649,27 @@ pd.DataFrame({
 }).to_sql("ventas", conn, index=False)
 
 # SQL: GROUP BY ciudad → pandas: agregar %
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT ciudad, SUM(monto) as total FROM ventas GROUP BY ciudad\", conn)","df[\"pct\"] = round(df[\"total\"] / df[\"total\"].sum() * 100, 1)","print(df); print(f\"Total: ${df[\\\"total\\\"].sum():,}\"); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT ciudad, SUM(monto) as total FROM ventas GROUP BY ciudad\", conn)","df[\"pct\"] = round(df[\"total\"] / df[\"total\"].sum() * 100, 1)","print(df); print(f\"Total: ${df[\\\"total\\\"].sum():,}\"); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Guardar resultados con to_sql</h4>
-  <p>Calculá un resumen en pandas y guardálo como nueva tabla SQL. Verificá leyéndolo. Debe incluir <code>resumen</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-6" data-expected="resumen">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "resumen"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Guardar resultados con to_sql</h4>
+        <p>Calculá un resumen en pandas y guardálo como nueva tabla SQL. Verificá leyéndolo. Debe incluir
+          <code>resumen</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-6"
+          data-expected="resumen">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "resumen"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -525,20 +683,27 @@ pd.DataFrame({
 # 1. Leer, agrupar en pandas
 # 2. to_sql como "resumen_productos"
 # 3. Verificar con read_sql
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT * FROM ventas\", conn)","res = df.groupby(\"producto\").agg(total=(\"monto\",\"sum\")).reset_index()","res.to_sql(\"resumen\", conn, index=False)","print(pd.read_sql(\"SELECT * FROM resumen\", conn)); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT * FROM ventas\", conn)","res = df.groupby(\"producto\").agg(total=(\"monto\",\"sum\")).reset_index()","res.to_sql(\"resumen\", conn, index=False)","print(pd.read_sql(\"SELECT * FROM resumen\", conn)); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Query parametrizada</h4>
-  <p>Usá una query con parámetro <code>?</code> para filtrar por una ciudad específica. Debe incluir <code>Córdoba</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-7" data-expected="Córdoba">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Córdoba"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Query parametrizada</h4>
+        <p>Usá una query con parámetro <code>?</code> para filtrar por una ciudad específica. Debe incluir
+          <code>Córdoba</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-7"
+          data-expected="Córdoba">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Córdoba"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -552,20 +717,26 @@ pd.DataFrame({
 ciudad_buscada = "Córdoba"
 
 # Query con parámetro ? (no f-string!)
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT * FROM clientes WHERE ciudad = ?\", conn, params=[ciudad_buscada])","print(df); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT * FROM clientes WHERE ciudad = ?\", conn, params=[ciudad_buscada])","print(df); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: SQL → pandas → estadísticas</h4>
-  <p>Extraé datos con SQL, luego calculá media, mediana y percentil 90 en pandas. Debe incluir <code>P90</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-8" data-expected="P90">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "P90"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: SQL → pandas → estadísticas</h4>
+        <p>Extraé datos con SQL, luego calculá media, mediana y percentil 90 en pandas. Debe incluir <code>P90</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-8" data-expected="P90">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "P90"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -576,20 +747,26 @@ pd.DataFrame({
 }).to_sql("ventas", conn, index=False)
 
 # SQL: extraer → pandas: estadísticas avanzadas
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT monto FROM ventas\", conn)","print(f\"Media: ${df[\\\"monto\\\"].mean():,.0f}\")","print(f\"Mediana: ${df[\\\"monto\\\"].median():,.0f}\")","print(f\"P90: ${df[\\\"monto\\\"].quantile(0.9):,.0f}\"); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT monto FROM ventas\", conn)","print(f\"Media: ${df[\\\"monto\\\"].mean():,.0f}\")","print(f\"Mediana: ${df[\\\"monto\\\"].median():,.0f}\")","print(f\"P90: ${df[\\\"monto\\\"].quantile(0.9):,.0f}\"); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Pipeline SQL → pandas → gráfico</h4>
-  <p>Extraé ventas mensuales con SQL, luego graficá la tendencia. Imprimí <code>Pipeline OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-9" data-expected="Pipeline OK">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe imprimir "Pipeline OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Pipeline SQL → pandas → gráfico</h4>
+        <p>Extraé ventas mensuales con SQL, luego graficá la tendencia. Imprimí <code>Pipeline OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-9"
+          data-expected="Pipeline OK">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe imprimir "Pipeline OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import sqlite3
@@ -604,20 +781,28 @@ pd.DataFrame({
 }).to_sql("ventas", conn, index=False)
 
 # SQL: agrupar por mes → pandas: gráfico de línea
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT substr(fecha,1,7) as mes, SUM(monto) as total FROM ventas GROUP BY mes\", conn)","plt.figure(figsize=(8,4)); plt.plot(df[\\\"mes\\\"], df[\\\"total\\\"], \\\"o-\\\")","plt.title(\\\"Tendencia Mensual\\\"); plt.xticks(rotation=45); plt.tight_layout(); plt.show(); print(\\\"Pipeline OK\\\"); conn.close()"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT substr(fecha,1,7) as mes, SUM(monto) as total FROM ventas GROUP BY mes\", conn)","plt.figure(figsize=(8,4)); plt.plot(df[\\\"mes\\\"], df[\\\"total\\\"], \\\"o-\\\")","plt.title(\\\"Tendencia Mensual\\\"); plt.xticks(rotation=45); plt.tight_layout(); plt.show(); print(\\\"Pipeline OK\\\"); conn.close()"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Pipeline completo con 2 tablas</h4>
-  <p>Creá 2 tablas (clientes + ventas), hacé JOIN en SQL, calculá métricas por segmento en pandas, y guardá el resultado como nueva tabla. Debe incluir <code>Pipeline completo</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-10" data-expected="Pipeline completo">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Pipeline completo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Pipeline completo con 2 tablas</h4>
+        <p>Creá 2 tablas (clientes + ventas), hacé JOIN en SQL, calculá métricas por segmento en pandas, y guardá el
+          resultado como nueva tabla. Debe incluir <code>Pipeline completo</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-10"
+          data-expected="Pipeline completo">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Pipeline completo"</span>
+          </div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sqlite3
 import pandas as pd
 import numpy as np
 np.random.seed(42)
@@ -639,43 +824,51 @@ pd.DataFrame({
 # 2. Métricas por segmento en pandas
 # 3. to_sql como "resumen_segmentos"
 # 4. Verificar + imprimir "Pipeline completo"
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["df = pd.read_sql(\"SELECT c.segmento, v.monto FROM ventas v JOIN clientes c ON v.cliente_id = c.id\", conn)","res = df.groupby(\"segmento\").agg(total=(\"monto\",\"sum\"),promedio=(\"monto\",\"mean\")).round(0).reset_index()","res.to_sql(\"resumen_segmentos\", conn, index=False)","print(pd.read_sql(\"SELECT * FROM resumen_segmentos\", conn))","print(\"Pipeline completo\"); conn.close()"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li><code>pd.read_sql(query, conn)</code> es el puente entre SQL y pandas — ejecuta queries y devuelve
+          DataFrames.</li>
+        <li><code>df.to_sql("tabla", conn)</code> guarda DataFrames como tablas SQL.</li>
+        <li><strong>Regla de oro:</strong> filtrá en SQL, analizá en pandas. No traigas millones de filas si solo
+          necesitás un resumen.</li>
+        <li>Usá <strong>queries parametrizadas</strong> (<code>?</code>) para evitar SQL injection.</li>
+        <li><code>sqlite3</code> viene incluida en Python — perfecta para aprender y prototipar.</li>
+        <li>En producción se usa <code>sqlalchemy</code> como capa de abstracción universal.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>18 · Portfolio y proyecto final</strong>) vas a aplicar todo lo aprendido en
+        un proyecto completo de Data Analysis, construyendo tu portfolio profesional.</p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/16-power-bi-tableau-intro.html">← Power BI / Tableau intro</a>
+        <a class="next" href="/data-analysis/18-portfolio-proyecto-final.html">Portfolio y proyecto final →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT c.segmento, v.monto FROM ventas v JOIN clientes c ON v.cliente_id = c.id\", conn)","res = df.groupby(\"segmento\").agg(total=(\"monto\",\"sum\"),promedio=(\"monto\",\"mean\")).round(0).reset_index()","res.to_sql(\"resumen_segmentos\", conn, index=False)","print(pd.read_sql(\"SELECT * FROM resumen_segmentos\", conn))","print(\"Pipeline completo\"); conn.close()"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li><code>pd.read_sql(query, conn)</code> es el puente entre SQL y pandas — ejecuta queries y devuelve DataFrames.</li>
-  <li><code>df.to_sql("tabla", conn)</code> guarda DataFrames como tablas SQL.</li>
-  <li><strong>Regla de oro:</strong> filtrá en SQL, analizá en pandas. No traigas millones de filas si solo necesitás un resumen.</li>
-  <li>Usá <strong>queries parametrizadas</strong> (<code>?</code>) para evitar SQL injection.</li>
-  <li><code>sqlite3</code> viene incluida en Python — perfecta para aprender y prototipar.</li>
-  <li>En producción se usa <code>sqlalchemy</code> como capa de abstracción universal.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>18 · Portfolio y proyecto final</strong>) vas a aplicar todo lo aprendido en un proyecto completo de Data Analysis, construyendo tu portfolio profesional.</p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/16-power-bi-tableau-intro.html">← Power BI / Tableau intro</a>
-  <a class="next" href="/data-analysis/18-portfolio-proyecto-final.html">Portfolio y proyecto final →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

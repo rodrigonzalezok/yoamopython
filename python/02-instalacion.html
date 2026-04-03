@@ -1,149 +1,213 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 02 · Instalación</title>
-<meta name="description" content="Instalá Python y Visual Studio Code paso a paso. Configurá tu entorno de desarrollo profesional para programar en Python.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 02 · Instalación</title>
+  <meta name="description"
+    content="Instalá Python y Visual Studio Code paso a paso. Configurá tu entorno de desarrollo profesional para programar en Python.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 02 de 27</span>
-  <h1>Instalación: VS Code & Python</h1>
-  <p>Configurá tu entorno de desarrollo profesional. Vas a instalar Python, Visual Studio Code y las extensiones necesarias para escribir, ejecutar y depurar código como un profesional.</p>
-  <div class="badges">
-    <span class="badge">40–60 min</span>
-    <span class="badge">Prerrequisitos: 01 Qué es Python</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 02 de 27</span>
+        <h1>Instalación: VS Code & Python</h1>
+        <p>Configurá tu entorno de desarrollo profesional. Vas a instalar Python, Visual Studio Code y las extensiones
+          necesarias para escribir, ejecutar y depurar código como un profesional.</p>
+        <div class="badges">
+          <span class="badge">40–60 min</span>
+          <span class="badge">Prerrequisitos: 01 Qué es Python</span>
+        </div>
+      </div>
 
-<h3>¿Qué es un entorno de desarrollo?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Un <strong>entorno de desarrollo</strong> es el conjunto de herramientas que usás para escribir, probar y ejecutar código. Para programar en Python necesitás exactamente dos cosas: el <strong>intérprete de Python</strong> (el programa que traduce y ejecuta tu código) y un <strong>editor de código</strong> (donde escribís el código). Todo lo demás — extensiones, temas, atajos — es opcional pero hace tu vida mucho más fácil.</p>
+      <h3>¿Qué es un entorno de desarrollo?</h3>
 
-<p>En esta plataforma podés ejecutar código Python directamente en el navegador gracias a Pyodide (un motor de Python compilado a WebAssembly). Pero para trabajar profesionalmente, necesitás Python instalado en tu máquina. ¿Por qué? Porque en el navegador no podés crear archivos, instalar librerías como pandas, conectarte a bases de datos, ni construir proyectos de múltiples archivos.</p>
+      <p>Un <strong>entorno de desarrollo</strong> es el conjunto de herramientas que usás para escribir, probar y
+        ejecutar código. Para programar en Python necesitás exactamente dos cosas: el <strong>intérprete de
+          Python</strong> (el programa que traduce y ejecuta tu código) y un <strong>editor de código</strong> (donde
+        escribís el código). Todo lo demás — extensiones, temas, atajos — es opcional pero hace tu vida mucho más fácil.
+      </p>
 
-<h3>¿Por qué no programar directamente en la consola?</h3>
+      <p>En esta plataforma podés ejecutar código Python directamente en el navegador gracias a Pyodide (un motor de
+        Python compilado a WebAssembly). Pero para trabajar profesionalmente, necesitás Python instalado en tu máquina.
+        ¿Por qué? Porque en el navegador no podés crear archivos, instalar librerías como pandas, conectarte a bases de
+        datos, ni construir proyectos de múltiples archivos.</p>
 
-<p>La <strong>consola</strong> (CMD en Windows, Terminal en Mac/Linux) permite ejecutar Python línea por línea. Escribís <code>python</code>, se abre el intérprete interactivo, y podés tipear <code>print("Hola")</code> y ver el resultado inmediatamente. Esto sirve para pruebas rápidas, pero tiene limitaciones serias para trabajo real:</p>
+      <h3>¿Por qué no programar directamente en la consola?</h3>
 
-<ul>
-  <li><b>No podés guardar tu trabajo:</b> si cerrás la consola, perdés todo lo que escribiste. Para un script de 50 líneas, esto es inaceptable.</li>
-  <li><b>No tiene autocompletado:</b> no te sugiere nombres de funciones ni argumentos. Tenés que recordar todo de memoria.</li>
-  <li><b>No resalta errores:</b> si escribís mal algo, no te avisa hasta que ejecutás. En un editor, los errores se subrayan en rojo al instante.</li>
-  <li><b>No maneja múltiples archivos:</b> un proyecto real tiene decenas de archivos organizados en carpetas. La consola no tiene forma de gestionar eso.</li>
-  <li><b>No tiene depuración (debugging):</b> no podés pausar la ejecución, inspeccionar variables ni avanzar paso a paso.</li>
-</ul>
+      <p>La <strong>consola</strong> (CMD en Windows, Terminal en Mac/Linux) permite ejecutar Python línea por línea.
+        Escribís <code>python</code>, se abre el intérprete interactivo, y podés tipear <code>print("Hola")</code> y ver
+        el resultado inmediatamente. Esto sirve para pruebas rápidas, pero tiene limitaciones serias para trabajo real:
+      </p>
 
-<div class="analogy"><strong>Analogía:</strong> programar en la consola es como escribir un informe financiero en el bloc de notas. Técnicamente funciona, pero no tiene corrector ortográfico, formato, ni forma de organizar secciones. Un editor como VS Code es como usar Word: te da herramientas que hacen el trabajo 10 veces más eficiente.</div>
+      <ul>
+        <li><b>No podés guardar tu trabajo:</b> si cerrás la consola, perdés todo lo que escribiste. Para un script de
+          50 líneas, esto es inaceptable.</li>
+        <li><b>No tiene autocompletado:</b> no te sugiere nombres de funciones ni argumentos. Tenés que recordar todo de
+          memoria.</li>
+        <li><b>No resalta errores:</b> si escribís mal algo, no te avisa hasta que ejecutás. En un editor, los errores
+          se subrayan en rojo al instante.</li>
+        <li><b>No maneja múltiples archivos:</b> un proyecto real tiene decenas de archivos organizados en carpetas. La
+          consola no tiene forma de gestionar eso.</li>
+        <li><b>No tiene depuración (debugging):</b> no podés pausar la ejecución, inspeccionar variables ni avanzar paso
+          a paso.</li>
+      </ul>
 
-<h3>Paso 1: Instalar Python</h3>
+      <div class="analogy"><strong>Analogía:</strong> programar en la consola es como escribir un informe financiero en
+        el bloc de notas. Técnicamente funciona, pero no tiene corrector ortográfico, formato, ni forma de organizar
+        secciones. Un editor como VS Code es como usar Word: te da herramientas que hacen el trabajo 10 veces más
+        eficiente.</div>
 
-<p>Python es el intérprete — el programa que tu computadora necesita para entender y ejecutar archivos <code>.py</code>. Sin él, tu máquina no sabe qué hacer con tu código.</p>
+      <h3>Paso 1: Instalar Python</h3>
 
-<p><strong>Instrucciones:</strong></p>
-<ol>
-  <li>Abrí <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a></li>
-  <li>Hacé clic en el botón grande amarillo "Download Python 3.x.x" (siempre la versión más reciente)</li>
-  <li>Abrí el archivo descargado (ej: <code>python-3.12.x.exe</code> en Windows)</li>
-  <li><b>MUY IMPORTANTE:</b> antes de hacer clic en "Install Now", marcá la casilla <b>"Add Python to PATH"</b>. Esto le dice a Windows dónde encontrar Python cuando lo llames desde cualquier terminal.</li>
-  <li>Hacé clic en "Install Now" y esperá</li>
-  <li>Verificá la instalación abriendo CMD (Windows) o Terminal (Mac) y escribiendo: <code>python --version</code></li>
-</ol>
+      <p>Python es el intérprete — el programa que tu computadora necesita para entender y ejecutar archivos
+        <code>.py</code>. Sin él, tu máquina no sabe qué hacer con tu código.</p>
 
-<div class="warning"><strong>Error #1 más común del curso:</strong> no marcar "Add Python to PATH". Si lo olvidaste, al escribir <code>python</code> en la terminal te va a decir "no se reconoce como comando". Solución: desinstalá Python (Inicio → Agregar o quitar programas → Python → Desinstalar) y volvé a instalarlo marcando esa casilla.</div>
+      <p><strong>Instrucciones:</strong></p>
+      <ol>
+        <li>Abrí <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a></li>
+        <li>Hacé clic en el botón grande amarillo "Download Python 3.x.x" (siempre la versión más reciente)</li>
+        <li>Abrí el archivo descargado (ej: <code>python-3.12.x.exe</code> en Windows)</li>
+        <li><b>MUY IMPORTANTE:</b> antes de hacer clic en "Install Now", marcá la casilla <b>"Add Python to PATH"</b>.
+          Esto le dice a Windows dónde encontrar Python cuando lo llames desde cualquier terminal.</li>
+        <li>Hacé clic en "Install Now" y esperá</li>
+        <li>Verificá la instalación abriendo CMD (Windows) o Terminal (Mac) y escribiendo: <code>python --version</code>
+        </li>
+      </ol>
 
-<p>En <strong>Mac</strong>, Python 3 se puede instalar también con Homebrew: <code>brew install python3</code>. En <strong>Linux</strong>, la mayoría de distribuciones ya lo traen — verificá con <code>python3 --version</code>.</p>
+      <div class="warning"><strong>Error #1 más común del curso:</strong> no marcar "Add Python to PATH". Si lo
+        olvidaste, al escribir <code>python</code> en la terminal te va a decir "no se reconoce como comando". Solución:
+        desinstalá Python (Inicio → Agregar o quitar programas → Python → Desinstalar) y volvé a instalarlo marcando esa
+        casilla.</div>
 
-<h3>Paso 2: Instalar Visual Studio Code</h3>
+      <p>En <strong>Mac</strong>, Python 3 se puede instalar también con Homebrew: <code>brew install python3</code>. En
+        <strong>Linux</strong>, la mayoría de distribuciones ya lo traen — verificá con <code>python3 --version</code>.
+      </p>
 
-<p><strong>Visual Studio Code</strong> (VS Code) es un editor de código gratuito desarrollado por Microsoft. Es el editor más popular del mundo: lo usan más del 70% de los desarrolladores según Stack Overflow. Es liviano, rápido, y tiene miles de extensiones para cualquier lenguaje.</p>
+      <h3>Paso 2: Instalar Visual Studio Code</h3>
 
-<ol>
-  <li>Abrí <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a></li>
-  <li>Descargá la versión para tu sistema operativo</li>
-  <li>Instalá con las opciones por defecto. En Windows, marcá "Add to PATH" y "Register Code as editor for supported file types"</li>
-</ol>
+      <p><strong>Visual Studio Code</strong> (VS Code) es un editor de código gratuito desarrollado por Microsoft. Es el
+        editor más popular del mundo: lo usan más del 70% de los desarrolladores según Stack Overflow. Es liviano,
+        rápido, y tiene miles de extensiones para cualquier lenguaje.</p>
 
-<div class="concept"><strong>¿Por qué VS Code y no PyCharm, Sublime o Atom?</strong> PyCharm es excelente pero pesado y la versión completa es paga. Sublime es rápido pero limitado sin extensiones. Atom fue discontinuado. VS Code tiene el mejor balance: es gratuito, liviano, extensible, y tiene la mejor integración con Python, Git y terminales.</div>
+      <ol>
+        <li>Abrí <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a></li>
+        <li>Descargá la versión para tu sistema operativo</li>
+        <li>Instalá con las opciones por defecto. En Windows, marcá "Add to PATH" y "Register Code as editor for
+          supported file types"</li>
+      </ol>
 
-<h3>Paso 3: Extensiones esenciales para Python</h3>
+      <div class="concept"><strong>¿Por qué VS Code y no PyCharm, Sublime o Atom?</strong> PyCharm es excelente pero
+        pesado y la versión completa es paga. Sublime es rápido pero limitado sin extensiones. Atom fue discontinuado.
+        VS Code tiene el mejor balance: es gratuito, liviano, extensible, y tiene la mejor integración con Python, Git y
+        terminales.</div>
 
-<p>VS Code sin extensiones es como un auto sin ruedas — funciona como editor básico pero le falta lo esencial. Estas son las extensiones que debés instalar (todas gratuitas):</p>
+      <h3>Paso 3: Extensiones esenciales para Python</h3>
 
-<ul>
-  <li><b>Python (Microsoft):</b> LA extensión fundamental. Te da autocompletado, detección de errores, ejecución de scripts, debugging, y soporte para notebooks. Sin esta, VS Code no sabe qué es un archivo <code>.py</code>.</li>
-  <li><b>Pylance (Microsoft):</b> mejora el autocompletado con sugerencias inteligentes, información de tipos, y detección de errores más avanzada.</li>
-  <li><b>Code Runner:</b> te permite ejecutar código con clic derecho → "Run Code" o con el atajo <code>Ctrl+Alt+N</code>. Muy cómodo para pruebas rápidas.</li>
-  <li><b>Python Indent:</b> maneja la indentación automáticamente cuando presionás Enter después de un <code>:</code>. Te ahorra errores de indentación.</li>
-</ul>
+      <p>VS Code sin extensiones es como un auto sin ruedas — funciona como editor básico pero le falta lo esencial.
+        Estas son las extensiones que debés instalar (todas gratuitas):</p>
 
-<p>Para instalar una extensión: abrí VS Code → hacé clic en el ícono de cuadrados en la barra lateral izquierda (o <code>Ctrl+Shift+X</code>) → buscá el nombre → hacé clic en "Install".</p>
+      <ul>
+        <li><b>Python (Microsoft):</b> LA extensión fundamental. Te da autocompletado, detección de errores, ejecución
+          de scripts, debugging, y soporte para notebooks. Sin esta, VS Code no sabe qué es un archivo <code>.py</code>.
+        </li>
+        <li><b>Pylance (Microsoft):</b> mejora el autocompletado con sugerencias inteligentes, información de tipos, y
+          detección de errores más avanzada.</li>
+        <li><b>Code Runner:</b> te permite ejecutar código con clic derecho → "Run Code" o con el atajo
+          <code>Ctrl+Alt+N</code>. Muy cómodo para pruebas rápidas.</li>
+        <li><b>Python Indent:</b> maneja la indentación automáticamente cuando presionás Enter después de un
+          <code>:</code>. Te ahorra errores de indentación.</li>
+      </ul>
 
-<h3>Paso 4: Tu primer archivo .py</h3>
+      <p>Para instalar una extensión: abrí VS Code → hacé clic en el ícono de cuadrados en la barra lateral izquierda (o
+        <code>Ctrl+Shift+X</code>) → buscá el nombre → hacé clic en "Install".</p>
 
-<p>Ahora que tenés todo instalado, creá tu primer programa:</p>
+      <h3>Paso 4: Tu primer archivo .py</h3>
 
-<ol>
-  <li>Creá una carpeta en tu computadora llamada <code>python-curso</code> (en el escritorio o donde quieras)</li>
-  <li>Abrí VS Code → Archivo → Abrir Carpeta → seleccioná <code>python-curso</code></li>
-  <li>En el panel izquierdo, hacé clic en "Nuevo archivo" y nombralo <code>hola.py</code></li>
-  <li>Escribí: <code>print("¡Hola desde VS Code!")</code></li>
-  <li>Guardá con <code>Ctrl+S</code></li>
-  <li>Ejecutá con el botón ▶ en la esquina superior derecha, o abrí la terminal integrada (<code>Ctrl+`</code>) y escribí: <code>python hola.py</code></li>
-</ol>
+      <p>Ahora que tenés todo instalado, creá tu primer programa:</p>
 
-<div class="tip"><strong>Atajos que vas a usar todos los días:</strong> <code>Ctrl+S</code> (guardar), <code>Ctrl+`</code> (abrir/cerrar terminal), <code>Ctrl+Shift+P</code> (paleta de comandos — buscá "Run Python File"), <code>Ctrl+/</code> (comentar/descomentar línea), <code>Ctrl+D</code> (seleccionar siguiente ocurrencia de una palabra).</div>
+      <ol>
+        <li>Creá una carpeta en tu computadora llamada <code>python-curso</code> (en el escritorio o donde quieras)</li>
+        <li>Abrí VS Code → Archivo → Abrir Carpeta → seleccioná <code>python-curso</code></li>
+        <li>En el panel izquierdo, hacé clic en "Nuevo archivo" y nombralo <code>hola.py</code></li>
+        <li>Escribí: <code>print("¡Hola desde VS Code!")</code></li>
+        <li>Guardá con <code>Ctrl+S</code></li>
+        <li>Ejecutá con el botón ▶ en la esquina superior derecha, o abrí la terminal integrada (<code>Ctrl+`</code>) y
+          escribí: <code>python hola.py</code></li>
+      </ol>
 
-<h3>Paso 5: La terminal integrada</h3>
+      <div class="tip"><strong>Atajos que vas a usar todos los días:</strong> <code>Ctrl+S</code> (guardar),
+        <code>Ctrl+`</code> (abrir/cerrar terminal), <code>Ctrl+Shift+P</code> (paleta de comandos — buscá "Run Python
+        File"), <code>Ctrl+/</code> (comentar/descomentar línea), <code>Ctrl+D</code> (seleccionar siguiente ocurrencia
+        de una palabra).</div>
 
-<p>VS Code tiene una terminal incorporada — no necesitás abrir CMD aparte. Para abrirla: <code>Ctrl+`</code> (la tilde que está a la izquierda del 1). Desde ahí podés ejecutar <code>python archivo.py</code>, instalar paquetes con <code>pip install pandas</code>, y cualquier comando de sistema.</p>
+      <h3>Paso 5: La terminal integrada</h3>
 
-<p>La terminal integrada tiene una ventaja crucial: siempre se abre en la carpeta de tu proyecto. No tenés que navegar con <code>cd</code> para encontrar tus archivos.</p>
+      <p>VS Code tiene una terminal incorporada — no necesitás abrir CMD aparte. Para abrirla: <code>Ctrl+`</code> (la
+        tilde que está a la izquierda del 1). Desde ahí podés ejecutar <code>python archivo.py</code>, instalar paquetes
+        con <code>pip install pandas</code>, y cualquier comando de sistema.</p>
 
-<div class="realworld"><strong>En el mundo laboral:</strong> el 100% de los analistas de datos profesionales usan un editor como VS Code (o Jupyter Notebook, o PyCharm). Nadie trabaja profesionalmente desde la consola pura. Invertir 30 minutos en configurar bien tu entorno te ahorra cientos de horas a lo largo de tu carrera.</div>
+      <p>La terminal integrada tiene una ventaja crucial: siempre se abre en la carpeta de tu proyecto. No tenés que
+        navegar con <code>cd</code> para encontrar tus archivos.</p>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="realworld"><strong>En el mundo laboral:</strong> el 100% de los analistas de datos profesionales usan
+        un editor como VS Code (o Jupyter Notebook, o PyCharm). Nadie trabaja profesionalmente desde la consola pura.
+        Invertir 30 minutos en configurar bien tu entorno te ahorra cientos de horas a lo largo de tu carrera.</div>
 
-<h3>Ejemplo 1: Verificar que Python funciona</h3>
-<p>Este código verifica la versión de Python instalada. En tu máquina local, correría desde VS Code. Acá podés probarlo en el navegador.</p>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>verificar_python.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sys
+      <h3>Ejemplo 1: Verificar que Python funciona</h3>
+      <p>Este código verifica la versión de Python instalada. En tu máquina local, correría desde VS Code. Acá podés
+        probarlo en el navegador.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>verificar_python.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import sys
 
 print(f"Python version: {sys.version}")
 print(f"Plataforma: {sys.platform}")
-print("¡Python funciona correctamente!")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("¡Python funciona correctamente!")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Estructura de un archivo .py profesional</h3>
-<p>Un archivo Python bien estructurado siempre tiene: un comentario de encabezado, imports al inicio, constantes, y al final la lógica. Este patrón lo vas a ver en todo proyecto profesional.</p>
+      <h3>Ejemplo 2: Estructura de un archivo .py profesional</h3>
+      <p>Un archivo Python bien estructurado siempre tiene: un comentario de encabezado, imports al inicio, constantes,
+        y al final la lógica. Este patrón lo vas a ver en todo proyecto profesional.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>primer_script.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># primer_script.py
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>primer_script.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># primer_script.py
 # Autor: [tu nombre]
 # Fecha: 2025
 # Descripción: mi primer script profesional en Python
@@ -161,17 +225,21 @@ print(f"Estado: funcionando")
 sueldo = 450000
 jubilacion = sueldo * 0.11
 neto = sueldo - jubilacion
-print(f"Sueldo neto: ${neto:,.0f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Sueldo neto: ${neto:,.0f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Múltiples prints para debugging</h3>
-<p>Una técnica fundamental en desarrollo: usar <code>print()</code> para verificar valores intermedios. Esto se llama "print debugging" y es lo primero que hacés cuando algo no funciona.</p>
+      <h3>Ejemplo 3: Múltiples prints para debugging</h3>
+      <p>Una técnica fundamental en desarrollo: usar <code>print()</code> para verificar valores intermedios. Esto se
+        llama "print debugging" y es lo primero que hacés cuando algo no funciona.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>debugging_basico.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Simulemos un cálculo de cuota de préstamo
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>debugging_basico.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Simulemos un cálculo de cuota de préstamo
 capital = 1000000
 tasa_anual = 0.65
 plazo_meses = 12
@@ -190,17 +258,21 @@ cuota = total / plazo_meses
 print("DEBUG - Cuota mensual:", round(cuota, 2))
 
 # Resultado final
-print(f"\nResultado: cuota mensual de ${cuota:,.0f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nResultado: cuota mensual de ${cuota:,.0f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Verificar módulos disponibles</h3>
-<p>Python viene con una "biblioteca estándar" enorme. Este script verifica qué módulos tenés disponibles — en tu PC tendrías más que en el navegador.</p>
+      <h3>Ejemplo 4: Verificar módulos disponibles</h3>
+      <p>Python viene con una "biblioteca estándar" enorme. Este script verifica qué módulos tenés disponibles — en tu
+        PC tendrías más que en el navegador.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>modulos_disponibles.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sys
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>modulos_disponibles.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import sys
 import math
 import datetime
 import json
@@ -211,17 +283,21 @@ print(f"  math:     pi = {math.pi:.4f}")
 print(f"  datetime: {datetime.datetime.now()}")
 print(f"  json:     disponible")
 print(f"  random:   número aleatorio = {random.randint(1, 100)}")
-print(f"\nPython path: {sys.executable or 'navegador (Pyodide)'}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nPython path: {sys.executable or 'navegador (Pyodide)'}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Errores de instalación comunes y cómo resolverlos</h3>
-<p>Este código simula los errores que más aparecen cuando la instalación no está bien hecha. Lee los comentarios para entender cada caso.</p>
+      <h3>Ejemplo 5: Errores de instalación comunes y cómo resolverlos</h3>
+      <p>Este código simula los errores que más aparecen cuando la instalación no está bien hecha. Lee los comentarios
+        para entender cada caso.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>errores_instalacion.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Errores comunes de instalación y sus soluciones:
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>errores_instalacion.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Errores comunes de instalación y sus soluciones:
 
 # ERROR 1: "python no se reconoce como comando"
 # Causa: no marcaste "Add Python to PATH" al instalar
@@ -245,205 +321,330 @@ print(f"3. Python versión {major}: {'OK (Python 3)' if major == 3 else 'ERROR: 
 # Solución: Ctrl+Shift+X → buscar "Python" → Install
 print("4. Si estás viendo esto, tu entorno funciona")
 
-print("\n✅ Todos los checks pasaron.")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("\n✅ Todos los checks pasaron.")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Herramienta</th><th>¿Qué es?</th><th>¿Dónde se descarga?</th></tr>
-<tr><td>Python</td><td>Intérprete que ejecuta tu código</td><td><a href="https://python.org" target="_blank">python.org</a></td></tr>
-<tr><td>VS Code</td><td>Editor de código profesional</td><td><a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></td></tr>
-<tr><td>Extensión Python</td><td>Soporte de Python en VS Code</td><td>Dentro de VS Code: Ctrl+Shift+X</td></tr>
-<tr><td>pip</td><td>Instalador de paquetes de Python</td><td>Viene con Python 3.4+</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Herramienta</th>
+            <th>¿Qué es?</th>
+            <th>¿Dónde se descarga?</th>
+          </tr>
+          <tr>
+            <td>Python</td>
+            <td>Intérprete que ejecuta tu código</td>
+            <td><a href="https://python.org" target="_blank">python.org</a></td>
+          </tr>
+          <tr>
+            <td>VS Code</td>
+            <td>Editor de código profesional</td>
+            <td><a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></td>
+          </tr>
+          <tr>
+            <td>Extensión Python</td>
+            <td>Soporte de Python en VS Code</td>
+            <td>Dentro de VS Code: Ctrl+Shift+X</td>
+          </tr>
+          <tr>
+            <td>pip</td>
+            <td>Instalador de paquetes de Python</td>
+            <td>Viene con Python 3.4+</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Atajo VS Code</th><th>Acción</th></tr>
-<tr><td><code>Ctrl+S</code></td><td>Guardar archivo</td></tr>
-<tr><td><code>Ctrl+`</code></td><td>Abrir/cerrar terminal integrada</td></tr>
-<tr><td><code>Ctrl+Shift+P</code></td><td>Paleta de comandos</td></tr>
-<tr><td><code>Ctrl+/</code></td><td>Comentar/descomentar línea</td></tr>
-<tr><td><code>Ctrl+D</code></td><td>Seleccionar siguiente ocurrencia</td></tr>
-<tr><td><code>Ctrl+Shift+X</code></td><td>Panel de extensiones</td></tr>
-<tr><td><code>F5</code></td><td>Iniciar debugging</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Atajo VS Code</th>
+            <th>Acción</th>
+          </tr>
+          <tr>
+            <td><code>Ctrl+S</code></td>
+            <td>Guardar archivo</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+`</code></td>
+            <td>Abrir/cerrar terminal integrada</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+Shift+P</code></td>
+            <td>Paleta de comandos</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+/</code></td>
+            <td>Comentar/descomentar línea</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+D</code></td>
+            <td>Seleccionar siguiente ocurrencia</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+Shift+X</code></td>
+            <td>Panel de extensiones</td>
+          </tr>
+          <tr>
+            <td><code>F5</code></td>
+            <td>Iniciar debugging</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Comando terminal</th><th>Qué hace</th></tr>
-<tr><td><code>python --version</code></td><td>Ver versión de Python instalada</td></tr>
-<tr><td><code>python archivo.py</code></td><td>Ejecutar un script</td></tr>
-<tr><td><code>pip install pandas</code></td><td>Instalar un paquete</td></tr>
-<tr><td><code>pip list</code></td><td>Ver paquetes instalados</td></tr>
-<tr><td><code>pip freeze > requirements.txt</code></td><td>Guardar lista de dependencias</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Comando terminal</th>
+            <th>Qué hace</th>
+          </tr>
+          <tr>
+            <td><code>python --version</code></td>
+            <td>Ver versión de Python instalada</td>
+          </tr>
+          <tr>
+            <td><code>python archivo.py</code></td>
+            <td>Ejecutar un script</td>
+          </tr>
+          <tr>
+            <td><code>pip install pandas</code></td>
+            <td>Instalar un paquete</td>
+          </tr>
+          <tr>
+            <td><code>pip list</code></td>
+            <td>Ver paquetes instalados</td>
+          </tr>
+          <tr>
+            <td><code>pip freeze > requirements.txt</code></td>
+            <td>Guardar lista de dependencias</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Verificar la versión</h4>
-  <p>Importá <code>sys</code> e imprimí <code>sys.version</code>. El output debe incluir el número <code>3</code> (Python 3.x).</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-1" data-expected="3">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "3"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Importá sys e imprimí la versión:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["import sys en la primera línea","print(sys.version) en la segunda","La versión empieza con 3.x.x"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Verificar la versión</h4>
+        <p>Importá <code>sys</code> e imprimí <code>sys.version</code>. El output debe incluir el número <code>3</code>
+          (Python 3.x).</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-1" data-expected="3">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Importá sys e imprimí la versión:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["import sys en la primera línea","print(sys.version) en la segunda","La versión empieza con 3.x.x"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Múltiples prints organizados</h4>
-  <p>Escribí un script con 4 <code>print()</code> que muestre: tu nombre, la herramienta que usás (VS Code), el lenguaje (Python) y el mensaje <code>Entorno listo</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-2" data-expected="Entorno listo">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Entorno listo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># 4 prints con tu información:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["print(\"Rodrigo\") o tu nombre","print(\"VS Code\"), print(\"Python\")","El último debe ser: print(\"Entorno listo\")"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Múltiples prints organizados</h4>
+        <p>Escribí un script con 4 <code>print()</code> que muestre: tu nombre, la herramienta que usás (VS Code), el
+          lenguaje (Python) y el mensaje <code>Entorno listo</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-2"
+          data-expected="Entorno listo">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Entorno listo"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># 4 prints con tu información:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["print(\"Rodrigo\") o tu nombre","print(\"VS Code\"), print(\"Python\")","El último debe ser: print(\"Entorno listo\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Usar el módulo math</h4>
-  <p>Importá <code>math</code> e imprimí el valor de Pi (<code>math.pi</code>) y la raíz cuadrada de 144 (<code>math.sqrt(144)</code>). El output debe incluir <code>12.0</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-3" data-expected="12.0">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "12.0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Importá math y mostrá pi y raíz de 144:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["import math","print(math.pi)","print(math.sqrt(144)) da 12.0"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Usar el módulo math</h4>
+        <p>Importá <code>math</code> e imprimí el valor de Pi (<code>math.pi</code>) y la raíz cuadrada de 144
+          (<code>math.sqrt(144)</code>). El output debe incluir <code>12.0</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-3" data-expected="12.0">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "12.0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Importá math y mostrá pi y raíz de 144:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box" data-hints='["import math","print(math.pi)","print(math.sqrt(144)) da 12.0"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Script con encabezado profesional</h4>
-  <p>Creá un script con: 3 líneas de comentarios (nombre, fecha, descripción) y 3 prints que muestren datos del proyecto. El output debe incluir <code>v1.0</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-4" data-expected="v1.0">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "v1.0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Encabezado profesional:
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Script con encabezado profesional</h4>
+        <p>Creá un script con: 3 líneas de comentarios (nombre, fecha, descripción) y 3 prints que muestren datos del
+          proyecto. El output debe incluir <code>v1.0</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-4" data-expected="v1.0">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "v1.0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Encabezado profesional:
 # Nombre:
 # Fecha:
 # Descripción:
 
 # Tu código acá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["Completá los 3 comentarios con tu info","Agregá print(\"Proyecto: Mi App\")","Una línea debe decir print(\"Versión: v1.0\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["Completá los 3 comentarios con tu info","Agregá print(\"Proyecto: Mi App\")","Una línea debe decir print(\"Versión: v1.0\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Fecha y hora actual</h4>
-  <p>Importá <code>datetime</code> y mostrá la fecha y hora actual usando <code>datetime.datetime.now()</code>. El output debe incluir <code>202</code> (parte del año).</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-5" data-expected="202">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "202"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Importá datetime y mostrá la fecha actual:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["import datetime","ahora = datetime.datetime.now()","print(ahora) o print(ahora.strftime(\"%d/%m/%Y %H:%M\"))"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Fecha y hora actual</h4>
+        <p>Importá <code>datetime</code> y mostrá la fecha y hora actual usando <code>datetime.datetime.now()</code>. El
+          output debe incluir <code>202</code> (parte del año).</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-5" data-expected="202">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "202"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Importá datetime y mostrá la fecha actual:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["import datetime","ahora = datetime.datetime.now()","print(ahora) o print(ahora.strftime(\"%d/%m/%Y %H:%M\"))"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Generador de números aleatorios</h4>
-  <p>Importá <code>random</code> y generá 5 números aleatorios entre 1 y 100 usando <code>random.randint(1, 100)</code>. Imprimí cada uno en una línea separada. El output debe incluir la palabra <code>Aleatorio</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-6" data-expected="Aleatorio">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Aleatorio"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import random
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Generador de números aleatorios</h4>
+        <p>Importá <code>random</code> y generá 5 números aleatorios entre 1 y 100 usando
+          <code>random.randint(1, 100)</code>. Imprimí cada uno en una línea separada. El output debe incluir la palabra
+          <code>Aleatorio</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-6" data-expected="Aleatorio">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Aleatorio"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import random
 
 # Generá 5 números aleatorios:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["Usá print(\"Aleatorio 1:\", random.randint(1, 100))","Repetí 5 veces cambiando el número","Cada ejecución va a dar números distintos"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["Usá print(\"Aleatorio 1:\", random.randint(1, 100))","Repetí 5 veces cambiando el número","Cada ejecución va a dar números distintos"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Diagnóstico del sistema</h4>
-  <p>Creá un script de diagnóstico que muestre: versión de Python, plataforma (<code>sys.platform</code>), fecha actual y un número aleatorio. El output debe incluir <code>Diagnóstico completado</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-7" data-expected="Diagnóstico completado">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Diagnóstico completado"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Script de diagnóstico del sistema:
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Diagnóstico del sistema</h4>
+        <p>Creá un script de diagnóstico que muestre: versión de Python, plataforma (<code>sys.platform</code>), fecha
+          actual y un número aleatorio. El output debe incluir <code>Diagnóstico completado</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-7"
+          data-expected="Diagnóstico completado">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Diagnóstico completado"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Script de diagnóstico del sistema:
 import sys
 import datetime
 import random
 
 # Imprimí los datos del sistema:
 
-print("Diagnóstico completado")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["print(\"Python:\", sys.version)","print(\"Plataforma:\", sys.platform)","print(\"Fecha:\", datetime.datetime.now())"]'></div>
-</div>
+print("Diagnóstico completado")</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["print(\"Python:\", sys.version)","print(\"Plataforma:\", sys.platform)","print(\"Fecha:\", datetime.datetime.now())"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Reporte de bienvenida formateado</h4>
-  <p>Creá un reporte de bienvenida con líneas separadoras, datos del sistema y un mensaje personalizado. Debe incluir <code>================================</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-8" data-expected="================================">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir separadores</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sys
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Reporte de bienvenida formateado</h4>
+        <p>Creá un reporte de bienvenida con líneas separadoras, datos del sistema y un mensaje personalizado. Debe
+          incluir <code>================================</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-8"
+          data-expected="================================">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir separadores</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import sys
 import datetime
 
 # Armá un reporte formateado con separadores:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["print(\"================================\")","Después: print(\"  BIENVENIDO A PYTHON\")","Cerrá con otra línea de ==="]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["print(\"================================\")","Después: print(\"  BIENVENIDO A PYTHON\")","Cerrá con otra línea de ==="]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Calculadora de interés con debugging</h4>
-  <p>Calculá el interés simple de $200,000 al 5% mensual por 6 meses. Imprimí cada paso intermedio con el prefijo <code>DEBUG -</code> y el resultado final. El output debe incluir <code>260000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-9" data-expected="260000">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "260000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Calculá con print debugging:
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Calculadora de interés con debugging</h4>
+        <p>Calculá el interés simple de $200,000 al 5% mensual por 6 meses. Imprimí cada paso intermedio con el prefijo
+          <code>DEBUG -</code> y el resultado final. El output debe incluir <code>260000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-9" data-expected="260000">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "260000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Calculá con print debugging:
 capital = 200000
 tasa = 0.05
 meses = 6
 
 # Mostrá cada paso con DEBUG:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["print(\"DEBUG - Capital:\", capital)","interes = capital * tasa * meses = 60000","total = capital + interes = 260000"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["print(\"DEBUG - Capital:\", capital)","interes = capital * tasa * meses = 60000","total = capital + interes = 260000"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Setup check completo</h4>
-  <p>Creá un script que haga un "health check" completo de tu entorno: versión de Python (debe ser 3+), verificar que <code>math</code>, <code>datetime</code>, <code>json</code> y <code>random</code> estén disponibles, e imprimir un resumen con ✅ para cada check que pase. El output debe incluir <code>4/4 checks OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-10" data-expected="4/4 checks OK">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "4/4 checks OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Health check del entorno de Python
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Setup check completo</h4>
+        <p>Creá un script que haga un "health check" completo de tu entorno: versión de Python (debe ser 3+), verificar
+          que <code>math</code>, <code>datetime</code>, <code>json</code> y <code>random</code> estén disponibles, e
+          imprimir un resumen con ✅ para cada check que pase. El output debe incluir <code>4/4 checks OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-02" data-exercise="ex-10"
+          data-expected="4/4 checks OK">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "4/4 checks OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Health check del entorno de Python
 import sys
 
 checks = 0
@@ -454,45 +655,55 @@ checks = 0
 # Check 4: módulo json disponible
 
 # Imprimí el resumen final:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["if sys.version_info.major >= 3: checks += 1; print(\"✅ Python 3\")","import math; checks += 1; print(\"✅ math\") — repetí para datetime y json","Al final: print(f\"{checks}/4 checks OK\")"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>Un entorno de desarrollo requiere: el intérprete de Python + un editor de código (VS Code).</li>
+        <li>Al instalar Python, <b>siempre marcá "Add to PATH"</b> — es el error #1 de principiantes.</li>
+        <li>Las extensiones esenciales de VS Code son: Python (Microsoft), Pylance y Code Runner.</li>
+        <li>La terminal integrada de VS Code (<code>Ctrl+`</code>) es tu herramienta de ejecución principal.</li>
+        <li><code>print()</code> es tu herramienta de debugging más básica y más usada — incluso profesionalmente.</li>
+        <li>Python viene con módulos estándar (math, datetime, random, json) que ya podés usar sin instalar nada extra.
+        </li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>03 · Tipos de datos</strong>) vas a aprender cómo Python clasifica la
+        información: números enteros, decimales, texto, booleanos y None. Entender los tipos de datos es la base de todo
+        análisis — si tus datos tienen el tipo incorrecto, tus cálculos van a estar mal.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://code.visualstudio.com/docs/python/python-tutorial"
+          target="_blank">VS Code Python Tutorial</a> · <a href="https://docs.python.org/3/using/index.html"
+          target="_blank">Python Setup and Usage</a></p>
+
+      <div class="footer-nav">
+        <a href="/python/01-que-es-python.html">← ¿Qué es Python?</a>
+        <a class="next" href="/python/03-tipos-de-datos.html">Tipos de datos →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["if sys.version_info.major >= 3: checks += 1; print(\"✅ Python 3\")","import math; checks += 1; print(\"✅ math\") — repetí para datetime y json","Al final: print(f\"{checks}/4 checks OK\")"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>Un entorno de desarrollo requiere: el intérprete de Python + un editor de código (VS Code).</li>
-  <li>Al instalar Python, <b>siempre marcá "Add to PATH"</b> — es el error #1 de principiantes.</li>
-  <li>Las extensiones esenciales de VS Code son: Python (Microsoft), Pylance y Code Runner.</li>
-  <li>La terminal integrada de VS Code (<code>Ctrl+`</code>) es tu herramienta de ejecución principal.</li>
-  <li><code>print()</code> es tu herramienta de debugging más básica y más usada — incluso profesionalmente.</li>
-  <li>Python viene con módulos estándar (math, datetime, random, json) que ya podés usar sin instalar nada extra.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>03 · Tipos de datos</strong>) vas a aprender cómo Python clasifica la información: números enteros, decimales, texto, booleanos y None. Entender los tipos de datos es la base de todo análisis — si tus datos tienen el tipo incorrecto, tus cálculos van a estar mal.</p>
-
-<p><strong>Recursos:</strong> <a href="https://code.visualstudio.com/docs/python/python-tutorial" target="_blank">VS Code Python Tutorial</a> · <a href="https://docs.python.org/3/using/index.html" target="_blank">Python Setup and Usage</a></p>
-
-<div class="footer-nav">
-  <a href="/python/01-que-es-python.html">← ¿Qué es Python?</a>
-  <a class="next" href="/python/03-tipos-de-datos.html">Tipos de datos →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

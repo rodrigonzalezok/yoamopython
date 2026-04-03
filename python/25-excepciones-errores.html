@@ -1,64 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 25 · Excepciones y errores</title>
-<meta name="description" content="Manejá errores en Python: try/except/else/finally, tipos de error, raise, excepciones custom y patrones EAFP vs LBYL.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuieroProgramar · Python 25 · Excepciones y errores</title>
+    <meta name="description"
+        content="Manejá errores en Python: try/except/else/finally, tipos de error, raise, excepciones custom y patrones EAFP vs LBYL.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
+    <div class="topbar">
+        <button class="ham-btn"
+            onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+        <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+        <div class="progress-shell">
+            <div id="global-progress-fill" class="progress-fill"></div>
+        </div>
+        <div id="global-progress-text" class="top-stats"></div>
+    </div>
+    <div id="sb-overlay" class="sidebar-overlay"
+        onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+    <div class="layout">
+        <aside class="sidebar" id="sidebar-mount"></aside>
+        <main class="main">
 
-<div class="hero">
-  <span class="track-label python">Python · Lección 25 de 27</span>
-  <h1>Excepciones y errores</h1>
-  <p>Los errores son inevitables: archivos que no existen, datos con formato incorrecto, divisiones por cero. La diferencia entre código amateur y profesional es cómo manejás esos errores. Con <code>try/except</code>, tu programa reacciona en vez de explotar.</p>
-  <div class="badges">
-    <span class="badge">80–100 min</span>
-    <span class="badge">Prerrequisitos: 18 Funciones, 24 Archivos</span>
-  </div>
-</div>
+            <div class="hero">
+                <span class="track-label python">Python · Lección 25 de 27</span>
+                <h1>Excepciones y errores</h1>
+                <p>Los errores son inevitables: archivos que no existen, datos con formato incorrecto, divisiones por
+                    cero. La diferencia entre código amateur y profesional es cómo manejás esos errores. Con
+                    <code>try/except</code>, tu programa reacciona en vez de explotar.</p>
+                <div class="badges">
+                    <span class="badge">80–100 min</span>
+                    <span class="badge">Prerrequisitos: 18 Funciones, 24 Archivos</span>
+                </div>
+            </div>
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+            <div class="section-num">01</div>
+            <h2>Concepto teórico</h2>
 
-<h3>¿Qué es una excepción?</h3>
+            <h3>¿Qué es una excepción?</h3>
 
-<p>Una <strong>excepción</strong> es un error que ocurre durante la ejecución del programa. Cuando Python encuentra un error, crea un objeto de excepción con información sobre qué salió mal. Si no lo "atrapás", el programa se detiene y muestra un traceback (la cadena de llamadas que llevó al error).</p>
+            <p>Una <strong>excepción</strong> es un error que ocurre durante la ejecución del programa. Cuando Python
+                encuentra un error, crea un objeto de excepción con información sobre qué salió mal. Si no lo "atrapás",
+                el programa se detiene y muestra un traceback (la cadena de llamadas que llevó al error).</p>
 
-<h3>Tipos de errores comunes</h3>
+            <h3>Tipos de errores comunes</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Error</th><th>Cuándo ocurre</th><th>Ejemplo</th></tr>
-<tr><td><code>SyntaxError</code></td><td>Código mal escrito (se detecta ANTES de ejecutar)</td><td><code>if x = 5:</code> (falta ==)</td></tr>
-<tr><td><code>NameError</code></td><td>Variable o función no definida</td><td><code>print(xyz)</code> sin definir xyz</td></tr>
-<tr><td><code>TypeError</code></td><td>Operación con tipo incorrecto</td><td><code>"5" + 3</code> (str + int)</td></tr>
-<tr><td><code>ValueError</code></td><td>Valor incorrecto para el tipo</td><td><code>int("abc")</code></td></tr>
-<tr><td><code>IndexError</code></td><td>Índice fuera de rango</td><td><code>lista[100]</code> en lista de 5</td></tr>
-<tr><td><code>KeyError</code></td><td>Clave no existe en diccionario</td><td><code>d["inexistente"]</code></td></tr>
-<tr><td><code>ZeroDivisionError</code></td><td>División por cero</td><td><code>10 / 0</code></td></tr>
-<tr><td><code>FileNotFoundError</code></td><td>Archivo no existe</td><td><code>open("no_existe.csv")</code></td></tr>
-<tr><td><code>AttributeError</code></td><td>Método/atributo no existe</td><td><code>"hola".appendd()</code></td></tr>
-</table>
-</div>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Error</th>
+                        <th>Cuándo ocurre</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>SyntaxError</code></td>
+                        <td>Código mal escrito (se detecta ANTES de ejecutar)</td>
+                        <td><code>if x = 5:</code> (falta ==)</td>
+                    </tr>
+                    <tr>
+                        <td><code>NameError</code></td>
+                        <td>Variable o función no definida</td>
+                        <td><code>print(xyz)</code> sin definir xyz</td>
+                    </tr>
+                    <tr>
+                        <td><code>TypeError</code></td>
+                        <td>Operación con tipo incorrecto</td>
+                        <td><code>"5" + 3</code> (str + int)</td>
+                    </tr>
+                    <tr>
+                        <td><code>ValueError</code></td>
+                        <td>Valor incorrecto para el tipo</td>
+                        <td><code>int("abc")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>IndexError</code></td>
+                        <td>Índice fuera de rango</td>
+                        <td><code>lista[100]</code> en lista de 5</td>
+                    </tr>
+                    <tr>
+                        <td><code>KeyError</code></td>
+                        <td>Clave no existe en diccionario</td>
+                        <td><code>d["inexistente"]</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>ZeroDivisionError</code></td>
+                        <td>División por cero</td>
+                        <td><code>10 / 0</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>FileNotFoundError</code></td>
+                        <td>Archivo no existe</td>
+                        <td><code>open("no_existe.csv")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>AttributeError</code></td>
+                        <td>Método/atributo no existe</td>
+                        <td><code>"hola".appendd()</code></td>
+                    </tr>
+                </table>
+            </div>
 
-<h3>try / except / else / finally</h3>
+            <h3>try / except / else / finally</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">try:
+            <pre
+                style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">try:
     # código que PUEDE fallar
     resultado = int(dato)
 except ValueError:
@@ -74,40 +128,55 @@ finally:
     # se ejecuta SIEMPRE (haya o no error)
     print("Proceso terminado")</pre>
 
-<div class="concept"><strong>Regla de oro: except específico, nunca genérico.</strong> <code>except:</code> o <code>except Exception:</code> captura TODO, incluyendo errores que necesitás ver (como bugs en tu código). Siempre capturá el tipo de error específico que esperás: <code>except ValueError:</code>, <code>except FileNotFoundError:</code>, etc.</div>
+            <div class="concept"><strong>Regla de oro: except específico, nunca genérico.</strong> <code>except:</code>
+                o <code>except Exception:</code> captura TODO, incluyendo errores que necesitás ver (como bugs en tu
+                código). Siempre capturá el tipo de error específico que esperás: <code>except ValueError:</code>,
+                <code>except FileNotFoundError:</code>, etc.</div>
 
-<div class="warning"><strong>Anti-patrón mortal:</strong> <code>try: ... except: pass</code>. Esto silencia TODOS los errores. Tu programa "funciona" pero produce resultados incorrectos sin avisarte. Es el equivalente a tapar la luz de "check engine" con cinta. NUNCA uses <code>except: pass</code>.</div>
+            <div class="warning"><strong>Anti-patrón mortal:</strong> <code>try: ... except: pass</code>. Esto silencia
+                TODOS los errores. Tu programa "funciona" pero produce resultados incorrectos sin avisarte. Es el
+                equivalente a tapar la luz de "check engine" con cinta. NUNCA uses <code>except: pass</code>.</div>
 
-<h3>raise — lanzar excepciones propias</h3>
+            <h3>raise — lanzar excepciones propias</h3>
 
-<p><code>raise</code> te permite lanzar excepciones explícitamente cuando tu código detecta una condición inválida:</p>
+            <p><code>raise</code> te permite lanzar excepciones explícitamente cuando tu código detecta una condición
+                inválida:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def depositar(saldo, monto):
+            <pre
+                style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def depositar(saldo, monto):
     if monto <= 0:
         raise ValueError(f"Monto debe ser positivo, recibí: {monto}")
     return saldo + monto</pre>
 
-<h3>EAFP vs LBYL</h3>
+            <h3>EAFP vs LBYL</h3>
 
-<p>Dos filosofías para manejar errores:</p>
+            <p>Dos filosofías para manejar errores:</p>
 
-<ul>
-  <li><b>LBYL</b> (Look Before You Leap — mirá antes de saltar): verificá las condiciones ANTES de actuar. <code>if "score" in dict: usar dict["score"]</code></li>
-  <li><b>EAFP</b> (Easier to Ask Forgiveness than Permission — mejor pedir perdón que permiso): intentá directamente y capturá el error si falla. <code>try: usar dict["score"] except KeyError: manejar</code></li>
-</ul>
+            <ul>
+                <li><b>LBYL</b> (Look Before You Leap — mirá antes de saltar): verificá las condiciones ANTES de actuar.
+                    <code>if "score" in dict: usar dict["score"]</code></li>
+                <li><b>EAFP</b> (Easier to Ask Forgiveness than Permission — mejor pedir perdón que permiso): intentá
+                    directamente y capturá el error si falla.
+                    <code>try: usar dict["score"] except KeyError: manejar</code></li>
+            </ul>
 
-<p>Python favorece <b>EAFP</b>. Es más pythónico, más eficiente (si el error es raro) y evita condiciones de carrera.</p>
+            <p>Python favorece <b>EAFP</b>. Es más pythónico, más eficiente (si el error es raro) y evita condiciones de
+                carrera.</p>
 
-<div class="realworld"><strong>En análisis de datos:</strong> los errores de tipo y valor son el pan de cada día. Un CSV con un campo "N/A" donde esperás un número, una fecha en formato inesperado, un campo vacío. <code>try/except ValueError</code> te permite procesar miles de registros atrapando los errores uno a uno sin que todo el pipeline se caiga.</div>
+            <div class="realworld"><strong>En análisis de datos:</strong> los errores de tipo y valor son el pan de cada
+                día. Un CSV con un campo "N/A" donde esperás un número, una fecha en formato inesperado, un campo vacío.
+                <code>try/except ValueError</code> te permite procesar miles de registros atrapando los errores uno a
+                uno sin que todo el pipeline se caiga.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+            <div class="section-num">02</div>
+            <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: try/except básico</h3>
+            <h3>Ejemplo 1: try/except básico</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_basico.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Sin try/except: el programa explota
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_01_basico.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code"># Sin try/except: el programa explota
 # print(10 / 0)  # ZeroDivisionError!
 
 # Con try/except: manejamos el error
@@ -142,16 +211,19 @@ for d in datos:
         errores.append(d)
 
 print(f"Convertidos: {convertidos}")
-print(f"Errores: {errores}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Errores: {errores}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Ejemplo 2: Capturar múltiples tipos de error</h3>
+            <h3>Ejemplo 2: Capturar múltiples tipos de error</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_multiples.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Función que puede fallar de varias formas
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_02_multiples.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code"># Función que puede fallar de varias formas
 def obtener_dato(datos, clave, indice):
     try:
         lista = datos[clave]        # puede dar KeyError
@@ -177,16 +249,19 @@ print("=== Pruebas ===")
 print(f"Normal: {obtener_dato(datos, 'saldos', 0)}")
 print(f"KeyError: {obtener_dato(datos, 'emails', 0)}")
 print(f"IndexError: {obtener_dato(datos, 'scores', 10)}")
-print(f"ValueError: {obtener_dato(datos, 'saldos', 2)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"ValueError: {obtener_dato(datos, 'saldos', 2)}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Ejemplo 3: raise y validación de datos</h3>
+            <h3>Ejemplo 3: raise y validación de datos</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_raise.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># raise: lanzar errores cuando los datos son inválidos
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_03_raise.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code"># raise: lanzar errores cuando los datos son inválidos
 def validar_cliente(nombre, score, saldo):
     if not isinstance(nombre, str) or len(nombre) < 2:
         raise ValueError(f"Nombre inválido: '{nombre}'")
@@ -210,16 +285,19 @@ for nombre, score, saldo in pruebas:
         cliente = validar_cliente(nombre, score, saldo)
         print(f"  ✅ {cliente['nombre']}: OK")
     except (ValueError, TypeError) as e:
-        print(f"  ❌ Error: {e}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+        print(f"  ❌ Error: {e}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Ejemplo 4: Pipeline robusto con manejo de errores</h3>
+            <h3>Ejemplo 4: Pipeline robusto con manejo de errores</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_pipeline.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Pipeline que procesa registros con errores mezclados
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_04_pipeline.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code"># Pipeline que procesa registros con errores mezclados
 registros = [
     "García|720|$150,000",
     "López|abc|$320,000",      # score no numérico
@@ -264,16 +342,19 @@ for c in validos:
 
 print(f"\n❌ Errores: {len(errores)}")
 for e in errores:
-    print(f"  Línea {e['linea']}: {e['error']}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"  Línea {e['linea']}: {e['error']}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Ejemplo 5: EAFP vs LBYL y excepciones custom</h3>
+            <h3>Ejemplo 5: EAFP vs LBYL y excepciones custom</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_eafp.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># LBYL: verificar TODO antes de actuar
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_05_eafp.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code"># LBYL: verificar TODO antes de actuar
 def obtener_score_lbyl(cliente):
     if isinstance(cliente, dict):
         if "scoring" in cliente:
@@ -312,62 +393,179 @@ for score in [720, 590, 810, 480]:
         resultado = evaluar_credito(score)
         print(f"  Score {score}: {resultado}")
     except ScoreInsuficienteError as e:
-        print(f"  Score {e.score}: ❌ {e}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+        print(f"  Score {e.score}: ❌ {e}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+            <div class="section-num">03</div>
+            <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Bloque</th><th>Cuándo se ejecuta</th><th>Obligatorio</th></tr>
-<tr><td><code>try</code></td><td>Siempre (código que puede fallar)</td><td>Sí</td></tr>
-<tr><td><code>except TipoError</code></td><td>Solo si ocurre ese tipo de error</td><td>Sí (al menos uno)</td></tr>
-<tr><td><code>else</code></td><td>Solo si NO hubo error</td><td>No</td></tr>
-<tr><td><code>finally</code></td><td>SIEMPRE (haya o no error)</td><td>No</td></tr>
-</table>
-</div>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Bloque</th>
+                        <th>Cuándo se ejecuta</th>
+                        <th>Obligatorio</th>
+                    </tr>
+                    <tr>
+                        <td><code>try</code></td>
+                        <td>Siempre (código que puede fallar)</td>
+                        <td>Sí</td>
+                    </tr>
+                    <tr>
+                        <td><code>except TipoError</code></td>
+                        <td>Solo si ocurre ese tipo de error</td>
+                        <td>Sí (al menos uno)</td>
+                    </tr>
+                    <tr>
+                        <td><code>else</code></td>
+                        <td>Solo si NO hubo error</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td><code>finally</code></td>
+                        <td>SIEMPRE (haya o no error)</td>
+                        <td>No</td>
+                    </tr>
+                </table>
+            </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Buena práctica</th><th>Mala práctica</th></tr>
-<tr><td><code>except ValueError:</code> (específico)</td><td><code>except:</code> (captura TODO)</td></tr>
-<tr><td>Loggear el error</td><td><code>except: pass</code> (silenciar)</td></tr>
-<tr><td><code>raise</code> para datos inválidos</td><td>Devolver None o -1 silenciosamente</td></tr>
-<tr><td>EAFP (try/except)</td><td>LBYL excesivo (if anidados)</td></tr>
-<tr><td>Excepciones custom descriptivas</td><td>Mensajes genéricos "Error"</td></tr>
-</table>
-</div>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Buena práctica</th>
+                        <th>Mala práctica</th>
+                    </tr>
+                    <tr>
+                        <td><code>except ValueError:</code> (específico)</td>
+                        <td><code>except:</code> (captura TODO)</td>
+                    </tr>
+                    <tr>
+                        <td>Loggear el error</td>
+                        <td><code>except: pass</code> (silenciar)</td>
+                    </tr>
+                    <tr>
+                        <td><code>raise</code> para datos inválidos</td>
+                        <td>Devolver None o -1 silenciosamente</td>
+                    </tr>
+                    <tr>
+                        <td>EAFP (try/except)</td>
+                        <td>LBYL excesivo (if anidados)</td>
+                    </tr>
+                    <tr>
+                        <td>Excepciones custom descriptivas</td>
+                        <td>Mensajes genéricos "Error"</td>
+                    </tr>
+                </table>
+            </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+            <div class="section-num">04</div>
+            <h2>Ejercicios</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: try/except con ValueError</h4><p>Intentá convertir <code>"abc"</code> a int. Capturá el error e imprimí un mensaje amigable. Debe incluir <code>no es un número</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-1" data-expected="no es un número"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "no es un número"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">dato = "abc"
+            <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+                <h4>Ejercicio 1: try/except con ValueError</h4>
+                <p>Intentá convertir <code>"abc"</code> a int. Capturá el error e imprimí un mensaje amigable. Debe
+                    incluir <code>no es un número</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-1"
+                    data-expected="no es un número">
+                    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "no es un número"</span>
+                    </div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">dato = "abc"
 
 # Intentá convertir:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["try: int(dato)","except ValueError: print(f\"{dato} no es un número\")","ValueError se lanza cuando int() recibe texto no numérico"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h1" class="hint-box"
+                    data-hints='["try: int(dato)","except ValueError: print(f\"{dato} no es un número\")","ValueError se lanza cuando int() recibe texto no numérico"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Capturar ZeroDivisionError</h4><p>Creá una función <code>dividir(a, b)</code> que devuelva <code>a/b</code> o <code>None</code> si b es 0. Debe incluir <code>None</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-2" data-expected="None"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "None"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">def dividir(a, b):
+            <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+                <h4>Ejercicio 2: Capturar ZeroDivisionError</h4>
+                <p>Creá una función <code>dividir(a, b)</code> que devuelva <code>a/b</code> o <code>None</code> si b es
+                    0. Debe incluir <code>None</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-2"
+                    data-expected="None">
+                    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "None"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">def dividir(a, b):
     pass  # completá
 
 print(dividir(10, 3))
-print(dividir(10, 0))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["try: return a / b","except ZeroDivisionError: return None","10/0 devuelve None en vez de explotar"]'></div></div>
+print(dividir(10, 0))</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h2" class="hint-box"
+                    data-hints='["try: return a / b","except ZeroDivisionError: return None","10/0 devuelve None en vez de explotar"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: KeyError con .get() o try/except</h4><p>Dado un dict sin clave "email", accedé de forma segura con try/except. Debe incluir <code>no disponible</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-3" data-expected="no disponible"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "no disponible"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">cliente = {"nombre": "García", "score": 720}
+            <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+                <h4>Ejercicio 3: KeyError con .get() o try/except</h4>
+                <p>Dado un dict sin clave "email", accedé de forma segura con try/except. Debe incluir
+                    <code>no disponible</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-3"
+                    data-expected="no disponible">
+                    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "no disponible"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">cliente = {"nombre": "García", "score": 720}
 
 # Accedé a "email" de forma segura:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["try: print(cliente[\"email\"])","except KeyError: print(\"Email no disponible\")","O más simple: print(cliente.get(\"email\", \"no disponible\"))"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h3" class="hint-box"
+                    data-hints='["try: print(cliente[\"email\"])","except KeyError: print(\"Email no disponible\")","O más simple: print(cliente.get(\"email\", \"no disponible\"))"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Convertir lista con errores</h4><p>Dada <code>["42","3.14","abc","100","","N/A","55"]</code>, convertí a float los que se pueda, contá los errores. Debe incluir <code>errores: 3</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-4" data-expected="errores: 3"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "errores: 3"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">datos = ["42", "3.14", "abc", "100", "", "N/A", "55"]
+            <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+                <h4>Ejercicio 4: Convertir lista con errores</h4>
+                <p>Dada <code>["42","3.14","abc","100","","N/A","55"]</code>, convertí a float los que se pueda, contá
+                    los errores. Debe incluir <code>errores: 3</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-4"
+                    data-expected="errores: 3">
+                    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "errores: 3"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">datos = ["42", "3.14", "abc", "100", "", "N/A", "55"]
 validos = []
 errores = 0
 
 # Convertí con try/except:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["for d in datos: try: validos.append(float(d))","except ValueError: errores += 1","abc, \"\", N/A fallan → errores: 3"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h4" class="hint-box"
+                    data-hints='["for d in datos: try: validos.append(float(d))","except ValueError: errores += 1","abc, \"\", N/A fallan → errores: 3"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: raise para validación</h4><p>Creá <code>validar_monto(monto)</code> que lance <code>ValueError</code> si es negativo o <code>TypeError</code> si no es número. Debe incluir <code>ValueError</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-5" data-expected="ValueError"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "ValueError"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">def validar_monto(monto):
+            <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+                <h4>Ejercicio 5: raise para validación</h4>
+                <p>Creá <code>validar_monto(monto)</code> que lance <code>ValueError</code> si es negativo o
+                    <code>TypeError</code> si no es número. Debe incluir <code>ValueError</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-5"
+                    data-expected="ValueError">
+                    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "ValueError"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">def validar_monto(monto):
     pass  # completá con raise
 
 for m in [1500, -200, "abc", 0]:
@@ -375,9 +573,26 @@ for m in [1500, -200, "abc", 0]:
         validar_monto(m)
         print(f"  ${m}: ✅")
     except (ValueError, TypeError) as e:
-        print(f"  {m}: ❌ {type(e).__name__}: {e}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["if not isinstance(monto, (int, float)): raise TypeError(...)","if monto < 0: raise ValueError(\"Monto negativo\")","return True si todo está bien"]'></div></div>
+        print(f"  {m}: ❌ {type(e).__name__}: {e}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h5" class="hint-box"
+                    data-hints='["if not isinstance(monto, (int, float)): raise TypeError(...)","if monto < 0: raise ValueError(\"Monto negativo\")","return True si todo está bien"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: try/except/else/finally completo</h4><p>Creá una función que intente abrir un archivo, lo lea si existe, use else para confirmar éxito y finally para registrar que terminó. Debe incluir <code>finally</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-6" data-expected="finally"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "finally"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">def leer_archivo(nombre):
+            <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+                <h4>Ejercicio 6: try/except/else/finally completo</h4>
+                <p>Creá una función que intente abrir un archivo, lo lea si existe, use else para confirmar éxito y
+                    finally para registrar que terminó. Debe incluir <code>finally</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-6"
+                    data-expected="finally">
+                    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "finally"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">def leer_archivo(nombre):
     try:
         with open(nombre) as f:
             contenido = f.read()
@@ -396,23 +611,76 @@ with open("test.txt", "w") as f:
 
 leer_archivo("test.txt")
 print()
-leer_archivo("inexistente.txt")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["El código ya está casi completo","try abre, except captura si no existe","else confirma éxito, finally se ejecuta SIEMPRE"]'></div></div>
+leer_archivo("inexistente.txt")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h6" class="hint-box"
+                    data-hints='["El código ya está casi completo","try abre, except captura si no existe","else confirma éxito, finally se ejecuta SIEMPRE"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Pipeline robusto</h4><p>Procesá <code>["García|720|$150,000","López|abc|$320,000","Pérez|810|$890,000"]</code> con try/except capturando errores por línea sin detener el pipeline. Debe incluir <code>procesados</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-7" data-expected="procesados"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "procesados"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">registros = ["García|720|$150,000", "López|abc|$320,000", "Pérez|810|$890,000"]
+            <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+                <h4>Ejercicio 7: Pipeline robusto</h4>
+                <p>Procesá <code>["García|720|$150,000","López|abc|$320,000","Pérez|810|$890,000"]</code> con try/except
+                    capturando errores por línea sin detener el pipeline. Debe incluir <code>procesados</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-7"
+                    data-expected="procesados">
+                    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "procesados"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">registros = ["García|720|$150,000", "López|abc|$320,000", "Pérez|810|$890,000"]
 
 # Procesá con manejo de errores:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["for r in registros: try: campos = r.split(\"|\")","nombre, score, saldo = campos[0], int(campos[1]), ...","except ValueError as e: errores.append(...); continue"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h7" class="hint-box"
+                    data-hints='["for r in registros: try: campos = r.split(\"|\")","nombre, score, saldo = campos[0], int(campos[1]), ...","except ValueError as e: errores.append(...); continue"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Excepción custom</h4><p>Creá <code>class SaldoInsuficienteError(Exception)</code> que se lance cuando intentás extraer más de lo que hay. Debe incluir <code>SaldoInsuficiente</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-8" data-expected="SaldoInsuficiente"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "SaldoInsuficiente"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá la excepción custom y una función extraer():
+            <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+                <h4>Ejercicio 8: Excepción custom</h4>
+                <p>Creá <code>class SaldoInsuficienteError(Exception)</code> que se lance cuando intentás extraer más de
+                    lo que hay. Debe incluir <code>SaldoInsuficiente</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-8"
+                    data-expected="SaldoInsuficiente">
+                    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "SaldoInsuficiente"</span>
+                    </div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code"># Creá la excepción custom y una función extraer():
 
 saldo = 100000
 for monto in [30000, 50000, 80000]:
     try:
         pass  # llamá a extraer
     except Exception as e:
-        print(f"  ❌ {type(e).__name__}: {e}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["class SaldoInsuficienteError(Exception): pass","def extraer(saldo, monto): if monto > saldo: raise SaldoInsuficienteError(...)","return saldo - monto"]'></div></div>
+        print(f"  ❌ {type(e).__name__}: {e}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h8" class="hint-box"
+                    data-hints='["class SaldoInsuficienteError(Exception): pass","def extraer(saldo, monto): if monto > saldo: raise SaldoInsuficienteError(...)","return saldo - monto"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Retry pattern</h4><p>Creá una función <code>operar_con_retry(func, max_intentos=3)</code> que reintente una operación hasta N veces si falla. Simulá una operación que falla aleatoriamente. Debe incluir <code>intento</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-9" data-expected="intento"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "intento"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import random
+            <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+                <h4>Ejercicio 9: Retry pattern</h4>
+                <p>Creá una función <code>operar_con_retry(func, max_intentos=3)</code> que reintente una operación
+                    hasta N veces si falla. Simulá una operación que falla aleatoriamente. Debe incluir
+                    <code>intento</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-9"
+                    data-expected="intento">
+                    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "intento"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">import random
 random.seed(42)
 
 def operacion_inestable():
@@ -424,9 +692,27 @@ def con_retry(func, max_intentos=5):
     pass  # completá
 
 resultado = con_retry(operacion_inestable)
-print(f"Resultado: {resultado}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["for intento in range(1, max_intentos+1):","    try: return func()","    except Exception as e: print(f\"intento {intento}: {e}\")"]'></div></div>
+print(f"Resultado: {resultado}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h9" class="hint-box"
+                    data-hints='["for intento in range(1, max_intentos+1):","    try: return func()","    except Exception as e: print(f\"intento {intento}: {e}\")"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Sistema de procesamiento con logging de errores</h4><p>Procesá 6 registros crudos: parseá, validá (score 0-999, saldo positivo), guardá los válidos en un JSON y los errores en un log. Debe incluir <code>RESULTADO</code>.</p><div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-10" data-expected="RESULTADO"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "RESULTADO"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+            <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+                <h4>Ejercicio 10: Sistema de procesamiento con logging de errores</h4>
+                <p>Procesá 6 registros crudos: parseá, validá (score 0-999, saldo positivo), guardá los válidos en un
+                    JSON y los errores en un log. Debe incluir <code>RESULTADO</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-25" data-exercise="ex-10"
+                    data-expected="RESULTADO">
+                    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "RESULTADO"</span>
+                    </div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">import json
 
 registros = [
     "García|720|$150,000",
@@ -445,40 +731,55 @@ errores_log = []
 print(f"=== RESULTADO ===")
 print(f"Válidos: {len(validos)}")
 print(f"Errores: {len(errores_log)}")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["Split, convertir tipos con try/except","Validar: if score > 999: raise ValueError","Guardar validos en JSON, errores en lista con línea y motivo"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h10" class="hint-box"
+                    data-hints='["Split, convertir tipos con try/except","Validar: if score > 999: raise ValueError","Guardar validos en JSON, errores en lista con línea y motivo"]'>
+                </div>
+            </div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
+            <div class="section-num">05</div>
+            <h2>Resumen y conexión</h2>
 
-<ul>
-  <li><code>try/except</code> captura errores sin detener el programa. <code>else</code> se ejecuta si no hubo error. <code>finally</code> siempre.</li>
-  <li>SIEMPRE capturá excepciones específicas (<code>except ValueError</code>), nunca genéricas (<code>except:</code>).</li>
-  <li><code>raise</code> lanza excepciones cuando tus datos son inválidos.</li>
-  <li>NUNCA uses <code>except: pass</code> — silencia bugs sin avisarte.</li>
-  <li>Python favorece EAFP (try/except) sobre LBYL (if anidados).</li>
-  <li>Las excepciones custom (<code>class MiError(Exception)</code>) hacen tu código más expresivo.</li>
-</ul>
+            <ul>
+                <li><code>try/except</code> captura errores sin detener el programa. <code>else</code> se ejecuta si no
+                    hubo error. <code>finally</code> siempre.</li>
+                <li>SIEMPRE capturá excepciones específicas (<code>except ValueError</code>), nunca genéricas
+                    (<code>except:</code>).</li>
+                <li><code>raise</code> lanza excepciones cuando tus datos son inválidos.</li>
+                <li>NUNCA uses <code>except: pass</code> — silencia bugs sin avisarte.</li>
+                <li>Python favorece EAFP (try/except) sobre LBYL (if anidados).</li>
+                <li>Las excepciones custom (<code>class MiError(Exception)</code>) hacen tu código más expresivo.</li>
+            </ul>
 
-<p>En la siguiente lección (<strong>26 · Clases y objetos intro</strong>) vas a aprender programación orientada a objetos: crear clases, instancias, métodos y herencia básica.</p>
+            <p>En la siguiente lección (<strong>26 · Clases y objetos intro</strong>) vas a aprender programación
+                orientada a objetos: crear clases, instancias, métodos y herencia básica.</p>
 
-<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/errors.html" target="_blank">Python docs — Errors</a> · <a href="https://docs.python.org/3/library/exceptions.html" target="_blank">Built-in Exceptions</a></p>
+            <p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/errors.html"
+                    target="_blank">Python docs — Errors</a> · <a
+                    href="https://docs.python.org/3/library/exceptions.html" target="_blank">Built-in Exceptions</a></p>
 
-<div class="footer-nav">
-  <a href="/python/24-archivos.html">← Archivos</a>
-  <a class="next" href="/python/26-clases-objetos-intro.html">Clases y objetos →</a>
-</div>
+            <div class="footer-nav">
+                <a href="/python/24-archivos.html">← Archivos</a>
+                <a class="next" href="/python/26-clases-objetos-intro.html">Clases y objetos →</a>
+            </div>
 
-</main>
-</div>
+        </main>
+    </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+    <script type="module">
+        import { renderSidebar } from '/js/nav.js';
+        import { initTheme } from '/js/theme.js';
+        import { mountEditors } from '/js/editor.js';
+        initTheme();
+        renderSidebar(location.pathname);
+        mountEditors();
+        window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+    </script>
 </body>
+
 </html>

@@ -1,82 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 01 · Qué es Data Analysis</title>
-<meta name="description" content="Introducción al Análisis de Datos. Descubrí qué hace un Data Analyst, las etapas del proceso y tu primer contacto con pandas.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 01 · Qué es Data Analysis</title>
+  <meta name="description"
+    content="Introducción al Análisis de Datos. Descubrí qué hace un Data Analyst, las etapas del proceso y tu primer contacto con pandas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 01 de 19</span>
-  <h1>¿Qué es Data Analysis?</h1>
-  <p>El mercado está lleno de datos, pero los datos crudos no sirven para tomar decisiones. Un Data Analyst es el puente entre una base de datos caótica y la decisión de negocios de un gerente. En esta ruta vas a aprender la herramienta profesional número uno: <strong>pandas</strong>.</p>
-  <div class="badges">
-    <span class="badge">45–60 min</span>
-    <span class="badge">Prerrequisitos: Fundamentos de Python</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>El rol del Data Analyst</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 01 de 19</span>
+        <h1>¿Qué es Data Analysis?</h1>
+        <p>El mercado está lleno de datos, pero los datos crudos no sirven para tomar decisiones. Un Data Analyst es el
+          puente entre una base de datos caótica y la decisión de negocios de un gerente. En esta ruta vas a aprender la
+          herramienta profesional número uno: <strong>pandas</strong>.</p>
+        <div class="badges">
+          <span class="badge">45–60 min</span>
+          <span class="badge">Prerrequisitos: Fundamentos de Python</span>
+        </div>
+      </div>
 
-<h3>¿Qué hacemos realmente?</h3>
+      <div class="section-num">01</div>
+      <h2>El rol del Data Analyst</h2>
 
-<p>Existe el mito de que un analista de datos está todo el día escribiendo algoritmos de inteligencia artificial. La realidad del <strong>90% de los roles de Data Analyst</strong> (especialmente en LATAM) es muy distinta. El ciclo de vida de nuestro trabajo suele ser:</p>
+      <h3>¿Qué hacemos realmente?</h3>
 
-<ol>
-  <li><strong>Entiende el problema comercial:</strong> Negocio pregunta <em>"¿Por qué cayeron las ventas cruzadas este mes?"</em>.</li>
-  <li><strong>Extracción (SQL):</strong> Te conectás a la base de datos de la empresa y extraés las tablas de ventas, clientes y campañas.</li>
-  <li><strong>Limpieza y Transformación (Python / pandas):</strong> Limpiás los nulos, corregís formatos de fechas y unís las tablas. Esta es la parte que más tiempo lleva.</li>
-  <li><strong>Análisis Exploratorio (EDA):</strong> Buscás patrones. Descubrís que un segmento etario específico dejó de comprar porque el medio de pago fallaba.</li>
-  <li><strong>Comunicación (BI / Viz):</strong> Armás un gráfico claro o un dashboard en Power BI para mostrarle a negocio dónde está el problema y proponer una solución.</li>
-</ol>
+      <p>Existe el mito de que un analista de datos está todo el día escribiendo algoritmos de inteligencia artificial.
+        La realidad del <strong>90% de los roles de Data Analyst</strong> (especialmente en LATAM) es muy distinta. El
+        ciclo de vida de nuestro trabajo suele ser:</p>
 
-<div class="concept"><strong>Tu objetivo final:</strong> Convertir millones de filas incomprensibles en <strong>insights</strong> (hallazgos accionables) que generen o ahorren plata a la empresa. Nada más y nada menos.</div>
+      <ol>
+        <li><strong>Entiende el problema comercial:</strong> Negocio pregunta <em>"¿Por qué cayeron las ventas cruzadas
+            este mes?"</em>.</li>
+        <li><strong>Extracción (SQL):</strong> Te conectás a la base de datos de la empresa y extraés las tablas de
+          ventas, clientes y campañas.</li>
+        <li><strong>Limpieza y Transformación (Python / pandas):</strong> Limpiás los nulos, corregís formatos de fechas
+          y unís las tablas. Esta es la parte que más tiempo lleva.</li>
+        <li><strong>Análisis Exploratorio (EDA):</strong> Buscás patrones. Descubrís que un segmento etario específico
+          dejó de comprar porque el medio de pago fallaba.</li>
+        <li><strong>Comunicación (BI / Viz):</strong> Armás un gráfico claro o un dashboard en Power BI para mostrarle a
+          negocio dónde está el problema y proponer una solución.</li>
+      </ol>
 
-<h3>El Stack de Herramientas</h3>
+      <div class="concept"><strong>Tu objetivo final:</strong> Convertir millones de filas incomprensibles en
+        <strong>insights</strong> (hallazgos accionables) que generen o ahorren plata a la empresa. Nada más y nada
+        menos.</div>
 
-<p>Para lograr todo eso, la caja de herramientas estándar de la industria se compone de tres pilares, que son exactamente los que vas a dominar en esta plataforma:</p>
+      <h3>El Stack de Herramientas</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Herramienta</th><th>Propósito</th><th>Analogía</th></tr>
-<tr><td><strong>SQL</strong></td><td>Extraer datos masivos de la base.</td><td>Es el camión de minería extrayendo la tierra con oro de la montaña.</td></tr>
-<tr><td><strong>Python (pandas)</strong></td><td>Limpiar, filtrar, agrupar y analizar.</td><td>Es la planta refinadora que separa la tierra y pule el oro.</td></tr>
-<tr><td><strong>Power BI / Tableau</strong></td><td>Visualización interactiva y reportes.</td><td>Es la vidriera iluminada de la joyería donde el cliente ve el oro brillando.</td></tr>
-</table>
-</div>
+      <p>Para lograr todo eso, la caja de herramientas estándar de la industria se compone de tres pilares, que son
+        exactamente los que vas a dominar en esta plataforma:</p>
 
-<p>Acá nos vamos a enfocar fuertemente en el corazón del análisis: <strong>Python a través de la librería <code>pandas</code></strong>.</p>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Herramienta</th>
+            <th>Propósito</th>
+            <th>Analogía</th>
+          </tr>
+          <tr>
+            <td><strong>SQL</strong></td>
+            <td>Extraer datos masivos de la base.</td>
+            <td>Es el camión de minería extrayendo la tierra con oro de la montaña.</td>
+          </tr>
+          <tr>
+            <td><strong>Python (pandas)</strong></td>
+            <td>Limpiar, filtrar, agrupar y analizar.</td>
+            <td>Es la planta refinadora que separa la tierra y pule el oro.</td>
+          </tr>
+          <tr>
+            <td><strong>Power BI / Tableau</strong></td>
+            <td>Visualización interactiva y reportes.</td>
+            <td>Es la vidriera iluminada de la joyería donde el cliente ve el oro brillando.</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">02</div>
-<h2>Primer contacto con pandas</h2>
+      <p>Acá nos vamos a enfocar fuertemente en el corazón del análisis: <strong>Python a través de la librería
+          <code>pandas</code></strong>.</p>
 
-<p><code>pandas</code> es una librería externa de Python. No viene por defecto, hay que instalarla e importarla. Cuando trabajamos en entornos locales usamos `pip install pandas`, pero acá en nuestro navegador ya la tenemos lista para usar.</p>
+      <div class="section-num">02</div>
+      <h2>Primer contacto con pandas</h2>
 
-<div class="warning"><strong>El formato sagrado:</strong> Por convención mundial, <code>pandas</code> siempre se importa con el alias <code>pd</code>. Vas a ver <code>import pandas as pd</code> en literalmente todos los scripts de datos corporativos. No ofendas a los dioses del código usando otro alias.</div>
+      <p><code>pandas</code> es una librería externa de Python. No viene por defecto, hay que instalarla e importarla.
+        Cuando trabajamos en entornos locales usamos `pip install pandas`, pero acá en nuestro navegador ya la tenemos
+        lista para usar.</p>
 
-<h3>Ejemplo en vivo: Tu primer DataFrame</h3>
-<p>Un <strong>DataFrame</strong> es la estructura clave de pandas. Imaginalo simplemente como una tabla de Excel potenciada con esteroides, que vive en la memoria de tu computadora.</p>
+      <div class="warning"><strong>El formato sagrado:</strong> Por convención mundial, <code>pandas</code> siempre se
+        importa con el alias <code>pd</code>. Vas a ver <code>import pandas as pd</code> en literalmente todos los
+        scripts de datos corporativos. No ofendas a los dioses del código usando otro alias.</div>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>hola_pandas.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Importamos la librería con su alias oficial
+      <h3>Ejemplo en vivo: Tu primer DataFrame</h3>
+      <p>Un <strong>DataFrame</strong> es la estructura clave de pandas. Imaginalo simplemente como una tabla de Excel
+        potenciada con esteroides, que vive en la memoria de tu computadora.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>hola_pandas.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Importamos la librería con su alias oficial
 import pandas as pd
 
 # 1. Creamos un diccionario normal de Python con datos simulados de ventas
@@ -94,17 +138,21 @@ print("=== Mi primer DataFrame ===")
 print(df)
 
 # pandas automáticamente le asigna "índices" (0, 1, 2, 3) 
-# a la izquierda de la tabla.</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+# a la izquierda de la tabla.</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>El poder oculto de pandas: Estadísticas en 1 línea</h3>
-<p>Lo genial de tener los datos en un DataFrame no es imprimirlos, sino analizarlos velozmente sin necesidad de hacer bucles <code>for</code> manuales.</p>
+      <h3>El poder oculto de pandas: Estadísticas en 1 línea</h3>
+      <p>Lo genial de tener los datos en un DataFrame no es imprimirlos, sino analizarlos velozmente sin necesidad de
+        hacer bucles <code>for</code> manuales.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>poder_analitico.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>poder_analitico.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 datos = {
     "Cliente": ["García", "López", "Martínez", "Pérez", "Sosa"],
@@ -121,25 +169,33 @@ print(f"Promedio de venta: USD {df['Venta_USD'].mean()}")
 # ¿Cuántas ventas hubo por cada canal logístico?
 print("\n=== Ventas por Canal ===")
 print(df['Canal'].value_counts())
-</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="tip"><strong>Tip profesional:</strong> Fijate cómo <code>df['Canal'].value_counts()</code> nos devolvió un conteo instantáneo de categorías. Esta función la vas a usar millones de veces en tu carrera para entender cómo se distribuyen tus bases de datos.</div>
+      <div class="tip"><strong>Tip profesional:</strong> Fijate cómo <code>df['Canal'].value_counts()</code> nos
+        devolvió un conteo instantáneo de categorías. Esta función la vas a usar millones de veces en tu carrera para
+        entender cómo se distribuyen tus bases de datos.</div>
 
-<div class="section-num">03</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">03</div>
+      <h2>Ejercicios</h2>
 
-<p>Ya es momento de soltar las manos. Estos primeros ejercicios son para familiarizarte con el entorno de <code>pandas</code>. Recordá, siempre el alias debe ser <code>pd</code>.</p>
+      <p>Ya es momento de soltar las manos. Estos primeros ejercicios son para familiarizarte con el entorno de
+        <code>pandas</code>. Recordá, siempre el alias debe ser <code>pd</code>.</p>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Tu primer import y sumatoria</h4>
-  <p>Creá un DataFrame llamado <code>df_kpis</code> utilizando el diccionario provisto. Luego, usando pandas, imprimí la <strong>suma</strong> de la columna `'Ingresos'`. Utilizá la función <code>.sum()</code>. Recordá importar la librería adecuadamente. (El resultado esperado debe ser <code>2800</code>).</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-01" data-exercise="ex-1" data-expected="2800">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "2800"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Importá pandas acá
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Tu primer import y sumatoria</h4>
+        <p>Creá un DataFrame llamado <code>df_kpis</code> utilizando el diccionario provisto. Luego, usando pandas,
+          imprimí la <strong>suma</strong> de la columna `'Ingresos'`. Utilizá la función <code>.sum()</code>. Recordá
+          importar la librería adecuadamente. (El resultado esperado debe ser <code>2800</code>).</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-01" data-exercise="ex-1" data-expected="2800">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "2800"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Importá pandas acá
 
 
 datos_empresa = {
@@ -148,20 +204,27 @@ datos_empresa = {
 }
 
 # Convertí a DataFrame e imprimí la suma
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["import pandas as pd","df_kpis = pd.DataFrame(datos_empresa)","print(df_kpis[\"Ingresos\"].sum())"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["import pandas as pd","df_kpis = pd.DataFrame(datos_empresa)","print(df_kpis[\"Ingresos\"].sum())"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 2: Estadísticas descriptivas simples</h4>
-  <p>A partir del dataset de salarios, utilizá <code>.max()</code> y <code>.mean()</code> para imprimir en pantalla el salario más alto y el salario promedio. El resultado numérico del máximo (380) debe verse en tu output.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-01" data-exercise="ex-2" data-expected="380">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "380"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 2: Estadísticas descriptivas simples</h4>
+        <p>A partir del dataset de salarios, utilizá <code>.max()</code> y <code>.mean()</code> para imprimir en
+          pantalla el salario más alto y el salario promedio. El resultado numérico del máximo (380) debe verse en tu
+          output.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-01" data-exercise="ex-2" data-expected="380">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "380"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 empleados = {
     "Nombre": ["Ana", "Juan", "Pedro", "Maria", "Laura"],
@@ -172,20 +235,28 @@ empleados = {
 
 # Imprimir maximo y promedio
 
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["df = pd.DataFrame(empleados)","maximo = df[\"Salario_k\"].max()","print(\"Max:\", maximo)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["df = pd.DataFrame(empleados)","maximo = df[\"Salario_k\"].max()","print(\"Max:\", maximo)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 3: Frecuencias con value_counts</h4>
-  <p>En el área de riesgo crediticio es crucial saber cuántos préstamos fueron Aprobados vs Rechazados. Usando <code>.value_counts()</code>, imprimí la cantidad de ocurrencias de cada "Estado". Deben verse los valores "Aprobado" y la cantidad "3".</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-01" data-exercise="ex-3" data-expected="3">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir la cantidad "3" y "Aprobado"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 3: Frecuencias con value_counts</h4>
+        <p>En el área de riesgo crediticio es crucial saber cuántos préstamos fueron Aprobados vs Rechazados. Usando
+          <code>.value_counts()</code>, imprimí la cantidad de ocurrencias de cada "Estado". Deben verse los valores
+          "Aprobado" y la cantidad "3".</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-01" data-exercise="ex-3" data-expected="3">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir la cantidad "3" y "Aprobado"</span>
+          </div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 riesgo = {
     "ID_Cliente": [101, 102, 103, 104, 105],
@@ -194,40 +265,48 @@ riesgo = {
 
 # 1. Crear DataFrame
 # 2. Imprimir value_counts de la columna "Estado"
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["df = pd.DataFrame(riesgo)","conteo = df[\"Estado\"].value_counts()","print(conteo)"]'></div>
+      </div>
+
+      <div class="section-num">04</div>
+      <h2>Resumen rápido</h2>
+
+      <ul>
+        <li>Un <strong>Data Analyst</strong> extrae datos, los limpia, los explora y genera insights de negocio.</li>
+        <li><strong>pandas</strong> es la herramienta principal en Python, y siempre se importa como <code>pd</code>.
+        </li>
+        <li>Un <strong>DataFrame</strong> es la representación en tabla (filas y columnas) que usamos para trabajar con
+          pandas.</li>
+        <li>Métodos geniales: <code>.sum()</code> (sumatoria), <code>.mean()</code> (promedio), <code>.max()</code>
+          (máximo), y <code>.value_counts()</code> (para contar repeticiones de categorías).</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>02 · pandas: Series y DataFrames</strong>) nos meteremos de lleno en las dos
+        estructuras fundamentales de la librería para dominar su anatomía interna por completo.</p>
+
+      <div class="footer-nav">
+        <a class="next" href="/data-analysis/02-pandas-series-dataframes.html">pandas: Series y DataFrames →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h3" class="hint-box" data-hints='["df = pd.DataFrame(riesgo)","conteo = df[\"Estado\"].value_counts()","print(conteo)"]'></div>
-</div>
 
-<div class="section-num">04</div>
-<h2>Resumen rápido</h2>
-
-<ul>
-  <li>Un <strong>Data Analyst</strong> extrae datos, los limpia, los explora y genera insights de negocio.</li>
-  <li><strong>pandas</strong> es la herramienta principal en Python, y siempre se importa como <code>pd</code>.</li>
-  <li>Un <strong>DataFrame</strong> es la representación en tabla (filas y columnas) que usamos para trabajar con pandas.</li>
-  <li>Métodos geniales: <code>.sum()</code> (sumatoria), <code>.mean()</code> (promedio), <code>.max()</code> (máximo), y <code>.value_counts()</code> (para contar repeticiones de categorías).</li>
-</ul>
-
-<p>En la siguiente lección (<strong>02 · pandas: Series y DataFrames</strong>) nos meteremos de lleno en las dos estructuras fundamentales de la librería para dominar su anatomía interna por completo.</p>
-
-<div class="footer-nav">
-  <a class="next" href="/data-analysis/02-pandas-series-dataframes.html">pandas: Series y DataFrames →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

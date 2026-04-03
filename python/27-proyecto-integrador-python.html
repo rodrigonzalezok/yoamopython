@@ -1,73 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 27 · Proyecto integrador</title>
-<meta name="description" content="Proyecto final de Python: sistema de gestión de cartera de clientes que integra tipos, funciones, clases, archivos, excepciones y análisis.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuieroProgramar · Python 27 · Proyecto integrador</title>
+    <meta name="description"
+        content="Proyecto final de Python: sistema de gestión de cartera de clientes que integra tipos, funciones, clases, archivos, excepciones y análisis.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
+    <div class="topbar">
+        <button class="ham-btn"
+            onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+        <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+        <div class="progress-shell">
+            <div id="global-progress-fill" class="progress-fill"></div>
+        </div>
+        <div id="global-progress-text" class="top-stats"></div>
+    </div>
+    <div id="sb-overlay" class="sidebar-overlay"
+        onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+    <div class="layout">
+        <aside class="sidebar" id="sidebar-mount"></aside>
+        <main class="main">
 
-<div class="hero">
-  <span class="track-label python">Python · Lección 27 de 27 · FINAL</span>
-  <h1>Proyecto integrador: Gestión de cartera</h1>
-  <p>Este es el cierre del track de Python. Vas a construir un sistema completo de gestión de cartera de clientes bancarios que combina TODO lo que aprendiste: tipos, variables, condicionales, bucles, funciones, clases, archivos, excepciones y análisis de datos.</p>
-  <div class="badges">
-    <span class="badge">120–180 min</span>
-    <span class="badge">Prerrequisitos: TODAS las lecciones anteriores</span>
-  </div>
-</div>
+            <div class="hero">
+                <span class="track-label python">Python · Lección 27 de 27 · FINAL</span>
+                <h1>Proyecto integrador: Gestión de cartera</h1>
+                <p>Este es el cierre del track de Python. Vas a construir un sistema completo de gestión de cartera de
+                    clientes bancarios que combina TODO lo que aprendiste: tipos, variables, condicionales, bucles,
+                    funciones, clases, archivos, excepciones y análisis de datos.</p>
+                <div class="badges">
+                    <span class="badge">120–180 min</span>
+                    <span class="badge">Prerrequisitos: TODAS las lecciones anteriores</span>
+                </div>
+            </div>
 
-<div class="section-num">01</div>
-<h2>El proyecto</h2>
+            <div class="section-num">01</div>
+            <h2>El proyecto</h2>
 
-<h3>Objetivo</h3>
+            <h3>Objetivo</h3>
 
-<p>Construir un <strong>sistema de gestión de cartera</strong> que permita: crear clientes, evaluar su perfil crediticio, registrar operaciones, persistir datos en archivos y generar reportes de análisis. Cada ejercicio construye una pieza del sistema, y al final se integran todas.</p>
+            <p>Construir un <strong>sistema de gestión de cartera</strong> que permita: crear clientes, evaluar su
+                perfil crediticio, registrar operaciones, persistir datos en archivos y generar reportes de análisis.
+                Cada ejercicio construye una pieza del sistema, y al final se integran todas.</p>
 
-<div class="realworld"><strong>Contexto laboral:</strong> este tipo de sistema es una versión simplificada de lo que corre en un banco o fintech. Un analista de datos trabaja con datos de clientes, scores, transacciones y reportes. Lo que construimos acá con Python puro, después lo harías a mayor escala con pandas, SQL y dashboards.</div>
+            <div class="realworld"><strong>Contexto laboral:</strong> este tipo de sistema es una versión simplificada
+                de lo que corre en un banco o fintech. Un analista de datos trabaja con datos de clientes, scores,
+                transacciones y reportes. Lo que construimos acá con Python puro, después lo harías a mayor escala con
+                pandas, SQL y dashboards.</div>
 
-<h3>Conceptos integrados</h3>
+            <h3>Conceptos integrados</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Lección</th><th>Concepto</th><th>Se usa en...</th></tr>
-<tr><td>03-04</td><td>Tipos y variables</td><td>Modelado de datos del cliente</td></tr>
-<tr><td>06</td><td>Condicionales</td><td>Evaluación crediticia, clasificación</td></tr>
-<tr><td>08-15</td><td>Estructuras de datos</td><td>Listas de dicts, anidación</td></tr>
-<tr><td>16-17</td><td>Bucles</td><td>Procesamiento de registros</td></tr>
-<tr><td>18-19</td><td>Funciones</td><td>Modularización del pipeline</td></tr>
-<tr><td>20</td><td>Módulos stdlib</td><td>datetime, json, collections</td></tr>
-<tr><td>23</td><td>Regex</td><td>Validación de CUIT</td></tr>
-<tr><td>24</td><td>Archivos</td><td>Persistencia CSV/JSON</td></tr>
-<tr><td>25</td><td>Excepciones</td><td>Manejo robusto de errores</td></tr>
-<tr><td>26</td><td>Clases</td><td>Modelado OOP del sistema</td></tr>
-</table>
-</div>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Lección</th>
+                        <th>Concepto</th>
+                        <th>Se usa en...</th>
+                    </tr>
+                    <tr>
+                        <td>03-04</td>
+                        <td>Tipos y variables</td>
+                        <td>Modelado de datos del cliente</td>
+                    </tr>
+                    <tr>
+                        <td>06</td>
+                        <td>Condicionales</td>
+                        <td>Evaluación crediticia, clasificación</td>
+                    </tr>
+                    <tr>
+                        <td>08-15</td>
+                        <td>Estructuras de datos</td>
+                        <td>Listas de dicts, anidación</td>
+                    </tr>
+                    <tr>
+                        <td>16-17</td>
+                        <td>Bucles</td>
+                        <td>Procesamiento de registros</td>
+                    </tr>
+                    <tr>
+                        <td>18-19</td>
+                        <td>Funciones</td>
+                        <td>Modularización del pipeline</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>Módulos stdlib</td>
+                        <td>datetime, json, collections</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>Regex</td>
+                        <td>Validación de CUIT</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>Archivos</td>
+                        <td>Persistencia CSV/JSON</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>Excepciones</td>
+                        <td>Manejo robusto de errores</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>Clases</td>
+                        <td>Modelado OOP del sistema</td>
+                    </tr>
+                </table>
+            </div>
 
-<div class="section-num">02</div>
-<h2>Construcción paso a paso</h2>
+            <div class="section-num">02</div>
+            <h2>Construcción paso a paso</h2>
 
-<h3>Paso 1: El modelo de datos</h3>
-<p>Empezamos definiendo la clase <code>Cliente</code> con todos sus atributos y métodos de negocio.</p>
+            <h3>Paso 1: El modelo de datos</h3>
+            <p>Empezamos definiendo la clase <code>Cliente</code> con todos sus atributos y métodos de negocio.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>paso_01_modelo.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">from dataclasses import dataclass, field
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>paso_01_modelo.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code">from dataclasses import dataclass, field
 from datetime import datetime
 import re
 
@@ -117,17 +178,20 @@ print(f"¿Crédito de $85K? {c1.puede_credito(85000)}")
 try:
     malo = Cliente("Test", "abc", 720, 100000)
 except ValueError as e:
-    print(f"\n❌ Validación: {e}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"\n❌ Validación: {e}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Paso 2: La cartera con persistencia</h3>
-<p>Un gestor que maneja la colección de clientes con lectura/escritura a JSON.</p>
+            <h3>Paso 2: La cartera con persistencia</h3>
+            <p>Un gestor que maneja la colección de clientes con lectura/escritura a JSON.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>paso_02_cartera.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>paso_02_cartera.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code">import json
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -222,16 +286,19 @@ cartera.agregar(Cliente("Pérez", "20-40123456-7", 810, 500000))
 cartera.agregar(Cliente("Sosa", "23-25123456-3", 590, 180000, "Rosario"))
 cartera.agregar(Cliente("Martínez", "20-35123456-5", 645, 280000, "Córdoba"))
 
-cartera.reporte()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+cartera.reporte()</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Paso 3: Análisis y generación de reporte de negocio</h3>
+            <h3>Paso 3: Análisis y generación de reporte de negocio</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>paso_03_analisis.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">from collections import Counter, defaultdict
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>paso_03_analisis.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code">from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime
 
@@ -307,37 +374,92 @@ for c in elegibles:
     ratio = cuota_prueba / c.ingreso * 100
     print(f"    {c.nombre} ({c.categoria}, ratio {ratio:.0f}%)")
 
-print(f"\n{'═'*50}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\n{'═'*50}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida del proyecto</h2>
+            <div class="section-num">03</div>
+            <h2>Referencia rápida del proyecto</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Componente</th><th>Concepto Python</th><th>Archivo/Clase</th></tr>
-<tr><td>Modelo de datos</td><td><code>@dataclass</code>, validación, <code>@property</code></td><td><code>Cliente</code></td></tr>
-<tr><td>Colección</td><td>Lista de objetos, <code>__len__</code></td><td><code>Cartera</code></td></tr>
-<tr><td>Persistencia</td><td><code>json.load/dump</code>, <code>with open</code></td><td><code>_cargar/_guardar</code></td></tr>
-<tr><td>Validación</td><td><code>raise ValueError</code>, regex</td><td><code>__post_init__</code></td></tr>
-<tr><td>Análisis</td><td><code>Counter</code>, <code>defaultdict</code>, comprehensions</td><td><code>reporte()</code></td></tr>
-<tr><td>Búsqueda</td><td>Iteración, <code>.get()</code></td><td><code>buscar()</code></td></tr>
-</table>
-</div>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Concepto Python</th>
+                        <th>Archivo/Clase</th>
+                    </tr>
+                    <tr>
+                        <td>Modelo de datos</td>
+                        <td><code>@dataclass</code>, validación, <code>@property</code></td>
+                        <td><code>Cliente</code></td>
+                    </tr>
+                    <tr>
+                        <td>Colección</td>
+                        <td>Lista de objetos, <code>__len__</code></td>
+                        <td><code>Cartera</code></td>
+                    </tr>
+                    <tr>
+                        <td>Persistencia</td>
+                        <td><code>json.load/dump</code>, <code>with open</code></td>
+                        <td><code>_cargar/_guardar</code></td>
+                    </tr>
+                    <tr>
+                        <td>Validación</td>
+                        <td><code>raise ValueError</code>, regex</td>
+                        <td><code>__post_init__</code></td>
+                    </tr>
+                    <tr>
+                        <td>Análisis</td>
+                        <td><code>Counter</code>, <code>defaultdict</code>, comprehensions</td>
+                        <td><code>reporte()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Búsqueda</td>
+                        <td>Iteración, <code>.get()</code></td>
+                        <td><code>buscar()</code></td>
+                    </tr>
+                </table>
+            </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios del proyecto</h2>
+            <div class="section-num">04</div>
+            <h2>Ejercicios del proyecto</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Crear la clase Cliente</h4><p>Creá un <code>@dataclass Cliente</code> con nombre, score e ingreso. Agregá <code>@property categoria</code>. Creá 2 instancias. Debe incluir <code>Premium</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-1" data-expected="Premium"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Premium"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
+            <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+                <h4>Ejercicio 1: Crear la clase Cliente</h4>
+                <p>Creá un <code>@dataclass Cliente</code> con nombre, score e ingreso. Agregá
+                    <code>@property categoria</code>. Creá 2 instancias. Debe incluir <code>Premium</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-1"
+                    data-expected="Premium">
+                    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Premium"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
 
 # Creá Cliente con @property categoria:
 
 c = Cliente("García", 720, 350000)
-print(f"{c.nombre}: {c.categoria}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["@dataclass\\nclass Cliente:\\n    nombre: str\\n    score: int\\n    ingreso: float","@property\\ndef categoria(self): if self.score >= 700: return \"Premium\"","elif self.score >= 600: return \"Estándar\" else: return \"Básico\""]'></div></div>
+print(f"{c.nombre}: {c.categoria}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h1" class="hint-box"
+                    data-hints='["@dataclass\\nclass Cliente:\\n    nombre: str\\n    score: int\\n    ingreso: float","@property\\ndef categoria(self): if self.score >= 700: return \"Premium\"","elif self.score >= 600: return \"Estándar\" else: return \"Básico\""]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Lista de clientes con estadísticas</h4><p>Creá 5 clientes, guardalos en lista, calculá score promedio e ingreso total. Debe incluir <code>promedio</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-2" data-expected="promedio"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "promedio"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
+            <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+                <h4>Ejercicio 2: Lista de clientes con estadísticas</h4>
+                <p>Creá 5 clientes, guardalos en lista, calculá score promedio e ingreso total. Debe incluir
+                    <code>promedio</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-2"
+                    data-expected="promedio">
+                    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "promedio"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
 
 @dataclass
 class Cliente:
@@ -354,9 +476,26 @@ clientes = [
 ]
 
 # Calculá estadísticas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["scores = [c.score for c in clientes]","prom = sum(scores) / len(scores)","print(f\"Score promedio: {prom:.0f}\")"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h2" class="hint-box"
+                    data-hints='["scores = [c.score for c in clientes]","prom = sum(scores) / len(scores)","print(f\"Score promedio: {prom:.0f}\")"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: Filtrar y ordenar</h4><p>De la lista anterior, filtrá los que tienen score >= 650 y ordenalos por ingreso descendente. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-3" data-expected="Pérez"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
+            <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+                <h4>Ejercicio 3: Filtrar y ordenar</h4>
+                <p>De la lista anterior, filtrá los que tienen score >= 650 y ordenalos por ingreso descendente. Debe
+                    incluir <code>Pérez</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-3"
+                    data-expected="Pérez">
+                    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Pérez"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
 
 @dataclass
 class Cliente:
@@ -370,9 +509,26 @@ clientes = [
 ]
 
 # Filtrá score >= 650 y ordená por ingreso desc:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["buenos = [c for c in clientes if c.score >= 650]","ordenados = sorted(buenos, key=lambda c: c.ingreso, reverse=True)","Pérez primero (500K), después García, después López"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h3" class="hint-box"
+                    data-hints='["buenos = [c for c in clientes if c.score >= 650]","ordenados = sorted(buenos, key=lambda c: c.ingreso, reverse=True)","Pérez primero (500K), después García, después López"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Validación con regex y excepciones</h4><p>Agregá validación de CUIT en <code>__post_init__</code>. Probá con CUITs válidos e inválidos. Debe incluir <code>inválido</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-4" data-expected="inválido"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "inválido"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
+            <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+                <h4>Ejercicio 4: Validación con regex y excepciones</h4>
+                <p>Agregá validación de CUIT en <code>__post_init__</code>. Probá con CUITs válidos e inválidos. Debe
+                    incluir <code>inválido</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-4"
+                    data-expected="inválido">
+                    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "inválido"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
 import re
 
 @dataclass
@@ -390,9 +546,26 @@ for cuit in ["20-30123456-9", "abc-123", "27-28765432-1"]:
         c = Cliente("Test", cuit, 700)
         print(f"  ✅ {cuit}")
     except ValueError as e:
-        print(f"  ❌ {e}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["if not re.match(r\"^\\d{2}-\\d{8}-\\d$\", self.cuit):","    raise ValueError(f\"CUIT inválido: {self.cuit}\")","abc-123 no matchea el patrón → error"]'></div></div>
+        print(f"  ❌ {e}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h4" class="hint-box"
+                    data-hints='["if not re.match(r\"^\\d{2}-\\d{8}-\\d$\", self.cuit):","    raise ValueError(f\"CUIT inválido: {self.cuit}\")","abc-123 no matchea el patrón → error"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Persistencia JSON</h4><p>Creá funciones <code>guardar_clientes(lista, archivo)</code> y <code>cargar_clientes(archivo)</code> que serialicen/deserialicen a JSON. Debe incluir <code>guardados</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-5" data-expected="guardados"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "guardados"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+            <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+                <h4>Ejercicio 5: Persistencia JSON</h4>
+                <p>Creá funciones <code>guardar_clientes(lista, archivo)</code> y <code>cargar_clientes(archivo)</code>
+                    que serialicen/deserialicen a JSON. Debe incluir <code>guardados</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-5"
+                    data-expected="guardados">
+                    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "guardados"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">import json
 
 clientes = [
     {"nombre": "García", "score": 720, "ingreso": 350000},
@@ -401,9 +574,26 @@ clientes = [
 
 # Funciones guardar y cargar:
 
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["def guardar(lista, arch): json.dump(lista, open(arch,\"w\"), indent=2)","def cargar(arch): return json.load(open(arch))","guardar(clientes, \"c.json\"); datos = cargar(\"c.json\"); print(f\"{len(datos)} guardados\")"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h5" class="hint-box"
+                    data-hints='["def guardar(lista, arch): json.dump(lista, open(arch,\"w\"), indent=2)","def cargar(arch): return json.load(open(arch))","guardar(clientes, \"c.json\"); datos = cargar(\"c.json\"); print(f\"{len(datos)} guardados\")"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: Agrupar por categoría con Counter</h4><p>Clasifica cada cliente en su categoría y contá cuántos hay en cada una con Counter. Debe incluir <code>most_common</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-6" data-expected="most_common"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "most_common"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from collections import Counter
+            <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+                <h4>Ejercicio 6: Agrupar por categoría con Counter</h4>
+                <p>Clasifica cada cliente en su categoría y contá cuántos hay en cada una con Counter. Debe incluir
+                    <code>most_common</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-6"
+                    data-expected="most_common">
+                    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "most_common"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">from collections import Counter
 
 scores = [720, 680, 810, 590, 645, 750, 520, 700]
 
@@ -414,18 +604,53 @@ def clasificar(score):
     return "Básico"
 
 # Contá categorías:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["cats = [clasificar(s) for s in scores]","freq = Counter(cats)","for cat, n in freq.most_common(): print(f\"{cat}: {n}\")"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h6" class="hint-box"
+                    data-hints='["cats = [clasificar(s) for s in scores]","freq = Counter(cats)","for cat, n in freq.most_common(): print(f\"{cat}: {n}\")"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Evaluación crediticia modular</h4><p>Creá funciones de validación separadas: <code>validar_edad()</code>, <code>validar_score()</code>, <code>validar_ratio()</code>. Combinalas en <code>evaluar()</code>. Debe incluir <code>APROBADO</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-7" data-expected="APROBADO"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "APROBADO"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Funciones de validación:
+            <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+                <h4>Ejercicio 7: Evaluación crediticia modular</h4>
+                <p>Creá funciones de validación separadas: <code>validar_edad()</code>, <code>validar_score()</code>,
+                    <code>validar_ratio()</code>. Combinalas en <code>evaluar()</code>. Debe incluir
+                    <code>APROBADO</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-7"
+                    data-expected="APROBADO">
+                    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "APROBADO"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code"># Funciones de validación:
 
 def evaluar(nombre, edad, score, ingreso, cuota):
     pass  # combiná las validaciones
 
 # Probá:
 resultado = evaluar("García", 35, 720, 350000, 85000)
-print(resultado)</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["def validar_score(s): return s >= 650","def validar_ratio(cuota, ingreso): return cuota/ingreso <= 0.35","if all([validar_edad(e), validar_score(s), ...]): return \"APROBADO\""]'></div></div>
+print(resultado)</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h7" class="hint-box"
+                    data-hints='["def validar_score(s): return s >= 650","def validar_ratio(cuota, ingreso): return cuota/ingreso <= 0.35","if all([validar_edad(e), validar_score(s), ...]): return \"APROBADO\""]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Cargar CSV crudo y procesar</h4><p>Dado un CSV como string multilínea, parsealo, limpiá los datos, filtrá errores y generá estadísticas. Debe incluir <code>procesados</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-8" data-expected="procesados"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "procesados"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">csv_data = """nombre,score,ingreso
+            <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+                <h4>Ejercicio 8: Cargar CSV crudo y procesar</h4>
+                <p>Dado un CSV como string multilínea, parsealo, limpiá los datos, filtrá errores y generá estadísticas.
+                    Debe incluir <code>procesados</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-8"
+                    data-expected="procesados">
+                    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "procesados"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">csv_data = """nombre,score,ingreso
 García,720,$350,000
 López,abc,$250,000
 Pérez,810,$500,000
@@ -433,9 +658,26 @@ Pérez,810,$500,000
 Martínez,645,"""
 
 # Pipeline: parsear → limpiar → validar → estadísticas
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["lineas = csv_data.strip().splitlines()","headers = lineas[0].split(\",\")","Para cada línea: try split, convertir tipos, except → error"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h8" class="hint-box"
+                    data-hints='["lineas = csv_data.strip().splitlines()","headers = lineas[0].split(\",\")","Para cada línea: try split, convertir tipos, except → error"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Análisis por ciudad con defaultdict</h4><p>Agrupá clientes por ciudad, calculá ingreso promedio y score promedio por ciudad. Debe incluir <code>BsAs</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-9" data-expected="BsAs"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "BsAs"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from collections import defaultdict
+            <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+                <h4>Ejercicio 9: Análisis por ciudad con defaultdict</h4>
+                <p>Agrupá clientes por ciudad, calculá ingreso promedio y score promedio por ciudad. Debe incluir
+                    <code>BsAs</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-9"
+                    data-expected="BsAs">
+                    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "BsAs"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">from collections import defaultdict
 
 clientes = [
     {"nombre": "García", "score": 720, "ingreso": 350000, "ciudad": "BsAs"},
@@ -446,9 +688,29 @@ clientes = [
 ]
 
 # Agrupá y analizá:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["por_ciudad = defaultdict(list)","for c in clientes: por_ciudad[c[\"ciudad\"]].append(c)","Para cada ciudad: sum(c[\"ingreso\"])/len(lista)"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h9" class="hint-box"
+                    data-hints='["por_ciudad = defaultdict(list)","for c in clientes: por_ciudad[c[\"ciudad\"]].append(c)","Para cada ciudad: sum(c[\"ingreso\"])/len(lista)"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Sistema completo integrado</h4><p>Construí el sistema completo: clase <code>Cliente</code> con validación, clase <code>Cartera</code> con agregar/buscar/reporte, persistencia JSON, manejo de errores. Cargá 5 clientes, generá reporte con estadísticas, categorías y oportunidades de cross-sell. Debe incluir <code>SISTEMA COMPLETO</code>.</p><div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-10" data-expected="SISTEMA COMPLETO"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "SISTEMA COMPLETO"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import json, re
+            <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+                <h4>Ejercicio 10: Sistema completo integrado</h4>
+                <p>Construí el sistema completo: clase <code>Cliente</code> con validación, clase <code>Cartera</code>
+                    con agregar/buscar/reporte, persistencia JSON, manejo de errores. Cargá 5 clientes, generá reporte
+                    con estadísticas, categorías y oportunidades de cross-sell. Debe incluir
+                    <code>SISTEMA COMPLETO</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-27" data-exercise="ex-10"
+                    data-expected="SISTEMA COMPLETO">
+                    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "SISTEMA
+                            COMPLETO"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">import json, re
 from dataclasses import dataclass, field
 from datetime import datetime
 from collections import Counter, defaultdict
@@ -456,41 +718,57 @@ from collections import Counter, defaultdict
 # Construí el sistema completo:
 
 print("=== SISTEMA COMPLETO ===")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["@dataclass Cliente con __post_init__ para validar CUIT","class Cartera con self.clientes, agregar(), reporte()","Usá Counter para categorías, defaultdict para agrupación por ciudad"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h10" class="hint-box"
+                    data-hints='["@dataclass Cliente con __post_init__ para validar CUIT","class Cartera con self.clientes, agregar(), reporte()","Usá Counter para categorías, defaultdict para agrupación por ciudad"]'>
+                </div>
+            </div>
 
-<div class="section-num">05</div>
-<h2>Resumen final del track Python</h2>
+            <div class="section-num">05</div>
+            <h2>Resumen final del track Python</h2>
 
-<ul>
-  <li><b>27 lecciones completadas</b> — de "¿qué es Python?" hasta un sistema completo con clases, archivos y análisis.</li>
-  <li><b>Fundamentos:</b> tipos, variables, operadores, condicionales, bucles, funciones (lecciones 1-19).</li>
-  <li><b>Estructuras:</b> listas, tuplas, diccionarios, sets y sus métodos (lecciones 8-15).</li>
-  <li><b>Profesional:</b> módulos, scope, regex, archivos, excepciones, OOP (lecciones 20-26).</li>
-  <li><b>Integración:</b> este proyecto combina todo en un sistema real de gestión de datos.</li>
-</ul>
+            <ul>
+                <li><b>27 lecciones completadas</b> — de "¿qué es Python?" hasta un sistema completo con clases,
+                    archivos y análisis.</li>
+                <li><b>Fundamentos:</b> tipos, variables, operadores, condicionales, bucles, funciones (lecciones 1-19).
+                </li>
+                <li><b>Estructuras:</b> listas, tuplas, diccionarios, sets y sus métodos (lecciones 8-15).</li>
+                <li><b>Profesional:</b> módulos, scope, regex, archivos, excepciones, OOP (lecciones 20-26).</li>
+                <li><b>Integración:</b> este proyecto combina todo en un sistema real de gestión de datos.</li>
+            </ul>
 
-<p>🎉 <strong>¡Felicitaciones!</strong> Completaste el track de Python. Ahora tenés las bases sólidas para el siguiente paso: <strong>SQL</strong> (para consultar bases de datos) y <strong>Data Analysis</strong> (para usar pandas, numpy, matplotlib y todo el ecosistema de análisis).</p>
+            <p>🎉 <strong>¡Felicitaciones!</strong> Completaste el track de Python. Ahora tenés las bases sólidas para
+                el siguiente paso: <strong>SQL</strong> (para consultar bases de datos) y <strong>Data Analysis</strong>
+                (para usar pandas, numpy, matplotlib y todo el ecosistema de análisis).</p>
 
-<p>El código que escribiste en estas 27 lecciones — con funciones, clases, archivos y manejo de errores — es exactamente el tipo de código que vas a escribir como Data Analyst en un banco, fintech o consultora. La diferencia es la escala: en vez de 5 clientes, van a ser 5 millones. Para eso está pandas.</p>
+            <p>El código que escribiste en estas 27 lecciones — con funciones, clases, archivos y manejo de errores — es
+                exactamente el tipo de código que vas a escribir como Data Analyst en un banco, fintech o consultora. La
+                diferencia es la escala: en vez de 5 clientes, van a ser 5 millones. Para eso está pandas.</p>
 
-<p><strong>Próximos pasos:</strong> <a href="/sql/01-que-es-sql.html">Track de SQL →</a></p>
+            <p><strong>Próximos pasos:</strong> <a href="/sql/01-que-es-sql.html">Track de SQL →</a></p>
 
-<div class="footer-nav">
-  <a href="/python/26-clases-objetos-intro.html">← Clases y objetos</a>
-  <a class="next" href="/sql/01-que-es-sql.html">Empezar SQL →</a>
-</div>
+            <div class="footer-nav">
+                <a href="/python/26-clases-objetos-intro.html">← Clases y objetos</a>
+                <a class="next" href="/sql/01-que-es-sql.html">Empezar SQL →</a>
+            </div>
 
-</main>
-</div>
+        </main>
+    </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+    <script type="module">
+        import { renderSidebar } from '/js/nav.js';
+        import { initTheme } from '/js/theme.js';
+        import { mountEditors } from '/js/editor.js';
+        initTheme();
+        renderSidebar(location.pathname);
+        mountEditors();
+        window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+    </script>
 </body>
+
 </html>

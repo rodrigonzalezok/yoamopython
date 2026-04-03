@@ -1,59 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 06 · pandas: transformaciones</title>
-<meta name="description" content="Creá columnas nuevas, aplicá funciones, mapeá valores y calculá métricas de negocio. Transformar datos es el corazón del análisis.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 06 · pandas: transformaciones</title>
+  <meta name="description"
+    content="Creá columnas nuevas, aplicá funciones, mapeá valores y calculá métricas de negocio. Transformar datos es el corazón del análisis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 06 de 19</span>
-  <h1>pandas: Transformaciones</h1>
-  <p>Los datos limpios todavía no responden preguntas de negocio. Necesitás <strong>transformarlos</strong>: crear columnas nuevas, calcular métricas, categorizar clientes, aplicar reglas. Transformar datos es el momento en que dejás de ser un técnico y empezás a generar valor para la empresa.</p>
-  <div class="badges">
-    <span class="badge">90–120 min</span>
-    <span class="badge">Prerrequisitos: Lección 05 (Limpieza)</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 06 de 19</span>
+        <h1>pandas: Transformaciones</h1>
+        <p>Los datos limpios todavía no responden preguntas de negocio. Necesitás <strong>transformarlos</strong>: crear
+          columnas nuevas, calcular métricas, categorizar clientes, aplicar reglas. Transformar datos es el momento en
+          que dejás de ser un técnico y empezás a generar valor para la empresa.</p>
+        <div class="badges">
+          <span class="badge">90–120 min</span>
+          <span class="badge">Prerrequisitos: Lección 05 (Limpieza)</span>
+        </div>
+      </div>
 
-<h3>¿Qué es una transformación?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Una <strong>transformación</strong> es cualquier operación que toma los datos existentes y produce datos nuevos o modificados. Las operaciones más comunes en el día a día de un analista son:</p>
+      <h3>¿Qué es una transformación?</h3>
 
-<ul>
-  <li><strong>Crear columnas calculadas:</strong> "Ganancia = Ingreso - Costo"</li>
-  <li><strong>Mapear valores:</strong> Convertir 1/2/3 a "Bajo"/"Medio"/"Alto"</li>
-  <li><strong>Aplicar funciones:</strong> Aplicar una función personalizada a cada fila</li>
-  <li><strong>Operaciones aritméticas vectorizadas:</strong> Sumar/restar/multiplicar columnas enteras</li>
-  <li><strong>Renombrar columnas:</strong> Cambiar "Mnt_Brto" a "Monto_Bruto"</li>
-</ul>
+      <p>Una <strong>transformación</strong> es cualquier operación que toma los datos existentes y produce datos nuevos
+        o modificados. Las operaciones más comunes en el día a día de un analista son:</p>
 
-<div class="concept"><strong>Principio clave:</strong> las operaciones en pandas son <strong>vectorizadas</strong>. Esto significa que cuando escribís <code>df["Precio"] * 1.21</code>, pandas aplica el cálculo a TODAS las filas simultáneamente, en una sola operación. No necesitás un bucle <code>for</code>. Esto es miles de veces más rápido y es la razón por la que pandas puede procesar millones de filas en segundos.</div>
+      <ul>
+        <li><strong>Crear columnas calculadas:</strong> "Ganancia = Ingreso - Costo"</li>
+        <li><strong>Mapear valores:</strong> Convertir 1/2/3 a "Bajo"/"Medio"/"Alto"</li>
+        <li><strong>Aplicar funciones:</strong> Aplicar una función personalizada a cada fila</li>
+        <li><strong>Operaciones aritméticas vectorizadas:</strong> Sumar/restar/multiplicar columnas enteras</li>
+        <li><strong>Renombrar columnas:</strong> Cambiar "Mnt_Brto" a "Monto_Bruto"</li>
+      </ul>
 
-<h3>Crear columnas nuevas</h3>
+      <div class="concept"><strong>Principio clave:</strong> las operaciones en pandas son
+        <strong>vectorizadas</strong>. Esto significa que cuando escribís <code>df["Precio"] * 1.21</code>, pandas
+        aplica el cálculo a TODAS las filas simultáneamente, en una sola operación. No necesitás un bucle
+        <code>for</code>. Esto es miles de veces más rápido y es la razón por la que pandas puede procesar millones de
+        filas en segundos.</div>
 
-<p>Crear una columna nueva es tan simple como asignar un valor a un nombre de columna que no existe. Si el nombre ya existe, sobreescribe la columna.</p>
+      <h3>Crear columnas nuevas</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Columna calculada a partir de otras
+      <p>Crear una columna nueva es tan simple como asignar un valor a un nombre de columna que no existe. Si el nombre
+        ya existe, sobreescribe la columna.</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Columna calculada a partir de otras
 df["Ganancia"] = df["Ingreso"] - df["Costo"]
 
 # Columna con valor fijo
@@ -63,32 +80,58 @@ df["Moneda"] = "ARS"
 df["IVA"] = df["Monto"] * 0.21
 df["Total"] = df["Monto"] + df["IVA"]</pre>
 
-<h3>map() vs apply() vs np.where()</h3>
+      <h3>map() vs apply() vs np.where()</h3>
 
-<p>Tres herramientas para transformaciones más complejas:</p>
+      <p>Tres herramientas para transformaciones más complejas:</p>
 
-<div class="table-wrap">
-<table>
-<tr><th>Método</th><th>Qué hace</th><th>Trabaja sobre</th><th>Uso típico</th></tr>
-<tr><td><code>.map(dict)</code></td><td>Reemplaza valores 1-a-1</td><td>Serie (una columna)</td><td>Codificar categorías: {"M": "Masculino"}</td></tr>
-<tr><td><code>.apply(func)</code></td><td>Aplica función a cada elemento/fila</td><td>Serie o DataFrame</td><td>Lógica personalizada compleja</td></tr>
-<tr><td><code>np.where(cond, si, no)</code></td><td>Asigna valor según condición</td><td>Serie/array</td><td>If/else vectorizado rápido</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Método</th>
+            <th>Qué hace</th>
+            <th>Trabaja sobre</th>
+            <th>Uso típico</th>
+          </tr>
+          <tr>
+            <td><code>.map(dict)</code></td>
+            <td>Reemplaza valores 1-a-1</td>
+            <td>Serie (una columna)</td>
+            <td>Codificar categorías: {"M": "Masculino"}</td>
+          </tr>
+          <tr>
+            <td><code>.apply(func)</code></td>
+            <td>Aplica función a cada elemento/fila</td>
+            <td>Serie o DataFrame</td>
+            <td>Lógica personalizada compleja</td>
+          </tr>
+          <tr>
+            <td><code>np.where(cond, si, no)</code></td>
+            <td>Asigna valor según condición</td>
+            <td>Serie/array</td>
+            <td>If/else vectorizado rápido</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="analogy"><strong>Analogía:</strong> <code>map()</code> es como un diccionario de traducción (buscás la palabra y te da la traducción directa). <code>apply()</code> es como contratar un traductor humano (puede hacer cosas complejas pero es más lento). <code>np.where()</code> es un semáforo: verde pasa, rojo no pasa.</div>
+      <div class="analogy"><strong>Analogía:</strong> <code>map()</code> es como un diccionario de traducción (buscás la
+        palabra y te da la traducción directa). <code>apply()</code> es como contratar un traductor humano (puede hacer
+        cosas complejas pero es más lento). <code>np.where()</code> es un semáforo: verde pasa, rojo no pasa.</div>
 
-<div class="warning"><strong>Performance:</strong> <code>apply()</code> es la más lenta de las tres porque ejecuta la función fila por fila en Python puro. Siempre intentá usar operaciones vectorizadas (<code>+</code>, <code>*</code>, <code>np.where</code>) antes de recurrir a <code>apply()</code>. En datasets de millones de filas, la diferencia puede ser de segundos vs minutos.</div>
+      <div class="warning"><strong>Performance:</strong> <code>apply()</code> es la más lenta de las tres porque ejecuta
+        la función fila por fila en Python puro. Siempre intentá usar operaciones vectorizadas (<code>+</code>,
+        <code>*</code>, <code>np.where</code>) antes de recurrir a <code>apply()</code>. En datasets de millones de
+        filas, la diferencia puede ser de segundos vs minutos.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: Columnas calculadas — operaciones aritméticas</h3>
-<p>El caso más directo: crear nuevas columnas a partir de operaciones matemáticas entre columnas existentes.</p>
+      <h3>Ejemplo 1: Columnas calculadas — operaciones aritméticas</h3>
+      <p>El caso más directo: crear nuevas columnas a partir de operaciones matemáticas entre columnas existentes.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_columnas_calc.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_columnas_calc.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Producto": ["Notebook", "Mouse", "Monitor", "Teclado", "Auriculares"],
@@ -107,17 +150,21 @@ print(df)
 # Estadísticas sobre las nuevas columnas
 print(f"\nIngreso total estimado: ${df['Subtotal'].sum():,.0f}")
 print(f"Ticket promedio: ${df['Precio_Final'].mean():,.0f}")
-print(f"Producto más caro (con IVA): {df.loc[df['Precio_Final'].idxmax(), 'Producto']}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Producto más caro (con IVA): {df.loc[df['Precio_Final'].idxmax(), 'Producto']}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: map() — Traducir códigos a nombres legibles</h3>
-<p>Los sistemas internos guardan datos codificados ("A", "B", "C"). Para el reporte final necesitás nombres legibles. <code>map()</code> es perfecto para esto.</p>
+      <h3>Ejemplo 2: map() — Traducir códigos a nombres legibles</h3>
+      <p>Los sistemas internos guardan datos codificados ("A", "B", "C"). Para el reporte final necesitás nombres
+        legibles. <code>map()</code> es perfecto para esto.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_map.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_map.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Cliente": ["García", "López", "Pérez", "Sosa", "Luna"],
@@ -143,17 +190,21 @@ print(df[["Cliente", "Segmento", "Canal"]])
 
 # Conteo por segmento
 print("\n=== Distribución por segmento ===")
-print(df["Segmento"].value_counts())</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(df["Segmento"].value_counts())</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: np.where() — If/else vectorizado</h3>
-<p>Cuando necesitás clasificar con una condición simple (True/False), <code>np.where()</code> es más rápido y limpio que <code>apply()</code>.</p>
+      <h3>Ejemplo 3: np.where() — If/else vectorizado</h3>
+      <p>Cuando necesitás clasificar con una condición simple (True/False), <code>np.where()</code> es más rápido y
+        limpio que <code>apply()</code>.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_npwhere.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_npwhere.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 df = pd.DataFrame({
@@ -181,17 +232,21 @@ df["Prioridad"] = np.where(
 print("=== Clasificaciones ===")
 print(df)
 print(f"\nClientes VIP: {(df['Prioridad'] == 'VIP').sum()}")
-print(f"Clientes en riesgo: {(df['Estado'].str.contains('riesgo')).sum()}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Clientes en riesgo: {(df['Estado'].str.contains('riesgo')).sum()}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: apply() — Lógica personalizada</h3>
-<p>Cuando la lógica es demasiado compleja para <code>np.where()</code>, definís una función Python y la aplicás a cada fila con <code>apply()</code>.</p>
+      <h3>Ejemplo 4: apply() — Lógica personalizada</h3>
+      <p>Cuando la lógica es demasiado compleja para <code>np.where()</code>, definís una función Python y la aplicás a
+        cada fila con <code>apply()</code>.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_apply.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_apply.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Cliente": ["García", "López", "Pérez", "Sosa", "Luna"],
@@ -221,19 +276,25 @@ df["Decision"] = df.apply(evaluar_credito, axis=1)
 df["Ratio_%"] = round(df["Cuota"] / df["Ingreso"] * 100, 1)
 
 print("=== Evaluación Crediticia ===")
-print(df[["Cliente", "Score", "Ratio_%", "Decision"]])</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(df[["Cliente", "Score", "Ratio_%", "Decision"]])</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="tip"><strong>Tip profesional — axis=0 vs axis=1:</strong> <code>axis=0</code> (default) aplica la función a cada columna. <code>axis=1</code> aplica la función a cada fila. Cuando tu función necesita acceder a varias columnas de la misma fila (como nuestro scoring), necesitás <code>axis=1</code>.</div>
+      <div class="tip"><strong>Tip profesional — axis=0 vs axis=1:</strong> <code>axis=0</code> (default) aplica la
+        función a cada columna. <code>axis=1</code> aplica la función a cada fila. Cuando tu función necesita acceder a
+        varias columnas de la misma fila (como nuestro scoring), necesitás <code>axis=1</code>.</div>
 
-<h3>Ejemplo 5: Renombrar, reordenar y eliminar columnas</h3>
-<p>El toque final antes de entregar un reporte: que las columnas tengan nombres profesionales y estén en orden lógico.</p>
+      <h3>Ejemplo 5: Renombrar, reordenar y eliminar columnas</h3>
+      <p>El toque final antes de entregar un reporte: que las columnas tengan nombres profesionales y estén en orden
+        lógico.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_renombrar.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_renombrar.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "cli_nom": ["García", "López", "Pérez"],
@@ -263,38 +324,79 @@ print(df)
 
 # Bonus: renombrar con una función (todo a minúsculas)
 df.columns = [c.lower() for c in df.columns]
-print(f"\nColumnas finales: {list(df.columns)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nColumnas finales: {list(df.columns)}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Operación</th><th>Sintaxis</th><th>Uso</th></tr>
-<tr><td>Crear columna calculada</td><td><code>df["new"] = df["a"] + df["b"]</code></td><td>Operaciones aritméticas</td></tr>
-<tr><td>Valor fijo</td><td><code>df["moneda"] = "ARS"</code></td><td>Asignar constante a toda la columna</td></tr>
-<tr><td>Mapear valores</td><td><code>df["col"].map(dict)</code></td><td>Traducir códigos 1-a-1</td></tr>
-<tr><td>If/else vectorizado</td><td><code>np.where(cond, si, no)</code></td><td>Clasificación binaria rápida</td></tr>
-<tr><td>Función personalizada</td><td><code>df.apply(func, axis=1)</code></td><td>Lógica compleja fila por fila</td></tr>
-<tr><td>Renombrar columnas</td><td><code>df.rename(columns=dict)</code></td><td>Nombres profesionales</td></tr>
-<tr><td>Eliminar columnas</td><td><code>df.drop(columns=[...])</code></td><td>Quitar columnas temporales</td></tr>
-<tr><td>Reordenar columnas</td><td><code>df[["c2","c1","c3"]]</code></td><td>Orden lógico para reporte</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Operación</th>
+            <th>Sintaxis</th>
+            <th>Uso</th>
+          </tr>
+          <tr>
+            <td>Crear columna calculada</td>
+            <td><code>df["new"] = df["a"] + df["b"]</code></td>
+            <td>Operaciones aritméticas</td>
+          </tr>
+          <tr>
+            <td>Valor fijo</td>
+            <td><code>df["moneda"] = "ARS"</code></td>
+            <td>Asignar constante a toda la columna</td>
+          </tr>
+          <tr>
+            <td>Mapear valores</td>
+            <td><code>df["col"].map(dict)</code></td>
+            <td>Traducir códigos 1-a-1</td>
+          </tr>
+          <tr>
+            <td>If/else vectorizado</td>
+            <td><code>np.where(cond, si, no)</code></td>
+            <td>Clasificación binaria rápida</td>
+          </tr>
+          <tr>
+            <td>Función personalizada</td>
+            <td><code>df.apply(func, axis=1)</code></td>
+            <td>Lógica compleja fila por fila</td>
+          </tr>
+          <tr>
+            <td>Renombrar columnas</td>
+            <td><code>df.rename(columns=dict)</code></td>
+            <td>Nombres profesionales</td>
+          </tr>
+          <tr>
+            <td>Eliminar columnas</td>
+            <td><code>df.drop(columns=[...])</code></td>
+            <td>Quitar columnas temporales</td>
+          </tr>
+          <tr>
+            <td>Reordenar columnas</td>
+            <td><code>df[["c2","c1","c3"]]</code></td>
+            <td>Orden lógico para reporte</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Crear columna calculada</h4>
-  <p>Creá una columna <code>"Total"</code> que sea <code>Precio * Cantidad</code>. Imprimí la suma de Total. Debe dar <code>18500</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-1" data-expected="18500">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "18500"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Crear columna calculada</h4>
+        <p>Creá una columna <code>"Total"</code> que sea <code>Precio * Cantidad</code>. Imprimí la suma de Total. Debe
+          dar <code>18500</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-1"
+          data-expected="18500">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "18500"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Producto": ["A", "B", "C"],
@@ -303,20 +405,26 @@ df = pd.DataFrame({
 })
 
 # Creá la columna Total y sumá
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["df[\"Total\"] = df[\"Precio\"] * df[\"Cantidad\"]","print(df[\"Total\"].sum())"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["df[\"Total\"] = df[\"Precio\"] * df[\"Cantidad\"]","print(df[\"Total\"].sum())"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Agregar IVA</h4>
-  <p>Creá columnas <code>"IVA"</code> (21% del precio) y <code>"Precio_Final"</code> (Precio + IVA). Imprimí el Precio_Final del primer producto. Debe incluir <code>605.0</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-2" data-expected="605.0">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "605.0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Agregar IVA</h4>
+        <p>Creá columnas <code>"IVA"</code> (21% del precio) y <code>"Precio_Final"</code> (Precio + IVA). Imprimí el
+          Precio_Final del primer producto. Debe incluir <code>605.0</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-2"
+          data-expected="605.0">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "605.0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Producto": ["Notebook", "Mouse", "Monitor"],
@@ -324,20 +432,27 @@ df = pd.DataFrame({
 })
 
 # Creá IVA y Precio_Final, imprimí el primer Precio_Final
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["df[\"IVA\"] = df[\"Precio\"] * 0.21","df[\"Precio_Final\"] = df[\"Precio\"] + df[\"IVA\"]","print(df[\"Precio_Final\"].iloc[0])"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["df[\"IVA\"] = df[\"Precio\"] * 0.21","df[\"Precio_Final\"] = df[\"Precio\"] + df[\"IVA\"]","print(df[\"Precio_Final\"].iloc[0])"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: map() para decodificar</h4>
-  <p>Usá <code>map()</code> para convertir la columna <code>"Nivel"</code> de códigos numéricos a texto: 1→"Junior", 2→"Semi", 3→"Senior". Imprimí el DataFrame. Debe incluir <code>Senior</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-3" data-expected="Senior">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Senior"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: map() para decodificar</h4>
+        <p>Usá <code>map()</code> para convertir la columna <code>"Nivel"</code> de códigos numéricos a texto:
+          1→"Junior", 2→"Semi", 3→"Senior". Imprimí el DataFrame. Debe incluir <code>Senior</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-3"
+          data-expected="Senior">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Senior"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Nombre": ["Ana", "Luis", "María"],
@@ -345,20 +460,26 @@ df = pd.DataFrame({
 })
 
 # Usá map() para crear columna "Cargo"
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["df[\"Cargo\"] = df[\"Nivel\"].map({1: \"Junior\", 2: \"Semi\", 3: \"Senior\"})","print(df)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["df[\"Cargo\"] = df[\"Nivel\"].map({1: \"Junior\", 2: \"Semi\", 3: \"Senior\"})","print(df)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: np.where() para clasificar</h4>
-  <p>Usá <code>np.where()</code> para crear una columna <code>"Rango"</code>: "Alto" si Saldo >= 500000, "Bajo" si no. Contá cuántos son "Alto". Debe dar <code>3</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-4" data-expected="3">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "3"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: np.where() para clasificar</h4>
+        <p>Usá <code>np.where()</code> para crear una columna <code>"Rango"</code>: "Alto" si Saldo >= 500000, "Bajo" si
+          no. Contá cuántos son "Alto". Debe dar <code>3</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-4" data-expected="3">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 df = pd.DataFrame({
@@ -367,20 +488,26 @@ df = pd.DataFrame({
 })
 
 # Usá np.where para crear "Rango" y contá los "Alto"
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["df[\"Rango\"] = np.where(df[\"Saldo\"] >= 500000, \"Alto\", \"Bajo\")","print((df[\"Rango\"] == \"Alto\").sum())"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["df[\"Rango\"] = np.where(df[\"Saldo\"] >= 500000, \"Alto\", \"Bajo\")","print((df[\"Rango\"] == \"Alto\").sum())"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Calcular ratio y porcentaje</h4>
-  <p>Creá una columna <code>"Ratio_Cuota"</code> que sea <code>Cuota / Ingreso * 100</code> (porcentaje). Imprimí el ratio máximo redondeado. Debe incluir <code>47</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-5" data-expected="47">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "47"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Calcular ratio y porcentaje</h4>
+        <p>Creá una columna <code>"Ratio_Cuota"</code> que sea <code>Cuota / Ingreso * 100</code> (porcentaje). Imprimí
+          el ratio máximo redondeado. Debe incluir <code>47</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-5" data-expected="47">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "47"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Cliente": ["García", "López", "Pérez"],
@@ -389,20 +516,27 @@ df = pd.DataFrame({
 })
 
 # Calculá Ratio_Cuota (%) e imprimí el máximo redondeado
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["df[\"Ratio_Cuota\"] = df[\"Cuota\"] / df[\"Ingreso\"] * 100","print(round(df[\"Ratio_Cuota\"].max()))"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["df[\"Ratio_Cuota\"] = df[\"Cuota\"] / df[\"Ingreso\"] * 100","print(round(df[\"Ratio_Cuota\"].max()))"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Renombrar y reordenar</h4>
-  <p>Renombrá <code>"cli_nom"</code> a <code>"Nombre"</code> y <code>"cli_sal"</code> a <code>"Saldo"</code>. Eliminá <code>"tmp"</code>. Imprimí las columnas finales. Debe incluir <code>Nombre</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-6" data-expected="Nombre">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Nombre"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Renombrar y reordenar</h4>
+        <p>Renombrá <code>"cli_nom"</code> a <code>"Nombre"</code> y <code>"cli_sal"</code> a <code>"Saldo"</code>.
+          Eliminá <code>"tmp"</code>. Imprimí las columnas finales. Debe incluir <code>Nombre</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-6"
+          data-expected="Nombre">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Nombre"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "cli_nom": ["García", "López", "Pérez"],
@@ -411,20 +545,26 @@ df = pd.DataFrame({
 })
 
 # Renombrá, eliminá tmp, imprimí
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["df = df.rename(columns={\"cli_nom\": \"Nombre\", \"cli_sal\": \"Saldo\"})","df = df.drop(columns=[\"tmp\"])","print(df)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["df = df.rename(columns={\"cli_nom\": \"Nombre\", \"cli_sal\": \"Saldo\"})","df = df.drop(columns=[\"tmp\"])","print(df)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: apply() con función personalizada</h4>
-  <p>Escribí una función <code>clasificar_saldo</code> que reciba un número y devuelva "VIP" si >= 1M, "Premium" si >= 500K, "Estándar" si no. Aplicala con <code>apply()</code>. Debe incluir <code>VIP</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-7" data-expected="VIP">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "VIP"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: apply() con función personalizada</h4>
+        <p>Escribí una función <code>clasificar_saldo</code> que reciba un número y devuelva "VIP" si >= 1M, "Premium"
+          si >= 500K, "Estándar" si no. Aplicala con <code>apply()</code>. Debe incluir <code>VIP</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-7" data-expected="VIP">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "VIP"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Cliente": ["García", "López", "Pérez"],
@@ -432,20 +572,27 @@ df = pd.DataFrame({
 })
 
 # Definí la función y aplicala con apply
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["def clasificar_saldo(s): return \"VIP\" if s >= 1000000 else \"Premium\" if s >= 500000 else \"Estándar\"","df[\"Categoria\"] = df[\"Saldo\"].apply(clasificar_saldo)","print(df)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["def clasificar_saldo(s): return \"VIP\" if s >= 1000000 else \"Premium\" if s >= 500000 else \"Estándar\"","df[\"Categoria\"] = df[\"Saldo\"].apply(clasificar_saldo)","print(df)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: apply() con axis=1 (acceso a varias columnas)</h4>
-  <p>Creá una función que evalúe si un cliente es "✅ Aprobado" (score >= 650 Y ratio_cuota <= 35%) o "❌ Rechazado". Usá <code>apply(func, axis=1)</code>. Debe incluir <code>Aprobado</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-8" data-expected="Aprobado">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Aprobado"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: apply() con axis=1 (acceso a varias columnas)</h4>
+        <p>Creá una función que evalúe si un cliente es "✅ Aprobado" (score >= 650 Y ratio_cuota <= 35%) o "❌ Rechazado"
+            . Usá <code>apply(func, axis=1)</code>. Debe incluir <code>Aprobado</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-8"
+          data-expected="Aprobado">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Aprobado"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Cliente": ["García", "López", "Pérez"],
@@ -455,20 +602,27 @@ df = pd.DataFrame({
 })
 
 # Función que recibe una FILA (axis=1) y evalúa
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["def evaluar(fila): ratio = fila[\"Cuota\"]/fila[\"Ingreso\"]*100; return \"✅ Aprobado\" if fila[\"Score\"]>=650 and ratio<=35 else \"❌ Rechazado\"","df[\"Decision\"] = df.apply(evaluar, axis=1)","print(df[[\"Cliente\",\"Decision\"]])"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["def evaluar(fila): ratio = fila[\"Cuota\"]/fila[\"Ingreso\"]*100; return \"✅ Aprobado\" if fila[\"Score\"]>=650 and ratio<=35 else \"❌ Rechazado\"","df[\"Decision\"] = df.apply(evaluar, axis=1)","print(df[[\"Cliente\",\"Decision\"]])"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: np.where() anidado (3 categorías)</h4>
-  <p>Usá <code>np.where()</code> anidado para crear 3 niveles: "Alto" (>= 800K), "Medio" (>= 300K), "Bajo" (resto). Imprimí el value_counts. Debe incluir <code>Medio</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-9" data-expected="Medio">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Medio"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: np.where() anidado (3 categorías)</h4>
+        <p>Usá <code>np.where()</code> anidado para crear 3 niveles: "Alto" (>= 800K), "Medio" (>= 300K), "Bajo"
+          (resto). Imprimí el value_counts. Debe incluir <code>Medio</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-9"
+          data-expected="Medio">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Medio"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 df = pd.DataFrame({
@@ -477,20 +631,28 @@ df = pd.DataFrame({
 })
 
 # np.where anidado para 3 niveles
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["df[\"Nivel\"] = np.where(df[\"Saldo\"]>=800000, \"Alto\", np.where(df[\"Saldo\"]>=300000, \"Medio\", \"Bajo\"))","print(df[\"Nivel\"].value_counts())"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["df[\"Nivel\"] = np.where(df[\"Saldo\"]>=800000, \"Alto\", np.where(df[\"Saldo\"]>=300000, \"Medio\", \"Bajo\"))","print(df[\"Nivel\"].value_counts())"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Pipeline de transformación completo</h4>
-  <p>A partir del dataset: (1) Creá columna <code>"Ganancia"</code> = Ingreso - Costo, (2) Creá <code>"Margen_%"</code> = Ganancia/Ingreso*100, (3) Clasificá con np.where: margen >= 30 → "Rentable", else "Ajustar", (4) Imprimí solo Producto + Margen_% + Clasificación. Debe incluir <code>Rentable</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-10" data-expected="Rentable">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Rentable"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Pipeline de transformación completo</h4>
+        <p>A partir del dataset: (1) Creá columna <code>"Ganancia"</code> = Ingreso - Costo, (2) Creá
+          <code>"Margen_%"</code> = Ganancia/Ingreso*100, (3) Clasificá con np.where: margen >= 30 → "Rentable", else
+          "Ajustar", (4) Imprimí solo Producto + Margen_% + Clasificación. Debe incluir <code>Rentable</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-10"
+          data-expected="Rentable">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Rentable"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 df = pd.DataFrame({
@@ -500,45 +662,54 @@ df = pd.DataFrame({
 })
 
 # Pipeline completo: Ganancia → Margen → Clasificación → Reporte
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["df[\"Ganancia\"] = df[\"Ingreso\"] - df[\"Costo\"]","df[\"Margen_%\"] = round(df[\"Ganancia\"]/df[\"Ingreso\"]*100, 1)","df[\"Estado\"] = np.where(df[\"Margen_%\"]>=30, \"Rentable\", \"Ajustar\")"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>Crear columnas es tan simple como <code>df["nueva"] = expresión</code>.</li>
+        <li>Las operaciones vectorizadas (<code>+</code>, <code>*</code>, etc.) son rapidísimas — no uses
+          <code>for</code>.</li>
+        <li><code>map(dict)</code> traduce códigos a nombres legibles, 1 a 1.</li>
+        <li><code>np.where(cond, si, no)</code> es el if/else vectorizado más rápido.</li>
+        <li><code>apply(func, axis=1)</code> permite lógica compleja accediendo a varias columnas por fila.</li>
+        <li><code>rename()</code>, <code>drop()</code> y reordenamiento preparan tus datos para el reporte final.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>07 · pandas: groupby y pivot</strong>) vas a aprender a agrupar datos por
+        categoría y calcular métricas agregadas — la herramienta preferida de todo analista para responder preguntas
+        como <em>"¿cuánto factura cada sucursal?"</em> o <em>"¿cuál es el ticket promedio por canal?"</em>.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://pandas.pydata.org/docs/user_guide/basics.html"
+          target="_blank">pandas docs — Essential Basic Functionality</a></p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/05-pandas-limpieza.html">← pandas: limpieza</a>
+        <a class="next" href="/data-analysis/07-pandas-groupby-pivot.html">pandas: groupby y pivot →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["df[\"Ganancia\"] = df[\"Ingreso\"] - df[\"Costo\"]","df[\"Margen_%\"] = round(df[\"Ganancia\"]/df[\"Ingreso\"]*100, 1)","df[\"Estado\"] = np.where(df[\"Margen_%\"]>=30, \"Rentable\", \"Ajustar\")"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>Crear columnas es tan simple como <code>df["nueva"] = expresión</code>.</li>
-  <li>Las operaciones vectorizadas (<code>+</code>, <code>*</code>, etc.) son rapidísimas — no uses <code>for</code>.</li>
-  <li><code>map(dict)</code> traduce códigos a nombres legibles, 1 a 1.</li>
-  <li><code>np.where(cond, si, no)</code> es el if/else vectorizado más rápido.</li>
-  <li><code>apply(func, axis=1)</code> permite lógica compleja accediendo a varias columnas por fila.</li>
-  <li><code>rename()</code>, <code>drop()</code> y reordenamiento preparan tus datos para el reporte final.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>07 · pandas: groupby y pivot</strong>) vas a aprender a agrupar datos por categoría y calcular métricas agregadas — la herramienta preferida de todo analista para responder preguntas como <em>"¿cuánto factura cada sucursal?"</em> o <em>"¿cuál es el ticket promedio por canal?"</em>.</p>
-
-<p><strong>Recursos:</strong> <a href="https://pandas.pydata.org/docs/user_guide/basics.html" target="_blank">pandas docs — Essential Basic Functionality</a></p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/05-pandas-limpieza.html">← pandas: limpieza</a>
-  <a class="next" href="/data-analysis/07-pandas-groupby-pivot.html">pandas: groupby y pivot →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

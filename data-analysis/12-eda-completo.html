@@ -1,78 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 12 · EDA Completo</title>
-<meta name="description" content="Realizá un Análisis Exploratorio de Datos (EDA) profesional de principio a fin. Combiná pandas, estadística, matplotlib y seaborn en un proceso estructurado.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 12 · EDA Completo</title>
+  <meta name="description"
+    content="Realizá un Análisis Exploratorio de Datos (EDA) profesional de principio a fin. Combiná pandas, estadística, matplotlib y seaborn en un proceso estructurado.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 12 de 19</span>
-  <h1>EDA Completo: Análisis Exploratorio de Datos</h1>
-  <p>El <strong>Análisis Exploratorio de Datos (EDA)</strong> es el proceso sistemático de examinar un dataset antes de cualquier modelado o decisión de negocio. No es un paso — es <em>el</em> paso. Un EDA mal hecho lleva a conclusiones equivocadas. Uno bien hecho te da la intuición necesaria para hacer las preguntas correctas.</p>
-  <div class="badges">
-    <span class="badge">120–150 min</span>
-    <span class="badge">Prerrequisitos: Lecciones 04-11</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 12 de 19</span>
+        <h1>EDA Completo: Análisis Exploratorio de Datos</h1>
+        <p>El <strong>Análisis Exploratorio de Datos (EDA)</strong> es el proceso sistemático de examinar un dataset
+          antes de cualquier modelado o decisión de negocio. No es un paso — es <em>el</em> paso. Un EDA mal hecho lleva
+          a conclusiones equivocadas. Uno bien hecho te da la intuición necesaria para hacer las preguntas correctas.
+        </p>
+        <div class="badges">
+          <span class="badge">120–150 min</span>
+          <span class="badge">Prerrequisitos: Lecciones 04-11</span>
+        </div>
+      </div>
 
-<h3>¿Qué es el EDA y por qué importa?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>El EDA fue formalizado por John Tukey en 1977 en su libro <em>"Exploratory Data Analysis"</em>. La idea central es: <strong>antes de hacer modelos o pruebas, mirá los datos</strong>. Suena obvio, pero en la práctica muchos analistas saltan directo a las conclusiones sin entender la estructura de los datos.</p>
+      <h3>¿Qué es el EDA y por qué importa?</h3>
 
-<div class="concept"><strong>El EDA responde 5 preguntas fundamentales:</strong>
-<br>1. ¿Qué forma tienen los datos? (dimensiones, tipos, estructura)
-<br>2. ¿Qué tan limpios están? (nulos, duplicados, inconsistencias)
-<br>3. ¿Cómo se distribuyen las variables numéricas? (centralidad, dispersión, outliers)
-<br>4. ¿Cómo se distribuyen las variables categóricas? (frecuencias, desbalances)
-<br>5. ¿Qué relaciones existen entre variables? (correlaciones, patrones)</div>
+      <p>El EDA fue formalizado por John Tukey en 1977 en su libro <em>"Exploratory Data Analysis"</em>. La idea central
+        es: <strong>antes de hacer modelos o pruebas, mirá los datos</strong>. Suena obvio, pero en la práctica muchos
+        analistas saltan directo a las conclusiones sin entender la estructura de los datos.</p>
 
-<h3>Los 6 pasos del EDA profesional</h3>
+      <div class="concept"><strong>El EDA responde 5 preguntas fundamentales:</strong>
+        <br>1. ¿Qué forma tienen los datos? (dimensiones, tipos, estructura)
+        <br>2. ¿Qué tan limpios están? (nulos, duplicados, inconsistencias)
+        <br>3. ¿Cómo se distribuyen las variables numéricas? (centralidad, dispersión, outliers)
+        <br>4. ¿Cómo se distribuyen las variables categóricas? (frecuencias, desbalances)
+        <br>5. ¿Qué relaciones existen entre variables? (correlaciones, patrones)
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>#</th><th>Paso</th><th>Herramientas</th><th>Objetivo</th></tr>
-<tr><td>1</td><td><strong>Reconocimiento</strong></td><td><code>shape, dtypes, head, info</code></td><td>Entender la estructura básica</td></tr>
-<tr><td>2</td><td><strong>Calidad</strong></td><td><code>isna, duplicated, describe</code></td><td>Evaluar la salud de los datos</td></tr>
-<tr><td>3</td><td><strong>Univariado numérico</strong></td><td>Histogramas, box plots, estadísticas</td><td>Distribución de cada variable numérica</td></tr>
-<tr><td>4</td><td><strong>Univariado categórico</strong></td><td>value_counts, countplot</td><td>Distribución de cada variable categórica</td></tr>
-<tr><td>5</td><td><strong>Bivariado</strong></td><td>Scatter, heatmap de correlación, boxplot por grupo</td><td>Relaciones entre pares de variables</td></tr>
-<tr><td>6</td><td><strong>Insights</strong></td><td>Resumen escrito, visualización clave</td><td>Hallazgos accionables del negocio</td></tr>
-</table>
-</div>
+      <h3>Los 6 pasos del EDA profesional</h3>
 
-<div class="analogy"><strong>Analogía del detective:</strong> un detective no empieza un caso con una teoría preconcebida. Primero examina la escena del crimen (paso 1), recolecta evidencia (pasos 2-4), busca conexiones (paso 5) y finalmente formula hipótesis (paso 6). El EDA es exactamente eso: investigar sin sesgo, dejar que los datos hablen.</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>#</th>
+            <th>Paso</th>
+            <th>Herramientas</th>
+            <th>Objetivo</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td><strong>Reconocimiento</strong></td>
+            <td><code>shape, dtypes, head, info</code></td>
+            <td>Entender la estructura básica</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Calidad</strong></td>
+            <td><code>isna, duplicated, describe</code></td>
+            <td>Evaluar la salud de los datos</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Univariado numérico</strong></td>
+            <td>Histogramas, box plots, estadísticas</td>
+            <td>Distribución de cada variable numérica</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Univariado categórico</strong></td>
+            <td>value_counts, countplot</td>
+            <td>Distribución de cada variable categórica</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Bivariado</strong></td>
+            <td>Scatter, heatmap de correlación, boxplot por grupo</td>
+            <td>Relaciones entre pares de variables</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Insights</strong></td>
+            <td>Resumen escrito, visualización clave</td>
+            <td>Hallazgos accionables del negocio</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="realworld"><strong>En el trabajo real:</strong> cuando recibís un dataset nuevo en tu primer día de trabajo, la expectativa es que en las primeras 2-4 horas entregues un EDA con las características principales de los datos, problemas de calidad detectados y 3-5 hallazgos preliminares. Es tu primera oportunidad de demostrar seniority analítico.</div>
+      <div class="analogy"><strong>Analogía del detective:</strong> un detective no empieza un caso con una teoría
+        preconcebida. Primero examina la escena del crimen (paso 1), recolecta evidencia (pasos 2-4), busca conexiones
+        (paso 5) y finalmente formula hipótesis (paso 6). El EDA es exactamente eso: investigar sin sesgo, dejar que los
+        datos hablen.</div>
 
-<div class="section-num">02</div>
-<h2>EDA paso a paso: caso práctico completo</h2>
+      <div class="realworld"><strong>En el trabajo real:</strong> cuando recibís un dataset nuevo en tu primer día de
+        trabajo, la expectativa es que en las primeras 2-4 horas entregues un EDA con las características principales de
+        los datos, problemas de calidad detectados y 3-5 hallazgos preliminares. Es tu primera oportunidad de demostrar
+        seniority analítico.</div>
 
-<h3>Paso 1: Reconocimiento del dataset</h3>
-<p>Lo primero siempre: ¿cuántas filas y columnas? ¿Qué tipo de datos hay? ¿Cómo se ven las primeras filas?</p>
+      <div class="section-num">02</div>
+      <h2>EDA paso a paso: caso práctico completo</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>eda_paso01_reconocimiento.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <h3>Paso 1: Reconocimiento del dataset</h3>
+      <p>Lo primero siempre: ¿cuántas filas y columnas? ¿Qué tipo de datos hay? ¿Cómo se ven las primeras filas?</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>eda_paso01_reconocimiento.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 # Creamos un dataset realista de clientes bancarios
@@ -106,17 +163,21 @@ print(f"\n=== Tipos de datos ===")
 print(df.dtypes)
 print(f"\n=== Info general ===")
 print(f"Columnas numéricas: {list(df.select_dtypes('number').columns)}")
-print(f"Columnas categóricas: {list(df.select_dtypes('object').columns)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Columnas categóricas: {list(df.select_dtypes('object').columns)}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Paso 2: Evaluación de calidad</h3>
-<p>¿Cuántos nulos? ¿Duplicados? ¿Valores atípicos? Este paso decide si podemos confiar en las métricas que calculemos después.</p>
+      <h3>Paso 2: Evaluación de calidad</h3>
+      <p>¿Cuántos nulos? ¿Duplicados? ¿Valores atípicos? Este paso decide si podemos confiar en las métricas que
+        calculemos después.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>eda_paso02_calidad.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>eda_paso02_calidad.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 np.random.seed(42)
@@ -153,17 +214,21 @@ print(f"\nDuplicados: {dupes} filas ({round(dupes/len(df)*100, 1)}%)")
 
 # Estadísticas básicas
 print(f"\nResumen estadístico:")
-print(df.describe().round(0))</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(df.describe().round(0))</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Paso 3: Análisis univariado numérico</h3>
-<p>Distribuir cada variable numérica: histogramas, box plots, estadísticas. Detectar asimetrías y outliers.</p>
+      <h3>Paso 3: Análisis univariado numérico</h3>
+      <p>Distribuir cada variable numérica: histogramas, box plots, estadísticas. Detectar asimetrías y outliers.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>eda_paso03_univariado_num.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>eda_paso03_univariado_num.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea
+            class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -200,17 +265,21 @@ plt.show()
 for col in num_cols:
     s = df[col]
     asimetria = "→ derecha" if s.mean() > s.median() else "← izquierda" if s.mean() < s.median() else "simétrica"
-    print(f"{col:12s}: media={s.mean():>10,.0f}  mediana={s.median():>10,.0f}  std={s.std():>10,.0f}  {asimetria}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"{col:12s}: media={s.mean():>10,.0f}  mediana={s.median():>10,.0f}  std={s.std():>10,.0f}  {asimetria}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Paso 4: Análisis univariado categórico</h3>
-<p>¿Cómo se distribuyen las categorías? ¿Hay desbalances? Las frecuencias categóricas revelan sesgos en la muestra.</p>
+      <h3>Paso 4: Análisis univariado categórico</h3>
+      <p>¿Cómo se distribuyen las categorías? ¿Hay desbalances? Las frecuencias categóricas revelan sesgos en la
+        muestra.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>eda_paso04_univariado_cat.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>eda_paso04_univariado_cat.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -248,17 +317,21 @@ plt.show()
 for col in cat_cols:
     print(f"\n{col}:")
     for val, cnt in df[col].value_counts().items():
-        print(f"  {val}: {cnt} ({cnt/len(df)*100:.0f}%)")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+        print(f"  {val}: {cnt} ({cnt/len(df)*100:.0f}%)")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Paso 5: Análisis bivariado — Relaciones entre variables</h3>
-<p>¿Qué variables se relacionan? Correlaciones entre numéricas, distribuciones numéricas segmentadas por categóricas.</p>
+      <h3>Paso 5: Análisis bivariado — Relaciones entre variables</h3>
+      <p>¿Qué variables se relacionan? Correlaciones entre numéricas, distribuciones numéricas segmentadas por
+        categóricas.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>eda_paso05_bivariado.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>eda_paso05_bivariado.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -307,41 +380,92 @@ plt.show()
 
 print("Hallazgos clave:")
 print(f"  Corr(Antigüedad, Ingreso) = {corr.loc['Antigüedad','Ingreso']:.2f}")
-print(f"  Corr(Ingreso, Saldo) = {corr.loc['Ingreso','Saldo']:.2f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"  Corr(Ingreso, Saldo) = {corr.loc['Ingreso','Saldo']:.2f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida — Checklist de EDA</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida — Checklist de EDA</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Paso</th><th>Código clave</th><th>¿Qué buscás?</th></tr>
-<tr><td>Dimensiones</td><td><code>df.shape</code></td><td>Filas × columnas</td></tr>
-<tr><td>Tipos</td><td><code>df.dtypes</code></td><td>¿object donde debería ser number?</td></tr>
-<tr><td>Head</td><td><code>df.head()</code></td><td>¿Los datos tienen sentido?</td></tr>
-<tr><td>Nulos</td><td><code>df.isna().sum()</code></td><td>¿Cuántos y dónde?</td></tr>
-<tr><td>Duplicados</td><td><code>df.duplicated().sum()</code></td><td>¿Filas repetidas?</td></tr>
-<tr><td>Describe</td><td><code>df.describe()</code></td><td>Estadísticas rápidas</td></tr>
-<tr><td>Distribución num</td><td><code>sns.histplot(kde=True)</code></td><td>Forma, asimetría</td></tr>
-<tr><td>Distribución cat</td><td><code>df["col"].value_counts()</code></td><td>Desbalances</td></tr>
-<tr><td>Outliers</td><td><code>sns.boxplot()</code></td><td>Valores atípicos</td></tr>
-<tr><td>Correlaciones</td><td><code>sns.heatmap(df.corr())</code></td><td>Relaciones lineales</td></tr>
-<tr><td>Relación num-cat</td><td><code>sns.boxplot(x=cat, y=num)</code></td><td>¿La distribución varía por grupo?</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Paso</th>
+            <th>Código clave</th>
+            <th>¿Qué buscás?</th>
+          </tr>
+          <tr>
+            <td>Dimensiones</td>
+            <td><code>df.shape</code></td>
+            <td>Filas × columnas</td>
+          </tr>
+          <tr>
+            <td>Tipos</td>
+            <td><code>df.dtypes</code></td>
+            <td>¿object donde debería ser number?</td>
+          </tr>
+          <tr>
+            <td>Head</td>
+            <td><code>df.head()</code></td>
+            <td>¿Los datos tienen sentido?</td>
+          </tr>
+          <tr>
+            <td>Nulos</td>
+            <td><code>df.isna().sum()</code></td>
+            <td>¿Cuántos y dónde?</td>
+          </tr>
+          <tr>
+            <td>Duplicados</td>
+            <td><code>df.duplicated().sum()</code></td>
+            <td>¿Filas repetidas?</td>
+          </tr>
+          <tr>
+            <td>Describe</td>
+            <td><code>df.describe()</code></td>
+            <td>Estadísticas rápidas</td>
+          </tr>
+          <tr>
+            <td>Distribución num</td>
+            <td><code>sns.histplot(kde=True)</code></td>
+            <td>Forma, asimetría</td>
+          </tr>
+          <tr>
+            <td>Distribución cat</td>
+            <td><code>df["col"].value_counts()</code></td>
+            <td>Desbalances</td>
+          </tr>
+          <tr>
+            <td>Outliers</td>
+            <td><code>sns.boxplot()</code></td>
+            <td>Valores atípicos</td>
+          </tr>
+          <tr>
+            <td>Correlaciones</td>
+            <td><code>sns.heatmap(df.corr())</code></td>
+            <td>Relaciones lineales</td>
+          </tr>
+          <tr>
+            <td>Relación num-cat</td>
+            <td><code>sns.boxplot(x=cat, y=num)</code></td>
+            <td>¿La distribución varía por grupo?</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Reconocimiento con shape y dtypes</h4>
-  <p>Imprimí las dimensiones del DataFrame y los tipos de datos. Debe incluir la palabra <code>int</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-1" data-expected="int">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "int"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Reconocimiento con shape y dtypes</h4>
+        <p>Imprimí las dimensiones del DataFrame y los tipos de datos. Debe incluir la palabra <code>int</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-1" data-expected="int">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "int"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -352,20 +476,23 @@ df = pd.DataFrame({
 })
 
 # Imprimí shape y dtypes
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["print(f\"Dimensiones: {df.shape}\")","print(df.dtypes)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box" data-hints='["print(f\"Dimensiones: {df.shape}\")","print(df.dtypes)"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Reporte de nulos y duplicados</h4>
-  <p>Imprimí la cantidad de nulos por columna y el total de duplicados. Debe incluir el número <code>0</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-2" data-expected="0">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Reporte de nulos y duplicados</h4>
+        <p>Imprimí la cantidad de nulos por columna y el total de duplicados. Debe incluir el número <code>0</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-2" data-expected="0">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -376,20 +503,25 @@ df = pd.DataFrame({
 })
 
 # Nulos por columna + duplicados
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["print(\"Nulos:\")\nprint(df.isna().sum())","print(f\"Duplicados: {df.duplicated().sum()}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["print(\"Nulos:\")\nprint(df.isna().sum())","print(f\"Duplicados: {df.duplicated().sum()}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: describe()</h4>
-  <p>Ejecutá <code>describe()</code> sobre el DataFrame. Debe incluir <code>mean</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-3" data-expected="mean">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "mean"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: describe()</h4>
+        <p>Ejecutá <code>describe()</code> sobre el DataFrame. Debe incluir <code>mean</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-3" data-expected="mean">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "mean"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -400,20 +532,25 @@ df = pd.DataFrame({
 })
 
 # describe()
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["print(df.describe())"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box" data-hints='["print(df.describe())"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Histograma con mediana</h4>
-  <p>Graficá la distribución de Ingreso con <code>sns.histplot(kde=True)</code> y agregá una línea en la mediana. Imprimí <code>Univariado OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-4" data-expected="Univariado OK">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe imprimir "Univariado OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Histograma con mediana</h4>
+        <p>Graficá la distribución de Ingreso con <code>sns.histplot(kde=True)</code> y agregá una línea en la mediana.
+          Imprimí <code>Univariado OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-4"
+          data-expected="Univariado OK">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe imprimir "Univariado OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -424,20 +561,27 @@ np.random.seed(42)
 df = pd.DataFrame({"Ingreso": np.random.normal(400000, 120000, 100).astype(int)})
 
 # Histograma + mediana + print
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["sns.histplot(data=df, x=\"Ingreso\", kde=True, bins=20)","plt.axvline(df[\"Ingreso\"].median(), color=\"red\", linestyle=\"--\")","plt.show(); print(\"Univariado OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["sns.histplot(data=df, x=\"Ingreso\", kde=True, bins=20)","plt.axvline(df[\"Ingreso\"].median(), color=\"red\", linestyle=\"--\")","plt.show(); print(\"Univariado OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: value_counts con porcentaje</h4>
-  <p>Imprimí el <code>value_counts(normalize=True)</code> de Segmento para ver porcentajes. Debe incluir la palabra <code>Estándar</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-5" data-expected="Estándar">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Estándar"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: value_counts con porcentaje</h4>
+        <p>Imprimí el <code>value_counts(normalize=True)</code> de Segmento para ver porcentajes. Debe incluir la
+          palabra <code>Estándar</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-5"
+          data-expected="Estándar">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Estándar"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -446,20 +590,25 @@ df = pd.DataFrame({
 })
 
 # value_counts normalizado (porcentajes)
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["print(df[\"Segmento\"].value_counts(normalize=True).round(2))"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box" data-hints='["print(df[\"Segmento\"].value_counts(normalize=True).round(2))"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Boxplot por categoría</h4>
-  <p>Graficá un boxplot de Ingreso por Segmento. Imprimí <code>Bivariado OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-6" data-expected="Bivariado OK">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe imprimir "Bivariado OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Boxplot por categoría</h4>
+        <p>Graficá un boxplot de Ingreso por Segmento. Imprimí <code>Bivariado OK</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-6"
+          data-expected="Bivariado OK">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe imprimir "Bivariado OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -473,20 +622,26 @@ df = pd.DataFrame({
 })
 
 # Boxplot por segmento
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["sns.boxplot(data=df, x=\"Segmento\", y=\"Ingreso\", palette=\"Set2\")","plt.title(\"Ingreso por Segmento\"); plt.show(); print(\"Bivariado OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["sns.boxplot(data=df, x=\"Segmento\", y=\"Ingreso\", palette=\"Set2\")","plt.title(\"Ingreso por Segmento\"); plt.show(); print(\"Bivariado OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Heatmap de correlaciones</h4>
-  <p>Calculá la matriz de correlación y graficála con heatmap. Imprimí la correlación entre Antigüedad e Ingreso. Debe incluir un número decimal (ej: <code>0.</code>).</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-7" data-expected="0.">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "0."</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Heatmap de correlaciones</h4>
+        <p>Calculá la matriz de correlación y graficála con heatmap. Imprimí la correlación entre Antigüedad e Ingreso.
+          Debe incluir un número decimal (ej: <code>0.</code>).</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-7" data-expected="0.">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "0."</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -502,20 +657,28 @@ df = pd.DataFrame({
 })
 
 # Correlación + heatmap + print
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["corr = df.corr()","sns.heatmap(corr, annot=True, cmap=\"RdYlBu_r\"); plt.show()","print(f\"Corr Ant-Ing: {corr.loc[\\\"Antigüedad\\\",\\\"Ingreso\\\"]:.2f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["corr = df.corr()","sns.heatmap(corr, annot=True, cmap=\"RdYlBu_r\"); plt.show()","print(f\"Corr Ant-Ing: {corr.loc[\\\"Antigüedad\\\",\\\"Ingreso\\\"]:.2f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Limpieza + análisis</h4>
-  <p>El dataset tiene nulos y duplicados. Limpiálo (<code>fillna</code> con mediana, <code>drop_duplicates</code>), después imprimí media y mediana del saldo. Debe incluir <code>Limpio</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-8" data-expected="Limpio">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Limpio"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Limpieza + análisis</h4>
+        <p>El dataset tiene nulos y duplicados. Limpiálo (<code>fillna</code> con mediana,
+          <code>drop_duplicates</code>), después imprimí media y mediana del saldo. Debe incluir <code>Limpio</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-8"
+          data-expected="Limpio">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Limpio"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -527,20 +690,27 @@ df = pd.DataFrame({
 # 1. fillna con mediana
 # 2. drop_duplicates por ID
 # 3. Imprimí "Limpio" + media + mediana
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["df[\"Saldo\"] = df[\"Saldo\"].fillna(df[\"Saldo\"].median())","df = df.drop_duplicates(subset=\"ID\")","print(f\"Limpio: media={df[\\\"Saldo\\\"].mean():.0f}, mediana={df[\\\"Saldo\\\"].median():.0f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["df[\"Saldo\"] = df[\"Saldo\"].fillna(df[\"Saldo\"].median())","df = df.drop_duplicates(subset=\"ID\")","print(f\"Limpio: media={df[\\\"Saldo\\\"].mean():.0f}, mediana={df[\\\"Saldo\\\"].median():.0f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Dashboard EDA de 4 gráficos</h4>
-  <p>Creá 4 subplots: histograma de Ingreso, countplot de Segmento, boxplot Ingreso×Segmento, scatter Antigüedad×Ingreso. Imprimí <code>EDA dashboard</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-9" data-expected="EDA dashboard">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe imprimir "EDA dashboard"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Dashboard EDA de 4 gráficos</h4>
+        <p>Creá 4 subplots: histograma de Ingreso, countplot de Segmento, boxplot Ingreso×Segmento, scatter
+          Antigüedad×Ingreso. Imprimí <code>EDA dashboard</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-9"
+          data-expected="EDA dashboard">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe imprimir "EDA dashboard"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -556,20 +726,27 @@ df = pd.DataFrame({
 
 # fig, axes = plt.subplots(2, 2, ...)
 # 4 gráficos del EDA
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 10))","sns.histplot(data=df, x=\"Ingreso\", kde=True, ax=axes[0,0])","sns.countplot(data=df, x=\"Segmento\", ax=axes[0,1]); sns.boxplot(data=df, x=\"Segmento\", y=\"Ingreso\", ax=axes[1,0]); sns.regplot(data=df, x=\"Antigüedad\", y=\"Ingreso\", ax=axes[1,1]); plt.tight_layout(); plt.show(); print(\"EDA dashboard\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 10))","sns.histplot(data=df, x=\"Ingreso\", kde=True, ax=axes[0,0])","sns.countplot(data=df, x=\"Segmento\", ax=axes[0,1]); sns.boxplot(data=df, x=\"Segmento\", y=\"Ingreso\", ax=axes[1,0]); sns.regplot(data=df, x=\"Antigüedad\", y=\"Ingreso\", ax=axes[1,1]); plt.tight_layout(); plt.show(); print(\"EDA dashboard\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Reporte EDA con insights escritos</h4>
-  <p>Generá un reporte EDA completo: (1) dimensiones, (2) nulos %, (3) estadísticas por segmento, (4) un hallazgo clave. Debe incluir la palabra <code>Hallazgo</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-10" data-expected="Hallazgo">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Hallazgo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Reporte EDA con insights escritos</h4>
+        <p>Generá un reporte EDA completo: (1) dimensiones, (2) nulos %, (3) estadísticas por segmento, (4) un hallazgo
+          clave. Debe incluir la palabra <code>Hallazgo</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-10"
+          data-expected="Hallazgo">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Hallazgo"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -587,45 +764,59 @@ df = pd.DataFrame({
 df.loc[np.random.choice(n, 5, replace=False), "Ingreso"] = np.nan
 
 # Reporte EDA completo con insights
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["print(f\"Dimensiones: {df.shape}\")","print(f\"Nulos: {df.isna().sum().sum()} ({df.isna().sum().sum()/df.size*100:.1f}%)\")","reporte = df.groupby(\"Segmento\").agg(Media=(\"Ingreso\",\"mean\"), Productos=(\"Productos\",\"mean\")); print(reporte.round(0)); print(\"Hallazgo: Premium tiene más productos y mayor ingreso\")"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>El EDA sigue 6 pasos: reconocimiento → calidad → univariado numérico → univariado categórico → bivariado →
+          insights.</li>
+        <li>Las primeras 4 líneas de cualquier EDA: <code>shape</code>, <code>dtypes</code>, <code>isna().sum()</code>,
+          <code>describe()</code>.</li>
+        <li>Los histogramas revelan la <strong>forma</strong> de los datos (simétricos, sesgados, bimodales).</li>
+        <li>Los box plots detectan <strong>outliers</strong> automáticamente y comparan distribuciones por categoría.
+        </li>
+        <li>El heatmap de correlaciones identifica <strong>relaciones lineales</strong> entre todas las variables
+          numéricas.</li>
+        <li>Siempre terminá con <strong>insights escritos</strong> — los gráficos sin interpretación no generan valor.
+        </li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>13 · NumPy fundamentos</strong>) vas a profundizar en la biblioteca que está
+        debajo de pandas: arrays de alto rendimiento, operaciones vectorizadas y álgebra lineal básica.</p>
+
+      <p><strong>Recursos:</strong> <a
+          href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html"
+          target="_blank">pandas — Calculate statistics</a> · <a href="https://seaborn.pydata.org/tutorial.html"
+          target="_blank">Seaborn Tutorial</a></p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/11-seaborn-visualizacion.html">← Seaborn: visualización</a>
+        <a class="next" href="/data-analysis/13-numpy-fundamentos.html">NumPy fundamentos →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["print(f\"Dimensiones: {df.shape}\")","print(f\"Nulos: {df.isna().sum().sum()} ({df.isna().sum().sum()/df.size*100:.1f}%)\")","reporte = df.groupby(\"Segmento\").agg(Media=(\"Ingreso\",\"mean\"), Productos=(\"Productos\",\"mean\")); print(reporte.round(0)); print(\"Hallazgo: Premium tiene más productos y mayor ingreso\")"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>El EDA sigue 6 pasos: reconocimiento → calidad → univariado numérico → univariado categórico → bivariado → insights.</li>
-  <li>Las primeras 4 líneas de cualquier EDA: <code>shape</code>, <code>dtypes</code>, <code>isna().sum()</code>, <code>describe()</code>.</li>
-  <li>Los histogramas revelan la <strong>forma</strong> de los datos (simétricos, sesgados, bimodales).</li>
-  <li>Los box plots detectan <strong>outliers</strong> automáticamente y comparan distribuciones por categoría.</li>
-  <li>El heatmap de correlaciones identifica <strong>relaciones lineales</strong> entre todas las variables numéricas.</li>
-  <li>Siempre terminá con <strong>insights escritos</strong> — los gráficos sin interpretación no generan valor.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>13 · NumPy fundamentos</strong>) vas a profundizar en la biblioteca que está debajo de pandas: arrays de alto rendimiento, operaciones vectorizadas y álgebra lineal básica.</p>
-
-<p><strong>Recursos:</strong> <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html" target="_blank">pandas — Calculate statistics</a> · <a href="https://seaborn.pydata.org/tutorial.html" target="_blank">Seaborn Tutorial</a></p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/11-seaborn-visualizacion.html">← Seaborn: visualización</a>
-  <a class="next" href="/data-analysis/13-numpy-fundamentos.html">NumPy fundamentos →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

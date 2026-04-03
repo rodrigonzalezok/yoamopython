@@ -1,112 +1,213 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 14 · Introducción a Machine Learning</title>
-<meta name="description" content="Entendé qué es Machine Learning, sus tipos (supervisado, no supervisado), el flujo de trabajo estándar y los conceptos de train/test split, overfitting y métricas.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 14 · Introducción a Machine Learning</title>
+  <meta name="description"
+    content="Entendé qué es Machine Learning, sus tipos (supervisado, no supervisado), el flujo de trabajo estándar y los conceptos de train/test split, overfitting y métricas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 14 de 19</span>
-  <h1>Introducción a Machine Learning</h1>
-  <p>Machine Learning (ML) es el campo de la inteligencia artificial donde <strong>las computadoras aprenden patrones a partir de datos</strong>, sin ser programadas explícitamente para cada caso. No necesitás un doctorado para entenderlo — los conceptos fundamentales son simples y poderosos. Como Data Analyst, no vas a construir modelos complejos de deep learning, pero <strong>sí necesitás entender cómo funcionan</strong> para colaborar con Data Scientists y evaluar resultados.</p>
-  <div class="badges">
-    <span class="badge">90–120 min</span>
-    <span class="badge">Prerrequisitos: Lección 13 (NumPy)</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 14 de 19</span>
+        <h1>Introducción a Machine Learning</h1>
+        <p>Machine Learning (ML) es el campo de la inteligencia artificial donde <strong>las computadoras aprenden
+            patrones a partir de datos</strong>, sin ser programadas explícitamente para cada caso. No necesitás un
+          doctorado para entenderlo — los conceptos fundamentales son simples y poderosos. Como Data Analyst, no vas a
+          construir modelos complejos de deep learning, pero <strong>sí necesitás entender cómo funcionan</strong> para
+          colaborar con Data Scientists y evaluar resultados.</p>
+        <div class="badges">
+          <span class="badge">90–120 min</span>
+          <span class="badge">Prerrequisitos: Lección 13 (NumPy)</span>
+        </div>
+      </div>
 
-<h3>¿Qué es Machine Learning?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>La programación tradicional funciona así: le das <strong>reglas</strong> + <strong>datos</strong> → la computadora produce <strong>respuestas</strong>. Machine Learning invierte el proceso: le das <strong>datos</strong> + <strong>respuestas correctas</strong> → la computadora descubre las <strong>reglas</strong> sola.</p>
+      <h3>¿Qué es Machine Learning?</h3>
 
-<div class="analogy"><strong>Analogía del médico:</strong> un médico no memoriza "si temperatura > 38°C y tos seca → gripe". Después de ver miles de pacientes (datos) con sus diagnósticos (respuestas), su cerebro aprende patrones. Cuando llega un nuevo paciente, aplica esos patrones para diagnosticar. Machine Learning hace exactamente eso, pero con datos y matemáticas.</div>
+      <p>La programación tradicional funciona así: le das <strong>reglas</strong> + <strong>datos</strong> → la
+        computadora produce <strong>respuestas</strong>. Machine Learning invierte el proceso: le das
+        <strong>datos</strong> + <strong>respuestas correctas</strong> → la computadora descubre las
+        <strong>reglas</strong> sola.</p>
 
-<h3>Los 3 tipos de Machine Learning</h3>
+      <div class="analogy"><strong>Analogía del médico:</strong> un médico no memoriza "si temperatura > 38°C y tos seca
+        → gripe". Después de ver miles de pacientes (datos) con sus diagnósticos (respuestas), su cerebro aprende
+        patrones. Cuando llega un nuevo paciente, aplica esos patrones para diagnosticar. Machine Learning hace
+        exactamente eso, pero con datos y matemáticas.</div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Tipo</th><th>Qué tiene</th><th>Qué hace</th><th>Ejemplo</th></tr>
-<tr><td><strong>Supervisado</strong></td><td>Datos + respuestas correctas</td><td>Aprende a predecir la respuesta</td><td>Predecir si un email es spam</td></tr>
-<tr><td><strong>No supervisado</strong></td><td>Solo datos (sin respuestas)</td><td>Descubre estructura oculta</td><td>Agrupar clientes similares</td></tr>
-<tr><td><strong>Por refuerzo</strong></td><td>Entorno + recompensas</td><td>Aprende por prueba y error</td><td>Un robot que aprende a caminar</td></tr>
-</table>
-</div>
+      <h3>Los 3 tipos de Machine Learning</h3>
 
-<div class="concept"><strong>El 90% del ML en empresas es supervisado.</strong> ¿El cliente va a abandonar? (clasificación). ¿Cuánto va a facturar este trimestre? (regresión). ¿Este mail es spam? (clasificación). ¿Cuánto vale esta propiedad? (regresión). Como Data Analyst, el ML supervisado es lo que más vas a encontrar.</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Tipo</th>
+            <th>Qué tiene</th>
+            <th>Qué hace</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><strong>Supervisado</strong></td>
+            <td>Datos + respuestas correctas</td>
+            <td>Aprende a predecir la respuesta</td>
+            <td>Predecir si un email es spam</td>
+          </tr>
+          <tr>
+            <td><strong>No supervisado</strong></td>
+            <td>Solo datos (sin respuestas)</td>
+            <td>Descubre estructura oculta</td>
+            <td>Agrupar clientes similares</td>
+          </tr>
+          <tr>
+            <td><strong>Por refuerzo</strong></td>
+            <td>Entorno + recompensas</td>
+            <td>Aprende por prueba y error</td>
+            <td>Un robot que aprende a caminar</td>
+          </tr>
+        </table>
+      </div>
 
-<h3>Clasificación vs Regresión</h3>
+      <div class="concept"><strong>El 90% del ML en empresas es supervisado.</strong> ¿El cliente va a abandonar?
+        (clasificación). ¿Cuánto va a facturar este trimestre? (regresión). ¿Este mail es spam? (clasificación). ¿Cuánto
+        vale esta propiedad? (regresión). Como Data Analyst, el ML supervisado es lo que más vas a encontrar.</div>
 
-<p>Dentro del aprendizaje supervisado hay dos grandes familias:</p>
+      <h3>Clasificación vs Regresión</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Tipo</th><th>Variable objetivo</th><th>Predice</th><th>Ejemplo</th><th>Métricas</th></tr>
-<tr><td><strong>Clasificación</strong></td><td>Categoría (discreta)</td><td>¿A qué grupo pertenece?</td><td>Spam / No spam</td><td>Accuracy, Precision, Recall</td></tr>
-<tr><td><strong>Regresión</strong></td><td>Número (continuo)</td><td>¿Cuánto va a ser?</td><td>Precio de una casa</td><td>MAE, MSE, R²</td></tr>
-</table>
-</div>
+      <p>Dentro del aprendizaje supervisado hay dos grandes familias:</p>
 
-<h3>El flujo de trabajo de ML</h3>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Tipo</th>
+            <th>Variable objetivo</th>
+            <th>Predice</th>
+            <th>Ejemplo</th>
+            <th>Métricas</th>
+          </tr>
+          <tr>
+            <td><strong>Clasificación</strong></td>
+            <td>Categoría (discreta)</td>
+            <td>¿A qué grupo pertenece?</td>
+            <td>Spam / No spam</td>
+            <td>Accuracy, Precision, Recall</td>
+          </tr>
+          <tr>
+            <td><strong>Regresión</strong></td>
+            <td>Número (continuo)</td>
+            <td>¿Cuánto va a ser?</td>
+            <td>Precio de una casa</td>
+            <td>MAE, MSE, R²</td>
+          </tr>
+        </table>
+      </div>
 
-<p>Todo proyecto de Machine Learning sigue estos 6 pasos:</p>
+      <h3>El flujo de trabajo de ML</h3>
 
-<ol>
-  <li><strong>Definir el problema:</strong> ¿qué queremos predecir? ¿Es clasificación o regresión?</li>
-  <li><strong>Preparar los datos:</strong> limpieza, selección de features, encoding de variables categóricas.</li>
-  <li><strong>Dividir:</strong> separar en <code>train</code> (para aprender) y <code>test</code> (para evaluar).</li>
-  <li><strong>Entrenar:</strong> alimentar el modelo con los datos de entrenamiento.</li>
-  <li><strong>Evaluar:</strong> medir el rendimiento con datos que el modelo nunca vio (<code>test</code>).</li>
-  <li><strong>Iterar:</strong> ajustar parámetros, probar otros modelos, mejorar los datos.</li>
-</ol>
+      <p>Todo proyecto de Machine Learning sigue estos 6 pasos:</p>
 
-<div class="warning"><strong>El error más grave: evaluar con datos de entrenamiento.</strong> Si el modelo "estudio" con 100 pacientes y lo evaluás con los mismos 100, va a sacar 100% (los memorizó). Necesitás evaluarlo con pacientes nuevos — por eso se separa en train/test. Esto se llama <em>data leakage</em> y es la fuente #1 de modelos que parecen perfectos pero fallan en producción.</div>
+      <ol>
+        <li><strong>Definir el problema:</strong> ¿qué queremos predecir? ¿Es clasificación o regresión?</li>
+        <li><strong>Preparar los datos:</strong> limpieza, selección de features, encoding de variables categóricas.
+        </li>
+        <li><strong>Dividir:</strong> separar en <code>train</code> (para aprender) y <code>test</code> (para evaluar).
+        </li>
+        <li><strong>Entrenar:</strong> alimentar el modelo con los datos de entrenamiento.</li>
+        <li><strong>Evaluar:</strong> medir el rendimiento con datos que el modelo nunca vio (<code>test</code>).</li>
+        <li><strong>Iterar:</strong> ajustar parámetros, probar otros modelos, mejorar los datos.</li>
+      </ol>
 
-<h3>Vocabulario esencial</h3>
+      <div class="warning"><strong>El error más grave: evaluar con datos de entrenamiento.</strong> Si el modelo
+        "estudio" con 100 pacientes y lo evaluás con los mismos 100, va a sacar 100% (los memorizó). Necesitás evaluarlo
+        con pacientes nuevos — por eso se separa en train/test. Esto se llama <em>data leakage</em> y es la fuente #1 de
+        modelos que parecen perfectos pero fallan en producción.</div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Término</th><th>Significado</th><th>Analogía</th></tr>
-<tr><td><strong>Features (X)</strong></td><td>Variables predictoras (input)</td><td>Los síntomas del paciente</td></tr>
-<tr><td><strong>Target (y)</strong></td><td>Variable a predecir (output)</td><td>El diagnóstico</td></tr>
-<tr><td><strong>Train set</strong></td><td>Datos para aprender (70-80%)</td><td>Los pacientes que ya diagnosticaste</td></tr>
-<tr><td><strong>Test set</strong></td><td>Datos para evaluar (20-30%)</td><td>Pacientes nuevos</td></tr>
-<tr><td><strong>Overfitting</strong></td><td>Memoriza en vez de generalizar</td><td>Un estudiante que memoriza respuestas pero no entiende</td></tr>
-<tr><td><strong>Underfitting</strong></td><td>Modelo demasiado simple</td><td>Un estudiante que no estudió lo suficiente</td></tr>
-<tr><td><strong>Hiperparámetros</strong></td><td>Configuraciones del modelo</td><td>La dificultad del examen</td></tr>
-</table>
-</div>
+      <h3>Vocabulario esencial</h3>
 
-<div class="realworld"><strong>En el trabajo real:</strong> como Data Analyst, tu rol en un proyecto de ML es: (1) entender el problema de negocio, (2) preparar y limpiar los datos (el 80% del trabajo), (3) interpretar los resultados y comunicarlos. No necesitás inventar algoritmos — necesitás saber qué significan las métricas y si el modelo sirve para el negocio.</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Término</th>
+            <th>Significado</th>
+            <th>Analogía</th>
+          </tr>
+          <tr>
+            <td><strong>Features (X)</strong></td>
+            <td>Variables predictoras (input)</td>
+            <td>Los síntomas del paciente</td>
+          </tr>
+          <tr>
+            <td><strong>Target (y)</strong></td>
+            <td>Variable a predecir (output)</td>
+            <td>El diagnóstico</td>
+          </tr>
+          <tr>
+            <td><strong>Train set</strong></td>
+            <td>Datos para aprender (70-80%)</td>
+            <td>Los pacientes que ya diagnosticaste</td>
+          </tr>
+          <tr>
+            <td><strong>Test set</strong></td>
+            <td>Datos para evaluar (20-30%)</td>
+            <td>Pacientes nuevos</td>
+          </tr>
+          <tr>
+            <td><strong>Overfitting</strong></td>
+            <td>Memoriza en vez de generalizar</td>
+            <td>Un estudiante que memoriza respuestas pero no entiende</td>
+          </tr>
+          <tr>
+            <td><strong>Underfitting</strong></td>
+            <td>Modelo demasiado simple</td>
+            <td>Un estudiante que no estudió lo suficiente</td>
+          </tr>
+          <tr>
+            <td><strong>Hiperparámetros</strong></td>
+            <td>Configuraciones del modelo</td>
+            <td>La dificultad del examen</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="realworld"><strong>En el trabajo real:</strong> como Data Analyst, tu rol en un proyecto de ML es: (1)
+        entender el problema de negocio, (2) preparar y limpiar los datos (el 80% del trabajo), (3) interpretar los
+        resultados y comunicarlos. No necesitás inventar algoritmos — necesitás saber qué significan las métricas y si
+        el modelo sirve para el negocio.</div>
 
-<h3>Ejemplo 1: El dataset y el problema</h3>
-<p>Antes de cualquier modelo, necesitás entender los datos. Creamos un dataset de clientes bancarios para predecir quién va a cancelar.</p>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_dataset.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <h3>Ejemplo 1: El dataset y el problema</h3>
+      <p>Antes de cualquier modelo, necesitás entender los datos. Creamos un dataset de clientes bancarios para predecir
+        quién va a cancelar.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_dataset.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 np.random.seed(42)
@@ -146,17 +247,21 @@ print(df.groupby("Canceló").agg(
     Antiguedad_Prom=("Antiguedad", "mean"),
     Productos_Prom=("Productos", "mean"),
     Saldo_Prom=("Saldo", "mean")
-).round(0))</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+).round(0))</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Train/Test Split — Separar datos</h3>
-<p>El paso más importante antes de entrenar: dividir los datos. Nunca evalúes un modelo con los datos que usó para aprender.</p>
+      <h3>Ejemplo 2: Train/Test Split — Separar datos</h3>
+      <p>El paso más importante antes de entrenar: dividir los datos. Nunca evalúes un modelo con los datos que usó para
+        aprender.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_split.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_split.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 
@@ -188,19 +293,25 @@ print(f"Target (y): Canceló (0=No, 1=Sí)")
 print(f"\n=== Balance en train ===")
 print(y_train.value_counts())
 print(f"\n=== Balance en test ===")
-print(y_test.value_counts())</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(y_test.value_counts())</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="tip"><strong>Tip profesional — stratify:</strong> si tu variable target está desbalanceada (ej: 5% cancelan), usá <code>stratify=y</code> en <code>train_test_split</code> para que ambos conjuntos tengan la misma proporción. Sin esto, podrías terminar con un test set sin ningún caso positivo.</div>
+      <div class="tip"><strong>Tip profesional — stratify:</strong> si tu variable target está desbalanceada (ej: 5%
+        cancelan), usá <code>stratify=y</code> en <code>train_test_split</code> para que ambos conjuntos tengan la misma
+        proporción. Sin esto, podrías terminar con un test set sin ningún caso positivo.</div>
 
-<h3>Ejemplo 3: Primer modelo — Árbol de Decisión</h3>
-<p>Entrenar un modelo de clasificación y hacer predicciones. El árbol de decisión es el modelo más intuitivo: genera reglas tipo "si antigüedad < 3 y productos < 2 → cancela".</p>
+      <h3>Ejemplo 3: Primer modelo — Árbol de Decisión</h3>
+      <p>Entrenar un modelo de clasificación y hacer predicciones. El árbol de decisión es el modelo más intuitivo:
+        genera reglas tipo "si antigüedad < 3 y productos < 2 → cancela".</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_arbol.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+          <div class="editor" data-mode="python">
+            <div class="editor-top"><span>ejemplo_03_arbol.py</span><span>Python</span></div>
+            <div class="editor-area">
+              <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -238,17 +349,21 @@ print(comparacion.to_string(index=False))
 from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test, predicciones)
 print(f"\nAccuracy: {acc*100:.1f}%")
-print(f"De {len(y_test)} predicciones, {int(acc*len(y_test))} fueron correctas")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"De {len(y_test)} predicciones, {int(acc*len(y_test))} fueron correctas")</textarea>
+            </div>
+            <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                data-reset>Reset</button></div>
+            <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+          </div>
 
-<h3>Ejemplo 4: Métricas — ¿Es bueno mi modelo?</h3>
-<p>Accuracy no siempre basta. Si el 95% de los clientes no cancelan, un modelo que siempre dice "no cancela" tiene 95% de accuracy pero es inútil. Necesitás precision, recall y la matriz de confusión.</p>
+          <h3>Ejemplo 4: Métricas — ¿Es bueno mi modelo?</h3>
+          <p>Accuracy no siempre basta. Si el 95% de los clientes no cancelan, un modelo que siempre dice "no cancela"
+            tiene 95% de accuracy pero es inútil. Necesitás precision, recall y la matriz de confusión.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_metricas.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+          <div class="editor" data-mode="python">
+            <div class="editor-top"><span>ejemplo_04_metricas.py</span><span>Python</span></div>
+            <div class="editor-area">
+              <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -284,21 +399,29 @@ print(f"  Real SÍ (1):       {cm[1,0]:>4}        {cm[1,1]:>4}")
 print(f"\n  Verdaderos Negativos (TN): {cm[0,0]}")
 print(f"  Falsos Positivos (FP):     {cm[0,1]}")
 print(f"  Falsos Negativos (FN):     {cm[1,0]}  ← Los más peligrosos")
-print(f"  Verdaderos Positivos (TP): {cm[1,1]}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"  Verdaderos Positivos (TP): {cm[1,1]}")</textarea>
+            </div>
+            <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                data-reset>Reset</button></div>
+            <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+          </div>
 
-<div class="concept"><strong>Precision vs Recall:</strong><br>
-<strong>Precision:</strong> "De todos los que el modelo dijo que cancelan, ¿cuántos realmente cancelan?" → Importa cuando los falsos positivos son costosos (ej: enviar un descuento a alguien que no iba a cancelar).<br>
-<strong>Recall:</strong> "De todos los que realmente cancelan, ¿cuántos capturó el modelo?" → Importa cuando los falsos negativos son costosos (ej: no detectar un fraude).</div>
+          <div class="concept"><strong>Precision vs Recall:</strong><br>
+            <strong>Precision:</strong> "De todos los que el modelo dijo que cancelan, ¿cuántos realmente cancelan?" →
+            Importa cuando los falsos positivos son costosos (ej: enviar un descuento a alguien que no iba a
+            cancelar).<br>
+            <strong>Recall:</strong> "De todos los que realmente cancelan, ¿cuántos capturó el modelo?" → Importa cuando
+            los falsos negativos son costosos (ej: no detectar un fraude).
+          </div>
 
-<h3>Ejemplo 5: Comparar modelos</h3>
-<p>Nunca te quedes con un solo modelo. Probá varios y compará las métricas. scikit-learn hace que cambiar de modelo sea cambiar una línea de código.</p>
+          <h3>Ejemplo 5: Comparar modelos</h3>
+          <p>Nunca te quedes con un solo modelo. Probá varios y compará las métricas. scikit-learn hace que cambiar de
+            modelo sea cambiar una línea de código.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_comparar.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+          <div class="editor" data-mode="python">
+            <div class="editor-top"><span>ejemplo_05_comparar.py</span><span>Python</span></div>
+            <div class="editor-area">
+              <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -336,38 +459,78 @@ for nombre, modelo in modelos.items():
     print(f"{nombre:<25} {acc*100:>9.1f}%")
 
 print("\nMismos datos, 3 algoritmos, resultados distintos.")
-print("Elegí el que mejor se adapte al problema y las métricas que importan.")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("Elegí el que mejor se adapte al problema y las métricas que importan.")</textarea>
+            </div>
+            <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                data-reset>Reset</button></div>
+            <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+          </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+          <div class="section-num">03</div>
+          <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Paso</th><th>Código scikit-learn</th><th>Qué hace</th></tr>
-<tr><td>Separar datos</td><td><code>train_test_split(X, y)</code></td><td>80/20 (o 70/30)</td></tr>
-<tr><td>Crear modelo</td><td><code>DecisionTreeClassifier()</code></td><td>Instanciar</td></tr>
-<tr><td>Entrenar</td><td><code>modelo.fit(X_train, y_train)</code></td><td>Aprender patrones</td></tr>
-<tr><td>Predecir</td><td><code>modelo.predict(X_test)</code></td><td>Aplicar lo aprendido</td></tr>
-<tr><td>Accuracy</td><td><code>accuracy_score(y, pred)</code></td><td>% correcto total</td></tr>
-<tr><td>Precision</td><td><code>precision_score(y, pred)</code></td><td>% de positivos predichos que son reales</td></tr>
-<tr><td>Recall</td><td><code>recall_score(y, pred)</code></td><td>% de positivos reales capturados</td></tr>
-<tr><td>Confusión</td><td><code>confusion_matrix(y, pred)</code></td><td>Tabla TN/FP/FN/TP</td></tr>
-</table>
-</div>
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <th>Paso</th>
+                <th>Código scikit-learn</th>
+                <th>Qué hace</th>
+              </tr>
+              <tr>
+                <td>Separar datos</td>
+                <td><code>train_test_split(X, y)</code></td>
+                <td>80/20 (o 70/30)</td>
+              </tr>
+              <tr>
+                <td>Crear modelo</td>
+                <td><code>DecisionTreeClassifier()</code></td>
+                <td>Instanciar</td>
+              </tr>
+              <tr>
+                <td>Entrenar</td>
+                <td><code>modelo.fit(X_train, y_train)</code></td>
+                <td>Aprender patrones</td>
+              </tr>
+              <tr>
+                <td>Predecir</td>
+                <td><code>modelo.predict(X_test)</code></td>
+                <td>Aplicar lo aprendido</td>
+              </tr>
+              <tr>
+                <td>Accuracy</td>
+                <td><code>accuracy_score(y, pred)</code></td>
+                <td>% correcto total</td>
+              </tr>
+              <tr>
+                <td>Precision</td>
+                <td><code>precision_score(y, pred)</code></td>
+                <td>% de positivos predichos que son reales</td>
+              </tr>
+              <tr>
+                <td>Recall</td>
+                <td><code>recall_score(y, pred)</code></td>
+                <td>% de positivos reales capturados</td>
+              </tr>
+              <tr>
+                <td>Confusión</td>
+                <td><code>confusion_matrix(y, pred)</code></td>
+                <td>Tabla TN/FP/FN/TP</td>
+              </tr>
+            </table>
+          </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+          <div class="section-num">04</div>
+          <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Separar Features y Target</h4>
-  <p>Separá X (Edad, Ingreso) e y (Compra). Imprimí el shape de X. Debe incluir <code>(6, 2)</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-1" data-expected="(6, 2)">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "(6, 2)"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+          <div class="exercise">
+            <span class="exercise-level basic">Nivel 1 · Básico</span>
+            <h4>Ejercicio 1: Separar Features y Target</h4>
+            <p>Separá X (Edad, Ingreso) e y (Compra). Imprimí el shape de X. Debe incluir <code>(6, 2)</code>.</p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-1"
+              data-expected="(6, 2)">
+              <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "(6, 2)"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "Edad": [25, 30, 35, 40, 45, 50],
@@ -376,20 +539,27 @@ df = pd.DataFrame({
 })
 
 # Separá X (features) e y (target)
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["X = df[[\"Edad\", \"Ingreso\"]]","y = df[\"Compra\"]","print(f\"X shape: {X.shape}\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h1" class="hint-box"
+              data-hints='["X = df[[\"Edad\", \"Ingreso\"]]","y = df[\"Compra\"]","print(f\"X shape: {X.shape}\")"]'>
+            </div>
+          </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Train/Test split</h4>
-  <p>Dividí el dataset en 80% train y 20% test. Imprimí cuántas filas tiene el train. Debe incluir <code>160</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-2" data-expected="160">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "160"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+          <div class="exercise">
+            <span class="exercise-level basic">Nivel 1 · Básico</span>
+            <h4>Ejercicio 2: Train/Test split</h4>
+            <p>Dividí el dataset en 80% train y 20% test. Imprimí cuántas filas tiene el train. Debe incluir
+              <code>160</code>.</p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-2"
+              data-expected="160">
+              <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "160"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 
@@ -404,20 +574,27 @@ X = df[["Edad", "Ingreso"]]
 y = df["Compra"]
 
 # train_test_split con test_size=0.2
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)","print(f\"Train: {len(X_train)} filas\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h2" class="hint-box"
+              data-hints='["X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)","print(f\"Train: {len(X_train)} filas\")"]'>
+            </div>
+          </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Entrenar y predecir</h4>
-  <p>Entrenáun <code>DecisionTreeClassifier</code> y hacé predicciones. Imprimí la accuracy. Debe incluir <code>%</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-3" data-expected="%">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "%"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+          <div class="exercise">
+            <span class="exercise-level basic">Nivel 1 · Básico</span>
+            <h4>Ejercicio 3: Entrenar y predecir</h4>
+            <p>Entrenáun <code>DecisionTreeClassifier</code> y hacé predicciones. Imprimí la accuracy. Debe incluir
+              <code>%</code>.</p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-3"
+              data-expected="%">
+              <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "%"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
@@ -428,20 +605,27 @@ y = (X[:, 0] + X[:, 1] > 1).astype(int)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Crear modelo, fit, predict, accuracy
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X_train, y_train)","pred = modelo.predict(X_test)","print(f\"Accuracy: {accuracy_score(y_test, pred)*100:.1f}%\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h3" class="hint-box"
+              data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X_train, y_train)","pred = modelo.predict(X_test)","print(f\"Accuracy: {accuracy_score(y_test, pred)*100:.1f}%\")"]'>
+            </div>
+          </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Matriz de confusión</h4>
-  <p>Entrenáun modelo y mostrásu matriz de confusión. Imprimí cuántos Falsos Negativos hay. Debe incluir <code>FN</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-4" data-expected="FN">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "FN"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+          <div class="exercise">
+            <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+            <h4>Ejercicio 4: Matriz de confusión</h4>
+            <p>Entrenáun modelo y mostrásu matriz de confusión. Imprimí cuántos Falsos Negativos hay. Debe incluir
+              <code>FN</code>.</p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-4"
+              data-expected="FN">
+              <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "FN"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import confusion_matrix
@@ -452,20 +636,26 @@ y = (X[:, 0] * 2 + X[:, 1] > 1.5).astype(int)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Entrenar, predecir, confusion_matrix
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X_train, y_train); pred = modelo.predict(X_test)","cm = confusion_matrix(y_test, pred); print(f\"FN: {cm[1,0]}\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h4" class="hint-box"
+              data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X_train, y_train); pred = modelo.predict(X_test)","cm = confusion_matrix(y_test, pred); print(f\"FN: {cm[1,0]}\")"]'>
+            </div>
+          </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Precision y Recall</h4>
-  <p>Calculá precision y recall del modelo. Imprimí ambas. Debe incluir <code>Precision</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-5" data-expected="Precision">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Precision"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+          <div class="exercise">
+            <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+            <h4>Ejercicio 5: Precision y Recall</h4>
+            <p>Calculá precision y recall del modelo. Imprimí ambas. Debe incluir <code>Precision</code>.</p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-5"
+              data-expected="Precision">
+              <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Precision"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import precision_score, recall_score
@@ -476,20 +666,26 @@ y = (X[:, 0] + X[:, 1] > 1).astype(int)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Entrenar, predecir, precision, recall
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X_train, y_train); pred = modelo.predict(X_test)","print(f\"Precision: {precision_score(y_test,pred)*100:.1f}%\")","print(f\"Recall: {recall_score(y_test,pred)*100:.1f}%\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h5" class="hint-box"
+              data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X_train, y_train); pred = modelo.predict(X_test)","print(f\"Precision: {precision_score(y_test,pred)*100:.1f}%\")","print(f\"Recall: {recall_score(y_test,pred)*100:.1f}%\")"]'>
+            </div>
+          </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Probar otro modelo (Regresión Logística)</h4>
-  <p>Cambiá el modelo a <code>LogisticRegression</code> y medí su accuracy. Debe incluir <code>%</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-6" data-expected="%">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "%"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+          <div class="exercise">
+            <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+            <h4>Ejercicio 6: Probar otro modelo (Regresión Logística)</h4>
+            <p>Cambiá el modelo a <code>LogisticRegression</code> y medí su accuracy. Debe incluir <code>%</code>.</p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-6"
+              data-expected="%">
+              <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "%"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
@@ -500,20 +696,27 @@ y = (X[:, 0] + X[:, 1] > 1).astype(int)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # LogisticRegression → fit → predict → accuracy
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["modelo = LogisticRegression(random_state=42)","modelo.fit(X_train, y_train)","pred = modelo.predict(X_test)","print(f\"Accuracy: {accuracy_score(y_test,pred)*100:.1f}%\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h6" class="hint-box"
+              data-hints='["modelo = LogisticRegression(random_state=42)","modelo.fit(X_train, y_train)","pred = modelo.predict(X_test)","print(f\"Accuracy: {accuracy_score(y_test,pred)*100:.1f}%\")"]'>
+            </div>
+          </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Comparar 2 modelos</h4>
-  <p>Compará Árbol de Decisión vs Regresión Logística. Imprimí cuál ganó. Debe incluir <code>Ganador</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-7" data-expected="Ganador">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Ganador"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+          <div class="exercise">
+            <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+            <h4>Ejercicio 7: Comparar 2 modelos</h4>
+            <p>Compará Árbol de Decisión vs Regresión Logística. Imprimí cuál ganó. Debe incluir <code>Ganador</code>.
+            </p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-7"
+              data-expected="Ganador">
+              <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Ganador"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
@@ -525,20 +728,27 @@ y = (X[:, 0] + X[:, 1] * 0.5 > 0.8).astype(int)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Entrenar ambos, comparar accuracy, imprimir ganador
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["arbol = DecisionTreeClassifier(max_depth=3, random_state=42).fit(X_train, y_train)","lr = LogisticRegression(random_state=42).fit(X_train, y_train)","a1 = accuracy_score(y_test, arbol.predict(X_test))","a2 = accuracy_score(y_test, lr.predict(X_test))","print(f\"Ganador: {\\\"Árbol\\\" if a1>a2 else \\\"Logística\\\"}\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h7" class="hint-box"
+              data-hints='["arbol = DecisionTreeClassifier(max_depth=3, random_state=42).fit(X_train, y_train)","lr = LogisticRegression(random_state=42).fit(X_train, y_train)","a1 = accuracy_score(y_test, arbol.predict(X_test))","a2 = accuracy_score(y_test, lr.predict(X_test))","print(f\"Ganador: {\\\"Árbol\\\" if a1>a2 else \\\"Logística\\\"}\")"]'>
+            </div>
+          </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Overfitting — profundidad del árbol</h4>
-  <p>Entrenáárboles con max_depth de 1 a 10. Imprimí accuracy de train y test para cada uno. El test accuracy puede bajar con árboles profundos (overfitting). Debe incluir <code>depth</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-8" data-expected="depth">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "depth"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+          <div class="exercise">
+            <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+            <h4>Ejercicio 8: Overfitting — profundidad del árbol</h4>
+            <p>Entrenáárboles con max_depth de 1 a 10. Imprimí accuracy de train y test para cada uno. El test accuracy
+              puede bajar con árboles profundos (overfitting). Debe incluir <code>depth</code>.</p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-8"
+              data-expected="depth">
+              <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "depth"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
@@ -549,20 +759,27 @@ y = (X[:, 0] + X[:, 1] > 1).astype(int)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Probar depth 1 a 10
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["for d in range(1, 11):", "    m = DecisionTreeClassifier(max_depth=d, random_state=42).fit(X_train, y_train)", "    tr = accuracy_score(y_train, m.predict(X_train))", "    te = accuracy_score(y_test, m.predict(X_test))", "    print(f\"depth={d}: train={tr*100:.1f}%, test={te*100:.1f}%\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h8" class="hint-box"
+              data-hints='["for d in range(1, 11):", "    m = DecisionTreeClassifier(max_depth=d, random_state=42).fit(X_train, y_train)", "    tr = accuracy_score(y_train, m.predict(X_train))", "    te = accuracy_score(y_test, m.predict(X_test))", "    print(f\"depth={d}: train={tr*100:.1f}%, test={te*100:.1f}%\")"]'>
+            </div>
+          </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Feature importance</h4>
-  <p>Después de entrenar un árbol, imprimí qué features son más importantes con <code>modelo.feature_importances_</code>. Debe incluir <code>Importancia</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-9" data-expected="Importancia">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Importancia"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+          <div class="exercise">
+            <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+            <h4>Ejercicio 9: Feature importance</h4>
+            <p>Después de entrenar un árbol, imprimí qué features son más importantes con
+              <code>modelo.feature_importances_</code>. Debe incluir <code>Importancia</code>.</p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-9"
+              data-expected="Importancia">
+              <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Importancia"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 
@@ -579,20 +796,27 @@ X = df[["Antiguedad", "Productos", "Saldo"]]
 y = df["Canceló"]
 
 # Entrenar y mostrar feature_importances_
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X, y)","for feat, imp in zip(X.columns, modelo.feature_importances_):","    print(f\"Importancia {feat}: {imp:.3f}\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h9" class="hint-box"
+              data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X, y)","for feat, imp in zip(X.columns, modelo.feature_importances_):","    print(f\"Importancia {feat}: {imp:.3f}\")"]'>
+            </div>
+          </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Pipeline completo de ML</h4>
-  <p>Flujo completo: crear datos → split → entrenar 2 modelos → evaluar con accuracy, precision, recall → imprimir el mejor. Debe incluir <code>Mejor</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-10" data-expected="Mejor">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Mejor"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+          <div class="exercise">
+            <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+            <h4>Ejercicio 10: Pipeline completo de ML</h4>
+            <p>Flujo completo: crear datos → split → entrenar 2 modelos → evaluar con accuracy, precision, recall →
+              imprimir el mejor. Debe incluir <code>Mejor</code>.</p>
+            <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-10"
+              data-expected="Mejor">
+              <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Mejor"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
@@ -603,46 +827,58 @@ X = np.random.rand(300, 3)
 y = (X[:, 0] * 2 + X[:, 1] - X[:, 2] > 1.5).astype(int)
 
 # Pipeline completo: split → 2 modelos → métricas → ganador
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h10" class="hint-box"
+              data-hints='["X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)","for nom,mod in [(\"Árbol\",DecisionTreeClassifier(max_depth=3,random_state=42)),(\"LogReg\",LogisticRegression(random_state=42))]:","    mod.fit(X_tr,y_tr); p=mod.predict(X_te); print(f\"{nom}: acc={accuracy_score(y_te,p)*100:.1f}%\")"]'>
+            </div>
+          </div>
+
+          <div class="section-num">05</div>
+          <h2>Resumen y conexión</h2>
+
+          <ul>
+            <li>ML supervisado: le das datos + respuestas → aprende a predecir.</li>
+            <li><strong>Clasificación</strong> predice categorías; <strong>regresión</strong> predice números.</li>
+            <li>Siempre separá <strong>train/test</strong> — evaluar con datos de entrenamiento es el error #1.</li>
+            <li>El flujo es: <code>split → fit → predict → evaluate</code>.</li>
+            <li><strong>Accuracy</strong> no siempre basta — usá <strong>precision</strong> y <strong>recall</strong>
+              según el costo de los errores.</li>
+            <li><strong>Overfitting</strong>: el modelo memoriza en vez de generalizar (train accuracy alta, test baja).
+            </li>
+            <li>Siempre compará al menos 2-3 modelos distintos.</li>
+          </ul>
+
+          <p>En la siguiente lección (<strong>15 · Regresión y clasificación</strong>) vas a profundizar en los
+            algoritmos más usados: regresión lineal, logística, árboles y KNN, con implementaciones completas y
+            visualizaciones de sus decisiones.</p>
+
+          <p><strong>Recursos:</strong> <a href="https://scikit-learn.org/stable/getting_started.html"
+              target="_blank">scikit-learn Getting Started</a> · <a
+              href="https://scikit-learn.org/stable/tutorial/basic/tutorial.html" target="_blank">Tutorial básico</a>
+          </p>
+
+          <div class="footer-nav">
+            <a href="/data-analysis/13-numpy-fundamentos.html">← NumPy fundamentos</a>
+            <a class="next" href="/data-analysis/15-regresion-clasificacion.html">Regresión y clasificación →</a>
+          </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)","for nom,mod in [(\"Árbol\",DecisionTreeClassifier(max_depth=3,random_state=42)),(\"LogReg\",LogisticRegression(random_state=42))]:","    mod.fit(X_tr,y_tr); p=mod.predict(X_te); print(f\"{nom}: acc={accuracy_score(y_te,p)*100:.1f}%\")"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>ML supervisado: le das datos + respuestas → aprende a predecir.</li>
-  <li><strong>Clasificación</strong> predice categorías; <strong>regresión</strong> predice números.</li>
-  <li>Siempre separá <strong>train/test</strong> — evaluar con datos de entrenamiento es el error #1.</li>
-  <li>El flujo es: <code>split → fit → predict → evaluate</code>.</li>
-  <li><strong>Accuracy</strong> no siempre basta — usá <strong>precision</strong> y <strong>recall</strong> según el costo de los errores.</li>
-  <li><strong>Overfitting</strong>: el modelo memoriza en vez de generalizar (train accuracy alta, test baja).</li>
-  <li>Siempre compará al menos 2-3 modelos distintos.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>15 · Regresión y clasificación</strong>) vas a profundizar en los algoritmos más usados: regresión lineal, logística, árboles y KNN, con implementaciones completas y visualizaciones de sus decisiones.</p>
-
-<p><strong>Recursos:</strong> <a href="https://scikit-learn.org/stable/getting_started.html" target="_blank">scikit-learn Getting Started</a> · <a href="https://scikit-learn.org/stable/tutorial/basic/tutorial.html" target="_blank">Tutorial básico</a></p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/13-numpy-fundamentos.html">← NumPy fundamentos</a>
-  <a class="next" href="/data-analysis/15-regresion-clasificacion.html">Regresión y clasificación →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

@@ -1,92 +1,154 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · SQL 05 · Funciones de agregación</title>
-<meta name="description" content="COUNT, SUM, AVG, MIN, MAX en SQL: resumir datos con funciones de agregación y combinarlas con WHERE y ROUND.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · SQL 05 · Funciones de agregación</title>
+  <meta name="description"
+    content="COUNT, SUM, AVG, MIN, MAX en SQL: resumir datos con funciones de agregación y combinarlas con WHERE y ROUND.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
 </head>
+
 <body>
-<div class="topbar"><button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button><div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div><div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div><div id="global-progress-text" class="top-stats"></div></div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label sql">SQL · Lección 05 de 15</span>
-  <h1>Funciones de agregación</h1>
-  <p>Las funciones de agregación resumen muchas filas en un solo valor: cuántos clientes hay, cuál es el saldo total, el score promedio. Son las herramientas que convierten datos crudos en información útil para decisiones de negocio.</p>
-  <div class="badges">
-    <span class="badge">80–100 min</span>
-    <span class="badge">Prerrequisitos: SQL 04</span>
+  <div class="topbar"><button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label sql">SQL · Lección 05 de 15</span>
+        <h1>Funciones de agregación</h1>
+        <p>Las funciones de agregación resumen muchas filas en un solo valor: cuántos clientes hay, cuál es el saldo
+          total, el score promedio. Son las herramientas que convierten datos crudos en información útil para decisiones
+          de negocio.</p>
+        <div class="badges">
+          <span class="badge">80–100 min</span>
+          <span class="badge">Prerrequisitos: SQL 04</span>
+        </div>
+      </div>
 
-<h3>Las 5 funciones esenciales</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Función</th><th>Qué hace</th><th>Ignora NULL?</th><th>Ejemplo</th></tr>
-<tr><td><code>COUNT(*)</code></td><td>Cuenta TODAS las filas</td><td>No (cuenta todo)</td><td><code>COUNT(*) → 5</code></td></tr>
-<tr><td><code>COUNT(col)</code></td><td>Cuenta filas donde col NO es NULL</td><td><b>Sí</b></td><td><code>COUNT(email) → 3</code></td></tr>
-<tr><td><code>SUM(col)</code></td><td>Suma valores</td><td>Sí</td><td><code>SUM(saldo) → 1477000</code></td></tr>
-<tr><td><code>AVG(col)</code></td><td>Promedio</td><td>Sí</td><td><code>AVG(score) → 689</code></td></tr>
-<tr><td><code>MIN(col)</code></td><td>Valor mínimo</td><td>Sí</td><td><code>MIN(score) → 590</code></td></tr>
-<tr><td><code>MAX(col)</code></td><td>Valor máximo</td><td>Sí</td><td><code>MAX(saldo) → 890000</code></td></tr>
-</table>
-</div>
+      <h3>Las 5 funciones esenciales</h3>
 
-<div class="concept"><strong>COUNT(*) vs COUNT(col):</strong> esta diferencia es CRÍTICA y aparece en entrevistas técnicas. <code>COUNT(*)</code> cuenta TODAS las filas sin importar nada. <code>COUNT(email)</code> cuenta solo las filas donde email NO es NULL. Si tenés 5 clientes y 2 no tienen email: <code>COUNT(*) = 5</code>, <code>COUNT(email) = 3</code>.</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Función</th>
+            <th>Qué hace</th>
+            <th>Ignora NULL?</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><code>COUNT(*)</code></td>
+            <td>Cuenta TODAS las filas</td>
+            <td>No (cuenta todo)</td>
+            <td><code>COUNT(*) → 5</code></td>
+          </tr>
+          <tr>
+            <td><code>COUNT(col)</code></td>
+            <td>Cuenta filas donde col NO es NULL</td>
+            <td><b>Sí</b></td>
+            <td><code>COUNT(email) → 3</code></td>
+          </tr>
+          <tr>
+            <td><code>SUM(col)</code></td>
+            <td>Suma valores</td>
+            <td>Sí</td>
+            <td><code>SUM(saldo) → 1477000</code></td>
+          </tr>
+          <tr>
+            <td><code>AVG(col)</code></td>
+            <td>Promedio</td>
+            <td>Sí</td>
+            <td><code>AVG(score) → 689</code></td>
+          </tr>
+          <tr>
+            <td><code>MIN(col)</code></td>
+            <td>Valor mínimo</td>
+            <td>Sí</td>
+            <td><code>MIN(score) → 590</code></td>
+          </tr>
+          <tr>
+            <td><code>MAX(col)</code></td>
+            <td>Valor máximo</td>
+            <td>Sí</td>
+            <td><code>MAX(saldo) → 890000</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="warning"><strong>AVG y los NULLs:</strong> <code>AVG()</code> ignora los NULLs, no los trata como 0. Esto es importante: si tenés saldos [100, NULL, 200], <code>AVG(saldo) = 150</code> (promedia solo los 2 valores existentes), NO 100 (promedio con 0 incluido). Esto puede distorsionar resultados si hay muchos NULLs.</div>
+      <div class="concept"><strong>COUNT(*) vs COUNT(col):</strong> esta diferencia es CRÍTICA y aparece en entrevistas
+        técnicas. <code>COUNT(*)</code> cuenta TODAS las filas sin importar nada. <code>COUNT(email)</code> cuenta solo
+        las filas donde email NO es NULL. Si tenés 5 clientes y 2 no tienen email: <code>COUNT(*) = 5</code>,
+        <code>COUNT(email) = 3</code>.</div>
 
-<h3>COUNT(DISTINCT col)</h3>
+      <div class="warning"><strong>AVG y los NULLs:</strong> <code>AVG()</code> ignora los NULLs, no los trata como 0.
+        Esto es importante: si tenés saldos [100, NULL, 200], <code>AVG(saldo) = 150</code> (promedia solo los 2 valores
+        existentes), NO 100 (promedio con 0 incluido). Esto puede distorsionar resultados si hay muchos NULLs.</div>
 
-<p>Combina conteo con deduplicación: cuenta cuántos valores ÚNICOS hay en una columna.</p>
+      <h3>COUNT(DISTINCT col)</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT COUNT(*) AS total_registros,
+      <p>Combina conteo con deduplicación: cuenta cuántos valores ÚNICOS hay en una columna.</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT COUNT(*) AS total_registros,
        COUNT(DISTINCT cliente) AS clientes_unicos,
        COUNT(DISTINCT ciudad) AS ciudades
 FROM transacciones;</pre>
 
-<h3>Combinar agregaciones con WHERE</h3>
+      <h3>Combinar agregaciones con WHERE</h3>
 
-<p>WHERE filtra ANTES de agregar. Esto te permite calcular estadísticas sobre un subconjunto:</p>
+      <p>WHERE filtra ANTES de agregar. Esto te permite calcular estadísticas sobre un subconjunto:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Promedio de score SOLO de clientes activos
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Promedio de score SOLO de clientes activos
 SELECT AVG(score) AS avg_score_activos
 FROM clientes
 WHERE activo = 1;</pre>
 
-<h3>ROUND con agregaciones</h3>
+      <h3>ROUND con agregaciones</h3>
 
-<p><code>ROUND(valor, decimales)</code> redondea. Se usa constantemente con AVG y cálculos de porcentaje:</p>
+      <p><code>ROUND(valor, decimales)</code> redondea. Se usa constantemente con AVG y cálculos de porcentaje:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT ROUND(AVG(score), 0) AS score_promedio,
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">SELECT ROUND(AVG(score), 0) AS score_promedio,
        ROUND(AVG(saldo), 2) AS saldo_promedio,
        ROUND(SUM(saldo) * 100.0 / 1000000, 1) AS pct_del_millon
 FROM clientes;</pre>
 
-<div class="realworld"><strong>En el trabajo:</strong> las funciones de agregación son el corazón de TODOS los reportes. "Total de ventas del mes", "Clientes nuevos esta semana", "Saldo promedio por segmento", "Score máximo de la cartera". Sin GROUP BY (siguiente lección), las agregaciones resumen TODA la tabla en una sola fila. Con GROUP BY, podés resumir por categoría.</div>
+      <div class="realworld"><strong>En el trabajo:</strong> las funciones de agregación son el corazón de TODOS los
+        reportes. "Total de ventas del mes", "Clientes nuevos esta semana", "Saldo promedio por segmento", "Score máximo
+        de la cartera". Sin GROUP BY (siguiente lección), las agregaciones resumen TODA la tabla en una sola fila. Con
+        GROUP BY, podés resumir por categoría.</div>
 
-<div class="analogy"><strong>Equivalencia con pandas:</strong> <code>COUNT(*)</code> = <code>len(df)</code>, <code>SUM(col)</code> = <code>df["col"].sum()</code>, <code>AVG(col)</code> = <code>df["col"].mean()</code>, <code>COUNT(DISTINCT col)</code> = <code>df["col"].nunique()</code>. Las mismas operaciones, distinto lenguaje.</div>
+      <div class="analogy"><strong>Equivalencia con pandas:</strong> <code>COUNT(*)</code> = <code>len(df)</code>,
+        <code>SUM(col)</code> = <code>df["col"].sum()</code>, <code>AVG(col)</code> = <code>df["col"].mean()</code>,
+        <code>COUNT(DISTINCT col)</code> = <code>df["col"].nunique()</code>. Las mismas operaciones, distinto lenguaje.
+      </div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: Las 5 funciones en acción</h3>
+      <h3>Ejemplo 1: Las 5 funciones en acción</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_01_basicas.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, email TEXT);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_01_basicas.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, email TEXT);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,'garcia@mail.com');
 INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000,NULL);
 INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000,'martinez@mail.com');
@@ -101,16 +163,19 @@ SELECT
     MIN(score) AS score_minimo,
     MAX(score) AS score_maximo,
     MAX(saldo) - MIN(saldo) AS rango_saldos
-FROM clientes;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+FROM clientes;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: COUNT(*) vs COUNT(col) — la diferencia clave</h3>
+      <h3>Ejemplo 2: COUNT(*) vs COUNT(col) — la diferencia clave</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_02_count.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT, telefono TEXT);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_02_count.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT, telefono TEXT);
 INSERT INTO clientes VALUES (1,'García','garcia@mail.com','+5411234567');
 INSERT INTO clientes VALUES (2,'López',NULL,'+5435123456');
 INSERT INTO clientes VALUES (3,'Martínez','martinez@mail.com',NULL);
@@ -122,16 +187,19 @@ SELECT
     COUNT(email) AS con_email,         -- 3 (ignora NULL)
     COUNT(telefono) AS con_telefono,   -- 3 (ignora NULL)
     COUNT(DISTINCT email) AS emails_unicos -- 3 (únicos no-NULL)
-FROM clientes;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+FROM clientes;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Agregaciones con WHERE</h3>
+      <h3>Ejemplo 3: Agregaciones con WHERE</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_03_where.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_03_where.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1);
 INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000,1);
 INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000,0);
@@ -148,16 +216,19 @@ WHERE activo = 1;
 
 -- Solo Buenos Aires
 -- SELECT COUNT(*) AS total_bsas, SUM(saldo) AS saldo_bsas
--- FROM clientes WHERE ciudad = 'Buenos Aires';</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+-- FROM clientes WHERE ciudad = 'Buenos Aires';</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Dashboard de métricas en una consulta</h3>
+      <h3>Ejemplo 4: Dashboard de métricas en una consulta</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_04_dashboard.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_04_dashboard.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1);
 INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000,1);
 INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000,0);
@@ -175,16 +246,19 @@ SELECT
     SUM(saldo) AS saldo_total,
     ROUND(AVG(saldo), 0) AS saldo_promedio,
     COUNT(DISTINCT ciudad) AS ciudades
-FROM clientes;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+FROM clientes;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Estadísticas de transacciones</h3>
+      <h3>Ejemplo 5: Estadísticas de transacciones</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_05_transacciones.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, cliente TEXT, tipo TEXT, monto REAL, fecha TEXT);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_05_transacciones.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, cliente TEXT, tipo TEXT, monto REAL, fecha TEXT);
 INSERT INTO transacciones VALUES (1,'García','compra',15000,'2025-01-15');
 INSERT INTO transacciones VALUES (2,'García','compra',32000,'2025-01-20');
 INSERT INTO transacciones VALUES (3,'López','venta',8000,'2025-01-18');
@@ -203,59 +277,168 @@ SELECT
     MAX(monto) AS monto_maximo,
     MIN(fecha) AS primera,
     MAX(fecha) AS ultima
-FROM transacciones;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+FROM transacciones;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Función</th><th>Descripción</th><th>NULLs</th><th>Equivalente pandas</th></tr>
-<tr><td><code>COUNT(*)</code></td><td>Total de filas</td><td>Cuenta todo</td><td><code>len(df)</code></td></tr>
-<tr><td><code>COUNT(col)</code></td><td>Filas no-NULL</td><td>Ignora</td><td><code>df["col"].count()</code></td></tr>
-<tr><td><code>COUNT(DISTINCT col)</code></td><td>Valores únicos</td><td>Ignora</td><td><code>df["col"].nunique()</code></td></tr>
-<tr><td><code>SUM(col)</code></td><td>Suma</td><td>Ignora</td><td><code>df["col"].sum()</code></td></tr>
-<tr><td><code>AVG(col)</code></td><td>Promedio</td><td>Ignora</td><td><code>df["col"].mean()</code></td></tr>
-<tr><td><code>MIN(col)</code></td><td>Mínimo</td><td>Ignora</td><td><code>df["col"].min()</code></td></tr>
-<tr><td><code>MAX(col)</code></td><td>Máximo</td><td>Ignora</td><td><code>df["col"].max()</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Función</th>
+            <th>Descripción</th>
+            <th>NULLs</th>
+            <th>Equivalente pandas</th>
+          </tr>
+          <tr>
+            <td><code>COUNT(*)</code></td>
+            <td>Total de filas</td>
+            <td>Cuenta todo</td>
+            <td><code>len(df)</code></td>
+          </tr>
+          <tr>
+            <td><code>COUNT(col)</code></td>
+            <td>Filas no-NULL</td>
+            <td>Ignora</td>
+            <td><code>df["col"].count()</code></td>
+          </tr>
+          <tr>
+            <td><code>COUNT(DISTINCT col)</code></td>
+            <td>Valores únicos</td>
+            <td>Ignora</td>
+            <td><code>df["col"].nunique()</code></td>
+          </tr>
+          <tr>
+            <td><code>SUM(col)</code></td>
+            <td>Suma</td>
+            <td>Ignora</td>
+            <td><code>df["col"].sum()</code></td>
+          </tr>
+          <tr>
+            <td><code>AVG(col)</code></td>
+            <td>Promedio</td>
+            <td>Ignora</td>
+            <td><code>df["col"].mean()</code></td>
+          </tr>
+          <tr>
+            <td><code>MIN(col)</code></td>
+            <td>Mínimo</td>
+            <td>Ignora</td>
+            <td><code>df["col"].min()</code></td>
+          </tr>
+          <tr>
+            <td><code>MAX(col)</code></td>
+            <td>Máximo</td>
+            <td>Ignora</td>
+            <td><code>df["col"].max()</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: COUNT(*)</h4><p>Contá el total de productos. Debe incluir <code>5</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-1" data-expected="5"><div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "5"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE productos (id INTEGER, nombre TEXT, precio REAL, stock INTEGER);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: COUNT(*)</h4>
+        <p>Contá el total de productos. Debe incluir <code>5</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-1" data-expected="5">
+          <div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "5"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE productos (id INTEGER, nombre TEXT, precio REAL, stock INTEGER);
 INSERT INTO productos VALUES (1,'Notebook',920000,15),(2,'Mouse',23000,150),
 (3,'Teclado',46000,80),(4,'Monitor',185000,25),(5,'Auriculares',35000,200);
 
 -- Contá productos:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT COUNT(*) AS total FROM productos;","COUNT(*) cuenta todas las filas","5 productos en la tabla"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["SELECT COUNT(*) AS total FROM productos;","COUNT(*) cuenta todas las filas","5 productos en la tabla"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: SUM</h4><p>Calculá el saldo total de todos los clientes. Debe incluir <code>1477000</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-2" data-expected="1477000"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "1477000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: SUM</h4>
+        <p>Calculá el saldo total de todos los clientes. Debe incluir <code>1477000</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-2" data-expected="1477000">
+          <div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "1477000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),
 (3,'Martínez',45000),(4,'Pérez',890000),(5,'Fernández',72000);
 
 -- Suma de saldos:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["SELECT SUM(saldo) AS total FROM clientes;","150000+320000+45000+890000+72000","= 1477000"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["SELECT SUM(saldo) AS total FROM clientes;","150000+320000+45000+890000+72000","= 1477000"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: AVG con ROUND</h4><p>Calculá el score promedio redondeado a entero. Debe incluir <code>689</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-3" data-expected="689"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "689"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: AVG con ROUND</h4>
+        <p>Calculá el score promedio redondeado a entero. Debe incluir <code>689</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-3" data-expected="689">
+          <div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "689"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Martínez',590),
 (4,'Pérez',810),(5,'Fernández',645);
 
 -- Promedio redondeado:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["SELECT ROUND(AVG(score), 0) AS promedio FROM clientes;","(720+680+590+810+645)/5 = 689","ROUND(..., 0) redondea a entero"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["SELECT ROUND(AVG(score), 0) AS promedio FROM clientes;","(720+680+590+810+645)/5 = 689","ROUND(..., 0) redondea a entero"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: MIN y MAX</h4><p>Encontrá el score mínimo y máximo, y la diferencia (rango). Debe incluir <code>220</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-4" data-expected="220"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "220"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: MIN y MAX</h4>
+        <p>Encontrá el score mínimo y máximo, y la diferencia (rango). Debe incluir <code>220</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-4" data-expected="220">
+          <div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "220"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Martínez',590),
 (4,'Pérez',810),(5,'Fernández',645);
 
 -- MIN, MAX y rango:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["SELECT MIN(score), MAX(score), MAX(score) - MIN(score) AS rango","810 - 590 = 220","Podés agregar AS para los alias"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["SELECT MIN(score), MAX(score), MAX(score) - MIN(score) AS rango","810 - 590 = 220","Podés agregar AS para los alias"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: COUNT(*) vs COUNT(col)</h4><p>Mostrá COUNT(*) y COUNT(email) para ver la diferencia. Debe incluir <code>3</code> (los que tienen email).</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-5" data-expected="3"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "3"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: COUNT(*) vs COUNT(col)</h4>
+        <p>Mostrá COUNT(*) y COUNT(email) para ver la diferencia. Debe incluir <code>3</code> (los que tienen email).
+        </p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-5" data-expected="3">
+          <div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT);
 INSERT INTO clientes VALUES (1,'García','garcia@mail.com');
 INSERT INTO clientes VALUES (2,'López',NULL);
 INSERT INTO clientes VALUES (3,'Martínez','martinez@mail.com');
@@ -263,9 +446,24 @@ INSERT INTO clientes VALUES (4,'Pérez',NULL);
 INSERT INTO clientes VALUES (5,'Fernández','fernandez@mail.com');
 
 -- Mostrá ambos COUNTs:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["SELECT COUNT(*) AS total, COUNT(email) AS con_email FROM clientes;","COUNT(*) = 5, COUNT(email) = 3","COUNT(col) ignora NULLs"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["SELECT COUNT(*) AS total, COUNT(email) AS con_email FROM clientes;","COUNT(*) = 5, COUNT(email) = 3","COUNT(col) ignora NULLs"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: Agregación con WHERE</h4><p>Calculá saldo promedio de clientes activos de Buenos Aires. Debe incluir <code>416667</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-6" data-expected="416667"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "416667"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL, activo INTEGER);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Agregación con WHERE</h4>
+        <p>Calculá saldo promedio de clientes activos de Buenos Aires. Debe incluir <code>416667</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-6" data-expected="416667">
+          <div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "416667"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000,1);
 INSERT INTO clientes VALUES (2,'López','Córdoba',320000,1);
 INSERT INTO clientes VALUES (3,'Martínez','Buenos Aires',45000,0);
@@ -273,24 +471,71 @@ INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',890000,1);
 INSERT INTO clientes VALUES (5,'Sosa','Buenos Aires',210000,1);
 
 -- Promedio BsAs activos:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["WHERE activo = 1 AND ciudad = \\x27Buenos Aires\\x27","García 150K + Pérez 890K + Sosa 210K = 1250000 / 3","ROUND(AVG(saldo), 0) = 416667"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["WHERE activo = 1 AND ciudad = \\x27Buenos Aires\\x27","García 150K + Pérez 890K + Sosa 210K = 1250000 / 3","ROUND(AVG(saldo), 0) = 416667"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: COUNT(DISTINCT)</h4><p>De una tabla de transacciones, contá transacciones totales, clientes únicos y tipos únicos. Debe incluir <code>3</code> (clientes).</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-7" data-expected="3"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "3"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, cliente TEXT, tipo TEXT, monto REAL);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: COUNT(DISTINCT)</h4>
+        <p>De una tabla de transacciones, contá transacciones totales, clientes únicos y tipos únicos. Debe incluir
+          <code>3</code> (clientes).</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-7" data-expected="3">
+          <div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, cliente TEXT, tipo TEXT, monto REAL);
 INSERT INTO transacciones VALUES (1,'García','compra',1500),(2,'López','venta',800),
 (3,'García','compra',3200),(4,'Pérez','transferencia',5000),
 (5,'García','venta',2100),(6,'López','compra',950);
 
 -- Conteo total, clientes únicos, tipos únicos:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["COUNT(*) AS total, COUNT(DISTINCT cliente) AS clientes","COUNT(DISTINCT tipo) AS tipos","6 transacciones, 3 clientes, 3 tipos"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["COUNT(*) AS total, COUNT(DISTINCT cliente) AS clientes","COUNT(DISTINCT tipo) AS tipos","6 transacciones, 3 clientes, 3 tipos"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Porcentaje del total</h4><p>Calculá qué porcentaje del saldo total representa Buenos Aires. Debe incluir un porcentaje (redondeado).</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-8" data-expected="70"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir el porcentaje</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Porcentaje del total</h4>
+        <p>Calculá qué porcentaje del saldo total representa Buenos Aires. Debe incluir un porcentaje (redondeado).</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-8" data-expected="70">
+          <div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir el porcentaje</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
 (3,'Martínez','Rosario',45000),(4,'Pérez','Buenos Aires',810000),(5,'Sosa','Buenos Aires',100000);
 
 -- % que representa BsAs del total:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["Subconsulta: (SELECT SUM(saldo) FROM clientes) para el total","SUM(saldo) WHERE ciudad BsAs * 100.0 / (SELECT SUM(saldo) FROM clientes)","ROUND(..., 0) para redondear"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["Subconsulta: (SELECT SUM(saldo) FROM clientes) para el total","SUM(saldo) WHERE ciudad BsAs * 100.0 / (SELECT SUM(saldo) FROM clientes)","ROUND(..., 0) para redondear"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Múltiples métricas con SUM+CASE</h4><p>En una sola consulta: total de ventas, cantidad de compras, cantidad de ventas, monto promedio por tipo usando SUM+CASE. Debe incluir <code>compra</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-9" data-expected="compra"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "compra"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, tipo TEXT, monto REAL);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Múltiples métricas con SUM+CASE</h4>
+        <p>En una sola consulta: total de ventas, cantidad de compras, cantidad de ventas, monto promedio por tipo
+          usando SUM+CASE. Debe incluir <code>compra</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-9" data-expected="compra">
+          <div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "compra"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, tipo TEXT, monto REAL);
 INSERT INTO transacciones VALUES (1,'compra',15000),(2,'venta',8000),(3,'compra',32000),
 (4,'transferencia',50000),(5,'venta',21000),(6,'compra',9500);
 
@@ -299,46 +544,73 @@ SELECT
     COUNT(*) AS total,
     SUM(CASE WHEN tipo = 'compra' THEN 1 ELSE 0 END) AS qty_compra,
     SUM(CASE WHEN tipo = 'venta' THEN 1 ELSE 0 END) AS qty_venta
-FROM transacciones;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["SUM(CASE WHEN tipo = \\x27compra\\x27 THEN monto ELSE 0 END) AS monto_compra","Podés agregar más métricas con el mismo patrón","3 compras, 2 ventas, 1 transferencia"]'></div></div>
+FROM transacciones;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["SUM(CASE WHEN tipo = \\x27compra\\x27 THEN monto ELSE 0 END) AS monto_compra","Podés agregar más métricas con el mismo patrón","3 compras, 2 ventas, 1 transferencia"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Reporte ejecutivo completo</h4><p>Generá un "dashboard" en una sola fila: total clientes, activos, inactivos, % activos, saldo total, promedio, máximo, ciudades únicas, y cantidad de premium (score>=700). Debe incluir <code>total</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-10" data-expected="total"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "total"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
+      <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Reporte ejecutivo completo</h4>
+        <p>Generá un "dashboard" en una sola fila: total clientes, activos, inactivos, % activos, saldo total, promedio,
+          máximo, ciudades únicas, y cantidad de premium (score>=700). Debe incluir <code>total</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-10" data-expected="total">
+          <div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "total"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1),(2,'López','Córdoba',680,320000,1),
 (3,'Martínez','Rosario',590,45000,0),(4,'Pérez','Buenos Aires',810,890000,1),
 (5,'Fernández','Mendoza',645,72000,1),(6,'Sosa','Buenos Aires',750,210000,1);
 
 -- Dashboard completo:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["COUNT(*) AS total, SUM(CASE WHEN activo=1 ...) AS activos","ROUND(SUM(CASE WHEN activo=1 ...)*100.0/COUNT(*), 1) AS pct_activos","SUM(saldo), ROUND(AVG(saldo)), COUNT(DISTINCT ciudad)"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["COUNT(*) AS total, SUM(CASE WHEN activo=1 ...) AS activos","ROUND(SUM(CASE WHEN activo=1 ...)*100.0/COUNT(*), 1) AS pct_activos","SUM(saldo), ROUND(AVG(saldo)), COUNT(DISTINCT ciudad)"]'>
+        </div>
+      </div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
 
-<ul>
-  <li><code>COUNT(*)</code> cuenta todas las filas. <code>COUNT(col)</code> cuenta solo las no-NULL.</li>
-  <li><code>SUM, AVG, MIN, MAX</code> ignoran NULLs automáticamente.</li>
-  <li><code>COUNT(DISTINCT col)</code> cuenta valores únicos.</li>
-  <li><code>ROUND(valor, n)</code> redondea a n decimales.</li>
-  <li>WHERE filtra ANTES de la agregación.</li>
-  <li><code>SUM(CASE WHEN ... THEN 1 ELSE 0 END)</code> permite contar condicionalmente.</li>
-</ul>
+      <ul>
+        <li><code>COUNT(*)</code> cuenta todas las filas. <code>COUNT(col)</code> cuenta solo las no-NULL.</li>
+        <li><code>SUM, AVG, MIN, MAX</code> ignoran NULLs automáticamente.</li>
+        <li><code>COUNT(DISTINCT col)</code> cuenta valores únicos.</li>
+        <li><code>ROUND(valor, n)</code> redondea a n decimales.</li>
+        <li>WHERE filtra ANTES de la agregación.</li>
+        <li><code>SUM(CASE WHEN ... THEN 1 ELSE 0 END)</code> permite contar condicionalmente.</li>
+      </ul>
 
-<p>En la siguiente lección (<strong>06 · GROUP BY y HAVING</strong>) vas a aprender a agrupar datos: estadísticas POR CIUDAD, POR TIPO, POR CATEGORÍA — el equivalente de <code>df.groupby()</code> en pandas.</p>
+      <p>En la siguiente lección (<strong>06 · GROUP BY y HAVING</strong>) vas a aprender a agrupar datos: estadísticas
+        POR CIUDAD, POR TIPO, POR CATEGORÍA — el equivalente de <code>df.groupby()</code> en pandas.</p>
 
-<div class="footer-nav">
-  <a href="/sql/04-order-limit-distinct.html">← ORDER BY, LIMIT, DISTINCT</a>
-  <a class="next" href="/sql/06-group-by-having.html">GROUP BY y HAVING →</a>
-</div>
+      <div class="footer-nav">
+        <a href="/sql/04-order-limit-distinct.html">← ORDER BY, LIMIT, DISTINCT</a>
+        <a class="next" href="/sql/06-group-by-having.html">GROUP BY y HAVING →</a>
+      </div>
 
-</main>
-</div>
+    </main>
+  </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

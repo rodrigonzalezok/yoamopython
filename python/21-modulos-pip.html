@@ -1,62 +1,109 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 21 · Módulos de pip</title>
-<meta name="description" content="Instalá paquetes con pip: pandas, numpy, requests, matplotlib. Entornos virtuales, requirements.txt y cómo leer documentación.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 21 · Módulos de pip</title>
+  <meta name="description"
+    content="Instalá paquetes con pip: pandas, numpy, requests, matplotlib. Entornos virtuales, requirements.txt y cómo leer documentación.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 21 de 27</span>
-  <h1>Módulos externos (pip)</h1>
-  <p>La biblioteca estándar cubre lo básico, pero el verdadero poder de Python viene de su ecosistema: más de 400,000 paquetes en PyPI que instalás con <code>pip</code>. Esta lección cubre pip, entornos virtuales y los paquetes que necesitás como Data Analyst.</p>
-  <div class="badges">
-    <span class="badge">70–90 min</span>
-    <span class="badge">Prerrequisitos: 20 Módulos stdlib</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 21 de 27</span>
+        <h1>Módulos externos (pip)</h1>
+        <p>La biblioteca estándar cubre lo básico, pero el verdadero poder de Python viene de su ecosistema: más de
+          400,000 paquetes en PyPI que instalás con <code>pip</code>. Esta lección cubre pip, entornos virtuales y los
+          paquetes que necesitás como Data Analyst.</p>
+        <div class="badges">
+          <span class="badge">70–90 min</span>
+          <span class="badge">Prerrequisitos: 20 Módulos stdlib</span>
+        </div>
+      </div>
 
-<h3>¿Qué es pip?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p><strong>pip</strong> (Package Installer for Python) es la herramienta oficial para instalar paquetes de <b>PyPI</b> (Python Package Index), el repositorio central con más de 400,000 paquetes. Viene incluido con Python 3.4+ — no necesitás instalarlo por separado.</p>
+      <h3>¿Qué es pip?</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Comando</th><th>Qué hace</th><th>Ejemplo</th></tr>
-<tr><td><code>pip install paquete</code></td><td>Instala un paquete</td><td><code>pip install pandas</code></td></tr>
-<tr><td><code>pip install paquete==version</code></td><td>Instala versión específica</td><td><code>pip install pandas==2.1.0</code></td></tr>
-<tr><td><code>pip install -U paquete</code></td><td>Actualiza a la última</td><td><code>pip install -U pandas</code></td></tr>
-<tr><td><code>pip uninstall paquete</code></td><td>Desinstala</td><td><code>pip uninstall pandas</code></td></tr>
-<tr><td><code>pip list</code></td><td>Lista paquetes instalados</td><td>—</td></tr>
-<tr><td><code>pip freeze</code></td><td>Lista con versiones exactas</td><td>Para <code>requirements.txt</code></td></tr>
-<tr><td><code>pip install -r req.txt</code></td><td>Instala desde archivo</td><td><code>pip install -r requirements.txt</code></td></tr>
-</table>
-</div>
+      <p><strong>pip</strong> (Package Installer for Python) es la herramienta oficial para instalar paquetes de
+        <b>PyPI</b> (Python Package Index), el repositorio central con más de 400,000 paquetes. Viene incluido con
+        Python 3.4+ — no necesitás instalarlo por separado.</p>
 
-<h3>Entornos virtuales (venv) — aislar proyectos</h3>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Comando</th>
+            <th>Qué hace</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><code>pip install paquete</code></td>
+            <td>Instala un paquete</td>
+            <td><code>pip install pandas</code></td>
+          </tr>
+          <tr>
+            <td><code>pip install paquete==version</code></td>
+            <td>Instala versión específica</td>
+            <td><code>pip install pandas==2.1.0</code></td>
+          </tr>
+          <tr>
+            <td><code>pip install -U paquete</code></td>
+            <td>Actualiza a la última</td>
+            <td><code>pip install -U pandas</code></td>
+          </tr>
+          <tr>
+            <td><code>pip uninstall paquete</code></td>
+            <td>Desinstala</td>
+            <td><code>pip uninstall pandas</code></td>
+          </tr>
+          <tr>
+            <td><code>pip list</code></td>
+            <td>Lista paquetes instalados</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><code>pip freeze</code></td>
+            <td>Lista con versiones exactas</td>
+            <td>Para <code>requirements.txt</code></td>
+          </tr>
+          <tr>
+            <td><code>pip install -r req.txt</code></td>
+            <td>Instala desde archivo</td>
+            <td><code>pip install -r requirements.txt</code></td>
+          </tr>
+        </table>
+      </div>
 
-<p>Cada proyecto puede necesitar versiones diferentes de los mismos paquetes. Un <strong>entorno virtual</strong> es una copia aislada de Python con sus propios paquetes, independiente del sistema. Es como tener una "burbuja" por proyecto.</p>
+      <h3>Entornos virtuales (venv) — aislar proyectos</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Crear entorno virtual
+      <p>Cada proyecto puede necesitar versiones diferentes de los mismos paquetes. Un <strong>entorno virtual</strong>
+        es una copia aislada de Python con sus propios paquetes, independiente del sistema. Es como tener una "burbuja"
+        por proyecto.</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Crear entorno virtual
 python -m venv .venv
 
 # Activar (Windows)
@@ -74,61 +121,113 @@ pip freeze > requirements.txt
 # Otro desarrollador replica tu entorno:
 pip install -r requirements.txt</pre>
 
-<div class="warning"><strong>Regla profesional:</strong> SIEMPRE usá entornos virtuales para proyectos. Nunca instales paquetes globalmente. Si dos proyectos necesitan versiones distintas de pandas, los entornos virtuales te salvan. En VS Code, la extensión de Python detecta el venv automáticamente.</div>
+      <div class="warning"><strong>Regla profesional:</strong> SIEMPRE usá entornos virtuales para proyectos. Nunca
+        instales paquetes globalmente. Si dos proyectos necesitan versiones distintas de pandas, los entornos virtuales
+        te salvan. En VS Code, la extensión de Python detecta el venv automáticamente.</div>
 
-<h3>requirements.txt — reproducibilidad</h3>
+      <h3>requirements.txt — reproducibilidad</h3>
 
-<p>Un archivo <code>requirements.txt</code> lista todos los paquetes que tu proyecto necesita con sus versiones exactas. Es el contrato que garantiza que cualquiera pueda reproducir tu entorno:</p>
+      <p>Un archivo <code>requirements.txt</code> lista todos los paquetes que tu proyecto necesita con sus versiones
+        exactas. Es el contrato que garantiza que cualquiera pueda reproducir tu entorno:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">pandas==2.1.4
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">pandas==2.1.4
 numpy==1.26.2
 matplotlib==3.8.2
 scikit-learn==1.3.2
 openpyxl==3.1.2
 requests==2.31.0</pre>
 
-<div class="concept"><strong>¿Por qué versiones exactas?</strong> Porque una actualización menor de pandas puede romper tu código. Si tu script funciona con pandas 2.1.4, fijá esa versión. Cuando tengas tiempo de testear con la nueva versión, actualizá deliberadamente.</div>
+      <div class="concept"><strong>¿Por qué versiones exactas?</strong> Porque una actualización menor de pandas puede
+        romper tu código. Si tu script funciona con pandas 2.1.4, fijá esa versión. Cuando tengas tiempo de testear con
+        la nueva versión, actualizá deliberadamente.</div>
 
-<h3>Los paquetes que todo Data Analyst necesita</h3>
+      <h3>Los paquetes que todo Data Analyst necesita</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Paquete</th><th>¿Para qué?</th><th>Instalar</th></tr>
-<tr><td><code>pandas</code></td><td>DataFrames, limpieza, análisis tabular</td><td><code>pip install pandas</code></td></tr>
-<tr><td><code>numpy</code></td><td>Arrays numéricos, operaciones vectorizadas</td><td><code>pip install numpy</code></td></tr>
-<tr><td><code>matplotlib</code></td><td>Gráficos y visualizaciones</td><td><code>pip install matplotlib</code></td></tr>
-<tr><td><code>seaborn</code></td><td>Visualizaciones estadísticas (sobre matplotlib)</td><td><code>pip install seaborn</code></td></tr>
-<tr><td><code>scikit-learn</code></td><td>Machine Learning</td><td><code>pip install scikit-learn</code></td></tr>
-<tr><td><code>openpyxl</code></td><td>Leer/escribir archivos Excel (.xlsx)</td><td><code>pip install openpyxl</code></td></tr>
-<tr><td><code>requests</code></td><td>Consumir APIs HTTP</td><td><code>pip install requests</code></td></tr>
-<tr><td><code>sqlalchemy</code></td><td>Conexión a bases de datos SQL</td><td><code>pip install sqlalchemy</code></td></tr>
-<tr><td><code>jupyter</code></td><td>Notebooks interactivos</td><td><code>pip install jupyter</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Paquete</th>
+            <th>¿Para qué?</th>
+            <th>Instalar</th>
+          </tr>
+          <tr>
+            <td><code>pandas</code></td>
+            <td>DataFrames, limpieza, análisis tabular</td>
+            <td><code>pip install pandas</code></td>
+          </tr>
+          <tr>
+            <td><code>numpy</code></td>
+            <td>Arrays numéricos, operaciones vectorizadas</td>
+            <td><code>pip install numpy</code></td>
+          </tr>
+          <tr>
+            <td><code>matplotlib</code></td>
+            <td>Gráficos y visualizaciones</td>
+            <td><code>pip install matplotlib</code></td>
+          </tr>
+          <tr>
+            <td><code>seaborn</code></td>
+            <td>Visualizaciones estadísticas (sobre matplotlib)</td>
+            <td><code>pip install seaborn</code></td>
+          </tr>
+          <tr>
+            <td><code>scikit-learn</code></td>
+            <td>Machine Learning</td>
+            <td><code>pip install scikit-learn</code></td>
+          </tr>
+          <tr>
+            <td><code>openpyxl</code></td>
+            <td>Leer/escribir archivos Excel (.xlsx)</td>
+            <td><code>pip install openpyxl</code></td>
+          </tr>
+          <tr>
+            <td><code>requests</code></td>
+            <td>Consumir APIs HTTP</td>
+            <td><code>pip install requests</code></td>
+          </tr>
+          <tr>
+            <td><code>sqlalchemy</code></td>
+            <td>Conexión a bases de datos SQL</td>
+            <td><code>pip install sqlalchemy</code></td>
+          </tr>
+          <tr>
+            <td><code>jupyter</code></td>
+            <td>Notebooks interactivos</td>
+            <td><code>pip install jupyter</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="realworld"><strong>En el trabajo:</strong> cuando empezás en un equipo, lo primero que hacés es: <code>git clone proyecto</code>, <code>python -m venv .venv</code>, <code>pip install -r requirements.txt</code>. En 3 comandos tenés exactamente el mismo entorno que tus compañeros. Sin venv ni requirements, cada persona tiene versiones distintas y los bugs son imposibles de reproducir.</div>
+      <div class="realworld"><strong>En el trabajo:</strong> cuando empezás en un equipo, lo primero que hacés es:
+        <code>git clone proyecto</code>, <code>python -m venv .venv</code>,
+        <code>pip install -r requirements.txt</code>. En 3 comandos tenés exactamente el mismo entorno que tus
+        compañeros. Sin venv ni requirements, cada persona tiene versiones distintas y los bugs son imposibles de
+        reproducir.</div>
 
-<h3>Cómo leer documentación de un paquete nuevo</h3>
+      <h3>Cómo leer documentación de un paquete nuevo</h3>
 
-<p>Cuando encontrás un paquete nuevo, seguí esta secuencia:</p>
-<ol>
-  <li><b>README / Getting Started:</b> ejemplo mínimo de uso</li>
-  <li><b>API Reference:</b> lista de funciones con parámetros</li>
-  <li><b>Examples / Tutorials:</b> casos de uso reales</li>
-  <li><b>Changelog:</b> qué cambió en cada versión</li>
-</ol>
+      <p>Cuando encontrás un paquete nuevo, seguí esta secuencia:</p>
+      <ol>
+        <li><b>README / Getting Started:</b> ejemplo mínimo de uso</li>
+        <li><b>API Reference:</b> lista de funciones con parámetros</li>
+        <li><b>Examples / Tutorials:</b> casos de uso reales</li>
+        <li><b>Changelog:</b> qué cambió en cada versión</li>
+      </ol>
 
-<div class="tip"><strong>Tip:</strong> en el intérprete de Python, <code>help(pandas.read_csv)</code> muestra la documentación completa de cualquier función. <code>dir(objeto)</code> lista todos los métodos disponibles. Son tus herramientas de exploración rápida.</div>
+      <div class="tip"><strong>Tip:</strong> en el intérprete de Python, <code>help(pandas.read_csv)</code> muestra la
+        documentación completa de cualquier función. <code>dir(objeto)</code> lista todos los métodos disponibles. Son
+        tus herramientas de exploración rápida.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: pandas — primer contacto</h3>
-<p>Pandas está disponible en Pyodide (este editor). Podés probarlo directamente.</p>
+      <h3>Ejemplo 1: pandas — primer contacto</h3>
+      <p>Pandas está disponible en Pyodide (este editor). Podés probarlo directamente.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_pandas.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_pandas.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 # Crear DataFrame desde lista de diccionarios
 clientes = [
@@ -150,16 +249,19 @@ print(f"Score máximo: {df['score'].max()}")
 # Filtrar
 aprobados = df[df["score"] >= 650]
 print(f"\nAprobados (score >= 650):")
-print(aprobados[["nombre", "score"]])</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(aprobados[["nombre", "score"]])</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: numpy — operaciones vectorizadas</h3>
+      <h3>Ejemplo 2: numpy — operaciones vectorizadas</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_numpy.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_numpy.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 
 # Array desde lista
 saldos = np.array([150000, 320000, 45000, 890000, 72000])
@@ -186,16 +288,19 @@ print(f"\nSimulación 100 retornos:")
 print(f"  Media: {np.mean(retornos):.4f}")
 print(f"  Desvío: {np.std(retornos):.4f}")
 print(f"  Min: {np.min(retornos):.4f}")
-print(f"  Max: {np.max(retornos):.4f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"  Max: {np.max(retornos):.4f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: pandas + numpy combinados</h3>
+      <h3>Ejemplo 3: pandas + numpy combinados</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_pd_np.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_pd_np.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 # Crear DataFrame con datos generados
@@ -218,16 +323,19 @@ print(df.describe().round(0))
 # Crear columna derivada
 df["categoria"] = np.where(df["score"] >= 700, "Premium", "Estándar")
 print(f"\nConteo por categoría:")
-print(df["categoria"].value_counts())</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(df["categoria"].value_counts())</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: json + requests simulado (consumir API)</h3>
+      <h3>Ejemplo 4: json + requests simulado (consumir API)</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_api.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_api.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import json
 
 # Simulamos respuesta de API (en tu PC usarías requests.get())
 # import requests
@@ -265,16 +373,19 @@ print(f"Total ARS: ${total:,}")
 # if response.status_code == 200:
 #     data = response.json()
 #     procesar(data)
-print("\n(En tu PC: pip install requests, luego requests.get(url).json())")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("\n(En tu PC: pip install requests, luego requests.get(url).json())")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Explorar paquetes con help() y dir()</h3>
+      <h3>Ejemplo 5: Explorar paquetes con help() y dir()</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_explorar.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_explorar.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 # dir(): listar todo lo disponible en un módulo/objeto
@@ -299,58 +410,153 @@ print(f"numpy: {np.__version__}")
 
 # Bonus: listar todos los módulos de la stdlib disponibles
 import sys
-print(f"\nMódulos cargados: {len(sys.modules)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nMódulos cargados: {len(sys.modules)}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Comando pip</th><th>Acción</th></tr>
-<tr><td><code>pip install pandas</code></td><td>Instalar paquete</td></tr>
-<tr><td><code>pip install pandas==2.1.4</code></td><td>Versión específica</td></tr>
-<tr><td><code>pip install -U pandas</code></td><td>Actualizar</td></tr>
-<tr><td><code>pip uninstall pandas</code></td><td>Desinstalar</td></tr>
-<tr><td><code>pip list</code></td><td>Ver instalados</td></tr>
-<tr><td><code>pip freeze > requirements.txt</code></td><td>Exportar dependencias</td></tr>
-<tr><td><code>pip install -r requirements.txt</code></td><td>Instalar desde archivo</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Comando pip</th>
+            <th>Acción</th>
+          </tr>
+          <tr>
+            <td><code>pip install pandas</code></td>
+            <td>Instalar paquete</td>
+          </tr>
+          <tr>
+            <td><code>pip install pandas==2.1.4</code></td>
+            <td>Versión específica</td>
+          </tr>
+          <tr>
+            <td><code>pip install -U pandas</code></td>
+            <td>Actualizar</td>
+          </tr>
+          <tr>
+            <td><code>pip uninstall pandas</code></td>
+            <td>Desinstalar</td>
+          </tr>
+          <tr>
+            <td><code>pip list</code></td>
+            <td>Ver instalados</td>
+          </tr>
+          <tr>
+            <td><code>pip freeze > requirements.txt</code></td>
+            <td>Exportar dependencias</td>
+          </tr>
+          <tr>
+            <td><code>pip install -r requirements.txt</code></td>
+            <td>Instalar desde archivo</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Comando venv</th><th>Acción</th></tr>
-<tr><td><code>python -m venv .venv</code></td><td>Crear entorno virtual</td></tr>
-<tr><td><code>.venv\Scripts\activate</code> (Win)</td><td>Activar</td></tr>
-<tr><td><code>source .venv/bin/activate</code> (Mac/Linux)</td><td>Activar</td></tr>
-<tr><td><code>deactivate</code></td><td>Desactivar</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Comando venv</th>
+            <th>Acción</th>
+          </tr>
+          <tr>
+            <td><code>python -m venv .venv</code></td>
+            <td>Crear entorno virtual</td>
+          </tr>
+          <tr>
+            <td><code>.venv\Scripts\activate</code> (Win)</td>
+            <td>Activar</td>
+          </tr>
+          <tr>
+            <td><code>source .venv/bin/activate</code> (Mac/Linux)</td>
+            <td>Activar</td>
+          </tr>
+          <tr>
+            <td><code>deactivate</code></td>
+            <td>Desactivar</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Crear DataFrame</h4><p>Creá un DataFrame con 3 productos (nombre, precio, stock) e imprimilo. Debe incluir <code>Notebook</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-1" data-expected="Notebook"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Crear DataFrame</h4>
+        <p>Creá un DataFrame con 3 productos (nombre, precio, stock) e imprimilo. Debe incluir <code>Notebook</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-1" data-expected="Notebook">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 # Creá el DataFrame:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["datos = [{\"nombre\":\"Notebook\",\"precio\":920000,\"stock\":15}, ...]","df = pd.DataFrame(datos)","print(df)"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["datos = [{\"nombre\":\"Notebook\",\"precio\":920000,\"stock\":15}, ...]","df = pd.DataFrame(datos)","print(df)"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Array de numpy</h4><p>Creá un array <code>np.array([100, 200, 300, 400, 500])</code> y multiplicalo por 1.21 (IVA). Debe incluir <code>121</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-2" data-expected="121"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "121"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Array de numpy</h4>
+        <p>Creá un array <code>np.array([100, 200, 300, 400, 500])</code> y multiplicalo por 1.21 (IVA). Debe incluir
+          <code>121</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-2" data-expected="121">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "121"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 precios = np.array([100, 200, 300, 400, 500])
 
 # Multiplicá por 1.21:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["con_iva = precios * 1.21","print(con_iva)","[121. 242. 363. 484. 605.]"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["con_iva = precios * 1.21","print(con_iva)","[121. 242. 363. 484. 605.]"]'></div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: Estadísticas con numpy</h4><p>Dado <code>np.array([150000,320000,45000,890000,72000])</code>, calculá media, mediana y desvío. Debe incluir <code>295400</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-3" data-expected="295400"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "295400"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Estadísticas con numpy</h4>
+        <p>Dado <code>np.array([150000,320000,45000,890000,72000])</code>, calculá media, mediana y desvío. Debe incluir
+          <code>295400</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-3" data-expected="295400">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "295400"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 saldos = np.array([150000, 320000, 45000, 890000, 72000])
 
 # Calculá estadísticas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["print(f\"Media: {np.mean(saldos):.0f}\")","np.mean([150000,320000,45000,890000,72000]) = 295400","np.median, np.std para mediana y desvío"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["print(f\"Media: {np.mean(saldos):.0f}\")","np.mean([150000,320000,45000,890000,72000]) = 295400","np.median, np.std para mediana y desvío"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: DataFrame con filtrado</h4><p>Creá un DataFrame de 5 clientes, filtrá los que tienen score >= 700 e imprimí solo sus nombres. Debe incluir <code>Premium</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-4" data-expected="Premium"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Premium"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: DataFrame con filtrado</h4>
+        <p>Creá un DataFrame de 5 clientes, filtrá los que tienen score >= 700 e imprimí solo sus nombres. Debe incluir
+          <code>Premium</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-4" data-expected="Premium">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Premium"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 
 df = pd.DataFrame({
@@ -360,25 +566,73 @@ df = pd.DataFrame({
 
 # Filtrá y clasificá:
 df["categoria"] = np.where(df["score"] >= 700, "Premium", "Estándar")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["premium = df[df[\"categoria\"] == \"Premium\"]","print(premium)","García, Pérez y Sosa son Premium"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["premium = df[df[\"categoria\"] == \"Premium\"]","print(premium)","García, Pérez y Sosa son Premium"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: describe() del DataFrame</h4><p>Generá un DataFrame con 50 valores aleatorios de score (400-900) usando numpy. Mostrá <code>describe()</code>. Debe incluir <code>mean</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-5" data-expected="mean"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "mean"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: describe() del DataFrame</h4>
+        <p>Generá un DataFrame con 50 valores aleatorios de score (400-900) usando numpy. Mostrá
+          <code>describe()</code>. Debe incluir <code>mean</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-5" data-expected="mean">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "mean"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
 # Generá DataFrame con 50 scores aleatorios:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400, 900, 50)})","print(df.describe())","describe() muestra count, mean, std, min, 25%, 50%, 75%, max"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400, 900, 50)})","print(df.describe())","describe() muestra count, mean, std, min, 25%, 50%, 75%, max"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: value_counts()</h4><p>Creá un DataFrame con 20 transacciones de tipo aleatorio ("compra","venta","transferencia"). Mostrá <code>value_counts()</code>. Debe incluir <code>compra</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-6" data-expected="compra"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "compra"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: value_counts()</h4>
+        <p>Creá un DataFrame con 20 transacciones de tipo aleatorio ("compra","venta","transferencia"). Mostrá
+          <code>value_counts()</code>. Debe incluir <code>compra</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-6" data-expected="compra">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "compra"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
 tipos = ["compra", "venta", "transferencia"]
 
 # Generá 20 transacciones aleatorias:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["df = pd.DataFrame({\"tipo\": np.random.choice(tipos, 20)})","print(df[\"tipo\"].value_counts())","value_counts() cuenta frecuencias automáticamente"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["df = pd.DataFrame({\"tipo\": np.random.choice(tipos, 20)})","print(df[\"tipo\"].value_counts())","value_counts() cuenta frecuencias automáticamente"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: groupby básico</h4><p>Creá un DataFrame con clientes, ciudad y saldo. Agrupá por ciudad y mostrá el saldo promedio. Debe incluir <code>BsAs</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-7" data-expected="BsAs"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "BsAs"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: groupby básico</h4>
+        <p>Creá un DataFrame con clientes, ciudad y saldo. Agrupá por ciudad y mostrá el saldo promedio. Debe incluir
+          <code>BsAs</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-7" data-expected="BsAs">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "BsAs"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df = pd.DataFrame({
     "nombre": ["García","López","Martínez","Pérez","Fernández"],
@@ -387,17 +641,49 @@ df = pd.DataFrame({
 })
 
 # Agrupá por ciudad:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["print(df.groupby(\"ciudad\")[\"saldo\"].mean())","O: print(df.groupby(\"ciudad\").agg({\"saldo\": [\"sum\",\"mean\",\"count\"]}))","BsAs promedio: (150000+45000+890000)/3"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["print(df.groupby(\"ciudad\")[\"saldo\"].mean())","O: print(df.groupby(\"ciudad\").agg({\"saldo\": [\"sum\",\"mean\",\"count\"]}))","BsAs promedio: (150000+45000+890000)/3"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Operaciones vectorizadas</h4><p>Creá un array de 10 precios con numpy. Aplicá descuento 15% vectorizado y calculá el ahorro total. Debe incluir <code>Ahorro</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-8" data-expected="Ahorro"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Ahorro"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Operaciones vectorizadas</h4>
+        <p>Creá un array de 10 precios con numpy. Aplicá descuento 15% vectorizado y calculá el ahorro total. Debe
+          incluir <code>Ahorro</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-8" data-expected="Ahorro">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Ahorro"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 np.random.seed(42)
 
 precios = np.random.uniform(1000, 50000, 10).round(0)
 
 # Aplicá descuento 15% y calculá ahorro:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["con_descuento = precios * 0.85","ahorro = np.sum(precios - con_descuento)","print(f\"Ahorro total: ${ahorro:,.0f}\")"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["con_descuento = precios * 0.85","ahorro = np.sum(precios - con_descuento)","print(f\"Ahorro total: ${ahorro:,.0f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Escribir y leer requirements.txt simulado</h4><p>Creá una lista de paquetes con versiones y generá un string con formato requirements.txt. Debe incluir <code>pandas</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-9" data-expected="pandas"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "pandas"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">paquetes = [
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Escribir y leer requirements.txt simulado</h4>
+        <p>Creá una lista de paquetes con versiones y generá un string con formato requirements.txt. Debe incluir
+          <code>pandas</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-9" data-expected="pandas">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "pandas"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">paquetes = [
     ("pandas", "2.1.4"),
     ("numpy", "1.26.2"),
     ("scikit-learn", "1.3.2"),
@@ -405,9 +691,26 @@ precios = np.random.uniform(1000, 50000, 10).round(0)
 ]
 
 # Generá requirements.txt como string:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["lineas = [f\"{pkg}=={ver}\" for pkg, ver in paquetes]","req = \"\\n\".join(lineas)","print(req)"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["lineas = [f\"{pkg}=={ver}\" for pkg, ver in paquetes]","req = \"\\n\".join(lineas)","print(req)"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Pipeline con pandas + numpy</h4><p>Generá un DataFrame de 100 clientes (seed 42) con score, ingreso y ciudad aleatorios. Agregá columna "categoria" (Premium/Estándar), agrupá por ciudad y mostrá estadísticas. Debe incluir <code>PIPELINE</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-10" data-expected="PIPELINE"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "PIPELINE"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Pipeline con pandas + numpy</h4>
+        <p>Generá un DataFrame de 100 clientes (seed 42) con score, ingreso y ciudad aleatorios. Agregá columna
+          "categoria" (Premium/Estándar), agrupá por ciudad y mostrá estadísticas. Debe incluir <code>PIPELINE</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-10" data-expected="PIPELINE">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "PIPELINE"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
@@ -415,39 +718,55 @@ ciudades = ["BsAs", "Córdoba", "Rosario", "Mendoza"]
 
 # Generá 100 clientes y procesá:
 print("=== PIPELINE DE DATOS ===")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400,900,100), ...})","\"ciudad\": np.random.choice(ciudades, 100)","df.groupby(\"ciudad\").agg({\"score\":\"mean\", \"ingreso\":\"sum\"})"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400,900,100), ...})","\"ciudad\": np.random.choice(ciudades, 100)","df.groupby(\"ciudad\").agg({\"score\":\"mean\", \"ingreso\":\"sum\"})"]'>
+        </div>
+      </div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
 
-<ul>
-  <li><code>pip install paquete</code> instala desde PyPI. <code>pip freeze > requirements.txt</code> guarda dependencias.</li>
-  <li>SIEMPRE usá entornos virtuales (<code>python -m venv .venv</code>) para aislar proyectos.</li>
-  <li><code>pandas</code> para DataFrames y análisis tabular. <code>numpy</code> para arrays y operaciones vectorizadas.</li>
-  <li><code>requests</code> para consumir APIs. <code>openpyxl</code> para Excel. <code>matplotlib</code>/<code>seaborn</code> para gráficos.</li>
-  <li><code>help()</code> y <code>dir()</code> son tus herramientas de exploración de cualquier paquete.</li>
-</ul>
+      <ul>
+        <li><code>pip install paquete</code> instala desde PyPI. <code>pip freeze > requirements.txt</code> guarda
+          dependencias.</li>
+        <li>SIEMPRE usá entornos virtuales (<code>python -m venv .venv</code>) para aislar proyectos.</li>
+        <li><code>pandas</code> para DataFrames y análisis tabular. <code>numpy</code> para arrays y operaciones
+          vectorizadas.</li>
+        <li><code>requests</code> para consumir APIs. <code>openpyxl</code> para Excel.
+          <code>matplotlib</code>/<code>seaborn</code> para gráficos.</li>
+        <li><code>help()</code> y <code>dir()</code> son tus herramientas de exploración de cualquier paquete.</li>
+      </ul>
 
-<p>En la siguiente lección (<strong>22 · Scope de variables</strong>) vas a entender cómo Python maneja la visibilidad de las variables: local, enclosing, global y built-in.</p>
+      <p>En la siguiente lección (<strong>22 · Scope de variables</strong>) vas a entender cómo Python maneja la
+        visibilidad de las variables: local, enclosing, global y built-in.</p>
 
-<p><strong>Recursos:</strong> <a href="https://pypi.org/" target="_blank">PyPI</a> · <a href="https://pandas.pydata.org/docs/" target="_blank">pandas docs</a> · <a href="https://numpy.org/doc/" target="_blank">numpy docs</a></p>
+      <p><strong>Recursos:</strong> <a href="https://pypi.org/" target="_blank">PyPI</a> · <a
+          href="https://pandas.pydata.org/docs/" target="_blank">pandas docs</a> · <a href="https://numpy.org/doc/"
+          target="_blank">numpy docs</a></p>
 
-<div class="footer-nav">
-  <a href="/python/20-modulos-stdlib.html">← Módulos stdlib</a>
-  <a class="next" href="/python/22-scope-variables.html">Scope de variables →</a>
-</div>
+      <div class="footer-nav">
+        <a href="/python/20-modulos-stdlib.html">← Módulos stdlib</a>
+        <a class="next" href="/python/22-scope-variables.html">Scope de variables →</a>
+      </div>
 
-</main>
-</div>
+    </main>
+  </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

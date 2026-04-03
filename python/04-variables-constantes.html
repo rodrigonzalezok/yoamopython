@@ -1,127 +1,195 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 04 · Variables y constantes</title>
-<meta name="description" content="Aprendé a crear, nombrar y organizar variables en Python. Tipado dinámico, snake_case, constantes y f-strings.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 04 · Variables y constantes</title>
+  <meta name="description"
+    content="Aprendé a crear, nombrar y organizar variables en Python. Tipado dinámico, snake_case, constantes y f-strings.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 04 de 27</span>
-  <h1>Variables y constantes</h1>
-  <p>Las variables son el mecanismo fundamental para guardar, reutilizar y transformar datos en cualquier programa. Cómo las nombres y organices define si tu código es profesional o un desastre inmantenible.</p>
-  <div class="badges">
-    <span class="badge">70–90 min</span>
-    <span class="badge">Prerrequisitos: 03 Tipos de datos</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 04 de 27</span>
+        <h1>Variables y constantes</h1>
+        <p>Las variables son el mecanismo fundamental para guardar, reutilizar y transformar datos en cualquier
+          programa. Cómo las nombres y organices define si tu código es profesional o un desastre inmantenible.</p>
+        <div class="badges">
+          <span class="badge">70–90 min</span>
+          <span class="badge">Prerrequisitos: 03 Tipos de datos</span>
+        </div>
+      </div>
 
-<h3>¿Qué es una variable?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Una <strong>variable</strong> es un nombre que le asignás a un valor para poder usarlo después. Internamente, Python crea un objeto en memoria con el valor y hace que el nombre "apunte" a ese objeto. Cuando escribís <code>edad = 28</code>, Python reserva espacio para el número 28 y asocia el nombre <code>edad</code> a esa ubicación de memoria.</p>
+      <h3>¿Qué es una variable?</h3>
 
-<p>A diferencia de lenguajes como Java o C++ donde declarás el tipo explícitamente (<code>int edad = 28;</code>), Python usa <strong>tipado dinámico</strong>: el tipo se infiere automáticamente del valor que asignás. Esto significa que la misma variable puede cambiar de tipo durante la ejecución del programa:</p>
+      <p>Una <strong>variable</strong> es un nombre que le asignás a un valor para poder usarlo después. Internamente,
+        Python crea un objeto en memoria con el valor y hace que el nombre "apunte" a ese objeto. Cuando escribís
+        <code>edad = 28</code>, Python reserva espacio para el número 28 y asocia el nombre <code>edad</code> a esa
+        ubicación de memoria.</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">x = 42          # x es int
+      <p>A diferencia de lenguajes como Java o C++ donde declarás el tipo explícitamente (<code>int edad = 28;</code>),
+        Python usa <strong>tipado dinámico</strong>: el tipo se infiere automáticamente del valor que asignás. Esto
+        significa que la misma variable puede cambiar de tipo durante la ejecución del programa:</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">x = 42          # x es int
 x = "cuarenta"  # ahora x es str — Python no se queja
 x = [1, 2, 3]   # ahora x es list — sigue sin quejarse</pre>
 
-<div class="analogy"><strong>Analogía: las cajas con etiquetas.</strong> Imaginá un depósito con cajas. Cada caja tiene una etiqueta (el nombre de la variable) y adentro guardás algo (el valor). Podés abrir la caja y cambiar el contenido (reasignar), podés leer lo que tiene (usar la variable), o podés pegarle una etiqueta nueva a otra caja. Lo importante es que la etiqueta sea descriptiva: una caja que dice "saldo_cuenta" es mucho más útil que una que dice "x".</div>
+      <div class="analogy"><strong>Analogía: las cajas con etiquetas.</strong> Imaginá un depósito con cajas. Cada caja
+        tiene una etiqueta (el nombre de la variable) y adentro guardás algo (el valor). Podés abrir la caja y cambiar
+        el contenido (reasignar), podés leer lo que tiene (usar la variable), o podés pegarle una etiqueta nueva a otra
+        caja. Lo importante es que la etiqueta sea descriptiva: una caja que dice "saldo_cuenta" es mucho más útil que
+        una que dice "x".</div>
 
-<h3>Crear y reasignar variables</h3>
+      <h3>Crear y reasignar variables</h3>
 
-<p>Crear una variable es simplísimo: <code>nombre = valor</code>. El signo <code>=</code> es el operador de <strong>asignación</strong> — NO significa "es igual a" (eso es <code>==</code>). Significa "guardá este valor con este nombre".</p>
+      <p>Crear una variable es simplísimo: <code>nombre = valor</code>. El signo <code>=</code> es el operador de
+        <strong>asignación</strong> — NO significa "es igual a" (eso es <code>==</code>). Significa "guardá este valor
+        con este nombre".</p>
 
-<p>Python ofrece algunas formas avanzadas de asignación que son muy útiles:</p>
+      <p>Python ofrece algunas formas avanzadas de asignación que son muy útiles:</p>
 
-<ul>
-  <li><b>Asignación múltiple:</b> <code>a, b, c = 1, 2, 3</code> — asigná varios valores en una línea</li>
-  <li><b>Mismo valor a varias:</b> <code>x = y = z = 0</code> — inicializar varias variables en cero</li>
-  <li><b>Intercambio (swap):</b> <code>a, b = b, a</code> — intercambiá dos valores SIN variable temporal. En otros lenguajes necesitarías una variable auxiliar <code>temp</code>. Python lo hace en una línea.</li>
-  <li><b>Desempaquetado:</b> <code>nombre, edad = ["García", 35]</code> — extraé valores de una lista/tupla directamente a variables</li>
-</ul>
+      <ul>
+        <li><b>Asignación múltiple:</b> <code>a, b, c = 1, 2, 3</code> — asigná varios valores en una línea</li>
+        <li><b>Mismo valor a varias:</b> <code>x = y = z = 0</code> — inicializar varias variables en cero</li>
+        <li><b>Intercambio (swap):</b> <code>a, b = b, a</code> — intercambiá dos valores SIN variable temporal. En
+          otros lenguajes necesitarías una variable auxiliar <code>temp</code>. Python lo hace en una línea.</li>
+        <li><b>Desempaquetado:</b> <code>nombre, edad = ["García", 35]</code> — extraé valores de una lista/tupla
+          directamente a variables</li>
+      </ul>
 
-<h3>Reglas de naming (obligatorias)</h3>
+      <h3>Reglas de naming (obligatorias)</h3>
 
-<p>Python tiene reglas estrictas sobre qué nombres son válidos:</p>
+      <p>Python tiene reglas estrictas sobre qué nombres son válidos:</p>
 
-<div class="table-wrap">
-<table>
-<tr><th>Regla</th><th>Válido</th><th>Inválido</th><th>Por qué</th></tr>
-<tr><td>Solo letras, números y <code>_</code></td><td><code>saldo_1</code></td><td><code>saldo-1</code>, <code>saldo.1</code></td><td>Guión y punto son operadores</td></tr>
-<tr><td>Debe empezar con letra o <code>_</code></td><td><code>_temp</code>, <code>edad</code></td><td><code>1er_nombre</code></td><td>Empezar con número es inválido</td></tr>
-<tr><td>Case-sensitive</td><td><code>Edad</code> ≠ <code>edad</code> ≠ <code>EDAD</code></td><td>—</td><td>Son 3 variables distintas</td></tr>
-<tr><td>No usar palabras reservadas</td><td><code>mi_clase</code></td><td><code>class</code>, <code>if</code>, <code>for</code></td><td>Son palabras del lenguaje</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Regla</th>
+            <th>Válido</th>
+            <th>Inválido</th>
+            <th>Por qué</th>
+          </tr>
+          <tr>
+            <td>Solo letras, números y <code>_</code></td>
+            <td><code>saldo_1</code></td>
+            <td><code>saldo-1</code>, <code>saldo.1</code></td>
+            <td>Guión y punto son operadores</td>
+          </tr>
+          <tr>
+            <td>Debe empezar con letra o <code>_</code></td>
+            <td><code>_temp</code>, <code>edad</code></td>
+            <td><code>1er_nombre</code></td>
+            <td>Empezar con número es inválido</td>
+          </tr>
+          <tr>
+            <td>Case-sensitive</td>
+            <td><code>Edad</code> ≠ <code>edad</code> ≠ <code>EDAD</code></td>
+            <td>—</td>
+            <td>Son 3 variables distintas</td>
+          </tr>
+          <tr>
+            <td>No usar palabras reservadas</td>
+            <td><code>mi_clase</code></td>
+            <td><code>class</code>, <code>if</code>, <code>for</code></td>
+            <td>Son palabras del lenguaje</td>
+          </tr>
+        </table>
+      </div>
 
-<h3>Convenciones de estilo (PEP 8)</h3>
+      <h3>Convenciones de estilo (PEP 8)</h3>
 
-<p>Además de las reglas obligatorias, Python tiene convenciones de estilo que todo programador profesional sigue. Están documentadas en <strong>PEP 8</strong> (Python Enhancement Proposal #8):</p>
+      <p>Además de las reglas obligatorias, Python tiene convenciones de estilo que todo programador profesional sigue.
+        Están documentadas en <strong>PEP 8</strong> (Python Enhancement Proposal #8):</p>
 
-<ul>
-  <li><b>Variables y funciones:</b> <code>snake_case</code> — todo en minúsculas, palabras separadas por guión bajo. Ejemplo: <code>saldo_cuenta</code>, <code>ingreso_mensual</code>, <code>calcular_cuota</code></li>
-  <li><b>Constantes:</b> <code>UPPER_SNAKE_CASE</code> — todo en mayúsculas. Ejemplo: <code>IVA</code>, <code>DOLAR_OFICIAL</code>, <code>MAX_INTENTOS</code></li>
-  <li><b>Clases:</b> <code>PascalCase</code> — cada palabra empieza en mayúscula. Ejemplo: <code>CuentaBancaria</code>, <code>ClientePremium</code></li>
-  <li><b>Variables privadas:</b> empiezan con <code>_</code>. Ejemplo: <code>_cache_interno</code></li>
-</ul>
+      <ul>
+        <li><b>Variables y funciones:</b> <code>snake_case</code> — todo en minúsculas, palabras separadas por guión
+          bajo. Ejemplo: <code>saldo_cuenta</code>, <code>ingreso_mensual</code>, <code>calcular_cuota</code></li>
+        <li><b>Constantes:</b> <code>UPPER_SNAKE_CASE</code> — todo en mayúsculas. Ejemplo: <code>IVA</code>,
+          <code>DOLAR_OFICIAL</code>, <code>MAX_INTENTOS</code></li>
+        <li><b>Clases:</b> <code>PascalCase</code> — cada palabra empieza en mayúscula. Ejemplo:
+          <code>CuentaBancaria</code>, <code>ClientePremium</code></li>
+        <li><b>Variables privadas:</b> empiezan con <code>_</code>. Ejemplo: <code>_cache_interno</code></li>
+      </ul>
 
-<div class="warning"><strong>Error común: usar nombres genéricos.</strong> Variables como <code>x</code>, <code>data</code>, <code>temp</code>, <code>valor</code> no dicen nada. ¿<code>x</code> es un precio, un score, una edad? Nadie lo sabe sin leer todo el contexto. Usá nombres descriptivos: <code>precio_unitario</code>, <code>score_crediticio</code>, <code>edad_cliente</code>. Tu yo de dentro de 3 meses te lo va a agradecer.</div>
+      <div class="warning"><strong>Error común: usar nombres genéricos.</strong> Variables como <code>x</code>,
+        <code>data</code>, <code>temp</code>, <code>valor</code> no dicen nada. ¿<code>x</code> es un precio, un score,
+        una edad? Nadie lo sabe sin leer todo el contexto. Usá nombres descriptivos: <code>precio_unitario</code>,
+        <code>score_crediticio</code>, <code>edad_cliente</code>. Tu yo de dentro de 3 meses te lo va a agradecer.</div>
 
-<h3>Constantes (por convención)</h3>
+      <h3>Constantes (por convención)</h3>
 
-<p>Python <strong>no tiene constantes reales</strong>. A diferencia de JavaScript (<code>const</code>) o Java (<code>final</code>), no hay forma de forzar que una variable no cambie. La convención es escribirla en MAYÚSCULAS para indicar que <strong>no debería modificarse</strong>. Es un acuerdo entre programadores, no una restricción del lenguaje.</p>
+      <p>Python <strong>no tiene constantes reales</strong>. A diferencia de JavaScript (<code>const</code>) o Java
+        (<code>final</code>), no hay forma de forzar que una variable no cambie. La convención es escribirla en
+        MAYÚSCULAS para indicar que <strong>no debería modificarse</strong>. Es un acuerdo entre programadores, no una
+        restricción del lenguaje.</p>
 
-<p>Las constantes se usan para valores que definen la configuración de tu programa y no deberían cambiar durante la ejecución: tasas impositivas, límites, URLs de APIs, claves de configuración.</p>
+      <p>Las constantes se usan para valores que definen la configuración de tu programa y no deberían cambiar durante
+        la ejecución: tasas impositivas, límites, URLs de APIs, claves de configuración.</p>
 
-<div class="tip"><strong>Tip profesional:</strong> poné todas las constantes al inicio del archivo, después de los imports. Así cualquier persona que lea tu código sabe inmediatamente qué parámetros usa y puede ajustarlos sin buscar en todo el programa. Esto es estándar en cualquier equipo profesional.</div>
+      <div class="tip"><strong>Tip profesional:</strong> poné todas las constantes al inicio del archivo, después de los
+        imports. Así cualquier persona que lea tu código sabe inmediatamente qué parámetros usa y puede ajustarlos sin
+        buscar en todo el programa. Esto es estándar en cualquier equipo profesional.</div>
 
-<h3>f-strings: formateo moderno de texto</h3>
+      <h3>f-strings: formateo moderno de texto</h3>
 
-<p>Los <strong>f-strings</strong> (format strings) son la forma moderna y preferida de incluir variables dentro de texto. Se escriben con una <code>f</code> antes de las comillas y las variables van entre llaves <code>{}</code>:</p>
+      <p>Los <strong>f-strings</strong> (format strings) son la forma moderna y preferida de incluir variables dentro de
+        texto. Se escriben con una <code>f</code> antes de las comillas y las variables van entre llaves
+        <code>{}</code>:</p>
 
-<p><code>print(f"Hola, {nombre}. Tenés {edad} años.")</code></p>
+      <p><code>print(f"Hola, {nombre}. Tenés {edad} años.")</code></p>
 
-<p>Dentro de las llaves podés poner cualquier expresión de Python, incluyendo cálculos, llamadas a funciones y formatos especiales:</p>
+      <p>Dentro de las llaves podés poner cualquier expresión de Python, incluyendo cálculos, llamadas a funciones y
+        formatos especiales:</p>
 
-<ul>
-  <li><code>{precio:,.2f}</code> — formato con separador de miles y 2 decimales: <code>1,234,567.89</code></li>
-  <li><code>{porcentaje:.1%}</code> — formato como porcentaje con 1 decimal: <code>15.3%</code></li>
-  <li><code>{nombre:>20}</code> — alineado a la derecha en 20 caracteres</li>
-  <li><code>{nombre:<20}</code> — alineado a la izquierda</li>
-  <li><code>{nombre:^20}</code> — centrado</li>
-</ul>
+      <ul>
+        <li><code>{precio:,.2f}</code> — formato con separador de miles y 2 decimales: <code>1,234,567.89</code></li>
+        <li><code>{porcentaje:.1%}</code> — formato como porcentaje con 1 decimal: <code>15.3%</code></li>
+        <li><code>{nombre:>20}</code> — alineado a la derecha en 20 caracteres</li>
+        <li><code>{nombre:<20}</code> — alineado a la izquierda</li>
+        <li><code>{nombre:^20}</code> — centrado</li>
+      </ul>
 
-<div class="realworld"><strong>En análisis de datos:</strong> el formato <code>:,.2f</code> (separador de miles + 2 decimales) lo vas a usar en CADA reporte. <code>${saldo:,.2f}</code> muestra <code>$1,234,567.89</code> en vez de <code>$1234567.89</code>. Esa diferencia es la que hace que tu reporte parezca profesional o amateur.</div>
+      <div class="realworld"><strong>En análisis de datos:</strong> el formato <code>:,.2f</code> (separador de miles +
+        2 decimales) lo vas a usar en CADA reporte. <code>${saldo:,.2f}</code> muestra <code>$1,234,567.89</code> en vez
+        de <code>$1234567.89</code>. Esa diferencia es la que hace que tu reporte parezca profesional o amateur.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: Crear, reasignar y verificar tipos</h3>
-<p>Fijate cómo Python permite cambiar el tipo de una variable sin quejarse. Esto es el tipado dinámico en acción.</p>
+      <h3>Ejemplo 1: Crear, reasignar y verificar tipos</h3>
+      <p>Fijate cómo Python permite cambiar el tipo de una variable sin quejarse. Esto es el tipado dinámico en acción.
+      </p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_variables.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Crear variables
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_variables.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Crear variables
 nombre = "Rodrigo González"
 edad = 28
 salario = 850000.50
@@ -145,17 +213,20 @@ print(f"\nx = {x}, tipo: {type(x).__name__}")
 x = "cien"
 print(f"x = {x}, tipo: {type(x).__name__}")
 x = [1, 0, 0]
-print(f"x = {x}, tipo: {type(x).__name__}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"x = {x}, tipo: {type(x).__name__}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Asignación múltiple, swap y desempaquetado</h3>
-<p>Python tiene formas elegantes de asignar valores que en otros lenguajes requerirían varias líneas.</p>
+      <h3>Ejemplo 2: Asignación múltiple, swap y desempaquetado</h3>
+      <p>Python tiene formas elegantes de asignar valores que en otros lenguajes requerirían varias líneas.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_asignacion.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Asignación múltiple en una línea
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_asignacion.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Asignación múltiple en una línea
 nombre, edad, ciudad = "García", 35, "Buenos Aires"
 print(f"{nombre}, {edad} años, {ciudad}")
 
@@ -177,17 +248,21 @@ print(f"\nCliente: {nombre}, Score: {score}")
 
 # Desempaquetado parcial con *
 primero, *resto = [100, 200, 300, 400, 500]
-print(f"\nPrimero: {primero}, Resto: {resto}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nPrimero: {primero}, Resto: {resto}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Constantes y configuración profesional</h3>
-<p>Así se estructura un archivo Python profesional: constantes arriba, lógica abajo. Cualquiera puede ajustar los parámetros sin buscar en el código.</p>
+      <h3>Ejemplo 3: Constantes y configuración profesional</h3>
+      <p>Así se estructura un archivo Python profesional: constantes arriba, lógica abajo. Cualquiera puede ajustar los
+        parámetros sin buscar en el código.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_constantes.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ═══ CONSTANTES (configuración del programa) ═══
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_constantes.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># ═══ CONSTANTES (configuración del programa) ═══
 IVA = 0.21
 IMPUESTO_GANANCIAS = 0.17
 IMPUESTO_JUBILACION = 0.11
@@ -225,17 +300,20 @@ print(f"\nProducto ${precio_producto:,} + IVA = ${precio_producto * (1 + IVA):,.
 
 # Conversión de ahorros
 print(f"\nUSD {ahorro_usd:,} = ${ahorro_usd * DOLAR_OFICIAL:,.0f} (oficial)")
-print(f"USD {ahorro_usd:,} = ${ahorro_usd * DOLAR_MEP:,.0f} (MEP)")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"USD {ahorro_usd:,} = ${ahorro_usd * DOLAR_MEP:,.0f} (MEP)")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: f-strings avanzados — formato de números</h3>
-<p>Dominá el formato de números en f-strings. Esto es lo que hace que tus reportes se vean profesionales.</p>
+      <h3>Ejemplo 4: f-strings avanzados — formato de números</h3>
+      <p>Dominá el formato de números en f-strings. Esto es lo que hace que tus reportes se vean profesionales.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_fstrings.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">nombre = "García"
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_fstrings.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">nombre = "García"
 saldo = 1234567.891
 tasa = 0.0653
 cantidad = 42
@@ -264,17 +342,20 @@ for i in range(1, 6):
 
 # Expresiones dentro de f-strings
 print(f"\n2 + 2 = {2 + 2}")
-print(f"{'PAR' if cantidad % 2 == 0 else 'IMPAR'}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"{'PAR' if cantidad % 2 == 0 else 'IMPAR'}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Nombres buenos vs malos — el impacto en código real</h3>
-<p>Compará dos versiones del mismo programa. El de la izquierda es ilegible; el de la derecha se explica solo.</p>
+      <h3>Ejemplo 5: Nombres buenos vs malos — el impacto en código real</h3>
+      <p>Compará dos versiones del mismo programa. El de la izquierda es ilegible; el de la derecha se explica solo.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_naming.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ❌ VERSIÓN ILEGIBLE (nombres genéricos)
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_naming.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># ❌ VERSIÓN ILEGIBLE (nombres genéricos)
 a = 500000
 b = 0.65
 c = 12
@@ -298,203 +379,339 @@ print(f"Cuota mensual: ${cuota_mensual:,.0f}")
 
 # Moraleja: el código se lee 10 veces más de lo que se escribe.
 # Invertí 5 segundos en un buen nombre y ahorrá 5 minutos cada vez
-# que alguien (incluido vos) lea el código.</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+# que alguien (incluido vos) lea el código.</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Operación</th><th>Sintaxis</th><th>Ejemplo</th></tr>
-<tr><td>Crear variable</td><td><code>nombre = valor</code></td><td><code>edad = 28</code></td></tr>
-<tr><td>Reasignar</td><td><code>nombre = nuevo_valor</code></td><td><code>edad = 29</code></td></tr>
-<tr><td>Asignación múltiple</td><td><code>a, b, c = v1, v2, v3</code></td><td><code>x, y = 10, 20</code></td></tr>
-<tr><td>Swap</td><td><code>a, b = b, a</code></td><td>Intercambia valores</td></tr>
-<tr><td>Desempaquetado</td><td><code>a, b = lista</code></td><td><code>nombre, edad = ["Ana", 25]</code></td></tr>
-<tr><td>Verificar tipo</td><td><code>type(variable)</code></td><td><code>type(edad).__name__</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Operación</th>
+            <th>Sintaxis</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td>Crear variable</td>
+            <td><code>nombre = valor</code></td>
+            <td><code>edad = 28</code></td>
+          </tr>
+          <tr>
+            <td>Reasignar</td>
+            <td><code>nombre = nuevo_valor</code></td>
+            <td><code>edad = 29</code></td>
+          </tr>
+          <tr>
+            <td>Asignación múltiple</td>
+            <td><code>a, b, c = v1, v2, v3</code></td>
+            <td><code>x, y = 10, 20</code></td>
+          </tr>
+          <tr>
+            <td>Swap</td>
+            <td><code>a, b = b, a</code></td>
+            <td>Intercambia valores</td>
+          </tr>
+          <tr>
+            <td>Desempaquetado</td>
+            <td><code>a, b = lista</code></td>
+            <td><code>nombre, edad = ["Ana", 25]</code></td>
+          </tr>
+          <tr>
+            <td>Verificar tipo</td>
+            <td><code>type(variable)</code></td>
+            <td><code>type(edad).__name__</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Convención</th><th>Estilo</th><th>Ejemplo</th><th>Uso</th></tr>
-<tr><td>Variables/funciones</td><td><code>snake_case</code></td><td><code>saldo_cuenta</code></td><td>Todo el código general</td></tr>
-<tr><td>Constantes</td><td><code>UPPER_SNAKE_CASE</code></td><td><code>IVA</code>, <code>DOLAR_MEP</code></td><td>Valores que no cambian</td></tr>
-<tr><td>Clases</td><td><code>PascalCase</code></td><td><code>CuentaBancaria</code></td><td>Definiciones de clases</td></tr>
-<tr><td>Privadas</td><td><code>_prefijo</code></td><td><code>_cache</code></td><td>Uso interno</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Convención</th>
+            <th>Estilo</th>
+            <th>Ejemplo</th>
+            <th>Uso</th>
+          </tr>
+          <tr>
+            <td>Variables/funciones</td>
+            <td><code>snake_case</code></td>
+            <td><code>saldo_cuenta</code></td>
+            <td>Todo el código general</td>
+          </tr>
+          <tr>
+            <td>Constantes</td>
+            <td><code>UPPER_SNAKE_CASE</code></td>
+            <td><code>IVA</code>, <code>DOLAR_MEP</code></td>
+            <td>Valores que no cambian</td>
+          </tr>
+          <tr>
+            <td>Clases</td>
+            <td><code>PascalCase</code></td>
+            <td><code>CuentaBancaria</code></td>
+            <td>Definiciones de clases</td>
+          </tr>
+          <tr>
+            <td>Privadas</td>
+            <td><code>_prefijo</code></td>
+            <td><code>_cache</code></td>
+            <td>Uso interno</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Formato f-string</th><th>Ejemplo</th><th>Resultado</th></tr>
-<tr><td><code>:,.2f</code></td><td><code>f"${1234.5:,.2f}"</code></td><td><code>$1,234.50</code></td></tr>
-<tr><td><code>:.1%</code></td><td><code>f"{0.153:.1%}"</code></td><td><code>15.3%</code></td></tr>
-<tr><td><code>:>12</code></td><td><code>f"{'hola':>12}"</code></td><td><code>        hola</code></td></tr>
-<tr><td><code>:<12</code></td><td><code>f"{'hola':<12}"</code></td><td><code>hola        </code></td></tr>
-<tr><td><code>:05d</code></td><td><code>f"{42:05d}"</code></td><td><code>00042</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Formato f-string</th>
+            <th>Ejemplo</th>
+            <th>Resultado</th>
+          </tr>
+          <tr>
+            <td><code>:,.2f</code></td>
+            <td><code>f"${1234.5:,.2f}"</code></td>
+            <td><code>$1,234.50</code></td>
+          </tr>
+          <tr>
+            <td><code>:.1%</code></td>
+            <td><code>f"{0.153:.1%}"</code></td>
+            <td><code>15.3%</code></td>
+          </tr>
+          <tr>
+            <td><code>:>12</code></td>
+            <td><code>f"{'hola':>12}"</code></td>
+            <td><code>        hola</code></td>
+          </tr>
+          <tr>
+            <td><code>:<12</code></td>
+            <td><code>f"{'hola':<12}"</code></td>
+            <td><code>hola        </code></td>
+          </tr>
+          <tr>
+            <td><code>:05d</code></td>
+            <td><code>f"{42:05d}"</code></td>
+            <td><code>00042</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Crear e imprimir variables</h4>
-  <p>Creá variables <code>nombre</code>, <code>edad</code> y <code>ciudad</code> con tus datos e imprimilas usando f-string en una sola línea. Debe incluir <code>años</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-1" data-expected="años">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "años"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá 3 variables e imprimilas:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["nombre = \"Rodrigo\"","edad = 28","print(f\"{nombre}, {edad} años, {ciudad}\")"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Crear e imprimir variables</h4>
+        <p>Creá variables <code>nombre</code>, <code>edad</code> y <code>ciudad</code> con tus datos e imprimilas usando
+          f-string en una sola línea. Debe incluir <code>años</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-1" data-expected="años">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "años"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Creá 3 variables e imprimilas:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["nombre = \"Rodrigo\"","edad = 28","print(f\"{nombre}, {edad} años, {ciudad}\")"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Reasignación</h4>
-  <p>Creá <code>saldo = 100000</code>. Imprimilo. Reasignalo a <code>150000</code>. Imprimilo de nuevo. Debe incluir <code>150000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-2" data-expected="150000">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "150000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 100000
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Reasignación</h4>
+        <p>Creá <code>saldo = 100000</code>. Imprimilo. Reasignalo a <code>150000</code>. Imprimilo de nuevo. Debe
+          incluir <code>150000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-2" data-expected="150000">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "150000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">saldo = 100000
 # Imprimí, reasigná e imprimí de nuevo:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["print(saldo) → muestra 100000","saldo = 150000","print(saldo) → muestra 150000"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["print(saldo) → muestra 100000","saldo = 150000","print(saldo) → muestra 150000"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Asignación múltiple y swap</h4>
-  <p>Asigná <code>a = "primero"</code> y <code>b = "segundo"</code> en una línea. Intercambialos con swap e imprimí ambos. Debe incluir <code>a = segundo</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-3" data-expected="a = segundo">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "a = segundo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Asignación múltiple + swap:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["a, b = \"primero\", \"segundo\"","a, b = b, a","print(f\"a = {a}, b = {b}\")"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Asignación múltiple y swap</h4>
+        <p>Asigná <code>a = "primero"</code> y <code>b = "segundo"</code> en una línea. Intercambialos con swap e
+          imprimí ambos. Debe incluir <code>a = segundo</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-3" data-expected="a = segundo">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "a = segundo"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Asignación múltiple + swap:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["a, b = \"primero\", \"segundo\"","a, b = b, a","print(f\"a = {a}, b = {b}\")"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Sueldo neto con constantes</h4>
-  <p>Definí constantes <code>JUBILACION = 0.11</code> y <code>GANANCIAS = 0.17</code>. Con <code>sueldo_bruto = 750000</code>, calculá e imprimí el neto. Debe incluir <code>540000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-4" data-expected="540000">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "540000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Constantes y cálculo de sueldo neto:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["JUBILACION = 0.11, GANANCIAS = 0.17","neto = 750000 - 750000*0.11 - 750000*0.17","750000 * (1 - 0.11 - 0.17) = 750000 * 0.72 = 540000"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Sueldo neto con constantes</h4>
+        <p>Definí constantes <code>JUBILACION = 0.11</code> y <code>GANANCIAS = 0.17</code>. Con
+          <code>sueldo_bruto = 750000</code>, calculá e imprimí el neto. Debe incluir <code>540000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-4" data-expected="540000">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "540000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Constantes y cálculo de sueldo neto:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["JUBILACION = 0.11, GANANCIAS = 0.17","neto = 750000 - 750000*0.11 - 750000*0.17","750000 * (1 - 0.11 - 0.17) = 750000 * 0.72 = 540000"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Formateo de moneda</h4>
-  <p>Dado <code>monto = 2345678.5</code>, imprimilo con formato de moneda argentina: <code>$2,345,678.50</code>. Debe incluir <code>$2,345,678.50</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-5" data-expected="$2,345,678.50">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "$2,345,678.50"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">monto = 2345678.5
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Formateo de moneda</h4>
+        <p>Dado <code>monto = 2345678.5</code>, imprimilo con formato de moneda argentina: <code>$2,345,678.50</code>.
+          Debe incluir <code>$2,345,678.50</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-5"
+          data-expected="$2,345,678.50">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "$2,345,678.50"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">monto = 2345678.5
 
 # Imprimí con formato:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["Usá f-string con formato :,.2f","print(f\"${monto:,.2f}\")","El : indica formato, la , separa miles, .2f son 2 decimales"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["Usá f-string con formato :,.2f","print(f\"${monto:,.2f}\")","El : indica formato, la , separa miles, .2f son 2 decimales"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Desempaquetado de datos</h4>
-  <p>Tenés <code>datos = ["Fernández", 30, "Mendoza", 710, 280000]</code>. Desempaquetá en variables con nombres descriptivos e imprimí un resumen. Debe incluir <code>Score: 710</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-6" data-expected="Score: 710">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Score: 710"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">datos = ["Fernández", 30, "Mendoza", 710, 280000]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Desempaquetado de datos</h4>
+        <p>Tenés <code>datos = ["Fernández", 30, "Mendoza", 710, 280000]</code>. Desempaquetá en variables con nombres
+          descriptivos e imprimí un resumen. Debe incluir <code>Score: 710</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-6" data-expected="Score: 710">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Score: 710"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">datos = ["Fernández", 30, "Mendoza", 710, 280000]
 
 # Desempaquetá e imprimí:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["nombre, edad, ciudad, score, ingreso = datos","print(f\"Score: {score}\")","Cada variable toma el valor en la misma posición de la lista"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["nombre, edad, ciudad, score, ingreso = datos","print(f\"Score: {score}\")","Cada variable toma el valor en la misma posición de la lista"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Tabla formateada con f-strings</h4>
-  <p>Imprimí esta tabla alineada usando f-strings con <code>:<20</code> y <code>:>10</code>. Debe incluir <code>Total</code>.</p>
-  <pre style="color:var(--t2);font-size:.82rem;background:var(--bg3);padding:10px;border-radius:6px;margin:8px 0">Concepto              Monto
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Tabla formateada con f-strings</h4>
+        <p>Imprimí esta tabla alineada usando f-strings con <code>:<20</code> y <code>:>10</code>. Debe incluir
+          <code>Total</code>.</p>
+        <pre style="color:var(--t2);font-size:.82rem;background:var(--bg3);padding:10px;border-radius:6px;margin:8px 0">Concepto              Monto
 ──────────────────────────────
 Sueldo               $450,000
 Alquiler             -$85,000
 Servicios            -$32,000
 ──────────────────────────────
 Total                $333,000</pre>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-7" data-expected="Total">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Total"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Armá la tabla con f-strings:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["print(f\"{\"Concepto\":<20} {\"Monto\":>10}\")","print(f\"{\"Sueldo\":<20} ${450000:>9,}\")","Usá :<20 para alinear a la izquierda y :>10 para la derecha"]'></div>
-</div>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-7" data-expected="Total">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Total"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Armá la tabla con f-strings:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["print(f\"{\"Concepto\":<20} {\"Monto\":>10}\")","print(f\"{\"Sueldo\":<20} ${450000:>9,}\")","Usá :<20 para alinear a la izquierda y :>10 para la derecha"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Conversión de moneda con constantes</h4>
-  <p>Definí <code>DOLAR_OFICIAL = 1150</code> y <code>DOLAR_MEP = 1280</code>. Dado <code>ahorro_usd = 3500</code>, imprimí cuánto es en pesos con cada tipo de cambio y la diferencia (brecha). Debe incluir <code>Brecha</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-8" data-expected="Brecha">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Brecha"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">DOLAR_OFICIAL = 1150
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Conversión de moneda con constantes</h4>
+        <p>Definí <code>DOLAR_OFICIAL = 1150</code> y <code>DOLAR_MEP = 1280</code>. Dado
+          <code>ahorro_usd = 3500</code>, imprimí cuánto es en pesos con cada tipo de cambio y la diferencia (brecha).
+          Debe incluir <code>Brecha</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-8" data-expected="Brecha">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Brecha"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">DOLAR_OFICIAL = 1150
 DOLAR_MEP = 1280
 ahorro_usd = 3500
 
 # Calculá e imprimí oficial, MEP y brecha:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["oficial = ahorro_usd * DOLAR_OFICIAL","mep = ahorro_usd * DOLAR_MEP","brecha = (DOLAR_MEP/DOLAR_OFICIAL - 1) * 100. print(f\"Brecha: {brecha:.1f}%\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["oficial = ahorro_usd * DOLAR_OFICIAL","mep = ahorro_usd * DOLAR_MEP","brecha = (DOLAR_MEP/DOLAR_OFICIAL - 1) * 100. print(f\"Brecha: {brecha:.1f}%\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Generador de IDs con padding</h4>
-  <p>Generá 5 IDs de factura con formato <code>FAC-2025-00001</code> a <code>FAC-2025-00005</code>. Usá un for con range y f-string con <code>:05d</code>. Debe incluir <code>FAC-2025-00003</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-9" data-expected="FAC-2025-00003">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "FAC-2025-00003"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">ANIO = 2025
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Generador de IDs con padding</h4>
+        <p>Generá 5 IDs de factura con formato <code>FAC-2025-00001</code> a <code>FAC-2025-00005</code>. Usá un for con
+          range y f-string con <code>:05d</code>. Debe incluir <code>FAC-2025-00003</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-9"
+          data-expected="FAC-2025-00003">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "FAC-2025-00003"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">ANIO = 2025
 
 # Generá los 5 IDs:
 for i in range(1, 6):
     pass  # reemplazá pass
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["Reemplazá pass por un print con f-string","print(f\"FAC-{ANIO}-{i:05d}\")","El :05d rellena con ceros hasta 5 dígitos"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["Reemplazá pass por un print con f-string","print(f\"FAC-{ANIO}-{i:05d}\")","El :05d rellena con ceros hasta 5 dígitos"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Recibo de sueldo completo con formato profesional</h4>
-  <p>Construí un recibo de sueldo formateado. Bruto: $1,200,000. Deducciones: jubilación 11%, obra social 3%, ganancias 17%. Calculá cada deducción, el total de deducciones y el neto. Imprimí todo con alineación y formato de moneda. Debe incluir <code>Neto:</code> y <code>828,000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-10" data-expected="828,000">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "828,000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Constantes
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Recibo de sueldo completo con formato profesional</h4>
+        <p>Construí un recibo de sueldo formateado. Bruto: $1,200,000. Deducciones: jubilación 11%, obra social 3%,
+          ganancias 17%. Calculá cada deducción, el total de deducciones y el neto. Imprimí todo con alineación y
+          formato de moneda. Debe incluir <code>Neto:</code> y <code>828,000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-10" data-expected="828,000">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "828,000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Constantes
 JUBILACION = 0.11
 OBRA_SOCIAL = 0.03
 GANANCIAS = 0.17
@@ -502,45 +719,59 @@ GANANCIAS = 0.17
 sueldo_bruto = 1200000
 
 # Armá el recibo completo con formato:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["Calculá: jub = 1200000*0.11 = 132000, os = 36000, gan = 204000","Total deducciones = 372000. Neto = 1200000 - 372000 = 828000","Formateá: print(f\"Neto: ${neto:>12,}\") para que diga 828,000"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>Las variables se crean con <code>=</code> (asignación). Python infiere el tipo automáticamente (tipado
+          dinámico).</li>
+        <li>Podés hacer asignación múltiple (<code>a, b = 1, 2</code>), swap (<code>a, b = b, a</code>) y desempaquetado
+          en una línea.</li>
+        <li>Convención PEP 8: variables en <code>snake_case</code>, constantes en <code>UPPER_CASE</code>, clases en
+          <code>PascalCase</code>.</li>
+        <li>Los f-strings (<code>f"..."</code>) son la forma moderna de formatear texto. Usá <code>:,.2f</code> para
+          moneda y <code>:.1%</code> para porcentajes.</li>
+        <li>Nombres descriptivos (<code>saldo_cuenta</code>) valen 100 veces más que nombres genéricos (<code>x</code>).
+        </li>
+        <li>Las constantes van al inicio del archivo para que cualquiera pueda ajustar la configuración.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>05 · Operaciones básicas</strong>) vas a aprender a usar operadores
+        aritméticos, de comparación y lógicos para calcular, comparar y tomar decisiones con los datos que acabás de
+        aprender a guardar en variables.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://peps.python.org/pep-0008/" target="_blank">PEP 8 — Style Guide</a>
+        · <a href="https://docs.python.org/3/reference/lexical_analysis.html#f-strings" target="_blank">Python docs —
+          f-strings</a></p>
+
+      <div class="footer-nav">
+        <a href="/python/03-tipos-de-datos.html">← Tipos de datos</a>
+        <a class="next" href="/python/05-operaciones.html">Operaciones básicas →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["Calculá: jub = 1200000*0.11 = 132000, os = 36000, gan = 204000","Total deducciones = 372000. Neto = 1200000 - 372000 = 828000","Formateá: print(f\"Neto: ${neto:>12,}\") para que diga 828,000"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>Las variables se crean con <code>=</code> (asignación). Python infiere el tipo automáticamente (tipado dinámico).</li>
-  <li>Podés hacer asignación múltiple (<code>a, b = 1, 2</code>), swap (<code>a, b = b, a</code>) y desempaquetado en una línea.</li>
-  <li>Convención PEP 8: variables en <code>snake_case</code>, constantes en <code>UPPER_CASE</code>, clases en <code>PascalCase</code>.</li>
-  <li>Los f-strings (<code>f"..."</code>) son la forma moderna de formatear texto. Usá <code>:,.2f</code> para moneda y <code>:.1%</code> para porcentajes.</li>
-  <li>Nombres descriptivos (<code>saldo_cuenta</code>) valen 100 veces más que nombres genéricos (<code>x</code>).</li>
-  <li>Las constantes van al inicio del archivo para que cualquiera pueda ajustar la configuración.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>05 · Operaciones básicas</strong>) vas a aprender a usar operadores aritméticos, de comparación y lógicos para calcular, comparar y tomar decisiones con los datos que acabás de aprender a guardar en variables.</p>
-
-<p><strong>Recursos:</strong> <a href="https://peps.python.org/pep-0008/" target="_blank">PEP 8 — Style Guide</a> · <a href="https://docs.python.org/3/reference/lexical_analysis.html#f-strings" target="_blank">Python docs — f-strings</a></p>
-
-<div class="footer-nav">
-  <a href="/python/03-tipos-de-datos.html">← Tipos de datos</a>
-  <a class="next" href="/python/05-operaciones.html">Operaciones básicas →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

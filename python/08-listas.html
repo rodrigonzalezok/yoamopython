@@ -1,128 +1,251 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 08 · Listas</title>
-<meta name="description" content="Dominá las listas en Python: índices, slicing, mutabilidad, métodos y list comprehensions. La estructura de datos más usada en análisis.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 08 · Listas</title>
+  <meta name="description"
+    content="Dominá las listas en Python: índices, slicing, mutabilidad, métodos y list comprehensions. La estructura de datos más usada en análisis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 08 de 27</span>
-  <h1>Listas</h1>
-  <p>Las listas son la estructura de datos más versátil de Python. Son colecciones ordenadas y modificables que te permiten guardar, acceder y transformar múltiples valores bajo un solo nombre. Son el paso previo a los DataFrames de pandas.</p>
-  <div class="badges">
-    <span class="badge">90–120 min</span>
-    <span class="badge">Prerrequisitos: 05 Operaciones, 06 Condicionales</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 08 de 27</span>
+        <h1>Listas</h1>
+        <p>Las listas son la estructura de datos más versátil de Python. Son colecciones ordenadas y modificables que te
+          permiten guardar, acceder y transformar múltiples valores bajo un solo nombre. Son el paso previo a los
+          DataFrames de pandas.</p>
+        <div class="badges">
+          <span class="badge">90–120 min</span>
+          <span class="badge">Prerrequisitos: 05 Operaciones, 06 Condicionales</span>
+        </div>
+      </div>
 
-<h3>¿Qué es una lista?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Una <strong>lista</strong> es una colección <b>ordenada</b> y <b>modificable (mutable)</b> de elementos. Se crea con corchetes <code>[]</code> y los elementos se separan por comas. Puede contener cualquier tipo de dato — incluso mezclarlos, aunque no es recomendable en la práctica.</p>
+      <h3>¿Qué es una lista?</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">numeros = [10, 20, 30, 40, 50]          # lista de ints
+      <p>Una <strong>lista</strong> es una colección <b>ordenada</b> y <b>modificable (mutable)</b> de elementos. Se
+        crea con corchetes <code>[]</code> y los elementos se separan por comas. Puede contener cualquier tipo de dato —
+        incluso mezclarlos, aunque no es recomendable en la práctica.</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">numeros = [10, 20, 30, 40, 50]          # lista de ints
 nombres = ["García", "López", "Pérez"]   # lista de strings
 mixta = [1, "hola", True, 3.14, None]   # tipos mezclados (evitalo)
 vacia = []                               # lista vacía
 anidada = [[1, 2], [3, 4], [5, 6]]      # lista de listas</pre>
 
-<div class="concept"><strong>¿Por qué son tan importantes?</strong> Porque en análisis de datos, los datos vienen en colecciones: una lista de clientes, una lista de transacciones, una lista de precios. Antes de aprender pandas (que es el siguiente nivel), necesitás dominar listas. Un DataFrame de pandas es, en esencia, un diccionario de listas.</div>
+      <div class="concept"><strong>¿Por qué son tan importantes?</strong> Porque en análisis de datos, los datos vienen
+        en colecciones: una lista de clientes, una lista de transacciones, una lista de precios. Antes de aprender
+        pandas (que es el siguiente nivel), necesitás dominar listas. Un DataFrame de pandas es, en esencia, un
+        diccionario de listas.</div>
 
-<h3>Índices: acceder a elementos</h3>
+      <h3>Índices: acceder a elementos</h3>
 
-<p>Cada elemento tiene una <strong>posición</strong> (índice) que empieza en <code>0</code>, no en <code>1</code>. Esto es universal en programación y es lo que más confunde a los principiantes.</p>
+      <p>Cada elemento tiene una <strong>posición</strong> (índice) que empieza en <code>0</code>, no en <code>1</code>.
+        Esto es universal en programación y es lo que más confunde a los principiantes.</p>
 
-<div class="table-wrap">
-<table>
-<tr><th>Elemento</th><td><code>"García"</code></td><td><code>"López"</code></td><td><code>"Pérez"</code></td><td><code>"Sosa"</code></td><td><code>"Luna"</code></td></tr>
-<tr><th>Índice positivo</th><td><code>0</code></td><td><code>1</code></td><td><code>2</code></td><td><code>3</code></td><td><code>4</code></td></tr>
-<tr><th>Índice negativo</th><td><code>-5</code></td><td><code>-4</code></td><td><code>-3</code></td><td><code>-2</code></td><td><code>-1</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Elemento</th>
+            <td><code>"García"</code></td>
+            <td><code>"López"</code></td>
+            <td><code>"Pérez"</code></td>
+            <td><code>"Sosa"</code></td>
+            <td><code>"Luna"</code></td>
+          </tr>
+          <tr>
+            <th>Índice positivo</th>
+            <td><code>0</code></td>
+            <td><code>1</code></td>
+            <td><code>2</code></td>
+            <td><code>3</code></td>
+            <td><code>4</code></td>
+          </tr>
+          <tr>
+            <th>Índice negativo</th>
+            <td><code>-5</code></td>
+            <td><code>-4</code></td>
+            <td><code>-3</code></td>
+            <td><code>-2</code></td>
+            <td><code>-1</code></td>
+          </tr>
+        </table>
+      </div>
 
-<p>Los <strong>índices negativos</strong> cuentan desde el final: <code>-1</code> es el último elemento, <code>-2</code> el anteúltimo, etc. Son extremadamente útiles cuando querés acceder al final sin saber cuántos elementos hay.</p>
+      <p>Los <strong>índices negativos</strong> cuentan desde el final: <code>-1</code> es el último elemento,
+        <code>-2</code> el anteúltimo, etc. Son extremadamente útiles cuando querés acceder al final sin saber cuántos
+        elementos hay.</p>
 
-<div class="warning"><strong>Error clásico: IndexError.</strong> Si intentás acceder a un índice que no existe (<code>lista[10]</code> en una lista de 5 elementos), Python da <code>IndexError: list index out of range</code>. Siempre verificá con <code>len(lista)</code> antes de acceder a índices variables.</div>
+      <div class="warning"><strong>Error clásico: IndexError.</strong> Si intentás acceder a un índice que no existe
+        (<code>lista[10]</code> en una lista de 5 elementos), Python da
+        <code>IndexError: list index out of range</code>. Siempre verificá con <code>len(lista)</code> antes de acceder
+        a índices variables.</div>
 
-<h3>Slicing: extraer sublistas</h3>
+      <h3>Slicing: extraer sublistas</h3>
 
-<p>El <strong>slicing</strong> permite extraer una porción de la lista con la sintaxis <code>lista[inicio:fin:paso]</code>:</p>
+      <p>El <strong>slicing</strong> permite extraer una porción de la lista con la sintaxis
+        <code>lista[inicio:fin:paso]</code>:</p>
 
-<ul>
-  <li><code>inicio</code> — índice donde empieza (incluido). Default: <code>0</code></li>
-  <li><code>fin</code> — índice donde termina (<b>excluido</b>). Default: largo de la lista</li>
-  <li><code>paso</code> — de a cuántos elementos avanzar. Default: <code>1</code></li>
-</ul>
+      <ul>
+        <li><code>inicio</code> — índice donde empieza (incluido). Default: <code>0</code></li>
+        <li><code>fin</code> — índice donde termina (<b>excluido</b>). Default: largo de la lista</li>
+        <li><code>paso</code> — de a cuántos elementos avanzar. Default: <code>1</code></li>
+      </ul>
 
-<p>Ejemplos con <code>nums = [10, 20, 30, 40, 50, 60, 70]</code>:</p>
+      <p>Ejemplos con <code>nums = [10, 20, 30, 40, 50, 60, 70]</code>:</p>
 
-<div class="table-wrap">
-<table>
-<tr><th>Slice</th><th>Resultado</th><th>Significado</th></tr>
-<tr><td><code>nums[1:4]</code></td><td><code>[20, 30, 40]</code></td><td>Del índice 1 al 3 (4 excluido)</td></tr>
-<tr><td><code>nums[:3]</code></td><td><code>[10, 20, 30]</code></td><td>Los primeros 3</td></tr>
-<tr><td><code>nums[3:]</code></td><td><code>[40, 50, 60, 70]</code></td><td>Del índice 3 al final</td></tr>
-<tr><td><code>nums[-3:]</code></td><td><code>[50, 60, 70]</code></td><td>Los últimos 3</td></tr>
-<tr><td><code>nums[::2]</code></td><td><code>[10, 30, 50, 70]</code></td><td>De a 2 (posiciones pares)</td></tr>
-<tr><td><code>nums[::-1]</code></td><td><code>[70, 60, 50, 40, 30, 20, 10]</code></td><td>Invertida</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Slice</th>
+            <th>Resultado</th>
+            <th>Significado</th>
+          </tr>
+          <tr>
+            <td><code>nums[1:4]</code></td>
+            <td><code>[20, 30, 40]</code></td>
+            <td>Del índice 1 al 3 (4 excluido)</td>
+          </tr>
+          <tr>
+            <td><code>nums[:3]</code></td>
+            <td><code>[10, 20, 30]</code></td>
+            <td>Los primeros 3</td>
+          </tr>
+          <tr>
+            <td><code>nums[3:]</code></td>
+            <td><code>[40, 50, 60, 70]</code></td>
+            <td>Del índice 3 al final</td>
+          </tr>
+          <tr>
+            <td><code>nums[-3:]</code></td>
+            <td><code>[50, 60, 70]</code></td>
+            <td>Los últimos 3</td>
+          </tr>
+          <tr>
+            <td><code>nums[::2]</code></td>
+            <td><code>[10, 30, 50, 70]</code></td>
+            <td>De a 2 (posiciones pares)</td>
+          </tr>
+          <tr>
+            <td><code>nums[::-1]</code></td>
+            <td><code>[70, 60, 50, 40, 30, 20, 10]</code></td>
+            <td>Invertida</td>
+          </tr>
+        </table>
+      </div>
 
-<p>Un dato importante: el slicing <strong>nunca da IndexError</strong>. Si pedís <code>nums[100:200]</code> en una lista de 7 elementos, simplemente devuelve una lista vacía <code>[]</code>.</p>
+      <p>Un dato importante: el slicing <strong>nunca da IndexError</strong>. Si pedís <code>nums[100:200]</code> en una
+        lista de 7 elementos, simplemente devuelve una lista vacía <code>[]</code>.</p>
 
-<h3>Mutabilidad: las listas se pueden modificar</h3>
+      <h3>Mutabilidad: las listas se pueden modificar</h3>
 
-<p>A diferencia de los strings (inmutables) y las tuplas (inmutables), las listas son <strong>mutables</strong>: podés agregar, eliminar, reordenar y modificar elementos después de crearlas. Esto es poderoso pero también peligroso — si dos partes de tu código referencian la misma lista, una modificación afecta a ambas.</p>
+      <p>A diferencia de los strings (inmutables) y las tuplas (inmutables), las listas son <strong>mutables</strong>:
+        podés agregar, eliminar, reordenar y modificar elementos después de crearlas. Esto es poderoso pero también
+        peligroso — si dos partes de tu código referencian la misma lista, una modificación afecta a ambas.</p>
 
-<div class="analogy"><strong>Analogía:</strong> una lista es como una planilla de Excel donde podés insertar filas, borrar filas, reordenar y cambiar valores. Un string es como un PDF protegido — lo podés leer pero no modificar directamente.</div>
+      <div class="analogy"><strong>Analogía:</strong> una lista es como una planilla de Excel donde podés insertar
+        filas, borrar filas, reordenar y cambiar valores. Un string es como un PDF protegido — lo podés leer pero no
+        modificar directamente.</div>
 
-<h3>Funciones útiles con listas</h3>
+      <h3>Funciones útiles con listas</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Función</th><th>Qué hace</th><th>Ejemplo</th><th>Resultado</th></tr>
-<tr><td><code>len()</code></td><td>Cantidad de elementos</td><td><code>len([1,2,3])</code></td><td><code>3</code></td></tr>
-<tr><td><code>sum()</code></td><td>Suma (solo números)</td><td><code>sum([10,20,30])</code></td><td><code>60</code></td></tr>
-<tr><td><code>min()</code></td><td>Valor mínimo</td><td><code>min([5,2,8])</code></td><td><code>2</code></td></tr>
-<tr><td><code>max()</code></td><td>Valor máximo</td><td><code>max([5,2,8])</code></td><td><code>8</code></td></tr>
-<tr><td><code>sorted()</code></td><td>Devuelve copia ordenada</td><td><code>sorted([3,1,2])</code></td><td><code>[1,2,3]</code></td></tr>
-<tr><td><code>list()</code></td><td>Convierte a lista</td><td><code>list("hola")</code></td><td><code>['h','o','l','a']</code></td></tr>
-<tr><td><code>x in lista</code></td><td>Verifica pertenencia</td><td><code>3 in [1,2,3]</code></td><td><code>True</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Función</th>
+            <th>Qué hace</th>
+            <th>Ejemplo</th>
+            <th>Resultado</th>
+          </tr>
+          <tr>
+            <td><code>len()</code></td>
+            <td>Cantidad de elementos</td>
+            <td><code>len([1,2,3])</code></td>
+            <td><code>3</code></td>
+          </tr>
+          <tr>
+            <td><code>sum()</code></td>
+            <td>Suma (solo números)</td>
+            <td><code>sum([10,20,30])</code></td>
+            <td><code>60</code></td>
+          </tr>
+          <tr>
+            <td><code>min()</code></td>
+            <td>Valor mínimo</td>
+            <td><code>min([5,2,8])</code></td>
+            <td><code>2</code></td>
+          </tr>
+          <tr>
+            <td><code>max()</code></td>
+            <td>Valor máximo</td>
+            <td><code>max([5,2,8])</code></td>
+            <td><code>8</code></td>
+          </tr>
+          <tr>
+            <td><code>sorted()</code></td>
+            <td>Devuelve copia ordenada</td>
+            <td><code>sorted([3,1,2])</code></td>
+            <td><code>[1,2,3]</code></td>
+          </tr>
+          <tr>
+            <td><code>list()</code></td>
+            <td>Convierte a lista</td>
+            <td><code>list("hola")</code></td>
+            <td><code>['h','o','l','a']</code></td>
+          </tr>
+          <tr>
+            <td><code>x in lista</code></td>
+            <td>Verifica pertenencia</td>
+            <td><code>3 in [1,2,3]</code></td>
+            <td><code>True</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="tip"><strong>Tip:</strong> <code>sorted()</code> devuelve una NUEVA lista sin modificar la original. <code>lista.sort()</code> modifica la lista in-place y devuelve <code>None</code>. Es una diferencia crucial que genera bugs si no la entendés.</div>
+      <div class="tip"><strong>Tip:</strong> <code>sorted()</code> devuelve una NUEVA lista sin modificar la original.
+        <code>lista.sort()</code> modifica la lista in-place y devuelve <code>None</code>. Es una diferencia crucial que
+        genera bugs si no la entendés.</div>
 
-<div class="realworld"><strong>En análisis de datos:</strong> cuando trabajás con pandas, un DataFrame tiene columnas que son Series (similares a listas). Las operaciones de slicing, filtrado y funciones como <code>sum()</code>, <code>min()</code>, <code>max()</code> que aprendés acá se trasladan directamente a pandas. Dominá listas y pandas va a ser natural.</div>
+      <div class="realworld"><strong>En análisis de datos:</strong> cuando trabajás con pandas, un DataFrame tiene
+        columnas que son Series (similares a listas). Las operaciones de slicing, filtrado y funciones como
+        <code>sum()</code>, <code>min()</code>, <code>max()</code> que aprendés acá se trasladan directamente a pandas.
+        Dominá listas y pandas va a ser natural.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: Crear, acceder y slicing</h3>
-<p>Las operaciones más comunes: crear una lista, acceder por índice y extraer porciones con slicing.</p>
+      <h3>Ejemplo 1: Crear, acceder y slicing</h3>
+      <p>Las operaciones más comunes: crear una lista, acceder por índice y extraer porciones con slicing.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_acceso.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Crear lista de clientes
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_acceso.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Crear lista de clientes
 clientes = ["García", "López", "Martínez", "Pérez", "Fernández", "Sosa", "Luna"]
 print(f"Lista completa: {clientes}")
 print(f"Cantidad: {len(clientes)}")
@@ -142,17 +265,20 @@ print(f"Invertida: {clientes[::-1]}")
 
 # Verificar pertenencia
 print(f"\n¿'López' está? {'López' in clientes}")
-print(f"¿'Rodríguez' está? {'Rodríguez' in clientes}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"¿'Rodríguez' está? {'Rodríguez' in clientes}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Modificar listas — agregar, eliminar, cambiar</h3>
-<p>La mutabilidad de las listas te permite construir datasets dinámicamente.</p>
+      <h3>Ejemplo 2: Modificar listas — agregar, eliminar, cambiar</h3>
+      <p>La mutabilidad de las listas te permite construir datasets dinámicamente.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_modificar.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldos = [150000, 320000, 45000, 890000]
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_modificar.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">saldos = [150000, 320000, 45000, 890000]
 print(f"Original: {saldos}")
 
 # Agregar al final
@@ -183,17 +309,21 @@ eliminado_2 = saldos.pop(0)  # Elimina y devuelve el de índice 0
 print(f"pop(0) devolvió: {eliminado_2}")
 
 print(f"\nFinal: {saldos}")
-print(f"Cantidad: {len(saldos)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Cantidad: {len(saldos)}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Funciones estadísticas con listas</h3>
-<p>Calculá estadísticas básicas de una cartera de clientes — esto es exactamente lo que harías con pandas, pero primero con listas puras.</p>
+      <h3>Ejemplo 3: Funciones estadísticas con listas</h3>
+      <p>Calculá estadísticas básicas de una cartera de clientes — esto es exactamente lo que harías con pandas, pero
+        primero con listas puras.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_estadisticas.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Cartera de saldos (en pesos)
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_estadisticas.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Cartera de saldos (en pesos)
 saldos = [150000, 320000, 45000, 890000, 72000, 210000, 15000, 530000]
 
 print(f"=== Análisis de cartera ===")
@@ -219,17 +349,20 @@ print(f"Top 3 = {pct_top3:.1f}% de la cartera")
 # Contar cuántos superan el promedio
 promedio = sum(saldos) / len(saldos)
 sobre_promedio = sum(1 for s in saldos if s > promedio)
-print(f"\nSobre promedio ({promedio:,.0f}): {sobre_promedio}/{len(saldos)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nSobre promedio ({promedio:,.0f}): {sobre_promedio}/{len(saldos)}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Recorrer listas con for</h3>
-<p>Combinar listas con bucles for es el patrón más común en procesamiento de datos.</p>
+      <h3>Ejemplo 4: Recorrer listas con for</h3>
+      <p>Combinar listas con bucles for es el patrón más común en procesamiento de datos.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_recorrer.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Recorrer con for
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_recorrer.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Recorrer con for
 clientes = ["García", "López", "Martínez", "Pérez", "Fernández"]
 saldos = [150000, 320000, 45000, 890000, 72000]
 
@@ -248,17 +381,21 @@ print(f"\n=== Acumulador manual ===")
 total = 0
 for saldo in saldos:
     total += saldo
-    print(f"  + ${saldo:>8,} → acumulado: ${total:>10,}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"  + ${saldo:>8,} → acumulado: ${total:>10,}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: List comprehensions — la herramienta más poderosa</h3>
-<p>Las list comprehensions son la forma "pythónica" de crear listas transformadas. Reemplazan bucles for completos en una sola línea.</p>
+      <h3>Ejemplo 5: List comprehensions — la herramienta más poderosa</h3>
+      <p>Las list comprehensions son la forma "pythónica" de crear listas transformadas. Reemplazan bucles for completos
+        en una sola línea.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_comprehensions.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">precios = [1200, 3500, 800, 15000, 4200, 950, 22000]
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_comprehensions.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">precios = [1200, 3500, 800, 15000, 4200, 950, 22000]
 
 # Sintaxis: [expresión for elemento in iterable if condición]
 
@@ -287,227 +424,365 @@ print(f"\nNombres limpios: {limpios}")
 montos_str = ["$1,500", "$820", "$3,200", "$950"]
 montos_num = [float(m.replace("$","").replace(",","")) for m in montos_str]
 print(f"Montos numéricos: {montos_num}")
-print(f"Total: ${sum(montos_num):,.0f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Total: ${sum(montos_num):,.0f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Método</th><th>Qué hace</th><th>Modifica la lista?</th><th>Devuelve</th></tr>
-<tr><td><code>.append(x)</code></td><td>Agrega x al final</td><td>Sí</td><td><code>None</code></td></tr>
-<tr><td><code>.insert(i, x)</code></td><td>Inserta x en posición i</td><td>Sí</td><td><code>None</code></td></tr>
-<tr><td><code>.extend(lista)</code></td><td>Agrega todos los elementos</td><td>Sí</td><td><code>None</code></td></tr>
-<tr><td><code>.remove(x)</code></td><td>Elimina primera ocurrencia de x</td><td>Sí</td><td><code>None</code></td></tr>
-<tr><td><code>.pop(i)</code></td><td>Elimina y devuelve elemento en i</td><td>Sí</td><td>El elemento</td></tr>
-<tr><td><code>.clear()</code></td><td>Vacía la lista</td><td>Sí</td><td><code>None</code></td></tr>
-<tr><td><code>.sort()</code></td><td>Ordena in-place</td><td>Sí</td><td><code>None</code></td></tr>
-<tr><td><code>.reverse()</code></td><td>Invierte in-place</td><td>Sí</td><td><code>None</code></td></tr>
-<tr><td><code>.index(x)</code></td><td>Posición de x</td><td>No</td><td><code>int</code></td></tr>
-<tr><td><code>.count(x)</code></td><td>Cuántas veces aparece x</td><td>No</td><td><code>int</code></td></tr>
-<tr><td><code>.copy()</code></td><td>Copia superficial</td><td>No</td><td>Nueva lista</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Método</th>
+            <th>Qué hace</th>
+            <th>Modifica la lista?</th>
+            <th>Devuelve</th>
+          </tr>
+          <tr>
+            <td><code>.append(x)</code></td>
+            <td>Agrega x al final</td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+          </tr>
+          <tr>
+            <td><code>.insert(i, x)</code></td>
+            <td>Inserta x en posición i</td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+          </tr>
+          <tr>
+            <td><code>.extend(lista)</code></td>
+            <td>Agrega todos los elementos</td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+          </tr>
+          <tr>
+            <td><code>.remove(x)</code></td>
+            <td>Elimina primera ocurrencia de x</td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+          </tr>
+          <tr>
+            <td><code>.pop(i)</code></td>
+            <td>Elimina y devuelve elemento en i</td>
+            <td>Sí</td>
+            <td>El elemento</td>
+          </tr>
+          <tr>
+            <td><code>.clear()</code></td>
+            <td>Vacía la lista</td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+          </tr>
+          <tr>
+            <td><code>.sort()</code></td>
+            <td>Ordena in-place</td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+          </tr>
+          <tr>
+            <td><code>.reverse()</code></td>
+            <td>Invierte in-place</td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+          </tr>
+          <tr>
+            <td><code>.index(x)</code></td>
+            <td>Posición de x</td>
+            <td>No</td>
+            <td><code>int</code></td>
+          </tr>
+          <tr>
+            <td><code>.count(x)</code></td>
+            <td>Cuántas veces aparece x</td>
+            <td>No</td>
+            <td><code>int</code></td>
+          </tr>
+          <tr>
+            <td><code>.copy()</code></td>
+            <td>Copia superficial</td>
+            <td>No</td>
+            <td>Nueva lista</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Crear y acceder</h4>
-  <p>Creá una lista <code>ciudades</code> con 5 ciudades argentinas. Imprimí la primera, la última (con índice negativo) y la cantidad de elementos. Debe incluir <code>Buenos Aires</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-1" data-expected="Buenos Aires">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Buenos Aires"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá la lista e imprimí:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["ciudades = [\"Buenos Aires\", \"Córdoba\", \"Rosario\", \"Mendoza\", \"Tucumán\"]","print(ciudades[0]) para la primera","print(ciudades[-1]) para la última, len(ciudades) para la cantidad"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Crear y acceder</h4>
+        <p>Creá una lista <code>ciudades</code> con 5 ciudades argentinas. Imprimí la primera, la última (con índice
+          negativo) y la cantidad de elementos. Debe incluir <code>Buenos Aires</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-1"
+          data-expected="Buenos Aires">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Buenos Aires"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Creá la lista e imprimí:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["ciudades = [\"Buenos Aires\", \"Córdoba\", \"Rosario\", \"Mendoza\", \"Tucumán\"]","print(ciudades[0]) para la primera","print(ciudades[-1]) para la última, len(ciudades) para la cantidad"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Slicing</h4>
-  <p>Dada <code>nums = [10, 20, 30, 40, 50, 60, 70, 80]</code>, extraé e imprimí: los primeros 3, los últimos 3, y la lista invertida. Debe incluir <code>[60, 70, 80]</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-2" data-expected="[60, 70, 80]">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "[60, 70, 80]"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">nums = [10, 20, 30, 40, 50, 60, 70, 80]
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Slicing</h4>
+        <p>Dada <code>nums = [10, 20, 30, 40, 50, 60, 70, 80]</code>, extraé e imprimí: los primeros 3, los últimos 3, y
+          la lista invertida. Debe incluir <code>[60, 70, 80]</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-2"
+          data-expected="[60, 70, 80]">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "[60, 70, 80]"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">nums = [10, 20, 30, 40, 50, 60, 70, 80]
 
 # Extraé con slicing:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["Primeros 3: nums[:3]","Últimos 3: nums[-3:] → [60, 70, 80]","Invertida: nums[::-1]"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["Primeros 3: nums[:3]","Últimos 3: nums[-3:] → [60, 70, 80]","Invertida: nums[::-1]"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Sum, min, max, len</h4>
-  <p>Dada <code>ventas = [45000, 72000, 38000, 91000, 55000]</code>, imprimí: total, promedio, máximo y mínimo. Debe incluir <code>301000</code> (el total).</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-3" data-expected="301000">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "301000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">ventas = [45000, 72000, 38000, 91000, 55000]
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Sum, min, max, len</h4>
+        <p>Dada <code>ventas = [45000, 72000, 38000, 91000, 55000]</code>, imprimí: total, promedio, máximo y mínimo.
+          Debe incluir <code>301000</code> (el total).</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-3" data-expected="301000">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "301000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">ventas = [45000, 72000, 38000, 91000, 55000]
 
 # Calculá e imprimí estadísticas:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["print(f\"Total: {sum(ventas)}\")","Promedio: sum(ventas) / len(ventas)","max(ventas) y min(ventas) para extremos"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["print(f\"Total: {sum(ventas)}\")","Promedio: sum(ventas) / len(ventas)","max(ventas) y min(ventas) para extremos"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Append y extend</h4>
-  <p>Empezá con <code>cartera = [100000, 250000]</code>. Agregá <code>180000</code> con append, después extendé con <code>[50000, 320000]</code>. Imprimí la lista final y su longitud. Debe incluir la longitud <code>5</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-4" data-expected="5">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "5"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">cartera = [100000, 250000]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Append y extend</h4>
+        <p>Empezá con <code>cartera = [100000, 250000]</code>. Agregá <code>180000</code> con append, después extendé
+          con <code>[50000, 320000]</code>. Imprimí la lista final y su longitud. Debe incluir la longitud
+          <code>5</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-4" data-expected="5">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "5"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">cartera = [100000, 250000]
 
 # append + extend:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["cartera.append(180000)","cartera.extend([50000, 320000])","print(cartera, len(cartera)) → 5 elementos"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["cartera.append(180000)","cartera.extend([50000, 320000])","print(cartera, len(cartera)) → 5 elementos"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Ordenar y top N</h4>
-  <p>Dada <code>scores = [720, 590, 810, 645, 680, 750, 520]</code>, imprimí los 3 scores más altos (top 3) usando <code>sorted()</code> con <code>reverse=True</code> y slicing. Debe incluir <code>[810, 750, 720]</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-5" data-expected="[810, 750, 720]">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "[810, 750, 720]"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">scores = [720, 590, 810, 645, 680, 750, 520]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Ordenar y top N</h4>
+        <p>Dada <code>scores = [720, 590, 810, 645, 680, 750, 520]</code>, imprimí los 3 scores más altos (top 3) usando
+          <code>sorted()</code> con <code>reverse=True</code> y slicing. Debe incluir <code>[810, 750, 720]</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-5"
+          data-expected="[810, 750, 720]">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "[810, 750, 720]"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">scores = [720, 590, 810, 645, 680, 750, 520]
 
 # Top 3:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["sorted(scores, reverse=True) ordena de mayor a menor","[:3] toma los primeros 3","top3 = sorted(scores, reverse=True)[:3]"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["sorted(scores, reverse=True) ordena de mayor a menor","[:3] toma los primeros 3","top3 = sorted(scores, reverse=True)[:3]"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: List comprehension — filtrar</h4>
-  <p>Dada <code>montos = [12000, 3500, 45000, 800, 67000, 2100, 91000]</code>, creá una nueva lista <code>grandes</code> con solo los montos > 10000 e imprimí su suma. Debe incluir <code>215000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-6" data-expected="215000">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "215000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">montos = [12000, 3500, 45000, 800, 67000, 2100, 91000]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: List comprehension — filtrar</h4>
+        <p>Dada <code>montos = [12000, 3500, 45000, 800, 67000, 2100, 91000]</code>, creá una nueva lista
+          <code>grandes</code> con solo los montos > 10000 e imprimí su suma. Debe incluir <code>215000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-6" data-expected="215000">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "215000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">montos = [12000, 3500, 45000, 800, 67000, 2100, 91000]
 
 # List comprehension para filtrar > 10000:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["grandes = [m for m in montos if m > 10000]","print(sum(grandes))","12000 + 45000 + 67000 + 91000 = 215000"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["grandes = [m for m in montos if m > 10000]","print(sum(grandes))","12000 + 45000 + 67000 + 91000 = 215000"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: List comprehension — transformar</h4>
-  <p>Tenés <code>precios_str = ["$2,500", "$1,800", "$4,200", "$950"]</code>. Con una list comprehension, limpiá el $ y la coma, convertí a float y calculá el total. Debe incluir <code>9450</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-7" data-expected="9450">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "9450"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">precios_str = ["$2,500", "$1,800", "$4,200", "$950"]
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: List comprehension — transformar</h4>
+        <p>Tenés <code>precios_str = ["$2,500", "$1,800", "$4,200", "$950"]</code>. Con una list comprehension, limpiá
+          el $ y la coma, convertí a float y calculá el total. Debe incluir <code>9450</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-7" data-expected="9450">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "9450"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">precios_str = ["$2,500", "$1,800", "$4,200", "$950"]
 
 # Limpiá, convertí y sumá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["float(p.replace(\"$\",\"\").replace(\",\",\"\")) para cada precio","nums = [float(p.replace(\"$\",\"\").replace(\",\",\"\")) for p in precios_str]","print(sum(nums)) → 9450.0"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["float(p.replace(\"$\",\"\").replace(\",\",\"\")) para cada precio","nums = [float(p.replace(\"$\",\"\").replace(\",\",\"\")) for p in precios_str]","print(sum(nums)) → 9450.0"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Recorrer dos listas en paralelo</h4>
-  <p>Tenés <code>clientes = ["García", "López", "Pérez"]</code> y <code>saldos = [250000, 80000, 510000]</code>. Recorrelos con <code>zip()</code> e imprimí un reporte. Debe incluir <code>Total: 840000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-8" data-expected="Total: 840000">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Total: 840000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = ["García", "López", "Pérez"]
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Recorrer dos listas en paralelo</h4>
+        <p>Tenés <code>clientes = ["García", "López", "Pérez"]</code> y <code>saldos = [250000, 80000, 510000]</code>.
+          Recorrelos con <code>zip()</code> e imprimí un reporte. Debe incluir <code>Total: 840000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-8"
+          data-expected="Total: 840000">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Total: 840000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">clientes = ["García", "López", "Pérez"]
 saldos = [250000, 80000, 510000]
 
 # Recorré con zip e imprimí:
 
-print(f"Total: {sum(saldos)}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["for nombre, saldo in zip(clientes, saldos):","    print(f\"{nombre}: ${saldo:,}\")","zip() empareja los elementos por posición"]'></div>
-</div>
+print(f"Total: {sum(saldos)}")</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["for nombre, saldo in zip(clientes, saldos):","    print(f\"{nombre}: ${saldo:,}\")","zip() empareja los elementos por posición"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Clasificar con comprehension y ternario</h4>
-  <p>Dada <code>edades = [15, 22, 17, 30, 12, 45, 16, 28]</code>, creá una lista que tenga <code>"Mayor"</code> o <code>"Menor"</code> para cada edad. Contá cuántos son mayores. Debe incluir <code>Mayores: 4</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-9" data-expected="Mayores: 4">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Mayores: 4"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">edades = [15, 22, 17, 30, 12, 45, 16, 28]
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Clasificar con comprehension y ternario</h4>
+        <p>Dada <code>edades = [15, 22, 17, 30, 12, 45, 16, 28]</code>, creá una lista que tenga <code>"Mayor"</code> o
+          <code>"Menor"</code> para cada edad. Contá cuántos son mayores. Debe incluir <code>Mayores: 4</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-9" data-expected="Mayores: 4">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Mayores: 4"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">edades = [15, 22, 17, 30, 12, 45, 16, 28]
 
 # Clasificá y contá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["cats = [\"Mayor\" if e >= 18 else \"Menor\" for e in edades]","mayores = cats.count(\"Mayor\")","print(f\"Mayores: {mayores}\") → 4 (22, 30, 45, 28)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["cats = [\"Mayor\" if e >= 18 else \"Menor\" for e in edades]","mayores = cats.count(\"Mayor\")","print(f\"Mayores: {mayores}\") → 4 (22, 30, 45, 28)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Análisis de cartera completo</h4>
-  <p>Tenés <code>clientes = ["García","López","Martínez","Pérez","Fernández"]</code> y <code>saldos = [150000, 320000, 45000, 890000, 72000]</code>. Imprimí: (1) cada cliente con su saldo y un emoji 🟢 si > promedio, 🔴 si no, (2) el promedio, (3) los nombres de clientes sobre el promedio, (4) el Top 1. Debe incluir <code>Promedio: 295400</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-10" data-expected="Promedio: 295400">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Promedio: 295400"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = ["García", "López", "Martínez", "Pérez", "Fernández"]
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Análisis de cartera completo</h4>
+        <p>Tenés <code>clientes = ["García","López","Martínez","Pérez","Fernández"]</code> y
+          <code>saldos = [150000, 320000, 45000, 890000, 72000]</code>. Imprimí: (1) cada cliente con su saldo y un
+          emoji 🟢 si > promedio, 🔴 si no, (2) el promedio, (3) los nombres de clientes sobre el promedio, (4) el Top
+          1. Debe incluir <code>Promedio: 295400</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-10"
+          data-expected="Promedio: 295400">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Promedio: 295400"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">clientes = ["García", "López", "Martínez", "Pérez", "Fernández"]
 saldos = [150000, 320000, 45000, 890000, 72000]
 
 # Análisis completo:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["prom = sum(saldos)/len(saldos) = 1477000/5 = 295400","for n, s in zip(clientes, saldos): emoji = \"🟢\" if s > prom else \"🔴\"","sobre = [n for n, s in zip(clientes, saldos) if s > prom] → López, Pérez"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>Las listas son colecciones ordenadas y mutables, creadas con <code>[]</code>.</li>
+        <li>Los índices empiezan en <code>0</code>. Los negativos (<code>-1</code>) cuentan desde el final.</li>
+        <li>Slicing (<code>[inicio:fin:paso]</code>) extrae sublistas. Nunca da IndexError.</li>
+        <li>Métodos de modificación: <code>append</code>, <code>insert</code>, <code>extend</code>, <code>remove</code>,
+          <code>pop</code>, <code>sort</code>, <code>reverse</code>.</li>
+        <li>Funciones estadísticas: <code>len</code>, <code>sum</code>, <code>min</code>, <code>max</code>,
+          <code>sorted</code>.</li>
+        <li>List comprehensions (<code>[x for x in lista if cond]</code>) son la herramienta más poderosa para
+          transformar datos.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>09 · Tuplas</strong>) vas a aprender la versión inmutable de las listas:
+        cuándo conviene usar tuplas en vez de listas, y por qué la inmutabilidad es importante en código profesional.
+      </p>
+
+      <p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/datastructures.html"
+          target="_blank">Python docs — Lists</a> · <a
+          href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions" target="_blank">List
+          Comprehensions</a></p>
+
+      <div class="footer-nav">
+        <a href="/python/07-comentarios-indentacion.html">← Comentarios e indentación</a>
+        <a class="next" href="/python/09-tuplas.html">Tuplas →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["prom = sum(saldos)/len(saldos) = 1477000/5 = 295400","for n, s in zip(clientes, saldos): emoji = \"🟢\" if s > prom else \"🔴\"","sobre = [n for n, s in zip(clientes, saldos) if s > prom] → López, Pérez"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>Las listas son colecciones ordenadas y mutables, creadas con <code>[]</code>.</li>
-  <li>Los índices empiezan en <code>0</code>. Los negativos (<code>-1</code>) cuentan desde el final.</li>
-  <li>Slicing (<code>[inicio:fin:paso]</code>) extrae sublistas. Nunca da IndexError.</li>
-  <li>Métodos de modificación: <code>append</code>, <code>insert</code>, <code>extend</code>, <code>remove</code>, <code>pop</code>, <code>sort</code>, <code>reverse</code>.</li>
-  <li>Funciones estadísticas: <code>len</code>, <code>sum</code>, <code>min</code>, <code>max</code>, <code>sorted</code>.</li>
-  <li>List comprehensions (<code>[x for x in lista if cond]</code>) son la herramienta más poderosa para transformar datos.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>09 · Tuplas</strong>) vas a aprender la versión inmutable de las listas: cuándo conviene usar tuplas en vez de listas, y por qué la inmutabilidad es importante en código profesional.</p>
-
-<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/datastructures.html" target="_blank">Python docs — Lists</a> · <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions" target="_blank">List Comprehensions</a></p>
-
-<div class="footer-nav">
-  <a href="/python/07-comentarios-indentacion.html">← Comentarios e indentación</a>
-  <a class="next" href="/python/09-tuplas.html">Tuplas →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

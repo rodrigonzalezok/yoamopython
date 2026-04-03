@@ -1,135 +1,242 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 23 · Strings avanzado</title>
-<meta name="description" content="Slicing profundo, regex con re, encoding UTF-8, raw strings y patrones avanzados de procesamiento de texto para limpieza de datos.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 23 · Strings avanzado</title>
+  <meta name="description"
+    content="Slicing profundo, regex con re, encoding UTF-8, raw strings y patrones avanzados de procesamiento de texto para limpieza de datos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 23 de 27</span>
-  <h1>Strings avanzado</h1>
-  <p>En la lección 12 cubrimos los métodos básicos. Ahora vamos al nivel avanzado: slicing profundo, expresiones regulares con <code>re</code>, encoding, raw strings y f-strings con expresiones complejas. Estas herramientas son las que usás para limpiar datos realmente sucios.</p>
-  <div class="badges">
-    <span class="badge">90–110 min</span>
-    <span class="badge">Prerrequisitos: 12 Métodos de strings, 18 Funciones</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 23 de 27</span>
+        <h1>Strings avanzado</h1>
+        <p>En la lección 12 cubrimos los métodos básicos. Ahora vamos al nivel avanzado: slicing profundo, expresiones
+          regulares con <code>re</code>, encoding, raw strings y f-strings con expresiones complejas. Estas herramientas
+          son las que usás para limpiar datos realmente sucios.</p>
+        <div class="badges">
+          <span class="badge">90–110 min</span>
+          <span class="badge">Prerrequisitos: 12 Métodos de strings, 18 Funciones</span>
+        </div>
+      </div>
 
-<h3>Slicing profundo de strings</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Los strings en Python son secuencias de caracteres y soportan el mismo slicing que las listas: <code>string[inicio:fin:paso]</code>. Algunos patrones útiles que no vimos antes:</p>
+      <h3>Slicing profundo de strings</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Slice</th><th>Resultado (con <code>"ABCDEFGH"</code>)</th><th>Uso</th></tr>
-<tr><td><code>s[::2]</code></td><td><code>"ACEG"</code></td><td>Caracteres en posición par</td></tr>
-<tr><td><code>s[::-1]</code></td><td><code>"HGFEDCBA"</code></td><td>Invertir un string</td></tr>
-<tr><td><code>s[2:5]</code></td><td><code>"CDE"</code></td><td>Extraer subcadena</td></tr>
-<tr><td><code>s[-4:]</code></td><td><code>"EFGH"</code></td><td>Últimos 4 caracteres</td></tr>
-<tr><td><code>s[:4]</code></td><td><code>"ABCD"</code></td><td>Primeros 4 caracteres</td></tr>
-</table>
-</div>
+      <p>Los strings en Python son secuencias de caracteres y soportan el mismo slicing que las listas:
+        <code>string[inicio:fin:paso]</code>. Algunos patrones útiles que no vimos antes:</p>
 
-<p>Recordá: los strings son <b>inmutables</b>. No podés hacer <code>s[0] = "Z"</code>. Cada operación de slicing devuelve un <b>nuevo string</b>.</p>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Slice</th>
+            <th>Resultado (con <code>"ABCDEFGH"</code>)</th>
+            <th>Uso</th>
+          </tr>
+          <tr>
+            <td><code>s[::2]</code></td>
+            <td><code>"ACEG"</code></td>
+            <td>Caracteres en posición par</td>
+          </tr>
+          <tr>
+            <td><code>s[::-1]</code></td>
+            <td><code>"HGFEDCBA"</code></td>
+            <td>Invertir un string</td>
+          </tr>
+          <tr>
+            <td><code>s[2:5]</code></td>
+            <td><code>"CDE"</code></td>
+            <td>Extraer subcadena</td>
+          </tr>
+          <tr>
+            <td><code>s[-4:]</code></td>
+            <td><code>"EFGH"</code></td>
+            <td>Últimos 4 caracteres</td>
+          </tr>
+          <tr>
+            <td><code>s[:4]</code></td>
+            <td><code>"ABCD"</code></td>
+            <td>Primeros 4 caracteres</td>
+          </tr>
+        </table>
+      </div>
 
-<h3>Repetición y multiplicación de strings</h3>
+      <p>Recordá: los strings son <b>inmutables</b>. No podés hacer <code>s[0] = "Z"</code>. Cada operación de slicing
+        devuelve un <b>nuevo string</b>.</p>
 
-<p>El operador <code>*</code> repite un string: <code>"─" * 40</code> genera una línea de 40 guiones. Muy útil para formatear reportes y separadores.</p>
+      <h3>Repetición y multiplicación de strings</h3>
 
-<h3>Multiline strings y raw strings</h3>
+      <p>El operador <code>*</code> repite un string: <code>"─" * 40</code> genera una línea de 40 guiones. Muy útil
+        para formatear reportes y separadores.</p>
 
-<p><strong>Triple comillas</strong> (<code>"""..."""</code> o <code>'''...'''</code>) permiten strings que ocupan varias líneas, preservando saltos de línea y espacios:</p>
+      <h3>Multiline strings y raw strings</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">consulta_sql = """
+      <p><strong>Triple comillas</strong> (<code>"""..."""</code> o <code>'''...'''</code>) permiten strings que ocupan
+        varias líneas, preservando saltos de línea y espacios:</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">consulta_sql = """
 SELECT nombre, score, saldo
 FROM clientes
 WHERE score >= 650
 ORDER BY saldo DESC
 """</pre>
 
-<p><strong>Raw strings</strong> (<code>r"..."</code>) no interpretan escapes. Son esenciales para regex y paths de Windows:</p>
+      <p><strong>Raw strings</strong> (<code>r"..."</code>) no interpretan escapes. Son esenciales para regex y paths de
+        Windows:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">normal = "C:\nueva\carpeta"   # \n se interpreta como salto de línea!
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">normal = "C:\nueva\carpeta"   # \n se interpreta como salto de línea!
 raw = r"C:\nueva\carpeta"     # se mantiene literal
 regex = r"\d{2}-\d{8}-\d"     # patrón de CUIT sin escapar</pre>
 
-<h3>Encoding: UTF-8, Latin-1 y el caos de la Ñ</h3>
+      <h3>Encoding: UTF-8, Latin-1 y el caos de la Ñ</h3>
 
-<p>Los strings de Python 3 son <b>Unicode nativamente</b>. Pero cuando leés archivos de otras fuentes (Excel viejos, CSVs de sistemas legacy), podés encontrarte con encodings distintos:</p>
+      <p>Los strings de Python 3 son <b>Unicode nativamente</b>. Pero cuando leés archivos de otras fuentes (Excel
+        viejos, CSVs de sistemas legacy), podés encontrarte con encodings distintos:</p>
 
-<ul>
-  <li><b>UTF-8:</b> estándar universal. Soporta todos los caracteres. <b>Siempre preferí UTF-8.</b></li>
-  <li><b>Latin-1 (ISO 8859-1):</b> viejo estándar europeo. Muchos CSVs argentinos vienen en Latin-1 porque los sistemas legacy lo usaban. La Ñ, las tildes y los signos de peso funcionan, pero otros caracteres no.</li>
-  <li><b>ASCII:</b> solo inglés básico. Sin tildes, sin Ñ, sin ñ. Limitadísimo.</li>
-</ul>
+      <ul>
+        <li><b>UTF-8:</b> estándar universal. Soporta todos los caracteres. <b>Siempre preferí UTF-8.</b></li>
+        <li><b>Latin-1 (ISO 8859-1):</b> viejo estándar europeo. Muchos CSVs argentinos vienen en Latin-1 porque los
+          sistemas legacy lo usaban. La Ñ, las tildes y los signos de peso funcionan, pero otros caracteres no.</li>
+        <li><b>ASCII:</b> solo inglés básico. Sin tildes, sin Ñ, sin ñ. Limitadísimo.</li>
+      </ul>
 
-<div class="warning"><strong>Error clásico de encoding:</strong> <code>UnicodeDecodeError</code> al leer un CSV. Esto pasa cuando el archivo está en Latin-1 pero Python intenta leerlo como UTF-8. Solución: <code>pd.read_csv("archivo.csv", encoding="latin-1")</code>. En datos argentinos, esto pasa MUY seguido con exports de MERCAP, SINENSUP y sistemas bancarios legacy.</div>
+      <div class="warning"><strong>Error clásico de encoding:</strong> <code>UnicodeDecodeError</code> al leer un CSV.
+        Esto pasa cuando el archivo está en Latin-1 pero Python intenta leerlo como UTF-8. Solución:
+        <code>pd.read_csv("archivo.csv", encoding="latin-1")</code>. En datos argentinos, esto pasa MUY seguido con
+        exports de MERCAP, SINENSUP y sistemas bancarios legacy.</div>
 
-<h3>Expresiones regulares (regex) con el módulo re</h3>
+      <h3>Expresiones regulares (regex) con el módulo re</h3>
 
-<p>Las <strong>expresiones regulares</strong> son patrones que describen texto. Son la herramienta más poderosa para buscar, extraer y reemplazar patrones complejos en strings. El módulo <code>re</code> de Python las implementa.</p>
+      <p>Las <strong>expresiones regulares</strong> son patrones que describen texto. Son la herramienta más poderosa
+        para buscar, extraer y reemplazar patrones complejos en strings. El módulo <code>re</code> de Python las
+        implementa.</p>
 
-<div class="table-wrap">
-<table>
-<tr><th>Patrón</th><th>Significado</th><th>Ejemplo match</th></tr>
-<tr><td><code>\d</code></td><td>Un dígito (0-9)</td><td><code>"5"</code></td></tr>
-<tr><td><code>\d{8}</code></td><td>Exactamente 8 dígitos</td><td><code>"12345678"</code></td></tr>
-<tr><td><code>\w</code></td><td>Letra, dígito o _</td><td><code>"a"</code>, <code>"3"</code>, <code>"_"</code></td></tr>
-<tr><td><code>\s</code></td><td>Espacio, tab, newline</td><td><code>" "</code></td></tr>
-<tr><td><code>.</code></td><td>Cualquier carácter (excepto newline)</td><td><code>"x"</code></td></tr>
-<tr><td><code>+</code></td><td>1 o más del anterior</td><td><code>\d+</code> → <code>"123"</code></td></tr>
-<tr><td><code>*</code></td><td>0 o más del anterior</td><td><code>\d*</code> → <code>""</code> o <code>"5"</code></td></tr>
-<tr><td><code>?</code></td><td>0 o 1 del anterior</td><td><code>\d?</code> → <code>""</code> o <code>"5"</code></td></tr>
-<tr><td><code>[abc]</code></td><td>Cualquiera de a, b, c</td><td><code>"a"</code></td></tr>
-<tr><td><code>(grupo)</code></td><td>Captura un grupo</td><td>Extraer partes del match</td></tr>
-<tr><td><code>^</code></td><td>Inicio del string</td><td>—</td></tr>
-<tr><td><code>$</code></td><td>Fin del string</td><td>—</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Patrón</th>
+            <th>Significado</th>
+            <th>Ejemplo match</th>
+          </tr>
+          <tr>
+            <td><code>\d</code></td>
+            <td>Un dígito (0-9)</td>
+            <td><code>"5"</code></td>
+          </tr>
+          <tr>
+            <td><code>\d{8}</code></td>
+            <td>Exactamente 8 dígitos</td>
+            <td><code>"12345678"</code></td>
+          </tr>
+          <tr>
+            <td><code>\w</code></td>
+            <td>Letra, dígito o _</td>
+            <td><code>"a"</code>, <code>"3"</code>, <code>"_"</code></td>
+          </tr>
+          <tr>
+            <td><code>\s</code></td>
+            <td>Espacio, tab, newline</td>
+            <td><code>" "</code></td>
+          </tr>
+          <tr>
+            <td><code>.</code></td>
+            <td>Cualquier carácter (excepto newline)</td>
+            <td><code>"x"</code></td>
+          </tr>
+          <tr>
+            <td><code>+</code></td>
+            <td>1 o más del anterior</td>
+            <td><code>\d+</code> → <code>"123"</code></td>
+          </tr>
+          <tr>
+            <td><code>*</code></td>
+            <td>0 o más del anterior</td>
+            <td><code>\d*</code> → <code>""</code> o <code>"5"</code></td>
+          </tr>
+          <tr>
+            <td><code>?</code></td>
+            <td>0 o 1 del anterior</td>
+            <td><code>\d?</code> → <code>""</code> o <code>"5"</code></td>
+          </tr>
+          <tr>
+            <td><code>[abc]</code></td>
+            <td>Cualquiera de a, b, c</td>
+            <td><code>"a"</code></td>
+          </tr>
+          <tr>
+            <td><code>(grupo)</code></td>
+            <td>Captura un grupo</td>
+            <td>Extraer partes del match</td>
+          </tr>
+          <tr>
+            <td><code>^</code></td>
+            <td>Inicio del string</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><code>$</code></td>
+            <td>Fin del string</td>
+            <td>—</td>
+          </tr>
+        </table>
+      </div>
 
-<p>Las funciones principales de <code>re</code>:</p>
-<ul>
-  <li><code>re.search(patron, texto)</code> — busca la primera coincidencia en cualquier parte</li>
-  <li><code>re.match(patron, texto)</code> — busca solo al INICIO del string</li>
-  <li><code>re.findall(patron, texto)</code> — devuelve TODAS las coincidencias como lista</li>
-  <li><code>re.sub(patron, reemplazo, texto)</code> — reemplaza todas las coincidencias</li>
-  <li><code>re.compile(patron)</code> — pre-compila un patrón para uso repetido (más rápido)</li>
-</ul>
+      <p>Las funciones principales de <code>re</code>:</p>
+      <ul>
+        <li><code>re.search(patron, texto)</code> — busca la primera coincidencia en cualquier parte</li>
+        <li><code>re.match(patron, texto)</code> — busca solo al INICIO del string</li>
+        <li><code>re.findall(patron, texto)</code> — devuelve TODAS las coincidencias como lista</li>
+        <li><code>re.sub(patron, reemplazo, texto)</code> — reemplaza todas las coincidencias</li>
+        <li><code>re.compile(patron)</code> — pre-compila un patrón para uso repetido (más rápido)</li>
+      </ul>
 
-<div class="concept"><strong>Siempre usá raw strings para regex:</strong> <code>r"\d{2}-\d{8}-\d"</code>. Sin el <code>r</code>, Python interpreta <code>\d</code> como un escape (que no existe) y puede dar resultados inesperados. Con <code>r</code>, el patrón llega intacto al motor de regex.</div>
+      <div class="concept"><strong>Siempre usá raw strings para regex:</strong> <code>r"\d{2}-\d{8}-\d"</code>. Sin el
+        <code>r</code>, Python interpreta <code>\d</code> como un escape (que no existe) y puede dar resultados
+        inesperados. Con <code>r</code>, el patrón llega intacto al motor de regex.</div>
 
-<div class="realworld"><strong>En análisis de datos:</strong> regex es indispensable para: (1) extraer CUITs, teléfonos, emails de texto libre, (2) limpiar montos con formatos mixtos ($1.500,00 vs 1500.00 vs $1,500), (3) validar formatos de datos, (4) parsear logs y archivos semi-estructurados. En pandas: <code>df["col"].str.extract(r"patron")</code> usa regex directamente.</div>
+      <div class="realworld"><strong>En análisis de datos:</strong> regex es indispensable para: (1) extraer CUITs,
+        teléfonos, emails de texto libre, (2) limpiar montos con formatos mixtos ($1.500,00 vs 1500.00 vs $1,500), (3)
+        validar formatos de datos, (4) parsear logs y archivos semi-estructurados. En pandas:
+        <code>df["col"].str.extract(r"patron")</code> usa regex directamente.</div>
 
-<div class="tip"><strong>Tip:</strong> no necesitás memorizar toda la sintaxis de regex. Lo que necesitás es saber que existe, y usar <a href="https://regex101.com/" target="_blank">regex101.com</a> para construir y testear patrones interactivamente. Es la herramienta más útil para regex.</div>
+      <div class="tip"><strong>Tip:</strong> no necesitás memorizar toda la sintaxis de regex. Lo que necesitás es saber
+        que existe, y usar <a href="https://regex101.com/" target="_blank">regex101.com</a> para construir y testear
+        patrones interactivamente. Es la herramienta más útil para regex.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: Slicing avanzado y manipulación</h3>
+      <h3>Ejemplo 1: Slicing avanzado y manipulación</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_slicing.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Slicing avanzado
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_slicing.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Slicing avanzado
 cbu = "2850590940090418135201"
 print(f"CBU completo: {cbu}")
 print(f"Banco (3 primeros): {cbu[:3]}")
@@ -157,16 +264,19 @@ for p in palabras:
 # Repetición para formato
 print(f"\n{'═' * 40}")
 print(f"{'REPORTE':^40}")
-print(f"{'═' * 40}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"{'═' * 40}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Raw strings, multiline y encoding</h3>
+      <h3>Ejemplo 2: Raw strings, multiline y encoding</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_raw_multiline.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Multiline string: SQL query
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_raw_multiline.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Multiline string: SQL query
 query = """
 SELECT c.nombre, c.score, s.saldo
 FROM clientes c
@@ -201,16 +311,19 @@ print(f"Decodificado: {utf8_bytes.decode('utf-8')}")
 # Verificar si un string tiene caracteres especiales
 for char in texto:
     if ord(char) > 127:
-        print(f"  Carácter especial: '{char}' → Unicode {ord(char)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+        print(f"  Carácter especial: '{char}' → Unicode {ord(char)}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Regex básico — search, findall, sub</h3>
+      <h3>Ejemplo 3: Regex básico — search, findall, sub</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_regex_basico.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_regex_basico.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import re
 
 # re.search: buscar la primera coincidencia
 texto = "El cliente García tiene CUIT 20-30123456-9 y vive en BsAs"
@@ -237,16 +350,19 @@ print(f"\nLimpiar '{monto_sucio}' → '{monto_limpio}' → {float(monto_limpio)}
 dni = "El DNI es 30123456 del cliente"
 oculto = re.sub(r"\d{8}", "XXXXXXXX", dni)
 print(f"Original: {dni}")
-print(f"Oculto: {oculto}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Oculto: {oculto}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Regex con grupos — extraer datos estructurados</h3>
+      <h3>Ejemplo 4: Regex con grupos — extraer datos estructurados</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_regex_grupos.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_regex_grupos.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import re
 
 # Extraer partes de un CUIT con grupos de captura
 cuits = ["20-30123456-9", "27-28765432-1", "30-71234567-5", "abc-123-x"]
@@ -278,16 +394,19 @@ texto_montos = "Factura A: $1,500.00 — Factura B: AR$23,450 — Factura C: 800
 montos = re.findall(r"(?:AR)?\$?([\d,]+\.?\d*)", texto_montos)
 print(f"\nMontos extraídos: {montos}")
 limpios = [float(m.replace(",", "")) for m in montos]
-print(f"Como floats: {limpios}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Como floats: {limpios}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: f-strings con expresiones complejas</h3>
+      <h3>Ejemplo 5: f-strings con expresiones complejas</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_fstrings_avanzado.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># f-strings con expresiones dentro
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_fstrings_avanzado.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># f-strings con expresiones dentro
 nombre = "García"
 score = 720
 
@@ -324,98 +443,312 @@ reporte = f"""
 ║  Score: {cliente['score']:<20} ║
 ║  Saldo: ${cliente['saldo']:>18,} ║
 ╚══════════════════════════════╝"""
-print(reporte)</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(reporte)</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Función re</th><th>Qué hace</th><th>Devuelve</th></tr>
-<tr><td><code>re.search(p, t)</code></td><td>Busca primera coincidencia</td><td>Match object o None</td></tr>
-<tr><td><code>re.match(p, t)</code></td><td>Busca solo al inicio</td><td>Match object o None</td></tr>
-<tr><td><code>re.findall(p, t)</code></td><td>Todas las coincidencias</td><td>Lista de strings</td></tr>
-<tr><td><code>re.sub(p, r, t)</code></td><td>Reemplaza coincidencias</td><td>Nuevo string</td></tr>
-<tr><td><code>re.split(p, t)</code></td><td>Divide por patrón</td><td>Lista</td></tr>
-<tr><td><code>re.compile(p)</code></td><td>Pre-compila patrón</td><td>Pattern object</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Función re</th>
+            <th>Qué hace</th>
+            <th>Devuelve</th>
+          </tr>
+          <tr>
+            <td><code>re.search(p, t)</code></td>
+            <td>Busca primera coincidencia</td>
+            <td>Match object o None</td>
+          </tr>
+          <tr>
+            <td><code>re.match(p, t)</code></td>
+            <td>Busca solo al inicio</td>
+            <td>Match object o None</td>
+          </tr>
+          <tr>
+            <td><code>re.findall(p, t)</code></td>
+            <td>Todas las coincidencias</td>
+            <td>Lista de strings</td>
+          </tr>
+          <tr>
+            <td><code>re.sub(p, r, t)</code></td>
+            <td>Reemplaza coincidencias</td>
+            <td>Nuevo string</td>
+          </tr>
+          <tr>
+            <td><code>re.split(p, t)</code></td>
+            <td>Divide por patrón</td>
+            <td>Lista</td>
+          </tr>
+          <tr>
+            <td><code>re.compile(p)</code></td>
+            <td>Pre-compila patrón</td>
+            <td>Pattern object</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Regex patrón</th><th>Significado</th><th>Ejemplo</th></tr>
-<tr><td><code>\d</code></td><td>Dígito</td><td><code>"5"</code></td></tr>
-<tr><td><code>\d+</code></td><td>1+ dígitos</td><td><code>"123"</code></td></tr>
-<tr><td><code>\d{8}</code></td><td>Exactamente 8 dígitos</td><td><code>"12345678"</code></td></tr>
-<tr><td><code>\w+</code></td><td>Palabra (letras/dígitos/_)</td><td><code>"hola_42"</code></td></tr>
-<tr><td><code>\s</code></td><td>Espacio/tab</td><td><code>" "</code></td></tr>
-<tr><td><code>[^0-9]</code></td><td>Todo excepto dígitos</td><td><code>"$", ","</code></td></tr>
-<tr><td><code>(grupo)</code></td><td>Capturar grupo</td><td><code>match.group(1)</code></td></tr>
-<tr><td><code>^...$</code></td><td>Inicio a fin (exacto)</td><td>Validación completa</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Regex patrón</th>
+            <th>Significado</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><code>\d</code></td>
+            <td>Dígito</td>
+            <td><code>"5"</code></td>
+          </tr>
+          <tr>
+            <td><code>\d+</code></td>
+            <td>1+ dígitos</td>
+            <td><code>"123"</code></td>
+          </tr>
+          <tr>
+            <td><code>\d{8}</code></td>
+            <td>Exactamente 8 dígitos</td>
+            <td><code>"12345678"</code></td>
+          </tr>
+          <tr>
+            <td><code>\w+</code></td>
+            <td>Palabra (letras/dígitos/_)</td>
+            <td><code>"hola_42"</code></td>
+          </tr>
+          <tr>
+            <td><code>\s</code></td>
+            <td>Espacio/tab</td>
+            <td><code>" "</code></td>
+          </tr>
+          <tr>
+            <td><code>[^0-9]</code></td>
+            <td>Todo excepto dígitos</td>
+            <td><code>"$", ","</code></td>
+          </tr>
+          <tr>
+            <td><code>(grupo)</code></td>
+            <td>Capturar grupo</td>
+            <td><code>match.group(1)</code></td>
+          </tr>
+          <tr>
+            <td><code>^...$</code></td>
+            <td>Inicio a fin (exacto)</td>
+            <td>Validación completa</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Invertir un string</h4><p>Dado <code>texto = "Python"</code>, invertilo con slicing. Debe incluir <code>nohtyP</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-1" data-expected="nohtyP"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "nohtyP"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">texto = "Python"
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Invertir un string</h4>
+        <p>Dado <code>texto = "Python"</code>, invertilo con slicing. Debe incluir <code>nohtyP</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-1" data-expected="nohtyP">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "nohtyP"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">texto = "Python"
 
 # Invertí:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["print(texto[::-1])","[::-1] invierte cualquier secuencia","\"Python\"[::-1] = \"nohtyP\""]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["print(texto[::-1])","[::-1] invierte cualquier secuencia","\"Python\"[::-1] = \"nohtyP\""]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Extraer partes de un CBU</h4><p>Dado <code>cbu = "2850590940090418135201"</code>, extraé los 3 primeros dígitos (banco), los siguientes 4 (sucursal) y el último (verificador). Debe incluir <code>285</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-2" data-expected="285"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "285"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">cbu = "2850590940090418135201"
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Extraer partes de un CBU</h4>
+        <p>Dado <code>cbu = "2850590940090418135201"</code>, extraé los 3 primeros dígitos (banco), los siguientes 4
+          (sucursal) y el último (verificador). Debe incluir <code>285</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-2" data-expected="285">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "285"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">cbu = "2850590940090418135201"
 
 # Extraé con slicing:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["banco = cbu[:3] → \"285\"","sucursal = cbu[3:7]","verificador = cbu[-1]"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["banco = cbu[:3] → \"285\"","sucursal = cbu[3:7]","verificador = cbu[-1]"]'></div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: re.findall para extraer números</h4><p>Dado <code>"Ventas: $1500, $3200, $800"</code>, extraé todos los números con <code>re.findall()</code>. Debe incluir <code>3200</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-3" data-expected="3200"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "3200"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: re.findall para extraer números</h4>
+        <p>Dado <code>"Ventas: $1500, $3200, $800"</code>, extraé todos los números con <code>re.findall()</code>. Debe
+          incluir <code>3200</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-3" data-expected="3200">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "3200"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import re
 texto = "Ventas: $1500, $3200, $800"
 
 # Extraé números:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["nums = re.findall(r\"\\d+\", texto)","print(nums)","[\"1500\", \"3200\", \"800\"]"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["nums = re.findall(r\"\\d+\", texto)","print(nums)","[\"1500\", \"3200\", \"800\"]"]'></div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Validar CUIT con regex</h4><p>Creá una función <code>validar_cuit(cuit)</code> que use regex para verificar formato <code>XX-XXXXXXXX-X</code>. Probá con "20-30123456-9" (válido) y "abc-123-x" (inválido). Debe incluir <code>True</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-4" data-expected="True"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "True"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Validar CUIT con regex</h4>
+        <p>Creá una función <code>validar_cuit(cuit)</code> que use regex para verificar formato
+          <code>XX-XXXXXXXX-X</code>. Probá con "20-30123456-9" (válido) y "abc-123-x" (inválido). Debe incluir
+          <code>True</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-4" data-expected="True">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "True"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import re
 
 def validar_cuit(cuit):
     pass  # usá re.match con un patrón
 
 print(validar_cuit("20-30123456-9"))
-print(validar_cuit("abc-123-x"))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["patron = r\"^\\d{2}-\\d{8}-\\d$\"","return bool(re.match(patron, cuit))","^ y $ aseguran que matchee TODO el string"]'></div></div>
+print(validar_cuit("abc-123-x"))</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["patron = r\"^\\d{2}-\\d{8}-\\d$\"","return bool(re.match(patron, cuit))","^ y $ aseguran que matchee TODO el string"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: re.sub para limpiar montos</h4><p>Dado <code>"$1,250,000.50"</code>, usá <code>re.sub()</code> para eliminar todo excepto dígitos y punto. Convertí a float. Debe incluir <code>1250000.5</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-5" data-expected="1250000.5"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "1250000.5"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: re.sub para limpiar montos</h4>
+        <p>Dado <code>"$1,250,000.50"</code>, usá <code>re.sub()</code> para eliminar todo excepto dígitos y punto.
+          Convertí a float. Debe incluir <code>1250000.5</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-5" data-expected="1250000.5">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "1250000.5"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import re
 monto = "$1,250,000.50"
 
 # Limpiá con re.sub:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["limpio = re.sub(r\"[^0-9.]\", \"\", monto)","[^0-9.] = todo lo que NO sea dígito o punto","float(limpio) → 1250000.5"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["limpio = re.sub(r\"[^0-9.]\", \"\", monto)","[^0-9.] = todo lo que NO sea dígito o punto","float(limpio) → 1250000.5"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: Extraer emails con regex</h4><p>Dado un texto con 3 emails, extraelos todos con <code>re.findall()</code>. Debe incluir <code>@</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-6" data-expected="@"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "@"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Extraer emails con regex</h4>
+        <p>Dado un texto con 3 emails, extraelos todos con <code>re.findall()</code>. Debe incluir <code>@</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-6" data-expected="@">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "@"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import re
 texto = "Contactar a garcia@banco.com, info@empresa.com.ar o soporte@mail.net"
 
 # Extraé emails:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["patron = r\"[\\w.+-]+@[\\w.-]+\\.\\w+\"","emails = re.findall(patron, texto)","print(emails)"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["patron = r\"[\\w.+-]+@[\\w.-]+\\.\\w+\"","emails = re.findall(patron, texto)","print(emails)"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Regex con grupos para parsear CUIT</h4><p>Usá grupos de captura <code>(\d{2})-(\d{8})-(\d)</code> para extraer las 3 partes de <code>"20-30123456-9"</code>. Debe incluir <code>30123456</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-7" data-expected="30123456"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "30123456"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Regex con grupos para parsear CUIT</h4>
+        <p>Usá grupos de captura <code>(\d{2})-(\d{8})-(\d)</code> para extraer las 3 partes de
+          <code>"20-30123456-9"</code>. Debe incluir <code>30123456</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-7" data-expected="30123456">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "30123456"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import re
 cuit = "20-30123456-9"
 
 # Extraé las partes con grupos:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["match = re.match(r\"(\\d{2})-(\\d{8})-(\\d)\", cuit)","prefijo, cuerpo, verif = match.groups()","print(f\"Cuerpo: {cuerpo}\") → 30123456"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["match = re.match(r\"(\\d{2})-(\\d{8})-(\\d)\", cuit)","prefijo, cuerpo, verif = match.groups()","print(f\"Cuerpo: {cuerpo}\") → 30123456"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Ocultar datos sensibles con re.sub</h4><p>Dado <code>"DNI 30123456, Tel +54-11-4567-8901"</code>, ocultar el DNI con X y los últimos 4 dígitos del teléfono con *. Debe incluir <code>XXXXXXXX</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-8" data-expected="XXXXXXXX"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "XXXXXXXX"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Ocultar datos sensibles con re.sub</h4>
+        <p>Dado <code>"DNI 30123456, Tel +54-11-4567-8901"</code>, ocultar el DNI con X y los últimos 4 dígitos del
+          teléfono con *. Debe incluir <code>XXXXXXXX</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-8" data-expected="XXXXXXXX">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "XXXXXXXX"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import re
 texto = "DNI 30123456, Tel +54-11-4567-8901"
 
 # Ocultar datos sensibles:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["oculto = re.sub(r\"\\b\\d{8}\\b\", \"XXXXXXXX\", texto)","\\b marca límites de palabra","Para el teléfono podés usar otro re.sub"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["oculto = re.sub(r\"\\b\\d{8}\\b\", \"XXXXXXXX\", texto)","\\b marca límites de palabra","Para el teléfono podés usar otro re.sub"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Limpiar lista de montos con formatos mixtos</h4><p>Tenés <code>["$1,500.00", "AR$23.450", "1500", "$-200", "N/A"]</code>. Usá regex para extraer el valor numérico de cada uno, ignorando los inválidos. Debe incluir <code>Total</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-9" data-expected="Total"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Total"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Limpiar lista de montos con formatos mixtos</h4>
+        <p>Tenés <code>["$1,500.00", "AR$23.450", "1500", "$-200", "N/A"]</code>. Usá regex para extraer el valor
+          numérico de cada uno, ignorando los inválidos. Debe incluir <code>Total</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-9" data-expected="Total">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Total"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import re
 montos_crudos = ["$1,500.00", "AR$23.450", "1500", "$-200", "N/A"]
 
 # Limpiá y sumá:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["Para cada m: limpio = re.sub(r\"[^0-9.-]\", \"\", m)","if limpio and limpio != \"-\": float(limpio)","Sumá los válidos y print(f\"Total: ${total:,.0f}\")"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["Para cada m: limpio = re.sub(r\"[^0-9.-]\", \"\", m)","if limpio and limpio != \"-\": float(limpio)","Sumá los válidos y print(f\"Total: ${total:,.0f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Parser de registros con regex completo</h4><p>Dado un texto con registros semi-estructurados, extraé nombre, CUIT y monto de cada línea usando regex con grupos. Armá una lista de diccionarios. Debe incluir <code>registros</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-10" data-expected="registros"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "registros"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
+      <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Parser de registros con regex completo</h4>
+        <p>Dado un texto con registros semi-estructurados, extraé nombre, CUIT y monto de cada línea usando regex con
+          grupos. Armá una lista de diccionarios. Debe incluir <code>registros</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-10" data-expected="registros">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "registros"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import re
 
 texto = """
 Cliente: García, CUIT: 20-30123456-9, Monto: $150,000
@@ -425,41 +758,55 @@ Cliente: Pérez, CUIT: 20-40123456-7, Monto: $890,000
 
 # Parseá cada línea con regex:
 print(f"=== {len(texto.strip().splitlines())} registros ===")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["patron = r\"Cliente: (\\w+), CUIT: ([\\d-]+), Monto: \\$([\\d,]+)\"","matches = re.findall(patron, texto)","registros = [{\"nombre\":m[0], \"cuit\":m[1], \"monto\":m[2]} for m in matches]"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["patron = r\"Cliente: (\\w+), CUIT: ([\\d-]+), Monto: \\$([\\d,]+)\"","matches = re.findall(patron, texto)","registros = [{\"nombre\":m[0], \"cuit\":m[1], \"monto\":m[2]} for m in matches]"]'>
+        </div>
+      </div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
 
-<ul>
-  <li>Slicing de strings: <code>[::-1]</code> invierte, <code>[:3]</code> primeros 3, <code>[-4:]</code> últimos 4.</li>
-  <li>Raw strings (<code>r"..."</code>) son esenciales para regex y paths de Windows.</li>
-  <li>Multiline strings (<code>"""..."""</code>) preservan saltos de línea — ideales para SQL queries.</li>
-  <li>Encoding: UTF-8 por defecto. Si un CSV falla, probá <code>encoding="latin-1"</code>.</li>
-  <li><code>re.findall()</code> extrae coincidencias, <code>re.sub()</code> reemplaza, <code>re.match()</code> valida.</li>
-  <li>Siempre usá raw strings para patrones regex: <code>r"\d{2}-\d{8}-\d"</code>.</li>
-  <li>f-strings admiten expresiones, llamadas a funciones y operadores ternarios.</li>
-</ul>
+      <ul>
+        <li>Slicing de strings: <code>[::-1]</code> invierte, <code>[:3]</code> primeros 3, <code>[-4:]</code> últimos
+          4.</li>
+        <li>Raw strings (<code>r"..."</code>) son esenciales para regex y paths de Windows.</li>
+        <li>Multiline strings (<code>"""..."""</code>) preservan saltos de línea — ideales para SQL queries.</li>
+        <li>Encoding: UTF-8 por defecto. Si un CSV falla, probá <code>encoding="latin-1"</code>.</li>
+        <li><code>re.findall()</code> extrae coincidencias, <code>re.sub()</code> reemplaza, <code>re.match()</code>
+          valida.</li>
+        <li>Siempre usá raw strings para patrones regex: <code>r"\d{2}-\d{8}-\d"</code>.</li>
+        <li>f-strings admiten expresiones, llamadas a funciones y operadores ternarios.</li>
+      </ul>
 
-<p>En la siguiente lección (<strong>24 · Archivos</strong>) vas a aprender a leer y escribir archivos: texto, CSV, JSON y Excel. El puente entre tu código y los datos del mundo real.</p>
+      <p>En la siguiente lección (<strong>24 · Archivos</strong>) vas a aprender a leer y escribir archivos: texto, CSV,
+        JSON y Excel. El puente entre tu código y los datos del mundo real.</p>
 
-<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/library/re.html" target="_blank">Python docs — re</a> · <a href="https://regex101.com/" target="_blank">regex101.com (tester)</a></p>
+      <p><strong>Recursos:</strong> <a href="https://docs.python.org/3/library/re.html" target="_blank">Python docs —
+          re</a> · <a href="https://regex101.com/" target="_blank">regex101.com (tester)</a></p>
 
-<div class="footer-nav">
-  <a href="/python/22-scope-variables.html">← Scope de variables</a>
-  <a class="next" href="/python/24-archivos.html">Archivos →</a>
-</div>
+      <div class="footer-nav">
+        <a href="/python/22-scope-variables.html">← Scope de variables</a>
+        <a class="next" href="/python/24-archivos.html">Archivos →</a>
+      </div>
 
-</main>
-</div>
+    </main>
+  </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

@@ -1,45 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 14 · Métodos de diccionarios</title>
-<meta name="description" content="Dominá todos los métodos de diccionarios: get, setdefault, update, pop, comprehensions, defaultdict, Counter y patrones avanzados.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 14 · Métodos de diccionarios</title>
+  <meta name="description"
+    content="Dominá todos los métodos de diccionarios: get, setdefault, update, pop, comprehensions, defaultdict, Counter y patrones avanzados.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 14 de 27</span>
-  <h1>Métodos de diccionarios</h1>
-  <p>En la lección 10 aprendiste lo básico de diccionarios. Ahora vas a dominar los métodos avanzados que usan los profesionales: acceso seguro, merge, conteo de frecuencias, defaultdict y patrones de agrupación que son la base de lo que después harás con pandas groupby.</p>
-  <div class="badges">
-    <span class="badge">80–100 min</span>
-    <span class="badge">Prerrequisitos: 10 Diccionarios, 13 Métodos de listas</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 14 de 27</span>
+        <h1>Métodos de diccionarios</h1>
+        <p>En la lección 10 aprendiste lo básico de diccionarios. Ahora vas a dominar los métodos avanzados que usan los
+          profesionales: acceso seguro, merge, conteo de frecuencias, defaultdict y patrones de agrupación que son la
+          base de lo que después harás con pandas groupby.</p>
+        <div class="badges">
+          <span class="badge">80–100 min</span>
+          <span class="badge">Prerrequisitos: 10 Diccionarios, 13 Métodos de listas</span>
+        </div>
+      </div>
 
-<h3>.get() vs .setdefault() — acceso seguro con matices</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Ya conocés <code>.get(clave, default)</code>: devuelve el valor si la clave existe, o el default si no. Pero <code>.get()</code> NO modifica el diccionario — solo consulta. A veces necesitás algo más: si la clave no existe, crearla con un valor inicial y DESPUÉS devolver ese valor. Para eso existe <code>.setdefault()</code>:</p>
+      <h3>.get() vs .setdefault() — acceso seguro con matices</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">d = {"nombre": "García"}
+      <p>Ya conocés <code>.get(clave, default)</code>: devuelve el valor si la clave existe, o el default si no. Pero
+        <code>.get()</code> NO modifica el diccionario — solo consulta. A veces necesitás algo más: si la clave no
+        existe, crearla con un valor inicial y DESPUÉS devolver ese valor. Para eso existe <code>.setdefault()</code>:
+      </p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">d = {"nombre": "García"}
 
 # .get() — solo consulta, no modifica
 email = d.get("email", "sin dato")   # devuelve "sin dato", d NO cambia
@@ -49,96 +63,114 @@ print(d)  # {"nombre": "García"} — email NO se creó
 email = d.setdefault("email", "sin dato")  # devuelve "sin dato" Y lo agrega
 print(d)  # {"nombre": "García", "email": "sin dato"} — email SÍ se creó</pre>
 
-<div class="concept"><strong>¿Cuándo usar cada uno?</strong> <code>.get()</code> cuando solo querés leer sin efectos secundarios (el 90% de los casos). <code>.setdefault()</code> cuando querés inicializar una clave la primera vez que la encontrás — típico en patrones de agrupación manual.</div>
+      <div class="concept"><strong>¿Cuándo usar cada uno?</strong> <code>.get()</code> cuando solo querés leer sin
+        efectos secundarios (el 90% de los casos). <code>.setdefault()</code> cuando querés inicializar una clave la
+        primera vez que la encontrás — típico en patrones de agrupación manual.</div>
 
-<h3>.update() — merge de diccionarios</h3>
+      <h3>.update() — merge de diccionarios</h3>
 
-<p><code>.update()</code> combina dos diccionarios. Si hay claves repetidas, los valores del diccionario que pasás como argumento sobreescriben los existentes:</p>
+      <p><code>.update()</code> combina dos diccionarios. Si hay claves repetidas, los valores del diccionario que pasás
+        como argumento sobreescriben los existentes:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">base = {"nombre": "García", "score": 720}
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">base = {"nombre": "García", "score": 720}
 nuevos = {"score": 735, "ciudad": "BsAs"}  # score se sobreescribe
 base.update(nuevos)
 # base = {"nombre": "García", "score": 735, "ciudad": "BsAs"}</pre>
 
-<p>Desde Python 3.9, también podés usar el operador <code>|</code> para merge (devuelve nuevo dict) y <code>|=</code> para merge in-place:</p>
+      <p>Desde Python 3.9, también podés usar el operador <code>|</code> para merge (devuelve nuevo dict) y
+        <code>|=</code> para merge in-place:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Python 3.9+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Python 3.9+
 combinado = base | nuevos      # nuevo dict (no modifica base)
 base |= nuevos                 # modifica base in-place (como update)</pre>
 
-<h3>.pop() y .popitem() — eliminar y obtener</h3>
+      <h3>.pop() y .popitem() — eliminar y obtener</h3>
 
-<ul>
-  <li><code>.pop(clave, default)</code> — elimina la clave y devuelve su valor. Si la clave no existe y no pasás default, da <code>KeyError</code>. Si pasás default, lo devuelve sin error.</li>
-  <li><code>.popitem()</code> — elimina y devuelve el <b>último par</b> insertado como tupla <code>(clave, valor)</code>. Útil para procesar un dict como cola LIFO.</li>
-</ul>
+      <ul>
+        <li><code>.pop(clave, default)</code> — elimina la clave y devuelve su valor. Si la clave no existe y no pasás
+          default, da <code>KeyError</code>. Si pasás default, lo devuelve sin error.</li>
+        <li><code>.popitem()</code> — elimina y devuelve el <b>último par</b> insertado como tupla
+          <code>(clave, valor)</code>. Útil para procesar un dict como cola LIFO.</li>
+      </ul>
 
-<h3>Patrón: contador de frecuencias</h3>
+      <h3>Patrón: contador de frecuencias</h3>
 
-<p>Uno de los patrones más usados en análisis de datos es contar cuántas veces aparece cada valor. Hay tres formas, de menos a más elegante:</p>
+      <p>Uno de los patrones más usados en análisis de datos es contar cuántas veces aparece cada valor. Hay tres
+        formas, de menos a más elegante:</p>
 
-<div class="analogy"><strong>Forma 1 — Manual con if/else:</strong>
-<pre style="color:var(--t2);font-size:.82rem;background:transparent;padding:4px 0;margin:4px 0">freq = {}
+      <div class="analogy"><strong>Forma 1 — Manual con if/else:</strong>
+        <pre style="color:var(--t2);font-size:.82rem;background:transparent;padding:4px 0;margin:4px 0">freq = {}
 for item in datos:
     if item in freq:
         freq[item] += 1
     else:
         freq[item] = 1</pre>
-<b>Forma 2 — Con .get():</b>
-<pre style="color:var(--t2);font-size:.82rem;background:transparent;padding:4px 0;margin:4px 0">freq = {}
+        <b>Forma 2 — Con .get():</b>
+        <pre style="color:var(--t2);font-size:.82rem;background:transparent;padding:4px 0;margin:4px 0">freq = {}
 for item in datos:
     freq[item] = freq.get(item, 0) + 1</pre>
-<b>Forma 3 — Con Counter (la mejor):</b>
-<pre style="color:var(--t2);font-size:.82rem;background:transparent;padding:4px 0;margin:4px 0">from collections import Counter
+        <b>Forma 3 — Con Counter (la mejor):</b>
+        <pre style="color:var(--t2);font-size:.82rem;background:transparent;padding:4px 0;margin:4px 0">from collections import Counter
 freq = Counter(datos)</pre>
-</div>
+      </div>
 
-<h3>defaultdict — diccionarios con valor inicial automático</h3>
+      <h3>defaultdict — diccionarios con valor inicial automático</h3>
 
-<p><code>defaultdict</code> del módulo <code>collections</code> es un diccionario que, cuando accedés a una clave que no existe, automáticamente la crea con un valor inicial según el tipo que le pases:</p>
+      <p><code>defaultdict</code> del módulo <code>collections</code> es un diccionario que, cuando accedés a una clave
+        que no existe, automáticamente la crea con un valor inicial según el tipo que le pases:</p>
 
-<ul>
-  <li><code>defaultdict(int)</code> — claves nuevas se crean con valor <code>0</code></li>
-  <li><code>defaultdict(list)</code> — claves nuevas se crean con <code>[]</code> (lista vacía)</li>
-  <li><code>defaultdict(set)</code> — claves nuevas se crean con <code>set()</code></li>
-  <li><code>defaultdict(float)</code> — claves nuevas se crean con <code>0.0</code></li>
-</ul>
+      <ul>
+        <li><code>defaultdict(int)</code> — claves nuevas se crean con valor <code>0</code></li>
+        <li><code>defaultdict(list)</code> — claves nuevas se crean con <code>[]</code> (lista vacía)</li>
+        <li><code>defaultdict(set)</code> — claves nuevas se crean con <code>set()</code></li>
+        <li><code>defaultdict(float)</code> — claves nuevas se crean con <code>0.0</code></li>
+      </ul>
 
-<div class="warning"><strong>Cuidado con defaultdict:</strong> como crea la clave al acceder, un simple <code>d["clave_inexistente"]</code> (incluso sin asignar nada) agrega esa clave al diccionario. Esto puede generar entradas "fantasma" si no tenés cuidado. Usalo solo cuando realmente necesitás la auto-creación.</div>
+      <div class="warning"><strong>Cuidado con defaultdict:</strong> como crea la clave al acceder, un simple
+        <code>d["clave_inexistente"]</code> (incluso sin asignar nada) agrega esa clave al diccionario. Esto puede
+        generar entradas "fantasma" si no tenés cuidado. Usalo solo cuando realmente necesitás la auto-creación.</div>
 
-<h3>Counter — el arma secreta para frecuencias</h3>
+      <h3>Counter — el arma secreta para frecuencias</h3>
 
-<p><code>Counter</code> de <code>collections</code> es una subclase de dict optimizada para contar. Tiene métodos adicionales como <code>.most_common(n)</code> que devuelve los N elementos más frecuentes como lista de tuplas:</p>
+      <p><code>Counter</code> de <code>collections</code> es una subclase de dict optimizada para contar. Tiene métodos
+        adicionales como <code>.most_common(n)</code> que devuelve los N elementos más frecuentes como lista de tuplas:
+      </p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">from collections import Counter
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">from collections import Counter
 ventas = ["GGAL", "YPF", "GGAL", "PAMP", "GGAL", "YPF", "MELI"]
 freq = Counter(ventas)
 print(freq.most_common(2))  # [("GGAL", 3), ("YPF", 2)]</pre>
 
-<div class="realworld"><strong>En pandas:</strong> <code>Counter</code> es el equivalente manual de <code>df["columna"].value_counts()</code>. Cuando no tenés pandas disponible (scripts simples, lambdas en AWS, exámenes técnicos), Counter es tu mejor amigo.</div>
+      <div class="realworld"><strong>En pandas:</strong> <code>Counter</code> es el equivalente manual de
+        <code>df["columna"].value_counts()</code>. Cuando no tenés pandas disponible (scripts simples, lambdas en AWS,
+        exámenes técnicos), Counter es tu mejor amigo.</div>
 
-<h3>Dict comprehensions avanzadas</h3>
+      <h3>Dict comprehensions avanzadas</h3>
 
-<p>Los patrones más útiles que no vimos en la lección 10:</p>
+      <p>Los patrones más útiles que no vimos en la lección 10:</p>
 
-<ul>
-  <li><b>Invertir clave-valor:</b> <code>{v: k for k, v in original.items()}</code></li>
-  <li><b>Filtrar por valor:</b> <code>{k: v for k, v in d.items() if v > umbral}</code></li>
-  <li><b>Transformar valores:</b> <code>{k: v * 1.21 for k, v in precios.items()}</code></li>
-  <li><b>Desde lista de tuplas:</b> <code>{k: v for k, v in lista_tuplas}</code></li>
-  <li><b>Con .fromkeys():</b> <code>dict.fromkeys(["a","b","c"], 0)</code> — todas las claves con el mismo valor</li>
-</ul>
+      <ul>
+        <li><b>Invertir clave-valor:</b> <code>{v: k for k, v in original.items()}</code></li>
+        <li><b>Filtrar por valor:</b> <code>{k: v for k, v in d.items() if v > umbral}</code></li>
+        <li><b>Transformar valores:</b> <code>{k: v * 1.21 for k, v in precios.items()}</code></li>
+        <li><b>Desde lista de tuplas:</b> <code>{k: v for k, v in lista_tuplas}</code></li>
+        <li><b>Con .fromkeys():</b> <code>dict.fromkeys(["a","b","c"], 0)</code> — todas las claves con el mismo valor
+        </li>
+      </ul>
 
-<div class="tip"><strong>Tip profesional:</strong> cuando necesitás "agrupar por" sin pandas, el patrón <code>defaultdict(list)</code> + loop es tu herramienta. Es exactamente lo que hace <code>df.groupby("columna")</code> por debajo.</div>
+      <div class="tip"><strong>Tip profesional:</strong> cuando necesitás "agrupar por" sin pandas, el patrón
+        <code>defaultdict(list)</code> + loop es tu herramienta. Es exactamente lo que hace
+        <code>df.groupby("columna")</code> por debajo.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: .get() vs .setdefault() vs acceso directo</h3>
+      <h3>Ejemplo 1: .get() vs .setdefault() vs acceso directo</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_acceso.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">cliente = {"nombre": "García", "score": 720}
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_acceso.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">cliente = {"nombre": "García", "score": 720}
 
 # Acceso directo: peligroso si la clave no existe
 print(f"Nombre: {cliente['nombre']}")
@@ -169,16 +201,19 @@ for tipo, monto in transacciones:
 
 print(f"\nAgrupado: {por_tipo}")
 for tipo, montos in por_tipo.items():
-    print(f"  {tipo}: {len(montos)} ops, total ${sum(montos):,}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"  {tipo}: {len(montos)} ops, total ${sum(montos):,}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: update, pop, merge</h3>
+      <h3>Ejemplo 2: update, pop, merge</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_update_pop.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># .update(): merge de diccionarios
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_update_pop.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># .update(): merge de diccionarios
 config_base = {
     "tasa_iva": 0.21,
     "moneda": "ARS",
@@ -211,16 +246,19 @@ precios_ars = {"Notebook": 920000, "Mouse": 23000}
 precios_nuevos = {"Mouse": 25000, "Teclado": 46000}
 combinado = precios_ars | precios_nuevos  # Mouse se actualiza
 print(f"\nMerge |: {combinado}")
-print(f"Original intacto: {precios_ars}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Original intacto: {precios_ars}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Counter y frecuencias</h3>
+      <h3>Ejemplo 3: Counter y frecuencias</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_counter.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">from collections import Counter
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_counter.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">from collections import Counter
 
 # Contar operaciones por ticker
 operaciones = ["GGAL", "YPF", "GGAL", "PAMP", "GGAL", "YPF",
@@ -248,16 +286,19 @@ print(f"Q1 - Q2: {dict(diferencia)}")
 # Contar caracteres en un string
 texto = "supercalifragilisticoespialidoso"
 letras = Counter(texto)
-print(f"\nTop 5 letras: {letras.most_common(5)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nTop 5 letras: {letras.most_common(5)}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: defaultdict para agrupación</h3>
+      <h3>Ejemplo 4: defaultdict para agrupación</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_defaultdict.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">from collections import defaultdict
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_defaultdict.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">from collections import defaultdict
 
 # Agrupar clientes por ciudad (equivalente manual de groupby)
 clientes = [
@@ -297,16 +338,19 @@ compras = [("García", "Tarjeta"), ("López", "Cuenta"), ("García", "Cuenta"),
 for cliente, producto in compras:
     productos_por_cliente[cliente].add(producto)
 
-print(f"\nProductos únicos: {dict(productos_por_cliente)}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nProductos únicos: {dict(productos_por_cliente)}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Dict comprehensions avanzadas</h3>
+      <h3>Ejemplo 5: Dict comprehensions avanzadas</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_comprehensions.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Filtrar pares por valor
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_comprehensions.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Filtrar pares por valor
 saldos = {"García": 150000, "López": 320000, "Martínez": 45000,
           "Pérez": 890000, "Sosa": 72000}
 
@@ -339,201 +383,331 @@ categorizado = {
     for nombre, score in scoring.items()
     if score >= 650
 }
-print(f"Categorizados: {categorizado}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Categorizados: {categorizado}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Método</th><th>Modifica dict?</th><th>Devuelve</th><th>Cuándo usar</th></tr>
-<tr><td><code>.get(k, default)</code></td><td>No</td><td>Valor o default</td><td>Lectura segura (90% de los casos)</td></tr>
-<tr><td><code>.setdefault(k, v)</code></td><td>Sí (si k no existe)</td><td>Valor existente o v</td><td>Inicializar clave la primera vez</td></tr>
-<tr><td><code>.update(dict2)</code></td><td>Sí</td><td><code>None</code></td><td>Merge de diccionarios</td></tr>
-<tr><td><code>.pop(k, default)</code></td><td>Sí</td><td>Valor eliminado</td><td>Eliminar y usar el valor</td></tr>
-<tr><td><code>.popitem()</code></td><td>Sí</td><td>(clave, valor)</td><td>Procesar como cola LIFO</td></tr>
-<tr><td><code>.fromkeys(keys, v)</code></td><td>—</td><td>Nuevo dict</td><td>Template con claves predefinidas</td></tr>
-<tr><td><code>d1 | d2</code> (3.9+)</td><td>No</td><td>Nuevo dict</td><td>Merge funcional</td></tr>
-<tr><td><code>d1 |= d2</code> (3.9+)</td><td>Sí</td><td><code>None</code></td><td>Merge in-place</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Método</th>
+            <th>Modifica dict?</th>
+            <th>Devuelve</th>
+            <th>Cuándo usar</th>
+          </tr>
+          <tr>
+            <td><code>.get(k, default)</code></td>
+            <td>No</td>
+            <td>Valor o default</td>
+            <td>Lectura segura (90% de los casos)</td>
+          </tr>
+          <tr>
+            <td><code>.setdefault(k, v)</code></td>
+            <td>Sí (si k no existe)</td>
+            <td>Valor existente o v</td>
+            <td>Inicializar clave la primera vez</td>
+          </tr>
+          <tr>
+            <td><code>.update(dict2)</code></td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+            <td>Merge de diccionarios</td>
+          </tr>
+          <tr>
+            <td><code>.pop(k, default)</code></td>
+            <td>Sí</td>
+            <td>Valor eliminado</td>
+            <td>Eliminar y usar el valor</td>
+          </tr>
+          <tr>
+            <td><code>.popitem()</code></td>
+            <td>Sí</td>
+            <td>(clave, valor)</td>
+            <td>Procesar como cola LIFO</td>
+          </tr>
+          <tr>
+            <td><code>.fromkeys(keys, v)</code></td>
+            <td>—</td>
+            <td>Nuevo dict</td>
+            <td>Template con claves predefinidas</td>
+          </tr>
+          <tr>
+            <td><code>d1 | d2</code> (3.9+)</td>
+            <td>No</td>
+            <td>Nuevo dict</td>
+            <td>Merge funcional</td>
+          </tr>
+          <tr>
+            <td><code>d1 |= d2</code> (3.9+)</td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+            <td>Merge in-place</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Herramienta collections</th><th>Qué hace</th><th>Equivalente pandas</th></tr>
-<tr><td><code>Counter(iterable)</code></td><td>Cuenta frecuencias</td><td><code>.value_counts()</code></td></tr>
-<tr><td><code>Counter.most_common(n)</code></td><td>Top N más frecuentes</td><td><code>.value_counts().head(n)</code></td></tr>
-<tr><td><code>defaultdict(list)</code></td><td>Agrupar valores por clave</td><td><code>.groupby().agg(list)</code></td></tr>
-<tr><td><code>defaultdict(int)</code></td><td>Acumular sumas por clave</td><td><code>.groupby().sum()</code></td></tr>
-<tr><td><code>defaultdict(set)</code></td><td>Acumular únicos por clave</td><td><code>.groupby().nunique()</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Herramienta collections</th>
+            <th>Qué hace</th>
+            <th>Equivalente pandas</th>
+          </tr>
+          <tr>
+            <td><code>Counter(iterable)</code></td>
+            <td>Cuenta frecuencias</td>
+            <td><code>.value_counts()</code></td>
+          </tr>
+          <tr>
+            <td><code>Counter.most_common(n)</code></td>
+            <td>Top N más frecuentes</td>
+            <td><code>.value_counts().head(n)</code></td>
+          </tr>
+          <tr>
+            <td><code>defaultdict(list)</code></td>
+            <td>Agrupar valores por clave</td>
+            <td><code>.groupby().agg(list)</code></td>
+          </tr>
+          <tr>
+            <td><code>defaultdict(int)</code></td>
+            <td>Acumular sumas por clave</td>
+            <td><code>.groupby().sum()</code></td>
+          </tr>
+          <tr>
+            <td><code>defaultdict(set)</code></td>
+            <td>Acumular únicos por clave</td>
+            <td><code>.groupby().nunique()</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: .get() con default</h4>
-  <p>Dado <code>prod = {"nombre": "Notebook", "precio": 920000}</code>, usá <code>.get()</code> para acceder a <code>"stock"</code> con default <code>0</code>. Imprimí el resultado. Debe incluir <code>Stock: 0</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-1" data-expected="Stock: 0">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Stock: 0"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">prod = {"nombre": "Notebook", "precio": 920000}
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: .get() con default</h4>
+        <p>Dado <code>prod = {"nombre": "Notebook", "precio": 920000}</code>, usá <code>.get()</code> para acceder a
+          <code>"stock"</code> con default <code>0</code>. Imprimí el resultado. Debe incluir <code>Stock: 0</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-1" data-expected="Stock: 0">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Stock: 0"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">prod = {"nombre": "Notebook", "precio": 920000}
 
 # Accedé a stock con default:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["stock = prod.get(\"stock\", 0)","print(f\"Stock: {stock}\")","\"stock\" no existe → devuelve 0"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["stock = prod.get(\"stock\", 0)","print(f\"Stock: {stock}\")","\"stock\" no existe → devuelve 0"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: .update() para merge</h4>
-  <p>Tenés <code>base = {"nombre": "García", "score": 700}</code> y <code>nuevo = {"score": 735, "ciudad": "BsAs"}</code>. Mergealos con <code>.update()</code>. El score debe quedar en 735. Debe incluir <code>735</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-2" data-expected="735">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "735"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">base = {"nombre": "García", "score": 700}
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: .update() para merge</h4>
+        <p>Tenés <code>base = {"nombre": "García", "score": 700}</code> y
+          <code>nuevo = {"score": 735, "ciudad": "BsAs"}</code>. Mergealos con <code>.update()</code>. El score debe
+          quedar en 735. Debe incluir <code>735</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-2" data-expected="735">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "735"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">base = {"nombre": "García", "score": 700}
 nuevo = {"score": 735, "ciudad": "BsAs"}
 
 # Mergeá e imprimí:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["base.update(nuevo)","print(base)","score se sobreescribe de 700 a 735"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["base.update(nuevo)","print(base)","score se sobreescribe de 700 a 735"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: .pop() para eliminar</h4>
-  <p>Dado <code>config = {"host": "db.local", "port": 5432, "debug": True}</code>, eliminá <code>"debug"</code> con <code>.pop()</code> y mostrá el valor eliminado. Debe incluir <code>True</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-3" data-expected="True">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "True"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">config = {"host": "db.local", "port": 5432, "debug": True}
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: .pop() para eliminar</h4>
+        <p>Dado <code>config = {"host": "db.local", "port": 5432, "debug": True}</code>, eliminá <code>"debug"</code>
+          con <code>.pop()</code> y mostrá el valor eliminado. Debe incluir <code>True</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-3" data-expected="True">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "True"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">config = {"host": "db.local", "port": 5432, "debug": True}
 
 # Eliminá debug y mostrá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["eliminado = config.pop(\"debug\")","print(f\"Eliminé: {eliminado}\")","print(config) para ver el dict sin debug"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["eliminado = config.pop(\"debug\")","print(f\"Eliminé: {eliminado}\")","print(config) para ver el dict sin debug"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Contar frecuencias con .get()</h4>
-  <p>Dada <code>ciudades = ["BsAs","Córdoba","BsAs","Rosario","BsAs","Córdoba","Mendoza"]</code>, contá la frecuencia de cada ciudad usando el patrón <code>.get(k, 0) + 1</code>. Debe incluir <code>3</code> (BsAs aparece 3 veces).</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-4" data-expected="3">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "3"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">ciudades = ["BsAs", "Córdoba", "BsAs", "Rosario", "BsAs", "Córdoba", "Mendoza"]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Contar frecuencias con .get()</h4>
+        <p>Dada <code>ciudades = ["BsAs","Córdoba","BsAs","Rosario","BsAs","Córdoba","Mendoza"]</code>, contá la
+          frecuencia de cada ciudad usando el patrón <code>.get(k, 0) + 1</code>. Debe incluir <code>3</code> (BsAs
+          aparece 3 veces).</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-4" data-expected="3">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">ciudades = ["BsAs", "Córdoba", "BsAs", "Rosario", "BsAs", "Córdoba", "Mendoza"]
 
 # Contá frecuencias:
 freq = {}
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["for c in ciudades: freq[c] = freq.get(c, 0) + 1","print(freq)","BsAs: 3, Córdoba: 2, Rosario: 1, Mendoza: 1"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["for c in ciudades: freq[c] = freq.get(c, 0) + 1","print(freq)","BsAs: 3, Córdoba: 2, Rosario: 1, Mendoza: 1"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Counter con most_common</h4>
-  <p>Dada la lista de tickers <code>["GGAL","YPF","GGAL","PAMP","GGAL","YPF","MELI","PAMP","GGAL"]</code>, usá <code>Counter</code> para encontrar los 2 más operados. Debe incluir <code>GGAL</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-5" data-expected="GGAL">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "GGAL"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">from collections import Counter
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Counter con most_common</h4>
+        <p>Dada la lista de tickers <code>["GGAL","YPF","GGAL","PAMP","GGAL","YPF","MELI","PAMP","GGAL"]</code>, usá
+          <code>Counter</code> para encontrar los 2 más operados. Debe incluir <code>GGAL</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-5" data-expected="GGAL">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "GGAL"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">from collections import Counter
 
 tickers = ["GGAL", "YPF", "GGAL", "PAMP", "GGAL", "YPF", "MELI", "PAMP", "GGAL"]
 
 # Top 2 con Counter:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["freq = Counter(tickers)","print(freq.most_common(2))","GGAL: 4 veces, YPF: 2 veces"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["freq = Counter(tickers)","print(freq.most_common(2))","GGAL: 4 veces, YPF: 2 veces"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Dict comprehension para filtrar</h4>
-  <p>Dado <code>saldos = {"García": 150000, "López": 320000, "Martínez": 45000, "Pérez": 890000}</code>, creá un nuevo dict solo con los que tienen saldo > $100K. Debe incluir <code>Pérez</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-6" data-expected="Pérez">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Pérez"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldos = {"García": 150000, "López": 320000, "Martínez": 45000, "Pérez": 890000}
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Dict comprehension para filtrar</h4>
+        <p>Dado <code>saldos = {"García": 150000, "López": 320000, "Martínez": 45000, "Pérez": 890000}</code>, creá un
+          nuevo dict solo con los que tienen saldo > $100K. Debe incluir <code>Pérez</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-6" data-expected="Pérez">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Pérez"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">saldos = {"García": 150000, "López": 320000, "Martínez": 45000, "Pérez": 890000}
 
 # Filtrá > $100K con comprehension:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["grandes = {k: v for k, v in saldos.items() if v > 100000}","print(grandes)","García, López y Pérez superan $100K"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["grandes = {k: v for k, v in saldos.items() if v > 100000}","print(grandes)","García, López y Pérez superan $100K"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: defaultdict(list) para agrupar</h4>
-  <p>Agrupá estas transacciones por tipo usando <code>defaultdict(list)</code>: <code>[("compra",1500), ("venta",800), ("compra",3200), ("venta",2100), ("compra",950)]</code>. Imprimí el total por tipo. Debe incluir <code>5650</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-7" data-expected="5650">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "5650"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">from collections import defaultdict
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: defaultdict(list) para agrupar</h4>
+        <p>Agrupá estas transacciones por tipo usando <code>defaultdict(list)</code>:
+          <code>[("compra",1500), ("venta",800), ("compra",3200), ("venta",2100), ("compra",950)]</code>. Imprimí el
+          total por tipo. Debe incluir <code>5650</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-7" data-expected="5650">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "5650"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">from collections import defaultdict
 
 transacciones = [("compra", 1500), ("venta", 800), ("compra", 3200),
                  ("venta", 2100), ("compra", 950)]
 
 # Agrupá con defaultdict:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["por_tipo = defaultdict(list)","for tipo, monto in transacciones: por_tipo[tipo].append(monto)","compra: [1500,3200,950] → sum = 5650"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["por_tipo = defaultdict(list)","for tipo, monto in transacciones: por_tipo[tipo].append(monto)","compra: [1500,3200,950] → sum = 5650"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Invertir diccionario</h4>
-  <p>Dado <code>codigos = {"AR": "Argentina", "BR": "Brasil", "CL": "Chile", "UY": "Uruguay"}</code>, creá un dict invertido (país → código) con comprehension. Debe incluir <code>Argentina</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-8" data-expected="Argentina">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Argentina"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">codigos = {"AR": "Argentina", "BR": "Brasil", "CL": "Chile", "UY": "Uruguay"}
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Invertir diccionario</h4>
+        <p>Dado <code>codigos = {"AR": "Argentina", "BR": "Brasil", "CL": "Chile", "UY": "Uruguay"}</code>, creá un dict
+          invertido (país → código) con comprehension. Debe incluir <code>Argentina</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-8" data-expected="Argentina">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Argentina"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">codigos = {"AR": "Argentina", "BR": "Brasil", "CL": "Chile", "UY": "Uruguay"}
 
 # Invertí con comprehension:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["invertido = {v: k for k, v in codigos.items()}","print(invertido)","\"Argentina\": \"AR\", \"Brasil\": \"BR\", etc."]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["invertido = {v: k for k, v in codigos.items()}","print(invertido)","\"Argentina\": \"AR\", \"Brasil\": \"BR\", etc."]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Pipeline merge + transform</h4>
-  <p>Tenés <code>precios_q3 = {"GGAL": 4800, "YPF": 25000}</code> y <code>precios_q4 = {"GGAL": 5200, "PAMP": 3100}</code>. Mergealos (Q4 sobreescribe), después creá un nuevo dict aplicando +10% a cada precio. Debe incluir <code>5720</code> (GGAL con 10%).</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-9" data-expected="5720">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "5720"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">precios_q3 = {"GGAL": 4800, "YPF": 25000}
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Pipeline merge + transform</h4>
+        <p>Tenés <code>precios_q3 = {"GGAL": 4800, "YPF": 25000}</code> y
+          <code>precios_q4 = {"GGAL": 5200, "PAMP": 3100}</code>. Mergealos (Q4 sobreescribe), después creá un nuevo
+          dict aplicando +10% a cada precio. Debe incluir <code>5720</code> (GGAL con 10%).</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-9" data-expected="5720">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "5720"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">precios_q3 = {"GGAL": 4800, "YPF": 25000}
 precios_q4 = {"GGAL": 5200, "PAMP": 3100}
 
 # Merge + transformar:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["actual = precios_q3 | precios_q4 (o con .update())","con_ajuste = {k: round(v * 1.10) for k, v in actual.items()}","GGAL: 5200 * 1.10 = 5720"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["actual = precios_q3 | precios_q4 (o con .update())","con_ajuste = {k: round(v * 1.10) for k, v in actual.items()}","GGAL: 5200 * 1.10 = 5720"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Reporte de ventas agrupado por vendedor</h4>
-  <p>Dadas estas ventas como lista de tuplas <code>(vendedor, producto, monto)</code>, generá un reporte agrupado por vendedor que muestre: cantidad de ventas, monto total, productos únicos y venta promedio. Usá defaultdict. Debe incluir <code>REPORTE</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-10" data-expected="REPORTE">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "REPORTE"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">from collections import defaultdict
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Reporte de ventas agrupado por vendedor</h4>
+        <p>Dadas estas ventas como lista de tuplas <code>(vendedor, producto, monto)</code>, generá un reporte agrupado
+          por vendedor que muestre: cantidad de ventas, monto total, productos únicos y venta promedio. Usá defaultdict.
+          Debe incluir <code>REPORTE</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-10" data-expected="REPORTE">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "REPORTE"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">from collections import defaultdict
 
 ventas = [
     ("García", "Tarjeta", 5000),
@@ -549,45 +723,56 @@ ventas = [
 
 # Agrupá y generá reporte:
 print("=== REPORTE DE VENTAS ===")
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["Creá: montos = defaultdict(list), productos = defaultdict(set)","for v, p, m in ventas: montos[v].append(m); productos[v].add(p)","Para cada vendedor: len(montos[v]), sum(montos[v]), productos[v]"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li><code>.get(k, default)</code> lee sin modificar. <code>.setdefault(k, v)</code> lee Y crea si no existe.
+        </li>
+        <li><code>.update()</code> y <code>|</code>/<code>|=</code> (3.9+) mergean diccionarios. Las claves del segundo
+          sobreescriben.</li>
+        <li><code>.pop(k, default)</code> elimina y devuelve. <code>.popitem()</code> elimina el último par.</li>
+        <li><code>Counter</code> cuenta frecuencias en una línea. <code>.most_common(n)</code> da el top N.</li>
+        <li><code>defaultdict(list/int/set)</code> es el equivalente manual de <code>groupby</code> en pandas.</li>
+        <li>Dict comprehensions filtran, transforman e invierten dicts en una línea.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>15 · Anidación</strong>) vas a combinar todo lo que aprendiste: listas de
+        listas, listas de diccionarios, diccionarios de diccionarios y recorridos profundos sobre estructuras complejas.
+      </p>
+
+      <p><strong>Recursos:</strong> <a href="https://docs.python.org/3/library/collections.html"
+          target="_blank">collections module</a> · <a href="https://docs.python.org/3/library/stdtypes.html#dict"
+          target="_blank">dict methods</a></p>
+
+      <div class="footer-nav">
+        <a href="/python/13-metodos-listas.html">← Métodos de listas</a>
+        <a class="next" href="/python/15-anidacion.html">Anidación →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["Creá: montos = defaultdict(list), productos = defaultdict(set)","for v, p, m in ventas: montos[v].append(m); productos[v].add(p)","Para cada vendedor: len(montos[v]), sum(montos[v]), productos[v]"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li><code>.get(k, default)</code> lee sin modificar. <code>.setdefault(k, v)</code> lee Y crea si no existe.</li>
-  <li><code>.update()</code> y <code>|</code>/<code>|=</code> (3.9+) mergean diccionarios. Las claves del segundo sobreescriben.</li>
-  <li><code>.pop(k, default)</code> elimina y devuelve. <code>.popitem()</code> elimina el último par.</li>
-  <li><code>Counter</code> cuenta frecuencias en una línea. <code>.most_common(n)</code> da el top N.</li>
-  <li><code>defaultdict(list/int/set)</code> es el equivalente manual de <code>groupby</code> en pandas.</li>
-  <li>Dict comprehensions filtran, transforman e invierten dicts en una línea.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>15 · Anidación</strong>) vas a combinar todo lo que aprendiste: listas de listas, listas de diccionarios, diccionarios de diccionarios y recorridos profundos sobre estructuras complejas.</p>
-
-<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/library/collections.html" target="_blank">collections module</a> · <a href="https://docs.python.org/3/library/stdtypes.html#dict" target="_blank">dict methods</a></p>
-
-<div class="footer-nav">
-  <a href="/python/13-metodos-listas.html">← Métodos de listas</a>
-  <a class="next" href="/python/15-anidacion.html">Anidación →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

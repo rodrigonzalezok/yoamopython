@@ -1,142 +1,224 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 01 · ¿Qué es Python?</title>
-<meta name="description" content="Entendé qué es una computadora, cómo piensa, qué son los lenguajes de programación y por qué Python es el mejor primer lenguaje para aprender.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 01 · ¿Qué es Python?</title>
+  <meta name="description"
+    content="Entendé qué es una computadora, cómo piensa, qué son los lenguajes de programación y por qué Python es el mejor primer lenguaje para aprender.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 01 de 27</span>
-  <h1>¿Qué es Python? / Lenguajes de programación</h1>
-  <p>Antes de escribir una sola línea de código, necesitás entender qué es una computadora, cómo "piensa", por qué existen los lenguajes de programación y qué hace a Python tan especial. Esta lección es la base de todo lo que viene.</p>
-  <div class="badges">
-    <span class="badge">60–80 min</span>
-    <span class="badge">Prerrequisitos: ninguno</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- 01 TEORÍA -->
-<!-- ═══════════════════════════════════════════════ -->
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 01 de 27</span>
+        <h1>¿Qué es Python? / Lenguajes de programación</h1>
+        <p>Antes de escribir una sola línea de código, necesitás entender qué es una computadora, cómo "piensa", por qué
+          existen los lenguajes de programación y qué hace a Python tan especial. Esta lección es la base de todo lo que
+          viene.</p>
+        <div class="badges">
+          <span class="badge">60–80 min</span>
+          <span class="badge">Prerrequisitos: ninguno</span>
+        </div>
+      </div>
 
-<h3>¿Qué es una computadora?</h3>
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 01 TEORÍA -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Una computadora es una máquina que hace exactamente tres cosas: <strong>recibe datos</strong> (input), <strong>los procesa</strong> según instrucciones y <strong>devuelve resultados</strong> (output). Nada más. Toda la complejidad que ves — videos de YouTube, hojas de cálculo, inteligencia artificial — se reduce a esas tres operaciones ejecutadas miles de millones de veces por segundo.</p>
+      <h3>¿Qué es una computadora?</h3>
 
-<p>Para entender cómo funciona, necesitás conocer sus dos componentes fundamentales:</p>
+      <p>Una computadora es una máquina que hace exactamente tres cosas: <strong>recibe datos</strong> (input),
+        <strong>los procesa</strong> según instrucciones y <strong>devuelve resultados</strong> (output). Nada más. Toda
+        la complejidad que ves — videos de YouTube, hojas de cálculo, inteligencia artificial — se reduce a esas tres
+        operaciones ejecutadas miles de millones de veces por segundo.</p>
 
-<p><strong>Hardware</strong> — es la parte física, lo que podés tocar. Los componentes clave son:</p>
-<ul>
-  <li><b>Procesador (CPU):</b> el "cerebro". Ejecuta instrucciones una por una, increíblemente rápido. Un procesador moderno ejecuta miles de millones de operaciones por segundo. Cuando tu programa dice <code>2 + 2</code>, es la CPU la que hace la cuenta.</li>
-  <li><b>Memoria RAM:</b> el "escritorio de trabajo". Es rápida pero temporal — cuando apagás la computadora, se borra. Cuando abrís un programa, se carga en la RAM para que la CPU pueda acceder rápido. Cuanta más RAM, más programas podés tener abiertos sin que se frene.</li>
-  <li><b>Disco duro (HDD/SSD):</b> el "archivo permanente". Acá se guardan tus archivos, programas instalados y el sistema operativo. Es más lento que la RAM pero los datos persisten aunque apagues la máquina. Los SSD son mucho más rápidos que los HDD mecánicos.</li>
-  <li><b>Periféricos:</b> teclado, mouse, monitor, impresora. Son los dispositivos de entrada (datos que entran) y salida (resultados que salen).</li>
-</ul>
+      <p>Para entender cómo funciona, necesitás conocer sus dos componentes fundamentales:</p>
 
-<p><strong>Software</strong> — son los programas, las instrucciones que le dicen al hardware qué hacer. Se divide en:</p>
-<ul>
-  <li><b>Sistema operativo:</b> Windows, macOS o Linux. Es el programa base que gestiona todo: le asigna memoria a cada aplicación, maneja el disco, controla los periféricos. Sin sistema operativo, el hardware es un ladrillo caro.</li>
-  <li><b>Aplicaciones:</b> Chrome, Excel, Spotify, WhatsApp. Son programas diseñados para tareas específicas. Cada uno fue creado por programadores que escribieron código — exactamente lo que vos vas a aprender a hacer.</li>
-</ul>
+      <p><strong>Hardware</strong> — es la parte física, lo que podés tocar. Los componentes clave son:</p>
+      <ul>
+        <li><b>Procesador (CPU):</b> el "cerebro". Ejecuta instrucciones una por una, increíblemente rápido. Un
+          procesador moderno ejecuta miles de millones de operaciones por segundo. Cuando tu programa dice
+          <code>2 + 2</code>, es la CPU la que hace la cuenta.</li>
+        <li><b>Memoria RAM:</b> el "escritorio de trabajo". Es rápida pero temporal — cuando apagás la computadora, se
+          borra. Cuando abrís un programa, se carga en la RAM para que la CPU pueda acceder rápido. Cuanta más RAM, más
+          programas podés tener abiertos sin que se frene.</li>
+        <li><b>Disco duro (HDD/SSD):</b> el "archivo permanente". Acá se guardan tus archivos, programas instalados y el
+          sistema operativo. Es más lento que la RAM pero los datos persisten aunque apagues la máquina. Los SSD son
+          mucho más rápidos que los HDD mecánicos.</li>
+        <li><b>Periféricos:</b> teclado, mouse, monitor, impresora. Son los dispositivos de entrada (datos que entran) y
+          salida (resultados que salen).</li>
+      </ul>
 
-<div class="analogy"><strong>Analogía: la cocina.</strong> El hardware es la cocina física — mesada, horno, heladera, utensilios. El software son las recetas que seguís. Sin recetas, tenés una cocina vacía. Sin cocina, las recetas son papel inútil. Necesitás los dos. Y vos vas a aprender a escribir las recetas (programas) para que la cocina (computadora) haga lo que necesitás.</div>
+      <p><strong>Software</strong> — son los programas, las instrucciones que le dicen al hardware qué hacer. Se divide
+        en:</p>
+      <ul>
+        <li><b>Sistema operativo:</b> Windows, macOS o Linux. Es el programa base que gestiona todo: le asigna memoria a
+          cada aplicación, maneja el disco, controla los periféricos. Sin sistema operativo, el hardware es un ladrillo
+          caro.</li>
+        <li><b>Aplicaciones:</b> Chrome, Excel, Spotify, WhatsApp. Son programas diseñados para tareas específicas. Cada
+          uno fue creado por programadores que escribieron código — exactamente lo que vos vas a aprender a hacer.</li>
+      </ul>
 
-<h3>¿Cómo "piensa" una computadora?</h3>
+      <div class="analogy"><strong>Analogía: la cocina.</strong> El hardware es la cocina física — mesada, horno,
+        heladera, utensilios. El software son las recetas que seguís. Sin recetas, tenés una cocina vacía. Sin cocina,
+        las recetas son papel inútil. Necesitás los dos. Y vos vas a aprender a escribir las recetas (programas) para
+        que la cocina (computadora) haga lo que necesitás.</div>
 
-<p>Las computadoras <strong>no piensan</strong>. No entienden español, inglés ni ningún idioma humano. Su único "lenguaje" es el <strong>sistema binario</strong>: secuencias de <code>0</code> y <code>1</code>. Nada más. Todo lo que hace una computadora — desde mostrar esta página hasta calcular el riesgo crediticio de un cliente — se reduce internamente a combinaciones de ceros y unos.</p>
+      <h3>¿Cómo "piensa" una computadora?</h3>
 
-<p><b>¿Por qué ceros y unos?</b> Porque las computadoras operan con electricidad, y la electricidad tiene dos estados: <strong>encendido</strong> (1) o <strong>apagado</strong> (0). Cada posición que puede ser 0 o 1 se llama <strong>bit</strong> (binary digit). Con 1 bit tenés 2 posibilidades (0 o 1). Con 8 bits (1 <strong>byte</strong>) tenés 256 combinaciones — suficiente para representar cada letra del abecedario, cada número del 0 al 255, o un píxel de un color.</p>
+      <p>Las computadoras <strong>no piensan</strong>. No entienden español, inglés ni ningún idioma humano. Su único
+        "lenguaje" es el <strong>sistema binario</strong>: secuencias de <code>0</code> y <code>1</code>. Nada más. Todo
+        lo que hace una computadora — desde mostrar esta página hasta calcular el riesgo crediticio de un cliente — se
+        reduce internamente a combinaciones de ceros y unos.</p>
 
-<p>¿Cómo se representa la letra "A" en binario? <code>01000001</code>. ¿Y el número 42? <code>00101010</code>. ¿Y una imagen? Como millones de píxeles, donde cada píxel son 3 bytes (rojo, verde, azul). Una imagen de 1920×1080 son 6.2 millones de bytes, o sea, casi 50 millones de ceros y unos. Y la computadora los procesa en fracciones de segundo.</p>
+      <p><b>¿Por qué ceros y unos?</b> Porque las computadoras operan con electricidad, y la electricidad tiene dos
+        estados: <strong>encendido</strong> (1) o <strong>apagado</strong> (0). Cada posición que puede ser 0 o 1 se
+        llama <strong>bit</strong> (binary digit). Con 1 bit tenés 2 posibilidades (0 o 1). Con 8 bits (1
+        <strong>byte</strong>) tenés 256 combinaciones — suficiente para representar cada letra del abecedario, cada
+        número del 0 al 255, o un píxel de un color.</p>
 
-<div class="concept"><strong>Punto clave:</strong> una computadora no entiende "sumar dos números". Entiende "recibir dos secuencias de bits, aplicar una operación lógica AND/OR/XOR sobre ellas bit a bit, y producir una nueva secuencia de bits". Todo lo demás — texto, imágenes, sonido, videos — son representaciones que nosotros humanos interpretamos, pero para la máquina son siempre ceros y unos.</div>
+      <p>¿Cómo se representa la letra "A" en binario? <code>01000001</code>. ¿Y el número 42? <code>00101010</code>. ¿Y
+        una imagen? Como millones de píxeles, donde cada píxel son 3 bytes (rojo, verde, azul). Una imagen de 1920×1080
+        son 6.2 millones de bytes, o sea, casi 50 millones de ceros y unos. Y la computadora los procesa en fracciones
+        de segundo.</p>
 
-<h3>El problema: los humanos no hablamos en binario</h3>
+      <div class="concept"><strong>Punto clave:</strong> una computadora no entiende "sumar dos números". Entiende
+        "recibir dos secuencias de bits, aplicar una operación lógica AND/OR/XOR sobre ellas bit a bit, y producir una
+        nueva secuencia de bits". Todo lo demás — texto, imágenes, sonido, videos — son representaciones que nosotros
+        humanos interpretamos, pero para la máquina son siempre ceros y unos.</div>
 
-<p>Si tuvieras que escribir un programa directamente en ceros y unos, sería prácticamente imposible. Imaginate escribir millones de bits solo para hacer una calculadora simple. Los primeros programadores de la historia (años 1940-50) hacían exactamente esto, y era extremadamente difícil, lento y propenso a errores.</p>
+      <h3>El problema: los humanos no hablamos en binario</h3>
 
-<p>La solución fue crear <strong>lenguajes de programación</strong>: idiomas intermedios entre el lenguaje humano y el lenguaje máquina. Vos escribís instrucciones en algo parecido al inglés, y un programa especial se encarga de traducirlo a los ceros y unos que la computadora entiende.</p>
+      <p>Si tuvieras que escribir un programa directamente en ceros y unos, sería prácticamente imposible. Imaginate
+        escribir millones de bits solo para hacer una calculadora simple. Los primeros programadores de la historia
+        (años 1940-50) hacían exactamente esto, y era extremadamente difícil, lento y propenso a errores.</p>
 
-<h3>Compiladores vs. Intérpretes</h3>
+      <p>La solución fue crear <strong>lenguajes de programación</strong>: idiomas intermedios entre el lenguaje humano
+        y el lenguaje máquina. Vos escribís instrucciones en algo parecido al inglés, y un programa especial se encarga
+        de traducirlo a los ceros y unos que la computadora entiende.</p>
 
-<p>Hay dos formas de traducir un programa de un lenguaje de programación a lenguaje máquina:</p>
+      <h3>Compiladores vs. Intérpretes</h3>
 
-<p><strong>Compilador:</strong> traduce <b>todo el programa de una vez</b> antes de ejecutarlo. El resultado es un archivo ejecutable independiente (un <code>.exe</code> en Windows). Es como traducir un libro entero al español antes de empezar a leerlo. <b>Ventaja:</b> el programa compilado corre muy rápido porque ya está traducido. <b>Desventaja:</b> si hay un error, tenés que corregirlo y compilar todo de nuevo. Ejemplos: C, C++, Go, Rust.</p>
+      <p>Hay dos formas de traducir un programa de un lenguaje de programación a lenguaje máquina:</p>
 
-<p><strong>Intérprete:</strong> traduce y ejecuta <b>línea por línea</b> en tiempo real. No genera un archivo separado — necesitás el intérprete instalado para correr el programa. Es como tener un traductor simultáneo en una conferencia: traduce cada frase al instante. <b>Ventaja:</b> podés probar código rápidamente sin esperar compilaciones, ideal para aprender y experimentar. <b>Desventaja:</b> la ejecución es un poco más lenta. Ejemplos: <b>Python</b>, JavaScript, Ruby, PHP.</p>
+      <p><strong>Compilador:</strong> traduce <b>todo el programa de una vez</b> antes de ejecutarlo. El resultado es un
+        archivo ejecutable independiente (un <code>.exe</code> en Windows). Es como traducir un libro entero al español
+        antes de empezar a leerlo. <b>Ventaja:</b> el programa compilado corre muy rápido porque ya está traducido.
+        <b>Desventaja:</b> si hay un error, tenés que corregirlo y compilar todo de nuevo. Ejemplos: C, C++, Go, Rust.
+      </p>
 
-<div class="warning"><strong>Error común:</strong> pensar que "compilado = bueno" e "interpretado = malo". No es así. Cada enfoque tiene ventajas según el contexto. Python es interpretado y es el lenguaje más usado en análisis de datos, IA y automatización. La velocidad de ejecución rara vez es un problema en estos campos — lo que importa es la velocidad de desarrollo.</div>
+      <p><strong>Intérprete:</strong> traduce y ejecuta <b>línea por línea</b> en tiempo real. No genera un archivo
+        separado — necesitás el intérprete instalado para correr el programa. Es como tener un traductor simultáneo en
+        una conferencia: traduce cada frase al instante. <b>Ventaja:</b> podés probar código rápidamente sin esperar
+        compilaciones, ideal para aprender y experimentar. <b>Desventaja:</b> la ejecución es un poco más lenta.
+        Ejemplos: <b>Python</b>, JavaScript, Ruby, PHP.</p>
 
-<h3>¿Qué es Python?</h3>
+      <div class="warning"><strong>Error común:</strong> pensar que "compilado = bueno" e "interpretado = malo". No es
+        así. Cada enfoque tiene ventajas según el contexto. Python es interpretado y es el lenguaje más usado en
+        análisis de datos, IA y automatización. La velocidad de ejecución rara vez es un problema en estos campos — lo
+        que importa es la velocidad de desarrollo.</div>
 
-<p>Python es un lenguaje de programación <strong>interpretado</strong>, de <strong>alto nivel</strong> (su sintaxis se parece al inglés) y de <strong>propósito general</strong> (sirve para casi cualquier cosa). Fue creado por <strong>Guido van Rossum</strong> en 1991 en los Países Bajos. El nombre viene de los comediantes Monty Python, no de la serpiente.</p>
+      <h3>¿Qué es Python?</h3>
 
-<p>Python es, desde hace años, el <strong>lenguaje de programación más popular del mundo</strong> según rankings como TIOBE, Stack Overflow Developer Survey y GitHub. ¿Por qué? Varias razones:</p>
+      <p>Python es un lenguaje de programación <strong>interpretado</strong>, de <strong>alto nivel</strong> (su
+        sintaxis se parece al inglés) y de <strong>propósito general</strong> (sirve para casi cualquier cosa). Fue
+        creado por <strong>Guido van Rossum</strong> en 1991 en los Países Bajos. El nombre viene de los comediantes
+        Monty Python, no de la serpiente.</p>
 
-<ul>
-  <li><b>Sintaxis simple y legible:</b> se parece al pseudocódigo. Donde otros lenguajes necesitan llaves, punto y coma y declaraciones de tipos, Python usa indentación y palabras claras.</li>
-  <li><b>Enorme ecosistema:</b> tiene miles de librerías gratuitas para análisis de datos (pandas), machine learning (scikit-learn, TensorFlow), web (Django, Flask), automatización, finanzas, ciencia, y más.</li>
-  <li><b>Comunidad gigante:</b> cualquier error que encuentres, alguien ya lo preguntó en Stack Overflow. Hay cursos, tutoriales y documentación en todos los idiomas.</li>
-  <li><b>Versatilidad:</b> el mismo lenguaje te sirve para automatizar una planilla de Excel, construir un modelo de riesgo crediticio, crear una API web, o analizar millones de registros.</li>
-  <li><b>Demanda laboral:</b> es el lenguaje más pedido en posiciones de Data Analyst, Data Scientist, y cada vez más en finanzas y banca.</li>
-</ul>
+      <p>Python es, desde hace años, el <strong>lenguaje de programación más popular del mundo</strong> según rankings
+        como TIOBE, Stack Overflow Developer Survey y GitHub. ¿Por qué? Varias razones:</p>
 
-<div class="realworld"><strong>¿Dónde se usa Python en Argentina?</strong> Bancos (Galicia, Macro, BBVA) lo usan para modelos de scoring y automatización. Fintechs (Ualá, Mercado Pago) lo usan para análisis de datos y machine learning. Empresas de seguros lo usan para cálculo de reservas y reportes regulatorios. Consultoras como Equifax lo usan para pipelines de datos y calidad. Si querés trabajar con datos en Argentina, Python es imprescindible.</div>
+      <ul>
+        <li><b>Sintaxis simple y legible:</b> se parece al pseudocódigo. Donde otros lenguajes necesitan llaves, punto y
+          coma y declaraciones de tipos, Python usa indentación y palabras claras.</li>
+        <li><b>Enorme ecosistema:</b> tiene miles de librerías gratuitas para análisis de datos (pandas), machine
+          learning (scikit-learn, TensorFlow), web (Django, Flask), automatización, finanzas, ciencia, y más.</li>
+        <li><b>Comunidad gigante:</b> cualquier error que encuentres, alguien ya lo preguntó en Stack Overflow. Hay
+          cursos, tutoriales y documentación en todos los idiomas.</li>
+        <li><b>Versatilidad:</b> el mismo lenguaje te sirve para automatizar una planilla de Excel, construir un modelo
+          de riesgo crediticio, crear una API web, o analizar millones de registros.</li>
+        <li><b>Demanda laboral:</b> es el lenguaje más pedido en posiciones de Data Analyst, Data Scientist, y cada vez
+          más en finanzas y banca.</li>
+      </ul>
 
-<h3>Tu primera instrucción: print()</h3>
+      <div class="realworld"><strong>¿Dónde se usa Python en Argentina?</strong> Bancos (Galicia, Macro, BBVA) lo usan
+        para modelos de scoring y automatización. Fintechs (Ualá, Mercado Pago) lo usan para análisis de datos y machine
+        learning. Empresas de seguros lo usan para cálculo de reservas y reportes regulatorios. Consultoras como Equifax
+        lo usan para pipelines de datos y calidad. Si querés trabajar con datos en Argentina, Python es imprescindible.
+      </div>
 
-<p>La función <code>print()</code> es la más básica de Python. Le dice a la computadora: "mostrá esto en pantalla". Lo que pongas entre los paréntesis y entre comillas se muestra como texto. Es la primera herramienta de todo programador — te permite verificar que tu código está haciendo lo que esperás.</p>
+      <h3>Tu primera instrucción: print()</h3>
 
-<p>La sintaxis es: <code>print("texto que quieras mostrar")</code>. Podés usar comillas dobles <code>"texto"</code> o simples <code>'texto'</code> — es lo mismo. Y podés poner varias cosas separadas por coma: <code>print("Resultado:", 2 + 2)</code> muestra <code>Resultado: 4</code>.</p>
+      <p>La función <code>print()</code> es la más básica de Python. Le dice a la computadora: "mostrá esto en
+        pantalla". Lo que pongas entre los paréntesis y entre comillas se muestra como texto. Es la primera herramienta
+        de todo programador — te permite verificar que tu código está haciendo lo que esperás.</p>
 
-<div class="tip"><strong>Tip profesional:</strong> <code>print()</code> no es solo para principiantes. En el mundo profesional, los desarrolladores usan <code>print()</code> constantemente para depurar código (debugging) — imprimir valores intermedios para verificar que el programa está haciendo lo correcto. Es la herramienta de diagnóstico más simple y universal.</div>
+      <p>La sintaxis es: <code>print("texto que quieras mostrar")</code>. Podés usar comillas dobles
+        <code>"texto"</code> o simples <code>'texto'</code> — es lo mismo. Y podés poner varias cosas separadas por
+        coma: <code>print("Resultado:", 2 + 2)</code> muestra <code>Resultado: 4</code>.</p>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- 02 EJEMPLOS -->
-<!-- ═══════════════════════════════════════════════ -->
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="tip"><strong>Tip profesional:</strong> <code>print()</code> no es solo para principiantes. En el mundo
+        profesional, los desarrolladores usan <code>print()</code> constantemente para depurar código (debugging) —
+        imprimir valores intermedios para verificar que el programa está haciendo lo correcto. Es la herramienta de
+        diagnóstico más simple y universal.</div>
 
-<h3>Ejemplo 1: Tu primer programa — Hola Mundo</h3>
-<p>Por tradición, el primer programa en cualquier lenguaje es mostrar "Hola Mundo". En Python es una sola línea. Compará con otros lenguajes donde necesitarías 5-10 líneas para lo mismo.</p>
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 02 EJEMPLOS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>hola_mundo.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Este es tu primer programa en Python
+      <h3>Ejemplo 1: Tu primer programa — Hola Mundo</h3>
+      <p>Por tradición, el primer programa en cualquier lenguaje es mostrar "Hola Mundo". En Python es una sola línea.
+        Compará con otros lenguajes donde necesitarías 5-10 líneas para lo mismo.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>hola_mundo.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Este es tu primer programa en Python
 # Las líneas que empiezan con # son comentarios — Python las ignora
 # Sirven para dejar notas y explicaciones
 
 print("¡Hola, Mundo!")
-print("Este es mi primer programa en Python")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("Este es mi primer programa en Python")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: print() con múltiples valores y cálculos</h3>
-<p>Python puede hacer cálculos directamente dentro de <code>print()</code>. Cuando separás valores con comas, Python los muestra separados por un espacio.</p>
+      <h3>Ejemplo 2: print() con múltiples valores y cálculos</h3>
+      <p>Python puede hacer cálculos directamente dentro de <code>print()</code>. Cuando separás valores con comas,
+        Python los muestra separados por un espacio.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>calculos_basicos.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># print() con texto y cálculos
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>calculos_basicos.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># print() con texto y cálculos
 print("Dos más dos es:", 2 + 2)
 print("Diez por cinco es:", 10 * 5)
 print("Cien dividido tres es:", 100 / 3)
@@ -146,17 +228,21 @@ print(42)
 print(3.14159)
 
 # Y combinar muchos valores
-print("Nombre:", "Rodrigo", "| Edad:", 28, "| Ciudad:", "Buenos Aires")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("Nombre:", "Rodrigo", "| Edad:", 28, "| Ciudad:", "Buenos Aires")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Comparación Python vs otros lenguajes</h3>
-<p>Fijate la diferencia de complejidad para hacer lo mismo. En Python es 1 línea; en Java serían 5; en C++ serían 6. Esa simplicidad es la razón por la que Python es el mejor primer lenguaje.</p>
+      <h3>Ejemplo 3: Comparación Python vs otros lenguajes</h3>
+      <p>Fijate la diferencia de complejidad para hacer lo mismo. En Python es 1 línea; en Java serían 5; en C++ serían
+        6. Esa simplicidad es la razón por la que Python es el mejor primer lenguaje.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>comparacion.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># En Python, mostrar un mensaje es UNA línea:
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>comparacion.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># En Python, mostrar un mensaje es UNA línea:
 print("¡Hola desde Python!")
 
 # En Java sería:
@@ -175,17 +261,21 @@ print("¡Hola desde Python!")
 
 # Python: 1 línea. Java: 5 líneas. C++: 6 líneas.
 # ¿Ves por qué Python es ideal para empezar?
-print("Python es simple, directo y poderoso.")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("Python es simple, directo y poderoso.")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Python como calculadora (contexto financiero)</h3>
-<p>Antes de aprender variables, ya podés usar Python como la calculadora más poderosa del mundo. Acá simulamos cálculos financieros reales.</p>
+      <h3>Ejemplo 4: Python como calculadora (contexto financiero)</h3>
+      <p>Antes de aprender variables, ya podés usar Python como la calculadora más poderosa del mundo. Acá simulamos
+        cálculos financieros reales.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>calculadora_financiera.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Python como calculadora financiera
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>calculadora_financiera.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Python como calculadora financiera
 print("=== Calculadora financiera ===")
 
 # Precio con IVA (21%)
@@ -202,17 +292,21 @@ print("USD 500 a $1,150:", 500 * 1150)
 
 # Operaciones encadenadas
 print("Sueldo bruto $450,000 - 11% jubilación - 17% ganancias:")
-print(450000 - 450000 * 0.11 - 450000 * 0.17)</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(450000 - 450000 * 0.11 - 450000 * 0.17)</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Errores comunes y cómo leerlos</h3>
-<p>Equivocarse es parte de aprender. Python te dice EXACTAMENTE qué salió mal y en qué línea. Aprender a leer errores es tan importante como aprender a escribir código.</p>
+      <h3>Ejemplo 5: Errores comunes y cómo leerlos</h3>
+      <p>Equivocarse es parte de aprender. Python te dice EXACTAMENTE qué salió mal y en qué línea. Aprender a leer
+        errores es tan importante como aprender a escribir código.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>errores_comunes.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Estos son los errores más comunes al empezar.
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>errores_comunes.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Estos son los errores más comunes al empezar.
 # Descomentá cada línea (borrá el #) para ver el error.
 
 # Error 1: olvidar las comillas
@@ -229,138 +323,243 @@ print(450000 - 450000 * 0.11 - 450000 * 0.17)</textarea></div>
 
 # Código correcto:
 print("Si llegaste acá, tu código funciona correctamente")
-print("Los errores no son el enemigo — son tu GPS")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("Los errores no son el enemigo — son tu GPS")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- 03 REFERENCIA -->
-<!-- ═══════════════════════════════════════════════ -->
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 03 REFERENCIA -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Concepto</th><th>Significado</th><th>Ejemplo</th></tr>
-<tr><td>Hardware</td><td>Parte física de la computadora</td><td>CPU, RAM, disco, monitor</td></tr>
-<tr><td>Software</td><td>Programas e instrucciones</td><td>Windows, Excel, tu código Python</td></tr>
-<tr><td>Bit</td><td>Unidad mínima: 0 o 1</td><td><code>1</code></td></tr>
-<tr><td>Byte</td><td>8 bits = 256 posibilidades</td><td><code>01000001</code> = "A"</td></tr>
-<tr><td>Lenguaje máquina</td><td>Ceros y unos que la CPU entiende</td><td><code>10110000 01100001</code></td></tr>
-<tr><td>Lenguaje de programación</td><td>Idioma intermedio para humanos</td><td>Python, JavaScript, C++</td></tr>
-<tr><td>Compilador</td><td>Traduce todo de una vez</td><td>C++ → archivo .exe</td></tr>
-<tr><td>Intérprete</td><td>Traduce y ejecuta línea por línea</td><td>Python → ejecución en tiempo real</td></tr>
-<tr><td><code>print()</code></td><td>Muestra valores en pantalla</td><td><code>print("Hola")</code></td></tr>
-<tr><td><code>#</code></td><td>Comentario (Python lo ignora)</td><td><code># esto es una nota</code></td></tr>
-<tr><td>Operaciones en print</td><td>Python calcula dentro de print</td><td><code>print(2 + 2)</code> → 4</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Concepto</th>
+            <th>Significado</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td>Hardware</td>
+            <td>Parte física de la computadora</td>
+            <td>CPU, RAM, disco, monitor</td>
+          </tr>
+          <tr>
+            <td>Software</td>
+            <td>Programas e instrucciones</td>
+            <td>Windows, Excel, tu código Python</td>
+          </tr>
+          <tr>
+            <td>Bit</td>
+            <td>Unidad mínima: 0 o 1</td>
+            <td><code>1</code></td>
+          </tr>
+          <tr>
+            <td>Byte</td>
+            <td>8 bits = 256 posibilidades</td>
+            <td><code>01000001</code> = "A"</td>
+          </tr>
+          <tr>
+            <td>Lenguaje máquina</td>
+            <td>Ceros y unos que la CPU entiende</td>
+            <td><code>10110000 01100001</code></td>
+          </tr>
+          <tr>
+            <td>Lenguaje de programación</td>
+            <td>Idioma intermedio para humanos</td>
+            <td>Python, JavaScript, C++</td>
+          </tr>
+          <tr>
+            <td>Compilador</td>
+            <td>Traduce todo de una vez</td>
+            <td>C++ → archivo .exe</td>
+          </tr>
+          <tr>
+            <td>Intérprete</td>
+            <td>Traduce y ejecuta línea por línea</td>
+            <td>Python → ejecución en tiempo real</td>
+          </tr>
+          <tr>
+            <td><code>print()</code></td>
+            <td>Muestra valores en pantalla</td>
+            <td><code>print("Hola")</code></td>
+          </tr>
+          <tr>
+            <td><code>#</code></td>
+            <td>Comentario (Python lo ignora)</td>
+            <td><code># esto es una nota</code></td>
+          </tr>
+          <tr>
+            <td>Operaciones en print</td>
+            <td>Python calcula dentro de print</td>
+            <td><code>print(2 + 2)</code> → 4</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Error común</th><th>Causa</th><th>Solución</th></tr>
-<tr><td><code>SyntaxError</code></td><td>Error de escritura en el código</td><td>Revisá paréntesis, comillas, dos puntos</td></tr>
-<tr><td><code>NameError</code></td><td>Usás un nombre que Python no conoce</td><td>¿Olvidaste las comillas en un texto?</td></tr>
-<tr><td><code>TypeError</code></td><td>Operación inválida entre tipos</td><td>¿Estás sumando texto con números?</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Error común</th>
+            <th>Causa</th>
+            <th>Solución</th>
+          </tr>
+          <tr>
+            <td><code>SyntaxError</code></td>
+            <td>Error de escritura en el código</td>
+            <td>Revisá paréntesis, comillas, dos puntos</td>
+          </tr>
+          <tr>
+            <td><code>NameError</code></td>
+            <td>Usás un nombre que Python no conoce</td>
+            <td>¿Olvidaste las comillas en un texto?</td>
+          </tr>
+          <tr>
+            <td><code>TypeError</code></td>
+            <td>Operación inválida entre tipos</td>
+            <td>¿Estás sumando texto con números?</td>
+          </tr>
+        </table>
+      </div>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- 04 EJERCICIOS -->
-<!-- ═══════════════════════════════════════════════ -->
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 04 EJERCICIOS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Hola Mundo personalizado</h4>
-  <p>Usá <code>print()</code> para mostrar el mensaje <code>Hola, soy [tu nombre]</code>. El output debe incluir la palabra <code>Hola</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-1" data-expected="Hola">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Hola"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Escribí tu print() acá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["Escribí: print(\"Hola, soy ...\") con tu nombre","Recordá que el texto va entre comillas","print(\"Hola, soy Rodrigo\")"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Hola Mundo personalizado</h4>
+        <p>Usá <code>print()</code> para mostrar el mensaje <code>Hola, soy [tu nombre]</code>. El output debe incluir
+          la palabra <code>Hola</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-1" data-expected="Hola">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Hola"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Escribí tu print() acá:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["Escribí: print(\"Hola, soy ...\") con tu nombre","Recordá que el texto va entre comillas","print(\"Hola, soy Rodrigo\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Tres datos personales</h4>
-  <p>Imprimí en líneas separadas: tu nombre, tu ciudad y tu edad. Usá 3 <code>print()</code> distintos. El output debe incluir al menos <code>3</code> líneas y la palabra <code>Buenos Aires</code> (o tu ciudad).</p>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-2" data-expected="Buenos Aires">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir tu ciudad</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Imprimí nombre, ciudad y edad en 3 líneas:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["Usá un print() por dato","print(\"Rodrigo\") en la primera línea","print(\"Buenos Aires\") en la segunda, print(28) en la tercera"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Tres datos personales</h4>
+        <p>Imprimí en líneas separadas: tu nombre, tu ciudad y tu edad. Usá 3 <code>print()</code> distintos. El output
+          debe incluir al menos <code>3</code> líneas y la palabra <code>Buenos Aires</code> (o tu ciudad).</p>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-2"
+          data-expected="Buenos Aires">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir tu ciudad</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Imprimí nombre, ciudad y edad en 3 líneas:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["Usá un print() por dato","print(\"Rodrigo\") en la primera línea","print(\"Buenos Aires\") en la segunda, print(28) en la tercera"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Suma directa</h4>
-  <p>Usá <code>print()</code> para mostrar el resultado de <code>1500 + 3200</code>. No escribas el resultado vos — dejá que Python lo calcule. El output debe incluir <code>4700</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-3" data-expected="4700">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "4700"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Mostrá el resultado de 1500 + 3200:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["Poné la operación dentro del print, sin comillas","Los números NO llevan comillas — solo el texto","print(1500 + 3200)"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Suma directa</h4>
+        <p>Usá <code>print()</code> para mostrar el resultado de <code>1500 + 3200</code>. No escribas el resultado vos
+          — dejá que Python lo calcule. El output debe incluir <code>4700</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-3" data-expected="4700">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "4700"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Mostrá el resultado de 1500 + 3200:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["Poné la operación dentro del print, sin comillas","Los números NO llevan comillas — solo el texto","print(1500 + 3200)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Texto y cálculo combinados</h4>
-  <p>Imprimí: <code>Precio con IVA: 6050.0</code> calculando <code>5000 * 1.21</code> dentro del print. Usá una coma para separar el texto del cálculo.</p>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-4" data-expected="6050">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "6050"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Combiná texto y cálculo en un print:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["El texto va entre comillas, el cálculo no","Separalos con una coma dentro del print","print(\"Precio con IVA:\", 5000 * 1.21)"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Texto y cálculo combinados</h4>
+        <p>Imprimí: <code>Precio con IVA: 6050.0</code> calculando <code>5000 * 1.21</code> dentro del print. Usá una
+          coma para separar el texto del cálculo.</p>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-4" data-expected="6050">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "6050"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Combiná texto y cálculo en un print:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["El texto va entre comillas, el cálculo no","Separalos con una coma dentro del print","print(\"Precio con IVA:\", 5000 * 1.21)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Múltiples operaciones</h4>
-  <p>Mostrá en líneas separadas los resultados de: <code>100 * 12</code> (ingreso anual), <code>100 * 12 * 0.17</code> (ganancias), y <code>100 * 12 - 100 * 12 * 0.17</code> (neto). Cada uno con su etiqueta de texto. El output debe incluir <code>Neto:</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-5" data-expected="Neto:">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Neto:"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Calculá ingreso anual, ganancias y neto:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["Usá 3 print(), uno por cálculo","print(\"Anual:\", 100 * 12) para el primero","print(\"Neto:\", 100*12 - 100*12*0.17) para el último"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Múltiples operaciones</h4>
+        <p>Mostrá en líneas separadas los resultados de: <code>100 * 12</code> (ingreso anual),
+          <code>100 * 12 * 0.17</code> (ganancias), y <code>100 * 12 - 100 * 12 * 0.17</code> (neto). Cada uno con su
+          etiqueta de texto. El output debe incluir <code>Neto:</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-5" data-expected="Neto:">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Neto:"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Calculá ingreso anual, ganancias y neto:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["Usá 3 print(), uno por cálculo","print(\"Anual:\", 100 * 12) para el primero","print(\"Neto:\", 100*12 - 100*12*0.17) para el último"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Conversión de moneda</h4>
-  <p>Un freelancer cobra USD 800. El dólar está a $1,150. Imprimí el equivalente en pesos. Además, calculá cuánto queda después de pagar 35% de impuesto PAIS + percepción. El output debe incluir <code>598000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-6" data-expected="598000">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "598000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Conversión USD a ARS y descuento impositivo:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["Primero: 800 * 1150 = 920000 (bruto en pesos)","Impuesto: 920000 * 0.35 = 322000","Neto: 920000 - 322000 = 598000. Imprimí cada paso."]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Conversión de moneda</h4>
+        <p>Un freelancer cobra USD 800. El dólar está a $1,150. Imprimí el equivalente en pesos. Además, calculá cuánto
+          queda después de pagar 35% de impuesto PAIS + percepción. El output debe incluir <code>598000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-6" data-expected="598000">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "598000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Conversión USD a ARS y descuento impositivo:
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["Primero: 800 * 1150 = 920000 (bruto en pesos)","Impuesto: 920000 * 0.35 = 322000","Neto: 920000 - 322000 = 598000. Imprimí cada paso."]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Reporte formateado</h4>
-  <p>Imprimí un mini reporte con este formato exacto (usá varios <code>print()</code>). El output debe incluir la línea <code>========================</code>.</p>
-  <pre style="color:var(--t2);font-size:.82rem;background:var(--bg3);padding:10px;border-radius:6px;margin:8px 0">========================
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Reporte formateado</h4>
+        <p>Imprimí un mini reporte con este formato exacto (usá varios <code>print()</code>). El output debe incluir la
+          línea <code>========================</code>.</p>
+        <pre style="color:var(--t2);font-size:.82rem;background:var(--bg3);padding:10px;border-radius:6px;margin:8px 0">========================
   REPORTE FINANCIERO
 ========================
 Sueldo bruto: 450000
@@ -368,97 +567,135 @@ Jubilacion:   49500
 Ganancias:    76500
 Sueldo neto:  324000
 ========================</pre>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-7" data-expected="========================">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "========================"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Armá el reporte con múltiples print():
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["Cada línea del reporte es un print() separado","Para las líneas de = usá: print(\"========================\")","Para los cálculos: 450000 * 0.11 = 49500 (jubilación), 450000 * 0.17 = 76500 (ganancias)"]'></div>
-</div>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-7"
+          data-expected="========================">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "========================"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Armá el reporte con múltiples print():
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["Cada línea del reporte es un print() separado","Para las líneas de = usá: print(\"========================\")","Para los cálculos: 450000 * 0.11 = 49500 (jubilación), 450000 * 0.17 = 76500 (ganancias)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Tabla de multiplicar</h4>
-  <p>Imprimí la tabla del 7, del 1 al 10. Cada línea debe decir <code>7 x N = resultado</code>. Por ahora no sabemos bucles, así que usá 10 <code>print()</code> separados. El output debe incluir <code>7 x 6 = 42</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-8" data-expected="7 x 6 = 42">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "7 x 6 = 42"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Tabla del 7 (10 prints):
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["Cada línea: print(\"7 x 1 =\", 7 * 1)","Repetí para 2, 3, 4... hasta 10","print(\"7 x 6 =\", 7 * 6) debe dar 42"]'></div>
-</div>
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Tabla de multiplicar</h4>
+        <p>Imprimí la tabla del 7, del 1 al 10. Cada línea debe decir <code>7 x N = resultado</code>. Por ahora no
+          sabemos bucles, así que usá 10 <code>print()</code> separados. El output debe incluir <code>7 x 6 = 42</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-8" data-expected="7 x 6 = 42">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "7 x 6 = 42"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Tabla del 7 (10 prints):
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["Cada línea: print(\"7 x 1 =\", 7 * 1)","Repetí para 2, 3, 4... hasta 10","print(\"7 x 6 =\", 7 * 6) debe dar 42"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Comparación de plazos fijos</h4>
-  <p>Calculá cuánto generan $500,000 en 3 plazos fijos distintos a 30, 60 y 90 días con TNA 75%. La fórmula es: <code>capital * tna * dias / 365</code>. Imprimí los 3 resultados. El output debe incluir <code>92465</code> (el de 90 días, redondeado).</p>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-9" data-expected="92465">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "92465"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Interés de plazo fijo a 30, 60 y 90 días:
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Comparación de plazos fijos</h4>
+        <p>Calculá cuánto generan $500,000 en 3 plazos fijos distintos a 30, 60 y 90 días con TNA 75%. La fórmula es:
+          <code>capital * tna * dias / 365</code>. Imprimí los 3 resultados. El output debe incluir <code>92465</code>
+          (el de 90 días, redondeado).</p>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-9" data-expected="92465">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "92465"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Interés de plazo fijo a 30, 60 y 90 días:
 # Fórmula: capital * tna * dias / 365
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["print(\"30 días:\", 500000 * 0.75 * 30 / 365)","Repetí para 60 y 90 días","500000 * 0.75 * 90 / 365 = 92465.75... Usá round() si querés redondear: round(500000*0.75*90/365)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["print(\"30 días:\", 500000 * 0.75 * 30 / 365)","Repetí para 60 y 90 días","500000 * 0.75 * 90 / 365 = 92465.75... Usá round() si querés redondear: round(500000*0.75*90/365)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Recibo de sueldo completo</h4>
-  <p>Generá un recibo de sueldo con estos datos: sueldo bruto $950,000. Deducciones: jubilación 11%, obra social 3%, ganancias 17%. El output debe mostrar cada deducción, el total de deducciones y el sueldo neto. Debe incluir <code>Neto: 655500</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-10" data-expected="Neto: 655500">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Neto: 655500"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Recibo de sueldo
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Recibo de sueldo completo</h4>
+        <p>Generá un recibo de sueldo con estos datos: sueldo bruto $950,000. Deducciones: jubilación 11%, obra social
+          3%, ganancias 17%. El output debe mostrar cada deducción, el total de deducciones y el sueldo neto. Debe
+          incluir <code>Neto: 655500</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-01" data-exercise="ex-10"
+          data-expected="Neto: 655500">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Neto: 655500"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Recibo de sueldo
 # Bruto: 950,000
 # Deducciones: jubilación 11%, obra social 3%, ganancias 17%
 # Imprimí cada línea del recibo y el neto final:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["Jubilación: 950000 * 0.11 = 104500","Obra social: 950000 * 0.03 = 28500. Ganancias: 950000 * 0.17 = 161500","Total deducciones: 294500. Neto: 950000 - 294500 = 655500. Imprimí: print(\"Neto:\", 655500) o calculalo"]'>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 05 RESUMEN -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li>Una computadora tiene hardware (CPU, RAM, disco) y software (sistema operativo, aplicaciones, <b>tu
+            código</b>).</li>
+        <li>Las computadoras solo entienden binario (0 y 1). Los lenguajes de programación son traductores entre humanos
+          y máquinas.</li>
+        <li>Un compilador traduce todo de una vez; un intérprete traduce línea por línea. Python usa un intérprete.</li>
+        <li>Python es el lenguaje #1 del mundo para data analysis, IA y automatización por su simplicidad y ecosistema.
+        </li>
+        <li><code>print()</code> muestra valores en pantalla. Podés combinar texto (entre comillas) y cálculos (sin
+          comillas).</li>
+        <li>Los errores son normales y Python te dice exactamente qué salió mal. Aprender a leerlos es parte esencial
+          del proceso.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>02 · Instalación: VS Code & Python</strong>) vas a configurar tu entorno de
+        desarrollo profesional para poder escribir, guardar y ejecutar programas Python en tu propia computadora. Todo
+        lo que practicaste acá en el navegador lo vas a poder hacer en tu máquina.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://www.python.org/" target="_blank">python.org — sitio oficial</a> ·
+        <a href="https://docs.python.org/3/tutorial/" target="_blank">Tutorial oficial de Python</a> · <a
+          href="https://www.instagram.com/yoamopython" target="_blank">@yoamopython en Instagram</a></p>
+
+      <div class="footer-nav">
+        <a href="/">← Volver al roadmap</a>
+        <a class="next" href="/python/02-instalacion.html">Instalación: VS Code & Python →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["Jubilación: 950000 * 0.11 = 104500","Obra social: 950000 * 0.03 = 28500. Ganancias: 950000 * 0.17 = 161500","Total deducciones: 294500. Neto: 950000 - 294500 = 655500. Imprimí: print(\"Neto:\", 655500) o calculalo"]'></div>
-</div>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- 05 RESUMEN -->
-<!-- ═══════════════════════════════════════════════ -->
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li>Una computadora tiene hardware (CPU, RAM, disco) y software (sistema operativo, aplicaciones, <b>tu código</b>).</li>
-  <li>Las computadoras solo entienden binario (0 y 1). Los lenguajes de programación son traductores entre humanos y máquinas.</li>
-  <li>Un compilador traduce todo de una vez; un intérprete traduce línea por línea. Python usa un intérprete.</li>
-  <li>Python es el lenguaje #1 del mundo para data analysis, IA y automatización por su simplicidad y ecosistema.</li>
-  <li><code>print()</code> muestra valores en pantalla. Podés combinar texto (entre comillas) y cálculos (sin comillas).</li>
-  <li>Los errores son normales y Python te dice exactamente qué salió mal. Aprender a leerlos es parte esencial del proceso.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>02 · Instalación: VS Code & Python</strong>) vas a configurar tu entorno de desarrollo profesional para poder escribir, guardar y ejecutar programas Python en tu propia computadora. Todo lo que practicaste acá en el navegador lo vas a poder hacer en tu máquina.</p>
-
-<p><strong>Recursos:</strong> <a href="https://www.python.org/" target="_blank">python.org — sitio oficial</a> · <a href="https://docs.python.org/3/tutorial/" target="_blank">Tutorial oficial de Python</a> · <a href="https://www.instagram.com/yoamopython" target="_blank">@yoamopython en Instagram</a></p>
-
-<div class="footer-nav">
-  <a href="/">← Volver al roadmap</a>
-  <a class="next" href="/python/02-instalacion.html">Instalación: VS Code & Python →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

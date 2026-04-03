@@ -1,68 +1,87 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 19 · Funciones avanzadas</title>
-<meta name="description" content="*args, **kwargs, lambda, funciones como objetos, closures, decoradores y generators en Python.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 19 · Funciones avanzadas</title>
+  <meta name="description"
+    content="*args, **kwargs, lambda, funciones como objetos, closures, decoradores y generators en Python.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 19 de 27</span>
-  <h1>Funciones avanzadas</h1>
-  <p>Lambda, *args/**kwargs, funciones como objetos, closures, decoradores y generators. Estas herramientas convierten código funcional en código elegante y profesional. Son las que aparecen en entrevistas técnicas y en el código de pandas y scikit-learn.</p>
-  <div class="badges">
-    <span class="badge">100–120 min</span>
-    <span class="badge">Prerrequisitos: 18 Funciones básicas</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 19 de 27</span>
+        <h1>Funciones avanzadas</h1>
+        <p>Lambda, *args/**kwargs, funciones como objetos, closures, decoradores y generators. Estas herramientas
+          convierten código funcional en código elegante y profesional. Son las que aparecen en entrevistas técnicas y
+          en el código de pandas y scikit-learn.</p>
+        <div class="badges">
+          <span class="badge">100–120 min</span>
+          <span class="badge">Prerrequisitos: 18 Funciones básicas</span>
+        </div>
+      </div>
 
-<h3>*args y **kwargs — parámetros flexibles</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>A veces no sabés de antemano cuántos argumentos va a recibir tu función. Python resuelve esto con dos mecanismos:</p>
+      <h3>*args y **kwargs — parámetros flexibles</h3>
 
-<p><code><b>*args</b></code> — captura cualquier cantidad de argumentos <b>posicionales</b> como una tupla:</p>
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def sumar_todo(*args):
+      <p>A veces no sabés de antemano cuántos argumentos va a recibir tu función. Python resuelve esto con dos
+        mecanismos:</p>
+
+      <p><code><b>*args</b></code> — captura cualquier cantidad de argumentos <b>posicionales</b> como una tupla:</p>
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def sumar_todo(*args):
     return sum(args)  # args es una tupla
 
 sumar_todo(1, 2, 3)         # args = (1, 2, 3) → 6
 sumar_todo(10, 20, 30, 40)  # args = (10, 20, 30, 40) → 100</pre>
 
-<p><code><b>**kwargs</b></code> — captura cualquier cantidad de argumentos <b>nombrados</b> como un diccionario:</p>
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def crear_ficha(**kwargs):
+      <p><code><b>**kwargs</b></code> — captura cualquier cantidad de argumentos <b>nombrados</b> como un diccionario:
+      </p>
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def crear_ficha(**kwargs):
     for k, v in kwargs.items():
         print(f"  {k}: {v}")
 
 crear_ficha(nombre="García", score=720, ciudad="BsAs")
 # kwargs = {"nombre": "García", "score": 720, "ciudad": "BsAs"}</pre>
 
-<p>Podés combinar ambos con parámetros normales. El orden obligatorio es: <code>def f(normales, *args, **kwargs)</code>.</p>
+      <p>Podés combinar ambos con parámetros normales. El orden obligatorio es:
+        <code>def f(normales, *args, **kwargs)</code>.</p>
 
-<div class="concept"><strong>¿Dónde se usan en la práctica?</strong> Los ves constantemente en librerías: <code>print(*args)</code> acepta cualquier cantidad de valores. <code>pd.read_csv(path, **kwargs)</code> acepta docenas de parámetros opcionales. <code>dict(**kwargs)</code> crea diccionarios. Entender *args/**kwargs te permite leer el código fuente de pandas y scikit-learn.</div>
+      <div class="concept"><strong>¿Dónde se usan en la práctica?</strong> Los ves constantemente en librerías:
+        <code>print(*args)</code> acepta cualquier cantidad de valores. <code>pd.read_csv(path, **kwargs)</code> acepta
+        docenas de parámetros opcionales. <code>dict(**kwargs)</code> crea diccionarios. Entender *args/**kwargs te
+        permite leer el código fuente de pandas y scikit-learn.</div>
 
-<h3>Lambda — funciones anónimas</h3>
+      <h3>Lambda — funciones anónimas</h3>
 
-<p>Una <code>lambda</code> es una función sin nombre, definida en una sola línea. Se usa cuando necesitás una función simple y descartable — típicamente como argumento de <code>sorted()</code>, <code>map()</code>, <code>filter()</code> o <code>df.apply()</code>.</p>
+      <p>Una <code>lambda</code> es una función sin nombre, definida en una sola línea. Se usa cuando necesitás una
+        función simple y descartable — típicamente como argumento de <code>sorted()</code>, <code>map()</code>,
+        <code>filter()</code> o <code>df.apply()</code>.</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Función normal
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Función normal
 def doble(x):
     return x * 2
 
@@ -72,19 +91,24 @@ doble = lambda x: x * 2
 # Uso típico: como key en sorted
 sorted(clientes, key=lambda c: c["score"])</pre>
 
-<div class="warning"><strong>Regla de estilo PEP 8:</strong> nunca asignes una lambda a una variable (<code>f = lambda x: x*2</code>). Si necesitás reusar la función, usá <code>def</code>. Las lambdas son para uso inline y descartable (dentro de sorted, map, filter, apply).</div>
+      <div class="warning"><strong>Regla de estilo PEP 8:</strong> nunca asignes una lambda a una variable
+        (<code>f = lambda x: x*2</code>). Si necesitás reusar la función, usá <code>def</code>. Las lambdas son para uso
+        inline y descartable (dentro de sorted, map, filter, apply).</div>
 
-<h3>Funciones como objetos (first-class functions)</h3>
+      <h3>Funciones como objetos (first-class functions)</h3>
 
-<p>En Python, las funciones son <b>objetos de primera clase</b>. Esto significa que podés: asignarlas a variables, pasarlas como argumentos a otras funciones, devoverlas desde funciones, y guardarlas en listas o diccionarios.</p>
+      <p>En Python, las funciones son <b>objetos de primera clase</b>. Esto significa que podés: asignarlas a variables,
+        pasarlas como argumentos a otras funciones, devoverlas desde funciones, y guardarlas en listas o diccionarios.
+      </p>
 
-<p>Esto habilita patrones muy poderosos como callbacks, estrategias dinámicas y pipelines configurables.</p>
+      <p>Esto habilita patrones muy poderosos como callbacks, estrategias dinámicas y pipelines configurables.</p>
 
-<h3>Closures — funciones que recuerdan su contexto</h3>
+      <h3>Closures — funciones que recuerdan su contexto</h3>
 
-<p>Un <strong>closure</strong> es una función interna que "recuerda" las variables del scope donde fue creada, incluso después de que ese scope termine. Es como una función con memoria:</p>
+      <p>Un <strong>closure</strong> es una función interna que "recuerda" las variables del scope donde fue creada,
+        incluso después de que ese scope termine. Es como una función con memoria:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def crear_calculadora_iva(tasa):
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def crear_calculadora_iva(tasa):
     def calcular(precio):
         return precio * (1 + tasa)  # "recuerda" tasa
     return calcular
@@ -94,11 +118,13 @@ iva_105 = crear_calculadora_iva(0.105)
 print(iva_21(1000))   # 1210.0
 print(iva_105(1000))  # 1105.0</pre>
 
-<h3>Decoradores — modificar funciones sin tocarlas</h3>
+      <h3>Decoradores — modificar funciones sin tocarlas</h3>
 
-<p>Un <strong>decorador</strong> es una función que envuelve otra función para agregarle funcionalidad sin modificar su código. Usan la sintaxis <code>@decorador</code> arriba de la función. Son la base de frameworks como Flask y Django:</p>
+      <p>Un <strong>decorador</strong> es una función que envuelve otra función para agregarle funcionalidad sin
+        modificar su código. Usan la sintaxis <code>@decorador</code> arriba de la función. Son la base de frameworks
+        como Flask y Django:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def medir_tiempo(func):
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def medir_tiempo(func):
     def wrapper(*args, **kwargs):
         import time
         inicio = time.time()
@@ -113,11 +139,13 @@ def procesar_datos(n):
 
 procesar_datos(1000000)  # imprime el tiempo automáticamente</pre>
 
-<h3>Generators — iteradores perezosos con yield</h3>
+      <h3>Generators — iteradores perezosos con yield</h3>
 
-<p>Un <strong>generator</strong> es una función que usa <code>yield</code> en vez de <code>return</code>. En vez de calcular todos los resultados de una vez y guardarlos en memoria, genera uno a la vez. Ideal para datasets grandes donde no querés cargar todo en RAM.</p>
+      <p>Un <strong>generator</strong> es una función que usa <code>yield</code> en vez de <code>return</code>. En vez
+        de calcular todos los resultados de una vez y guardarlos en memoria, genera uno a la vez. Ideal para datasets
+        grandes donde no querés cargar todo en RAM.</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def generar_cuotas(capital, tasa, n):
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def generar_cuotas(capital, tasa, n):
     saldo = capital
     for mes in range(1, n+1):
         interes = saldo * tasa
@@ -127,18 +155,24 @@ procesar_datos(1000000)  # imprime el tiempo automáticamente</pre>
 for mes, interes, saldo in generar_cuotas(100000, 0.05, 6):
     print(f"Mes {mes}: interés ${interes:,.0f}")</pre>
 
-<div class="realworld"><strong>En pandas/ML:</strong> <code>pd.read_csv(chunksize=1000)</code> devuelve un generator que lee 1000 filas por vez. <code>sklearn</code> usa generators internamente para datasets grandes. Lambda se usa en <code>df.apply(lambda x: ...)</code> constantemente. <code>sorted(df, key=lambda x: x["col"])</code> es el patrón más común de lambda.</div>
+      <div class="realworld"><strong>En pandas/ML:</strong> <code>pd.read_csv(chunksize=1000)</code> devuelve un
+        generator que lee 1000 filas por vez. <code>sklearn</code> usa generators internamente para datasets grandes.
+        Lambda se usa en <code>df.apply(lambda x: ...)</code> constantemente.
+        <code>sorted(df, key=lambda x: x["col"])</code> es el patrón más común de lambda.</div>
 
-<div class="tip"><strong>Tip profesional:</strong> no necesitás dominar todo esto el día uno. Las prioridades son: (1) lambda para sorted/map/apply — lo usás todos los días, (2) *args/**kwargs para leer código de librerías, (3) decoradores para entender frameworks, (4) generators cuando trabajes con datos muy grandes.</div>
+      <div class="tip"><strong>Tip profesional:</strong> no necesitás dominar todo esto el día uno. Las prioridades son:
+        (1) lambda para sorted/map/apply — lo usás todos los días, (2) *args/**kwargs para leer código de librerías, (3)
+        decoradores para entender frameworks, (4) generators cuando trabajes con datos muy grandes.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: *args y **kwargs</h3>
+      <h3>Ejemplo 1: *args y **kwargs</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_args_kwargs.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># *args: cantidad variable de argumentos posicionales
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_args_kwargs.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># *args: cantidad variable de argumentos posicionales
 def sumar_montos(*montos):
     """Suma cualquier cantidad de montos."""
     total = sum(montos)
@@ -169,16 +203,19 @@ def reporte(titulo, *items, **config):
     for item in items:
         print(f"  • {item}")
 
-reporte("Productos", "Cuenta", "Tarjeta", "Préstamo", sep="═", ancho=25)</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+reporte("Productos", "Cuenta", "Tarjeta", "Préstamo", sep="═", ancho=25)</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Lambda — funciones inline</h3>
+      <h3>Ejemplo 2: Lambda — funciones inline</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_lambda.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Lambda como key en sorted (USO #1 más común)
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_lambda.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Lambda como key en sorted (USO #1 más común)
 clientes = [
     {"nombre": "García", "score": 720, "saldo": 150000},
     {"nombre": "López", "score": 680, "saldo": 320000},
@@ -210,16 +247,19 @@ for nombre, func in operaciones.items():
     print(f"  {nombre}(10, 3) = {func(10, 3)}")
 
 # ❌ NO hagas esto (PEP 8 lo prohíbe):
-# doble = lambda x: x * 2   # Usá def doble(x): return x * 2</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+# doble = lambda x: x * 2   # Usá def doble(x): return x * 2</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Funciones como objetos — pasar funciones como argumentos</h3>
+      <h3>Ejemplo 3: Funciones como objetos — pasar funciones como argumentos</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_first_class.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Las funciones son objetos: podés pasarlas como argumento
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_first_class.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Las funciones son objetos: podés pasarlas como argumento
 def aplicar_a_lista(datos, transformar):
     """Aplica una función a cada elemento de la lista."""
     return [transformar(d) for d in datos]
@@ -253,16 +293,19 @@ calculadoras = {
 capital, tasa, meses = 100000, 0.05, 12
 for tipo, func in calculadoras.items():
     resultado = func(capital, tasa, meses)
-    print(f"\nInterés {tipo}: ${resultado:,.0f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"\nInterés {tipo}: ${resultado:,.0f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Closures y fábricas de funciones</h3>
+      <h3>Ejemplo 4: Closures y fábricas de funciones</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_closures.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Closure: función que "recuerda" su contexto de creación
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_closures.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Closure: función que "recuerda" su contexto de creación
 def crear_aplicador_iva(tasa):
     """Crea una función que aplica una tasa de IVA específica."""
     def aplicar(precio):
@@ -292,16 +335,19 @@ def crear_acumulador():
 cuenta = crear_acumulador()
 print(f"\n+$50,000: total ${cuenta(50000):,}")
 print(f"+$30,000: total ${cuenta(30000):,}")
-print(f"+$20,000: total ${cuenta(20000):,}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"+$20,000: total ${cuenta(20000):,}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Decoradores y generators</h3>
+      <h3>Ejemplo 5: Decoradores y generators</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_decoradores.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import time
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_decoradores.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import time
 
 # Decorador: medir tiempo de ejecución
 def medir_tiempo(func):
@@ -340,202 +386,310 @@ for c in cuotas_prestamo(500000, 0.05, 6):
     total_intereses += c["interes"]
     print(f"  {c['mes']:>2}  ${c['cuota']:>8,}  ${c['interes']:>8,}  ${c['saldo']:>10,}")
 print(f"{'─'*40}")
-print(f"Total intereses: ${total_intereses:,}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Total intereses: ${total_intereses:,}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Concepto</th><th>Sintaxis</th><th>Cuándo usar</th></tr>
-<tr><td><code>*args</code></td><td><code>def f(*args):</code></td><td>Cantidad variable de args posicionales</td></tr>
-<tr><td><code>**kwargs</code></td><td><code>def f(**kwargs):</code></td><td>Cantidad variable de args nombrados</td></tr>
-<tr><td>Lambda</td><td><code>lambda x: x*2</code></td><td>Inline en sorted/map/filter/apply</td></tr>
-<tr><td>Func como arg</td><td><code>f(otra_func)</code></td><td>Callbacks, estrategias, pipelines</td></tr>
-<tr><td>Closure</td><td><code>def ext(): def int(): return int</code></td><td>Fábricas de funciones, configuración</td></tr>
-<tr><td>Decorador</td><td><code>@deco def f():</code></td><td>Logging, timing, validación, caching</td></tr>
-<tr><td>Generator</td><td><code>def f(): yield x</code></td><td>Datos grandes, iteración perezosa</td></tr>
-<tr><td>Gen expression</td><td><code>(x for x in iter)</code></td><td>Comprehension perezosa (sin memoria)</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Concepto</th>
+            <th>Sintaxis</th>
+            <th>Cuándo usar</th>
+          </tr>
+          <tr>
+            <td><code>*args</code></td>
+            <td><code>def f(*args):</code></td>
+            <td>Cantidad variable de args posicionales</td>
+          </tr>
+          <tr>
+            <td><code>**kwargs</code></td>
+            <td><code>def f(**kwargs):</code></td>
+            <td>Cantidad variable de args nombrados</td>
+          </tr>
+          <tr>
+            <td>Lambda</td>
+            <td><code>lambda x: x*2</code></td>
+            <td>Inline en sorted/map/filter/apply</td>
+          </tr>
+          <tr>
+            <td>Func como arg</td>
+            <td><code>f(otra_func)</code></td>
+            <td>Callbacks, estrategias, pipelines</td>
+          </tr>
+          <tr>
+            <td>Closure</td>
+            <td><code>def ext(): def int(): return int</code></td>
+            <td>Fábricas de funciones, configuración</td>
+          </tr>
+          <tr>
+            <td>Decorador</td>
+            <td><code>@deco def f():</code></td>
+            <td>Logging, timing, validación, caching</td>
+          </tr>
+          <tr>
+            <td>Generator</td>
+            <td><code>def f(): yield x</code></td>
+            <td>Datos grandes, iteración perezosa</td>
+          </tr>
+          <tr>
+            <td>Gen expression</td>
+            <td><code>(x for x in iter)</code></td>
+            <td>Comprehension perezosa (sin memoria)</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Patrón</th><th>Ejemplo práctico en análisis de datos</th></tr>
-<tr><td>Lambda en sorted</td><td><code>sorted(clientes, key=lambda c: c["score"])</code></td></tr>
-<tr><td>Lambda en apply</td><td><code>df["cat"] = df["score"].apply(lambda s: "Alto" if s>700 else "Bajo")</code></td></tr>
-<tr><td>**kwargs en configs</td><td><code>pd.read_csv("datos.csv", sep=";", encoding="latin-1")</code></td></tr>
-<tr><td>Generator para chunks</td><td><code>for chunk in pd.read_csv("big.csv", chunksize=10000):</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Patrón</th>
+            <th>Ejemplo práctico en análisis de datos</th>
+          </tr>
+          <tr>
+            <td>Lambda en sorted</td>
+            <td><code>sorted(clientes, key=lambda c: c["score"])</code></td>
+          </tr>
+          <tr>
+            <td>Lambda en apply</td>
+            <td><code>df["cat"] = df["score"].apply(lambda s: "Alto" if s>700 else "Bajo")</code></td>
+          </tr>
+          <tr>
+            <td>**kwargs en configs</td>
+            <td><code>pd.read_csv("datos.csv", sep=";", encoding="latin-1")</code></td>
+          </tr>
+          <tr>
+            <td>Generator para chunks</td>
+            <td><code>for chunk in pd.read_csv("big.csv", chunksize=10000):</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Función con *args</h4>
-  <p>Creá <code>sumar(*numeros)</code> que sume cualquier cantidad de números. Probá con 3 y con 5 argumentos. Debe incluir <code>150</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-1" data-expected="150">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "150"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí sumar():
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Función con *args</h4>
+        <p>Creá <code>sumar(*numeros)</code> que sume cualquier cantidad de números. Probá con 3 y con 5 argumentos.
+          Debe incluir <code>150</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-1" data-expected="150">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "150"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Definí sumar():
 
 print(sumar(10, 20, 30))
-print(sumar(10, 20, 30, 40, 50))</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["def sumar(*numeros):","    return sum(numeros)","10+20+30+40+50 = 150"]'></div>
-</div>
+print(sumar(10, 20, 30, 40, 50))</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["def sumar(*numeros):","    return sum(numeros)","10+20+30+40+50 = 150"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Lambda en sorted</h4>
-  <p>Ordená <code>[("GGAL",5200),("YPF",28000),("PAMP",3100)]</code> por precio descendente con lambda. Debe incluir <code>YPF</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-2" data-expected="YPF">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "YPF"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">acciones = [("GGAL", 5200), ("YPF", 28000), ("PAMP", 3100)]
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Lambda en sorted</h4>
+        <p>Ordená <code>[("GGAL",5200),("YPF",28000),("PAMP",3100)]</code> por precio descendente con lambda. Debe
+          incluir <code>YPF</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-2" data-expected="YPF">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "YPF"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">acciones = [("GGAL", 5200), ("YPF", 28000), ("PAMP", 3100)]
 
 # Ordená por precio desc con lambda:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["sorted(acciones, key=lambda a: a[1], reverse=True)","El primero será (\"YPF\", 28000)","lambda a: a[1] extrae el precio (segundo elemento)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["sorted(acciones, key=lambda a: a[1], reverse=True)","El primero será (\"YPF\", 28000)","lambda a: a[1] extrae el precio (segundo elemento)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: **kwargs para crear registros</h4>
-  <p>Creá <code>crear_registro(**datos)</code> que devuelva un diccionario. Probá creando un cliente. Debe incluir <code>García</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-3" data-expected="García">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "García"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí crear_registro():
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: **kwargs para crear registros</h4>
+        <p>Creá <code>crear_registro(**datos)</code> que devuelva un diccionario. Probá creando un cliente. Debe incluir
+          <code>García</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-3" data-expected="García">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "García"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Definí crear_registro():
 
 cliente = crear_registro(nombre="García", score=720, ciudad="BsAs")
-print(cliente)</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["def crear_registro(**datos):","    return datos","kwargs ya es un diccionario"]'></div>
-</div>
+print(cliente)</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["def crear_registro(**datos):","    return datos","kwargs ya es un diccionario"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Lambda con map y filter</h4>
-  <p>Dada <code>montos = [1500, -200, 3200, -500, 4100]</code>, usá filter con lambda para quedarte solo con positivos, y map con lambda para aplicar IVA 21%. Debe incluir <code>10648</code> (suma con IVA).</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-4" data-expected="10648">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "10648"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">montos = [1500, -200, 3200, -500, 4100]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Lambda con map y filter</h4>
+        <p>Dada <code>montos = [1500, -200, 3200, -500, 4100]</code>, usá filter con lambda para quedarte solo con
+          positivos, y map con lambda para aplicar IVA 21%. Debe incluir <code>10648</code> (suma con IVA).</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-4" data-expected="10648">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "10648"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">montos = [1500, -200, 3200, -500, 4100]
 
 # filter positivos + map IVA:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["positivos = filter(lambda m: m > 0, montos)","con_iva = list(map(lambda m: round(m * 1.21), positivos))","1815 + 3872 + 4961 = 10648"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["positivos = filter(lambda m: m > 0, montos)","con_iva = list(map(lambda m: round(m * 1.21), positivos))","1815 + 3872 + 4961 = 10648"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Closure — fábrica de calculadoras</h4>
-  <p>Creá <code>crear_convertidor(tasa)</code> que devuelva una función que multiplique por la tasa. Usá para crear <code>a_dolares</code> (÷1150) y <code>a_pesos</code> (×1150). Debe incluir <code>USD</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-5" data-expected="USD">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "USD"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí crear_convertidor():
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Closure — fábrica de calculadoras</h4>
+        <p>Creá <code>crear_convertidor(tasa)</code> que devuelva una función que multiplique por la tasa. Usá para
+          crear <code>a_dolares</code> (÷1150) y <code>a_pesos</code> (×1150). Debe incluir <code>USD</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-5" data-expected="USD">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "USD"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Definí crear_convertidor():
 
 a_dolares = crear_convertidor(1/1150)
 a_pesos = crear_convertidor(1150)
 
 print(f"$1,150,000 = USD {a_dolares(1150000):,.0f}")
-print(f"USD 1,000 = ${a_pesos(1000):,.0f}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["def crear_convertidor(tasa):","    def convertir(monto): return monto * tasa","    return convertir"]'></div>
-</div>
+print(f"USD 1,000 = ${a_pesos(1000):,.0f}")</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["def crear_convertidor(tasa):","    def convertir(monto): return monto * tasa","    return convertir"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Función como argumento</h4>
-  <p>Creá <code>procesar_lista(datos, func)</code> que aplique <code>func</code> a cada elemento. Probá con <code>str.upper</code> y con una lambda. Debe incluir <code>GARCÍA</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-6" data-expected="GARCÍA">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "GARCÍA"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí procesar_lista():
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Función como argumento</h4>
+        <p>Creá <code>procesar_lista(datos, func)</code> que aplique <code>func</code> a cada elemento. Probá con
+          <code>str.upper</code> y con una lambda. Debe incluir <code>GARCÍA</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-6" data-expected="GARCÍA">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "GARCÍA"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Definí procesar_lista():
 
 nombres = ["garcía", "lópez", "pérez"]
-print(procesar_lista(nombres, str.upper))</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["def procesar_lista(datos, func):","    return [func(d) for d in datos]","str.upper se pasa sin paréntesis (es la función, no el resultado)"]'></div>
-</div>
+print(procesar_lista(nombres, str.upper))</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["def procesar_lista(datos, func):","    return [func(d) for d in datos]","str.upper se pasa sin paréntesis (es la función, no el resultado)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Generator para cuotas</h4>
-  <p>Creá un generator <code>cuotas(capital, n)</code> que yield las cuotas de un préstamo (capital/n). Consumilo con for. Capital $120,000 en 6 cuotas. Debe incluir <code>20000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-7" data-expected="20000">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "20000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí el generator:
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Generator para cuotas</h4>
+        <p>Creá un generator <code>cuotas(capital, n)</code> que yield las cuotas de un préstamo (capital/n). Consumilo
+          con for. Capital $120,000 en 6 cuotas. Debe incluir <code>20000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-7" data-expected="20000">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "20000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Definí el generator:
 
 for mes, monto in cuotas(120000, 6):
-    print(f"Mes {mes}: ${monto:,}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["def cuotas(capital, n):","    monto = capital / n","    for mes in range(1, n+1): yield mes, monto"]'></div>
-</div>
+    print(f"Mes {mes}: ${monto:,}")</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["def cuotas(capital, n):","    monto = capital / n","    for mes in range(1, n+1): yield mes, monto"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Decorador simple</h4>
-  <p>Creá un decorador <code>@log</code> que imprima <code>"Llamando a [nombre]..."</code> antes de ejecutar la función. Aplicalo a una función <code>sumar(a,b)</code>. Debe incluir <code>Llamando</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-8" data-expected="Llamando">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Llamando"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí el decorador @log:
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Decorador simple</h4>
+        <p>Creá un decorador <code>@log</code> que imprima <code>"Llamando a [nombre]..."</code> antes de ejecutar la
+          función. Aplicalo a una función <code>sumar(a,b)</code>. Debe incluir <code>Llamando</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-8" data-expected="Llamando">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Llamando"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Definí el decorador @log:
 
 @log
 def sumar(a, b):
     return a + b
 
 resultado = sumar(10, 20)
-print(f"Resultado: {resultado}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["def log(func):","    def wrapper(*args, **kwargs):","        print(f\"Llamando a {func.__name__}...\"); return func(*args, **kwargs)"]'></div>
-</div>
+print(f"Resultado: {resultado}")</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["def log(func):","    def wrapper(*args, **kwargs):","        print(f\"Llamando a {func.__name__}...\"); return func(*args, **kwargs)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Dispatch con dict de funciones</h4>
-  <p>Creá un dict <code>operaciones</code> donde las claves son strings ("sumar","restar","multiplicar") y los valores son lambdas. Usalo para ejecutar <code>"multiplicar"</code> con (15, 8). Debe incluir <code>120</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-9" data-expected="120">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "120"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Dict de funciones:
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Dispatch con dict de funciones</h4>
+        <p>Creá un dict <code>operaciones</code> donde las claves son strings ("sumar","restar","multiplicar") y los
+          valores son lambdas. Usalo para ejecutar <code>"multiplicar"</code> con (15, 8). Debe incluir
+          <code>120</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-9" data-expected="120">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "120"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Dict de funciones:
 operaciones = {
     # completá
 }
 
 op = "multiplicar"
-print(f"{op}(15, 8) = {operaciones[op](15, 8)}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["\"sumar\": lambda a, b: a + b","\"multiplicar\": lambda a, b: a * b","15 * 8 = 120"]'></div>
-</div>
+print(f"{op}(15, 8) = {operaciones[op](15, 8)}")</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["\"sumar\": lambda a, b: a + b","\"multiplicar\": lambda a, b: a * b","15 * 8 = 120"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Pipeline configurable con funciones avanzadas</h4>
-  <p>Creá un sistema de pipeline donde: (1) definís funciones de transformación (limpiar, convertir, clasificar), (2) las guardás en una lista <code>pasos</code>, (3) una función <code>ejecutar_pipeline(dato, pasos)</code> aplica cada paso en orden. Procesá <code>"  $1,500.00  "</code>. Debe incluir <code>pipeline</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-10" data-expected="pipeline">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "pipeline"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Funciones de transformación:
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Pipeline configurable con funciones avanzadas</h4>
+        <p>Creá un sistema de pipeline donde: (1) definís funciones de transformación (limpiar, convertir, clasificar),
+          (2) las guardás en una lista <code>pasos</code>, (3) una función <code>ejecutar_pipeline(dato, pasos)</code>
+          aplica cada paso en orden. Procesá <code>"  $1,500.00  "</code>. Debe incluir <code>pipeline</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-10" data-expected="pipeline">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "pipeline"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code"># Funciones de transformación:
 def limpiar_espacios(dato):
     return dato.strip()
 
@@ -559,45 +713,56 @@ def ejecutar_pipeline(dato, pasos):
 
 resultado = ejecutar_pipeline("  $1,500.00  ", pasos)
 print(f"Resultado del pipeline: {resultado}")
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["def ejecutar_pipeline(dato, pasos):","    for paso in pasos: dato = paso(dato)","    return dato"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li><code>*args</code> captura posicionales como tupla. <code>**kwargs</code> captura nombrados como dict.</li>
+        <li>Lambda es para funciones inline descartables: <code>sorted(data, key=lambda x: x["col"])</code>.</li>
+        <li>Las funciones son objetos: podés pasarlas como argumentos, guardarlas en dicts, devolverlas.</li>
+        <li>Closures son funciones que "recuerdan" variables de su scope de creación.</li>
+        <li>Decoradores (<code>@deco</code>) envuelven funciones para agregar funcionalidad (logging, timing, auth).
+        </li>
+        <li>Generators (<code>yield</code>) generan valores uno a uno — ideales para datos grandes.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>20 · Módulos de la stdlib</strong>) vas a explorar la biblioteca estándar de
+        Python: math, datetime, random, json, os, collections — herramientas que vienen incluidas y que usás todos los
+        días.</p>
+
+      <p><strong>Recursos:</strong> <a
+          href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions" target="_blank">Python
+          docs — More on Functions</a> · <a href="https://docs.python.org/3/howto/functional.html"
+          target="_blank">Functional Programming HOWTO</a></p>
+
+      <div class="footer-nav">
+        <a href="/python/18-funciones-basicas.html">← Funciones básicas</a>
+        <a class="next" href="/python/20-modulos-stdlib.html">Módulos de la stdlib →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["def ejecutar_pipeline(dato, pasos):","    for paso in pasos: dato = paso(dato)","    return dato"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li><code>*args</code> captura posicionales como tupla. <code>**kwargs</code> captura nombrados como dict.</li>
-  <li>Lambda es para funciones inline descartables: <code>sorted(data, key=lambda x: x["col"])</code>.</li>
-  <li>Las funciones son objetos: podés pasarlas como argumentos, guardarlas en dicts, devolverlas.</li>
-  <li>Closures son funciones que "recuerdan" variables de su scope de creación.</li>
-  <li>Decoradores (<code>@deco</code>) envuelven funciones para agregar funcionalidad (logging, timing, auth).</li>
-  <li>Generators (<code>yield</code>) generan valores uno a uno — ideales para datos grandes.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>20 · Módulos de la stdlib</strong>) vas a explorar la biblioteca estándar de Python: math, datetime, random, json, os, collections — herramientas que vienen incluidas y que usás todos los días.</p>
-
-<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions" target="_blank">Python docs — More on Functions</a> · <a href="https://docs.python.org/3/howto/functional.html" target="_blank">Functional Programming HOWTO</a></p>
-
-<div class="footer-nav">
-  <a href="/python/18-funciones-basicas.html">← Funciones básicas</a>
-  <a class="next" href="/python/20-modulos-stdlib.html">Módulos de la stdlib →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

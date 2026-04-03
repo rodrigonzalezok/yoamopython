@@ -1,40 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · SQL 04 · ORDER BY, LIMIT, DISTINCT</title>
-<meta name="description" content="Ordená, paginá y deduplicá resultados en SQL: ORDER BY ASC/DESC, LIMIT/OFFSET para paginación, DISTINCT para valores únicos y patrones TOP N.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · SQL 04 · ORDER BY, LIMIT, DISTINCT</title>
+  <meta name="description"
+    content="Ordená, paginá y deduplicá resultados en SQL: ORDER BY ASC/DESC, LIMIT/OFFSET para paginación, DISTINCT para valores únicos y patrones TOP N.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
 </head>
+
 <body>
-<div class="topbar"><button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button><div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div><div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div><div id="global-progress-text" class="top-stats"></div></div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label sql">SQL · Lección 04 de 15</span>
-  <h1>ORDER BY, LIMIT y DISTINCT</h1>
-  <p>Ordenar resultados, limitar la cantidad de filas y eliminar duplicados. Estos tres conceptos son la base de los reportes "Top N" que hacés todos los días como analista: "los 10 clientes con mayor saldo", "ciudades únicas de la cartera".</p>
-  <div class="badges">
-    <span class="badge">70–90 min</span>
-    <span class="badge">Prerrequisitos: SQL 03</span>
+  <div class="topbar"><button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label sql">SQL · Lección 04 de 15</span>
+        <h1>ORDER BY, LIMIT y DISTINCT</h1>
+        <p>Ordenar resultados, limitar la cantidad de filas y eliminar duplicados. Estos tres conceptos son la base de
+          los reportes "Top N" que hacés todos los días como analista: "los 10 clientes con mayor saldo", "ciudades
+          únicas de la cartera".</p>
+        <div class="badges">
+          <span class="badge">70–90 min</span>
+          <span class="badge">Prerrequisitos: SQL 03</span>
+        </div>
+      </div>
 
-<h3>ORDER BY — ordenar resultados</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p><code>ORDER BY</code> ordena las filas del resultado. Por defecto es <b>ascendente</b> (ASC). Para descendente usás <code>DESC</code>:</p>
+      <h3>ORDER BY — ordenar resultados</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Ascendente (por defecto)
+      <p><code>ORDER BY</code> ordena las filas del resultado. Por defecto es <b>ascendente</b> (ASC). Para descendente
+        usás <code>DESC</code>:</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Ascendente (por defecto)
 SELECT * FROM clientes ORDER BY score;       -- 590, 645, 680, 720, 810
 
 -- Descendente
@@ -43,15 +59,21 @@ SELECT * FROM clientes ORDER BY saldo DESC;  -- 890000, 320000, 150000...
 -- Múltiples columnas: primero por ciudad ASC, después por saldo DESC
 SELECT * FROM clientes ORDER BY ciudad ASC, saldo DESC;</pre>
 
-<div class="concept"><strong>Orden de múltiples columnas:</strong> cuando ordenás por 2+ columnas, SQL ordena primero por la primera. Dentro de los empates de la primera, ordena por la segunda. Es como ordenar una planilla de Excel por columna A y después por columna B. Esto es clave para reportes agrupados: "por ciudad, y dentro de cada ciudad, por saldo descendente".</div>
+      <div class="concept"><strong>Orden de múltiples columnas:</strong> cuando ordenás por 2+ columnas, SQL ordena
+        primero por la primera. Dentro de los empates de la primera, ordena por la segunda. Es como ordenar una planilla
+        de Excel por columna A y después por columna B. Esto es clave para reportes agrupados: "por ciudad, y dentro de
+        cada ciudad, por saldo descendente".</div>
 
-<div class="warning"><strong>Sin ORDER BY, el orden NO está garantizado.</strong> SQL puede devolver filas en cualquier orden si no especificás ORDER BY. Aunque parezca que siempre salen en el mismo orden, esto NO es una garantía. Si el orden importa para tu reporte, SIEMPRE usá ORDER BY.</div>
+      <div class="warning"><strong>Sin ORDER BY, el orden NO está garantizado.</strong> SQL puede devolver filas en
+        cualquier orden si no especificás ORDER BY. Aunque parezca que siempre salen en el mismo orden, esto NO es una
+        garantía. Si el orden importa para tu reporte, SIEMPRE usá ORDER BY.</div>
 
-<h3>LIMIT y OFFSET — paginación</h3>
+      <h3>LIMIT y OFFSET — paginación</h3>
 
-<p><code>LIMIT n</code> devuelve como máximo <code>n</code> filas. <code>OFFSET m</code> salta las primeras <code>m</code> filas. Juntos permiten paginación:</p>
+      <p><code>LIMIT n</code> devuelve como máximo <code>n</code> filas. <code>OFFSET m</code> salta las primeras
+        <code>m</code> filas. Juntos permiten paginación:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Top 5 clientes por saldo
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Top 5 clientes por saldo
 SELECT * FROM clientes ORDER BY saldo DESC LIMIT 5;
 
 -- Página 2 (filas 6-10): saltear 5, traer 5
@@ -60,13 +82,16 @@ SELECT * FROM clientes ORDER BY saldo DESC LIMIT 5 OFFSET 5;
 -- Top 3 por score
 SELECT nombre, score FROM clientes ORDER BY score DESC LIMIT 3;</pre>
 
-<div class="tip"><strong>Patrón "Top N":</strong> <code>ORDER BY columna DESC LIMIT N</code> es el patrón más usado en reportes. "Top 10 clientes por saldo", "Top 5 productos más vendidos", "Los 3 meses con más transacciones". Lo vas a usar constantemente.</div>
+      <div class="tip"><strong>Patrón "Top N":</strong> <code>ORDER BY columna DESC LIMIT N</code> es el patrón más
+        usado en reportes. "Top 10 clientes por saldo", "Top 5 productos más vendidos", "Los 3 meses con más
+        transacciones". Lo vas a usar constantemente.</div>
 
-<h3>DISTINCT — valores únicos</h3>
+      <h3>DISTINCT — valores únicos</h3>
 
-<p><code>DISTINCT</code> elimina filas duplicadas del resultado. Es el equivalente de <code>.unique()</code> o <code>.drop_duplicates()</code> en pandas:</p>
+      <p><code>DISTINCT</code> elimina filas duplicadas del resultado. Es el equivalente de <code>.unique()</code> o
+        <code>.drop_duplicates()</code> en pandas:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Todas las ciudades (con repetidas)
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Todas las ciudades (con repetidas)
 SELECT ciudad FROM clientes;
 -- Buenos Aires, Córdoba, Buenos Aires, Rosario, Buenos Aires
 
@@ -77,18 +102,23 @@ SELECT DISTINCT ciudad FROM clientes;
 -- Contar ciudades únicas
 SELECT COUNT(DISTINCT ciudad) AS ciudades_unicas FROM clientes;</pre>
 
-<p><code>DISTINCT</code> se aplica a TODA la fila. Si seleccionás 2 columnas, elimina duplicados del par: <code>SELECT DISTINCT ciudad, categoria FROM clientes</code> devuelve combinaciones únicas de ciudad+categoría.</p>
+      <p><code>DISTINCT</code> se aplica a TODA la fila. Si seleccionás 2 columnas, elimina duplicados del par:
+        <code>SELECT DISTINCT ciudad, categoria FROM clientes</code> devuelve combinaciones únicas de ciudad+categoría.
+      </p>
 
-<div class="realworld"><strong>En el trabajo:</strong> DISTINCT + COUNT es una de las consultas más frecuentes en análisis exploratorio: "¿cuántos clientes únicos tenemos?", "¿cuántas ciudades distintas?", "¿cuántos productos diferentes se vendieron?". Es lo primero que hacés cuando conocés una tabla nueva.</div>
+      <div class="realworld"><strong>En el trabajo:</strong> DISTINCT + COUNT es una de las consultas más frecuentes en
+        análisis exploratorio: "¿cuántos clientes únicos tenemos?", "¿cuántas ciudades distintas?", "¿cuántos productos
+        diferentes se vendieron?". Es lo primero que hacés cuando conocés una tabla nueva.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: ORDER BY básico — ASC y DESC</h3>
+      <h3>Ejemplo 1: ORDER BY básico — ASC y DESC</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_01_orderby.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_01_orderby.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000);
 INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000);
 INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000);
@@ -103,16 +133,19 @@ ORDER BY score DESC;
 
 -- Descomentá para probar orden por múltiples columnas:
 -- SELECT nombre, ciudad, saldo FROM clientes
--- ORDER BY ciudad ASC, saldo DESC;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+-- ORDER BY ciudad ASC, saldo DESC;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: ORDER BY con múltiples columnas</h3>
+      <h3>Ejemplo 2: ORDER BY con múltiples columnas</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_02_multi_order.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_02_multi_order.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000);
 INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000);
 INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000);
@@ -123,16 +156,19 @@ INSERT INTO clientes VALUES (6,'Sosa','Buenos Aires',750,210000);
 -- Primero por ciudad (A→Z), dentro de cada ciudad por saldo (mayor primero)
 SELECT nombre, ciudad, saldo
 FROM clientes
-ORDER BY ciudad ASC, saldo DESC;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+ORDER BY ciudad ASC, saldo DESC;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: LIMIT — Top N y paginación</h3>
+      <h3>Ejemplo 3: LIMIT — Top N y paginación</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_03_limit.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_03_limit.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),
 (3,'Martínez',590,45000),(4,'Pérez',810,890000),(5,'Fernández',645,72000),
 (6,'Sosa',750,210000),(7,'Luna',700,180000),(8,'Torres',660,95000);
@@ -144,16 +180,19 @@ SELECT nombre, saldo FROM clientes ORDER BY saldo DESC LIMIT 3;
 -- SELECT nombre, saldo FROM clientes ORDER BY saldo DESC LIMIT 3 OFFSET 0;
 
 -- Página 2 (siguientes 3)
--- SELECT nombre, saldo FROM clientes ORDER BY saldo DESC LIMIT 3 OFFSET 3;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+-- SELECT nombre, saldo FROM clientes ORDER BY saldo DESC LIMIT 3 OFFSET 3;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: DISTINCT — valores únicos</h3>
+      <h3>Ejemplo 4: DISTINCT — valores únicos</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_04_distinct.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, cliente TEXT, tipo TEXT, monto REAL, ciudad TEXT);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_04_distinct.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, cliente TEXT, tipo TEXT, monto REAL, ciudad TEXT);
 INSERT INTO transacciones VALUES (1,'García','compra',1500,'Buenos Aires');
 INSERT INTO transacciones VALUES (2,'López','venta',800,'Córdoba');
 INSERT INTO transacciones VALUES (3,'García','compra',3200,'Buenos Aires');
@@ -171,16 +210,19 @@ SELECT tipo FROM transacciones;
 -- SELECT COUNT(DISTINCT cliente) AS clientes_unicos FROM transacciones;
 
 -- Combinaciones únicas ciudad + tipo
--- SELECT DISTINCT ciudad, tipo FROM transacciones ORDER BY ciudad;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+-- SELECT DISTINCT ciudad, tipo FROM transacciones ORDER BY ciudad;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Combinación — reporte Top N filtrado</h3>
+      <h3>Ejemplo 5: Combinación — reporte Top N filtrado</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_05_combinado.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_05_combinado.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1);
 INSERT INTO clientes VALUES (2,'López','Córdoba',680,320000,1);
 INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000,0);
@@ -195,139 +237,334 @@ SELECT nombre, ciudad, score, saldo,
 FROM clientes
 WHERE activo = 1
 ORDER BY saldo DESC
-LIMIT 3;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+LIMIT 3;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Cláusula</th><th>Sintaxis</th><th>Ejemplo</th></tr>
-<tr><td>Orden ascendente</td><td><code>ORDER BY col ASC</code></td><td><code>ORDER BY nombre</code> (ASC es default)</td></tr>
-<tr><td>Orden descendente</td><td><code>ORDER BY col DESC</code></td><td><code>ORDER BY saldo DESC</code></td></tr>
-<tr><td>Múltiples columnas</td><td><code>ORDER BY c1, c2 DESC</code></td><td><code>ORDER BY ciudad, saldo DESC</code></td></tr>
-<tr><td>Limitar filas</td><td><code>LIMIT n</code></td><td><code>LIMIT 10</code></td></tr>
-<tr><td>Paginar</td><td><code>LIMIT n OFFSET m</code></td><td><code>LIMIT 10 OFFSET 20</code></td></tr>
-<tr><td>Valores únicos</td><td><code>SELECT DISTINCT col</code></td><td><code>SELECT DISTINCT ciudad</code></td></tr>
-<tr><td>Contar únicos</td><td><code>COUNT(DISTINCT col)</code></td><td><code>COUNT(DISTINCT cliente)</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Cláusula</th>
+            <th>Sintaxis</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td>Orden ascendente</td>
+            <td><code>ORDER BY col ASC</code></td>
+            <td><code>ORDER BY nombre</code> (ASC es default)</td>
+          </tr>
+          <tr>
+            <td>Orden descendente</td>
+            <td><code>ORDER BY col DESC</code></td>
+            <td><code>ORDER BY saldo DESC</code></td>
+          </tr>
+          <tr>
+            <td>Múltiples columnas</td>
+            <td><code>ORDER BY c1, c2 DESC</code></td>
+            <td><code>ORDER BY ciudad, saldo DESC</code></td>
+          </tr>
+          <tr>
+            <td>Limitar filas</td>
+            <td><code>LIMIT n</code></td>
+            <td><code>LIMIT 10</code></td>
+          </tr>
+          <tr>
+            <td>Paginar</td>
+            <td><code>LIMIT n OFFSET m</code></td>
+            <td><code>LIMIT 10 OFFSET 20</code></td>
+          </tr>
+          <tr>
+            <td>Valores únicos</td>
+            <td><code>SELECT DISTINCT col</code></td>
+            <td><code>SELECT DISTINCT ciudad</code></td>
+          </tr>
+          <tr>
+            <td>Contar únicos</td>
+            <td><code>COUNT(DISTINCT col)</code></td>
+            <td><code>COUNT(DISTINCT cliente)</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Orden de cláusulas</th></tr>
-<tr><td><code>SELECT</code> → <code>FROM</code> → <code>WHERE</code> → <code>ORDER BY</code> → <code>LIMIT</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Orden de cláusulas</th>
+          </tr>
+          <tr>
+            <td><code>SELECT</code> → <code>FROM</code> → <code>WHERE</code> → <code>ORDER BY</code> →
+              <code>LIMIT</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: ORDER BY ASC</h4><p>Ordená clientes por nombre alfabéticamente. Debe incluir <code>Fernández</code> primero.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-1" data-expected="Fernández"><div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "Fernández"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: ORDER BY ASC</h4>
+        <p>Ordená clientes por nombre alfabéticamente. Debe incluir <code>Fernández</code> primero.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-1" data-expected="Fernández">
+          <div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "Fernández"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),
 (3,'Martínez',590,45000),(4,'Pérez',810,890000),(5,'Fernández',645,72000);
 
 -- Ordená por nombre A→Z:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT * FROM clientes ORDER BY nombre;","ASC es el default, no hace falta escribirlo","Fernández es el primero alfabéticamente"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["SELECT * FROM clientes ORDER BY nombre;","ASC es el default, no hace falta escribirlo","Fernández es el primero alfabéticamente"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: ORDER BY DESC</h4><p>Ordená por saldo de mayor a menor. Debe incluir <code>890000</code> primero.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-2" data-expected="890000"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "890000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: ORDER BY DESC</h4>
+        <p>Ordená por saldo de mayor a menor. Debe incluir <code>890000</code> primero.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-2" data-expected="890000">
+          <div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "890000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),
 (3,'Martínez',590,45000),(4,'Pérez',810,890000),(5,'Fernández',645,72000);
 
 -- Ordená por saldo descendente:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["SELECT * FROM clientes ORDER BY saldo DESC;","DESC = descendente (mayor a menor)","Pérez (890000) aparece primero"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["SELECT * FROM clientes ORDER BY saldo DESC;","DESC = descendente (mayor a menor)","Pérez (890000) aparece primero"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: LIMIT — Top 3</h4><p>Traé los 3 clientes con mayor score. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-3" data-expected="Pérez"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: LIMIT — Top 3</h4>
+        <p>Traé los 3 clientes con mayor score. Debe incluir <code>Pérez</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-3" data-expected="Pérez">
+          <div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "Pérez"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),
 (3,'Martínez',590,45000),(4,'Pérez',810,890000),(5,'Fernández',645,72000);
 
 -- Top 3 por score:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["ORDER BY score DESC LIMIT 3","Pérez (810), García (720), López (680)","ORDER BY va ANTES de LIMIT"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["ORDER BY score DESC LIMIT 3","Pérez (810), García (720), López (680)","ORDER BY va ANTES de LIMIT"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: DISTINCT</h4><p>Listá las ciudades únicas de la tabla. Debe incluir <code>Rosario</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-4" data-expected="Rosario"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "Rosario"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: DISTINCT</h4>
+        <p>Listá las ciudades únicas de la tabla. Debe incluir <code>Rosario</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-4" data-expected="Rosario">
+          <div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "Rosario"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720),(2,'López','Córdoba',680),
 (3,'Martínez','Rosario',590),(4,'Pérez','Buenos Aires',810),(5,'Fernández','Córdoba',645);
 
 -- Ciudades únicas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["SELECT DISTINCT ciudad FROM clientes;","Sin DISTINCT saldrían 5 filas (BsAs repetida)","Con DISTINCT: 3 ciudades únicas"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["SELECT DISTINCT ciudad FROM clientes;","Sin DISTINCT saldrían 5 filas (BsAs repetida)","Con DISTINCT: 3 ciudades únicas"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: COUNT(DISTINCT)</h4><p>Contá cuántas ciudades distintas hay. Debe incluir <code>3</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-5" data-expected="3"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "3"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: COUNT(DISTINCT)</h4>
+        <p>Contá cuántas ciudades distintas hay. Debe incluir <code>3</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-5" data-expected="3">
+          <div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires'),(2,'López','Córdoba'),
 (3,'Martínez','Rosario'),(4,'Pérez','Buenos Aires'),(5,'Fernández','Córdoba');
 
 -- Contar ciudades únicas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["SELECT COUNT(DISTINCT ciudad) AS total FROM clientes;","BsAs, Córdoba, Rosario = 3","COUNT(DISTINCT col) combina conteo con deduplicación"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["SELECT COUNT(DISTINCT ciudad) AS total FROM clientes;","BsAs, Córdoba, Rosario = 3","COUNT(DISTINCT col) combina conteo con deduplicación"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: ORDER BY múltiples columnas</h4><p>Ordená por ciudad ASC y dentro de cada ciudad por score DESC. Debe incluir <code>Pérez</code> primero dentro de BsAs.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-6" data-expected="Pérez"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: ORDER BY múltiples columnas</h4>
+        <p>Ordená por ciudad ASC y dentro de cada ciudad por score DESC. Debe incluir <code>Pérez</code> primero dentro
+          de BsAs.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-6" data-expected="Pérez">
+          <div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "Pérez"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720),(2,'López','Córdoba',680),
 (3,'Pérez','Buenos Aires',810),(4,'Fernández','Córdoba',645),(5,'Sosa','Buenos Aires',750);
 
 -- Orden: ciudad ASC, score DESC:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["ORDER BY ciudad ASC, score DESC","BsAs: Pérez(810), Sosa(750), García(720)","Córdoba: López(680), Fernández(645)"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["ORDER BY ciudad ASC, score DESC","BsAs: Pérez(810), Sosa(750), García(720)","Córdoba: López(680), Fernández(645)"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Top N con WHERE</h4><p>Top 3 clientes ACTIVOS por saldo descendente. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-7" data-expected="Pérez"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL, activo INTEGER);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Top N con WHERE</h4>
+        <p>Top 3 clientes ACTIVOS por saldo descendente. Debe incluir <code>Pérez</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-7" data-expected="Pérez">
+          <div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "Pérez"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García',720,150000,1),(2,'López',680,320000,1),
 (3,'Martínez',590,45000,0),(4,'Pérez',810,890000,1),(5,'Sosa',750,210000,1);
 
 -- Top 3 activos por saldo:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["WHERE activo = 1 ORDER BY saldo DESC LIMIT 3","Primero filtra (WHERE), después ordena, después limita","Pérez (890K), López (320K), Sosa (210K)"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["WHERE activo = 1 ORDER BY saldo DESC LIMIT 3","Primero filtra (WHERE), después ordena, después limita","Pérez (890K), López (320K), Sosa (210K)"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Paginación con OFFSET</h4><p>Simulá paginación: traé la "página 2" (registros 4-6) de clientes ordenados por nombre. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-8" data-expected="Pérez"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Paginación con OFFSET</h4>
+        <p>Simulá paginación: traé la "página 2" (registros 4-6) de clientes ordenados por nombre. Debe incluir
+          <code>Pérez</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-8" data-expected="Pérez">
+          <div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "Pérez"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Martínez',590),
 (4,'Pérez',810),(5,'Fernández',645),(6,'Sosa',750),(7,'Luna',700),(8,'Torres',660);
 
 -- Página 2 (items 4-6, o sea OFFSET 3, LIMIT 3):
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["ORDER BY nombre LIMIT 3 OFFSET 3","Pág 1: Fernández, García, López | Pág 2: Luna, Martínez, Pérez","OFFSET 3 salta los primeros 3 resultados"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["ORDER BY nombre LIMIT 3 OFFSET 3","Pág 1: Fernández, García, López | Pág 2: Luna, Martínez, Pérez","OFFSET 3 salta los primeros 3 resultados"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: DISTINCT con ORDER BY</h4><p>Listá los tipos únicos de transacción ordenados alfabéticamente. Debe incluir <code>compra</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-9" data-expected="compra"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "compra"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, tipo TEXT, monto REAL);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: DISTINCT con ORDER BY</h4>
+        <p>Listá los tipos únicos de transacción ordenados alfabéticamente. Debe incluir <code>compra</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-9" data-expected="compra">
+          <div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "compra"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, tipo TEXT, monto REAL);
 INSERT INTO transacciones VALUES (1,'compra',1500),(2,'venta',800),(3,'compra',3200),
 (4,'transferencia',5000),(5,'compra',950),(6,'venta',2100);
 
 -- Tipos únicos ordenados:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["SELECT DISTINCT tipo FROM transacciones ORDER BY tipo;","compra, transferencia, venta (A→Z)","DISTINCT + ORDER BY se pueden combinar"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["SELECT DISTINCT tipo FROM transacciones ORDER BY tipo;","compra, transferencia, venta (A→Z)","DISTINCT + ORDER BY se pueden combinar"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Reporte Top 5 con categoría y filtros</h4><p>Top 5 clientes activos por saldo, con columna de categoría (CASE WHEN), ordenados por saldo DESC. Mostrá también el ranking (1 a 5 usando un truco). Debe incluir <code>Premium</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-10" data-expected="Premium"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "Premium"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
+      <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Reporte Top 5 con categoría y filtros</h4>
+        <p>Top 5 clientes activos por saldo, con columna de categoría (CASE WHEN), ordenados por saldo DESC. Mostrá
+          también el ranking (1 a 5 usando un truco). Debe incluir <code>Premium</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-10" data-expected="Premium">
+          <div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "Premium"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1),(2,'López','Córdoba',680,320000,1),
 (3,'Martínez','Rosario',590,45000,0),(4,'Pérez','Buenos Aires',810,890000,1),
 (5,'Fernández','Mendoza',645,72000,1),(6,'Sosa','Buenos Aires',750,210000,1),
 (7,'Luna','Córdoba',700,180000,1),(8,'Torres','Rosario',660,95000,0);
 
 -- Top 5 activos con categoría:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["SELECT nombre, score, saldo, CASE WHEN score >= 700 THEN \\x27Premium\\x27 ELSE \\x27Estándar\\x27 END AS categoria","FROM clientes WHERE activo = 1","ORDER BY saldo DESC LIMIT 5"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["SELECT nombre, score, saldo, CASE WHEN score >= 700 THEN \\x27Premium\\x27 ELSE \\x27Estándar\\x27 END AS categoria","FROM clientes WHERE activo = 1","ORDER BY saldo DESC LIMIT 5"]'>
+        </div>
+      </div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
 
-<ul>
-  <li><code>ORDER BY col ASC|DESC</code> ordena resultados. Sin ORDER BY, el orden NO está garantizado.</li>
-  <li>Múltiples columnas en ORDER BY: <code>ORDER BY c1 ASC, c2 DESC</code> ordena primero por c1, empates por c2.</li>
-  <li><code>LIMIT n</code> devuelve máximo n filas. <code>OFFSET m</code> salta las primeras m.</li>
-  <li>Patrón Top N: <code>ORDER BY col DESC LIMIT N</code> — el reporte más usado en análisis.</li>
-  <li><code>DISTINCT</code> elimina duplicados. <code>COUNT(DISTINCT col)</code> cuenta valores únicos.</li>
-  <li>Orden de cláusulas: SELECT → FROM → WHERE → ORDER BY → LIMIT.</li>
-</ul>
+      <ul>
+        <li><code>ORDER BY col ASC|DESC</code> ordena resultados. Sin ORDER BY, el orden NO está garantizado.</li>
+        <li>Múltiples columnas en ORDER BY: <code>ORDER BY c1 ASC, c2 DESC</code> ordena primero por c1, empates por c2.
+        </li>
+        <li><code>LIMIT n</code> devuelve máximo n filas. <code>OFFSET m</code> salta las primeras m.</li>
+        <li>Patrón Top N: <code>ORDER BY col DESC LIMIT N</code> — el reporte más usado en análisis.</li>
+        <li><code>DISTINCT</code> elimina duplicados. <code>COUNT(DISTINCT col)</code> cuenta valores únicos.</li>
+        <li>Orden de cláusulas: SELECT → FROM → WHERE → ORDER BY → LIMIT.</li>
+      </ul>
 
-<p>En la siguiente lección (<strong>05 · Funciones de agregación</strong>) vas a aprender COUNT, SUM, AVG, MIN, MAX y ROUND — las herramientas para resumir datos.</p>
+      <p>En la siguiente lección (<strong>05 · Funciones de agregación</strong>) vas a aprender COUNT, SUM, AVG, MIN,
+        MAX y ROUND — las herramientas para resumir datos.</p>
 
-<div class="footer-nav">
-  <a href="/sql/03-operadores-filtros.html">← Operadores y filtros</a>
-  <a class="next" href="/sql/05-funciones-agregacion.html">Funciones de agregación →</a>
-</div>
+      <div class="footer-nav">
+        <a href="/sql/03-operadores-filtros.html">← Operadores y filtros</a>
+        <a class="next" href="/sql/05-funciones-agregacion.html">Funciones de agregación →</a>
+      </div>
 
-</main>
-</div>
+    </main>
+  </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

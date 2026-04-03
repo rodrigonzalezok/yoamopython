@@ -1,121 +1,217 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 13 · Métodos de listas</title>
-<meta name="description" content="Dominá todos los métodos de listas: sort vs sorted, comprehensions avanzadas, enumerate, zip, map y filter.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 13 · Métodos de listas</title>
+  <meta name="description"
+    content="Dominá todos los métodos de listas: sort vs sorted, comprehensions avanzadas, enumerate, zip, map y filter.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 13 de 27</span>
-  <h1>Métodos de listas</h1>
-  <p>En la lección 08 aprendiste a crear y acceder a listas. Ahora vas a dominar TODOS los métodos para modificarlas, ordenarlas, buscar en ellas y transformarlas con comprehensions avanzadas, enumerate, zip, map y filter.</p>
-  <div class="badges">
-    <span class="badge">90–110 min</span>
-    <span class="badge">Prerrequisitos: 08 Listas, 12 Métodos de strings</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 13 de 27</span>
+        <h1>Métodos de listas</h1>
+        <p>En la lección 08 aprendiste a crear y acceder a listas. Ahora vas a dominar TODOS los métodos para
+          modificarlas, ordenarlas, buscar en ellas y transformarlas con comprehensions avanzadas, enumerate, zip, map y
+          filter.</p>
+        <div class="badges">
+          <span class="badge">90–110 min</span>
+          <span class="badge">Prerrequisitos: 08 Listas, 12 Métodos de strings</span>
+        </div>
+      </div>
 
-<h3>sort() vs sorted() — la diferencia más importante</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Esta es probablemente la fuente de bugs más común con listas:</p>
+      <h3>sort() vs sorted() — la diferencia más importante</h3>
 
-<ul>
-  <li><code><b>lista.sort()</b></code> — ordena la lista <b>in-place</b> (modifica la original) y devuelve <code>None</code>. Si hacés <code>resultado = lista.sort()</code>, resultado es <code>None</code> y tu lista original cambió.</li>
-  <li><code><b>sorted(lista)</b></code> — devuelve una <b>nueva lista</b> ordenada sin modificar la original. Esto es lo que querés el 90% de las veces.</li>
-</ul>
+      <p>Esta es probablemente la fuente de bugs más común con listas:</p>
 
-<p>Ambas aceptan dos parámetros opcionales: <code>key</code> (función que transforma cada elemento para comparar) y <code>reverse=True</code> (orden descendente).</p>
+      <ul>
+        <li><code><b>lista.sort()</b></code> — ordena la lista <b>in-place</b> (modifica la original) y devuelve
+          <code>None</code>. Si hacés <code>resultado = lista.sort()</code>, resultado es <code>None</code> y tu lista
+          original cambió.</li>
+        <li><code><b>sorted(lista)</b></code> — devuelve una <b>nueva lista</b> ordenada sin modificar la original. Esto
+          es lo que querés el 90% de las veces.</li>
+      </ul>
 
-<div class="warning"><strong>Bug clásico:</strong> <code>lista_ordenada = mi_lista.sort()</code> → <code>lista_ordenada</code> es <code>None</code> y <code>mi_lista</code> ya se modificó. Si querés una copia ordenada sin tocar la original, usá <code>sorted(mi_lista)</code>.</div>
+      <p>Ambas aceptan dos parámetros opcionales: <code>key</code> (función que transforma cada elemento para comparar)
+        y <code>reverse=True</code> (orden descendente).</p>
 
-<h3>Métodos de modificación</h3>
+      <div class="warning"><strong>Bug clásico:</strong> <code>lista_ordenada = mi_lista.sort()</code> →
+        <code>lista_ordenada</code> es <code>None</code> y <code>mi_lista</code> ya se modificó. Si querés una copia
+        ordenada sin tocar la original, usá <code>sorted(mi_lista)</code>.</div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Método</th><th>Qué hace</th><th>Devuelve</th><th>Uso típico</th></tr>
-<tr><td><code>.append(x)</code></td><td>Agrega x al final</td><td><code>None</code></td><td>Acumular resultados en un loop</td></tr>
-<tr><td><code>.insert(i, x)</code></td><td>Inserta x en posición i</td><td><code>None</code></td><td>Agregar al inicio: <code>.insert(0, x)</code></td></tr>
-<tr><td><code>.extend(iterable)</code></td><td>Agrega todos los elementos del iterable</td><td><code>None</code></td><td>Merge de dos listas</td></tr>
-<tr><td><code>.remove(x)</code></td><td>Elimina primera ocurrencia de x</td><td><code>None</code></td><td>Eliminar por valor (ValueError si no existe)</td></tr>
-<tr><td><code>.pop(i)</code></td><td>Elimina y devuelve elemento en i</td><td>El elemento</td><td>Sin argumento: el último. Con índice: el específico</td></tr>
-<tr><td><code>.clear()</code></td><td>Vacía la lista</td><td><code>None</code></td><td>Resetear datos</td></tr>
-<tr><td><code>.reverse()</code></td><td>Invierte in-place</td><td><code>None</code></td><td>Invertir orden (también <code>[::-1]</code>)</td></tr>
-<tr><td><code>.sort()</code></td><td>Ordena in-place</td><td><code>None</code></td><td>Cuando no necesitás la original</td></tr>
-</table>
-</div>
+      <h3>Métodos de modificación</h3>
 
-<div class="concept"><strong>Regla mnemotécnica:</strong> los métodos que MODIFICAN la lista devuelven <code>None</code> (append, sort, reverse, remove, insert, extend, clear). Los que NO modifican devuelven un valor (index, count, copy). Esta es una decisión de diseño de Python para evitar que encadenes operaciones destructivas.</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Método</th>
+            <th>Qué hace</th>
+            <th>Devuelve</th>
+            <th>Uso típico</th>
+          </tr>
+          <tr>
+            <td><code>.append(x)</code></td>
+            <td>Agrega x al final</td>
+            <td><code>None</code></td>
+            <td>Acumular resultados en un loop</td>
+          </tr>
+          <tr>
+            <td><code>.insert(i, x)</code></td>
+            <td>Inserta x en posición i</td>
+            <td><code>None</code></td>
+            <td>Agregar al inicio: <code>.insert(0, x)</code></td>
+          </tr>
+          <tr>
+            <td><code>.extend(iterable)</code></td>
+            <td>Agrega todos los elementos del iterable</td>
+            <td><code>None</code></td>
+            <td>Merge de dos listas</td>
+          </tr>
+          <tr>
+            <td><code>.remove(x)</code></td>
+            <td>Elimina primera ocurrencia de x</td>
+            <td><code>None</code></td>
+            <td>Eliminar por valor (ValueError si no existe)</td>
+          </tr>
+          <tr>
+            <td><code>.pop(i)</code></td>
+            <td>Elimina y devuelve elemento en i</td>
+            <td>El elemento</td>
+            <td>Sin argumento: el último. Con índice: el específico</td>
+          </tr>
+          <tr>
+            <td><code>.clear()</code></td>
+            <td>Vacía la lista</td>
+            <td><code>None</code></td>
+            <td>Resetear datos</td>
+          </tr>
+          <tr>
+            <td><code>.reverse()</code></td>
+            <td>Invierte in-place</td>
+            <td><code>None</code></td>
+            <td>Invertir orden (también <code>[::-1]</code>)</td>
+          </tr>
+          <tr>
+            <td><code>.sort()</code></td>
+            <td>Ordena in-place</td>
+            <td><code>None</code></td>
+            <td>Cuando no necesitás la original</td>
+          </tr>
+        </table>
+      </div>
 
-<h3>Métodos de consulta</h3>
+      <div class="concept"><strong>Regla mnemotécnica:</strong> los métodos que MODIFICAN la lista devuelven
+        <code>None</code> (append, sort, reverse, remove, insert, extend, clear). Los que NO modifican devuelven un
+        valor (index, count, copy). Esta es una decisión de diseño de Python para evitar que encadenes operaciones
+        destructivas.</div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Método</th><th>Qué hace</th><th>Devuelve</th></tr>
-<tr><td><code>.index(x)</code></td><td>Posición de la primera ocurrencia</td><td><code>int</code> (ValueError si no existe)</td></tr>
-<tr><td><code>.count(x)</code></td><td>Cuántas veces aparece x</td><td><code>int</code></td></tr>
-<tr><td><code>.copy()</code></td><td>Copia superficial (shallow copy)</td><td>Nueva lista</td></tr>
-</table>
-</div>
+      <h3>Métodos de consulta</h3>
 
-<h3>Copia superficial vs profunda</h3>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Método</th>
+            <th>Qué hace</th>
+            <th>Devuelve</th>
+          </tr>
+          <tr>
+            <td><code>.index(x)</code></td>
+            <td>Posición de la primera ocurrencia</td>
+            <td><code>int</code> (ValueError si no existe)</td>
+          </tr>
+          <tr>
+            <td><code>.count(x)</code></td>
+            <td>Cuántas veces aparece x</td>
+            <td><code>int</code></td>
+          </tr>
+          <tr>
+            <td><code>.copy()</code></td>
+            <td>Copia superficial (shallow copy)</td>
+            <td>Nueva lista</td>
+          </tr>
+        </table>
+      </div>
 
-<p>Cuando hacés <code>b = a</code> con listas, <code>b</code> no es una copia — es una <b>referencia</b> a la misma lista. Si modificás <code>b</code>, <code>a</code> también cambia. Para una copia independiente necesitás <code>.copy()</code> o <code>list(a)</code>.</p>
+      <h3>Copia superficial vs profunda</h3>
 
-<p>Pero cuidado: <code>.copy()</code> es <b>superficial</b> (shallow). Si la lista contiene listas anidadas, los elementos internos siguen siendo referencias. Para una copia 100% independiente de estructuras anidadas, necesitás <code>import copy; copy.deepcopy(a)</code>.</p>
+      <p>Cuando hacés <code>b = a</code> con listas, <code>b</code> no es una copia — es una <b>referencia</b> a la
+        misma lista. Si modificás <code>b</code>, <code>a</code> también cambia. Para una copia independiente necesitás
+        <code>.copy()</code> o <code>list(a)</code>.</p>
 
-<h3>Herramientas funcionales: enumerate, zip, map, filter</h3>
+      <p>Pero cuidado: <code>.copy()</code> es <b>superficial</b> (shallow). Si la lista contiene listas anidadas, los
+        elementos internos siguen siendo referencias. Para una copia 100% independiente de estructuras anidadas,
+        necesitás <code>import copy; copy.deepcopy(a)</code>.</p>
 
-<p>Python tiene funciones incorporadas que se combinan con listas para patrones muy potentes:</p>
+      <h3>Herramientas funcionales: enumerate, zip, map, filter</h3>
 
-<ul>
-  <li><code><b>enumerate(lista, start=0)</b></code> — devuelve pares (índice, elemento). Reemplaza el anti-patrón <code>for i in range(len(lista))</code>.</li>
-  <li><code><b>zip(lista1, lista2)</b></code> — recorre dos listas en paralelo. Esencial para combinar datos relacionados.</li>
-  <li><code><b>map(función, lista)</b></code> — aplica una función a cada elemento. Similar a comprehension pero funcional.</li>
-  <li><code><b>filter(función, lista)</b></code> — filtra elementos que cumplen una condición.</li>
-</ul>
+      <p>Python tiene funciones incorporadas que se combinan con listas para patrones muy potentes:</p>
 
-<div class="tip"><strong>Tip profesional:</strong> <code>enumerate()</code> es la forma pythónica de obtener índice + valor. NUNCA escribas <code>for i in range(len(lista)): elemento = lista[i]</code>. Escribí <code>for i, elemento in enumerate(lista):</code>. Es más legible, más seguro y más rápido.</div>
+      <ul>
+        <li><code><b>enumerate(lista, start=0)</b></code> — devuelve pares (índice, elemento). Reemplaza el anti-patrón
+          <code>for i in range(len(lista))</code>.</li>
+        <li><code><b>zip(lista1, lista2)</b></code> — recorre dos listas en paralelo. Esencial para combinar datos
+          relacionados.</li>
+        <li><code><b>map(función, lista)</b></code> — aplica una función a cada elemento. Similar a comprehension pero
+          funcional.</li>
+        <li><code><b>filter(función, lista)</b></code> — filtra elementos que cumplen una condición.</li>
+      </ul>
 
-<h3>List comprehensions avanzadas</h3>
+      <div class="tip"><strong>Tip profesional:</strong> <code>enumerate()</code> es la forma pythónica de obtener
+        índice + valor. NUNCA escribas <code>for i in range(len(lista)): elemento = lista[i]</code>. Escribí
+        <code>for i, elemento in enumerate(lista):</code>. Es más legible, más seguro y más rápido.</div>
 
-<p>En la lección 08 viste el básico: <code>[expr for x in lista if cond]</code>. Ahora vamos más allá:</p>
+      <h3>List comprehensions avanzadas</h3>
 
-<ul>
-  <li><b>Comprehension anidada:</b> <code>[x for sublista in lista for x in sublista]</code> — "aplanar" listas de listas</li>
-  <li><b>Con if/else:</b> <code>[expr_true if cond else expr_false for x in lista]</code> — transformar cada elemento condicionalmente</li>
-  <li><b>Múltiples condiciones:</b> <code>[x for x in lista if cond1 and cond2]</code></li>
-</ul>
+      <p>En la lección 08 viste el básico: <code>[expr for x in lista if cond]</code>. Ahora vamos más allá:</p>
 
-<div class="realworld"><strong>En pandas:</strong> <code>df.apply(lambda x: ...)</code> es la versión DataFrame de <code>map()</code>. <code>df[df["col"] > 100]</code> es la versión de <code>filter()</code>. <code>df.reset_index()</code> te da algo similar a <code>enumerate()</code>. Todo lo que aprendés acá se traslada directamente.</div>
+      <ul>
+        <li><b>Comprehension anidada:</b> <code>[x for sublista in lista for x in sublista]</code> — "aplanar" listas de
+          listas</li>
+        <li><b>Con if/else:</b> <code>[expr_true if cond else expr_false for x in lista]</code> — transformar cada
+          elemento condicionalmente</li>
+        <li><b>Múltiples condiciones:</b> <code>[x for x in lista if cond1 and cond2]</code></li>
+      </ul>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="realworld"><strong>En pandas:</strong> <code>df.apply(lambda x: ...)</code> es la versión DataFrame de
+        <code>map()</code>. <code>df[df["col"] > 100]</code> es la versión de <code>filter()</code>.
+        <code>df.reset_index()</code> te da algo similar a <code>enumerate()</code>. Todo lo que aprendés acá se
+        traslada directamente.</div>
 
-<h3>Ejemplo 1: sort() vs sorted() en acción</h3>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_sort.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">scores = [720, 590, 810, 645, 680, 750, 520]
+      <h3>Ejemplo 1: sort() vs sorted() en acción</h3>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_sort.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">scores = [720, 590, 810, 645, 680, 750, 520]
 print(f"Original: {scores}")
 
 # sorted() — devuelve NUEVA lista, no toca la original
@@ -138,16 +234,19 @@ print(f"\nPor largo: {por_largo}")
 # Ordenar lista de tuplas por segundo elemento
 clientes = [("García", 720), ("López", 680), ("Pérez", 810), ("Sosa", 590)]
 por_score = sorted(clientes, key=lambda c: c[1], reverse=True)
-print(f"Por score desc: {por_score}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Por score desc: {por_score}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: append, extend, insert — construir listas dinámicamente</h3>
+      <h3>Ejemplo 2: append, extend, insert — construir listas dinámicamente</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_construir.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Construir una lista de resultados procesando datos
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_construir.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Construir una lista de resultados procesando datos
 montos_crudos = ["$1,500", "N/A", "$3,200", "", "$820", "error", "$4,100"]
 
 validos = []
@@ -179,16 +278,19 @@ print(f"\nExtend: {lote_1}")
 # Diferencia con append:
 lote_3 = [100, 200]
 lote_3.append([300, 400])  # agrega la LISTA como un solo elemento
-print(f"Append lista: {lote_3}")  # [100, 200, [300, 400]] ← ojo!</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Append lista: {lote_3}")  # [100, 200, [300, 400]] ← ojo!</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: enumerate y zip — los aliados del for</h3>
+      <h3>Ejemplo 3: enumerate y zip — los aliados del for</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_enumerate_zip.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># enumerate: índice + valor sin range(len())
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_enumerate_zip.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># enumerate: índice + valor sin range(len())
 clientes = ["García", "López", "Martínez", "Pérez"]
 scores = [720, 680, 590, 810]
 
@@ -216,16 +318,19 @@ print(f"\nZip desigual: {list(zip(corta, larga))}")  # solo 2 pares
 
 # dict desde zip (patrón muy común)
 scoring = dict(zip(clientes, scores))
-print(f"Dict: {scoring}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Dict: {scoring}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: map() y filter() — programación funcional</h3>
+      <h3>Ejemplo 4: map() y filter() — programación funcional</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_map_filter.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">precios = [1200, 3500, 800, 15000, 4200, 950, 22000]
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_map_filter.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">precios = [1200, 3500, 800, 15000, 4200, 950, 22000]
 
 # map: aplicar función a cada elemento
 con_iva = list(map(lambda p: round(p * 1.21), precios))
@@ -255,16 +360,19 @@ nombres = ["  garcía  ", "LÓPEZ", "  martínez  "]
 limpios = list(map(str.strip, nombres))
 titulados = list(map(str.title, limpios))
 print(f"\nLimpios: {limpios}")
-print(f"Titulados: {titulados}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Titulados: {titulados}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Comprehensions avanzadas</h3>
+      <h3>Ejemplo 5: Comprehensions avanzadas</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_comp_avanzada.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Comprehension con if/else (transformar condicionalmente)
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_comp_avanzada.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Comprehension con if/else (transformar condicionalmente)
 scores = [720, 590, 810, 645, 680, 520, 750]
 categorias = ["Alto" if s >= 700 else "Medio" if s >= 600 else "Bajo" for s in scores]
 print(f"Categorías: {categorias}")
@@ -292,188 +400,310 @@ for r in resumen:
 
 # Crear diccionarios con comprehension desde lista de tuplas
 scoring = {nombre: score for nombre, score, _ in datos if score >= 700}
-print(f"\nPremium: {scoring}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nPremium: {scoring}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Método/Función</th><th>Modifica original?</th><th>Devuelve</th><th>Cuándo usar</th></tr>
-<tr><td><code>.sort()</code></td><td>Sí</td><td><code>None</code></td><td>No necesitás la original</td></tr>
-<tr><td><code>sorted()</code></td><td>No</td><td>Nueva lista</td><td>Necesitás mantener original (90% de los casos)</td></tr>
-<tr><td><code>.append(x)</code></td><td>Sí</td><td><code>None</code></td><td>Agregar un elemento al final</td></tr>
-<tr><td><code>.extend(iter)</code></td><td>Sí</td><td><code>None</code></td><td>Agregar TODOS los elementos de otro iterable</td></tr>
-<tr><td><code>.insert(i, x)</code></td><td>Sí</td><td><code>None</code></td><td>Agregar en posición específica</td></tr>
-<tr><td><code>.pop(i)</code></td><td>Sí</td><td>Elemento</td><td>Eliminar y usar el valor</td></tr>
-<tr><td><code>.remove(x)</code></td><td>Sí</td><td><code>None</code></td><td>Eliminar por valor (error si no existe)</td></tr>
-<tr><td><code>enumerate()</code></td><td>—</td><td>Iterador</td><td>Obtener índice + valor</td></tr>
-<tr><td><code>zip()</code></td><td>—</td><td>Iterador</td><td>Recorrer listas en paralelo</td></tr>
-<tr><td><code>map(f, lista)</code></td><td>—</td><td>Iterador</td><td>Aplicar función a cada elem</td></tr>
-<tr><td><code>filter(f, lista)</code></td><td>—</td><td>Iterador</td><td>Filtrar por condición</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Método/Función</th>
+            <th>Modifica original?</th>
+            <th>Devuelve</th>
+            <th>Cuándo usar</th>
+          </tr>
+          <tr>
+            <td><code>.sort()</code></td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+            <td>No necesitás la original</td>
+          </tr>
+          <tr>
+            <td><code>sorted()</code></td>
+            <td>No</td>
+            <td>Nueva lista</td>
+            <td>Necesitás mantener original (90% de los casos)</td>
+          </tr>
+          <tr>
+            <td><code>.append(x)</code></td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+            <td>Agregar un elemento al final</td>
+          </tr>
+          <tr>
+            <td><code>.extend(iter)</code></td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+            <td>Agregar TODOS los elementos de otro iterable</td>
+          </tr>
+          <tr>
+            <td><code>.insert(i, x)</code></td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+            <td>Agregar en posición específica</td>
+          </tr>
+          <tr>
+            <td><code>.pop(i)</code></td>
+            <td>Sí</td>
+            <td>Elemento</td>
+            <td>Eliminar y usar el valor</td>
+          </tr>
+          <tr>
+            <td><code>.remove(x)</code></td>
+            <td>Sí</td>
+            <td><code>None</code></td>
+            <td>Eliminar por valor (error si no existe)</td>
+          </tr>
+          <tr>
+            <td><code>enumerate()</code></td>
+            <td>—</td>
+            <td>Iterador</td>
+            <td>Obtener índice + valor</td>
+          </tr>
+          <tr>
+            <td><code>zip()</code></td>
+            <td>—</td>
+            <td>Iterador</td>
+            <td>Recorrer listas en paralelo</td>
+          </tr>
+          <tr>
+            <td><code>map(f, lista)</code></td>
+            <td>—</td>
+            <td>Iterador</td>
+            <td>Aplicar función a cada elem</td>
+          </tr>
+          <tr>
+            <td><code>filter(f, lista)</code></td>
+            <td>—</td>
+            <td>Iterador</td>
+            <td>Filtrar por condición</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: sorted() con reverse</h4>
-  <p>Dada <code>ventas = [45000, 72000, 38000, 91000, 55000]</code>, imprimí la lista ordenada de mayor a menor SIN modificar la original. Debe incluir <code>[91000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-1" data-expected="[91000">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "[91000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">ventas = [45000, 72000, 38000, 91000, 55000]
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: sorted() con reverse</h4>
+        <p>Dada <code>ventas = [45000, 72000, 38000, 91000, 55000]</code>, imprimí la lista ordenada de mayor a menor
+          SIN modificar la original. Debe incluir <code>[91000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-1" data-expected="[91000">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "[91000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">ventas = [45000, 72000, 38000, 91000, 55000]
 
 # Ordená descendente sin modificar la original:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["desc = sorted(ventas, reverse=True)","print(desc)","Verificá que ventas siga igual: print(ventas)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["desc = sorted(ventas, reverse=True)","print(desc)","Verificá que ventas siga igual: print(ventas)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: append para acumular</h4>
-  <p>Empezá con <code>pares = []</code>. Recorré los números del 1 al 20 y agregá con <code>.append()</code> solo los pares. Imprimí la lista. Debe incluir <code>20</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-2" data-expected="20">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "20"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">pares = []
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: append para acumular</h4>
+        <p>Empezá con <code>pares = []</code>. Recorré los números del 1 al 20 y agregá con <code>.append()</code> solo
+          los pares. Imprimí la lista. Debe incluir <code>20</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-2" data-expected="20">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "20"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">pares = []
 
 # Recorré 1 a 20 y appendeá los pares:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["for n in range(1, 21):","    if n % 2 == 0: pares.append(n)","print(pares) → [2, 4, 6, ..., 20]"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["for n in range(1, 21):","    if n % 2 == 0: pares.append(n)","print(pares) → [2, 4, 6, ..., 20]"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: enumerate para numeración</h4>
-  <p>Dada <code>productos = ["Notebook", "Mouse", "Teclado", "Monitor"]</code>, imprimilos numerados empezando en 1 usando <code>enumerate</code>. Debe incluir <code>3. Teclado</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-3" data-expected="3. Teclado">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "3. Teclado"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">productos = ["Notebook", "Mouse", "Teclado", "Monitor"]
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: enumerate para numeración</h4>
+        <p>Dada <code>productos = ["Notebook", "Mouse", "Teclado", "Monitor"]</code>, imprimilos numerados empezando en
+          1 usando <code>enumerate</code>. Debe incluir <code>3. Teclado</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-3" data-expected="3. Teclado">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "3. Teclado"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">productos = ["Notebook", "Mouse", "Teclado", "Monitor"]
 
 # Enumerá desde 1:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["for i, prod in enumerate(productos, start=1):","    print(f\"{i}. {prod}\")","enumerate(lista, start=1) arranca en 1"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["for i, prod in enumerate(productos, start=1):","    print(f\"{i}. {prod}\")","enumerate(lista, start=1) arranca en 1"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: zip para combinar datos</h4>
-  <p>Tenés <code>nombres = ["García","López","Pérez"]</code> y <code>saldos = [150000, 320000, 890000]</code>. Creeá un diccionario con <code>dict(zip(...))</code> e imprimilo. Debe incluir <code>320000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-4" data-expected="320000">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "320000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">nombres = ["García", "López", "Pérez"]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: zip para combinar datos</h4>
+        <p>Tenés <code>nombres = ["García","López","Pérez"]</code> y <code>saldos = [150000, 320000, 890000]</code>.
+          Creeá un diccionario con <code>dict(zip(...))</code> e imprimilo. Debe incluir <code>320000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-4" data-expected="320000">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "320000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">nombres = ["García", "López", "Pérez"]
 saldos = [150000, 320000, 890000]
 
 # Creá dict con zip:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["cartera = dict(zip(nombres, saldos))","print(cartera)","Da: {\"García\": 150000, \"López\": 320000, \"Pérez\": 890000}"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["cartera = dict(zip(nombres, saldos))","print(cartera)","Da: {\"García\": 150000, \"López\": 320000, \"Pérez\": 890000}"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Comprehension con if/else</h4>
-  <p>Dada <code>scores = [720, 590, 810, 645, 520, 750]</code>, creá una lista que tenga <code>"Alto"</code> si >= 700, <code>"Medio"</code> si >= 600, <code>"Bajo"</code> si no. Debe incluir <code>Bajo</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-5" data-expected="Bajo">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Bajo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">scores = [720, 590, 810, 645, 520, 750]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Comprehension con if/else</h4>
+        <p>Dada <code>scores = [720, 590, 810, 645, 520, 750]</code>, creá una lista que tenga <code>"Alto"</code> si >=
+          700, <code>"Medio"</code> si >= 600, <code>"Bajo"</code> si no. Debe incluir <code>Bajo</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-5" data-expected="Bajo">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Bajo"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">scores = [720, 590, 810, 645, 520, 750]
 
 # Comprehension con if/else:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["[\"Alto\" if s>=700 else \"Medio\" if s>=600 else \"Bajo\" for s in scores]","520 es < 600 → Bajo","print(categorias)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["[\"Alto\" if s>=700 else \"Medio\" if s>=600 else \"Bajo\" for s in scores]","520 es < 600 → Bajo","print(categorias)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: sorted con key lambda</h4>
-  <p>Dada <code>clientes = [("García",720), ("López",680), ("Pérez",810), ("Sosa",590)]</code>, ordenalos por score (segundo elemento) de mayor a menor. Imprimí el top 1. Debe incluir <code>Pérez</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-6" data-expected="Pérez">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Pérez"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = [("García", 720), ("López", 680), ("Pérez", 810), ("Sosa", 590)]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: sorted con key lambda</h4>
+        <p>Dada <code>clientes = [("García",720), ("López",680), ("Pérez",810), ("Sosa",590)]</code>, ordenalos por
+          score (segundo elemento) de mayor a menor. Imprimí el top 1. Debe incluir <code>Pérez</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-6" data-expected="Pérez">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Pérez"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">clientes = [("García", 720), ("López", 680), ("Pérez", 810), ("Sosa", 590)]
 
 # Ordená por score descendente:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["sorted(clientes, key=lambda c: c[1], reverse=True)","El primero es (\"Pérez\", 810)","print(f\"Top: {ordenados[0][0]}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["sorted(clientes, key=lambda c: c[1], reverse=True)","El primero es (\"Pérez\", 810)","print(f\"Top: {ordenados[0][0]}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Aplanar lista de listas</h4>
-  <p>Dada <code>cuentas = [[150000, 5000], [320000], [45000, 890000, 72000]]</code>, aplaná en una sola lista y calculá el total. Debe incluir <code>1482000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-7" data-expected="1482000">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "1482000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">cuentas = [[150000, 5000], [320000], [45000, 890000, 72000]]
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Aplanar lista de listas</h4>
+        <p>Dada <code>cuentas = [[150000, 5000], [320000], [45000, 890000, 72000]]</code>, aplaná en una sola lista y
+          calculá el total. Debe incluir <code>1482000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-7" data-expected="1482000">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "1482000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">cuentas = [[150000, 5000], [320000], [45000, 890000, 72000]]
 
 # Aplana y sumá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["plana = [s for subcuenta in cuentas for s in subcuenta]","print(sum(plana))","150000+5000+320000+45000+890000+72000 = 1482000"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["plana = [s for subcuenta in cuentas for s in subcuenta]","print(sum(plana))","150000+5000+320000+45000+890000+72000 = 1482000"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Pipeline con map y filter</h4>
-  <p>Dada <code>montos_str = ["$1,500", "$800", "$3,200", "$12,000", "$950"]</code>: (1) limpiá símbolos con map, (2) convertí a float, (3) filtrá > 1000. Imprimí la suma de los filtrados. Debe incluir <code>16700</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-8" data-expected="16700">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "16700"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">montos_str = ["$1,500", "$800", "$3,200", "$12,000", "$950"]
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Pipeline con map y filter</h4>
+        <p>Dada <code>montos_str = ["$1,500", "$800", "$3,200", "$12,000", "$950"]</code>: (1) limpiá símbolos con map,
+          (2) convertí a float, (3) filtrá > 1000. Imprimí la suma de los filtrados. Debe incluir <code>16700</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-8" data-expected="16700">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "16700"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">montos_str = ["$1,500", "$800", "$3,200", "$12,000", "$950"]
 
 # Limpiá, convertí, filtrá y sumá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["nums = [float(m.replace(\"$\",\"\").replace(\",\",\"\")) for m in montos_str]","grandes = [n for n in nums if n > 1000]","1500+3200+12000 = 16700"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["nums = [float(m.replace(\"$\",\"\").replace(\",\",\"\")) for m in montos_str]","grandes = [n for n in nums if n > 1000]","1500+3200+12000 = 16700"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Reporte con enumerate + zip + f-strings</h4>
-  <p>Combina <code>clientes = ["García","López","Pérez"]</code>, <code>scores = [720,680,810]</code> y <code>saldos = [150000,320000,890000]</code> en un reporte numerado con emojis (🟢 score>=700, 🔴 si no). Debe incluir <code>Total:</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-9" data-expected="Total:">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Total:"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">clientes = ["García", "López", "Pérez"]
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Reporte con enumerate + zip + f-strings</h4>
+        <p>Combina <code>clientes = ["García","López","Pérez"]</code>, <code>scores = [720,680,810]</code> y
+          <code>saldos = [150000,320000,890000]</code> en un reporte numerado con emojis (🟢 score>=700, 🔴 si no). Debe
+          incluir <code>Total:</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-9" data-expected="Total:">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Total:"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">clientes = ["García", "López", "Pérez"]
 scores = [720, 680, 810]
 saldos = [150000, 320000, 890000]
 
 # Reporte con enumerate + zip:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["for i, (n, s, sal) in enumerate(zip(clientes, scores, saldos), 1):","emoji = \"🟢\" if s >= 700 else \"🔴\"","Al final: print(f\"Total: ${sum(saldos):,}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["for i, (n, s, sal) in enumerate(zip(clientes, scores, saldos), 1):","emoji = \"🟢\" if s >= 700 else \"🔴\"","Al final: print(f\"Total: ${sum(saldos):,}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Procesamiento completo de datos crudos</h4>
-  <p>Tenés datos crudos de un CSV: <code>registros = ["García|720|$150,000", "López|680|$320,000", "Martínez|590|$45,000", "Pérez|810|$890,000"]</code>. Procesá cada uno: (1) split, (2) convertir tipos, (3) crear lista de tuplas (nombre, score_int, saldo_float), (4) ordená por saldo descendente, (5) imprimí top 3 con formato. Debe incluir <code>Top 3</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-10" data-expected="Top 3">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Top 3"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">registros = [
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Procesamiento completo de datos crudos</h4>
+        <p>Tenés datos crudos de un CSV:
+          <code>registros = ["García|720|$150,000", "López|680|$320,000", "Martínez|590|$45,000", "Pérez|810|$890,000"]</code>.
+          Procesá cada uno: (1) split, (2) convertir tipos, (3) crear lista de tuplas (nombre, score_int, saldo_float),
+          (4) ordená por saldo descendente, (5) imprimí top 3 con formato. Debe incluir <code>Top 3</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-10" data-expected="Top 3">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Top 3"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">registros = [
     "García|720|$150,000",
     "López|680|$320,000",
     "Martínez|590|$45,000",
@@ -482,45 +712,59 @@ saldos = [150000, 320000, 890000]
 
 # Procesá, ordená e imprimí:
 print("=== Top 3 por saldo ===")
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["Para cada r: campos = r.split(\"|\")","nombre, score, saldo = campos[0], int(campos[1]), float(campos[2].replace(\"$\",\"\").replace(\",\",\"\"))","sorted(datos, key=lambda x: x[2], reverse=True)[:3]"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li><code>.sort()</code> modifica in-place y devuelve <code>None</code>. <code>sorted()</code> devuelve nueva
+          lista sin modificar.</li>
+        <li><code>.append()</code> agrega uno, <code>.extend()</code> agrega muchos, <code>.insert(i, x)</code> en
+          posición específica.</li>
+        <li><code>enumerate()</code> reemplaza <code>range(len())</code>. <code>zip()</code> combina listas en paralelo.
+        </li>
+        <li><code>map()</code> transforma, <code>filter()</code> filtra — pero las comprehensions son más pythónicas.
+        </li>
+        <li>Comprehensions avanzadas: <code>[expr if cond else expr for x in lista]</code> y
+          <code>[x for sub in lista for x in sub]</code>.</li>
+        <li>Cuidado con las referencias: <code>b = a</code> NO copia la lista. Usá <code>.copy()</code>.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>14 · Métodos de diccionarios</strong>) vas a profundizar en los métodos de
+        diccionarios: .setdefault(), .update() avanzado, defaultdict, Counter y patrones profesionales.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists"
+          target="_blank">Python docs — Lists</a> · <a href="https://docs.python.org/3/library/functions.html#enumerate"
+          target="_blank">enumerate</a> · <a href="https://docs.python.org/3/library/functions.html#zip"
+          target="_blank">zip</a></p>
+
+      <div class="footer-nav">
+        <a href="/python/12-metodos-strings.html">← Métodos de strings</a>
+        <a class="next" href="/python/14-metodos-diccionarios.html">Métodos de diccionarios →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["Para cada r: campos = r.split(\"|\")","nombre, score, saldo = campos[0], int(campos[1]), float(campos[2].replace(\"$\",\"\").replace(\",\",\"\"))","sorted(datos, key=lambda x: x[2], reverse=True)[:3]"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li><code>.sort()</code> modifica in-place y devuelve <code>None</code>. <code>sorted()</code> devuelve nueva lista sin modificar.</li>
-  <li><code>.append()</code> agrega uno, <code>.extend()</code> agrega muchos, <code>.insert(i, x)</code> en posición específica.</li>
-  <li><code>enumerate()</code> reemplaza <code>range(len())</code>. <code>zip()</code> combina listas en paralelo.</li>
-  <li><code>map()</code> transforma, <code>filter()</code> filtra — pero las comprehensions son más pythónicas.</li>
-  <li>Comprehensions avanzadas: <code>[expr if cond else expr for x in lista]</code> y <code>[x for sub in lista for x in sub]</code>.</li>
-  <li>Cuidado con las referencias: <code>b = a</code> NO copia la lista. Usá <code>.copy()</code>.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>14 · Métodos de diccionarios</strong>) vas a profundizar en los métodos de diccionarios: .setdefault(), .update() avanzado, defaultdict, Counter y patrones profesionales.</p>
-
-<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists" target="_blank">Python docs — Lists</a> · <a href="https://docs.python.org/3/library/functions.html#enumerate" target="_blank">enumerate</a> · <a href="https://docs.python.org/3/library/functions.html#zip" target="_blank">zip</a></p>
-
-<div class="footer-nav">
-  <a href="/python/12-metodos-strings.html">← Métodos de strings</a>
-  <a class="next" href="/python/14-metodos-diccionarios.html">Métodos de diccionarios →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

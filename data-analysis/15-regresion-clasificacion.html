@@ -1,103 +1,184 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 15 · Regresión y Clasificación</title>
-<meta name="description" content="Implementá regresión lineal, regresión logística, árboles de decisión y KNN. Aprendé cuándo usar cada algoritmo y cómo interpretar sus resultados.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 15 · Regresión y Clasificación</title>
+  <meta name="description"
+    content="Implementá regresión lineal, regresión logística, árboles de decisión y KNN. Aprendé cuándo usar cada algoritmo y cómo interpretar sus resultados.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 15 de 19</span>
-  <h1>Regresión y Clasificación</h1>
-  <p>En la lección anterior vimos el panorama general de Machine Learning. Ahora vamos a profundizar en los <strong>4 algoritmos más usados</strong> en la industria: regresión lineal, regresión logística, árboles de decisión y K-Nearest Neighbors. Para cada uno vas a entender cómo funciona, cuándo usarlo, y cómo interpretar sus resultados.</p>
-  <div class="badges">
-    <span class="badge">120–150 min</span>
-    <span class="badge">Prerrequisitos: Lección 14 (Intro ML)</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 15 de 19</span>
+        <h1>Regresión y Clasificación</h1>
+        <p>En la lección anterior vimos el panorama general de Machine Learning. Ahora vamos a profundizar en los
+          <strong>4 algoritmos más usados</strong> en la industria: regresión lineal, regresión logística, árboles de
+          decisión y K-Nearest Neighbors. Para cada uno vas a entender cómo funciona, cuándo usarlo, y cómo interpretar
+          sus resultados.</p>
+        <div class="badges">
+          <span class="badge">120–150 min</span>
+          <span class="badge">Prerrequisitos: Lección 14 (Intro ML)</span>
+        </div>
+      </div>
 
-<h3>Los 4 algoritmos esenciales</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Algoritmo</th><th>Tipo</th><th>Target</th><th>Idea central</th><th>Ejemplo de uso</th></tr>
-<tr><td><strong>Regresión Lineal</strong></td><td>Regresión</td><td>Número continuo</td><td>Encontrar la recta que mejor ajusta los datos</td><td>Predecir precio de inmueble</td></tr>
-<tr><td><strong>Regresión Logística</strong></td><td>Clasificación</td><td>Categoría binaria (0/1)</td><td>Calcular probabilidad de pertenecer a una clase</td><td>Predecir si un cliente cancela</td></tr>
-<tr><td><strong>Árbol de Decisión</strong></td><td>Ambos</td><td>Número o categoría</td><td>Crear reglas tipo "si X > 5 → clase A"</td><td>Aprobar créditos</td></tr>
-<tr><td><strong>K-Nearest Neighbors</strong></td><td>Ambos</td><td>Número o categoría</td><td>Clasificar según los K vecinos más cercanos</td><td>Recomendar productos</td></tr>
-</table>
-</div>
+      <h3>Los 4 algoritmos esenciales</h3>
 
-<h3>Regresión Lineal: la recta que predice</h3>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Algoritmo</th>
+            <th>Tipo</th>
+            <th>Target</th>
+            <th>Idea central</th>
+            <th>Ejemplo de uso</th>
+          </tr>
+          <tr>
+            <td><strong>Regresión Lineal</strong></td>
+            <td>Regresión</td>
+            <td>Número continuo</td>
+            <td>Encontrar la recta que mejor ajusta los datos</td>
+            <td>Predecir precio de inmueble</td>
+          </tr>
+          <tr>
+            <td><strong>Regresión Logística</strong></td>
+            <td>Clasificación</td>
+            <td>Categoría binaria (0/1)</td>
+            <td>Calcular probabilidad de pertenecer a una clase</td>
+            <td>Predecir si un cliente cancela</td>
+          </tr>
+          <tr>
+            <td><strong>Árbol de Decisión</strong></td>
+            <td>Ambos</td>
+            <td>Número o categoría</td>
+            <td>Crear reglas tipo "si X > 5 → clase A"</td>
+            <td>Aprobar créditos</td>
+          </tr>
+          <tr>
+            <td><strong>K-Nearest Neighbors</strong></td>
+            <td>Ambos</td>
+            <td>Número o categoría</td>
+            <td>Clasificar según los K vecinos más cercanos</td>
+            <td>Recomendar productos</td>
+          </tr>
+        </table>
+      </div>
 
-<p>La regresión lineal busca la línea recta <code>y = mx + b</code> que minimiza la distancia entre la línea y los puntos reales. Es el modelo más simple pero tremendamente útil.</p>
+      <h3>Regresión Lineal: la recta que predice</h3>
 
-<ul>
-  <li><strong>m (coeficiente/pendiente):</strong> cuánto cambia y por cada unidad de x. Ej: "por cada año de antigüedad, el ingreso sube $35K".</li>
-  <li><strong>b (intercepto):</strong> el valor base cuando x = 0.</li>
-  <li><strong>R² (coeficiente de determinación):</strong> va de 0 a 1. Indica qué porcentaje de la variabilidad de y es explicado por x. R² = 0.85 → el modelo explica el 85% de la variación.</li>
-</ul>
+      <p>La regresión lineal busca la línea recta <code>y = mx + b</code> que minimiza la distancia entre la línea y los
+        puntos reales. Es el modelo más simple pero tremendamente útil.</p>
 
-<div class="analogy"><strong>Analogía:</strong> imaginate un gráfico con puntos (antigüedad vs ingreso). La regresión lineal es como poner una regla transparente sobre los puntos y rotarla hasta que quede lo más cerca posible de todos. La pendiente de esa regla te dice "por cada año más de antigüedad, ganás ~$35K más".</div>
+      <ul>
+        <li><strong>m (coeficiente/pendiente):</strong> cuánto cambia y por cada unidad de x. Ej: "por cada año de
+          antigüedad, el ingreso sube $35K".</li>
+        <li><strong>b (intercepto):</strong> el valor base cuando x = 0.</li>
+        <li><strong>R² (coeficiente de determinación):</strong> va de 0 a 1. Indica qué porcentaje de la variabilidad de
+          y es explicado por x. R² = 0.85 → el modelo explica el 85% de la variación.</li>
+      </ul>
 
-<h3>Métricas de regresión</h3>
+      <div class="analogy"><strong>Analogía:</strong> imaginate un gráfico con puntos (antigüedad vs ingreso). La
+        regresión lineal es como poner una regla transparente sobre los puntos y rotarla hasta que quede lo más cerca
+        posible de todos. La pendiente de esa regla te dice "por cada año más de antigüedad, ganás ~$35K más".</div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Métrica</th><th>Fórmula intuitiva</th><th>Interpretación</th></tr>
-<tr><td><strong>MAE</strong></td><td>Promedio de |error|</td><td>"Me equivoco en promedio $X"</td></tr>
-<tr><td><strong>MSE</strong></td><td>Promedio de error²</td><td>Penaliza más los errores grandes</td></tr>
-<tr><td><strong>RMSE</strong></td><td>√MSE</td><td>Error en las mismas unidades que y</td></tr>
-<tr><td><strong>R²</strong></td><td>1 − (error modelo / error base)</td><td>% de variabilidad explicada (0 a 1)</td></tr>
-</table>
-</div>
+      <h3>Métricas de regresión</h3>
 
-<h3>Regresión Logística: probabilidad de evento</h3>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Métrica</th>
+            <th>Fórmula intuitiva</th>
+            <th>Interpretación</th>
+          </tr>
+          <tr>
+            <td><strong>MAE</strong></td>
+            <td>Promedio de |error|</td>
+            <td>"Me equivoco en promedio $X"</td>
+          </tr>
+          <tr>
+            <td><strong>MSE</strong></td>
+            <td>Promedio de error²</td>
+            <td>Penaliza más los errores grandes</td>
+          </tr>
+          <tr>
+            <td><strong>RMSE</strong></td>
+            <td>√MSE</td>
+            <td>Error en las mismas unidades que y</td>
+          </tr>
+          <tr>
+            <td><strong>R²</strong></td>
+            <td>1 − (error modelo / error base)</td>
+            <td>% de variabilidad explicada (0 a 1)</td>
+          </tr>
+        </table>
+      </div>
 
-<p>A pesar de su nombre, la regresión logística es un modelo de <strong>clasificación</strong>. Calcula la <strong>probabilidad</strong> de que un evento ocurra (ej: P(cancela) = 0.78) y clasifica según un umbral (si P > 0.5 → "cancela").</p>
+      <h3>Regresión Logística: probabilidad de evento</h3>
 
-<div class="concept"><strong>¿Por qué se llama "regresión" si es clasificación?</strong> Porque internamente calcula un número continuo (la probabilidad) usando una función sigmoide. Luego la convierte en categoría con un umbral. Es una regresión sobre la probabilidad.</div>
+      <p>A pesar de su nombre, la regresión logística es un modelo de <strong>clasificación</strong>. Calcula la
+        <strong>probabilidad</strong> de que un evento ocurra (ej: P(cancela) = 0.78) y clasifica según un umbral (si P
+        > 0.5 → "cancela").</p>
 
-<h3>Árboles de Decisión: reglas interpretables</h3>
+      <div class="concept"><strong>¿Por qué se llama "regresión" si es clasificación?</strong> Porque internamente
+        calcula un número continuo (la probabilidad) usando una función sigmoide. Luego la convierte en categoría con un
+        umbral. Es una regresión sobre la probabilidad.</div>
 
-<p>Los árboles crean reglas binarias anidadas: "si antigüedad < 3 → sí cancela, sino, si productos ≥ 4 → no cancela…". Su gran ventaja: son <strong>completamente interpretables</strong>. Podés explicar cada decisión del modelo.</p>
+      <h3>Árboles de Decisión: reglas interpretables</h3>
 
-<div class="warning"><strong>Cuidado con la profundidad:</strong> un árbol muy profundo (<code>max_depth</code> alto) memoriza los datos de entrenamiento (overfitting). La regla: empezá con <code>max_depth=3</code> y subí gradualmente mientras el test accuracy mejore.</div>
+      <p>Los árboles crean reglas binarias anidadas: "si antigüedad < 3 → sí cancela, sino, si productos ≥ 4 → no
+          cancela…". Su gran ventaja: son <strong>completamente interpretables</strong>. Podés explicar cada decisión
+          del modelo.</p>
 
-<h3>KNN: "dime con quién andás…"</h3>
+      <div class="warning"><strong>Cuidado con la profundidad:</strong> un árbol muy profundo (<code>max_depth</code>
+        alto) memoriza los datos de entrenamiento (overfitting). La regla: empezá con <code>max_depth=3</code> y subí
+        gradualmente mientras el test accuracy mejore.</div>
 
-<p>K-Nearest Neighbors no "aprende" nada. Cuando llega un dato nuevo, busca los K más similares en el entrenamiento y vota: si 3 de 5 vecinos cancelaron → "cancela". Es simple pero sorprendentemente efectivo.</p>
+      <h3>KNN: "dime con quién andás…"</h3>
 
-<div class="realworld"><strong>En el trabajo real:</strong> regresión lineal se usa para forecasting (predecir ventas del próximo trimestre). Regresión logística para scoring crediticio y churn prediction. Árboles de decisión cuando el negocio necesita entender el "por qué" de cada decisión. KNN para sistemas de recomendación simples.</div>
+      <p>K-Nearest Neighbors no "aprende" nada. Cuando llega un dato nuevo, busca los K más similares en el
+        entrenamiento y vota: si 3 de 5 vecinos cancelaron → "cancela". Es simple pero sorprendentemente efectivo.</p>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="realworld"><strong>En el trabajo real:</strong> regresión lineal se usa para forecasting (predecir
+        ventas del próximo trimestre). Regresión logística para scoring crediticio y churn prediction. Árboles de
+        decisión cuando el negocio necesita entender el "por qué" de cada decisión. KNN para sistemas de recomendación
+        simples.</div>
 
-<h3>Ejemplo 1: Regresión Lineal — Predecir ingresos</h3>
-<p>Predecir el ingreso de un empleado a partir de sus años de antigüedad. Modelo simple, interpretable y poderoso.</p>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_regresion_lineal.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <h3>Ejemplo 1: Regresión Lineal — Predecir ingresos</h3>
+      <p>Predecir el ingreso de un empleado a partir de sus años de antigüedad. Modelo simple, interpretable y poderoso.
+      </p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_regresion_lineal.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
@@ -139,17 +220,21 @@ plt.title("Regresión Lineal: Antigüedad → Ingreso", fontweight="bold")
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.show()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+plt.show()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Regresión Logística — Predecir churn</h3>
-<p>Predecir si un cliente va a cancelar (sí/no). La logística nos da la probabilidad, lo que permite priorizar acciones de retención.</p>
+      <h3>Ejemplo 2: Regresión Logística — Predecir churn</h3>
+      <p>Predecir si un cliente va a cancelar (sí/no). La logística nos da la probabilidad, lo que permite priorizar
+        acciones de retención.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_logistica.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_logistica.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
@@ -189,19 +274,24 @@ features = ["Antigüedad", "Productos"]
 print(f"\n=== Coeficientes ===")
 for feat, coef in zip(features, modelo.coef_[0]):
     efecto = "reduce" if coef < 0 else "aumenta"
-    print(f"  {feat}: {coef:.3f} → {efecto} la probabilidad de cancelar")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"  {feat}: {coef:.3f} → {efecto} la probabilidad de cancelar")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="tip"><strong>Tip profesional — predict_proba:</strong> <code>modelo.predict_proba()</code> te da la <strong>probabilidad</strong> de cada clase, no solo la clasificación binaria. Esto es valiosísimo porque podés priorizar: un cliente con P(cancel)=0.92 necesita atención urgente; uno con P=0.55 puede esperar.</div>
+      <div class="tip"><strong>Tip profesional — predict_proba:</strong> <code>modelo.predict_proba()</code> te da la
+        <strong>probabilidad</strong> de cada clase, no solo la clasificación binaria. Esto es valiosísimo porque podés
+        priorizar: un cliente con P(cancel)=0.92 necesita atención urgente; uno con P=0.55 puede esperar.</div>
 
-<h3>Ejemplo 3: Árbol de Decisión con interpretación</h3>
-<p>Los árboles generan reglas legibles. Podés exportar las reglas y explicar cada decisión al negocio.</p>
+      <h3>Ejemplo 3: Árbol de Decisión con interpretación</h3>
+      <p>Los árboles generan reglas legibles. Podés exportar las reglas y explicar cada decisión al negocio.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_arbol.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_arbol.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier, export_text
 from sklearn.model_selection import train_test_split
@@ -237,17 +327,21 @@ print(f"\nAccuracy: {accuracy_score(y_test, pred)*100:.1f}%")
 print(f"\n=== Importancia de Features ===")
 for feat, imp in sorted(zip(X.columns, modelo.feature_importances_), key=lambda x: -x[1]):
     barra = "█" * int(imp * 30)
-    print(f"  {feat:15s} {imp:.3f} {barra}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"  {feat:15s} {imp:.3f} {barra}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Regresión Lineal Múltiple</h3>
-<p>La regresión no se limita a una variable. Con múltiples features podés hacer predicciones mucho más precisas.</p>
+      <h3>Ejemplo 4: Regresión Lineal Múltiple</h3>
+      <p>La regresión no se limita a una variable. Con múltiples features podés hacer predicciones mucho más precisas.
+      </p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_multiple.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_multiple.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
@@ -292,17 +386,20 @@ print(f"  {'Intercepto':20s}: ${modelo.intercept_:,.0f}")
 
 # Predicción para un depto específico
 nuevo = pd.DataFrame({"Metros2":[80], "Habitaciones":[3], "Antiguedad":[10], "Distancia_Centro":[5]})
-print(f"\nPredicción para 80m², 3 hab, 10 años, 5km: ${modelo.predict(nuevo)[0]:,.0f}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\nPredicción para 80m², 3 hab, 10 años, 5km: ${modelo.predict(nuevo)[0]:,.0f}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Comparación completa de modelos con visualización</h3>
-<p>Probamos 4 algoritmos, comparamos métricas y visualizamos los resultados.</p>
+      <h3>Ejemplo 5: Comparación completa de modelos con visualización</h3>
+      <p>Probamos 4 algoritmos, comparamos métricas y visualizamos los resultados.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_comparar.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_comparar.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
@@ -358,42 +455,78 @@ ax.set_title("Comparación de Modelos", fontweight="bold")
 ax.legend()
 ax.grid(axis="y", alpha=0.3)
 plt.tight_layout()
-plt.show()</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+plt.show()</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Algoritmo</th><th>Import</th><th>Parámetros clave</th></tr>
-<tr><td>Regresión Lineal</td><td><code>LinearRegression()</code></td><td>(sin hiperparámetros - ajusta automáticamente)</td></tr>
-<tr><td>Reg. Logística</td><td><code>LogisticRegression()</code></td><td><code>max_iter, C (regularización)</code></td></tr>
-<tr><td>Árbol Decisión</td><td><code>DecisionTreeClassifier()</code></td><td><code>max_depth, min_samples_split</code></td></tr>
-<tr><td>KNN</td><td><code>KNeighborsClassifier()</code></td><td><code>n_neighbors (K)</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Algoritmo</th>
+            <th>Import</th>
+            <th>Parámetros clave</th>
+          </tr>
+          <tr>
+            <td>Regresión Lineal</td>
+            <td><code>LinearRegression()</code></td>
+            <td>(sin hiperparámetros - ajusta automáticamente)</td>
+          </tr>
+          <tr>
+            <td>Reg. Logística</td>
+            <td><code>LogisticRegression()</code></td>
+            <td><code>max_iter, C (regularización)</code></td>
+          </tr>
+          <tr>
+            <td>Árbol Decisión</td>
+            <td><code>DecisionTreeClassifier()</code></td>
+            <td><code>max_depth, min_samples_split</code></td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td><code>KNeighborsClassifier()</code></td>
+            <td><code>n_neighbors (K)</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Métrica regresión</th><th>Código</th><th>Ideal</th></tr>
-<tr><td>MAE</td><td><code>mean_absolute_error(y, pred)</code></td><td>0 (menor = mejor)</td></tr>
-<tr><td>R²</td><td><code>r2_score(y, pred)</code></td><td>1 (mayor = mejor)</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Métrica regresión</th>
+            <th>Código</th>
+            <th>Ideal</th>
+          </tr>
+          <tr>
+            <td>MAE</td>
+            <td><code>mean_absolute_error(y, pred)</code></td>
+            <td>0 (menor = mejor)</td>
+          </tr>
+          <tr>
+            <td>R²</td>
+            <td><code>r2_score(y, pred)</code></td>
+            <td>1 (mayor = mejor)</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Regresión Lineal simple</h4>
-  <p>Entrenáuna regresión lineal de Metros2 → Precio. Imprimí el coeficiente. Debe incluir un número (ej: <code>2</code>).</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-1" data-expected="2">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir un coeficiente</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Regresión Lineal simple</h4>
+        <p>Entrenáuna regresión lineal de Metros2 → Precio. Imprimí el coeficiente. Debe incluir un número (ej:
+          <code>2</code>).</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-1" data-expected="2">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir un coeficiente</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.linear_model import LinearRegression
 
 np.random.seed(42)
@@ -401,20 +534,25 @@ metros = np.array([30, 50, 70, 90, 120, 150]).reshape(-1, 1)
 precio = np.array([75000, 125000, 175000, 225000, 300000, 375000])
 
 # Entrenar e imprimir coeficiente
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["modelo = LinearRegression().fit(metros, precio)","print(f\"Coef: {modelo.coef_[0]:,.0f}\")","print(f\"Por cada m², el precio sube ${modelo.coef_[0]:,.0f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["modelo = LinearRegression().fit(metros, precio)","print(f\"Coef: {modelo.coef_[0]:,.0f}\")","print(f\"Por cada m², el precio sube ${modelo.coef_[0]:,.0f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Predecir con regresión lineal</h4>
-  <p>Usá el modelo entrenado para predecir el precio de un depto de 100 m². Debe incluir <code>250</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-2" data-expected="250">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "250"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Predecir con regresión lineal</h4>
+        <p>Usá el modelo entrenado para predecir el precio de un depto de 100 m². Debe incluir <code>250</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-2" data-expected="250">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "250"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.linear_model import LinearRegression
 
 metros = np.array([30, 50, 70, 90, 120, 150]).reshape(-1, 1)
@@ -423,20 +561,24 @@ precio = np.array([75000, 125000, 175000, 225000, 300000, 375000])
 modelo = LinearRegression().fit(metros, precio)
 
 # Predecí para 100 m²
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["pred = modelo.predict([[100]])","print(f\"Precio predicho 100m²: ${pred[0]:,.0f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["pred = modelo.predict([[100]])","print(f\"Precio predicho 100m²: ${pred[0]:,.0f}\")"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: R² — bondad de ajuste</h4>
-  <p>Calculá el R² del modelo de regresión. Debe incluir un valor alto (ej: <code>0.9</code>).</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-3" data-expected="0.9">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "0.9..."</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: R² — bondad de ajuste</h4>
+        <p>Calculá el R² del modelo de regresión. Debe incluir un valor alto (ej: <code>0.9</code>).</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-3" data-expected="0.9">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "0.9..."</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 
@@ -448,20 +590,26 @@ modelo = LinearRegression().fit(X, y)
 pred = modelo.predict(X)
 
 # Calculá e imprimí el R²
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["r2 = r2_score(y, pred)","print(f\"R² = {r2:.3f}\")","print(f\"El modelo explica {r2*100:.1f}% de la variación\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["r2 = r2_score(y, pred)","print(f\"R² = {r2:.3f}\")","print(f\"El modelo explica {r2*100:.1f}% de la variación\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Reg. Logística con probabilidades</h4>
-  <p>Entrenáuna regresión logística y usá <code>predict_proba</code> para obtener probabilidades. Imprimí la probabilidad del primer caso de test. Debe incluir <code>0.</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-4" data-expected="0.">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "0."</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Reg. Logística con probabilidades</h4>
+        <p>Entrenáuna regresión logística y usá <code>predict_proba</code> para obtener probabilidades. Imprimí la
+          probabilidad del primer caso de test. Debe incluir <code>0.</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-4" data-expected="0.">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "0."</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
@@ -471,20 +619,27 @@ y = (X[:, 0] + X[:, 1] > 1).astype(int)
 X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Entrenar, predict_proba, imprimir P del primer caso
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["modelo = LogisticRegression(random_state=42).fit(X_tr, y_tr)","proba = modelo.predict_proba(X_te)[:, 1]","print(f\"P(clase=1) del primer caso: {proba[0]:.3f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["modelo = LogisticRegression(random_state=42).fit(X_tr, y_tr)","proba = modelo.predict_proba(X_te)[:, 1]","print(f\"P(clase=1) del primer caso: {proba[0]:.3f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Árbol de decisión — exportar reglas</h4>
-  <p>Entrenáun árbol con <code>max_depth=2</code> e imprimí las reglas con <code>export_text</code>. Debe incluir <code>&lt;=</code> (símbolo de regla).</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-5" data-expected="<=">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "<="</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Árbol de decisión — exportar reglas</h4>
+        <p>Entrenáun árbol con <code>max_depth=2</code> e imprimí las reglas con <code>export_text</code>. Debe incluir
+          <code>&lt;=</code> (símbolo de regla).</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-5" data-expected="<=">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "<="< /span>
+          </div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.tree import DecisionTreeClassifier, export_text
 
 np.random.seed(42)
@@ -492,20 +647,25 @@ X = np.random.rand(100, 2)
 y = ((X[:, 0] > 0.5) & (X[:, 1] > 0.3)).astype(int)
 
 # Entrenar con max_depth=2, export_text
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=2, random_state=42).fit(X, y)","print(export_text(modelo, feature_names=[\"Feature_0\",\"Feature_1\"]))"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["modelo = DecisionTreeClassifier(max_depth=2, random_state=42).fit(X, y)","print(export_text(modelo, feature_names=[\"Feature_0\",\"Feature_1\"]))"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: KNN — probar distintas K</h4>
-  <p>Probá KNN con K = 1, 3, 5, 7, 9. Imprimí la accuracy de cada uno. Debe incluir <code>k=</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-6" data-expected="k=">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "k="</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: KNN — probar distintas K</h4>
+        <p>Probá KNN con K = 1, 3, 5, 7, 9. Imprimí la accuracy de cada uno. Debe incluir <code>k=</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-6" data-expected="k=">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "k="</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -516,20 +676,25 @@ y = (X[:, 0] + X[:, 1] > 1).astype(int)
 X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Probar K = 1, 3, 5, 7, 9
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["for k in [1, 3, 5, 7, 9]:","    m = KNeighborsClassifier(n_neighbors=k).fit(X_tr, y_tr)","    acc = accuracy_score(y_te, m.predict(X_te))","    print(f\"k={k}: accuracy={acc*100:.1f}%\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["for k in [1, 3, 5, 7, 9]:","    m = KNeighborsClassifier(n_neighbors=k).fit(X_tr, y_tr)","    acc = accuracy_score(y_te, m.predict(X_te))","    print(f\"k={k}: accuracy={acc*100:.1f}%\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Regresión múltiple con MAE</h4>
-  <p>Entrená regresión con 3 features, evaluá con MAE y R². Debe incluir <code>R²</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-7" data-expected="R²">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "R²"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Regresión múltiple con MAE</h4>
+        <p>Entrená regresión con 3 features, evaluá con MAE y R². Debe incluir <code>R²</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-7" data-expected="R²">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "R²"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, r2_score
@@ -541,20 +706,27 @@ y = X[:,0]*2500 + X[:,1]*15000 - X[:,2]*800 + np.random.normal(0,20000,n)
 X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Entrenar, evaluar con MAE y R²
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["modelo = LinearRegression().fit(X_tr, y_tr)","pred = modelo.predict(X_te)","print(f\"MAE: ${mean_absolute_error(y_te,pred):,.0f}\")","print(f\"R²: {r2_score(y_te,pred):.3f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["modelo = LinearRegression().fit(X_tr, y_tr)","pred = modelo.predict(X_te)","print(f\"MAE: ${mean_absolute_error(y_te,pred):,.0f}\")","print(f\"R²: {r2_score(y_te,pred):.3f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Visualizar regresión lineal</h4>
-  <p>Entrenáuna regresión y graficá los puntos reales + la recta de predicción. Imprimí <code>Gráfico OK</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-8" data-expected="Gráfico OK">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe imprimir "Gráfico OK"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Visualizar regresión lineal</h4>
+        <p>Entrenáuna regresión y graficá los puntos reales + la recta de predicción. Imprimí <code>Gráfico OK</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-8"
+          data-expected="Gráfico OK">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe imprimir "Gráfico OK"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
@@ -565,20 +737,27 @@ X = np.random.uniform(1, 20, 50).reshape(-1, 1)
 y = X.ravel() * 35000 + 150000 + np.random.normal(0, 50000, 50)
 
 # Entrenar, graficar scatter + recta, imprimir "Gráfico OK"
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["modelo = LinearRegression().fit(X, y)","plt.scatter(X, y, alpha=0.6)","x_line = np.linspace(0, 22, 100).reshape(-1,1)","plt.plot(x_line, modelo.predict(x_line), color=\"red\"); plt.show(); print(\"Gráfico OK\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["modelo = LinearRegression().fit(X, y)","plt.scatter(X, y, alpha=0.6)","x_line = np.linspace(0, 22, 100).reshape(-1,1)","plt.plot(x_line, modelo.predict(x_line), color=\"red\"); plt.show(); print(\"Gráfico OK\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Feature importance del árbol</h4>
-  <p>Entrenaun árbol con 3 features. Imprimí la importancia de cada una ordenada de mayor a menor. Debe incluir <code>Importancia</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-9" data-expected="Importancia">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Importancia"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Feature importance del árbol</h4>
+        <p>Entrenaun árbol con 3 features. Imprimí la importancia de cada una ordenada de mayor a menor. Debe incluir
+          <code>Importancia</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-9"
+          data-expected="Importancia">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Importancia"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 
 np.random.seed(42)
@@ -588,20 +767,28 @@ y = (X[:, 0] * 2 + X[:, 1] > 1.5).astype(int)
 features = ["Feature_A", "Feature_B", "Feature_C"]
 
 # Entrenar árbol, imprimir importancia ordenada
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["m = DecisionTreeClassifier(max_depth=3, random_state=42).fit(X, y)","pares = sorted(zip(features, m.feature_importances_), key=lambda x:-x[1])","for f, i in pares: print(f\"Importancia {f}: {i:.3f}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["m = DecisionTreeClassifier(max_depth=3, random_state=42).fit(X, y)","pares = sorted(zip(features, m.feature_importances_), key=lambda x:-x[1])","for f, i in pares: print(f\"Importancia {f}: {i:.3f}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Pipeline completo con gráfico de comparación</h4>
-  <p>Compará 3 clasificadores, generá un gráfico de barras con sus accuracy, precision y recall. Imprimí <code>Comparación completa</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-10" data-expected="Comparación completa">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Comparación completa"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Pipeline completo con gráfico de comparación</h4>
+        <p>Compará 3 clasificadores, generá un gráfico de barras con sus accuracy, precision y recall. Imprimí
+          <code>Comparación completa</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-15" data-exercise="ex-10"
+          data-expected="Comparación completa">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Comparación completa"</span>
+          </div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
@@ -617,46 +804,60 @@ y = (X[:, 0] + X[:, 1] * 0.5 > 0.8).astype(int)
 X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # 3 modelos → métricas → gráfico de barras comparativo
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["modelos = {\"Árbol\":DecisionTreeClassifier(max_depth=3,random_state=42),\"LogReg\":LogisticRegression(random_state=42),\"KNN\":KNeighborsClassifier(5)}","resultados = []","for n,m in modelos.items(): m.fit(X_tr,y_tr); p=m.predict(X_te); resultados.append((n,accuracy_score(y_te,p)))","print(\"Comparación completa\")"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li><strong>Regresión Lineal:</strong> predice números. Interpretación directa: "por cada unidad de X, Y cambia
+          en coef."</li>
+        <li><strong>Regresión Logística:</strong> predice probabilidades (0 a 1). Perfecta para scoring y clasificación
+          binaria.</li>
+        <li><strong>Árboles de Decisión:</strong> generan reglas legibles. <code>max_depth</code> controla la
+          complejidad (evitar overfitting).</li>
+        <li><strong>KNN:</strong> clasifica por cercanía. Simple pero efectivo. <code>K</code> grande = más estable,
+          menos detallado.</li>
+        <li>Para regresión usá <strong>MAE</strong> y <strong>R²</strong>. Para clasificación usá <strong>accuracy,
+            precision, recall</strong>.</li>
+        <li><strong>Feature importance</strong> te dice qué variables son las más influyentes en las predicciones.</li>
+        <li>Siempre compará al menos 2-3 modelos antes de elegir uno.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>16 · Power BI / Tableau intro</strong>) vas a aprender cómo llevar tus
+        análisis a herramientas de visualización empresarial que usan los equipos de Business Intelligence en todo el
+        mundo.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://scikit-learn.org/stable/supervised_learning.html"
+          target="_blank">scikit-learn Supervised Learning</a> · <a
+          href="https://scikit-learn.org/stable/modules/model_evaluation.html" target="_blank">Model Evaluation</a></p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/14-intro-machine-learning.html">← Intro a Machine Learning</a>
+        <a class="next" href="/data-analysis/16-power-bi-tableau-intro.html">Power BI / Tableau intro →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["modelos = {\"Árbol\":DecisionTreeClassifier(max_depth=3,random_state=42),\"LogReg\":LogisticRegression(random_state=42),\"KNN\":KNeighborsClassifier(5)}","resultados = []","for n,m in modelos.items(): m.fit(X_tr,y_tr); p=m.predict(X_te); resultados.append((n,accuracy_score(y_te,p)))","print(\"Comparación completa\")"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li><strong>Regresión Lineal:</strong> predice números. Interpretación directa: "por cada unidad de X, Y cambia en coef."</li>
-  <li><strong>Regresión Logística:</strong> predice probabilidades (0 a 1). Perfecta para scoring y clasificación binaria.</li>
-  <li><strong>Árboles de Decisión:</strong> generan reglas legibles. <code>max_depth</code> controla la complejidad (evitar overfitting).</li>
-  <li><strong>KNN:</strong> clasifica por cercanía. Simple pero efectivo. <code>K</code> grande = más estable, menos detallado.</li>
-  <li>Para regresión usá <strong>MAE</strong> y <strong>R²</strong>. Para clasificación usá <strong>accuracy, precision, recall</strong>.</li>
-  <li><strong>Feature importance</strong> te dice qué variables son las más influyentes en las predicciones.</li>
-  <li>Siempre compará al menos 2-3 modelos antes de elegir uno.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>16 · Power BI / Tableau intro</strong>) vas a aprender cómo llevar tus análisis a herramientas de visualización empresarial que usan los equipos de Business Intelligence en todo el mundo.</p>
-
-<p><strong>Recursos:</strong> <a href="https://scikit-learn.org/stable/supervised_learning.html" target="_blank">scikit-learn Supervised Learning</a> · <a href="https://scikit-learn.org/stable/modules/model_evaluation.html" target="_blank">Model Evaluation</a></p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/14-intro-machine-learning.html">← Intro a Machine Learning</a>
-  <a class="next" href="/data-analysis/16-power-bi-tableau-intro.html">Power BI / Tableau intro →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

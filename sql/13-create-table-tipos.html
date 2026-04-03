@@ -1,38 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · SQL 13 · CREATE TABLE y tipos</title>
-<meta name="description" content="Crear tablas en SQL: tipos de datos, PRIMARY KEY, FOREIGN KEY, NOT NULL, UNIQUE, DEFAULT, ALTER TABLE y diseño de esquemas.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · SQL 13 · CREATE TABLE y tipos</title>
+  <meta name="description"
+    content="Crear tablas en SQL: tipos de datos, PRIMARY KEY, FOREIGN KEY, NOT NULL, UNIQUE, DEFAULT, ALTER TABLE y diseño de esquemas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
 </head>
+
 <body>
-<div class="topbar"><button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button><div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div><div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div><div id="global-progress-text" class="top-stats"></div></div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label sql">SQL · Lección 13 de 15</span>
-  <h1>CREATE TABLE y tipos de datos</h1>
-  <p>Hasta ahora usaste tablas que ya existían. Ahora aprendés a crearlas: elegir tipos de datos, definir restricciones (constraints) que protejan la integridad de los datos, y diseñar esquemas relacionales con claves primarias y foráneas.</p>
-  <div class="badges">
-    <span class="badge">80–100 min</span>
-    <span class="badge">Prerrequisitos: SQL 12</span>
+  <div class="topbar"><button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label sql">SQL · Lección 13 de 15</span>
+        <h1>CREATE TABLE y tipos de datos</h1>
+        <p>Hasta ahora usaste tablas que ya existían. Ahora aprendés a crearlas: elegir tipos de datos, definir
+          restricciones (constraints) que protejan la integridad de los datos, y diseñar esquemas relacionales con
+          claves primarias y foráneas.</p>
+        <div class="badges">
+          <span class="badge">80–100 min</span>
+          <span class="badge">Prerrequisitos: SQL 12</span>
+        </div>
+      </div>
 
-<h3>CREATE TABLE — definir la estructura</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">CREATE TABLE clientes (
+      <h3>CREATE TABLE — definir la estructura</h3>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">CREATE TABLE clientes (
     id          INTEGER PRIMARY KEY,
     nombre      TEXT NOT NULL,
     cuit        TEXT UNIQUE NOT NULL,
@@ -43,39 +58,104 @@
     fecha_alta  TEXT DEFAULT (date('now'))
 );</pre>
 
-<h3>Tipos de datos principales</h3>
+      <h3>Tipos de datos principales</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Tipo SQLite</th><th>Equivalente PostgreSQL</th><th>Uso</th><th>Ejemplo</th></tr>
-<tr><td><code>INTEGER</code></td><td><code>INT / BIGINT</code></td><td>Números enteros, IDs, conteos</td><td>42, -5, 0</td></tr>
-<tr><td><code>REAL</code></td><td><code>FLOAT / NUMERIC</code></td><td>Decimales, saldos, tasas</td><td>3.14, 150000.50</td></tr>
-<tr><td><code>TEXT</code></td><td><code>VARCHAR / TEXT</code></td><td>Strings, nombres, descripciones</td><td>'García', 'BsAs'</td></tr>
-<tr><td><code>BLOB</code></td><td><code>BYTEA</code></td><td>Datos binarios (raro en análisis)</td><td>Imágenes, archivos</td></tr>
-<tr><td>(no nativo)</td><td><code>DATE / TIMESTAMP</code></td><td>Fechas (en SQLite se usa TEXT)</td><td>'2025-03-15'</td></tr>
-<tr><td>(no nativo)</td><td><code>BOOLEAN</code></td><td>Verdadero/Falso (SQLite usa INTEGER 0/1)</td><td>0, 1</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Tipo SQLite</th>
+            <th>Equivalente PostgreSQL</th>
+            <th>Uso</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><code>INTEGER</code></td>
+            <td><code>INT / BIGINT</code></td>
+            <td>Números enteros, IDs, conteos</td>
+            <td>42, -5, 0</td>
+          </tr>
+          <tr>
+            <td><code>REAL</code></td>
+            <td><code>FLOAT / NUMERIC</code></td>
+            <td>Decimales, saldos, tasas</td>
+            <td>3.14, 150000.50</td>
+          </tr>
+          <tr>
+            <td><code>TEXT</code></td>
+            <td><code>VARCHAR / TEXT</code></td>
+            <td>Strings, nombres, descripciones</td>
+            <td>'García', 'BsAs'</td>
+          </tr>
+          <tr>
+            <td><code>BLOB</code></td>
+            <td><code>BYTEA</code></td>
+            <td>Datos binarios (raro en análisis)</td>
+            <td>Imágenes, archivos</td>
+          </tr>
+          <tr>
+            <td>(no nativo)</td>
+            <td><code>DATE / TIMESTAMP</code></td>
+            <td>Fechas (en SQLite se usa TEXT)</td>
+            <td>'2025-03-15'</td>
+          </tr>
+          <tr>
+            <td>(no nativo)</td>
+            <td><code>BOOLEAN</code></td>
+            <td>Verdadero/Falso (SQLite usa INTEGER 0/1)</td>
+            <td>0, 1</td>
+          </tr>
+        </table>
+      </div>
 
-<h3>Constraints — proteger los datos</h3>
+      <h3>Constraints — proteger los datos</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Constraint</th><th>Qué hace</th><th>Ejemplo</th></tr>
-<tr><td><code>PRIMARY KEY</code></td><td>Identificador único de cada fila (no nulo, no repetido)</td><td><code>id INTEGER PRIMARY KEY</code></td></tr>
-<tr><td><code>NOT NULL</code></td><td>No permite valores nulos</td><td><code>nombre TEXT NOT NULL</code></td></tr>
-<tr><td><code>UNIQUE</code></td><td>No permite duplicados</td><td><code>cuit TEXT UNIQUE</code></td></tr>
-<tr><td><code>DEFAULT</code></td><td>Valor automático si no se especifica</td><td><code>activo INTEGER DEFAULT 1</code></td></tr>
-<tr><td><code>CHECK</code></td><td>Validación de rango/condición</td><td><code>CHECK (score BETWEEN 0 AND 999)</code></td></tr>
-<tr><td><code>FOREIGN KEY</code></td><td>Referencia a otra tabla</td><td><code>FOREIGN KEY (cliente_id) REFERENCES clientes(id)</code></td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Constraint</th>
+            <th>Qué hace</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><code>PRIMARY KEY</code></td>
+            <td>Identificador único de cada fila (no nulo, no repetido)</td>
+            <td><code>id INTEGER PRIMARY KEY</code></td>
+          </tr>
+          <tr>
+            <td><code>NOT NULL</code></td>
+            <td>No permite valores nulos</td>
+            <td><code>nombre TEXT NOT NULL</code></td>
+          </tr>
+          <tr>
+            <td><code>UNIQUE</code></td>
+            <td>No permite duplicados</td>
+            <td><code>cuit TEXT UNIQUE</code></td>
+          </tr>
+          <tr>
+            <td><code>DEFAULT</code></td>
+            <td>Valor automático si no se especifica</td>
+            <td><code>activo INTEGER DEFAULT 1</code></td>
+          </tr>
+          <tr>
+            <td><code>CHECK</code></td>
+            <td>Validación de rango/condición</td>
+            <td><code>CHECK (score BETWEEN 0 AND 999)</code></td>
+          </tr>
+          <tr>
+            <td><code>FOREIGN KEY</code></td>
+            <td>Referencia a otra tabla</td>
+            <td><code>FOREIGN KEY (cliente_id) REFERENCES clientes(id)</code></td>
+          </tr>
+        </table>
+      </div>
 
-<div class="concept"><strong>PRIMARY KEY vs UNIQUE:</strong> una tabla tiene UNA sola Primary Key (típicamente el ID). Pero puede tener muchas columnas UNIQUE (CUIT, email). La PK no acepta NULL; UNIQUE sí acepta UN null (en la mayoría de los motores).</div>
+      <div class="concept"><strong>PRIMARY KEY vs UNIQUE:</strong> una tabla tiene UNA sola Primary Key (típicamente el
+        ID). Pero puede tener muchas columnas UNIQUE (CUIT, email). La PK no acepta NULL; UNIQUE sí acepta UN null (en
+        la mayoría de los motores).</div>
 
-<h3>FOREIGN KEY — relaciones entre tablas</h3>
+      <h3>FOREIGN KEY — relaciones entre tablas</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">CREATE TABLE cuentas (
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">CREATE TABLE cuentas (
     id INTEGER PRIMARY KEY,
     cliente_id INTEGER NOT NULL,
     tipo TEXT NOT NULL,
@@ -83,11 +163,12 @@
     FOREIGN KEY (cliente_id) REFERENCES clientes(id)
 );</pre>
 
-<p>La FK garantiza que <code>cliente_id</code> en cuentas SIEMPRE corresponda a un <code>id</code> válido en clientes. Si intentás insertar un <code>cliente_id</code> que no existe, da error.</p>
+      <p>La FK garantiza que <code>cliente_id</code> en cuentas SIEMPRE corresponda a un <code>id</code> válido en
+        clientes. Si intentás insertar un <code>cliente_id</code> que no existe, da error.</p>
 
-<h3>ALTER TABLE y DROP TABLE</h3>
+      <h3>ALTER TABLE y DROP TABLE</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Agregar columna
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Agregar columna
 ALTER TABLE clientes ADD COLUMN email TEXT;
 
 -- Renombrar tabla
@@ -96,18 +177,24 @@ ALTER TABLE clientes RENAME TO clientes_backup;
 -- Eliminar tabla (IRREVERSIBLE)
 DROP TABLE IF EXISTS clientes_temp;</pre>
 
-<div class="warning"><strong>DROP TABLE es IRREVERSIBLE.</strong> Elimina la tabla y TODOS sus datos. <code>IF EXISTS</code> evita error si la tabla no existe. En producción, NUNCA hagas DROP sin backup previo.</div>
+      <div class="warning"><strong>DROP TABLE es IRREVERSIBLE.</strong> Elimina la tabla y TODOS sus datos.
+        <code>IF EXISTS</code> evita error si la tabla no existe. En producción, NUNCA hagas DROP sin backup previo.
+      </div>
 
-<div class="realworld"><strong>En el trabajo:</strong> como Data Analyst, rara vez creás tablas en producción (eso lo hace el equipo de Data Engineering). Pero sí creás tablas temporales para análisis, tablas de staging para ETL, y necesitás entender el esquema existente para escribir JOINs correctos. Saber leer un CREATE TABLE te dice todo sobre la estructura de datos.</div>
+      <div class="realworld"><strong>En el trabajo:</strong> como Data Analyst, rara vez creás tablas en producción (eso
+        lo hace el equipo de Data Engineering). Pero sí creás tablas temporales para análisis, tablas de staging para
+        ETL, y necesitás entender el esquema existente para escribir JOINs correctos. Saber leer un CREATE TABLE te dice
+        todo sobre la estructura de datos.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: CREATE TABLE con constraints</h3>
+      <h3>Ejemplo 1: CREATE TABLE con constraints</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_01_create.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Diseño completo de tabla clientes
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_01_create.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">-- Diseño completo de tabla clientes
 CREATE TABLE clientes (
     id INTEGER PRIMARY KEY,
     nombre TEXT NOT NULL,
@@ -128,16 +215,19 @@ VALUES (2, 'López', '27-28765432-1', 680);  -- saldo = 0 (default)
 INSERT INTO clientes (id, nombre, cuit, ciudad, score, saldo)
 VALUES (3, 'Pérez', '20-40123456-7', 'Córdoba', 810, 890000);
 
-SELECT * FROM clientes;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+SELECT * FROM clientes;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: FOREIGN KEY — relación clientes-cuentas</h3>
+      <h3>Ejemplo 2: FOREIGN KEY — relación clientes-cuentas</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_02_fk.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">PRAGMA foreign_keys = ON;  -- Activar FK en SQLite
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_02_fk.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">PRAGMA foreign_keys = ON;  -- Activar FK en SQLite
 
 CREATE TABLE clientes (
     id INTEGER PRIMARY KEY,
@@ -159,16 +249,19 @@ INSERT INTO cuentas VALUES (103, 2, 'CA$', 320000);
 
 -- Verificar con JOIN
 SELECT c.nombre, cu.tipo, cu.saldo
-FROM clientes c JOIN cuentas cu ON c.id = cu.cliente_id;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+FROM clientes c JOIN cuentas cu ON c.id = cu.cliente_id;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Constraints en acción — rechazar datos inválidos</h3>
+      <h3>Ejemplo 3: Constraints en acción — rechazar datos inválidos</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_03_constraints.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_03_constraints.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (
     id INTEGER PRIMARY KEY,
     nombre TEXT NOT NULL,
     cuit TEXT UNIQUE,
@@ -183,16 +276,19 @@ INSERT INTO clientes VALUES (1, 'García', '20-30123456-9', 720);
 -- INSERT INTO clientes VALUES (3, 'Pérez', '20-30123456-9', 810);  -- UNIQUE violation (CUIT duplicado)
 -- INSERT INTO clientes VALUES (4, 'Sosa', '23-25123456-3', 1500);  -- CHECK violation (score > 999)
 
-SELECT * FROM clientes;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+SELECT * FROM clientes;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Diseño multi-tabla con esquema completo</h3>
+      <h3>Ejemplo 4: Diseño multi-tabla con esquema completo</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_04_esquema.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Esquema bancario simplificado
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_04_esquema.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">-- Esquema bancario simplificado
 CREATE TABLE sucursales (
     id INTEGER PRIMARY KEY,
     nombre TEXT NOT NULL UNIQUE,
@@ -225,16 +321,19 @@ SELECT s.nombre AS sucursal, c.nombre AS cliente, cu.tipo, cu.saldo
 FROM sucursales s
 JOIN clientes c ON s.id = c.sucursal_id
 JOIN cuentas cu ON c.id = cu.cliente_id
-ORDER BY s.nombre, cu.saldo DESC;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+ORDER BY s.nombre, cu.saldo DESC;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: ALTER TABLE y CREATE TABLE AS (tabla desde query)</h3>
+      <h3>Ejemplo 5: ALTER TABLE y CREATE TABLE AS (tabla desde query)</h3>
 
-<div class="editor" data-mode="sql">
-  <div class="editor-top"><span>ejemplo_05_alter.sql</span><span>SQL</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, saldo REAL);
+      <div class="editor" data-mode="sql">
+        <div class="editor-top"><span>ejemplo_05_alter.sql</span><span>SQL</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),(3,'Pérez',810,890000);
 
 -- ALTER TABLE: agregar columna
@@ -254,57 +353,162 @@ CREATE TABLE resumen_ciudad AS
 SELECT 'Buenos Aires' AS ciudad, COUNT(*) AS clientes, SUM(saldo) AS total
 FROM clientes;  -- simplificado
 
-SELECT * FROM resumen_ciudad;</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+SELECT * FROM resumen_ciudad;</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Sentencia DDL</th><th>Acción</th></tr>
-<tr><td><code>CREATE TABLE t (cols)</code></td><td>Crear tabla nueva</td></tr>
-<tr><td><code>CREATE TABLE t AS SELECT ...</code></td><td>Crear tabla desde query</td></tr>
-<tr><td><code>ALTER TABLE t ADD COLUMN c tipo</code></td><td>Agregar columna</td></tr>
-<tr><td><code>ALTER TABLE t RENAME TO nuevo</code></td><td>Renombrar tabla</td></tr>
-<tr><td><code>DROP TABLE IF EXISTS t</code></td><td>Eliminar tabla (irreversible)</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Sentencia DDL</th>
+            <th>Acción</th>
+          </tr>
+          <tr>
+            <td><code>CREATE TABLE t (cols)</code></td>
+            <td>Crear tabla nueva</td>
+          </tr>
+          <tr>
+            <td><code>CREATE TABLE t AS SELECT ...</code></td>
+            <td>Crear tabla desde query</td>
+          </tr>
+          <tr>
+            <td><code>ALTER TABLE t ADD COLUMN c tipo</code></td>
+            <td>Agregar columna</td>
+          </tr>
+          <tr>
+            <td><code>ALTER TABLE t RENAME TO nuevo</code></td>
+            <td>Renombrar tabla</td>
+          </tr>
+          <tr>
+            <td><code>DROP TABLE IF EXISTS t</code></td>
+            <td>Eliminar tabla (irreversible)</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: CREATE TABLE simple</h4><p>Creá una tabla <code>productos</code> con id (PK), nombre (NOT NULL), precio (REAL) y stock (INTEGER DEFAULT 0). Insertá 2 productos. Debe incluir <code>Notebook</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-1" data-expected="Notebook"><div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "Notebook"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Creá la tabla e insertá:
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: CREATE TABLE simple</h4>
+        <p>Creá una tabla <code>productos</code> con id (PK), nombre (NOT NULL), precio (REAL) y stock (INTEGER DEFAULT
+          0). Insertá 2 productos. Debe incluir <code>Notebook</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-1" data-expected="Notebook">
+          <div class="editor-top"><span>ejercicio_01.sql</span><span>Debe incluir "Notebook"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">-- Creá la tabla e insertá:
 
 
-SELECT * FROM productos;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["CREATE TABLE productos (id INTEGER PRIMARY KEY, nombre TEXT NOT NULL, precio REAL, stock INTEGER DEFAULT 0);","INSERT INTO productos (id, nombre, precio) VALUES (1, \\x27Notebook\\x27, 920000);","stock usa DEFAULT 0 si no lo especificás"]'></div></div>
+SELECT * FROM productos;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["CREATE TABLE productos (id INTEGER PRIMARY KEY, nombre TEXT NOT NULL, precio REAL, stock INTEGER DEFAULT 0);","INSERT INTO productos (id, nombre, precio) VALUES (1, \\x27Notebook\\x27, 920000);","stock usa DEFAULT 0 si no lo especificás"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: NOT NULL y DEFAULT</h4><p>Creá tabla <code>clientes</code> donde nombre es NOT NULL y activo tiene DEFAULT 1. Insertá un cliente sin especificar activo. Debe incluir <code>1</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-2" data-expected="1"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "1" (activo default)</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Creá tabla con NOT NULL y DEFAULT:
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: NOT NULL y DEFAULT</h4>
+        <p>Creá tabla <code>clientes</code> donde nombre es NOT NULL y activo tiene DEFAULT 1. Insertá un cliente sin
+          especificar activo. Debe incluir <code>1</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-2" data-expected="1">
+          <div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "1" (activo default)</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">-- Creá tabla con NOT NULL y DEFAULT:
 
 
 -- Insertá sin especificar activo:
 
-SELECT * FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT NOT NULL, activo INTEGER DEFAULT 1);","INSERT INTO clientes (id, nombre) VALUES (1, \\x27García\\x27);","activo se completa con 1 automáticamente"]'></div></div>
+SELECT * FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT NOT NULL, activo INTEGER DEFAULT 1);","INSERT INTO clientes (id, nombre) VALUES (1, \\x27García\\x27);","activo se completa con 1 automáticamente"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: UNIQUE constraint</h4><p>Creá tabla con CUIT UNIQUE. Insertá 2 clientes con CUITs distintos. Debe incluir <code>UNIQUE</code> (en el CREATE).</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-3" data-expected="20-30123456-9"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir un CUIT</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Tabla con CUIT UNIQUE:
+      <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: UNIQUE constraint</h4>
+        <p>Creá tabla con CUIT UNIQUE. Insertá 2 clientes con CUITs distintos. Debe incluir <code>UNIQUE</code> (en el
+          CREATE).</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-3" data-expected="20-30123456-9">
+          <div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir un CUIT</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">-- Tabla con CUIT UNIQUE:
 
 
-SELECT * FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, cuit TEXT UNIQUE NOT NULL);","UNIQUE impide insertar el mismo CUIT dos veces","Probá insertar duplicado para ver el error"]'></div></div>
+SELECT * FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, cuit TEXT UNIQUE NOT NULL);","UNIQUE impide insertar el mismo CUIT dos veces","Probá insertar duplicado para ver el error"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: CHECK constraint</h4><p>Creá tabla con CHECK que score esté entre 0 y 999. Insertá un cliente válido. Debe incluir <code>720</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-4" data-expected="720"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "720"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Tabla con CHECK:
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: CHECK constraint</h4>
+        <p>Creá tabla con CHECK que score esté entre 0 y 999. Insertá un cliente válido. Debe incluir <code>720</code>.
+        </p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-4" data-expected="720">
+          <div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "720"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">-- Tabla con CHECK:
 
 
-SELECT * FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["score INTEGER CHECK (score BETWEEN 0 AND 999)","INSERT INTO clientes VALUES (1, \\x27García\\x27, 720);","Probá con score 1500 para ver el error de CHECK"]'></div></div>
+SELECT * FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["score INTEGER CHECK (score BETWEEN 0 AND 999)","INSERT INTO clientes VALUES (1, \\x27García\\x27, 720);","Probá con score 1500 para ver el error de CHECK"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: FOREIGN KEY</h4><p>Creá tablas clientes y cuentas con FK. Insertá datos y hacé un JOIN. Debe incluir <code>CA$</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-5" data-expected="CA$"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "CA$"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Creá ambas tablas con FK:
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: FOREIGN KEY</h4>
+        <p>Creá tablas clientes y cuentas con FK. Insertá datos y hacé un JOIN. Debe incluir <code>CA$</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-5" data-expected="CA$">
+          <div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "CA$"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">-- Creá ambas tablas con FK:
 
 
 -- Insertá y consultá con JOIN:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);","CREATE TABLE cuentas (id INTEGER PRIMARY KEY, cliente_id INTEGER, tipo TEXT, FOREIGN KEY (cliente_id) REFERENCES clientes(id));","INSERT + JOIN para verificar"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);","CREATE TABLE cuentas (id INTEGER PRIMARY KEY, cliente_id INTEGER, tipo TEXT, FOREIGN KEY (cliente_id) REFERENCES clientes(id));","INSERT + JOIN para verificar"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: ALTER TABLE</h4><p>Creá tabla, después agregá columna <code>email</code> con ALTER TABLE. Debe incluir <code>email</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-6" data-expected="email"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "email"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER);
+      <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: ALTER TABLE</h4>
+        <p>Creá tabla, después agregá columna <code>email</code> con ALTER TABLE. Debe incluir <code>email</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-6" data-expected="email">
+          <div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "email"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1, 'García', 720);
 
 -- Agregá columna email:
@@ -312,63 +516,138 @@ INSERT INTO clientes VALUES (1, 'García', 720);
 
 -- Actualizá y verificá:
 UPDATE clientes SET email = 'garcia@mail.com' WHERE id = 1;
-SELECT * FROM clientes;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["ALTER TABLE clientes ADD COLUMN email TEXT;","La columna se agrega con NULL para filas existentes","Después podés UPDATE para llenar datos"]'></div></div>
+SELECT * FROM clientes;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["ALTER TABLE clientes ADD COLUMN email TEXT;","La columna se agrega con NULL para filas existentes","Después podés UPDATE para llenar datos"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: CREATE TABLE AS SELECT</h4><p>Creá una tabla <code>resumen</code> a partir de un SELECT agrupado. Debe incluir <code>Buenos Aires</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-7" data-expected="Buenos Aires"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "Buenos Aires"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: CREATE TABLE AS SELECT</h4>
+        <p>Creá una tabla <code>resumen</code> a partir de un SELECT agrupado. Debe incluir <code>Buenos Aires</code>.
+        </p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-7" data-expected="Buenos Aires">
+          <div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "Buenos Aires"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),(3,'Pérez','Buenos Aires',890000);
 
 -- CREATE TABLE AS:
 
 
-SELECT * FROM resumen;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["CREATE TABLE resumen AS SELECT ciudad, COUNT(*) AS clientes, SUM(saldo) AS total FROM clientes GROUP BY ciudad;","Crea la tabla con los datos del SELECT","Buenos Aires: 2 clientes, $1,040,000"]'></div></div>
+SELECT * FROM resumen;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["CREATE TABLE resumen AS SELECT ciudad, COUNT(*) AS clientes, SUM(saldo) AS total FROM clientes GROUP BY ciudad;","Crea la tabla con los datos del SELECT","Buenos Aires: 2 clientes, $1,040,000"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Esquema de 3 tablas relacionadas</h4><p>Diseñá: sucursales → clientes → cuentas con PKs y FKs. Insertá datos y verificá. Debe incluir <code>Centro</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-8" data-expected="Centro"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "Centro"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Diseñá las 3 tablas:
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Esquema de 3 tablas relacionadas</h4>
+        <p>Diseñá: sucursales → clientes → cuentas con PKs y FKs. Insertá datos y verificá. Debe incluir
+          <code>Centro</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-8" data-expected="Centro">
+          <div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "Centro"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">-- Diseñá las 3 tablas:
 
 
 -- Insertá datos y verificá con JOIN de 3 tablas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["CREATE TABLE sucursales (id INTEGER PRIMARY KEY, nombre TEXT UNIQUE);","clientes tiene sucursal_id con FK, cuentas tiene cliente_id con FK","JOIN sucursales → clientes → cuentas"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["CREATE TABLE sucursales (id INTEGER PRIMARY KEY, nombre TEXT UNIQUE);","clientes tiene sucursal_id con FK, cuentas tiene cliente_id con FK","JOIN sucursales → clientes → cuentas"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: CHECK + tipo restringido con IN</h4><p>Creá tabla donde <code>tipo</code> solo acepta 'compra', 'venta' o 'transferencia'. Debe incluir <code>compra</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-9" data-expected="compra"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "compra"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Tabla con CHECK + IN:
+      <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: CHECK + tipo restringido con IN</h4>
+        <p>Creá tabla donde <code>tipo</code> solo acepta 'compra', 'venta' o 'transferencia'. Debe incluir
+          <code>compra</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-9" data-expected="compra">
+          <div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "compra"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">-- Tabla con CHECK + IN:
 
 
 INSERT INTO transacciones VALUES (1, 'compra', 15000);
 INSERT INTO transacciones VALUES (2, 'venta', 8000);
-SELECT * FROM transacciones;</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["tipo TEXT CHECK (tipo IN (\\x27compra\\x27, \\x27venta\\x27, \\x27transferencia\\x27))","Si intentás INSERT con tipo \\x27otro\\x27 da error","CHECK + IN simula un ENUM"]'></div></div>
+SELECT * FROM transacciones;</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["tipo TEXT CHECK (tipo IN (\\x27compra\\x27, \\x27venta\\x27, \\x27transferencia\\x27))","Si intentás INSERT con tipo \\x27otro\\x27 da error","CHECK + IN simula un ENUM"]'>
+        </div>
+      </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Diseño completo + poblar + reporte</h4><p>Diseñá un esquema bancario de 3 tablas con todos los constraints. Poblalo con datos. Generá un reporte con JOINs. Debe incluir <code>ESQUEMA</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-10" data-expected="ESQUEMA"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "ESQUEMA"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">-- Diseñá el ESQUEMA completo:
+      <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Diseño completo + poblar + reporte</h4>
+        <p>Diseñá un esquema bancario de 3 tablas con todos los constraints. Poblalo con datos. Generá un reporte con
+          JOINs. Debe incluir <code>ESQUEMA</code>.</p>
+        <div class="editor" data-mode="sql" data-lesson="sql-13" data-exercise="ex-10" data-expected="ESQUEMA">
+          <div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "ESQUEMA"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">-- Diseñá el ESQUEMA completo:
 SELECT 'ESQUEMA BANCARIO' AS titulo;
 
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["3 tablas: clientes (PK, NOT NULL, UNIQUE cuit, CHECK score), cuentas (FK), transacciones (FK a cuentas)","INSERT datos realistas","SELECT con JOIN + GROUP BY para reporte final"]'></div></div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["3 tablas: clientes (PK, NOT NULL, UNIQUE cuit, CHECK score), cuentas (FK), transacciones (FK a cuentas)","INSERT datos realistas","SELECT con JOIN + GROUP BY para reporte final"]'>
+        </div>
+      </div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
 
-<ul>
-  <li><code>CREATE TABLE</code> define estructura con tipos y constraints.</li>
-  <li>Constraints: PRIMARY KEY, NOT NULL, UNIQUE, DEFAULT, CHECK, FOREIGN KEY.</li>
-  <li>FOREIGN KEY conecta tablas garantizando integridad referencial.</li>
-  <li><code>ALTER TABLE</code> agrega columnas. <code>DROP TABLE</code> elimina tablas (irreversible).</li>
-  <li><code>CREATE TABLE AS SELECT</code> crea tablas desde consultas.</li>
-</ul>
+      <ul>
+        <li><code>CREATE TABLE</code> define estructura con tipos y constraints.</li>
+        <li>Constraints: PRIMARY KEY, NOT NULL, UNIQUE, DEFAULT, CHECK, FOREIGN KEY.</li>
+        <li>FOREIGN KEY conecta tablas garantizando integridad referencial.</li>
+        <li><code>ALTER TABLE</code> agrega columnas. <code>DROP TABLE</code> elimina tablas (irreversible).</li>
+        <li><code>CREATE TABLE AS SELECT</code> crea tablas desde consultas.</li>
+      </ul>
 
-<p>En la siguiente lección (<strong>14 · Caso práctico</strong>) vas a aplicar TODO lo aprendido en un análisis completo sobre un dataset multi-tabla.</p>
+      <p>En la siguiente lección (<strong>14 · Caso práctico</strong>) vas a aplicar TODO lo aprendido en un análisis
+        completo sobre un dataset multi-tabla.</p>
 
-<div class="footer-nav">
-  <a href="/sql/12-insert-update-delete.html">← INSERT, UPDATE, DELETE</a>
-  <a class="next" href="/sql/14-caso-practico-sql.html">Caso práctico →</a>
-</div>
+      <div class="footer-nav">
+        <a href="/sql/12-insert-update-delete.html">← INSERT, UPDATE, DELETE</a>
+        <a class="next" href="/sql/14-caso-practico-sql.html">Caso práctico →</a>
+      </div>
 
-</main>
-</div>
+    </main>
+  </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

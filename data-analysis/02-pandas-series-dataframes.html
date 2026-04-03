@@ -1,61 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Data Analysis 02 · pandas: Series y DataFrames</title>
-<meta name="description" content="Dominá la estructura interna de pandas. Aprende a crear, entender y manipular Series y DataFrames desde cero con ejemplos reales del mundo financiero y retail.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Data Analysis 02 · pandas: Series y DataFrames</title>
+  <meta name="description"
+    content="Dominá la estructura interna de pandas. Aprende a crear, entender y manipular Series y DataFrames desde cero con ejemplos reales del mundo financiero y retail.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label data">Data Analysis · Lección 02 de 19</span>
-  <h1>pandas: Series y DataFrames</h1>
-  <p>En el mundo real, no trabajás con <em>bases de datos</em> en abstracto. En Python trabajás con <strong>DataFrames</strong> y <strong>Series</strong>. Entender la diferencia entre ambos es la clave para no trabarte cuando intentes aplicar funciones avanzadas más adelante.</p>
-  <div class="badges">
-    <span class="badge">60–90 min</span>
-    <span class="badge">Prerrequisitos: Lección 01</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Teoría: Anatomía de pandas</h2>
+      <div class="hero">
+        <span class="track-label data">Data Analysis · Lección 02 de 19</span>
+        <h1>pandas: Series y DataFrames</h1>
+        <p>En el mundo real, no trabajás con <em>bases de datos</em> en abstracto. En Python trabajás con
+          <strong>DataFrames</strong> y <strong>Series</strong>. Entender la diferencia entre ambos es la clave para no
+          trabarte cuando intentes aplicar funciones avanzadas más adelante.</p>
+        <div class="badges">
+          <span class="badge">60–90 min</span>
+          <span class="badge">Prerrequisitos: Lección 01</span>
+        </div>
+      </div>
 
-<p>Todo el ecosistema de análisis de datos de Python se sostiene sobre dos tipos de objetos creados por la librería principal:</p>
+      <div class="section-num">01</div>
+      <h2>Teoría: Anatomía de pandas</h2>
 
-<ul>
-    <li><strong>La Serie (<code>pd.Series</code>):</strong> Es un <strong>arreglo unidimensional</strong>. En lenguaje de negocios, imagínalo simplemente como <em>una sola columna de Excel</em>, pero acompañada de un índice.</li>
-    <li><strong>El DataFrame (<code>pd.DataFrame</code>):</strong> Es un <strong>arreglo bidimensional</strong>. Es una tabla entera, compuesta por múltiples columnas alineadas. En esencia, un DataFrame es, ni más ni menos, que "un rejunte" o diccionario compuesto de múltiples Series compartiendo el mismo índice.</li>
-</ul>
+      <p>Todo el ecosistema de análisis de datos de Python se sostiene sobre dos tipos de objetos creados por la
+        librería principal:</p>
 
-<div class="analogy"><strong>Analogía visual:</strong> Una sola pata de la mesa es una <strong>Serie</strong>. La mesa completa (con todas sus patas alineadas y atornilladas a la madera) es el <strong>DataFrame</strong>.</div>
+      <ul>
+        <li><strong>La Serie (<code>pd.Series</code>):</strong> Es un <strong>arreglo unidimensional</strong>. En
+          lenguaje de negocios, imagínalo simplemente como <em>una sola columna de Excel</em>, pero acompañada de un
+          índice.</li>
+        <li><strong>El DataFrame (<code>pd.DataFrame</code>):</strong> Es un <strong>arreglo bidimensional</strong>. Es
+          una tabla entera, compuesta por múltiples columnas alineadas. En esencia, un DataFrame es, ni más ni menos,
+          que "un rejunte" o diccionario compuesto de múltiples Series compartiendo el mismo índice.</li>
+      </ul>
 
-<h3>El Índice: El DNI de los datos</h3>
+      <div class="analogy"><strong>Analogía visual:</strong> Una sola pata de la mesa es una <strong>Serie</strong>. La
+        mesa completa (con todas sus patas alineadas y atornilladas a la madera) es el <strong>DataFrame</strong>.</div>
 
-<p>Tanto las Series como los DataFrames comparten un atributo mágico que las simples Listas de Python no tienen: <strong>el índice</strong> (<em>Index</em>). En las listas de Python (<code>[10, 20, 30]</code>) la posición 0, 1, 2 está implícita. En pandas, el índice es una capa visible al lado de la tabla que dice exactamente quién es esa fila. Puede ser un número <code>0, 1, 2</code>, pero ¡también puede ser una fecha <code>2024-01-01</code> o un ID de Cliente <code>CLI-892</code>!</p>
+      <h3>El Índice: El DNI de los datos</h3>
 
-<div class="section-num">02</div>
-<h2>Series en profundidad</h2>
+      <p>Tanto las Series como los DataFrames comparten un atributo mágico que las simples Listas de Python no tienen:
+        <strong>el índice</strong> (<em>Index</em>). En las listas de Python (<code>[10, 20, 30]</code>) la posición 0,
+        1, 2 está implícita. En pandas, el índice es una capa visible al lado de la tabla que dice exactamente quién es
+        esa fila. Puede ser un número <code>0, 1, 2</code>, pero ¡también puede ser una fecha <code>2024-01-01</code> o
+        un ID de Cliente <code>CLI-892</code>!</p>
 
-<p>Creemos una Serie para los precios de 3 acciones en la bolsa local.</p>
+      <div class="section-num">02</div>
+      <h2>Series en profundidad</h2>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>series_basicas.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <p>Creemos una Serie para los precios de 3 acciones en la bolsa local.</p>
+
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>series_basicas.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 # Creando una serie a partir de una lista simple de Python:
 precios = pd.Series([1200.5, 3450.0, 89.9])
@@ -67,17 +89,21 @@ print(precios)
 # Eso es el índice autogenerado porque no le pasamos uno. 
 # A la derecha tenés los valores reales que introdujimos.
 # Y abajo te avisa el 'dtype: float64' que significa: 
-# "todos estos datos son números decimales grandes".</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+# "todos estos datos son números decimales grandes".</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Series con Índice Personalizado</h3>
-<p>La magia ocurre cuando le asignamos las etiquetas (los nombres de las acciones) al índice. Ahora podemos extraer valores usando su nombre, y no solo porque <em>"esté en la posición 1"</em>.</p>
+      <h3>Series con Índice Personalizado</h3>
+      <p>La magia ocurre cuando le asignamos las etiquetas (los nombres de las acciones) al índice. Ahora podemos
+        extraer valores usando su nombre, y no solo porque <em>"esté en la posición 1"</em>.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>series_indice_personalizado.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>series_indice_personalizado.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 valores_acciones = [1200.5, 3450.0, 89.9]
 nombres_acciones = ["YPFD", "GGAL", "COME"]
@@ -90,22 +116,28 @@ print(cartera)
 
 print("\n=== Extrayendo datos ===")
 # Extraer usando nuestra etiqueta:
-print("Precio de GGAL:", cartera["GGAL"])</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("Precio de GGAL:", cartera["GGAL"])</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="tip"><strong>Tip estructural:</strong> Si armás la Serie desde un diccionario (ej: <code>{'YPFD': 1200, 'GGAL': 3450}</code>), pandas automáticamente usa las claves como índices y los valores como la data. Es una construcción súper ágil.</div>
+      <div class="tip"><strong>Tip estructural:</strong> Si armás la Serie desde un diccionario (ej:
+        <code>{'YPFD': 1200, 'GGAL': 3450}</code>), pandas automáticamente usa las claves como índices y los valores
+        como la data. Es una construcción súper ágil.</div>
 
 
-<div class="section-num">03</div>
-<h2>DataFrames en profundidad</h2>
+      <div class="section-num">03</div>
+      <h2>DataFrames en profundidad</h2>
 
-<p>Un DataFrame se usa cuando necesitás ver múltiples dimensiones. Para armarlo manualmente partimos de algo que en Análisis de Datos llamás "esquema columnar" (Dictionary of Lists).</p>
+      <p>Un DataFrame se usa cuando necesitás ver múltiples dimensiones. Para armarlo manualmente partimos de algo que
+        en Análisis de Datos llamás "esquema columnar" (Dictionary of Lists).</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>dataframes_columnar.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>dataframes_columnar.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 # 1. Definimos las columnas y sus listas de datos
 datos_financieros = {
@@ -124,19 +156,25 @@ print(df)
 # Atributos importantes de un dataframe que te evitan problemas técnicos:
 print(f"\nForma (filas, columnas): {df.shape}")
 print(f"Total de datos (celdas): {df.size}")
-print(f"Tipos de dato por columna:\n{df.dtypes}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Tipos de dato por columna:\n{df.dtypes}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="warning"><strong>El error de novato más grave:</strong> El atributo <code>.shape</code> no lleva paréntesis ni recibe argumentos. <code>df.shape()</code> fallará siempre. Es una <em>propiedad</em> del objeto, no un método/acción. Esto significa que la forma de la tabla ya está calculada y guardada, es inerte.</div>
+      <div class="warning"><strong>El error de novato más grave:</strong> El atributo <code>.shape</code> no lleva
+        paréntesis ni recibe argumentos. <code>df.shape()</code> fallará siempre. Es una <em>propiedad</em> del objeto,
+        no un método/acción. Esto significa que la forma de la tabla ya está calculada y guardada, es inerte.</div>
 
-<h3>Extrayendo partes de un DataFrame</h3>
-<p>Acá es donde conectás ambos conceptos. Cuando extraés una sola columna de un DataFrame, pandas evalúa: <em>"¿Una columna? Eso es un arreglo unidimensional"</em> y **automáticamente te devuelve una Serie**.</p>
+      <h3>Extrayendo partes de un DataFrame</h3>
+      <p>Acá es donde conectás ambos conceptos. Cuando extraés una sola columna de un DataFrame, pandas evalúa:
+        <em>"¿Una columna? Eso es un arreglo unidimensional"</em> y **automáticamente te devuelve una Serie**.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>extrayendo_series.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>extrayendo_series.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 datos = {"Ticker": ["YPFD", "GGAL", "COME"], "Precio": [1200, 3450, 89]}
 df_mercado = pd.DataFrame(datos)
@@ -149,42 +187,57 @@ print(columna_precios)
 
 # Verificamos qué tipo de objeto es:
 print("\n¿Qué sos?:", type(columna_precios))
-</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios interactivos</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios interactivos</h2>
 
-<p>Estos ejercicios están pensados para asentar la creación de estructuras y extracción básica.</p>
+      <p>Estos ejercicios están pensados para asentar la creación de estructuras y extracción básica.</p>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Crear una Serie desde un Diccionario</h4>
-  <p>Creá una serie desde un diccionario donde las claves sean los días de la semana y los valores la venta. La venta debe ser tu_dicc = <code>{"Lunes": 10, "Martes": 15, "Miercoles": 20}</code>. Imprimila por consola. La salida debe mostrar el index <code>Miercoles</code> y el valor <code>20</code> en la misma línea.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-02" data-exercise="ex-1" data-expected="Miercoles    20">
-    <div class="editor-top"><span>ejercicio_01_serie.py</span><span>Debe incluir "Miercoles    20"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Crear una Serie desde un Diccionario</h4>
+        <p>Creá una serie desde un diccionario donde las claves sean los días de la semana y los valores la venta. La
+          venta debe ser tu_dicc = <code>{"Lunes": 10, "Martes": 15, "Miercoles": 20}</code>. Imprimila por consola. La
+          salida debe mostrar el index <code>Miercoles</code> y el valor <code>20</code> en la misma línea.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-02" data-exercise="ex-1"
+          data-expected="Miercoles    20">
+          <div class="editor-top"><span>ejercicio_01_serie.py</span><span>Debe incluir "Miercoles 20"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 # Creá la variable tu_dicc
 # Pasala a pd.Series y asignala a "serie_ventas"
 # Imprimí serie_ventas
 
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["tu_dicc = {\"Lunes\": 10, \"Martes\": 15, \"Miercoles\": 20}","serie_ventas = pd.Series(tu_dicc)", "print(serie_ventas)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["tu_dicc = {\"Lunes\": 10, \"Martes\": 15, \"Miercoles\": 20}","serie_ventas = pd.Series(tu_dicc)", "print(serie_ventas)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 2: Creación de Dataframe y Extracción de Atributos</h4>
-  <p>Utilizá las listas proporcionadas para armar el DataFrame de Clientes. El diccionario debe llamarse <code>datos</code> y tener las llaves <code>"Usuario"</code>, <code>"Edad"</code>, <code>"Activo"</code>. Luego instancialo como dataframe en la variable <code>df</code>. Por último, imprimí <strong>exclusivamente la forma del DataFrame</strong> usando la propiedad correspondiente. Tiene que decir <code>(3, 3)</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-02" data-exercise="ex-2" data-expected="(3, 3)">
-    <div class="editor-top"><span>ejercicio_02_dataframe.py</span><span>Debe imprimir "(3, 3)"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 2: Creación de Dataframe y Extracción de Atributos</h4>
+        <p>Utilizá las listas proporcionadas para armar el DataFrame de Clientes. El diccionario debe llamarse
+          <code>datos</code> y tener las llaves <code>"Usuario"</code>, <code>"Edad"</code>, <code>"Activo"</code>.
+          Luego instancialo como dataframe en la variable <code>df</code>. Por último, imprimí <strong>exclusivamente la
+            forma del DataFrame</strong> usando la propiedad correspondiente. Tiene que decir <code>(3, 3)</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-02" data-exercise="ex-2"
+          data-expected="(3, 3)">
+          <div class="editor-top"><span>ejercicio_02_dataframe.py</span><span>Debe imprimir "(3, 3)"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 usuarios = ["agustin99", "martina_dt", "julianok"]
 edades = [24, 30, 21]
@@ -193,20 +246,28 @@ activos = [True, True, False]
 # 1. Crear el diccionario
 # 2. DataFrame df
 # 3. Imprimir el shape usando df.shape
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["datos = {\"Usuario\": usuarios, \"Edad\": edades, \"Activo\": activos}","df = pd.DataFrame(datos)", "print(df.shape)"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["datos = {\"Usuario\": usuarios, \"Edad\": edades, \"Activo\": activos}","df = pd.DataFrame(datos)", "print(df.shape)"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 3: Extrayendo una Serie desde un Dataframe y calculando max()</h4>
-  <p>Dado el DataFrame listo de métricas de marketing, extraé usando corchetes <code>["columna"]</code> la columna "CTR" (Click Through Rate) para tener la <strong>Serie</strong> individual, y luego usá sobre ella el método <code>.max()</code>. Modificalo en un print de forma que el resultado contenga el número `15.5`.</p>
-  <div class="editor" data-mode="python" data-lesson="data-analysis-02" data-exercise="ex-3" data-expected="15.5">
-    <div class="editor-top"><span>ejercicio_03_combinado.py</span><span>Debe evaluar e imprimir "15.5"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 3: Extrayendo una Serie desde un Dataframe y calculando max()</h4>
+        <p>Dado el DataFrame listo de métricas de marketing, extraé usando corchetes <code>["columna"]</code> la columna
+          "CTR" (Click Through Rate) para tener la <strong>Serie</strong> individual, y luego usá sobre ella el método
+          <code>.max()</code>. Modificalo en un print de forma que el resultado contenga el número `15.5`.</p>
+        <div class="editor" data-mode="python" data-lesson="data-analysis-02" data-exercise="ex-3" data-expected="15.5">
+          <div class="editor-top"><span>ejercicio_03_combinado.py</span><span>Debe evaluar e imprimir "15.5"</span>
+          </div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">import pandas as pd
 
 df_mkt = pd.DataFrame({
     "Campania": ["Verano", "Invierno", "Otoño", "Primavera"],
@@ -215,36 +276,45 @@ df_mkt = pd.DataFrame({
 })
 
 # Escribí el código para extraer la columna CTR y sacar su max()
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["serie_ctr = df_mkt[\"CTR\"]", "ctr_maximo = serie_ctr.max()","print(ctr_maximo)"]'></div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Reflexión de Negocios</h2>
+
+      <p>Saber armar esquemas con diccionarios de Python a memoria de Pandas (como hoy) se usa todos los días cuando
+        hacemos peticiones a una API y nos responde un `JSON`. Extraer todo este JSON, pasarlo a Listas, y meterlo a un
+        DataFrame es una tarea clave para un Data Analyst y sobre todo para posiciones orientadas a automatización de
+        procesos RPA e Ingeniería de Datos.</p>
+
+      <p>En la siguiente lección (<strong>03 · pandas: lectura de datos</strong>) pasaremos al <em>santo grial</em> del
+        día a día: cómo importar miles de registros de archivos CSV externos que no están directamente en la memoria.
+      </p>
+
+      <div class="footer-nav">
+        <a href="/data-analysis/01-que-es-data-analysis.html">← Qué es Data Analysis</a>
+        <a class="next" href="/data-analysis/03-pandas-lectura-datos.html">Lectura de datos I/O →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h3" class="hint-box" data-hints='["serie_ctr = df_mkt[\"CTR\"]", "ctr_maximo = serie_ctr.max()","print(ctr_maximo)"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Reflexión de Negocios</h2>
-
-<p>Saber armar esquemas con diccionarios de Python a memoria de Pandas (como hoy) se usa todos los días cuando hacemos peticiones a una API y nos responde un `JSON`. Extraer todo este JSON, pasarlo a Listas, y meterlo a un DataFrame es una tarea clave para un Data Analyst y sobre todo para posiciones orientadas a automatización de procesos RPA e Ingeniería de Datos.</p>
-
-<p>En la siguiente lección (<strong>03 · pandas: lectura de datos</strong>) pasaremos al <em>santo grial</em> del día a día: cómo importar miles de registros de archivos CSV externos que no están directamente en la memoria.</p>
-
-<div class="footer-nav">
-  <a href="/data-analysis/01-que-es-data-analysis.html">← Qué es Data Analysis</a>
-  <a class="next" href="/data-analysis/03-pandas-lectura-datos.html">Lectura de datos I/O →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

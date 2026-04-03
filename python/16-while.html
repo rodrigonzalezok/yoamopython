@@ -1,59 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 16 · While</title>
-<meta name="description" content="Dominá el bucle while en Python: condiciones de salida, break/continue, contadores, acumuladores y simulaciones financieras.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 16 · While</title>
+  <meta name="description"
+    content="Dominá el bucle while en Python: condiciones de salida, break/continue, contadores, acumuladores y simulaciones financieras.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 16 de 27</span>
-  <h1>While (bucle condicional)</h1>
-  <p>El bucle <code>while</code> repite un bloque de código mientras una condición sea verdadera. Es la herramienta ideal cuando no sabés de antemano cuántas veces necesitás repetir algo: simulaciones mes a mes, validación de datos, reintentos hasta éxito.</p>
-  <div class="badges">
-    <span class="badge">80–100 min</span>
-    <span class="badge">Prerrequisitos: 06 Condicionales, 08 Listas</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 16 de 27</span>
+        <h1>While (bucle condicional)</h1>
+        <p>El bucle <code>while</code> repite un bloque de código mientras una condición sea verdadera. Es la
+          herramienta ideal cuando no sabés de antemano cuántas veces necesitás repetir algo: simulaciones mes a mes,
+          validación de datos, reintentos hasta éxito.</p>
+        <div class="badges">
+          <span class="badge">80–100 min</span>
+          <span class="badge">Prerrequisitos: 06 Condicionales, 08 Listas</span>
+        </div>
+      </div>
 
-<h3>¿Qué es un bucle while?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Un <strong>bucle while</strong> ejecuta un bloque de código repetidamente <b>mientras una condición sea True</b>. Cuando la condición se vuelve False, el bucle se detiene y la ejecución continúa con la siguiente línea después del while.</p>
+      <h3>¿Qué es un bucle while?</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">while condición:
+      <p>Un <strong>bucle while</strong> ejecuta un bloque de código repetidamente <b>mientras una condición sea
+          True</b>. Cuando la condición se vuelve False, el bucle se detiene y la ejecución continúa con la siguiente
+        línea después del while.</p>
+
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">while condición:
     # este bloque se repite mientras condición sea True
     hacer_algo()
     # IMPORTANTE: algo dentro del bloque debe eventualmente
     # hacer que la condición sea False, o el loop es infinito</pre>
 
-<p>El flujo es: (1) evaluar condición → (2) si es True, ejecutar el bloque → (3) volver a (1) → (4) si es False, salir del while.</p>
+      <p>El flujo es: (1) evaluar condición → (2) si es True, ejecutar el bloque → (3) volver a (1) → (4) si es False,
+        salir del while.</p>
 
-<div class="concept"><strong>Diferencia con if:</strong> un <code>if</code> evalúa la condición UNA vez. Un <code>while</code> la evalúa MUCHAS veces, ejecutando el bloque en cada iteración. El <code>while</code> es como un <code>if</code> que se repite automáticamente hasta que la condición cambie.</div>
+      <div class="concept"><strong>Diferencia con if:</strong> un <code>if</code> evalúa la condición UNA vez. Un
+        <code>while</code> la evalúa MUCHAS veces, ejecutando el bloque en cada iteración. El <code>while</code> es como
+        un <code>if</code> que se repite automáticamente hasta que la condición cambie.</div>
 
-<h3>El peligro del loop infinito</h3>
+      <h3>El peligro del loop infinito</h3>
 
-<p>Si nada dentro del bloque modifica la condición para que eventualmente sea False, el bucle corre para siempre. Esto se llama <strong>loop infinito</strong> y es el error más grave que podés cometer con while:</p>
+      <p>Si nada dentro del bloque modifica la condición para que eventualmente sea False, el bucle corre para siempre.
+        Esto se llama <strong>loop infinito</strong> y es el error más grave que podés cometer con while:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># ❌ LOOP INFINITO — la condición nunca cambia
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># ❌ LOOP INFINITO — la condición nunca cambia
 x = 10
 while x > 0:
     print(x)    # imprime 10 para siempre
@@ -65,17 +82,22 @@ while x > 0:
     print(x)
     x -= 1      # eventualmente x llega a 0 → condición False</pre>
 
-<div class="warning"><strong>Regla de supervivencia:</strong> antes de escribir un while, preguntate: "¿qué línea dentro del bloque va a hacer que la condición cambie?". Si no tenés respuesta clara, vas a crear un loop infinito. Si te pasa en Pyodide (este editor), recargá la página.</div>
+      <div class="warning"><strong>Regla de supervivencia:</strong> antes de escribir un while, preguntate: "¿qué línea
+        dentro del bloque va a hacer que la condición cambie?". Si no tenés respuesta clara, vas a crear un loop
+        infinito. Si te pasa en Pyodide (este editor), recargá la página.</div>
 
-<h3>break y continue</h3>
+      <h3>break y continue</h3>
 
-<p><code><b>break</b></code> — sale del bucle inmediatamente, sin importar si la condición sigue siendo True. Es como un "basta, salgo ya".</p>
+      <p><code><b>break</b></code> — sale del bucle inmediatamente, sin importar si la condición sigue siendo True. Es
+        como un "basta, salgo ya".</p>
 
-<p><code><b>continue</b></code> — salta el resto de la iteración actual y vuelve al inicio del while para evaluar la condición de nuevo. Es como un "salteo esta vuelta".</p>
+      <p><code><b>continue</b></code> — salta el resto de la iteración actual y vuelve al inicio del while para evaluar
+        la condición de nuevo. Es como un "salteo esta vuelta".</p>
 
-<p>El patrón <code>while True: ... break</code> es muy común cuando la condición de salida está en el medio del bloque (no al inicio):</p>
+      <p>El patrón <code>while True: ... break</code> es muy común cuando la condición de salida está en el medio del
+        bloque (no al inicio):</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">while True:
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">while True:
     dato = obtener_dato()
     if dato == "salir":
         break           # sale del while
@@ -83,42 +105,71 @@ while x > 0:
         continue        # vuelve a pedir dato
     procesar(dato)</pre>
 
-<h3>Contadores y acumuladores</h3>
+      <h3>Contadores y acumuladores</h3>
 
-<p>Dos patrones fundamentales que usás constantemente con while (y también con for):</p>
+      <p>Dos patrones fundamentales que usás constantemente con while (y también con for):</p>
 
-<ul>
-  <li><b>Contador:</b> una variable que cuenta cuántas veces pasó algo. Empieza en 0 y se incrementa con <code>+= 1</code>.</li>
-  <li><b>Acumulador:</b> una variable que acumula un total. Empieza en 0 y se incrementa con el valor de cada iteración (<code>+= monto</code>).</li>
-</ul>
+      <ul>
+        <li><b>Contador:</b> una variable que cuenta cuántas veces pasó algo. Empieza en 0 y se incrementa con
+          <code>+= 1</code>.</li>
+        <li><b>Acumulador:</b> una variable que acumula un total. Empieza en 0 y se incrementa con el valor de cada
+          iteración (<code>+= monto</code>).</li>
+      </ul>
 
-<div class="analogy"><strong>Analogía bancaria:</strong> un cajero automático usa while internamente: <code>while intentos < 3 and not pin_correcto:</code> → le pide el PIN al usuario, cuenta los intentos, y si falla 3 veces o acertó, sale del loop. El contador (<code>intentos</code>) controla el límite y la condición booleana (<code>pin_correcto</code>) controla el éxito.</div>
+      <div class="analogy"><strong>Analogía bancaria:</strong> un cajero automático usa while internamente:
+        <code>while intentos < 3 and not pin_correcto:</code> → le pide el PIN al usuario, cuenta los intentos, y si
+        falla 3 veces o acertó, sale del loop. El contador (<code>intentos</code>) controla el límite y la condición
+        booleana (<code>pin_correcto</code>) controla el éxito.</div>
 
-<h3>¿Cuándo while vs for?</h3>
+      <h3>¿Cuándo while vs for?</h3>
 
-<div class="table-wrap">
-<table>
-<tr><th>Usá while cuando…</th><th>Usá for cuando…</th></tr>
-<tr><td>No sabés cuántas repeticiones necesitás</td><td>Sabés exactamente cuántas (o recorrés una colección)</td></tr>
-<tr><td>La condición de salida es compleja</td><td>Iterás sobre una lista, rango, diccionario</td></tr>
-<tr><td>Simulaciones hasta que se cumpla una meta</td><td>Procesás cada elemento de un dataset</td></tr>
-<tr><td>Reintentos con límite</td><td>Conteos y acumulaciones sobre datos conocidos</td></tr>
-<tr><td>Input validation loops</td><td>Recorridos de principio a fin</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Usá while cuando…</th>
+            <th>Usá for cuando…</th>
+          </tr>
+          <tr>
+            <td>No sabés cuántas repeticiones necesitás</td>
+            <td>Sabés exactamente cuántas (o recorrés una colección)</td>
+          </tr>
+          <tr>
+            <td>La condición de salida es compleja</td>
+            <td>Iterás sobre una lista, rango, diccionario</td>
+          </tr>
+          <tr>
+            <td>Simulaciones hasta que se cumpla una meta</td>
+            <td>Procesás cada elemento de un dataset</td>
+          </tr>
+          <tr>
+            <td>Reintentos con límite</td>
+            <td>Conteos y acumulaciones sobre datos conocidos</td>
+          </tr>
+          <tr>
+            <td>Input validation loops</td>
+            <td>Recorridos de principio a fin</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="realworld"><strong>En análisis de datos:</strong> while es ideal para simulaciones: "¿cuántos meses necesito para duplicar mi inversión al 5% mensual?" No sabés la respuesta antes de ejecutar — el while va calculando mes a mes hasta que la condición se cumpla.</div>
+      <div class="realworld"><strong>En análisis de datos:</strong> while es ideal para simulaciones: "¿cuántos meses
+        necesito para duplicar mi inversión al 5% mensual?" No sabés la respuesta antes de ejecutar — el while va
+        calculando mes a mes hasta que la condición se cumpla.</div>
 
-<div class="tip"><strong>Tip profesional:</strong> en Python, el 80% de las iteraciones se hacen con <code>for</code> (recorrer datos). El <code>while</code> se reserva para los casos donde la cantidad de repeticiones depende de una condición dinámica. Si te encontrás usando while para recorrer una lista con un índice manual, probablemente deberías usar for.</div>
+      <div class="tip"><strong>Tip profesional:</strong> en Python, el 80% de las iteraciones se hacen con
+        <code>for</code> (recorrer datos). El <code>while</code> se reserva para los casos donde la cantidad de
+        repeticiones depende de una condición dinámica. Si te encontrás usando while para recorrer una lista con un
+        índice manual, probablemente deberías usar for.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: Cuenta regresiva y while básico</h3>
+      <h3>Ejemplo 1: Cuenta regresiva y while básico</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_basico.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Cuenta regresiva
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_basico.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Cuenta regresiva
 n = 5
 print("Cuenta regresiva:")
 while n > 0:
@@ -135,16 +186,19 @@ while total < 100000:
     mes += 1
     total += deposito
     print(f"  Mes {mes}: depósito ${deposito:,} → total ${total:,}")
-print(f"Llegaste a ${total:,} en {mes} meses")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Llegaste a ${total:,} en {mes} meses")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Simulación de interés compuesto — ¿cuándo duplico mi plata?</h3>
+      <h3>Ejemplo 2: Simulación de interés compuesto — ¿cuándo duplico mi plata?</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_simulacion.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># ¿Cuántos meses para duplicar una inversión al 5% mensual?
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_simulacion.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># ¿Cuántos meses para duplicar una inversión al 5% mensual?
 capital_inicial = 100000
 tasa_mensual = 0.05
 objetivo = capital_inicial * 2  # duplicar
@@ -169,16 +223,19 @@ while saldo < objetivo:
 print(f"{'─'*35}")
 print(f"Duplicaste en {mes} meses")
 print(f"Saldo final: ${saldo:,.2f}")
-print(f"Ganancia: ${saldo - capital_inicial:,.2f} ({(saldo/capital_inicial - 1)*100:.1f}%)")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Ganancia: ${saldo - capital_inicial:,.2f} ({(saldo/capital_inicial - 1)*100:.1f}%)")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: break y continue en acción</h3>
+      <h3>Ejemplo 3: break y continue en acción</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_break_continue.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># break: buscar el primer cliente con score > 750
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_break_continue.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># break: buscar el primer cliente con score > 750
 clientes = [
     {"nombre": "García", "score": 720},
     {"nombre": "López", "score": 680},
@@ -234,16 +291,19 @@ while True:
         break
     if intentos >= 20:
         print(f"  Máximo de intentos alcanzado")
-        break</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+        break</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Amortización de préstamo (sistema francés simplificado)</h3>
+      <h3>Ejemplo 4: Amortización de préstamo (sistema francés simplificado)</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_amortizacion.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Simulación de amortización: pago fijo hasta saldar deuda
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_amortizacion.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Simulación de amortización: pago fijo hasta saldar deuda
 capital = 500000
 tasa_mensual = 0.045   # 4.5% mensual
 cuota_fija = 40000
@@ -285,16 +345,19 @@ while saldo > 0:
 print(f"{'─'*50}")
 print(f"Saldaste en {mes} meses")
 print(f"Total intereses: ${total_intereses:,}")
-print(f"Costo total: ${capital + total_intereses:,}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"Costo total: ${capital + total_intereses:,}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: while vs for — cuándo usar cada uno</h3>
+      <h3>Ejemplo 5: while vs for — cuándo usar cada uno</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_while_vs_for.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># CASO 1: Recorrer lista → FOR (siempre)
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_while_vs_for.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># CASO 1: Recorrer lista → FOR (siempre)
 saldos = [150000, 320000, 45000, 890000]
 print("FOR sobre lista:")
 for s in saldos:
@@ -327,205 +390,312 @@ cola = ["tarea_A", "tarea_B", "tarea_C"]
 while cola:
     tarea = cola.pop(0)
     print(f"  Procesando: {tarea}")
-print("  Cola vacía ✅")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print("  Cola vacía ✅")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Patrón</th><th>Estructura</th><th>Uso</th></tr>
-<tr><td>While básico</td><td><code>while cond: bloque</code></td><td>Repetir mientras se cumpla</td></tr>
-<tr><td>Contador</td><td><code>n=0; while cond: n+=1</code></td><td>Contar iteraciones</td></tr>
-<tr><td>Acumulador</td><td><code>total=0; while: total+=v</code></td><td>Sumar valores</td></tr>
-<tr><td>while True + break</td><td><code>while True: if x: break</code></td><td>Condición en medio del bloque</td></tr>
-<tr><td>Sentinel loop</td><td><code>while dato != fin:</code></td><td>Procesar hasta valor especial</td></tr>
-<tr><td>Retry con límite</td><td><code>while intentos < max:</code></td><td>Reintentos con tope</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Patrón</th>
+            <th>Estructura</th>
+            <th>Uso</th>
+          </tr>
+          <tr>
+            <td>While básico</td>
+            <td><code>while cond: bloque</code></td>
+            <td>Repetir mientras se cumpla</td>
+          </tr>
+          <tr>
+            <td>Contador</td>
+            <td><code>n=0; while cond: n+=1</code></td>
+            <td>Contar iteraciones</td>
+          </tr>
+          <tr>
+            <td>Acumulador</td>
+            <td><code>total=0; while: total+=v</code></td>
+            <td>Sumar valores</td>
+          </tr>
+          <tr>
+            <td>while True + break</td>
+            <td><code>while True: if x: break</code></td>
+            <td>Condición en medio del bloque</td>
+          </tr>
+          <tr>
+            <td>Sentinel loop</td>
+            <td><code>while dato != fin:</code></td>
+            <td>Procesar hasta valor especial</td>
+          </tr>
+          <tr>
+            <td>Retry con límite</td>
+            <td><code>while intentos < max:</code></td>
+            <td>Reintentos con tope</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Keyword</th><th>Qué hace</th><th>Cuándo usar</th></tr>
-<tr><td><code>break</code></td><td>Sale del while inmediatamente</td><td>Encontraste lo que buscabas / error fatal</td></tr>
-<tr><td><code>continue</code></td><td>Salta al inicio del while</td><td>Este dato es inválido, seguí con el próximo</td></tr>
-<tr><td><code>else</code> (en while)</td><td>Se ejecuta si NO hubo break</td><td>Verificar si el loop terminó normalmente</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Keyword</th>
+            <th>Qué hace</th>
+            <th>Cuándo usar</th>
+          </tr>
+          <tr>
+            <td><code>break</code></td>
+            <td>Sale del while inmediatamente</td>
+            <td>Encontraste lo que buscabas / error fatal</td>
+          </tr>
+          <tr>
+            <td><code>continue</code></td>
+            <td>Salta al inicio del while</td>
+            <td>Este dato es inválido, seguí con el próximo</td>
+          </tr>
+          <tr>
+            <td><code>else</code> (en while)</td>
+            <td>Se ejecuta si NO hubo break</td>
+            <td>Verificar si el loop terminó normalmente</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Cuenta regresiva desde 10</h4>
-  <p>Imprimí los números del 10 al 1 con while y después <code>¡Despegue!</code>. Debe incluir <code>¡Despegue!</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-1" data-expected="¡Despegue!">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "¡Despegue!"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">n = 10
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Cuenta regresiva desde 10</h4>
+        <p>Imprimí los números del 10 al 1 con while y después <code>¡Despegue!</code>. Debe incluir
+          <code>¡Despegue!</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-1" data-expected="¡Despegue!">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "¡Despegue!"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">n = 10
 
 # Cuenta regresiva:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["while n > 0: print(n); n -= 1","No olvides el n -= 1 dentro del while","Al salir del while: print(\"¡Despegue!\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["while n > 0: print(n); n -= 1","No olvides el n -= 1 dentro del while","Al salir del while: print(\"¡Despegue!\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Sumar hasta superar un objetivo</h4>
-  <p>Empezá con <code>total = 0</code>. Sumá <code>25000</code> por iteración hasta superar <code>$100,000</code>. Imprimí cuántas iteraciones necesitaste. Debe incluir <code>5</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-2" data-expected="5">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "5"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">total = 0
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Sumar hasta superar un objetivo</h4>
+        <p>Empezá con <code>total = 0</code>. Sumá <code>25000</code> por iteración hasta superar <code>$100,000</code>.
+          Imprimí cuántas iteraciones necesitaste. Debe incluir <code>5</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-2" data-expected="5">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "5"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">total = 0
 deposito = 25000
 iteraciones = 0
 
 # Acumulá hasta > 100000:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["while total <= 100000:","    total += deposito; iteraciones += 1","25000*4=100000 no supera, 25000*5=125000 sí → 5"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["while total <= 100000:","    total += deposito; iteraciones += 1","25000*4=100000 no supera, 25000*5=125000 sí → 5"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Dividir hasta que sea menor que 1</h4>
-  <p>Empezá con <code>n = 1024</code>. Dividilo por 2 en cada iteración hasta que sea menor que 1. Contá cuántas divisiones hiciste. Debe incluir <code>11</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-3" data-expected="11">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "11"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">n = 1024
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Dividir hasta que sea menor que 1</h4>
+        <p>Empezá con <code>n = 1024</code>. Dividilo por 2 en cada iteración hasta que sea menor que 1. Contá cuántas
+          divisiones hiciste. Debe incluir <code>11</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-3" data-expected="11">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "11"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">n = 1024
 divisiones = 0
 
 # Dividí por 2 hasta < 1:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["while n >= 1: n /= 2; divisiones += 1","1024 → 512 → 256 → ... → 0.5","2^10 = 1024, necesitás 11 divisiones para llegar a < 1"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["while n >= 1: n /= 2; divisiones += 1","1024 → 512 → 256 → ... → 0.5","2^10 = 1024, necesitás 11 divisiones para llegar a < 1"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: ¿Cuántos meses para duplicar inversión?</h4>
-  <p>Capital <code>$200,000</code> al <code>4%</code> mensual compuesto. ¿Cuántos meses para duplicar? Debe incluir <code>18</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-4" data-expected="18">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "18"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">capital = 200000
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: ¿Cuántos meses para duplicar inversión?</h4>
+        <p>Capital <code>$200,000</code> al <code>4%</code> mensual compuesto. ¿Cuántos meses para duplicar? Debe
+          incluir <code>18</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-4" data-expected="18">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "18"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">capital = 200000
 tasa = 0.04
 objetivo = capital * 2
 saldo = capital
 mes = 0
 
 # Simulá hasta duplicar:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["while saldo < objetivo:","    mes += 1; saldo *= (1 + tasa)","A 4% mensual compuesto, duplicar toma ~18 meses"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["while saldo < objetivo:","    mes += 1; saldo *= (1 + tasa)","A 4% mensual compuesto, duplicar toma ~18 meses"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Procesar cola con while + pop</h4>
-  <p>Dada <code>tareas = ["Limpiar datos","Calcular métricas","Generar reporte","Enviar email"]</code>, procesá cada una con <code>while tareas:</code> y <code>.pop(0)</code>. Debe incluir <code>Generar reporte</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-5" data-expected="Generar reporte">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Generar reporte"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">tareas = ["Limpiar datos", "Calcular métricas", "Generar reporte", "Enviar email"]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Procesar cola con while + pop</h4>
+        <p>Dada <code>tareas = ["Limpiar datos","Calcular métricas","Generar reporte","Enviar email"]</code>, procesá
+          cada una con <code>while tareas:</code> y <code>.pop(0)</code>. Debe incluir <code>Generar reporte</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-5"
+          data-expected="Generar reporte">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Generar reporte"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">tareas = ["Limpiar datos", "Calcular métricas", "Generar reporte", "Enviar email"]
 
 # Procesá la cola:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["while tareas: (la lista vacía es falsy)","    tarea = tareas.pop(0)","    print(f\"Procesando: {tarea}\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["while tareas: (la lista vacía es falsy)","    tarea = tareas.pop(0)","    print(f\"Procesando: {tarea}\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: break para buscar primer match</h4>
-  <p>Dada una lista de scores, encontrá el primero que supere 750 usando while + break. Debe incluir <code>810</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-6" data-expected="810">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "810"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">scores = [650, 720, 590, 810, 680, 900]
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: break para buscar primer match</h4>
+        <p>Dada una lista de scores, encontrá el primero que supere 750 usando while + break. Debe incluir
+          <code>810</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-6" data-expected="810">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "810"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">scores = [650, 720, 590, 810, 680, 900]
 
 # Encontrá el primero > 750:
 i = 0
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["while i < len(scores):","    if scores[i] > 750: print(scores[i]); break","    i += 1"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["while i < len(scores):","    if scores[i] > 750: print(scores[i]); break","    i += 1"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Simulación de ahorro mensual</h4>
-  <p>Ahorrás <code>$50,000/mes</code> con rendimiento de <code>3%</code> mensual sobre el acumulado. ¿Cuántos meses para llegar a <code>$1,000,000</code>? Imprimí cada mes. Debe incluir <code>Objetivo alcanzado</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-7" data-expected="Objetivo alcanzado">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Objetivo alcanzado"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">ahorro_mensual = 50000
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Simulación de ahorro mensual</h4>
+        <p>Ahorrás <code>$50,000/mes</code> con rendimiento de <code>3%</code> mensual sobre el acumulado. ¿Cuántos
+          meses para llegar a <code>$1,000,000</code>? Imprimí cada mes. Debe incluir <code>Objetivo alcanzado</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-7"
+          data-expected="Objetivo alcanzado">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Objetivo alcanzado"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">ahorro_mensual = 50000
 tasa = 0.03
 objetivo = 1000000
 saldo = 0
 mes = 0
 
 # Simulá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["while saldo < objetivo:","    mes += 1; saldo = saldo * (1+tasa) + ahorro_mensual","Al salir: print(\"Objetivo alcanzado\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["while saldo < objetivo:","    mes += 1; saldo = saldo * (1+tasa) + ahorro_mensual","Al salir: print(\"Objetivo alcanzado\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Amortización de deuda</h4>
-  <p>Deuda de <code>$300,000</code> al <code>5%</code> mensual. Pagás <code>$25,000/mes</code>. ¿En cuántos meses saldás? Si la cuota no cubre el interés, imprimí <code>Deuda impagable</code>. Debe incluir <code>meses</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-8" data-expected="meses">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "meses"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">deuda = 300000
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Amortización de deuda</h4>
+        <p>Deuda de <code>$300,000</code> al <code>5%</code> mensual. Pagás <code>$25,000/mes</code>. ¿En cuántos meses
+          saldás? Si la cuota no cubre el interés, imprimí <code>Deuda impagable</code>. Debe incluir
+          <code>meses</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-8" data-expected="meses">
+          <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "meses"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">deuda = 300000
 tasa = 0.05
 cuota = 25000
 mes = 0
 
 # Simulá amortización:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["Interés primer mes: 300000*0.05 = 15000. Cuota 25000 > interés → OK","while deuda > 0: interes = deuda*tasa; deuda = deuda + interes - cuota","Verificá si cuota > interes al inicio. Si no, es impagable."]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h8" class="hint-box"
+          data-hints='["Interés primer mes: 300000*0.05 = 15000. Cuota 25000 > interés → OK","while deuda > 0: interes = deuda*tasa; deuda = deuda + interes - cuota","Verificá si cuota > interes al inicio. Si no, es impagable."]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Fibonacci hasta superar un valor</h4>
-  <p>Generá la secuencia de Fibonacci (0, 1, 1, 2, 3, 5, 8, 13...) hasta superar <code>1000</code>. Imprimí la secuencia. Debe incluir <code>1597</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-9" data-expected="1597">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "1597"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">a, b = 0, 1
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Fibonacci hasta superar un valor</h4>
+        <p>Generá la secuencia de Fibonacci (0, 1, 1, 2, 3, 5, 8, 13...) hasta superar <code>1000</code>. Imprimí la
+          secuencia. Debe incluir <code>1597</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-9" data-expected="1597">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "1597"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">a, b = 0, 1
 secuencia = []
 
 # Generá Fibonacci hasta > 1000:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["while a <= 1000: secuencia.append(a); a, b = b, a + b","El swap a, b = b, a+b es clave","Después de 987 viene 1597 que es > 1000"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["while a <= 1000: secuencia.append(a); a, b = b, a + b","El swap a, b = b, a+b es clave","Después de 987 viene 1597 que es > 1000"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Simulación bancaria completa</h4>
-  <p>Simulá 24 meses de una cuenta: saldo inicial <code>$500,000</code>. Cada mes: sumá sueldo <code>$350,000</code>, restá gastos <code>$280,000</code>, aplicá rendimiento <code>0.2%</code> sobre saldo positivo. Si el saldo baja de 0, imprimí alerta y break. Al final imprimí un resumen con saldo final y meses transcurridos. Debe incluir <code>RESUMEN</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-10" data-expected="RESUMEN">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "RESUMEN"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 500000
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Simulación bancaria completa</h4>
+        <p>Simulá 24 meses de una cuenta: saldo inicial <code>$500,000</code>. Cada mes: sumá sueldo
+          <code>$350,000</code>, restá gastos <code>$280,000</code>, aplicá rendimiento <code>0.2%</code> sobre saldo
+          positivo. Si el saldo baja de 0, imprimí alerta y break. Al final imprimí un resumen con saldo final y meses
+          transcurridos. Debe incluir <code>RESUMEN</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-10" data-expected="RESUMEN">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "RESUMEN"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">saldo = 500000
 sueldo = 350000
 gastos = 280000
 rendimiento = 0.002
@@ -536,45 +706,57 @@ while mes < 24:
     pass  # reemplazá
 
 print(f"\n=== RESUMEN ===")
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["mes += 1; saldo += sueldo; saldo -= gastos","if saldo > 0: saldo *= (1 + rendimiento)","if saldo < 0: print(\"⚠️ Descubierto\"); break"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li><code>while condición:</code> repite mientras la condición sea True. Algo dentro del bloque DEBE cambiar la
+          condición.</li>
+        <li>Si nada cambia la condición → loop infinito (el bug más grave de while).</li>
+        <li><code>break</code> sale del while inmediatamente. <code>continue</code> salta a la siguiente iteración.</li>
+        <li>El patrón <code>while True: ... break</code> es ideal cuando la condición de salida está en medio del
+          bloque.</li>
+        <li>Contadores (<code>n += 1</code>) y acumuladores (<code>total += valor</code>) son los patrones más usados.
+        </li>
+        <li>Usá while para simulaciones y condiciones dinámicas. Usá for para recorrer datos.</li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>17 · For</strong>) vas a dominar el bucle más usado de Python: for con range,
+        listas, diccionarios, enumerate, zip, break/continue, y comprensiones — la herramienta que usás el 80% del
+        tiempo.</p>
+
+      <p><strong>Recursos:</strong> <a
+          href="https://docs.python.org/3/reference/compound_stmts.html#the-while-statement" target="_blank">Python docs
+          — while</a></p>
+
+      <div class="footer-nav">
+        <a href="/python/15-anidacion.html">← Anidación</a>
+        <a class="next" href="/python/17-for.html">For →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["mes += 1; saldo += sueldo; saldo -= gastos","if saldo > 0: saldo *= (1 + rendimiento)","if saldo < 0: print(\"⚠️ Descubierto\"); break"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li><code>while condición:</code> repite mientras la condición sea True. Algo dentro del bloque DEBE cambiar la condición.</li>
-  <li>Si nada cambia la condición → loop infinito (el bug más grave de while).</li>
-  <li><code>break</code> sale del while inmediatamente. <code>continue</code> salta a la siguiente iteración.</li>
-  <li>El patrón <code>while True: ... break</code> es ideal cuando la condición de salida está en medio del bloque.</li>
-  <li>Contadores (<code>n += 1</code>) y acumuladores (<code>total += valor</code>) son los patrones más usados.</li>
-  <li>Usá while para simulaciones y condiciones dinámicas. Usá for para recorrer datos.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>17 · For</strong>) vas a dominar el bucle más usado de Python: for con range, listas, diccionarios, enumerate, zip, break/continue, y comprensiones — la herramienta que usás el 80% del tiempo.</p>
-
-<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/reference/compound_stmts.html#the-while-statement" target="_blank">Python docs — while</a></p>
-
-<div class="footer-nav">
-  <a href="/python/15-anidacion.html">← Anidación</a>
-  <a class="next" href="/python/17-for.html">For →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

@@ -1,111 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 06 · Condicionales</title>
-<meta name="description" content="Aprendé if, elif y else en Python. Tomá decisiones en tu código con condicionales, operador ternario y match/case.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuieroProgramar · Python 06 · Condicionales</title>
+  <meta name="description"
+    content="Aprendé if, elif y else en Python. Tomá decisiones en tu código con condicionales, operador ternario y match/case.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
-
-<div class="hero">
-  <span class="track-label python">Python · Lección 06 de 27</span>
-  <h1>Condicionales (if / elif / else)</h1>
-  <p>Las estructuras condicionales hacen que tu programa tome decisiones. Sin ellas, un programa solo puede ejecutar instrucciones fijas de arriba a abajo. Con ellas, puede reaccionar a los datos y comportarse de forma inteligente.</p>
-  <div class="badges">
-    <span class="badge">80–100 min</span>
-    <span class="badge">Prerrequisitos: 05 Operaciones (comparación y lógicos)</span>
+  <div class="topbar">
+    <button class="ham-btn"
+      onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+    <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+    <div class="progress-shell">
+      <div id="global-progress-fill" class="progress-fill"></div>
+    </div>
+    <div id="global-progress-text" class="top-stats"></div>
   </div>
-</div>
+  <div id="sb-overlay" class="sidebar-overlay"
+    onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar-mount"></aside>
+    <main class="main">
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+      <div class="hero">
+        <span class="track-label python">Python · Lección 06 de 27</span>
+        <h1>Condicionales (if / elif / else)</h1>
+        <p>Las estructuras condicionales hacen que tu programa tome decisiones. Sin ellas, un programa solo puede
+          ejecutar instrucciones fijas de arriba a abajo. Con ellas, puede reaccionar a los datos y comportarse de forma
+          inteligente.</p>
+        <div class="badges">
+          <span class="badge">80–100 min</span>
+          <span class="badge">Prerrequisitos: 05 Operaciones (comparación y lógicos)</span>
+        </div>
+      </div>
 
-<h3>¿Qué es un condicional?</h3>
+      <div class="section-num">01</div>
+      <h2>Concepto teórico</h2>
 
-<p>Un <strong>condicional</strong> es una estructura que le dice a Python: "si esta condición es verdadera, ejecutá este bloque de código; si no, ejecutá otro". Es la forma en que un programa <b>toma decisiones</b>. Hasta ahora, tu código ejecutaba todas las líneas de arriba a abajo, siempre. Con condicionales, algunas líneas se ejecutan solo cuando se cumple una condición.</p>
+      <h3>¿Qué es un condicional?</h3>
 
-<p>La estructura más simple es:</p>
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">if condición:
+      <p>Un <strong>condicional</strong> es una estructura que le dice a Python: "si esta condición es verdadera,
+        ejecutá este bloque de código; si no, ejecutá otro". Es la forma en que un programa <b>toma decisiones</b>.
+        Hasta ahora, tu código ejecutaba todas las líneas de arriba a abajo, siempre. Con condicionales, algunas líneas
+        se ejecutan solo cuando se cumple una condición.</p>
+
+      <p>La estructura más simple es:</p>
+      <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">if condición:
     # este bloque se ejecuta solo si la condición es True
     hacer_algo()
 </pre>
 
-<div class="concept"><strong>Regla fundamental:</strong> la condición después de <code>if</code> debe ser algo que evalúe a <code>True</code> o <code>False</code>. Usás los operadores de comparación (<code>==</code>, <code>></code>, <code><</code>, <code>!=</code>) y lógicos (<code>and</code>, <code>or</code>, <code>not</code>) que aprendiste en la lección 05.</div>
+      <div class="concept"><strong>Regla fundamental:</strong> la condición después de <code>if</code> debe ser algo que
+        evalúe a <code>True</code> o <code>False</code>. Usás los operadores de comparación (<code>==</code>,
+        <code>></code>, <code><</code>, <code>!=</code>) y lógicos (<code>and</code>, <code>or</code>, <code>not</code>)
+        que aprendiste en la lección 05.</div>
 
-<h3>La indentación: obligatoria, no opcional</h3>
+      <h3>La indentación: obligatoria, no opcional</h3>
 
-<p>En Python, los <strong>dos puntos (<code>:</code>)</strong> al final del <code>if</code> y la <strong>indentación</strong> (4 espacios) en las líneas siguientes son la sintaxis que define el bloque. No hay llaves <code>{}</code> como en Java o JavaScript. Todo lo que esté indentado debajo del <code>if</code> pertenece a ese bloque; la primera línea sin indentar sale del bloque.</p>
+      <p>En Python, los <strong>dos puntos (<code>:</code>)</strong> al final del <code>if</code> y la
+        <strong>indentación</strong> (4 espacios) en las líneas siguientes son la sintaxis que define el bloque. No hay
+        llaves <code>{}</code> como en Java o JavaScript. Todo lo que esté indentado debajo del <code>if</code>
+        pertenece a ese bloque; la primera línea sin indentar sale del bloque.</p>
 
-<p>Esto significa que la indentación en Python no es cosmética — <b>es parte de la estructura del programa</b>. Si indentás mal, tu programa hace otra cosa (o directamente da error).</p>
+      <p>Esto significa que la indentación en Python no es cosmética — <b>es parte de la estructura del programa</b>. Si
+        indentás mal, tu programa hace otra cosa (o directamente da error).</p>
 
-<div class="warning"><strong>Error común: IndentationError.</strong> Si mezclás tabs y espacios, o si ponés 3 espacios en vez de 4, Python te da un error. Configurá VS Code para que Tab siempre inserte 4 espacios (la extensión de Python ya lo hace por defecto).</div>
+      <div class="warning"><strong>Error común: IndentationError.</strong> Si mezclás tabs y espacios, o si ponés 3
+        espacios en vez de 4, Python te da un error. Configurá VS Code para que Tab siempre inserte 4 espacios (la
+        extensión de Python ya lo hace por defecto).</div>
 
-<h3>if / elif / else: la estructura completa</h3>
+      <h3>if / elif / else: la estructura completa</h3>
 
-<p>La estructura completa tiene tres partes:</p>
+      <p>La estructura completa tiene tres partes:</p>
 
-<ul>
-  <li><code><b>if</b></code> — evalúa la primera condición. Si es <code>True</code>, ejecuta su bloque y salta todo lo demás.</li>
-  <li><code><b>elif</b></code> (else if) — se evalúa solo si el <code>if</code> anterior fue <code>False</code>. Podés tener tantos <code>elif</code> como necesites.</li>
-  <li><code><b>else</b></code> — se ejecuta si NINGUNA condición anterior fue <code>True</code>. No tiene condición propia. Es el "catch-all".</li>
-</ul>
+      <ul>
+        <li><code><b>if</b></code> — evalúa la primera condición. Si es <code>True</code>, ejecuta su bloque y salta
+          todo lo demás.</li>
+        <li><code><b>elif</b></code> (else if) — se evalúa solo si el <code>if</code> anterior fue <code>False</code>.
+          Podés tener tantos <code>elif</code> como necesites.</li>
+        <li><code><b>else</b></code> — se ejecuta si NINGUNA condición anterior fue <code>True</code>. No tiene
+          condición propia. Es el "catch-all".</li>
+      </ul>
 
-<p>El flujo es como un embudo: Python evalúa las condiciones de arriba a abajo y ejecuta <b>el primer bloque cuya condición sea True</b>. Después salta al final de toda la estructura. Esto significa que el orden importa — si ponés una condición más permisiva primero, las de abajo nunca se alcanzan.</p>
+      <p>El flujo es como un embudo: Python evalúa las condiciones de arriba a abajo y ejecuta <b>el primer bloque cuya
+          condición sea True</b>. Después salta al final de toda la estructura. Esto significa que el orden importa — si
+        ponés una condición más permisiva primero, las de abajo nunca se alcanzan.</p>
 
-<div class="analogy"><strong>Analogía: el cajero automático.</strong> Cuando querés extraer dinero, el cajero evalúa: ¿La tarjeta es válida? (if) → ¿El PIN es correcto? (elif) → ¿Hay saldo suficiente? (elif) → Si todo está bien, entrega el dinero. Si algo falla (else), muestra un error. Cada condición se evalúa solo si las anteriores pasaron.</div>
+      <div class="analogy"><strong>Analogía: el cajero automático.</strong> Cuando querés extraer dinero, el cajero
+        evalúa: ¿La tarjeta es válida? (if) → ¿El PIN es correcto? (elif) → ¿Hay saldo suficiente? (elif) → Si todo está
+        bien, entrega el dinero. Si algo falla (else), muestra un error. Cada condición se evalúa solo si las anteriores
+        pasaron.</div>
 
-<h3>Condicionales anidados</h3>
+      <h3>Condicionales anidados</h3>
 
-<p>Podés poner un <code>if</code> dentro de otro <code>if</code>. Esto se llama <strong>anidación</strong> y es útil cuando tenés decisiones que dependen de otras decisiones. Cada nivel agrega 4 espacios más de indentación.</p>
+      <p>Podés poner un <code>if</code> dentro de otro <code>if</code>. Esto se llama <strong>anidación</strong> y es
+        útil cuando tenés decisiones que dependen de otras decisiones. Cada nivel agrega 4 espacios más de indentación.
+      </p>
 
-<p>Sin embargo, más de 3 niveles de anidación hace el código difícil de leer. Si te encontrás anidando mucho, probablemente sea mejor usar funciones o reestructurar la lógica con <code>and</code>/<code>or</code>.</p>
+      <p>Sin embargo, más de 3 niveles de anidación hace el código difícil de leer. Si te encontrás anidando mucho,
+        probablemente sea mejor usar funciones o reestructurar la lógica con <code>and</code>/<code>or</code>.</p>
 
-<div class="tip"><strong>Tip profesional (flat is better than nested):</strong> en vez de anidar 4 niveles de if, usá <code>and</code> para combinar condiciones en un solo nivel, o usá "early return" (en funciones, devolver temprano si la condición no se cumple). El Zen de Python dice: "Flat is better than nested" — plano es mejor que anidado.</div>
+      <div class="tip"><strong>Tip profesional (flat is better than nested):</strong> en vez de anidar 4 niveles de if,
+        usá <code>and</code> para combinar condiciones en un solo nivel, o usá "early return" (en funciones, devolver
+        temprano si la condición no se cumple). El Zen de Python dice: "Flat is better than nested" — plano es mejor que
+        anidado.</div>
 
-<h3>El operador ternario (if en una línea)</h3>
+      <h3>El operador ternario (if en una línea)</h3>
 
-<p>Para decisiones simples, Python tiene una forma compacta de escribir un if/else en una sola línea:</p>
+      <p>Para decisiones simples, Python tiene una forma compacta de escribir un if/else en una sola línea:</p>
 
-<p><code>resultado = valor_si_true if condición else valor_si_false</code></p>
+      <p><code>resultado = valor_si_true if condición else valor_si_false</code></p>
 
-<p>Se llama "operador ternario" o "expresión condicional". Es perfecto para asignaciones simples. Por ejemplo: <code>estado = "Mayor" if edad >= 18 else "Menor"</code>. Pero NO lo uses para lógica compleja — pierde legibilidad rápidamente.</p>
+      <p>Se llama "operador ternario" o "expresión condicional". Es perfecto para asignaciones simples. Por ejemplo:
+        <code>estado = "Mayor" if edad >= 18 else "Menor"</code>. Pero NO lo uses para lógica compleja — pierde
+        legibilidad rápidamente.</p>
 
-<h3>Patrones comunes con condicionales</h3>
+      <h3>Patrones comunes con condicionales</h3>
 
-<p>En análisis de datos, vas a usar condicionales todo el tiempo para:</p>
-<ul>
-  <li><b>Clasificar por rangos:</b> score >= 800 → "Excelente", >= 700 → "Bueno", >= 600 → "Regular", else → "Malo"</li>
-  <li><b>Validar datos:</b> si el valor es None o está fuera de rango, rechazarlo o asignar un default</li>
-  <li><b>Tomar decisiones de negocio:</b> si ratio_cuota_ingreso > 0.30 → rechazar crédito</li>
-  <li><b>Formatear output:</b> si el número es negativo → mostrarlo en rojo</li>
-</ul>
+      <p>En análisis de datos, vas a usar condicionales todo el tiempo para:</p>
+      <ul>
+        <li><b>Clasificar por rangos:</b> score >= 800 → "Excelente", >= 700 → "Bueno", >= 600 → "Regular", else →
+          "Malo"</li>
+        <li><b>Validar datos:</b> si el valor es None o está fuera de rango, rechazarlo o asignar un default</li>
+        <li><b>Tomar decisiones de negocio:</b> si ratio_cuota_ingreso > 0.30 → rechazar crédito</li>
+        <li><b>Formatear output:</b> si el número es negativo → mostrarlo en rojo</li>
+      </ul>
 
-<div class="realworld"><strong>En el trabajo real:</strong> los modelos de scoring crediticio son esencialmente árboles de decisiones (condicionales). Un motor de reglas de negocio en un banco evalúa decenas de condiciones: edad, ingreso, score, deuda, antigüedad laboral, tipo de empleo, zona geográfica, historial con el banco, etc. Cada <code>if/elif</code> que escribís acá es la versión simplificada de lo que corre en producción.</div>
+      <div class="realworld"><strong>En el trabajo real:</strong> los modelos de scoring crediticio son esencialmente
+        árboles de decisiones (condicionales). Un motor de reglas de negocio en un banco evalúa decenas de condiciones:
+        edad, ingreso, score, deuda, antigüedad laboral, tipo de empleo, zona geográfica, historial con el banco, etc.
+        Cada <code>if/elif</code> que escribís acá es la versión simplificada de lo que corre en producción.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+      <div class="section-num">02</div>
+      <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: if/elif/else básico</h3>
-<p>Clasificación simple por rangos. Cambiá el valor de <code>nota</code> y volvé a ejecutar para ver cómo cambia el resultado.</p>
+      <h3>Ejemplo 1: if/elif/else básico</h3>
+      <p>Clasificación simple por rangos. Cambiá el valor de <code>nota</code> y volvé a ejecutar para ver cómo cambia
+        el resultado.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_basico.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Clasificación de notas (sistema argentino)
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_01_basico.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Clasificación de notas (sistema argentino)
 nota = 7
 
 if nota >= 9:
@@ -119,17 +164,21 @@ elif nota >= 4:
 else:
     print(f"Nota {nota}: Desaprobado")
 
-# Probá cambiar 'nota' a 3, 5, 8, 10 y volvé a ejecutar</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+# Probá cambiar 'nota' a 3, 5, 8, 10 y volvé a ejecutar</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 2: Validación de datos con condicionales</h3>
-<p>Antes de operar con datos, siempre conviene validarlos. Este patrón es fundamental en cualquier pipeline de datos.</p>
+      <h3>Ejemplo 2: Validación de datos con condicionales</h3>
+      <p>Antes de operar con datos, siempre conviene validarlos. Este patrón es fundamental en cualquier pipeline de
+        datos.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_validacion.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Validar un monto antes de procesarlo
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_02_validacion.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Validar un monto antes de procesarlo
 monto = -5000
 
 if monto is None:
@@ -153,17 +202,21 @@ elif edad < 0 or edad > 130:
 elif edad < 18:
     print(f"Menor de edad ({edad} años)")
 else:
-    print(f"Mayor de edad ({edad} años)")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"Mayor de edad ({edad} años)")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 3: Motor de scoring crediticio</h3>
-<p>Un ejemplo real simplificado de cómo funciona la evaluación crediticia en un banco. Cada regla de negocio es un condicional.</p>
+      <h3>Ejemplo 3: Motor de scoring crediticio</h3>
+      <p>Un ejemplo real simplificado de cómo funciona la evaluación crediticia en un banco. Cada regla de negocio es un
+        condicional.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_scoring.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Motor de scoring crediticio simplificado
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_03_scoring.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Motor de scoring crediticio simplificado
 score = 695
 ingreso = 320000
 deuda_vencida = False
@@ -202,17 +255,21 @@ else:
 print(f"{'═'*45}")
 print(f"  RESULTADO: {decision}")
 print(f"  Motivo: {motivo}")
-print(f"{'═'*45}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"{'═'*45}")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 4: Operador ternario y condicionales en f-strings</h3>
-<p>Para decisiones simples, el operador ternario es más limpio que un if/else de 4 líneas. Funciona incluso dentro de f-strings.</p>
+      <h3>Ejemplo 4: Operador ternario y condicionales en f-strings</h3>
+      <p>Para decisiones simples, el operador ternario es más limpio que un if/else de 4 líneas. Funciona incluso dentro
+        de f-strings.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_ternario.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Operador ternario: valor_si_true if condicion else valor_si_false
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_04_ternario.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code"># Operador ternario: valor_si_true if condicion else valor_si_false
 edad = 25
 estado = "Mayor" if edad >= 18 else "Menor"
 print(f"Edad {edad}: {estado}")
@@ -231,17 +288,21 @@ montos = [50000, -12000, 30000, -5000, 80000]
 for m in montos:
     signo = "+" if m >= 0 else "-"
     color = "verde" if m >= 0 else "rojo"
-    print(f"  {signo} ${abs(m):>8,} ({color})")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"  {signo} ${abs(m):>8,} ({color})")</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<h3>Ejemplo 5: Condicionales anidados vs planos</h3>
-<p>Dos formas de resolver el mismo problema. La versión anidada funciona pero es difícil de leer. La versión plana con <code>and</code> es más clara.</p>
+      <h3>Ejemplo 5: Condicionales anidados vs planos</h3>
+      <p>Dos formas de resolver el mismo problema. La versión anidada funciona pero es difícil de leer. La versión plana
+        con <code>and</code> es más clara.</p>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_anidado_vs_plano.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">edad = 30
+      <div class="editor" data-mode="python">
+        <div class="editor-top"><span>ejemplo_05_anidado_vs_plano.py</span><span>Python</span></div>
+        <div class="editor-area">
+          <pre class="lines"></pre><textarea class="code">edad = 30
 ingreso = 150000
 score = 720
 
@@ -272,241 +333,368 @@ elif score < 650:
 else:
     print("Aprobado (sin anidación 🎉)")
 
-# La versión plana es más fácil de leer, mantener y debuggear</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+# La versión plana es más fácil de leer, mantener y debuggear</textarea>
+        </div>
+        <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+            data-reset>Reset</button></div>
+        <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+      </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+      <div class="section-num">03</div>
+      <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Estructura</th><th>Sintaxis</th><th>Cuándo usar</th></tr>
-<tr><td><code>if</code></td><td><code>if condición:</code></td><td>Evaluar una condición</td></tr>
-<tr><td><code>if/else</code></td><td><code>if cond: ... else: ...</code></td><td>Dos caminos posibles</td></tr>
-<tr><td><code>if/elif/else</code></td><td><code>if: ... elif: ... else:</code></td><td>Múltiples caminos (clasificación)</td></tr>
-<tr><td>Ternario</td><td><code>x if cond else y</code></td><td>Asignación condicional simple</td></tr>
-<tr><td>Anidado</td><td><code>if: if: ...</code></td><td>Decisiones dependientes (evitar si posible)</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Estructura</th>
+            <th>Sintaxis</th>
+            <th>Cuándo usar</th>
+          </tr>
+          <tr>
+            <td><code>if</code></td>
+            <td><code>if condición:</code></td>
+            <td>Evaluar una condición</td>
+          </tr>
+          <tr>
+            <td><code>if/else</code></td>
+            <td><code>if cond: ... else: ...</code></td>
+            <td>Dos caminos posibles</td>
+          </tr>
+          <tr>
+            <td><code>if/elif/else</code></td>
+            <td><code>if: ... elif: ... else:</code></td>
+            <td>Múltiples caminos (clasificación)</td>
+          </tr>
+          <tr>
+            <td>Ternario</td>
+            <td><code>x if cond else y</code></td>
+            <td>Asignación condicional simple</td>
+          </tr>
+          <tr>
+            <td>Anidado</td>
+            <td><code>if: if: ...</code></td>
+            <td>Decisiones dependientes (evitar si posible)</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="table-wrap">
-<table>
-<tr><th>Patrón</th><th>Ejemplo</th><th>Uso típico</th></tr>
-<tr><td>Clasificación por rangos</td><td><code>if x>=90: elif x>=70: else:</code></td><td>Scoring, notas, categorías</td></tr>
-<tr><td>Validación</td><td><code>if x is None: elif x<0:</code></td><td>Limpieza de datos, input sanitization</td></tr>
-<tr><td>Guard clause</td><td><code>if not valid: return</code></td><td>Salir temprano si algo no cumple</td></tr>
-<tr><td>Flag booleano</td><td><code>aprobado = cond1 and cond2</code></td><td>Combinar múltiples validaciones</td></tr>
-<tr><td>Ternario en f-string</td><td><code>f"{'Sí' if x else 'No'}"</code></td><td>Output condicional inline</td></tr>
-</table>
-</div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Patrón</th>
+            <th>Ejemplo</th>
+            <th>Uso típico</th>
+          </tr>
+          <tr>
+            <td>Clasificación por rangos</td>
+            <td><code>if x>=90: elif x>=70: else:</code></td>
+            <td>Scoring, notas, categorías</td>
+          </tr>
+          <tr>
+            <td>Validación</td>
+            <td><code>if x is None: elif x<0:</code></td>
+            <td>Limpieza de datos, input sanitization</td>
+          </tr>
+          <tr>
+            <td>Guard clause</td>
+            <td><code>if not valid: return</code></td>
+            <td>Salir temprano si algo no cumple</td>
+          </tr>
+          <tr>
+            <td>Flag booleano</td>
+            <td><code>aprobado = cond1 and cond2</code></td>
+            <td>Combinar múltiples validaciones</td>
+          </tr>
+          <tr>
+            <td>Ternario en f-string</td>
+            <td><code>f"{'Sí' if x else 'No'}"</code></td>
+            <td>Output condicional inline</td>
+          </tr>
+        </table>
+      </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+      <div class="section-num">04</div>
+      <h2>Ejercicios</h2>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 1: Mayor o menor de edad</h4>
-  <p>Dada <code>edad = 16</code>, imprimí <code>Menor de edad</code> si es menor a 18, o <code>Mayor de edad</code> si no.</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-1" data-expected="Menor de edad">
-    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Menor de edad"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">edad = 16
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 1: Mayor o menor de edad</h4>
+        <p>Dada <code>edad = 16</code>, imprimí <code>Menor de edad</code> si es menor a 18, o
+          <code>Mayor de edad</code> si no.</p>
+        <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-1"
+          data-expected="Menor de edad">
+          <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Menor de edad"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">edad = 16
 
 # if/else:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h1" class="hint-box" data-hints='["if edad < 18:","    print(\"Menor de edad\")","else: print(\"Mayor de edad\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h1" class="hint-box"
+          data-hints='["if edad < 18:","    print(\"Menor de edad\")","else: print(\"Mayor de edad\")"]'></div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 2: Positivo, negativo o cero</h4>
-  <p>Dado <code>numero = -42</code>, imprimí si es <code>Positivo</code>, <code>Negativo</code> o <code>Cero</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-2" data-expected="Negativo">
-    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Negativo"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">numero = -42
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 2: Positivo, negativo o cero</h4>
+        <p>Dado <code>numero = -42</code>, imprimí si es <code>Positivo</code>, <code>Negativo</code> o
+          <code>Cero</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-2" data-expected="Negativo">
+          <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Negativo"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">numero = -42
 
 # Clasificá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h2" class="hint-box" data-hints='["if numero > 0: ... elif numero < 0: ... else:","El elif captura los negativos","else captura exactamente cero"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h2" class="hint-box"
+          data-hints='["if numero > 0: ... elif numero < 0: ... else:","El elif captura los negativos","else captura exactamente cero"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level basic">Nivel 1 · Básico</span>
-  <h4>Ejercicio 3: Clasificador de temperatura</h4>
-  <p>Dada <code>temp = 22</code>, clasificá: >35 "Extremo", >25 "Caluroso", >15 "Templado", >5 "Frío", else "Helado".</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-3" data-expected="Templado">
-    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Templado"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">temp = 22
+      <div class="exercise">
+        <span class="exercise-level basic">Nivel 1 · Básico</span>
+        <h4>Ejercicio 3: Clasificador de temperatura</h4>
+        <p>Dada <code>temp = 22</code>, clasificá: >35 "Extremo", >25 "Caluroso", >15 "Templado", >5 "Frío", else
+          "Helado".</p>
+        <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-3" data-expected="Templado">
+          <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Templado"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">temp = 22
 
 # Clasificá con if/elif/else:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h3" class="hint-box" data-hints='["if temp > 35: print(\"Extremo\")","elif temp > 25: print(\"Caluroso\")","Seguí con elif temp > 15: print(\"Templado\") — 22 cae acá"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h3" class="hint-box"
+          data-hints='["if temp > 35: print(\"Extremo\")","elif temp > 25: print(\"Caluroso\")","Seguí con elif temp > 15: print(\"Templado\") — 22 cae acá"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 4: Categoría de sueldo</h4>
-  <p>Dado <code>sueldo = 450000</code>, clasificá: >800K "Ejecutivo", >400K "Senior", >200K "Semi-senior", >100K "Junior", else "Trainee". Imprimí la categoría.</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-4" data-expected="Senior">
-    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Senior"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">sueldo = 450000
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 4: Categoría de sueldo</h4>
+        <p>Dado <code>sueldo = 450000</code>, clasificá: >800K "Ejecutivo", >400K "Senior", >200K "Semi-senior", >100K
+          "Junior", else "Trainee". Imprimí la categoría.</p>
+        <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-4" data-expected="Senior">
+          <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Senior"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">sueldo = 450000
 
 # Clasificá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h4" class="hint-box" data-hints='["Empezá por el rango más alto: if sueldo > 800000","450000 es > 400000 pero no > 800000, así que cae en Senior","print(f\"Categoría: Senior\")"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h4" class="hint-box"
+          data-hints='["Empezá por el rango más alto: if sueldo > 800000","450000 es > 400000 pero no > 800000, así que cae en Senior","print(f\"Categoría: Senior\")"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 5: Aprobación con múltiples condiciones</h4>
-  <p>Un cliente tiene <code>score=680</code> e <code>ingreso=250000</code>. Está aprobado si score >= 650 <b>Y</b> ingreso >= 100000. Imprimí <code>Aprobado</code> o <code>Rechazado</code> y el motivo.</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-5" data-expected="Aprobado">
-    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Aprobado"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">score = 680
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 5: Aprobación con múltiples condiciones</h4>
+        <p>Un cliente tiene <code>score=680</code> e <code>ingreso=250000</code>. Está aprobado si score >= 650 <b>Y</b>
+          ingreso >= 100000. Imprimí <code>Aprobado</code> o <code>Rechazado</code> y el motivo.</p>
+        <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-5" data-expected="Aprobado">
+          <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Aprobado"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">score = 680
 ingreso = 250000
 
 # Evaluá ambas condiciones:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h5" class="hint-box" data-hints='["if score >= 650 and ingreso >= 100000:","Ambas condiciones se cumplen → Aprobado","Podés agregar un elif para decir qué condición falló"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h5" class="hint-box"
+          data-hints='["if score >= 650 and ingreso >= 100000:","Ambas condiciones se cumplen → Aprobado","Podés agregar un elif para decir qué condición falló"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
-  <h4>Ejercicio 6: Operador ternario</h4>
-  <p>Dado <code>saldo = -8500</code>, asigná a la variable <code>estado</code> el valor <code>"Descubierto"</code> si es negativo o <code>"Positivo"</code> si no, usando operador ternario. Imprimí el resultado como <code>Estado: Descubierto</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-6" data-expected="Descubierto">
-    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Descubierto"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = -8500
+      <div class="exercise">
+        <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+        <h4>Ejercicio 6: Operador ternario</h4>
+        <p>Dado <code>saldo = -8500</code>, asigná a la variable <code>estado</code> el valor <code>"Descubierto"</code>
+          si es negativo o <code>"Positivo"</code> si no, usando operador ternario. Imprimí el resultado como
+          <code>Estado: Descubierto</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-6" data-expected="Descubierto">
+          <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Descubierto"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">saldo = -8500
 
 # Usá operador ternario:
 estado = 
 
-print(f"Estado: {estado}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h6" class="hint-box" data-hints='["Sintaxis: valor_true if condicion else valor_false","estado = \"Descubierto\" if saldo < 0 else \"Positivo\"","El saldo es -8500, que es < 0, así que da Descubierto"]'></div>
-</div>
+print(f"Estado: {estado}")</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h6" class="hint-box"
+          data-hints='["Sintaxis: valor_true if condicion else valor_false","estado = \"Descubierto\" if saldo < 0 else \"Positivo\"","El saldo es -8500, que es < 0, así que da Descubierto"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 7: Calculadora de IVA condicional</h4>
-  <p>Dado <code>monto = 15000</code> y <code>tipo = "servicio"</code>: si tipo es "producto" aplicá IVA 21%, si es "servicio" aplicá 10.5%, si es "exportación" aplicá 0%. Imprimí monto final. Debe incluir <code>16575</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-7" data-expected="16575">
-    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "16575"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">monto = 15000
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 7: Calculadora de IVA condicional</h4>
+        <p>Dado <code>monto = 15000</code> y <code>tipo = "servicio"</code>: si tipo es "producto" aplicá IVA 21%, si es
+          "servicio" aplicá 10.5%, si es "exportación" aplicá 0%. Imprimí monto final. Debe incluir <code>16575</code>.
+        </p>
+        <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-7" data-expected="16575">
+          <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "16575"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">monto = 15000
 tipo = "servicio"
 
 # Determiná la tasa de IVA según el tipo y calculá:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h7" class="hint-box" data-hints='["if tipo == \"producto\": tasa = 0.21","elif tipo == \"servicio\": tasa = 0.105","15000 * 1.105 = 16575.0"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h7" class="hint-box"
+          data-hints='["if tipo == \"producto\": tasa = 0.21","elif tipo == \"servicio\": tasa = 0.105","15000 * 1.105 = 16575.0"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 8: Scoring con 4 reglas</h4>
-  <p>Evaluá: <code>edad=35</code>, <code>ingreso=180000</code>, <code>score=590</code>, <code>deuda=False</code>. Reglas: edad 18-65, ingreso >= 100K, score >= 650, sin deuda. Imprimí cada regla con ✓ o ✗ y la decisión final. Debe incluir <code>RECHAZADO</code> (score es 590 < 650).</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-8" data-expected="RECHAZADO">
-    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "RECHAZADO"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">edad = 35
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 8: Scoring con 4 reglas</h4>
+        <p>Evaluá: <code>edad=35</code>, <code>ingreso=180000</code>, <code>score=590</code>, <code>deuda=False</code>.
+          Reglas: edad 18-65, ingreso >= 100K, score >= 650, sin deuda. Imprimí cada regla con ✓ o ✗ y la decisión
+          final. Debe incluir <code>RECHAZADO</code> (score es 590 < 650).</p>
+            <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-8"
+              data-expected="RECHAZADO">
+              <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "RECHAZADO"</span></div>
+              <div class="editor-area">
+                <pre class="lines"></pre><textarea class="code">edad = 35
 ingreso = 180000
 score = 590
 deuda = False
 
 # Evaluá cada regla e imprimí resultado:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h8" class="hint-box" data-hints='["r1 = 18 <= edad <= 65. Imprimí \"Edad:\", \"✓\" if r1 else \"✗\"","r3 = score >= 650 → False porque 590 < 650","Si no se cumplen todas: print(\"RECHAZADO\")"]'></div>
-</div>
+</textarea>
+              </div>
+              <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                  data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+              <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
+            <div id="h8" class="hint-box"
+              data-hints='["r1 = 18 <= edad <= 65. Imprimí \"Edad:\", \"✓\" if r1 else \"✗\"","r3 = score >= 650 → False porque 590 < 650","Si no se cumplen todas: print(\"RECHAZADO\")"]'>
+            </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
-  <h4>Ejercicio 9: Calculadora de impuesto a las ganancias</h4>
-  <p>El impuesto a las ganancias tiene escalas progresivas simplificadas: hasta $500K: 0%, de $500K a $1M: 15%, de $1M a $2M: 25%, más de $2M: 35%. Dado <code>ingreso_anual = 1500000</code>, calculá el impuesto e imprimilo. Debe incluir <code>375000</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-9" data-expected="375000">
-    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "375000"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">ingreso_anual = 1500000
+      <div class="exercise">
+        <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+        <h4>Ejercicio 9: Calculadora de impuesto a las ganancias</h4>
+        <p>El impuesto a las ganancias tiene escalas progresivas simplificadas: hasta $500K: 0%, de $500K a $1M: 15%, de
+          $1M a $2M: 25%, más de $2M: 35%. Dado <code>ingreso_anual = 1500000</code>, calculá el impuesto e imprimilo.
+          Debe incluir <code>375000</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-9" data-expected="375000">
+          <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "375000"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">ingreso_anual = 1500000
 
 # Calculá el impuesto según la escala:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-  </div>
-  <div id="h9" class="hint-box" data-hints='["1500000 cae en la escala de 1M a 2M → tasa 25%","impuesto = ingreso_anual * 0.25","1500000 * 0.25 = 375000"]'></div>
-</div>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h9" class="hint-box"
+          data-hints='["1500000 cae en la escala de 1M a 2M → tasa 25%","impuesto = ingreso_anual * 0.25","1500000 * 0.25 = 375000"]'>
+        </div>
+      </div>
 
-<div class="exercise">
-  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
-  <h4>Ejercicio 10: Sistema de categorización bancaria completo</h4>
-  <p>Clasificá a un cliente en: <code>Black</code> (saldo > 5M O ingreso > 1M), <code>Gold</code> (saldo > 1M O ingreso > 500K), <code>Silver</code> (saldo > 200K), <code>Standard</code> (resto). Datos: <code>saldo=3500000</code>, <code>ingreso=450000</code>. Además, si el cliente tiene <code>antiguedad=12</code> años (>= 10), agregá <code>"+ Fidelidad"</code> al nombre de la categoría. Imprimí la categoría final. Debe incluir <code>Gold + Fidelidad</code>.</p>
-  <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-10" data-expected="Gold + Fidelidad">
-    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Gold + Fidelidad"</span></div>
-    <div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 3500000
+      <div class="exercise">
+        <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+        <h4>Ejercicio 10: Sistema de categorización bancaria completo</h4>
+        <p>Clasificá a un cliente en: <code>Black</code> (saldo > 5M O ingreso > 1M), <code>Gold</code> (saldo > 1M O
+          ingreso > 500K), <code>Silver</code> (saldo > 200K), <code>Standard</code> (resto). Datos:
+          <code>saldo=3500000</code>, <code>ingreso=450000</code>. Además, si el cliente tiene
+          <code>antiguedad=12</code> años (>= 10), agregá <code>"+ Fidelidad"</code> al nombre de la categoría. Imprimí
+          la categoría final. Debe incluir <code>Gold + Fidelidad</code>.</p>
+        <div class="editor" data-mode="python" data-lesson="python-06" data-exercise="ex-10"
+          data-expected="Gold + Fidelidad">
+          <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Gold + Fidelidad"</span></div>
+          <div class="editor-area">
+            <pre class="lines"></pre><textarea class="code">saldo = 3500000
 ingreso = 450000
 antiguedad = 12
 
 # Clasificá y agregá fidelidad:
-</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
-    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</textarea>
+          </div>
+          <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+              data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+          <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+        </div>
+        <div id="h10" class="hint-box"
+          data-hints='["Black requiere saldo>5M OR ingreso>1M. 3.5M no es >5M y 450K no es >1M → no es Black","Gold requiere saldo>1M OR ingreso>500K. 3.5M es >1M → ES Gold","if antiguedad >= 10: categoria += \" + Fidelidad\" → Gold + Fidelidad"]'>
+        </div>
+      </div>
+
+      <div class="section-num">05</div>
+      <h2>Resumen y conexión</h2>
+
+      <ul>
+        <li><code>if</code> evalúa una condición. Si es <code>True</code>, ejecuta el bloque indentado.</li>
+        <li><code>elif</code> se evalúa solo si las condiciones anteriores fueron <code>False</code>. Podés tener
+          múltiples <code>elif</code>.</li>
+        <li><code>else</code> es el "catch-all": se ejecuta cuando nada anterior fue <code>True</code>.</li>
+        <li>La indentación (4 espacios) es obligatoria — define la estructura del programa.</li>
+        <li>El operador ternario (<code>x if cond else y</code>) es útil para asignaciones simples.</li>
+        <li>Preferí condicionales planos (con <code>and</code>/<code>or</code>) sobre anidados — "flat is better than
+          nested".</li>
+        <li>En el mundo real, los condicionales son la base de los motores de reglas de negocio y scoring crediticio.
+        </li>
+      </ul>
+
+      <p>En la siguiente lección (<strong>07 · Comentarios e indentación</strong>) vas a profundizar en cómo escribir
+        código legible y profesional: cuándo comentar, cómo documentar funciones con docstrings, y las convenciones de
+        estilo PEP 8 que todo equipo profesional sigue.</p>
+
+      <p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/controlflow.html" target="_blank">Python
+          docs — Control Flow</a> · <a href="https://peps.python.org/pep-0008/" target="_blank">PEP 8 — Style Guide</a>
+      </p>
+
+      <div class="footer-nav">
+        <a href="/python/05-operaciones.html">← Operaciones básicas</a>
+        <a class="next" href="/python/07-comentarios-indentacion.html">Comentarios e indentación →</a>
+      </div>
+
+    </main>
   </div>
-  <div id="h10" class="hint-box" data-hints='["Black requiere saldo>5M OR ingreso>1M. 3.5M no es >5M y 450K no es >1M → no es Black","Gold requiere saldo>1M OR ingreso>500K. 3.5M es >1M → ES Gold","if antiguedad >= 10: categoria += \" + Fidelidad\" → Gold + Fidelidad"]'></div>
-</div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
-
-<ul>
-  <li><code>if</code> evalúa una condición. Si es <code>True</code>, ejecuta el bloque indentado.</li>
-  <li><code>elif</code> se evalúa solo si las condiciones anteriores fueron <code>False</code>. Podés tener múltiples <code>elif</code>.</li>
-  <li><code>else</code> es el "catch-all": se ejecuta cuando nada anterior fue <code>True</code>.</li>
-  <li>La indentación (4 espacios) es obligatoria — define la estructura del programa.</li>
-  <li>El operador ternario (<code>x if cond else y</code>) es útil para asignaciones simples.</li>
-  <li>Preferí condicionales planos (con <code>and</code>/<code>or</code>) sobre anidados — "flat is better than nested".</li>
-  <li>En el mundo real, los condicionales son la base de los motores de reglas de negocio y scoring crediticio.</li>
-</ul>
-
-<p>En la siguiente lección (<strong>07 · Comentarios e indentación</strong>) vas a profundizar en cómo escribir código legible y profesional: cuándo comentar, cómo documentar funciones con docstrings, y las convenciones de estilo PEP 8 que todo equipo profesional sigue.</p>
-
-<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/controlflow.html" target="_blank">Python docs — Control Flow</a> · <a href="https://peps.python.org/pep-0008/" target="_blank">PEP 8 — Style Guide</a></p>
-
-<div class="footer-nav">
-  <a href="/python/05-operaciones.html">← Operaciones básicas</a>
-  <a class="next" href="/python/07-comentarios-indentacion.html">Comentarios e indentación →</a>
-</div>
-
-</main>
-</div>
-
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+  <script type="module">
+    import { renderSidebar } from '/js/nav.js';
+    import { initTheme } from '/js/theme.js';
+    import { mountEditors } from '/js/editor.js';
+    initTheme();
+    renderSidebar(location.pathname);
+    mountEditors();
+    window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+  </script>
 </body>
+
 </html>

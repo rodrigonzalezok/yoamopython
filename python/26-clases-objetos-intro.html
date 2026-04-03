@@ -1,49 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuieroProgramar · Python 26 · Clases y objetos</title>
-<meta name="description" content="Programación orientada a objetos en Python: clases, __init__, self, métodos, __str__, herencia, dataclass y cuándo usar clases.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuieroProgramar · Python 26 · Clases y objetos</title>
+    <meta name="description"
+        content="Programación orientada a objetos en Python: clases, __init__, self, métodos, __str__, herencia, dataclass y cuándo usar clases.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
+
 <body>
-<div class="topbar">
-  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
-  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
-  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
-  <div id="global-progress-text" class="top-stats"></div>
-</div>
-<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
-<div class="layout">
-<aside class="sidebar" id="sidebar-mount"></aside>
-<main class="main">
+    <div class="topbar">
+        <button class="ham-btn"
+            onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+        <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodri Gonzalez</small></div>
+        <div class="progress-shell">
+            <div id="global-progress-fill" class="progress-fill"></div>
+        </div>
+        <div id="global-progress-text" class="top-stats"></div>
+    </div>
+    <div id="sb-overlay" class="sidebar-overlay"
+        onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+    <div class="layout">
+        <aside class="sidebar" id="sidebar-mount"></aside>
+        <main class="main">
 
-<div class="hero">
-  <span class="track-label python">Python · Lección 26 de 27</span>
-  <h1>Clases y objetos (intro)</h1>
-  <p>La Programación Orientada a Objetos (OOP) te permite modelar conceptos del mundo real (clientes, cuentas, transacciones) como objetos con datos y comportamiento. Es el paradigma que usan pandas, scikit-learn y prácticamente todas las librerías de Python.</p>
-  <div class="badges">
-    <span class="badge">90–120 min</span>
-    <span class="badge">Prerrequisitos: 18-19 Funciones, 25 Excepciones</span>
-  </div>
-</div>
+            <div class="hero">
+                <span class="track-label python">Python · Lección 26 de 27</span>
+                <h1>Clases y objetos (intro)</h1>
+                <p>La Programación Orientada a Objetos (OOP) te permite modelar conceptos del mundo real (clientes,
+                    cuentas, transacciones) como objetos con datos y comportamiento. Es el paradigma que usan pandas,
+                    scikit-learn y prácticamente todas las librerías de Python.</p>
+                <div class="badges">
+                    <span class="badge">90–120 min</span>
+                    <span class="badge">Prerrequisitos: 18-19 Funciones, 25 Excepciones</span>
+                </div>
+            </div>
 
-<div class="section-num">01</div>
-<h2>Concepto teórico</h2>
+            <div class="section-num">01</div>
+            <h2>Concepto teórico</h2>
 
-<h3>¿Qué es una clase?</h3>
+            <h3>¿Qué es una clase?</h3>
 
-<p>Una <strong>clase</strong> es un molde (template) para crear objetos. Define qué datos tiene (atributos) y qué puede hacer (métodos). Un <strong>objeto</strong> es una instancia concreta de esa clase — un caso particular con datos reales.</p>
+            <p>Una <strong>clase</strong> es un molde (template) para crear objetos. Define qué datos tiene (atributos)
+                y qué puede hacer (métodos). Un <strong>objeto</strong> es una instancia concreta de esa clase — un caso
+                particular con datos reales.</p>
 
-<div class="analogy"><strong>Analogía bancaria:</strong> la clase <code>CuentaBancaria</code> es el formulario de apertura de cuenta (el molde). Define que toda cuenta tiene titular, CBU, saldo y tipo. Un objeto es la cuenta real de García con su CBU específico y su saldo de $150,000. Del mismo molde podés crear miles de cuentas, cada una con datos distintos.</div>
+            <div class="analogy"><strong>Analogía bancaria:</strong> la clase <code>CuentaBancaria</code> es el
+                formulario de apertura de cuenta (el molde). Define que toda cuenta tiene titular, CBU, saldo y tipo. Un
+                objeto es la cuenta real de García con su CBU específico y su saldo de $150,000. Del mismo molde podés
+                crear miles de cuentas, cada una con datos distintos.</div>
 
-<h3>Sintaxis: class, __init__, self</h3>
+            <h3>Sintaxis: class, __init__, self</h3>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">class Cliente:
+            <pre
+                style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">class Cliente:
     def __init__(self, nombre, score, saldo=0):
         self.nombre = nombre    # atributo de instancia
         self.score = score
@@ -62,35 +79,66 @@ print(c1.nombre)        # "García"
 print(c1.es_premium())  # True
 print(c1)               # "Cliente(García, score=720)"</pre>
 
-<ul>
-  <li><code><b>class NombreClase:</b></code> — define la clase. PascalCase por convención.</li>
-  <li><code><b>__init__(self, ...)</b></code> — el constructor. Se ejecuta automáticamente al crear un objeto. Recibe los datos iniciales y los guarda como atributos.</li>
-  <li><code><b>self</b></code> — referencia al objeto actual. SIEMPRE es el primer parámetro de todo método. Permite acceder a los atributos del objeto.</li>
-  <li><code><b>self.atributo = valor</b></code> — crea un atributo de instancia (cada objeto tiene su propia copia).</li>
-</ul>
+            <ul>
+                <li><code><b>class NombreClase:</b></code> — define la clase. PascalCase por convención.</li>
+                <li><code><b>__init__(self, ...)</b></code> — el constructor. Se ejecuta automáticamente al crear un
+                    objeto. Recibe los datos iniciales y los guarda como atributos.</li>
+                <li><code><b>self</b></code> — referencia al objeto actual. SIEMPRE es el primer parámetro de todo
+                    método. Permite acceder a los atributos del objeto.</li>
+                <li><code><b>self.atributo = valor</b></code> — crea un atributo de instancia (cada objeto tiene su
+                    propia copia).</li>
+            </ul>
 
-<div class="concept"><strong>¿Por qué self?</strong> Porque cuando llamás <code>c1.es_premium()</code>, Python internamente lo traduce a <code>Cliente.es_premium(c1)</code>. <code>self</code> es el objeto sobre el que estás operando. Sin <code>self</code>, el método no sabría a qué cuenta referirse.</div>
+            <div class="concept"><strong>¿Por qué self?</strong> Porque cuando llamás <code>c1.es_premium()</code>,
+                Python internamente lo traduce a <code>Cliente.es_premium(c1)</code>. <code>self</code> es el objeto
+                sobre el que estás operando. Sin <code>self</code>, el método no sabría a qué cuenta referirse.</div>
 
-<h3>Métodos especiales (dunder methods)</h3>
+            <h3>Métodos especiales (dunder methods)</h3>
 
-<p>Python tiene métodos "mágicos" que empiezan y terminan con doble guión bajo (<code>__</code>):</p>
+            <p>Python tiene métodos "mágicos" que empiezan y terminan con doble guión bajo (<code>__</code>):</p>
 
-<div class="table-wrap">
-<table>
-<tr><th>Método</th><th>Cuándo se llama</th><th>Ejemplo</th></tr>
-<tr><td><code>__init__</code></td><td>Al crear el objeto</td><td><code>Cliente("García", 720)</code></td></tr>
-<tr><td><code>__str__</code></td><td><code>print(obj)</code> o <code>str(obj)</code></td><td><code>print(c1)</code></td></tr>
-<tr><td><code>__repr__</code></td><td>Representación técnica</td><td>En el REPL o en listas</td></tr>
-<tr><td><code>__len__</code></td><td><code>len(obj)</code></td><td><code>len(mi_cartera)</code></td></tr>
-<tr><td><code>__eq__</code></td><td><code>obj1 == obj2</code></td><td>Comparar igualdad</td></tr>
-</table>
-</div>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Método</th>
+                        <th>Cuándo se llama</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>__init__</code></td>
+                        <td>Al crear el objeto</td>
+                        <td><code>Cliente("García", 720)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__str__</code></td>
+                        <td><code>print(obj)</code> o <code>str(obj)</code></td>
+                        <td><code>print(c1)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__repr__</code></td>
+                        <td>Representación técnica</td>
+                        <td>En el REPL o en listas</td>
+                    </tr>
+                    <tr>
+                        <td><code>__len__</code></td>
+                        <td><code>len(obj)</code></td>
+                        <td><code>len(mi_cartera)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__eq__</code></td>
+                        <td><code>obj1 == obj2</code></td>
+                        <td>Comparar igualdad</td>
+                    </tr>
+                </table>
+            </div>
 
-<h3>Herencia básica</h3>
+            <h3>Herencia básica</h3>
 
-<p>La <strong>herencia</strong> permite crear una clase nueva basada en otra existente. La clase hija hereda todos los atributos y métodos de la padre y puede agregar o sobreescribir funcionalidad:</p>
+            <p>La <strong>herencia</strong> permite crear una clase nueva basada en otra existente. La clase hija hereda
+                todos los atributos y métodos de la padre y puede agregar o sobreescribir funcionalidad:</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">class ClientePremium(Cliente):  # hereda de Cliente
+            <pre
+                style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">class ClientePremium(Cliente):  # hereda de Cliente
     def __init__(self, nombre, score, saldo, beneficio):
         super().__init__(nombre, score, saldo)  # llamar al padre
         self.beneficio = beneficio
@@ -98,11 +146,14 @@ print(c1)               # "Cliente(García, score=720)"</pre>
     def tasa_preferencial(self):  # método nuevo
         return 0.035</pre>
 
-<h3>dataclass — clases de datos rápidas</h3>
+            <h3>dataclass — clases de datos rápidas</h3>
 
-<p>Desde Python 3.7, <code>@dataclass</code> genera automáticamente <code>__init__</code>, <code>__repr__</code>, <code>__eq__</code> y más. Ideal para clases que son básicamente "contenedores de datos":</p>
+            <p>Desde Python 3.7, <code>@dataclass</code> genera automáticamente <code>__init__</code>,
+                <code>__repr__</code>, <code>__eq__</code> y más. Ideal para clases que son básicamente "contenedores de
+                datos":</p>
 
-<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">from dataclasses import dataclass
+            <pre
+                style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">from dataclasses import dataclass
 
 @dataclass
 class Transaccion:
@@ -111,18 +162,26 @@ class Transaccion:
     cuenta: str
     fecha: str = "2025-01-01"  # default</pre>
 
-<div class="warning"><strong>¿Cuándo clases vs funciones?</strong> Usá funciones cuando tenés lógica que recibe datos y devuelve resultados. Usá clases cuando tenés un "objeto" con estado (datos que cambian) y comportamiento (métodos). Si solo necesitás agrupar datos sin comportamiento, usá <code>dataclass</code> o un diccionario.</div>
+            <div class="warning"><strong>¿Cuándo clases vs funciones?</strong> Usá funciones cuando tenés lógica que
+                recibe datos y devuelve resultados. Usá clases cuando tenés un "objeto" con estado (datos que cambian) y
+                comportamiento (métodos). Si solo necesitás agrupar datos sin comportamiento, usá <code>dataclass</code>
+                o un diccionario.</div>
 
-<div class="realworld"><strong>En librerías de Python:</strong> un DataFrame de pandas es un objeto de la clase <code>pd.DataFrame</code>. <code>.head()</code>, <code>.describe()</code>, <code>.groupby()</code> son métodos. <code>.shape</code>, <code>.columns</code> son atributos. Un modelo de scikit-learn (<code>RandomForestClassifier()</code>) es un objeto con métodos <code>.fit()</code> y <code>.predict()</code>. Entender OOP te permite usar estas librerías con confianza.</div>
+            <div class="realworld"><strong>En librerías de Python:</strong> un DataFrame de pandas es un objeto de la
+                clase <code>pd.DataFrame</code>. <code>.head()</code>, <code>.describe()</code>, <code>.groupby()</code>
+                son métodos. <code>.shape</code>, <code>.columns</code> son atributos. Un modelo de scikit-learn
+                (<code>RandomForestClassifier()</code>) es un objeto con métodos <code>.fit()</code> y
+                <code>.predict()</code>. Entender OOP te permite usar estas librerías con confianza.</div>
 
-<div class="section-num">02</div>
-<h2>Ejemplos explicados paso a paso</h2>
+            <div class="section-num">02</div>
+            <h2>Ejemplos explicados paso a paso</h2>
 
-<h3>Ejemplo 1: Clase CuentaBancaria</h3>
+            <h3>Ejemplo 1: Clase CuentaBancaria</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_01_cuenta.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">class CuentaBancaria:
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_01_cuenta.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code">class CuentaBancaria:
     """Representa una cuenta bancaria con operaciones básicas."""
     
     def __init__(self, titular, saldo_inicial=0):
@@ -161,16 +220,19 @@ print(f"Movimientos: {cuenta.movimientos}")
 try:
     cuenta.extraer(500000)
 except ValueError as e:
-    print(f"\n❌ {e}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"\n❌ {e}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Ejemplo 2: Clase Cliente con métodos de negocio</h3>
+            <h3>Ejemplo 2: Clase Cliente con métodos de negocio</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_02_cliente.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">class Cliente:
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_02_cliente.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code">class Cliente:
     SCORE_PREMIUM = 700
     
     def __init__(self, nombre, score, ingreso, ciudad="BsAs"):
@@ -217,16 +279,19 @@ cuota = 85000
 print(f"\n¿Puede tomar cuota ${cuota:,}?")
 for c in clientes:
     resultado = "✅" if c.puede_tomar_credito(cuota) else "❌"
-    print(f"  {resultado} {c.nombre}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"  {resultado} {c.nombre}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Ejemplo 3: Herencia — ClientePremium</h3>
+            <h3>Ejemplo 3: Herencia — ClientePremium</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_03_herencia.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">class Cuenta:
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_03_herencia.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code">class Cuenta:
     def __init__(self, titular, saldo=0):
         self.titular = titular
         self.saldo = saldo
@@ -267,16 +332,19 @@ print(f"Nuevo saldo: {premium}")
 # isinstance: verificar tipo
 print(f"\n¿premium es Cuenta? {isinstance(premium, Cuenta)}")       # True
 print(f"¿premium es CuentaPremium? {isinstance(premium, CuentaPremium)}")  # True
-print(f"¿normal es CuentaPremium? {isinstance(normal, CuentaPremium)}")    # False</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"¿normal es CuentaPremium? {isinstance(normal, CuentaPremium)}")    # False</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Ejemplo 4: dataclass — clases de datos rápidas</h3>
+            <h3>Ejemplo 4: dataclass — clases de datos rápidas</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_04_dataclass.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">from dataclasses import dataclass, field
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_04_dataclass.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code">from dataclasses import dataclass, field
 
 @dataclass
 class Transaccion:
@@ -315,16 +383,19 @@ class ClienteData:
         return "Estándar"
 
 c = ClienteData("García", 720, 150000)
-print(f"\n{c.nombre}: {c.categoria}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+print(f"\n{c.nombre}: {c.categoria}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<h3>Ejemplo 5: Clase Cartera — colección de cuentas</h3>
+            <h3>Ejemplo 5: Clase Cartera — colección de cuentas</h3>
 
-<div class="editor" data-mode="python">
-  <div class="editor-top"><span>ejemplo_05_cartera.py</span><span>Python</span></div>
-  <div class="editor-area"><pre class="lines"></pre><textarea class="code">class Cartera:
+            <div class="editor" data-mode="python">
+                <div class="editor-top"><span>ejemplo_05_cartera.py</span><span>Python</span></div>
+                <div class="editor-area">
+                    <pre class="lines"></pre><textarea class="code">class Cartera:
     def __init__(self, nombre):
         self.nombre = nombre
         self.cuentas = []
@@ -363,53 +434,162 @@ print(f"len(): {len(cartera)}")
 
 print(f"\nTop 3:")
 for c in cartera.top(3):
-    print(f"  {c['titular']}: ${c['saldo']:,}")</textarea></div>
-  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
-  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
-</div>
+    print(f"  {c['titular']}: ${c['saldo']:,}")</textarea>
+                </div>
+                <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                        data-reset>Reset</button></div>
+                <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+            </div>
 
-<div class="section-num">03</div>
-<h2>Referencia rápida</h2>
+            <div class="section-num">03</div>
+            <h2>Referencia rápida</h2>
 
-<div class="table-wrap">
-<table>
-<tr><th>Concepto</th><th>Sintaxis</th><th>Significado</th></tr>
-<tr><td>Definir clase</td><td><code>class MiClase:</code></td><td>PascalCase por convención</td></tr>
-<tr><td>Constructor</td><td><code>def __init__(self, ...):</code></td><td>Inicializa atributos</td></tr>
-<tr><td>Atributo</td><td><code>self.nombre = valor</code></td><td>Dato de cada instancia</td></tr>
-<tr><td>Método</td><td><code>def metodo(self, ...):</code></td><td>Función del objeto</td></tr>
-<tr><td>Instanciar</td><td><code>obj = MiClase(args)</code></td><td>Crear un objeto</td></tr>
-<tr><td>Herencia</td><td><code>class Hija(Padre):</code></td><td>Hija hereda de Padre</td></tr>
-<tr><td>super()</td><td><code>super().__init__(...)</code></td><td>Llamar al padre</td></tr>
-<tr><td>__str__</td><td><code>def __str__(self):</code></td><td>Para print(obj)</td></tr>
-<tr><td>__len__</td><td><code>def __len__(self):</code></td><td>Para len(obj)</td></tr>
-<tr><td>@dataclass</td><td><code>@dataclass class X:</code></td><td>Auto-genera __init__/__repr__/__eq__</td></tr>
-<tr><td>@property</td><td><code>@property def x(self):</code></td><td>Atributo calculado</td></tr>
-</table>
-</div>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Sintaxis</th>
+                        <th>Significado</th>
+                    </tr>
+                    <tr>
+                        <td>Definir clase</td>
+                        <td><code>class MiClase:</code></td>
+                        <td>PascalCase por convención</td>
+                    </tr>
+                    <tr>
+                        <td>Constructor</td>
+                        <td><code>def __init__(self, ...):</code></td>
+                        <td>Inicializa atributos</td>
+                    </tr>
+                    <tr>
+                        <td>Atributo</td>
+                        <td><code>self.nombre = valor</code></td>
+                        <td>Dato de cada instancia</td>
+                    </tr>
+                    <tr>
+                        <td>Método</td>
+                        <td><code>def metodo(self, ...):</code></td>
+                        <td>Función del objeto</td>
+                    </tr>
+                    <tr>
+                        <td>Instanciar</td>
+                        <td><code>obj = MiClase(args)</code></td>
+                        <td>Crear un objeto</td>
+                    </tr>
+                    <tr>
+                        <td>Herencia</td>
+                        <td><code>class Hija(Padre):</code></td>
+                        <td>Hija hereda de Padre</td>
+                    </tr>
+                    <tr>
+                        <td>super()</td>
+                        <td><code>super().__init__(...)</code></td>
+                        <td>Llamar al padre</td>
+                    </tr>
+                    <tr>
+                        <td>__str__</td>
+                        <td><code>def __str__(self):</code></td>
+                        <td>Para print(obj)</td>
+                    </tr>
+                    <tr>
+                        <td>__len__</td>
+                        <td><code>def __len__(self):</code></td>
+                        <td>Para len(obj)</td>
+                    </tr>
+                    <tr>
+                        <td>@dataclass</td>
+                        <td><code>@dataclass class X:</code></td>
+                        <td>Auto-genera __init__/__repr__/__eq__</td>
+                    </tr>
+                    <tr>
+                        <td>@property</td>
+                        <td><code>@property def x(self):</code></td>
+                        <td>Atributo calculado</td>
+                    </tr>
+                </table>
+            </div>
 
-<div class="section-num">04</div>
-<h2>Ejercicios</h2>
+            <div class="section-num">04</div>
+            <h2>Ejercicios</h2>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Clase Producto</h4><p>Creá una clase <code>Producto</code> con nombre y precio. Instanciá un producto e imprimilo. Debe incluir <code>Notebook</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-1" data-expected="Notebook"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí clase Producto:
+            <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+                <h4>Ejercicio 1: Clase Producto</h4>
+                <p>Creá una clase <code>Producto</code> con nombre y precio. Instanciá un producto e imprimilo. Debe
+                    incluir <code>Notebook</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-1"
+                    data-expected="Notebook">
+                    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code"># Definí clase Producto:
 
 p = Producto("Notebook", 920000)
-print(f"{p.nombre}: ${p.precio:,}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["class Producto:","    def __init__(self, nombre, precio):","        self.nombre = nombre; self.precio = precio"]'></div></div>
+print(f"{p.nombre}: ${p.precio:,}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h1" class="hint-box"
+                    data-hints='["class Producto:","    def __init__(self, nombre, precio):","        self.nombre = nombre; self.precio = precio"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Método y __str__</h4><p>Agregá un método <code>con_iva()</code> que devuelva precio*1.21, y <code>__str__</code> que muestre nombre y precio. Debe incluir <code>1113200</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-2" data-expected="1113200"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "1113200"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Clase Producto con con_iva() y __str__:
+            <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+                <h4>Ejercicio 2: Método y __str__</h4>
+                <p>Agregá un método <code>con_iva()</code> que devuelva precio*1.21, y <code>__str__</code> que muestre
+                    nombre y precio. Debe incluir <code>1113200</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-2"
+                    data-expected="1113200">
+                    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "1113200"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code"># Clase Producto con con_iva() y __str__:
 
 p = Producto("Notebook", 920000)
 print(p)
-print(f"Con IVA: ${p.con_iva():,.0f}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["def con_iva(self): return self.precio * 1.21","def __str__(self): return f\"{self.nombre}: ${self.precio:,}\"","920000 * 1.21 = 1113200"]'></div></div>
+print(f"Con IVA: ${p.con_iva():,.0f}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h2" class="hint-box"
+                    data-hints='["def con_iva(self): return self.precio * 1.21","def __str__(self): return f\"{self.nombre}: ${self.precio:,}\"","920000 * 1.21 = 1113200"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: Clase CuentaSimple</h4><p>Creá <code>CuentaSimple</code> con titular y saldo. Métodos <code>depositar()</code> y <code>extraer()</code>. Debe incluir <code>120000</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-3" data-expected="120000"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "120000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí CuentaSimple:
+            <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
+                <h4>Ejercicio 3: Clase CuentaSimple</h4>
+                <p>Creá <code>CuentaSimple</code> con titular y saldo. Métodos <code>depositar()</code> y
+                    <code>extraer()</code>. Debe incluir <code>120000</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-3"
+                    data-expected="120000">
+                    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "120000"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code"># Definí CuentaSimple:
 
 c = CuentaSimple("García", 100000)
 c.depositar(50000)
 c.extraer(30000)
-print(f"Saldo: ${c.saldo:,}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["def depositar(self, monto): self.saldo += monto","def extraer(self, monto): self.saldo -= monto","100000 + 50000 - 30000 = 120000"]'></div></div>
+print(f"Saldo: ${c.saldo:,}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h3" class="hint-box"
+                    data-hints='["def depositar(self, monto): self.saldo += monto","def extraer(self, monto): self.saldo -= monto","100000 + 50000 - 30000 = 120000"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Lista de objetos</h4><p>Creá 4 instancias de <code>Cliente(nombre, score)</code>, guardalas en lista, filtrá premium (score>=700) e imprimí. Debe incluir <code>Premium</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-4" data-expected="Premium"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Premium"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">class Cliente:
+            <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+                <h4>Ejercicio 4: Lista de objetos</h4>
+                <p>Creá 4 instancias de <code>Cliente(nombre, score)</code>, guardalas en lista, filtrá premium
+                    (score>=700) e imprimí. Debe incluir <code>Premium</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-4"
+                    data-expected="Premium">
+                    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Premium"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">class Cliente:
     def __init__(self, nombre, score):
         self.nombre = nombre
         self.score = score
@@ -422,9 +602,26 @@ clientes = [
 ]
 
 # Filtrá premium e imprimí:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["premium = [c for c in clientes if c.es_premium()]","for c in premium: print(f\"Premium: {c.nombre}\")","García y Pérez son premium"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h4" class="hint-box"
+                    data-hints='["premium = [c for c in clientes if c.es_premium()]","for c in premium: print(f\"Premium: {c.nombre}\")","García y Pérez son premium"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Herencia básica</h4><p>Creá <code>CuentaAhorro(Cuenta)</code> que herede de una Cuenta base y agregue método <code>aplicar_interes(tasa)</code>. Debe incluir <code>103000</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-5" data-expected="103000"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "103000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">class Cuenta:
+            <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+                <h4>Ejercicio 5: Herencia básica</h4>
+                <p>Creá <code>CuentaAhorro(Cuenta)</code> que herede de una Cuenta base y agregue método
+                    <code>aplicar_interes(tasa)</code>. Debe incluir <code>103000</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-5"
+                    data-expected="103000">
+                    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "103000"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">class Cuenta:
     def __init__(self, titular, saldo=0):
         self.titular = titular
         self.saldo = saldo
@@ -433,9 +630,25 @@ clientes = [
 
 ca = CuentaAhorro("García", 100000)
 ca.aplicar_interes(0.03)
-print(f"Saldo: ${ca.saldo:,}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["class CuentaAhorro(Cuenta):","    def aplicar_interes(self, tasa): self.saldo *= (1 + tasa)","100000 * 1.03 = 103000"]'></div></div>
+print(f"Saldo: ${ca.saldo:,}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h5" class="hint-box"
+                    data-hints='["class CuentaAhorro(Cuenta):","    def aplicar_interes(self, tasa): self.saldo *= (1 + tasa)","100000 * 1.03 = 103000"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: dataclass</h4><p>Creá un <code>@dataclass</code> Cotizacion con ticker, precio, variacion. Creá 3 instancias e imprimí la de mayor precio. Debe incluir <code>YPF</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-6" data-expected="YPF"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "YPF"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
+            <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+                <h4>Ejercicio 6: dataclass</h4>
+                <p>Creá un <code>@dataclass</code> Cotizacion con ticker, precio, variacion. Creá 3 instancias e imprimí
+                    la de mayor precio. Debe incluir <code>YPF</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-6" data-expected="YPF">
+                    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "YPF"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code">from dataclasses import dataclass
 
 # Definí el dataclass:
 
@@ -445,32 +658,101 @@ cots = [
     Cotizacion("PAMP", 3100, 2.1),
 ]
 top = max(cots, key=lambda c: c.precio)
-print(f"Mayor precio: {top}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["@dataclass\\nclass Cotizacion:","    ticker: str\\n    precio: float\\n    variacion: float","YPF tiene el mayor precio (28000)"]'></div></div>
+print(f"Mayor precio: {top}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h6" class="hint-box"
+                    data-hints='["@dataclass\\nclass Cotizacion:","    ticker: str\\n    precio: float\\n    variacion: float","YPF tiene el mayor precio (28000)"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Cuenta con validación y excepciones</h4><p>Agregá validación al <code>extraer()</code>: si el monto > saldo, lanzá <code>ValueError</code>. Probá con try/except. Debe incluir <code>insuficiente</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-7" data-expected="insuficiente"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "insuficiente"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Clase con validación:
+            <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+                <h4>Ejercicio 7: Cuenta con validación y excepciones</h4>
+                <p>Agregá validación al <code>extraer()</code>: si el monto > saldo, lanzá <code>ValueError</code>.
+                    Probá con try/except. Debe incluir <code>insuficiente</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-7"
+                    data-expected="insuficiente">
+                    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "insuficiente"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code"># Clase con validación:
 
 c = CuentaSegura("García", 50000)
 try:
     c.extraer(100000)
 except ValueError as e:
-    print(f"Error: {e}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["def extraer(self, monto):","    if monto > self.saldo: raise ValueError(\"Saldo insuficiente\")","    self.saldo -= monto"]'></div></div>
+    print(f"Error: {e}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h7" class="hint-box"
+                    data-hints='["def extraer(self, monto):","    if monto > self.saldo: raise ValueError(\"Saldo insuficiente\")","    self.saldo -= monto"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: __len__ y __str__ custom</h4><p>Creá clase <code>Cartera</code> que guarde cuentas en una lista. Implementá <code>__len__</code> y <code>__str__</code>. Debe incluir <code>3 cuentas</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-8" data-expected="3 cuentas"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "3 cuentas"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá Cartera con __len__ y __str__:
+            <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+                <h4>Ejercicio 8: __len__ y __str__ custom</h4>
+                <p>Creá clase <code>Cartera</code> que guarde cuentas en una lista. Implementá <code>__len__</code> y
+                    <code>__str__</code>. Debe incluir <code>3 cuentas</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-8"
+                    data-expected="3 cuentas">
+                    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "3 cuentas"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code"># Creá Cartera con __len__ y __str__:
 
 c = Cartera()
 c.agregar("García", 150000)
 c.agregar("López", 320000)
 c.agregar("Pérez", 890000)
 print(c)
-print(f"len: {len(c)}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["self.cuentas = [] en __init__","def __len__(self): return len(self.cuentas)","def __str__(self): return f\"Cartera: {len(self)} cuentas\""]'></div></div>
+print(f"len: {len(c)}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h8" class="hint-box"
+                    data-hints='["self.cuentas = [] en __init__","def __len__(self): return len(self.cuentas)","def __str__(self): return f\"Cartera: {len(self)} cuentas\""]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: @property para campos calculados</h4><p>Creá <code>Empleado</code> con nombre, sueldo_bruto y un <code>@property sueldo_neto</code> que descuente 31%. Debe incluir <code>neto</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-9" data-expected="neto"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "neto"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá Empleado con @property:
+            <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+                <h4>Ejercicio 9: @property para campos calculados</h4>
+                <p>Creá <code>Empleado</code> con nombre, sueldo_bruto y un <code>@property sueldo_neto</code> que
+                    descuente 31%. Debe incluir <code>neto</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-9"
+                    data-expected="neto">
+                    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "neto"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code"># Creá Empleado con @property:
 
 e = Empleado("García", 950000)
 print(f"Bruto: ${e.sueldo_bruto:,}")
-print(f"neto: ${e.sueldo_neto:,.0f}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["@property","def sueldo_neto(self): return self.sueldo_bruto * 0.69","Se accede como atributo: e.sueldo_neto (sin paréntesis)"]'></div></div>
+print(f"neto: ${e.sueldo_neto:,.0f}")</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h9" class="hint-box"
+                    data-hints='["@property","def sueldo_neto(self): return self.sueldo_bruto * 0.69","Se accede como atributo: e.sueldo_neto (sin paréntesis)"]'>
+                </div>
+            </div>
 
-<div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Sistema bancario completo con OOP</h4><p>Creá clases <code>Banco</code>, <code>Cliente</code> y <code>Cuenta</code>. El banco tiene clientes, cada cliente tiene cuentas. Implementá: agregar cliente, abrir cuenta, depositar, y un reporte general. Debe incluir <code>BANCO</code>.</p><div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-10" data-expected="BANCO"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "BANCO"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Diseñá el sistema con 3 clases:
+            <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
+                <h4>Ejercicio 10: Sistema bancario completo con OOP</h4>
+                <p>Creá clases <code>Banco</code>, <code>Cliente</code> y <code>Cuenta</code>. El banco tiene clientes,
+                    cada cliente tiene cuentas. Implementá: agregar cliente, abrir cuenta, depositar, y un reporte
+                    general. Debe incluir <code>BANCO</code>.</p>
+                <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-10"
+                    data-expected="BANCO">
+                    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "BANCO"</span></div>
+                    <div class="editor-area">
+                        <pre class="lines"></pre><textarea class="code"># Diseñá el sistema con 3 clases:
 
 # Probá:
 # banco = Banco("Galicia")
@@ -478,40 +760,55 @@ print(f"neto: ${e.sueldo_neto:,.0f}")</textarea></div><div class="editor-actions
 # banco.abrir_cuenta("García", 150000)
 # banco.reporte()
 print("=== BANCO ===")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["class Banco: self.nombre, self.clientes = {}","class Cliente: self.nombre, self.cuentas = []","banco.agregar_cliente crea un Cliente, abrir_cuenta le agrega una Cuenta"]'></div></div>
+</textarea>
+                    </div>
+                    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary"
+                            data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
+                    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+                </div>
+                <div id="h10" class="hint-box"
+                    data-hints='["class Banco: self.nombre, self.clientes = {}","class Cliente: self.nombre, self.cuentas = []","banco.agregar_cliente crea un Cliente, abrir_cuenta le agrega una Cuenta"]'>
+                </div>
+            </div>
 
-<div class="section-num">05</div>
-<h2>Resumen y conexión</h2>
+            <div class="section-num">05</div>
+            <h2>Resumen y conexión</h2>
 
-<ul>
-  <li>Una clase es un molde (<code>class</code>), un objeto es una instancia con datos reales.</li>
-  <li><code>__init__</code> inicializa atributos. <code>self</code> referencia al objeto actual.</li>
-  <li><code>__str__</code> define cómo se muestra con <code>print()</code>. <code>__len__</code> para <code>len()</code>.</li>
-  <li>Herencia (<code>class Hija(Padre)</code>) permite reutilizar y extender. <code>super()</code> llama al padre.</li>
-  <li><code>@dataclass</code> genera constructores y repr automáticos para clases de datos.</li>
-  <li>Usá clases cuando tenés objetos con estado + comportamiento. Funciones para lógica pura.</li>
-</ul>
+            <ul>
+                <li>Una clase es un molde (<code>class</code>), un objeto es una instancia con datos reales.</li>
+                <li><code>__init__</code> inicializa atributos. <code>self</code> referencia al objeto actual.</li>
+                <li><code>__str__</code> define cómo se muestra con <code>print()</code>. <code>__len__</code> para
+                    <code>len()</code>.</li>
+                <li>Herencia (<code>class Hija(Padre)</code>) permite reutilizar y extender. <code>super()</code> llama
+                    al padre.</li>
+                <li><code>@dataclass</code> genera constructores y repr automáticos para clases de datos.</li>
+                <li>Usá clases cuando tenés objetos con estado + comportamiento. Funciones para lógica pura.</li>
+            </ul>
 
-<p>En la última lección (<strong>27 · Proyecto integrador</strong>) vas a combinar TODO lo aprendido en un proyecto completo de gestión de datos.</p>
+            <p>En la última lección (<strong>27 · Proyecto integrador</strong>) vas a combinar TODO lo aprendido en un
+                proyecto completo de gestión de datos.</p>
 
-<p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/classes.html" target="_blank">Python docs — Classes</a> · <a href="https://docs.python.org/3/library/dataclasses.html" target="_blank">dataclasses</a></p>
+            <p><strong>Recursos:</strong> <a href="https://docs.python.org/3/tutorial/classes.html"
+                    target="_blank">Python docs — Classes</a> · <a
+                    href="https://docs.python.org/3/library/dataclasses.html" target="_blank">dataclasses</a></p>
 
-<div class="footer-nav">
-  <a href="/python/25-excepciones-errores.html">← Excepciones</a>
-  <a class="next" href="/python/27-proyecto-integrador-python.html">Proyecto integrador →</a>
-</div>
+            <div class="footer-nav">
+                <a href="/python/25-excepciones-errores.html">← Excepciones</a>
+                <a class="next" href="/python/27-proyecto-integrador-python.html">Proyecto integrador →</a>
+            </div>
 
-</main>
-</div>
+        </main>
+    </div>
 
-<script type="module">
-import { renderSidebar } from '/js/nav.js';
-import { initTheme } from '/js/theme.js';
-import { mountEditors } from '/js/editor.js';
-initTheme();
-renderSidebar(location.pathname);
-mountEditors();
-window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
-</script>
+    <script type="module">
+        import { renderSidebar } from '/js/nav.js';
+        import { initTheme } from '/js/theme.js';
+        import { mountEditors } from '/js/editor.js';
+        initTheme();
+        renderSidebar(location.pathname);
+        mountEditors();
+        window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+    </script>
 </body>
+
 </html>
