@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════
    QuieroProgramar · Design System v2
-   ☾ DARK / ☼ LIGHT mode · Red + Grey palette
+   ☾ DARK / ☀︎ LIGHT mode · Red + Grey palette
    ═══════════════════════════════════════════════ */
 
 /* ── ☾ DARK MODE (default) ── */
@@ -43,8 +43,8 @@
   --transition: .25s cubic-bezier(.4, 0, .2, 1);
 }
 
-/* ── ☼ LIGHT MODE ── */
-[data-theme="☼ LIGHT"] {
+/* ── ☀︎ LIGHT MODE ── */
+[data-theme="☀︎ LIGHT"] {
   --bg: #f5f5f7;
   --bg2: #eeeef0;
   --bg3: #e4e4e8;

@@ -1,5 +1,5 @@
 /**
- * Theme toggle — ☾ DARK / ☼ LIGHT mode
+ * Theme toggle — ☾ DARK / ☀︎ LIGHT mode
  * Persists user preference in localStorage.
  */
 
@@ -8,7 +8,7 @@ const THEME_KEY = 'quiero-programar-theme';
 function getPreferred() {
   const stored = localStorage.getItem(THEME_KEY);
   if (stored) return stored;
-  return window.matchMedia('(prefers-color-scheme: ☼ LIGHT)').matches ? '☼ LIGHT' : '☾ DARK';
+  return window.matchMedia('(prefers-color-scheme: ☀︎ LIGHT)').matches ? '☀︎ LIGHT' : '☾ DARK';
 }
 
 export function applyTheme(theme) {
@@ -17,7 +17,7 @@ export function applyTheme(theme) {
 
   // Update toggle button icon if it exists
   const btn = document.querySelector('.theme-toggle');
-  if (btn) btn.textContent = theme === '☾ DARK' ? '☼ LIGHT' : '☾ DARK';
+  if (btn) btn.textContent = theme === '☾ DARK' ? '☀︎ LIGHT' : '☾ DARK';
 }
 
 export function initTheme() {
@@ -30,10 +30,10 @@ export function initTheme() {
     const btn = document.createElement('button');
     btn.className = 'theme-toggle';
     btn.title = 'Cambiar tema';
-    btn.textContent = theme === '☾ DARK' ? '☼ LIGHT' : '☾ DARK';
+    btn.textContent = theme === '☾ DARK' ? '☀︎ LIGHT' : '☾ DARK';
     btn.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme') || '☾ DARK';
-      applyTheme(current === '☾ DARK' ? '☼ LIGHT' : '☾ DARK');
+      applyTheme(current === '☾ DARK' ? '☀︎ LIGHT' : '☾ DARK');
     });
     topbar.appendChild(btn);
   }
