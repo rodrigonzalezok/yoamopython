@@ -1,221 +1,546 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 09</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 09</div><h1>Estadistica Descriptiva</h1><p>Subtítulo: dominá estadistica descriptiva desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 08</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 09</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Estadistica Descriptiva</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Estadistica Descriptiva</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de estadistica descriptiva</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Estadistica Descriptiva</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Estadistica Descriptiva</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Estadistica Descriptiva</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Estadistica Descriptiva</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-09' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-09-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-09-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de estadistica descriptiva con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/data-analysis/08-pandas-merge-join-concat.html'>← Anterior</a><a class='badge' href='/data-analysis/10-matplotlib-basico.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 09 · Estadística descriptiva</title>
+<meta name="description" content="Dominá media, mediana, desviación estándar, percentiles, distribuciones y correlación. La estadística descriptiva es el lenguaje universal del Data Analyst.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 09 de 19</span>
+  <h1>Estadística Descriptiva</h1>
+  <p>La estadística descriptiva es el <strong>lenguaje universal</strong> del análisis de datos. Cuando decís "el ingreso mediano es $350K con una desviación de $120K", cualquier analista del mundo entiende exactamente qué significa. Sin estadística, estás mirando números sin contexto. Con ella, estás contando la historia detrás de los datos.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: Lección 08 (merge/join/concat)</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>Las 3 preguntas fundamentales</h3>
+
+<p>Toda estadística descriptiva responde una de estas tres preguntas:</p>
+
+<ol>
+  <li><strong>¿Cuál es el centro de los datos?</strong> → Medidas de <em>tendencia central</em> (media, mediana, moda)</li>
+  <li><strong>¿Qué tan dispersos están?</strong> → Medidas de <em>dispersión</em> (rango, varianza, desviación estándar)</li>
+  <li><strong>¿Cómo se distribuyen?</strong> → <em>Forma</em> de la distribución (asimetría, percentiles, outliers)</li>
+</ol>
+
+<h3>Medidas de tendencia central</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Medida</th><th>Calcula</th><th>pandas</th><th>Cuándo usarla</th></tr>
+<tr><td><strong>Media</strong> (promedio)</td><td>Suma / cantidad</td><td><code>.mean()</code></td><td>Datos simétricos sin outliers</td></tr>
+<tr><td><strong>Mediana</strong></td><td>Valor del medio al ordenar</td><td><code>.median()</code></td><td>Datos con outliers o asimétricos</td></tr>
+<tr><td><strong>Moda</strong></td><td>Valor más frecuente</td><td><code>.mode()</code></td><td>Datos categóricos</td></tr>
+</table>
+</div>
+
+<div class="concept"><strong>¿Cuándo la media miente?</strong> Si en una sala hay 9 personas ganando $100K y 1 persona ganando $10M, la media es $1.09M — un número que no representa a nadie. La mediana es $100K, que describe al 90% del grupo. Por eso, para ingresos, precios de propiedades y salarios, siempre se usa la <strong>mediana</strong>.</div>
+
+<div class="analogy"><strong>Analogía:</strong> Jeff Bezos entra a un bar. La media de ingresos de los presentes sube a $1 mil millones. La mediana apenas se mueve. La media es sensible a valores extremos; la mediana es robusta.</div>
+
+<h3>Medidas de dispersión</h3>
+
+<p>El centro no cuenta toda la historia. Dos ciudades pueden tener el mismo ingreso promedio ($400K), pero en una todos ganan entre $350K-$450K y en otra van desde $50K hasta $2M. La dispersión mide esa "anchura".</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Medida</th><th>Calcula</th><th>pandas</th><th>Interpretación</th></tr>
+<tr><td><strong>Rango</strong></td><td>max − min</td><td><code>.max() - .min()</code></td><td>Amplitud total (afectado por outliers)</td></tr>
+<tr><td><strong>Varianza</strong></td><td>Promedio de distancias² al centro</td><td><code>.var()</code></td><td>Dispersión en unidades² (difícil de interpretar)</td></tr>
+<tr><td><strong>Desv. estándar (σ)</strong></td><td>√varianza</td><td><code>.std()</code></td><td>Dispersión en las mismas unidades que los datos</td></tr>
+<tr><td><strong>IQR</strong></td><td>Q3 − Q1 (rango intercuartílico)</td><td><code>.quantile(.75) - .quantile(.25)</code></td><td>Dispersión del 50% central (robusto a outliers)</td></tr>
+</table>
+</div>
+
+<div class="warning"><strong>La desviación estándar es la reina de la dispersión.</strong> Si te dicen "el ingreso promedio es $400K con σ = $20K", sabés que los datos están muy concentrados. Si σ = $200K, están muy dispersos. Un σ grande sugiere alta variabilidad — puede indicar segmentos diferentes mezclados, errores de carga, o simplemente una población heterogénea.</div>
+
+<h3>Percentiles y la regla del box plot</h3>
+
+<p>Los <strong>percentiles</strong> (o cuantiles) dividen tus datos ordenados en porciones iguales:</p>
+
+<ul>
+  <li><strong>Q1 (25%)</strong>: el valor por debajo del cual está el 25% de los datos</li>
+  <li><strong>Q2 (50%) = Mediana</strong>: el punto medio</li>
+  <li><strong>Q3 (75%)</strong>: por debajo del cual está el 75%</li>
+  <li><strong>IQR = Q3 - Q1</strong>: el rango donde vive el 50% central de los datos</li>
+</ul>
+
+<p>La regla clásica para detectar <strong>outliers</strong> usa el IQR:</p>
+<ul>
+  <li>Outlier por abajo: valor &lt; Q1 − 1.5 × IQR</li>
+  <li>Outlier por arriba: valor &gt; Q3 + 1.5 × IQR</li>
+</ul>
+
+<h3>El superpoder: .describe()</h3>
+
+<p>El método <code>df.describe()</code> genera un resumen estadístico completo en una sola línea. Te da: count, mean, std, min, 25%, 50%, 75% y max. Es lo primero que ejecutás cuando recibís un dataset nuevo.</p>
+
+<div class="realworld"><strong>En el trabajo real:</strong> cuando un líder te da un dataset nuevo y te dice "fijate qué hay acá", lo primero que hacés es: <code>df.shape</code> (tamaño), <code>df.dtypes</code> (tipos), <code>df.isna().sum()</code> (nulos), <code>df.describe()</code> (estadísticas). Con esas 4 líneas ya sabés el 80% de lo que necesitás saber.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Medidas de tendencia central</h3>
+<p>Comparar media vs mediana en un dataset con y sin outliers para entender cuándo usar cada una.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_central.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+# Ingresos de un equipo (sin outliers)
+equipo_a = pd.Series([350000, 380000, 400000, 420000, 450000],
+                     name="Equipo_A")
+
+# Ingresos con un director (outlier)
+equipo_b = pd.Series([350000, 380000, 400000, 420000, 3500000],
+                     name="Equipo_B")
+
+print("=== Equipo A (sin outliers) ===")
+print(f"  Media:   ${equipo_a.mean():,.0f}")
+print(f"  Mediana: ${equipo_a.median():,.0f}")
+print(f"  Diferencia: ${abs(equipo_a.mean() - equipo_a.median()):,.0f}")
+
+print("\n=== Equipo B (con outlier: director gana $3.5M) ===")
+print(f"  Media:   ${equipo_b.mean():,.0f}")
+print(f"  Mediana: ${equipo_b.median():,.0f}")
+print(f"  Diferencia: ${abs(equipo_b.mean() - equipo_b.median()):,.0f}")
+
+print("\nLa media del Equipo B es $1.01M → no representa a nadie")
+print("La mediana es $400K → describe al 80% del equipo")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Medidas de dispersión</h3>
+<p>Dos ciudades con el mismo ingreso promedio pero dispersión completamente distinta.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_dispersion.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+# Ciudad A: ingresos concentrados (poca dispersión)
+ciudad_a = pd.Series([380000, 390000, 400000, 410000, 420000], name="Ciudad_A")
+
+# Ciudad B: ingresos dispersos (mucha variabilidad)
+ciudad_b = pd.Series([100000, 200000, 400000, 600000, 700000], name="Ciudad_B")
+
+for ciudad, datos in [("Ciudad A", ciudad_a), ("Ciudad B", ciudad_b)]:
+    print(f"=== {ciudad} ===")
+    print(f"  Media:     ${datos.mean():>12,.0f}")
+    print(f"  Mediana:   ${datos.median():>12,.0f}")
+    print(f"  Desv std:  ${datos.std():>12,.0f}")
+    print(f"  Rango:     ${datos.max() - datos.min():>12,.0f}")
+    print(f"  Mínimo:    ${datos.min():>12,.0f}")
+    print(f"  Máximo:    ${datos.max():>12,.0f}")
+    print()
+
+print("Ambas tienen media $400K, pero Ciudad B tiene σ = $245K")
+print("contra σ = $15K de Ciudad A. Son realidades MUY distintas.")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: .describe() — El resumen automático</h3>
+<p>Una sola línea que te da el panorama completo. Es lo primero que ejecutás cuando recibís un dataset nuevo.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_describe.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["García", "López", "Pérez", "Sosa", "Luna",
+                "Díaz", "Ruiz", "Vega", "Mora", "Castro"],
+    "Saldo": [850000, 320000, 95000, 670000, 1200000,
+              180000, 450000, 3500000, 280000, 520000],
+    "Antiguedad_Anios": [12, 3, 1, 8, 15, 2, 6, 20, 4, 9],
+    "Productos": [5, 2, 1, 4, 6, 1, 3, 8, 2, 4]
+})
+
+# describe() para columnas numéricas
+print("=== Resumen estadístico ===")
+print(df.describe().round(0))
+
+# describe() con percentiles personalizados
+print("\n=== Con percentiles 10%, 90% ===")
+print(df["Saldo"].describe(percentiles=[.10, .25, .50, .75, .90]).round(0))
+
+# Interpretación
+print("\n=== Interpretación ===")
+mediana = df["Saldo"].median()
+media = df["Saldo"].mean()
+print(f"Media: ${media:,.0f} | Mediana: ${mediana:,.0f}")
+print(f"Media > Mediana → distribución con cola a la derecha (outliers altos)")
+print(f"El 50% de los clientes tiene saldo < ${mediana:,.0f}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Percentiles y detección de outliers</h3>
+<p>Usando la regla del IQR para detectar automáticamente valores atípicos que podrían distorsionar tu análisis.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_outliers.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+saldos = pd.Series([
+    120000, 180000, 250000, 300000, 350000,
+    380000, 420000, 500000, 650000, 5000000  # ← outlier
+], name="Saldo")
+
+# Calcular cuartiles e IQR
+Q1 = saldos.quantile(0.25)
+Q3 = saldos.quantile(0.75)
+IQR = Q3 - Q1
+
+# Límites para outliers
+limite_inf = Q1 - 1.5 * IQR
+limite_sup = Q3 + 1.5 * IQR
+
+print(f"Q1 (25%): ${Q1:,.0f}")
+print(f"Q3 (75%): ${Q3:,.0f}")
+print(f"IQR:      ${IQR:,.0f}")
+print(f"\nLímite inferior: ${limite_inf:,.0f}")
+print(f"Límite superior: ${limite_sup:,.0f}")
+
+# Detectar outliers
+outliers = saldos[(saldos < limite_inf) | (saldos > limite_sup)]
+print(f"\nOutliers detectados: {len(outliers)}")
+print(outliers.values)
+
+# Estadísticas con y sin outliers
+print(f"\nMedia CON outlier:  ${saldos.mean():,.0f}")
+print(f"Media SIN outlier:  ${saldos[saldos <= limite_sup].mean():,.0f}")
+print(f"Mediana (no cambia): ${saldos.median():,.0f}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="tip"><strong>Tip profesional:</strong> un outlier no siempre es un error. El cliente con $5M de saldo puede ser legítimo (un cliente VIP). La pregunta no es "¿elimino el outlier?" sino "¿este outlier distorsiona la métrica que estoy calculando?". Si estás calculando el saldo promedio de clientes estándar, sí lo sacás. Si estás calculando el total de depósitos, no.</div>
+
+<h3>Ejemplo 5: Estadísticas por grupo (groupby + describe)</h3>
+<p>El patrón más poderoso: calcular estadísticas descriptivas segmentadas por categoría. Ya no es "el promedio global" sino "el promedio de cada segmento".</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_por_grupo.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Segmento": ["Premium"]*4 + ["Estándar"]*4 + ["Básico"]*4,
+    "Saldo": [850000, 1200000, 670000, 920000,
+              320000, 280000, 450000, 380000,
+              95000, 120000, 80000, 150000],
+    "Productos": [5, 6, 4, 5, 2, 3, 3, 2, 1, 1, 1, 2]
+})
+
+# Estadísticas por segmento
+print("=== Reporte por segmento ===")
+reporte = df.groupby("Segmento").agg(
+    Clientes      = ("Saldo", "count"),
+    Saldo_Media   = ("Saldo", "mean"),
+    Saldo_Mediana = ("Saldo", "median"),
+    Saldo_Std     = ("Saldo", "std"),
+    Saldo_Min     = ("Saldo", "min"),
+    Saldo_Max     = ("Saldo", "max"),
+    Prod_Promedio = ("Productos", "mean")
+).round(0)
+
+print(reporte)
+
+# ¿Cuál es el segmento más homogéneo?
+print(f"\nSegmento más homogéneo (menor σ): {reporte['Saldo_Std'].idxmin()}")
+print(f"Segmento más heterogéneo (mayor σ): {reporte['Saldo_Std'].idxmax()}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Método pandas</th><th>Estadístico</th><th>Tipo</th></tr>
+<tr><td><code>.mean()</code></td><td>Media aritmética</td><td>Tendencia central</td></tr>
+<tr><td><code>.median()</code></td><td>Mediana (P50)</td><td>Tendencia central</td></tr>
+<tr><td><code>.mode()</code></td><td>Moda</td><td>Tendencia central</td></tr>
+<tr><td><code>.std()</code></td><td>Desviación estándar</td><td>Dispersión</td></tr>
+<tr><td><code>.var()</code></td><td>Varianza</td><td>Dispersión</td></tr>
+<tr><td><code>.min()</code> / <code>.max()</code></td><td>Mínimo / máximo</td><td>Rango</td></tr>
+<tr><td><code>.quantile(p)</code></td><td>Percentil p</td><td>Posición</td></tr>
+<tr><td><code>.describe()</code></td><td>Resumen completo</td><td>Todo junto</td></tr>
+<tr><td><code>.value_counts()</code></td><td>Frecuencia de valores</td><td>Distribución categórica</td></tr>
+<tr><td><code>.corr()</code></td><td>Correlación entre columnas</td><td>Relación</td></tr>
+<tr><td><code>.skew()</code></td><td>Asimetría</td><td>Forma</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Media y mediana</h4>
+  <p>Calculá la media y la mediana de la columna <code>"Saldo"</code>. Imprimí la mediana. Debe incluir <code>400000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-1" data-expected="400000">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "400000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["A", "B", "C", "D", "E"],
+    "Saldo": [200000, 350000, 400000, 500000, 800000]
+})
+
+# Calculá media y mediana del Saldo
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["print(f\"Media: {df[\\\"Saldo\\\"].mean()}\")","print(f\"Mediana: {df[\\\"Saldo\\\"].median()}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Desviación estándar</h4>
+  <p>Calculá la desviación estándar del saldo redondeada a entero. Debe incluir <code>212132</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-2" data-expected="212132">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "212132"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["A", "B", "C", "D", "E"],
+    "Saldo": [200000, 350000, 400000, 500000, 800000]
+})
+
+# Calculá la desviación estándar (redondeada)
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["print(round(df[\"Saldo\"].std()))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: .describe() completo</h4>
+  <p>Ejecutá <code>.describe()</code> sobre el DataFrame. El output debe incluir la palabra <code>mean</code> (nombre de la fila de la media).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-3" data-expected="mean">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "mean"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Edad": [25, 32, 45, 28, 55, 38, 42],
+    "Ingreso": [180000, 320000, 550000, 250000, 800000, 400000, 480000]
+})
+
+# Imprimí el describe
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["print(df.describe())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Calcular cuantiles</h4>
+  <p>Calculá Q1 (25%), mediana (50%) y Q3 (75%) de la columna <code>"Ingreso"</code>. Imprimí Q3. Debe incluir <code>480000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-4" data-expected="480000">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "480000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Empleado": ["A", "B", "C", "D", "E", "F", "G"],
+    "Ingreso": [180000, 250000, 320000, 400000, 480000, 550000, 800000]
+})
+
+# Calculá Q1, mediana, Q3
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["Q1 = df[\"Ingreso\"].quantile(0.25)","Q3 = df[\"Ingreso\"].quantile(0.75)","print(f\"Q3: {Q3}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Detectar outliers con IQR</h4>
+  <p>Usá la regla IQR para encontrar outliers. Imprimí cuántos hay. Debe dar <code>1</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-5" data-expected="1">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "1"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+saldos = pd.Series([100, 200, 250, 300, 350, 400, 450, 500, 2000])
+
+# Calculá Q1, Q3, IQR, límites, contá outliers
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["Q1 = saldos.quantile(0.25); Q3 = saldos.quantile(0.75)","IQR = Q3 - Q1; lim_sup = Q3 + 1.5 * IQR","outliers = saldos[saldos > lim_sup]; print(len(outliers))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: value_counts para distribución categórica</h4>
+  <p>Usá <code>.value_counts()</code> para contar cuántos clientes hay por <code>Segmento</code>. Imprimí el resultado. Debe incluir <code>Estándar</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-6" data-expected="Estándar">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Estándar"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Cliente": ["A","B","C","D","E","F","G","H"],
+    "Segmento": ["Premium","Estándar","Básico","Premium",
+                 "Estándar","Estándar","Básico","Premium"]
+})
+
+# value_counts del segmento
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["print(df[\"Segmento\"].value_counts())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Media vs mediana — detectar asimetría</h4>
+  <p>Calculá media y mediana de los salarios. Si media > mediana, imprimí <code>"Asimetría positiva"</code>. Debe incluir <code>positiva</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-7" data-expected="positiva">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "positiva"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+salarios = pd.Series([150000, 200000, 250000, 300000, 350000,
+                      400000, 500000, 1500000])
+
+# Calculá media, mediana, e interpretá la asimetría
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["media = salarios.mean(); mediana = salarios.median()","tipo = \"positiva\" if media > mediana else \"negativa\"","print(f\"Asimetría {tipo}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Estadísticas por grupo</h4>
+  <p>Calculá media y desv. estándar de <code>Saldo</code> por <code>Segmento</code> usando <code>.agg()</code>. Imprimí el reporte. Debe incluir <code>Premium</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-8" data-expected="Premium">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Premium"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Segmento": ["Premium","Premium","Estándar","Estándar","Básico","Básico"],
+    "Saldo": [850000, 920000, 320000, 380000, 95000, 120000]
+})
+
+# agg con media y std por segmento
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["reporte = df.groupby(\"Segmento\").agg(Media=(\"Saldo\",\"mean\"), Std=(\"Saldo\",\"std\")).round(0)","print(reporte)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Correlación entre variables</h4>
+  <p>Calculá la correlación entre <code>Antigüedad</code> e <code>Ingreso</code> usando <code>.corr()</code>. Imprimilo redondeado a 2 decimales. Debe incluir <code>0.98</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-9" data-expected="0.98">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "0.98"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Antiguedad": [1, 3, 5, 8, 12, 15],
+    "Ingreso": [150000, 250000, 380000, 520000, 700000, 850000]
+})
+
+# Calculá la correlación entre las dos columnas
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["corr = df[\"Antiguedad\"].corr(df[\"Ingreso\"])","print(round(corr, 2))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Reporte estadístico ejecutivo</h4>
+  <p>Generá un reporte completo: (1) describe() del saldo, (2) ¿Cuántos outliers hay?, (3) Media con y sin outliers, (4) Distribución por segmento. Debe incluir <code>outlier</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-10" data-expected="outlier">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "outlier"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Segmento": ["Premium","Estándar","Básico","Premium","Estándar",
+                 "Básico","Premium","Estándar","Básico","Premium"],
+    "Saldo": [850000, 320000, 95000, 920000, 280000,
+              120000, 5000000, 380000, 150000, 670000]
+})
+
+# Reporte ejecutivo:
+# 1. describe()
+# 2. Detectar outliers con IQR
+# 3. Media con y sin outliers
+# 4. value_counts() del segmento
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["print(df[\"Saldo\"].describe())","Q1 = df[\"Saldo\"].quantile(.25); Q3 = df[\"Saldo\"].quantile(.75); IQR = Q3-Q1","outliers = df[df[\"Saldo\"] > Q3+1.5*IQR]; print(f\"{len(outliers)} outlier(s)\")"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><strong>Tendencia central:</strong> usá la <strong>media</strong> para datos simétricos y la <strong>mediana</strong> cuando hay outliers o asimetría.</li>
+  <li><strong>Dispersión:</strong> la desviación estándar (<code>σ</code>) te dice qué tan "ancho" es tu dataset. Alto σ = mucha variabilidad.</li>
+  <li><strong>.describe()</strong> es tu primera línea de defensa: te da el panorama en 1 segundo.</li>
+  <li><strong>Outliers:</strong> la regla del IQR (< Q1 − 1.5×IQR o > Q3 + 1.5×IQR) los detecta automáticamente.</li>
+  <li>Si media > mediana → asimetría positiva (cola derecha). Si media < mediana → asimetría negativa.</li>
+  <li><strong>.corr()</strong> mide la relación lineal entre dos variables (de -1 a +1).</li>
+  <li>Combiná estadísticas con <strong>groupby</strong> para segmentar el análisis por categoría.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>10 · Matplotlib básico</strong>) vas a aprender a convertir todos estos números en visualizaciones claras y profesionales. Porque un gráfico bien hecho comunica en 2 segundos lo que una tabla de números tarda 2 minutos.</p>
+
+<p><strong>Recursos:</strong> <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html" target="_blank">pandas docs — Calculate statistics</a></p>
+
+<div class="footer-nav">
+  <a href="/data-analysis/08-pandas-merge-join-concat.html">← pandas: merge/join/concat</a>
+  <a class="next" href="/data-analysis/10-matplotlib-basico.html">Matplotlib básico →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

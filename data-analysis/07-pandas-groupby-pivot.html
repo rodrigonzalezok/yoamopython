@@ -1,221 +1,554 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 07</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 07</div><h1>pandas Groupby Pivot</h1><p>Subtítulo: dominá pandas groupby pivot desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 06</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 07</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>pandas Groupby Pivot</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>pandas Groupby Pivot</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de pandas groupby pivot</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Groupby Pivot</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Groupby Pivot</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Groupby Pivot</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Groupby Pivot</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-07' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-07-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-07-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de pandas groupby pivot con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/data-analysis/06-pandas-transformaciones.html'>← Anterior</a><a class='badge' href='/data-analysis/08-pandas-merge-join-concat.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 07 · pandas: groupby y pivot</title>
+<meta name="description" content="Dominá groupby, agg, pivot_table y crosstab en pandas. Aprendé a agrupar datos por categoría y calcular métricas agregadas como un analista profesional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 07 de 19</span>
+  <h1>pandas: groupby y pivot</h1>
+  <p>Cuando el director comercial pregunta <em>"¿cuánto factura cada sucursal por mes?"</em>, necesitás agrupar miles de transacciones por categoría y calcular totales. <code>groupby</code> es la herramienta que convierte datos transaccionales en reportes ejecutivos. Es el equivalente exacto del <code>GROUP BY</code> de SQL, pero con la potencia de Python.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: Lección 06 (Transformaciones)</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>El patrón Split-Apply-Combine</h3>
+
+<p><code>groupby</code> sigue un patrón de tres pasos que fue formalizado por Hadley Wickham (creador de R y ggplot2):</p>
+
+<ol>
+  <li><strong>Split (dividir):</strong> pandas divide el DataFrame en grupos según los valores de una columna. Ejemplo: todas las filas de "CABA" en un grupo, todas las de "Rosario" en otro.</li>
+  <li><strong>Apply (aplicar):</strong> se aplica una función de agregación (<code>sum</code>, <code>mean</code>, <code>count</code>, etc.) a cada grupo por separado.</li>
+  <li><strong>Combine (combinar):</strong> los resultados de cada grupo se combinan en un nuevo DataFrame o Serie.</li>
+</ol>
+
+<div class="analogy"><strong>Analogía del profesor:</strong> tenés 100 exámenes desordenados. El paso <em>Split</em> es apilarlos por materia (Matemáticas, Historia, Lengua). El paso <em>Apply</em> es calcular el promedio de cada pila. El paso <em>Combine</em> es escribir en un cuadro: "Matemáticas: 7.2, Historia: 6.8, Lengua: 8.1". Eso es <code>groupby</code>.</div>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Sintaxis básica
+df.groupby("columna_para_agrupar")["columna_para_calcular"].funcion()
+
+# Ejemplo concreto
+df.groupby("Sucursal")["Ventas"].sum()
+# → "Agrupá por sucursal y sumá las ventas de cada una"</pre>
+
+<h3>Funciones de agregación</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Función</th><th>Qué calcula</th><th>Equivalente SQL</th></tr>
+<tr><td><code>.sum()</code></td><td>Suma total</td><td><code>SUM(col)</code></td></tr>
+<tr><td><code>.mean()</code></td><td>Promedio aritmético</td><td><code>AVG(col)</code></td></tr>
+<tr><td><code>.count()</code></td><td>Cantidad de filas (no nulas)</td><td><code>COUNT(col)</code></td></tr>
+<tr><td><code>.min()</code> / <code>.max()</code></td><td>Mínimo / máximo</td><td><code>MIN(col)</code> / <code>MAX(col)</code></td></tr>
+<tr><td><code>.median()</code></td><td>Mediana</td><td>(no estándar en SQL)</td></tr>
+<tr><td><code>.std()</code></td><td>Desviación estándar</td><td><code>STDDEV(col)</code></td></tr>
+<tr><td><code>.first()</code> / <code>.last()</code></td><td>Primer / último valor</td><td>(no estándar)</td></tr>
+<tr><td><code>.nunique()</code></td><td>Cantidad de valores únicos</td><td><code>COUNT(DISTINCT col)</code></td></tr>
+</table>
+</div>
+
+<h3>Múltiples agregaciones con .agg()</h3>
+
+<p>El método más poderoso: <code>.agg()</code> te permite aplicar <strong>diferentes funciones a diferentes columnas</strong> en una sola operación. Es como escribir un <code>SELECT SUM(ventas), AVG(margen), COUNT(*) FROM ... GROUP BY ...</code> en SQL.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># .agg() con diccionario: columna → funciones
+df.groupby("Sucursal").agg(
+    Ventas_Total = ("Ventas", "sum"),
+    Ticket_Prom  = ("Monto", "mean"),
+    Operaciones  = ("ID", "count")
+)</pre>
+
+<div class="concept"><strong>Named aggregations:</strong> la sintaxis <code>Nombre = ("columna", "funcion")</code> te deja ponerle nombre a cada columna resultante directamente. Es más limpio que <code>.agg({"col": ["sum", "mean"]})</code> que genera MultiIndex en las columnas (difícil de manejar).</div>
+
+<h3>Pivot Tables: la tabla dinámica</h3>
+
+<p><code>pivot_table</code> es como las tablas dinámicas de Excel: pone valores de una columna como filas, valores de otra como columnas, y calcula una agregación en la intersección. Es ideal para reportes matriciales.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Pivot table
+pd.pivot_table(
+    df,
+    values="Ventas",       # Qué calcular
+    index="Sucursal",      # Filas
+    columns="Mes",         # Columnas
+    aggfunc="sum"           # Función de agregación
+)</pre>
+
+<div class="realworld"><strong>En el trabajo real:</strong> los reportes mensuales de gestión que reciben los directores de una empresa son, en esencia, pivot tables. "Ventas por sucursal por mes", "ticket promedio por canal por categoría de producto", "morosidad por zona por segmento". Dominar <code>pivot_table</code> te convierte en la persona que genera esos reportes en 5 minutos en vez de 3 horas en Excel.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: groupby básico con una columna</h3>
+<p>El caso fundamental: agrupar transacciones de ventas por sucursal y calcular métricas.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_groupby.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Sucursal": ["CABA", "Rosario", "CABA", "Córdoba", "Rosario",
+                 "CABA", "Córdoba", "Rosario", "CABA", "Córdoba"],
+    "Vendedor": ["Ana", "Luis", "Pedro", "María", "Ana",
+                 "Luis", "Pedro", "María", "Ana", "Luis"],
+    "Monto": [15000, 8500, 22000, 9500, 12000,
+              18000, 7500, 11000, 25000, 13000]
+})
+
+# groupby básico: suma por sucursal
+print("=== Ventas totales por sucursal ===")
+print(df.groupby("Sucursal")["Monto"].sum())
+
+# Promedio por sucursal
+print("\n=== Ticket promedio por sucursal ===")
+print(df.groupby("Sucursal")["Monto"].mean().round(0))
+
+# Conteo de operaciones
+print("\n=== Cantidad de operaciones por sucursal ===")
+print(df.groupby("Sucursal")["Monto"].count())
+
+# Ordenar resultado de mayor a menor
+print("\n=== Ranking de sucursales (mayor venta) ===")
+ranking = df.groupby("Sucursal")["Monto"].sum().sort_values(ascending=False)
+print(ranking)</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Agrupar por múltiples columnas</h3>
+<p>Podés agrupar por dos o más columnas — por ejemplo, ver las ventas de cada vendedor en cada sucursal.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_multi_group.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Sucursal": ["CABA", "CABA", "CABA", "Rosario", "Rosario",
+                 "Rosario", "Córdoba", "Córdoba", "Córdoba"],
+    "Canal": ["Web", "App", "Web", "App", "Web",
+              "App", "Web", "Sucursal", "Sucursal"],
+    "Monto": [15000, 22000, 18000, 8500, 12000,
+              11000, 9500, 7500, 13000]
+})
+
+# Agrupar por 2 columnas
+print("=== Ventas por Sucursal + Canal ===")
+resultado = df.groupby(["Sucursal", "Canal"])["Monto"].sum()
+print(resultado)
+
+# reset_index() convierte el resultado en un DataFrame plano
+print("\n=== Como DataFrame plano ===")
+print(resultado.reset_index())
+
+# ¿Cuántos canales distintos usa cada sucursal?
+print("\n=== Canales únicos por sucursal ===")
+print(df.groupby("Sucursal")["Canal"].nunique())</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: .agg() con múltiples funciones</h3>
+<p>El reporte completo: para cada sucursal queremos la suma, el promedio, el máximo y la cantidad de operaciones, todo de una vez.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_agg.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Sucursal": ["CABA", "CABA", "CABA", "CABA",
+                 "Rosario", "Rosario", "Rosario",
+                 "Córdoba", "Córdoba", "Córdoba"],
+    "Monto": [15000, 22000, 18000, 25000,
+              8500, 12000, 11000,
+              9500, 7500, 13000],
+    "Productos": [3, 5, 4, 6, 2, 3, 2, 1, 2, 3]
+})
+
+# Named aggregations (la forma más limpia)
+reporte = df.groupby("Sucursal").agg(
+    Venta_Total   = ("Monto", "sum"),
+    Ticket_Prom   = ("Monto", "mean"),
+    Venta_Max     = ("Monto", "max"),
+    Operaciones   = ("Monto", "count"),
+    Prod_Promedio = ("Productos", "mean")
+).round(0)
+
+print("=== Reporte Ejecutivo por Sucursal ===")
+print(reporte)
+
+# Agregar columna de participación (%)
+reporte["Participacion_%"] = round(
+    reporte["Venta_Total"] / reporte["Venta_Total"].sum() * 100, 1
+)
+print("\n=== Con participación de mercado ===")
+print(reporte)</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="tip"><strong>Tip profesional:</strong> siempre agregá una columna de <strong>participación porcentual</strong> en tus reportes. Un gerente no solo quiere saber que CABA vendió $80K — quiere saber que CABA representa el 56% del total. El contexto relativo importa más que el número absoluto.</div>
+
+<h3>Ejemplo 4: pivot_table — La tabla dinámica</h3>
+<p>Crear un reporte matricial donde las filas son sucursales, las columnas son canales, y las celdas son el total de ventas.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_pivot.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Sucursal": ["CABA","CABA","CABA","Rosario","Rosario",
+                 "Rosario","Córdoba","Córdoba","Córdoba"],
+    "Canal": ["Web","App","Sucursal","Web","App",
+              "Sucursal","Web","App","Sucursal"],
+    "Monto": [45000, 32000, 18000, 22000, 15000,
+              28000, 12000, 8000, 35000]
+})
+
+# Pivot table: filas=Sucursal, columnas=Canal, valores=Monto
+tabla = pd.pivot_table(
+    df,
+    values="Monto",
+    index="Sucursal",
+    columns="Canal",
+    aggfunc="sum",
+    fill_value=0,          # NaN → 0
+    margins=True,           # Agrega fila/columna de totales
+    margins_name="TOTAL"
+)
+
+print("=== Tabla Dinámica: Ventas por Sucursal × Canal ===")
+print(tabla)
+
+# crosstab: alternativa rápida para conteos
+print("\n=== crosstab: Cantidad de operaciones ===")
+print(pd.crosstab(df["Sucursal"], df["Canal"], margins=True))</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Transformaciones dentro de grupos</h3>
+<p>A veces no querés resumir los datos en menos filas, sino agregar información del grupo a cada fila original. Por ejemplo: "¿cuánto representan las ventas de esta transacción sobre el total de su sucursal?"</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_transform.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Sucursal": ["CABA", "CABA", "CABA", "Rosario", "Rosario", "Córdoba"],
+    "Vendedor": ["Ana", "Pedro", "Luis", "María", "Ana", "Pedro"],
+    "Monto": [15000, 22000, 18000, 8500, 12000, 9500]
+})
+
+# transform: agrega el resultado del grupo a CADA fila original
+df["Total_Sucursal"] = df.groupby("Sucursal")["Monto"].transform("sum")
+df["Prom_Sucursal"] = df.groupby("Sucursal")["Monto"].transform("mean").round(0)
+
+# Ahora podemos calcular el % de participación de cada vendedor
+df["Participacion_%"] = round(df["Monto"] / df["Total_Sucursal"] * 100, 1)
+
+# Y comparar con el promedio
+df["vs_Promedio"] = round(df["Monto"] - df["Prom_Sucursal"], 0)
+
+print("=== Cada fila con contexto de su grupo ===")
+print(df)
+
+print("\nPedro (CABA) vendió $22K, que es el 40% de CABA,")
+print("y $3.7K por encima del promedio de esa sucursal.")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="concept"><strong>transform vs agg:</strong> <code>agg()</code> reduce muchas filas a una por grupo (como <code>GROUP BY</code> en SQL). <code>transform()</code> mantiene el mismo número de filas pero agrega la métrica del grupo a cada una (como una <code>window function</code> en SQL). Es la diferencia entre "dame el total de CABA" vs "dime cuánto es el total de CABA en cada fila de CABA".</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>Sintaxis</th><th>Resultado</th></tr>
+<tr><td>Agrupar y sumar</td><td><code>df.groupby("col")["val"].sum()</code></td><td>Serie con totales</td></tr>
+<tr><td>Múltiples columnas</td><td><code>df.groupby(["c1","c2"])</code></td><td>Grupos multinivel</td></tr>
+<tr><td>Named agg</td><td><code>.agg(Nom=("col","func"))</code></td><td>DataFrame con headers limpios</td></tr>
+<tr><td>Pivot table</td><td><code>pd.pivot_table(df,...)</code></td><td>Tabla matricial</td></tr>
+<tr><td>Cross tabulation</td><td><code>pd.crosstab(s1, s2)</code></td><td>Tabla de frecuencias</td></tr>
+<tr><td>Transform</td><td><code>.groupby().transform("sum")</code></td><td>Serie del mismo largo</td></tr>
+<tr><td>Resetear índice</td><td><code>.reset_index()</code></td><td>Índice → columnas</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: groupby + sum</h4>
+  <p>Calculá las ventas totales por <code>Ciudad</code>. Imprimí el resultado. Debe incluir <code>95000</code> (total de CABA).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-1" data-expected="95000">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "95000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "Rosario", "CABA"],
+    "Ventas": [30000, 18000, 25000, 12000, 22000, 40000]
+})
+
+# groupby Ciudad, suma de Ventas
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["print(df.groupby(\"Ciudad\")[\"Ventas\"].sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: groupby + mean</h4>
+  <p>Calculá el ticket promedio por <code>Canal</code>. Imprimí el promedio de "Web" redondeado. Debe incluir <code>25000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-2" data-expected="25000">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "25000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Canal": ["Web", "App", "Web", "Sucursal", "App", "Web"],
+    "Monto": [30000, 15000, 20000, 45000, 10000, 25000]
+})
+
+# Promedio por canal
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["promedios = df.groupby(\"Canal\")[\"Monto\"].mean()","print(round(promedios))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: groupby + count (conteo)</h4>
+  <p>Contá cuántas operaciones hubo por <code>Ciudad</code>. Debe incluir <code>3</code> (CABA tiene 3 operaciones).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-3" data-expected="3">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "3"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "Rosario", "CABA"],
+    "Ventas": [30000, 18000, 25000, 12000, 22000, 40000]
+})
+
+# Conteo de operaciones por ciudad
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["print(df.groupby(\"Ciudad\")[\"Ventas\"].count())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Agrupar por dos columnas</h4>
+  <p>Agrupá por <code>Ciudad</code> y <code>Canal</code>, sumá <code>Monto</code>. Imprimí el resultado. Debe incluir <code>55000</code> (CABA+Web).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-4" data-expected="55000">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "55000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Ciudad": ["CABA", "CABA", "CABA", "Rosario", "Rosario", "Córdoba"],
+    "Canal": ["Web", "App", "Web", "App", "Web", "Web"],
+    "Monto": [30000, 20000, 25000, 15000, 18000, 12000]
+})
+
+# Agrupá por Ciudad + Canal
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["print(df.groupby([\"Ciudad\", \"Canal\"])[\"Monto\"].sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: .agg() con named aggregations</h4>
+  <p>Por cada <code>Ciudad</code>, calculá: venta total, ticket promedio y cantidad de operaciones usando <code>.agg()</code>. Debe incluir <code>40000</code> (Rosario total).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-5" data-expected="40000">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "40000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Ciudad": ["CABA", "Rosario", "CABA", "Córdoba", "Rosario", "CABA"],
+    "Monto": [30000, 18000, 25000, 12000, 22000, 40000]
+})
+
+# .agg() con named aggregations
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["reporte = df.groupby(\"Ciudad\").agg(Total=(\"Monto\",\"sum\"), Promedio=(\"Monto\",\"mean\"), Ops=(\"Monto\",\"count\"))","print(reporte)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: pivot_table básica</h4>
+  <p>Creá una <code>pivot_table</code> con filas = <code>Ciudad</code>, columnas = <code>Canal</code>, valores = <code>Monto</code> (suma). Debe incluir <code>55000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-6" data-expected="55000">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "55000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Ciudad": ["CABA", "CABA", "CABA", "Rosario", "Rosario", "Córdoba"],
+    "Canal": ["Web", "App", "Web", "App", "Web", "Web"],
+    "Monto": [30000, 20000, 25000, 15000, 18000, 12000]
+})
+
+# pivot_table
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["tabla = pd.pivot_table(df, values=\"Monto\", index=\"Ciudad\", columns=\"Canal\", aggfunc=\"sum\", fill_value=0)","print(tabla)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Ranking con sort_values</h4>
+  <p>Agrupá por <code>Vendedor</code>, sumá <code>Monto</code>, ordenálo de mayor a menor e imprimí el nombre del vendedor #1 usando <code>.index[0]</code>. Debe incluir <code>Ana</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-7" data-expected="Ana">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Ana"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Vendedor": ["Ana", "Luis", "Pedro", "Ana", "Luis", "Ana"],
+    "Monto": [15000, 8000, 12000, 20000, 9000, 25000]
+})
+
+# Ranking de vendedores
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["ranking = df.groupby(\"Vendedor\")[\"Monto\"].sum().sort_values(ascending=False)","print(f\"Vendedor #1: {ranking.index[0]}\")","print(ranking)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: transform para participación</h4>
+  <p>Usá <code>.transform("sum")</code> para calcular qué porcentaje del total de su ciudad representó cada venta. Imprimí la columna de participación. Debe incluir <code>31.6</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-8" data-expected="31.6">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "31.6"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Ciudad": ["CABA", "CABA", "CABA", "Rosario", "Rosario"],
+    "Vendedor": ["Ana", "Pedro", "Luis", "María", "Ana"],
+    "Monto": [15000, 22000, 18000, 8500, 12000]
+})
+
+# Calculá % de participación dentro de cada ciudad
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["df[\"Total_Ciudad\"] = df.groupby(\"Ciudad\")[\"Monto\"].transform(\"sum\")","df[\"Part_%\"] = round(df[\"Monto\"] / df[\"Total_Ciudad\"] * 100, 1)","print(df[[\"Ciudad\",\"Vendedor\",\"Monto\",\"Part_%\"]])"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: pivot_table con margins</h4>
+  <p>Creá una pivot_table con <code>margins=True</code> de ventas por Sucursal × Mes. Debe incluir la palabra <code>All</code> (la fila/columna de totales).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-9" data-expected="All">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "All"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Sucursal": ["CABA","CABA","Rosario","Rosario","CABA","Rosario"],
+    "Mes": ["Enero","Febrero","Enero","Febrero","Enero","Enero"],
+    "Ventas": [50000, 45000, 30000, 28000, 55000, 32000]
+})
+
+# pivot_table con margins
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["tabla = pd.pivot_table(df, values=\"Ventas\", index=\"Sucursal\", columns=\"Mes\", aggfunc=\"sum\", margins=True)","print(tabla)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Reporte ejecutivo completo</h4>
+  <p>Generá un reporte con: (1) Ventas totales por sucursal (con .agg), (2) Sucursal con más ventas, (3) Participación % de cada sucursal. El output debe incluir <code>CABA</code> (la sucursal líder).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-10" data-expected="CABA">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "CABA"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({
+    "Sucursal": ["CABA", "CABA", "Rosario", "Rosario", "Córdoba",
+                 "CABA", "Córdoba", "Rosario", "CABA"],
+    "Canal": ["Web", "App", "Web", "App", "Web",
+              "Sucursal", "App", "Web", "Web"],
+    "Monto": [30000, 22000, 18000, 15000, 12000,
+              25000, 8000, 20000, 35000]
+})
+
+# Reporte ejecutivo completo
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["res = df.groupby(\"Sucursal\").agg(Total=(\"Monto\",\"sum\"), Ops=(\"Monto\",\"count\"))","res[\"Part_%\"] = round(res[\"Total\"]/res[\"Total\"].sum()*100,1)","print(f\"Líder: {res[\\\"Total\\\"].idxmax()}\")"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>groupby</code> sigue el patrón <strong>Split-Apply-Combine</strong>: dividir, calcular, reunir.</li>
+  <li>Podés agrupar por 1 o más columnas: <code>df.groupby(["col1", "col2"])</code>.</li>
+  <li><code>.agg()</code> con named aggregations es la forma más profesional de generar reportes.</li>
+  <li><code>pivot_table</code> genera reportes matriciales (filas × columnas), ideal para ejecutivos.</li>
+  <li><code>transform()</code> mantiene las filas originales y les agrega la métrica del grupo — perfecto para participaciones y comparaciones.</li>
+  <li>Siempre incluí participación porcentual (<code>%</code>) en tus reportes para dar contexto relativo.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>08 · pandas: merge/join/concat</strong>) vas a aprender a combinar tablas de distintas fuentes — como cruzar la tabla de transacciones con la tabla de clientes, un patrón que vas a usar todos los días.</p>
+
+<p><strong>Recursos:</strong> <a href="https://pandas.pydata.org/docs/user_guide/groupby.html" target="_blank">pandas docs — GroupBy</a> · <a href="https://pandas.pydata.org/docs/user_guide/reshaping.html" target="_blank">pandas docs — Reshaping (pivot)</a></p>
+
+<div class="footer-nav">
+  <a href="/data-analysis/06-pandas-transformaciones.html">← pandas: transformaciones</a>
+  <a class="next" href="/data-analysis/08-pandas-merge-join-concat.html">pandas: merge/join/concat →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

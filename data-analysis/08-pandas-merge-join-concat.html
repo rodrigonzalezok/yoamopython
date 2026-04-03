@@ -1,221 +1,581 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 08</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 08</div><h1>pandas Merge Join Concat</h1><p>Subtítulo: dominá pandas merge join concat desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 07</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 08</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>pandas Merge Join Concat</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>pandas Merge Join Concat</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de pandas merge join concat</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Merge Join Concat</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Merge Join Concat</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>pandas Merge Join Concat</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>pandas Merge Join Concat</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-08' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-08-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-08-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de pandas merge join concat con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/data-analysis/07-pandas-groupby-pivot.html'>← Anterior</a><a class='badge' href='/data-analysis/09-estadistica-descriptiva.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 08 · pandas: merge, join y concat</title>
+<meta name="description" content="Aprendé a combinar tablas con merge, join y concat en pandas. Dominá INNER, LEFT, RIGHT y OUTER joins para cruzar datos de múltiples fuentes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 08 de 19</span>
+  <h1>pandas: merge, join y concat</h1>
+  <p>Los datos reales nunca viven en una sola tabla. Los clientes están en una tabla, las transacciones en otra, las sucursales en otra. Para analizar necesitás <strong>cruzar tablas</strong> — exactamente como los JOINs de SQL pero con la sintaxis de pandas. Si ya dominás SQL JOINs (lecciones SQL 07 y 08), esto te va a resultar familiar.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: Lección 07 (groupby y pivot)</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>Las 3 operaciones de combinación</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>Qué hace</th><th>Equivalente SQL</th><th>Cuándo usarla</th></tr>
+<tr><td><code>pd.merge()</code></td><td>Combina por columna clave</td><td><code>JOIN ... ON</code></td><td>Cruzar tablas por una clave compartida</td></tr>
+<tr><td><code>pd.concat()</code></td><td>Apila filas o columnas</td><td><code>UNION ALL</code></td><td>Combinar tablas con la misma estructura</td></tr>
+<tr><td><code>df.join()</code></td><td>Combina por índice</td><td><code>JOIN ... ON index</code></td><td>Cuando la clave es el índice</td></tr>
+</table>
+</div>
+
+<div class="concept"><strong>El 90% de los casos:</strong> vas a usar <code>pd.merge()</code>. Es la operación más versátil y explícita. <code>concat()</code> se usa cuando tenés datos partidos en archivos (ej: un CSV por mes) y querés apilarlos. <code>join()</code> es un atajo para merge por índice que se usa menos frecuentemente.</div>
+
+<h3>Los 4 tipos de merge (joins)</h3>
+
+<p>Igual que en SQL, pandas soporta 4 tipos de cruce. La diferencia es qué pasa con las filas que <strong>no tienen match</strong> en la otra tabla:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Tipo</th><th>how=</th><th>Qué conserva</th><th>Filas sin match</th></tr>
+<tr><td><strong>Inner</strong></td><td><code>"inner"</code></td><td>Solo filas con match en ambas</td><td>Se pierden</td></tr>
+<tr><td><strong>Left</strong></td><td><code>"left"</code></td><td>Todas las de la izquierda</td><td>NaN en columnas de la derecha</td></tr>
+<tr><td><strong>Right</strong></td><td><code>"right"</code></td><td>Todas las de la derecha</td><td>NaN en columnas de la izquierda</td></tr>
+<tr><td><strong>Outer</strong></td><td><code>"outer"</code></td><td>Todas las de ambas</td><td>NaN donde no hay match</td></tr>
+</table>
+</div>
+
+<div class="analogy"><strong>Analogía de la fiesta:</strong> tenés la lista de invitados y la lista de los que realmente vinieron. <em>Inner</em>: solo los que están en ambas listas (vinieron y estaban invitados). <em>Left</em>: todos los invitados, marcando quién vino y quién no. <em>Right</em>: todos los que vinieron, marcando quién estaba invitado. <em>Outer</em>: la unión de todos — invitados que no vinieron Y colados que no estaban invitados.</div>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Sintaxis de merge
+pd.merge(
+    df_izquierda,
+    df_derecha,
+    on="columna_clave",      # Si se llama igual en ambas
+    # left_on="col_izq",     # Si se llaman distinto
+    # right_on="col_der",
+    how="inner"               # inner | left | right | outer
+)</pre>
+
+<h3>concat: apilar DataFrames</h3>
+
+<p><code>pd.concat()</code> es para cuando tenés dos o más DataFrames con <strong>las mismas columnas</strong> y querés unirlos verticalmente (apilar filas). El caso típico: un archivo CSV por mes y querés un solo DataFrame con todo el año.</p>
+
+<pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Concatenar verticalmente (filas)
+pd.concat([df_enero, df_febrero, df_marzo], ignore_index=True)
+
+# Concatenar horizontalmente (columnas) → menos común
+pd.concat([df1, df2], axis=1)</pre>
+
+<div class="warning"><strong>¡Cuidado con los índices!</strong> Si no usás <code>ignore_index=True</code>, <code>concat()</code> conserva los índices originales de cada DataFrame. Esto significa que puedes terminar con un DataFrame donde el índice dice 0, 1, 2, 0, 1, 2 (repetidos). Siempre usá <code>ignore_index=True</code> al concatenar verticalmente.</div>
+
+<div class="realworld"><strong>En el trabajo real:</strong> el 80% de tus análisis van a requerir al menos un merge. Ejemplo típico: la tabla de transacciones tiene un <code>cliente_id</code> pero no tiene el nombre ni la ciudad. La tabla de clientes tiene <code>cliente_id</code> con nombre, ciudad y segmento. Necesitás hacer <code>merge</code> para cruzarlas. Esto pasa en cualquier empresa con base de datos relacional.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: merge INNER — el cruce básico</h3>
+<p>Cruzar transacciones con datos del cliente. Solo se conservan las filas que tienen match en ambas tablas.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_inner.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+# Tabla de transacciones
+transacciones = pd.DataFrame({
+    "Txn_ID": [1001, 1002, 1003, 1004, 1005],
+    "Cliente_ID": [10, 20, 30, 10, 40],
+    "Monto": [15000, 8500, 22000, 18000, 9500]
+})
+
+# Tabla de clientes
+clientes = pd.DataFrame({
+    "Cliente_ID": [10, 20, 30, 50],
+    "Nombre": ["García", "López", "Pérez", "Sosa"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Mendoza"]
+})
+
+print("=== Transacciones ===")
+print(transacciones)
+print("\n=== Clientes ===")
+print(clientes)
+
+# INNER JOIN: solo los que existen en ambas tablas
+resultado = pd.merge(transacciones, clientes, on="Cliente_ID", how="inner")
+print("\n=== INNER MERGE (solo con match) ===")
+print(resultado)
+print(f"\nObservá: Cliente_ID 40 no aparece (no existe en clientes)")
+print(f"         Cliente_ID 50 (Sosa) tampoco (no tiene transacciones)")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: LEFT merge — conservar todos los de la izquierda</h3>
+<p>El caso más común: querés TODAS las transacciones, incluso las que no tienen match en clientes. Las sin match muestran NaN.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_left.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+transacciones = pd.DataFrame({
+    "Txn_ID": [1001, 1002, 1003, 1004, 1005],
+    "Cliente_ID": [10, 20, 30, 10, 40],
+    "Monto": [15000, 8500, 22000, 18000, 9500]
+})
+
+clientes = pd.DataFrame({
+    "Cliente_ID": [10, 20, 30, 50],
+    "Nombre": ["García", "López", "Pérez", "Sosa"],
+    "Ciudad": ["CABA", "Rosario", "CABA", "Mendoza"]
+})
+
+# LEFT JOIN: todas las transacciones, con o sin dato de cliente
+left_result = pd.merge(transacciones, clientes, on="Cliente_ID", how="left")
+print("=== LEFT MERGE ===")
+print(left_result)
+
+print(f"\nTxn 1005 tiene Cliente_ID=40 que no existe en clientes → NaN")
+
+# ¿Cuántas transacciones no tienen info de cliente?
+sin_info = left_result["Nombre"].isna().sum()
+print(f"Transacciones sin info de cliente: {sin_info}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: OUTER merge y merge con claves distintas</h3>
+<p>A veces la columna clave se llama distinto en cada tabla. Usá <code>left_on</code> y <code>right_on</code>.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_outer.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+# Las columnas tienen nombres distintos
+ventas = pd.DataFrame({
+    "ID_Venta": [1, 2, 3, 4],
+    "cod_producto": ["A01", "B02", "C03", "D04"],
+    "Cantidad": [10, 5, 20, 8]
+})
+
+catalogo = pd.DataFrame({
+    "SKU": ["A01", "B02", "E05"],
+    "Nombre": ["Notebook", "Mouse", "Cable HDMI"],
+    "Precio": [450000, 15000, 3500]
+})
+
+# OUTER JOIN: conserva todo (de ambos lados)
+outer = pd.merge(
+    ventas, catalogo,
+    left_on="cod_producto",    # Nombre en la tabla izquierda
+    right_on="SKU",             # Nombre en la tabla derecha
+    how="outer"
+)
+print("=== OUTER MERGE ===")
+print(outer)
+print(f"\nC03 y D04: están en ventas pero no en catálogo → NaN en Nombre/Precio")
+print(f"E05: está en catálogo pero no tuvo ventas → NaN en ID_Venta/Cantidad")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="tip"><strong>Tip profesional — indicator=True:</strong> agregá <code>indicator=True</code> al merge y pandas crea una columna <code>_merge</code> que dice <code>"both"</code>, <code>"left_only"</code> o <code>"right_only"</code> para cada fila. Es perfecto para diagnosticar cuántas filas tienen match y cuántas no.</div>
+
+<h3>Ejemplo 4: concat para apilar DataFrames</h3>
+<p>Cuando los datos vienen partidos (un CSV por mes, un archivo por región), se concatenan para formar un solo DataFrame.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_concat.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+# Simular 3 archivos CSV mensuales
+enero = pd.DataFrame({
+    "Mes": ["Enero"] * 3,
+    "Producto": ["A", "B", "C"],
+    "Ventas": [100, 200, 150]
+})
+
+febrero = pd.DataFrame({
+    "Mes": ["Febrero"] * 3,
+    "Producto": ["A", "B", "C"],
+    "Ventas": [120, 180, 170]
+})
+
+marzo = pd.DataFrame({
+    "Mes": ["Marzo"] * 3,
+    "Producto": ["A", "B", "C"],
+    "Ventas": [90, 220, 160]
+})
+
+# Concatenar verticalmente (apilar filas)
+anual = pd.concat([enero, febrero, marzo], ignore_index=True)
+print("=== Dataset anual (concatenado) ===")
+print(anual)
+print(f"\nFilas totales: {len(anual)}")
+
+# Ahora podemos hacer groupby sobre todo el año
+print("\n=== Ventas totales por producto (todo el año) ===")
+print(anual.groupby("Producto")["Ventas"].sum())</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Merge múltiple — enriquecer datos paso a paso</h3>
+<p>En un caso real, cruzás más de 2 tablas. Hacés un merge tras otro, enriqueciendo tu dataset progresivamente.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_multi_merge.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+# Tabla 1: Transacciones
+txn = pd.DataFrame({
+    "Txn_ID": [1, 2, 3, 4, 5],
+    "Cliente_ID": [10, 20, 10, 30, 20],
+    "Sucursal_ID": [1, 2, 1, 3, 2],
+    "Monto": [15000, 8500, 22000, 9500, 12000]
+})
+
+# Tabla 2: Clientes
+clientes = pd.DataFrame({
+    "Cliente_ID": [10, 20, 30],
+    "Nombre": ["García", "López", "Pérez"],
+    "Segmento": ["Premium", "Estándar", "Básico"]
+})
+
+# Tabla 3: Sucursales
+sucursales = pd.DataFrame({
+    "Sucursal_ID": [1, 2, 3],
+    "Ciudad": ["CABA", "Rosario", "Córdoba"],
+    "Zona": ["Centro", "Litoral", "Interior"]
+})
+
+# Merge encadenado: txn → clientes → sucursales
+resultado = (txn
+    .merge(clientes, on="Cliente_ID", how="left")
+    .merge(sucursales, on="Sucursal_ID", how="left")
+)
+
+print("=== Dataset enriquecido ===")
+print(resultado)
+
+# Ahora puedo hacer queries ricas
+print("\n=== Ventas por Segmento ===")
+print(resultado.groupby("Segmento")["Monto"].sum())
+
+print("\n=== Ventas por Zona ===")
+print(resultado.groupby("Zona")["Monto"].sum())</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="warning"><strong>Cuidado con las duplicaciones:</strong> si la tabla derecha tiene filas duplicadas para una misma clave (ej: un cliente aparece 2 veces), el merge va a duplicar las filas de la izquierda. Si tenés 1000 transacciones y 1 cliente está duplicado en la tabla de clientes, tus transacciones de ese cliente se van a duplicar. Siempre verificá con <code>len()</code> antes y después del merge.</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>Sintaxis</th><th>Uso</th></tr>
+<tr><td>Inner merge</td><td><code>pd.merge(a, b, on="key")</code></td><td>Solo filas con match</td></tr>
+<tr><td>Left merge</td><td><code>pd.merge(a, b, on="key", how="left")</code></td><td>Todas las de la tabla izquierda</td></tr>
+<tr><td>Right merge</td><td><code>pd.merge(a, b, on="key", how="right")</code></td><td>Todas las de la tabla derecha</td></tr>
+<tr><td>Outer merge</td><td><code>pd.merge(a, b, on="key", how="outer")</code></td><td>Todas las de ambas</td></tr>
+<tr><td>Claves distintas</td><td><code>left_on="x", right_on="y"</code></td><td>Columnas con distinto nombre</td></tr>
+<tr><td>Diagnóstico</td><td><code>indicator=True</code></td><td>Columna _merge con both/left/right</td></tr>
+<tr><td>Concat vertical</td><td><code>pd.concat([dfs], ignore_index=True)</code></td><td>Apilar filas</td></tr>
+<tr><td>Concat horizontal</td><td><code>pd.concat([dfs], axis=1)</code></td><td>Agregar columnas lado a lado</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Inner merge simple</h4>
+  <p>Cruzá la tabla de pedidos con la de productos usando <code>Prod_ID</code>. Imprimí el resultado. Debe incluir <code>Notebook</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-1" data-expected="Notebook">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+pedidos = pd.DataFrame({
+    "Pedido_ID": [1, 2, 3],
+    "Prod_ID": ["A", "B", "C"],
+    "Cantidad": [2, 5, 1]
+})
+
+productos = pd.DataFrame({
+    "Prod_ID": ["A", "B", "D"],
+    "Nombre": ["Notebook", "Mouse", "Cable"]
+})
+
+# Inner merge por Prod_ID
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["resultado = pd.merge(pedidos, productos, on=\"Prod_ID\")","print(resultado)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Left merge</h4>
+  <p>Hacé un LEFT merge de pedidos con productos. Imprimí el resultado — deben aparecer las 3 filas de pedidos (la última con NaN). Debe incluir <code>NaN</code> o <code>nan</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-2" data-expected="NaN">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "NaN"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+pedidos = pd.DataFrame({
+    "Pedido_ID": [1, 2, 3],
+    "Prod_ID": ["A", "B", "C"],
+    "Cantidad": [2, 5, 1]
+})
+
+productos = pd.DataFrame({
+    "Prod_ID": ["A", "B", "D"],
+    "Nombre": ["Notebook", "Mouse", "Cable"]
+})
+
+# Left merge
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["resultado = pd.merge(pedidos, productos, on=\"Prod_ID\", how=\"left\")","print(resultado)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: concat vertical</h4>
+  <p>Concatená dos DataFrames de ventas (enero y febrero) verticalmente con <code>ignore_index=True</code>. Imprimí la cantidad total de filas. Debe dar <code>6</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-3" data-expected="6">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "6"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+enero = pd.DataFrame({"Producto": ["A","B","C"], "Ventas": [100,200,150]})
+febrero = pd.DataFrame({"Producto": ["A","B","C"], "Ventas": [120,180,170]})
+
+# Concatená e imprimí cantidad de filas
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["total = pd.concat([enero, febrero], ignore_index=True)","print(len(total))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Merge con claves distintas</h4>
+  <p>Las tablas tienen la clave con distinto nombre (<code>cod_cli</code> vs <code>ID_Cliente</code>). Usá <code>left_on</code> y <code>right_on</code>. Debe incluir <code>García</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-4" data-expected="García">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "García"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+ventas = pd.DataFrame({
+    "Venta_ID": [1, 2, 3],
+    "cod_cli": [10, 20, 30],
+    "Monto": [5000, 3000, 8000]
+})
+
+clientes = pd.DataFrame({
+    "ID_Cliente": [10, 20, 30],
+    "Nombre": ["García", "López", "Pérez"]
+})
+
+# Merge con claves de distinto nombre
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["res = pd.merge(ventas, clientes, left_on=\"cod_cli\", right_on=\"ID_Cliente\")","print(res)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Merge + indicator</h4>
+  <p>Hacé un OUTER merge con <code>indicator=True</code>. Contá cuántas filas son <code>"both"</code>. Debe dar <code>2</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-5" data-expected="2">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "2"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+izq = pd.DataFrame({"Key": [1, 2, 3], "Val_A": ["a", "b", "c"]})
+der = pd.DataFrame({"Key": [2, 3, 4], "Val_B": ["x", "y", "z"]})
+
+# Outer merge con indicator, contá "both"
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["res = pd.merge(izq, der, on=\"Key\", how=\"outer\", indicator=True)","print((res[\"_merge\"] == \"both\").sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Merge + cálculo</h4>
+  <p>Cruzá pedidos con precios y creá la columna <code>"Total"</code> = Cantidad × Precio. Imprimí la suma total de ventas. Debe incluir <code>960000</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-6" data-expected="960000">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "960000"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+pedidos = pd.DataFrame({
+    "Prod_ID": ["A", "B", "A"],
+    "Cantidad": [2, 5, 1]
+})
+
+precios = pd.DataFrame({
+    "Prod_ID": ["A", "B"],
+    "Nombre": ["Notebook", "Mouse"],
+    "Precio": [450000, 12000]
+})
+
+# Merge + calcular Total + sumar
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["df = pd.merge(pedidos, precios, on=\"Prod_ID\")","df[\"Total\"] = df[\"Cantidad\"] * df[\"Precio\"]","print(df[\"Total\"].sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Detectar "huérfanos" con left merge</h4>
+  <p>Hacé un LEFT merge y encontrá las transacciones <strong>sin</strong> cliente asociado. Imprimí cuántas son. Debe dar <code>1</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-7" data-expected="1">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "1"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+txn = pd.DataFrame({
+    "Txn_ID": [1, 2, 3, 4],
+    "Cliente_ID": [10, 20, 99, 10],
+    "Monto": [5000, 3000, 8000, 2000]
+})
+
+clientes = pd.DataFrame({
+    "Cliente_ID": [10, 20, 30],
+    "Nombre": ["García", "López", "Pérez"]
+})
+
+# Left merge y contar los que tienen NaN en Nombre
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["res = pd.merge(txn, clientes, on=\"Cliente_ID\", how=\"left\")","huerfanas = res[\"Nombre\"].isna().sum()","print(huerfanas)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Merge encadenado (3 tablas)</h4>
+  <p>Cruzá transacciones → clientes → ciudades. Imprimí las columnas del resultado. Debe incluir <code>Zona</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-8" data-expected="Zona">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Zona"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+txn = pd.DataFrame({"Txn_ID": [1,2,3], "Cli_ID": [10,20,10], "Ciudad_ID": [1,2,1], "Monto": [5000,3000,8000]})
+clientes = pd.DataFrame({"Cli_ID": [10,20], "Nombre": ["García","López"]})
+ciudades = pd.DataFrame({"Ciudad_ID": [1,2], "Ciudad": ["CABA","Rosario"], "Zona": ["Centro","Litoral"]})
+
+# Merge encadenado: txn → clientes → ciudades
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["res = txn.merge(clientes, on=\"Cli_ID\").merge(ciudades, on=\"Ciudad_ID\")","print(res)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: concat + groupby</h4>
+  <p>Concatená 3 DataFrames trimestrales, luego hacé groupby por Producto y sumá las ventas. El producto "A" debe sumar <code>310</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-9" data-expected="310">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "310"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+q1 = pd.DataFrame({"Producto": ["A","B"], "Ventas": [100, 200]})
+q2 = pd.DataFrame({"Producto": ["A","B"], "Ventas": [110, 180]})
+q3 = pd.DataFrame({"Producto": ["A","B"], "Ventas": [100, 220]})
+
+# Concatená los 3, groupby Producto, sumá Ventas
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["anual = pd.concat([q1,q2,q3], ignore_index=True)","print(anual.groupby(\"Producto\")[\"Ventas\"].sum())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Pipeline completo — merge + transform + reporte</h4>
+  <p>Cruzá transacciones con clientes (left merge). Rellenálos NaN de Segmento con "Desconocido". Agrupá por Segmento y reportá total + porcentaje de participación. Debe incluir <code>Premium</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-10" data-expected="Premium">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Premium"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+txn = pd.DataFrame({
+    "Txn_ID": [1, 2, 3, 4, 5],
+    "Cliente_ID": [10, 20, 30, 10, 99],
+    "Monto": [15000, 8500, 22000, 18000, 5000]
+})
+
+clientes = pd.DataFrame({
+    "Cliente_ID": [10, 20, 30],
+    "Segmento": ["Premium", "Estándar", "Premium"]
+})
+
+# Pipeline: merge → fillna → groupby → participación
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["df = pd.merge(txn, clientes, on=\"Cliente_ID\", how=\"left\")","df[\"Segmento\"] = df[\"Segmento\"].fillna(\"Desconocido\")","reporte = df.groupby(\"Segmento\")[\"Monto\"].sum()","reporte_pct = round(reporte / reporte.sum() * 100, 1)"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>pd.merge()</code> es el JOIN de pandas: cruza tablas por una columna clave compartida.</li>
+  <li>Los 4 tipos de merge (<code>inner</code>, <code>left</code>, <code>right</code>, <code>outer</code>) definen qué pasa con filas sin match.</li>
+  <li><code>left_on</code>/<code>right_on</code> se usan cuando la clave se llama distinto en cada tabla.</li>
+  <li><code>indicator=True</code> diagnostica el merge mostrando qué filas tienen match y cuáles no.</li>
+  <li><code>pd.concat()</code> apila DataFrames con la misma estructura (como UNION ALL de SQL).</li>
+  <li>Siempre verificá <code>len()</code> antes y después del merge para detectar duplicaciones inesperadas.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>09 · Estadística descriptiva</strong>) vas a aprender los fundamentos estadísticos que todo analista debe dominar: medidas de centralidad, dispersión, distribuciones, percentiles y cómo interpretar los números que pandas calcula.</p>
+
+<p><strong>Recursos:</strong> <a href="https://pandas.pydata.org/docs/user_guide/merging.html" target="_blank">pandas docs — Merge, join, concatenate</a></p>
+
+<div class="footer-nav">
+  <a href="/data-analysis/07-pandas-groupby-pivot.html">← pandas: groupby y pivot</a>
+  <a class="next" href="/data-analysis/09-estadistica-descriptiva.html">Estadística descriptiva →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
