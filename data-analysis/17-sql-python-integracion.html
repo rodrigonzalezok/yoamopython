@@ -1,221 +1,679 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 17</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 17</div><h1>SQL Python Integracion</h1><p>Subtítulo: dominá sql python integracion desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 16</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 17</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>SQL Python Integracion</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>SQL Python Integracion</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de sql python integracion</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>SQL Python Integracion</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>SQL Python Integracion</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>SQL Python Integracion</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>SQL Python Integracion</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-17' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-17-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-17-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de sql python integracion con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/data-analysis/16-power-bi-tableau-intro.html'>← Anterior</a><a class='badge' href='/data-analysis/18-portfolio-proyecto-final.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 17 · Integración SQL + Python</title>
+<meta name="description" content="Conectá Python con bases de datos SQL. Ejecutá queries desde pandas, cargá resultados en DataFrames y automatizá pipelines de análisis completos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 17 de 19</span>
+  <h1>Integración SQL + Python</h1>
+  <p>Ya dominás SQL para consultar bases de datos y Python/pandas para analizar datos. Ahora aprendé a <strong>conectar ambos mundos</strong>: ejecutar queries SQL desde Python, cargar resultados directamente en DataFrames y escribir pipelines automatizados que combinen lo mejor de cada tecnología.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: SQL (sección completa) + pandas</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Por qué integrar SQL + Python?</h3>
+
+<p>SQL es excelente para extraer y filtrar datos de millones de filas en el servidor. Python es excelente para análisis estadístico, visualización y ML en tu máquina local. La integración te da <strong>lo mejor de ambos</strong>:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Tarea</th><th>Mejor herramienta</th><th>¿Por qué?</th></tr>
+<tr><td>Filtrar millones de filas</td><td><strong>SQL</strong></td><td>El motor SQL está optimizado para esto</td></tr>
+<tr><td>JOINs complejos</td><td><strong>SQL</strong></td><td>Indexado del servidor es mucho más rápido</td></tr>
+<tr><td>Análisis estadístico</td><td><strong>Python</strong></td><td>scipy, statsmodels, pandas</td></tr>
+<tr><td>Visualización</td><td><strong>Python</strong></td><td>matplotlib, seaborn</td></tr>
+<tr><td>Machine Learning</td><td><strong>Python</strong></td><td>scikit-learn, TensorFlow</td></tr>
+<tr><td>Automatizar reportes</td><td><strong>Python</strong></td><td>Scripts programables</td></tr>
+<tr><td>Data cleaning complejo</td><td><strong>Python</strong></td><td>pandas es más flexible que SQL procesales</td></tr>
+</table>
+</div>
+
+<div class="analogy"><strong>Analogía del restaurante:</strong> SQL es la cocina — tiene los hornos industriales, las heladeras con toda la materia prima, puede servir 1000 platos. Python es el sommelier — toma el plato ya preparado (los datos filtrados) y le agrega el toque final: maridaje con vino (visualización), evaluación de calidad (estadísticas), y la recomendación al comensal (el insight). Cada uno en lo suyo.</div>
+
+<h3>Las librerías de conexión</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Librería</th><th>Base de datos</th><th>Tipo</th></tr>
+<tr><td><code>sqlite3</code></td><td>SQLite</td><td>Incluida en Python (no necesita instalar)</td></tr>
+<tr><td><code>psycopg2</code></td><td>PostgreSQL</td><td>Más usada en producción</td></tr>
+<tr><td><code>pymysql</code></td><td>MySQL/MariaDB</td><td>Empresas legacy</td></tr>
+<tr><td><code>pyodbc</code></td><td>SQL Server</td><td>Ecosistema Microsoft</td></tr>
+<tr><td><code>sqlalchemy</code></td><td>Cualquiera (ORM)</td><td>Capa de abstracción universal</td></tr>
+</table>
+</div>
+
+<div class="concept"><strong>El flujo estándar:</strong>
+<br>1. <code>conn = sqlite3.connect("mi_base.db")</code> → abrir conexión
+<br>2. <code>df = pd.read_sql("SELECT ...", conn)</code> → query → DataFrame
+<br>3. Analizar, visualizar, modelar con pandas/seaborn/sklearn
+<br>4. (Opcional) <code>df.to_sql("tabla", conn)</code> → guardar resultados de vuelta
+<br>5. <code>conn.close()</code> → cerrar conexión</div>
+
+<h3>pd.read_sql(): el puente mágico</h3>
+
+<p>Esta función es la llave maestra: ejecuta una query SQL y devuelve el resultado directamente como DataFrame de pandas. Todo lo que sabés de SQL funciona dentro del string de la query.</p>
+
+<div class="warning"><strong>Regla de oro:</strong> filtrá y agregá en SQL lo que puedas, y traé a Python solo los datos que vas a analizar. Si tu base tiene 50 millones de filas, <em>no hagas</em> <code>pd.read_sql("SELECT * FROM tabla", conn)</code>. Hacé <code>SELECT</code> con <code>WHERE</code>, <code>GROUP BY</code> y <code>LIMIT</code> para traer lo necesario.</div>
+
+<div class="realworld"><strong>En el trabajo real:</strong> el día a día de un Data Analyst es: (1) abrir Jupyter Notebook, (2) conectarse al data warehouse con <code>sqlalchemy + psycopg2</code>, (3) ejecutar queries, (4) explorar en pandas, (5) generar visualizaciones y presentar. Todo en un mismo flujo, de forma reproducible.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Crear una base SQLite y cargar datos desde pandas</h3>
+<p>SQLite está incluida en Python — no necesitás instalar nada. Es perfecta para aprender y para proyectos locales.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_crear_db.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+
+# Crear datos
+clientes = pd.DataFrame({
+    "cliente_id": range(1, 51),
+    "nombre": [f"Cliente_{i}" for i in range(1, 51)],
+    "ciudad": np.random.choice(["CABA","Rosario","Córdoba","Mendoza"], 50),
+    "segmento": np.random.choice(["Premium","Estándar","Básico"], 50, p=[0.15,0.55,0.30])
+})
+
+transacciones = pd.DataFrame({
+    "txn_id": range(1, 201),
+    "cliente_id": np.random.randint(1, 51, 200),
+    "monto": np.random.randint(1000, 50000, 200),
+    "fecha": pd.date_range("2024-01-01", periods=200, freq="D").strftime("%Y-%m-%d"),
+    "producto": np.random.choice(["Cuenta","Tarjeta","Préstamo"], 200)
+})
+
+# Crear base SQLite y cargar tablas
+conn = sqlite3.connect(":memory:")  # Base en memoria
+clientes.to_sql("clientes", conn, index=False, if_exists="replace")
+transacciones.to_sql("transacciones", conn, index=False, if_exists="replace")
+
+# Verificar
+tablas = pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'", conn)
+print("=== Tablas creadas ===")
+print(tablas)
+
+# Contar filas
+for tabla in ["clientes", "transacciones"]:
+    n = pd.read_sql(f"SELECT COUNT(*) as filas FROM {tabla}", conn)
+    print(f"  {tabla}: {n['filas'][0]} filas")
+
+conn.close()</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: pd.read_sql() — ejecutar queries y obtener DataFrames</h3>
+<p>El flujo principal: escribís SQL, obtenés un DataFrame. Lo mejor de los dos mundos.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_read_sql.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+conn = sqlite3.connect(":memory:")
+clientes = pd.DataFrame({
+    "cliente_id": range(1, 51),
+    "nombre": [f"Cliente_{i}" for i in range(1, 51)],
+    "ciudad": np.random.choice(["CABA","Rosario","Córdoba","Mendoza"], 50),
+    "segmento": np.random.choice(["Premium","Estándar","Básico"], 50, p=[0.15,0.55,0.30])
+})
+transacciones = pd.DataFrame({
+    "txn_id": range(1, 201),
+    "cliente_id": np.random.randint(1, 51, 200),
+    "monto": np.random.randint(1000, 50000, 200),
+    "fecha": pd.date_range("2024-01-01", periods=200, freq="D").strftime("%Y-%m-%d"),
+    "producto": np.random.choice(["Cuenta","Tarjeta","Préstamo"], 200)
+})
+clientes.to_sql("clientes", conn, index=False)
+transacciones.to_sql("transacciones", conn, index=False)
+
+# 1. Query simple → DataFrame
+print("=== Query 1: Top 5 transacciones ===")
+df1 = pd.read_sql("SELECT * FROM transacciones ORDER BY monto DESC LIMIT 5", conn)
+print(df1)
+
+# 2. Query con WHERE
+print("\n=== Query 2: Clientes Premium de CABA ===")
+df2 = pd.read_sql("""
+    SELECT nombre, ciudad, segmento 
+    FROM clientes 
+    WHERE segmento = 'Premium' AND ciudad = 'CABA'
+""", conn)
+print(df2)
+
+# 3. Query con JOIN + GROUP BY
+print("\n=== Query 3: Ventas por ciudad (SQL hace el JOIN + GROUP BY) ===")
+df3 = pd.read_sql("""
+    SELECT c.ciudad, 
+           COUNT(*) as operaciones,
+           SUM(t.monto) as total,
+           ROUND(AVG(t.monto), 0) as ticket_promedio
+    FROM transacciones t
+    JOIN clientes c ON t.cliente_id = c.cliente_id
+    GROUP BY c.ciudad
+    ORDER BY total DESC
+""", conn)
+print(df3)
+
+conn.close()</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: SQL para filtrar + pandas para analizar</h3>
+<p>El patrón profesional: dejá que SQL haga el trabajo pesado (filtrar, JOINs), y usá pandas para lo que hace mejor (estadísticas, EDA).</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_sql_pandas.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+conn = sqlite3.connect(":memory:")
+
+clientes = pd.DataFrame({
+    "cliente_id": range(1, 101),
+    "ciudad": np.random.choice(["CABA","Rosario","Córdoba"], 100),
+    "segmento": np.random.choice(["Premium","Estándar","Básico"], 100, p=[0.2,0.5,0.3]),
+    "antiguedad": np.random.randint(0, 20, 100)
+})
+txn = pd.DataFrame({
+    "cliente_id": np.random.randint(1, 101, 500),
+    "monto": np.random.randint(1000, 80000, 500),
+    "producto": np.random.choice(["Cuenta","Tarjeta","Préstamo"], 500)
+})
+clientes.to_sql("clientes", conn, index=False)
+txn.to_sql("transacciones", conn, index=False)
+
+# PASO 1: SQL filtra y une (trabajo pesado en el servidor)
+query = """
+    SELECT c.segmento, c.ciudad, c.antiguedad,
+           t.monto, t.producto
+    FROM transacciones t
+    JOIN clientes c ON t.cliente_id = c.cliente_id
+    WHERE c.antiguedad >= 3
+"""
+df = pd.read_sql(query, conn)
+print(f"SQL retornó {len(df)} filas (ya filtradas y unidas)")
+
+# PASO 2: pandas analiza (estadísticas avanzadas)
+print(f"\n=== EDA rápido con pandas ===")
+print(f"Segmentos: {df['segmento'].value_counts().to_dict()}")
+print(f"\nEstadísticas por segmento:")
+resumen = df.groupby("segmento")["monto"].agg(["mean","median","std","count"]).round(0)
+print(resumen)
+
+# PASO 3: Insight
+top_seg = resumen["mean"].idxmax()
+print(f"\n💡 Insight: '{top_seg}' tiene el ticket promedio más alto")
+print(f"   Ticket: ${resumen.loc[top_seg, 'mean']:,.0f}")
+
+conn.close()</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="tip"><strong>Tip pro — queries parametrizadas:</strong> nunca concatená variables en un string SQL (<code>f"WHERE id = {id}"</code>) — es vulnerable a SQL injection. Usá parámetros: <code>pd.read_sql("SELECT * FROM t WHERE id = ?", conn, params=[id])</code>.</div>
+
+<h3>Ejemplo 4: Guardar resultados de vuelta en SQL</h3>
+<p>Después de procesar datos en pandas, podés guardar los resultados en una tabla SQL para que otros los consuman.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_to_sql.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+conn = sqlite3.connect(":memory:")
+
+# Datos originales
+txn = pd.DataFrame({
+    "cliente_id": np.random.randint(1, 51, 200),
+    "monto": np.random.randint(1000, 50000, 200),
+    "producto": np.random.choice(["Cuenta","Tarjeta","Préstamo"], 200)
+})
+txn.to_sql("transacciones", conn, index=False)
+
+# Calcular resumen en pandas
+resumen = txn.groupby("cliente_id").agg(
+    total_ventas=("monto", "sum"),
+    cantidad_txn=("monto", "count"),
+    ticket_promedio=("monto", "mean"),
+    producto_favorito=("producto", lambda x: x.mode().iloc[0])
+).round(0).reset_index()
+
+# Guardar resumen como nueva tabla SQL
+resumen.to_sql("resumen_clientes", conn, index=False, if_exists="replace")
+
+# Verificar: leer la nueva tabla
+print("=== Tabla 'resumen_clientes' guardada en SQL ===")
+check = pd.read_sql("SELECT * FROM resumen_clientes ORDER BY total_ventas DESC LIMIT 10", conn)
+print(check)
+
+# Usar la nueva tabla en un query
+top3 = pd.read_sql("""
+    SELECT cliente_id, total_ventas, producto_favorito
+    FROM resumen_clientes
+    WHERE cantidad_txn >= 5
+    ORDER BY total_ventas DESC
+    LIMIT 3
+""", conn)
+print(f"\n=== Top 3 clientes con ≥5 operaciones ===")
+print(top3)
+
+conn.close()</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Pipeline completo — SQL → pandas → visualización</h3>
+<p>Un pipeline de análisis real: extraer de SQL, procesar en pandas, visualizar con matplotlib.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_pipeline.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import sqlite3
+import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+conn = sqlite3.connect(":memory:")
+
+# Simular base de datos
+fechas = pd.date_range("2024-01-01", periods=365, freq="D")
+txn = pd.DataFrame({
+    "fecha": fechas.strftime("%Y-%m-%d"),
+    "sucursal": np.random.choice(["CABA","Rosario","Córdoba"], 365),
+    "monto": np.random.normal(15000, 5000, 365).astype(int)
+})
+txn.to_sql("ventas", conn, index=False)
+
+# PASO 1: SQL extrae datos agregados por mes y sucursal
+df = pd.read_sql("""
+    SELECT substr(fecha, 1, 7) as mes,
+           sucursal,
+           SUM(monto) as total,
+           COUNT(*) as operaciones
+    FROM ventas
+    GROUP BY mes, sucursal
+    ORDER BY mes
+""", conn)
+print(f"SQL retornó {len(df)} filas (mensual × sucursal)")
+
+# PASO 2: pandas pivotea
+pivot = df.pivot_table(values="total", index="mes", columns="sucursal", aggfunc="sum", fill_value=0)
+
+# PASO 3: matplotlib visualiza
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+pivot.plot(kind="line", marker="o", ax=axes[0])
+axes[0].set_title("Tendencia Mensual por Sucursal", fontweight="bold")
+axes[0].tick_params(axis="x", rotation=45)
+axes[0].set_ylabel("Ventas ($)")
+axes[0].grid(True, alpha=0.3)
+
+totales = df.groupby("sucursal")["total"].sum()
+axes[1].bar(totales.index, totales.values, color=["#2196F3","#4CAF50","#FF9800"])
+axes[1].set_title("Total Anual por Sucursal", fontweight="bold")
+for i, v in enumerate(totales.values):
+    axes[1].text(i, v+10000, f"${v:,.0f}", ha="center", fontsize=9, fontweight="bold")
+
+plt.tight_layout()
+plt.show()
+
+print("\nPipeline: SQL (extracción) → pandas (transformación) → matplotlib (visualización)")
+conn.close()</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>Código</th></tr>
+<tr><td>Conectar (SQLite)</td><td><code>conn = sqlite3.connect("base.db")</code></td></tr>
+<tr><td>Conectar en memoria</td><td><code>conn = sqlite3.connect(":memory:")</code></td></tr>
+<tr><td>Query → DataFrame</td><td><code>pd.read_sql("SELECT ...", conn)</code></td></tr>
+<tr><td>Query parametrizada</td><td><code>pd.read_sql("... WHERE id=?", conn, params=[id])</code></td></tr>
+<tr><td>DataFrame → SQL</td><td><code>df.to_sql("tabla", conn, if_exists="replace")</code></td></tr>
+<tr><td>Listar tablas</td><td><code>pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'", conn)</code></td></tr>
+<tr><td>Cerrar conexión</td><td><code>conn.close()</code></td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Crear tabla y consultar</h4>
+  <p>Creá una tabla SQL con <code>to_sql</code> y leéla con <code>read_sql</code>. Debe incluir <code>CABA</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-1" data-expected="CABA">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "CABA"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+
+df = pd.DataFrame({
+    "Nombre": ["Ana", "Luis", "Pedro"],
+    "Ciudad": ["CABA", "Rosario", "Córdoba"]
+})
+
+conn = sqlite3.connect(":memory:")
+# Guardar en SQL y leer de vuelta
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["df.to_sql(\"personas\", conn, index=False)","resultado = pd.read_sql(\"SELECT * FROM personas\", conn)","print(resultado); conn.close()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: SELECT con WHERE</h4>
+  <p>Consultá los clientes de Rosario. Debe incluir <code>Rosario</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-2" data-expected="Rosario">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Rosario"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+conn = sqlite3.connect(":memory:")
+df = pd.DataFrame({
+    "nombre": [f"Cliente_{i}" for i in range(20)],
+    "ciudad": np.random.choice(["CABA","Rosario","Córdoba"], 20)
+})
+df.to_sql("clientes", conn, index=False)
+
+# SELECT WHERE ciudad = 'Rosario'
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["ros = pd.read_sql(\"SELECT * FROM clientes WHERE ciudad = \\\"Rosario\\\"\", conn)","print(ros); conn.close()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: COUNT y SUM en SQL</h4>
+  <p>Contá cuántas transacciones hay y sumá los montos con SQL. Debe incluir <code>total</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-3" data-expected="total">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "total"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+conn = sqlite3.connect(":memory:")
+pd.DataFrame({
+    "monto": np.random.randint(1000, 50000, 100)
+}).to_sql("ventas", conn, index=False)
+
+# COUNT y SUM con SQL
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["result = pd.read_sql(\"SELECT COUNT(*) as cantidad, SUM(monto) as total FROM ventas\", conn)","print(result); conn.close()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: JOIN en SQL → DataFrame</h4>
+  <p>Hacé un JOIN entre clientes y transacciones. Imprimí el DataFrame resultante. Debe incluir <code>ciudad</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-4" data-expected="ciudad">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "ciudad"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+conn = sqlite3.connect(":memory:")
+clientes = pd.DataFrame({"id": [1,2,3], "nombre": ["Ana","Luis","Marta"], "ciudad": ["CABA","Rosario","Córdoba"]})
+txn = pd.DataFrame({"txn_id": range(1,7), "cliente_id": [1,2,1,3,2,1], "monto": [100,200,150,300,250,180]})
+clientes.to_sql("clientes", conn, index=False)
+txn.to_sql("transacciones", conn, index=False)
+
+# JOIN
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT t.*, c.nombre, c.ciudad FROM transacciones t JOIN clientes c ON t.cliente_id = c.id\", conn)","print(df); conn.close()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: GROUP BY en SQL + análisis en pandas</h4>
+  <p>Hacé GROUP BY por ciudad en SQL, luego calculá el % de participación en pandas. Debe incluir <code>%</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-5" data-expected="%">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "%"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+conn = sqlite3.connect(":memory:")
+pd.DataFrame({
+    "ciudad": np.random.choice(["CABA","Rosario","Córdoba"], 100),
+    "monto": np.random.randint(5000, 30000, 100)
+}).to_sql("ventas", conn, index=False)
+
+# SQL: GROUP BY ciudad → pandas: agregar %
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT ciudad, SUM(monto) as total FROM ventas GROUP BY ciudad\", conn)","df[\"pct\"] = round(df[\"total\"] / df[\"total\"].sum() * 100, 1)","print(df); print(f\"Total: ${df[\\\"total\\\"].sum():,}\"); conn.close()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Guardar resultados con to_sql</h4>
+  <p>Calculá un resumen en pandas y guardálo como nueva tabla SQL. Verificá leyéndolo. Debe incluir <code>resumen</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-6" data-expected="resumen">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "resumen"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+conn = sqlite3.connect(":memory:")
+pd.DataFrame({
+    "producto": np.random.choice(["A","B","C"], 80),
+    "monto": np.random.randint(100, 1000, 80)
+}).to_sql("ventas", conn, index=False)
+
+# 1. Leer, agrupar en pandas
+# 2. to_sql como "resumen_productos"
+# 3. Verificar con read_sql
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT * FROM ventas\", conn)","res = df.groupby(\"producto\").agg(total=(\"monto\",\"sum\")).reset_index()","res.to_sql(\"resumen\", conn, index=False)","print(pd.read_sql(\"SELECT * FROM resumen\", conn)); conn.close()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Query parametrizada</h4>
+  <p>Usá una query con parámetro <code>?</code> para filtrar por una ciudad específica. Debe incluir <code>Córdoba</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-7" data-expected="Córdoba">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Córdoba"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+conn = sqlite3.connect(":memory:")
+pd.DataFrame({
+    "nombre": [f"C{i}" for i in range(20)],
+    "ciudad": np.random.choice(["CABA","Rosario","Córdoba"], 20)
+}).to_sql("clientes", conn, index=False)
+
+ciudad_buscada = "Córdoba"
+
+# Query con parámetro ? (no f-string!)
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT * FROM clientes WHERE ciudad = ?\", conn, params=[ciudad_buscada])","print(df); conn.close()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: SQL → pandas → estadísticas</h4>
+  <p>Extraé datos con SQL, luego calculá media, mediana y percentil 90 en pandas. Debe incluir <code>P90</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-8" data-expected="P90">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "P90"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+conn = sqlite3.connect(":memory:")
+pd.DataFrame({
+    "monto": np.random.normal(15000, 5000, 200).astype(int)
+}).to_sql("ventas", conn, index=False)
+
+# SQL: extraer → pandas: estadísticas avanzadas
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT monto FROM ventas\", conn)","print(f\"Media: ${df[\\\"monto\\\"].mean():,.0f}\")","print(f\"Mediana: ${df[\\\"monto\\\"].median():,.0f}\")","print(f\"P90: ${df[\\\"monto\\\"].quantile(0.9):,.0f}\"); conn.close()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Pipeline SQL → pandas → gráfico</h4>
+  <p>Extraé ventas mensuales con SQL, luego graficá la tendencia. Imprimí <code>Pipeline OK</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-9" data-expected="Pipeline OK">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe imprimir "Pipeline OK"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import sqlite3
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+conn = sqlite3.connect(":memory:")
+pd.DataFrame({
+    "fecha": pd.date_range("2024-01-01", periods=180, freq="D").strftime("%Y-%m-%d"),
+    "monto": np.random.normal(15000, 5000, 180).astype(int)
+}).to_sql("ventas", conn, index=False)
+
+# SQL: agrupar por mes → pandas: gráfico de línea
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT substr(fecha,1,7) as mes, SUM(monto) as total FROM ventas GROUP BY mes\", conn)","plt.figure(figsize=(8,4)); plt.plot(df[\\\"mes\\\"], df[\\\"total\\\"], \\\"o-\\\")","plt.title(\\\"Tendencia Mensual\\\"); plt.xticks(rotation=45); plt.tight_layout(); plt.show(); print(\\\"Pipeline OK\\\"); conn.close()"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Pipeline completo con 2 tablas</h4>
+  <p>Creá 2 tablas (clientes + ventas), hacé JOIN en SQL, calculá métricas por segmento en pandas, y guardá el resultado como nueva tabla. Debe incluir <code>Pipeline completo</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-10" data-expected="Pipeline completo">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Pipeline completo"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import sqlite3
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+conn = sqlite3.connect(":memory:")
+
+# Crear tablas
+pd.DataFrame({
+    "id": range(1, 31), 
+    "segmento": np.random.choice(["Premium","Estándar","Básico"], 30)
+}).to_sql("clientes", conn, index=False)
+
+pd.DataFrame({
+    "cliente_id": np.random.randint(1, 31, 100),
+    "monto": np.random.randint(1000, 50000, 100)
+}).to_sql("ventas", conn, index=False)
+
+# 1. JOIN en SQL
+# 2. Métricas por segmento en pandas
+# 3. to_sql como "resumen_segmentos"
+# 4. Verificar + imprimir "Pipeline completo"
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT c.segmento, v.monto FROM ventas v JOIN clientes c ON v.cliente_id = c.id\", conn)","res = df.groupby(\"segmento\").agg(total=(\"monto\",\"sum\"),promedio=(\"monto\",\"mean\")).round(0).reset_index()","res.to_sql(\"resumen_segmentos\", conn, index=False)","print(pd.read_sql(\"SELECT * FROM resumen_segmentos\", conn))","print(\"Pipeline completo\"); conn.close()"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><code>pd.read_sql(query, conn)</code> es el puente entre SQL y pandas — ejecuta queries y devuelve DataFrames.</li>
+  <li><code>df.to_sql("tabla", conn)</code> guarda DataFrames como tablas SQL.</li>
+  <li><strong>Regla de oro:</strong> filtrá en SQL, analizá en pandas. No traigas millones de filas si solo necesitás un resumen.</li>
+  <li>Usá <strong>queries parametrizadas</strong> (<code>?</code>) para evitar SQL injection.</li>
+  <li><code>sqlite3</code> viene incluida en Python — perfecta para aprender y prototipar.</li>
+  <li>En producción se usa <code>sqlalchemy</code> como capa de abstracción universal.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>18 · Portfolio y proyecto final</strong>) vas a aplicar todo lo aprendido en un proyecto completo de Data Analysis, construyendo tu portfolio profesional.</p>
+
+<div class="footer-nav">
+  <a href="/data-analysis/16-power-bi-tableau-intro.html">← Power BI / Tableau intro</a>
+  <a class="next" href="/data-analysis/18-portfolio-proyecto-final.html">Portfolio y proyecto final →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

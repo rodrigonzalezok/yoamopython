@@ -1,221 +1,625 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 16</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 16</div><h1>Power BI Tableau Intro</h1><p>Subtítulo: dominá power bi tableau intro desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 15</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 16</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Power BI Tableau Intro</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Power BI Tableau Intro</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de power bi tableau intro</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Power BI Tableau Intro</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Power BI Tableau Intro</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Power BI Tableau Intro</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Power BI Tableau Intro</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-16' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-16-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-16-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de power bi tableau intro con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/data-analysis/15-regresion-clasificacion.html'>← Anterior</a><a class='badge' href='/data-analysis/17-sql-python-integracion.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 16 · Power BI y Tableau: Introducción</title>
+<meta name="description" content="Conocé las herramientas de Business Intelligence más usadas: Power BI y Tableau. Entendé cuándo usarlas, cómo se comparan con Python, y los conceptos clave de dashboards empresariales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 16 de 19</span>
+  <h1>Power BI y Tableau: Introducción</h1>
+  <p>Python es la navaja suiza del análisis — flexible, potente, programable. Pero en el mundo corporativo, los gerentes y directores no van a abrir un Jupyter Notebook. Necesitan <strong>dashboards interactivos</strong> que puedan explorar solos, filtrar por región y mes, y compartir con un clic. Para eso existen <strong>Power BI</strong> y <strong>Tableau</strong>, las herramientas de Business Intelligence (BI) más usadas del planeta.</p>
+  <div class="badges">
+    <span class="badge">⏱ 60–90 min</span>
+    <span class="badge">Prerrequisitos: Lección 15 (Regresión y clasificación)</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es Business Intelligence?</h3>
+
+<p><strong>Business Intelligence (BI)</strong> es el proceso de transformar datos crudos en información accionable para la toma de decisiones empresariales. Las herramientas de BI permiten crear dashboards, reportes automatizados y visualizaciones interactivas sin escribir código.</p>
+
+<div class="analogy"><strong>Analogía:</strong> Python es como tener un taller de carpintería: podés construir cualquier mueble, pero necesitás saber usar las herramientas. Power BI / Tableau son como un showroom de IKEA: los muebles ya están diseñados, los ves montados, y el cliente puede recorrerlos y elegir sin saber carpintería. Tu trabajo como analista es construir los "muebles" (dashboards) para que los "clientes" (gerentes) tomen decisiones.</div>
+
+<h3>Power BI vs Tableau vs Python</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Aspecto</th><th>Power BI</th><th>Tableau</th><th>Python (matplotlib/seaborn)</th></tr>
+<tr><td><strong>Compañía</strong></td><td>Microsoft</td><td>Salesforce</td><td>Open source</td></tr>
+<tr><td><strong>Precio</strong></td><td>Gratis (Desktop) / $10/mes (Pro)</td><td>$75/mes</td><td>Gratis</td></tr>
+<tr><td><strong>Curva de aprendizaje</strong></td><td>Media (drag & drop)</td><td>Media-baja</td><td>Alta (programar)</td></tr>
+<tr><td><strong>Interactividad</strong></td><td>⭐⭐⭐ Filtros dinámicos</td><td>⭐⭐⭐ Exploración visual</td><td>⭐ Estáticos (sin plotly)</td></tr>
+<tr><td><strong>Datos grandes</strong></td><td>Bueno (DirectQuery)</td><td>Excelente</td><td>Limitado por RAM</td></tr>
+<tr><td><strong>Automatización</strong></td><td>Buena (scheduled refresh)</td><td>Buena</td><td>Excelente (scripts)</td></tr>
+<tr><td><strong>Integración SQL</strong></td><td>Nativa</td><td>Nativa</td><td>Con librerías</td></tr>
+<tr><td><strong>ML / Análisis avanzado</strong></td><td>Limitado</td><td>Limitado</td><td>⭐⭐⭐ Ilimitado</td></tr>
+<tr><td><strong>Uso en la industria</strong></td><td>Corporaciones (Microsoft)</td><td>Consultoría, data teams</td><td>Data Science, ingeniería</td></tr>
+</table>
+</div>
+
+<div class="concept"><strong>¿Cuál aprender?</strong> La respuesta depende del mercado laboral de tu zona. En LATAM y empresas con ecosistema Microsoft (la mayoría), <strong>Power BI domina</strong>. En EE.UU. y empresas tech, Tableau es más común. Python es universal. Lo ideal: <strong>Python + una herramienta de BI</strong> (preferiblemente Power BI si estás en LATAM).</div>
+
+<h3>Conceptos clave de BI</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Concepto</th><th>Qué es</th><th>Ejemplo</th></tr>
+<tr><td><strong>Dashboard</strong></td><td>Página con múltiples visualizaciones interactivas</td><td>Panel de ventas mensual</td></tr>
+<tr><td><strong>KPI</strong></td><td>Key Performance Indicator — métrica clave del negocio</td><td>Facturación, tasa de churn, NPS</td></tr>
+<tr><td><strong>Drill-down</strong></td><td>Navegar de lo general a lo particular</td><td>País → Provincia → Ciudad</td></tr>
+<tr><td><strong>Slicer / Filtro</strong></td><td>Control para filtrar datos dinámicamente</td><td>Dropdown de "Año" o "Región"</td></tr>
+<tr><td><strong>Medida (Measure)</strong></td><td>Cálculo dinámico sobre los datos</td><td><code>SUM(Ventas)</code>, <code>AVERAGE(Ticket)</code></td></tr>
+<tr><td><strong>DAX</strong></td><td>Lenguaje de fórmulas de Power BI</td><td><code>CALCULATE(SUM(Ventas), Año=2024)</code></td></tr>
+<tr><td><strong>Data Model</strong></td><td>Relaciones entre tablas (como SQL JOINs)</td><td>Transacciones ↔ Clientes ↔ Productos</td></tr>
+<tr><td><strong>ETL</strong></td><td>Extract, Transform, Load — pipeline de datos</td><td>Sacar de SQL → limpiar → cargar en BI</td></tr>
+</table>
+</div>
+
+<h3>El flujo de trabajo BI</h3>
+
+<ol>
+  <li><strong>Conectar:</strong> vincular la herramienta con la fuente de datos (SQL, Excel, CSV, API).</li>
+  <li><strong>Modelar:</strong> definir relaciones entre tablas (como los JOINs de SQL 07-08).</li>
+  <li><strong>Transformar:</strong> limpiar y preparar datos (equivalente a pandas lecciones 04-06).</li>
+  <li><strong>Visualizar:</strong> crear gráficos, KPIs, tablas y filtros interactivos.</li>
+  <li><strong>Publicar:</strong> compartir el dashboard para que otros lo exploren.</li>
+</ol>
+
+<div class="realworld"><strong>En el trabajo real:</strong> el patrón más común es: (1) un Data Engineer prepara los datos en un data warehouse (SQL), (2) un Data Analyst construye los dashboards en Power BI/Tableau conectados a ese warehouse, (3) los gerentes consumen los dashboards diariamente. Python entra cuando necesitás análisis exploratorio profundo, ML, o automatizaciones que BI no puede hacer.</div>
+
+<h3>DAX: el lenguaje de Power BI</h3>
+
+<p>DAX (Data Analysis Expressions) es el lenguaje de fórmulas de Power BI. Si ya sabés SQL y pandas, DAX te va a resultar familiar:</p>
+
+<div class="table-wrap">
+<table>
+<tr><th>Operación</th><th>pandas</th><th>SQL</th><th>DAX (Power BI)</th></tr>
+<tr><td>Sumar</td><td><code>df["Ventas"].sum()</code></td><td><code>SUM(Ventas)</code></td><td><code>SUM(Tabla[Ventas])</code></td></tr>
+<tr><td>Promedio</td><td><code>df["Ventas"].mean()</code></td><td><code>AVG(Ventas)</code></td><td><code>AVERAGE(Tabla[Ventas])</code></td></tr>
+<tr><td>Contar</td><td><code>df["ID"].nunique()</code></td><td><code>COUNT(DISTINCT ID)</code></td><td><code>DISTINCTCOUNT(Tabla[ID])</code></td></tr>
+<tr><td>Filtrar</td><td><code>df[df["Año"]==2024]</code></td><td><code>WHERE Año=2024</code></td><td><code>CALCULATE(..., Tabla[Año]=2024)</code></td></tr>
+<tr><td>% del total</td><td><code>v/v.sum()*100</code></td><td>Window function</td><td><code>DIVIDE(SUM(...), CALCULATE(SUM(...), ALL(...)))</code></td></tr>
+</table>
+</div>
+
+<div class="section-num">02</div>
+<h2>Ejercicios prácticos: preparar datos para BI con Python</h2>
+
+<p>Como Data Analyst, tu trabajo frecuentemente incluye <strong>preparar los datos</strong> que luego se visualizan en Power BI o Tableau. Estos ejercicios simulan ese flujo.</p>
+
+<h3>Ejemplo 1: Preparar un dataset limpio para dashboard</h3>
+<p>Limpiar y transformar datos crudos en un formato listo para importar en Power BI.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_prep_bi.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+n = 500
+
+# Datos crudos "sucios"
+df = pd.DataFrame({
+    "fecha": pd.date_range("2024-01-01", periods=n, freq="D"),
+    "sucursal": np.random.choice(["CABA", "Rosario", "Córdoba", " mendoza ", "TUCUMAN"], n),
+    "canal": np.random.choice(["Web", "app", "SUCURSAL", "web"], n),
+    "monto": np.abs(np.random.normal(15000, 8000, n)).round(0),
+    "producto": np.random.choice(["Cuenta", "Tarjeta", "Préstamo", "Seguro"], n, p=[0.4,0.3,0.2,0.1])
+})
+df.loc[np.random.choice(n, 20, replace=False), "monto"] = np.nan
+
+# === LIMPIEZA para BI ===
+# 1. Normalizar strings
+df["sucursal"] = df["sucursal"].str.strip().str.title()
+df["canal"] = df["canal"].str.strip().str.title()
+
+# 2. Rellenar nulos con mediana
+df["monto"] = df["monto"].fillna(df["monto"].median())
+
+# 3. Crear columnas de fecha (para slicers en BI)
+df["anio"] = df["fecha"].dt.year
+df["mes"] = df["fecha"].dt.month
+df["mes_nombre"] = df["fecha"].dt.strftime("%b")
+df["trimestre"] = df["fecha"].dt.quarter
+df["dia_semana"] = df["fecha"].dt.day_name()
+
+print("=== Dataset listo para Power BI ===")
+print(f"Filas: {len(df)}, Columnas: {len(df.columns)}")
+print(f"Nulos restantes: {df.isna().sum().sum()}")
+print(f"\nColumnas: {list(df.columns)}")
+print(f"\nSucursales: {sorted(df['sucursal'].unique())}")
+print(f"Canales: {sorted(df['canal'].unique())}")
+print(f"\nPrimeras filas:")
+print(df.head())</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Crear tabla de métricas agregadas (KPIs)</h3>
+<p>Calcular las métricas que un dashboard mostraría como KPIs y tablas resumen.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_kpis.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+n = 500
+df = pd.DataFrame({
+    "Fecha": pd.date_range("2024-01-01", periods=n, freq="D"),
+    "Sucursal": np.random.choice(["CABA","Rosario","Córdoba","Mendoza"], n),
+    "Canal": np.random.choice(["Web","App","Sucursal"], n),
+    "Monto": np.abs(np.random.normal(15000, 8000, n)).round(0),
+    "Producto": np.random.choice(["Cuenta","Tarjeta","Préstamo"], n)
+})
+df["Mes"] = df["Fecha"].dt.to_period("M")
+
+# KPIs globales
+print("=" * 50)
+print("KPIs GLOBALES (como se verían en un dashboard)")
+print("=" * 50)
+print(f"  Facturación total:   ${df['Monto'].sum():>12,.0f}")
+print(f"  Ticket promedio:     ${df['Monto'].mean():>12,.0f}")
+print(f"  Operaciones totales: {len(df):>12,}")
+print(f"  Ticket mediano:      ${df['Monto'].median():>12,.0f}")
+
+# Tabla para gráfico de barras: ventas por sucursal
+print(f"\n{'='*50}")
+print("VENTAS POR SUCURSAL")
+print(f"{'='*50}")
+suc = df.groupby("Sucursal").agg(
+    Total=("Monto","sum"),
+    Operaciones=("Monto","count"),
+    Ticket_Prom=("Monto","mean")
+).round(0)
+suc["Participacion_%"] = round(suc["Total"] / suc["Total"].sum() * 100, 1)
+print(suc.sort_values("Total", ascending=False))
+
+# Tabla para gráfico temporal: tendencia mensual
+print(f"\n{'='*50}")
+print("TENDENCIA MENSUAL")
+print(f"{'='*50}")
+mensual = df.groupby("Mes").agg(Total=("Monto","sum"), Ops=("Monto","count")).round(0)
+print(mensual.head(6))</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Crear el modelo de datos (tablas relacionadas)</h3>
+<p>En BI necesitás un modelo estrella: una tabla de hechos (transacciones) y tablas de dimensiones (clientes, productos, fechas). Python las prepara.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_modelo.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+
+# Tabla de DIMENSIÓN: Sucursales
+dim_sucursales = pd.DataFrame({
+    "Sucursal_ID": [1, 2, 3, 4],
+    "Nombre": ["CABA", "Rosario", "Córdoba", "Mendoza"],
+    "Zona": ["Centro", "Litoral", "Interior", "Cuyo"],
+    "Gerente": ["García", "López", "Pérez", "Sosa"]
+})
+
+# Tabla de DIMENSIÓN: Productos
+dim_productos = pd.DataFrame({
+    "Producto_ID": [1, 2, 3],
+    "Nombre": ["Cuenta", "Tarjeta", "Préstamo"],
+    "Categoría": ["Pasivo", "Activo", "Activo"],
+    "Comisión_%": [0.5, 2.0, 5.0]
+})
+
+# Tabla de HECHOS: Transacciones
+fact_txn = pd.DataFrame({
+    "Txn_ID": range(1, 201),
+    "Fecha": pd.date_range("2024-01-01", periods=200, freq="D"),
+    "Sucursal_ID": np.random.choice([1,2,3,4], 200),
+    "Producto_ID": np.random.choice([1,2,3], 200),
+    "Monto": np.abs(np.random.normal(15000, 8000, 200)).round(0).astype(int)
+})
+
+print("=== MODELO ESTRELLA para BI ===")
+print(f"\n📊 Tabla de Hechos: fact_txn ({len(fact_txn)} filas)")
+print(fact_txn.head())
+print(f"\n📋 Dimensión Sucursales ({len(dim_sucursales)} filas)")
+print(dim_sucursales)
+print(f"\n📋 Dimensión Productos ({len(dim_productos)} filas)")
+print(dim_productos)
+
+# Relaciones (en BI se configuran con drag & drop)
+print(f"\n=== Relaciones ===")
+print("  fact_txn.Sucursal_ID → dim_sucursales.Sucursal_ID")
+print("  fact_txn.Producto_ID → dim_productos.Producto_ID")
+print("\nEn Power BI, estas relaciones se crean")
+print("arrastrando una columna sobre otra en el Model View.")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="tip"><strong>Tip profesional — Modelo Estrella:</strong> es el estándar de la industria de BI. Una tabla central de <strong>hechos</strong> (transacciones, ventas, eventos) rodeada de tablas de <strong>dimensiones</strong> (clientes, productos, fechas, sucursales). Las dimensiones enriquecen los hechos. Cada relación es 1-a-muchos: un producto tiene muchas transacciones.</div>
+
+<h3>Ejemplo 4: Simular cálculos DAX con pandas</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_dax_pandas.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+df = pd.DataFrame({
+    "Sucursal": np.random.choice(["CABA","Rosario","Córdoba"], 100),
+    "Mes": np.random.choice(["Enero","Febrero","Marzo"], 100),
+    "Monto": np.abs(np.random.normal(15000, 5000, 100)).round(0).astype(int)
+})
+
+# Equivalente a DAX: CALCULATE(SUM(Monto), Sucursal="CABA")
+total_caba = df[df["Sucursal"]=="CABA"]["Monto"].sum()
+print(f"DAX: CALCULATE(SUM(Monto), Sucursal='CABA')")
+print(f"pandas: df[df['Sucursal']=='CABA']['Monto'].sum()")
+print(f"Resultado: ${total_caba:,}\n")
+
+# Equivalente a DAX: DIVIDE(SUM, CALCULATE+ALL) → participación
+total_global = df["Monto"].sum()
+participacion = df.groupby("Sucursal")["Monto"].sum() / total_global * 100
+print(f"DAX: DIVIDE(SUM(...), CALCULATE(SUM(...), ALL(Sucursal)))")
+print(f"pandas: groupby().sum() / total * 100")
+print(participacion.round(1))
+
+# Equivalente a DAX: TOTALYTD
+print(f"\nDAX: TOTALYTD(SUM(Monto), Fechas)")
+print(f"pandas: groupby('Mes').sum().cumsum()")
+mensual = df.groupby("Mes")["Monto"].sum()
+print(f"Mensual:\n{mensual}")
+print(f"\nAcumulado YTD:\n{mensual.cumsum()}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 5: Crear un mock dashboard con Python</h3>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_mock_dashboard.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+np.random.seed(42)
+df = pd.DataFrame({
+    "Mes": pd.date_range("2024-01-01", periods=12, freq="MS"),
+    "CABA": np.random.normal(90000, 15000, 12).astype(int),
+    "Rosario": np.random.normal(65000, 10000, 12).astype(int),
+    "Córdoba": np.random.normal(50000, 8000, 12).astype(int)
+})
+meses = [d.strftime("%b") for d in df["Mes"]]
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 9))
+fig.suptitle("Dashboard Ejecutivo — Ventas 2024", fontsize=15, fontweight="bold")
+
+# 1. KPIs (simulados como texto)
+axes[0,0].axis("off")
+total = df[["CABA","Rosario","Córdoba"]].sum().sum()
+axes[0,0].text(0.5, 0.8, "FACTURACIÓN TOTAL", ha="center", fontsize=11, color="gray")
+axes[0,0].text(0.5, 0.5, f"${total:,.0f}", ha="center", fontsize=28, fontweight="bold", color="#2196F3")
+axes[0,0].text(0.5, 0.25, f"Ticket Promedio: ${total/12/3:,.0f}", ha="center", fontsize=11, color="gray")
+
+# 2. Tendencia mensual
+for col, color in [("CABA","#2196F3"),("Rosario","#4CAF50"),("Córdoba","#FF9800")]:
+    axes[0,1].plot(meses, df[col], "o-", label=col, linewidth=2, markersize=4, color=color)
+axes[0,1].set_title("Tendencia Mensual"); axes[0,1].legend(fontsize=8)
+axes[0,1].grid(True, alpha=0.3); axes[0,1].tick_params(axis="x", rotation=45)
+
+# 3. Barras por sucursal
+totales = df[["CABA","Rosario","Córdoba"]].sum()
+axes[1,0].bar(totales.index, totales.values, color=["#2196F3","#4CAF50","#FF9800"])
+axes[1,0].set_title("Total por Sucursal")
+for i, (v) in enumerate(totales.values):
+    axes[1,0].text(i, v+5000, f"${v:,.0f}", ha="center", fontsize=8, fontweight="bold")
+
+# 4. Composición (pie)
+axes[1,1].pie(totales.values, labels=totales.index, autopct="%1.0f%%",
+              colors=["#2196F3","#4CAF50","#FF9800"], startangle=90)
+axes[1,1].set_title("Participación de Mercado")
+
+plt.tight_layout()
+plt.show()
+print("Este dashboard se replica en Power BI con drag & drop")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Concepto BI</th><th>Equivalente Python</th></tr>
+<tr><td>Dashboard</td><td><code>fig, axes = plt.subplots()</code></td></tr>
+<tr><td>Slicer / Filtro</td><td><code>df[df["col"]==val]</code></td></tr>
+<tr><td>Medida (SUM)</td><td><code>df["col"].sum()</code></td></tr>
+<tr><td>Drill-down</td><td><code>groupby(["nivel1","nivel2"])</code></td></tr>
+<tr><td>Modelo estrella</td><td><code>pd.merge(hechos, dimensión)</code></td></tr>
+<tr><td>DAX CALCULATE</td><td><code>df[filtro]["col"].sum()</code></td></tr>
+<tr><td>Scheduled Refresh</td><td>Cron job / script programado</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Limpiar strings para BI</h4>
+  <p>Normalizá la columna Ciudad: strip + title. Imprimí los valores únicos. Debe incluir <code>Caba</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-1" data-expected="Caba">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Caba"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({"Ciudad": [" caba ", "ROSARIO", " córdoba", "Caba", "rosario "]})
+
+# Normalizar y mostrar únicos
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["df[\"Ciudad\"] = df[\"Ciudad\"].str.strip().str.title()","print(df[\"Ciudad\"].unique())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Crear columnas de fecha</h4>
+  <p>A partir de una columna de fecha, extraé año, mes y trimestre. Imprimí las columnas. Debe incluir <code>Trimestre</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-2" data-expected="Trimestre">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Trimestre"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+
+df = pd.DataFrame({"Fecha": pd.date_range("2024-01-01", periods=10, freq="M")})
+
+# Crear: Anio, Mes, Trimestre
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["df[\"Anio\"] = df[\"Fecha\"].dt.year","df[\"Mes\"] = df[\"Fecha\"].dt.month","df[\"Trimestre\"] = df[\"Fecha\"].dt.quarter","print(df)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: KPIs básicos</h4>
+  <p>Calculá: total de ventas, ticket promedio y cantidad de operaciones. Debe incluir <code>Total</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-3" data-expected="Total">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Total"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({"Monto": np.random.normal(15000, 5000, 100).astype(int)})
+
+# 3 KPIs
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["print(f\"Total: ${df[\\\"Monto\\\"].sum():,}\")","print(f\"Ticket promedio: ${df[\\\"Monto\\\"].mean():,.0f}\")","print(f\"Operaciones: {len(df)}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Participación por sucursal (%)</h4>
+  <p>Calculá qué % del total representa cada sucursal. Debe incluir <code>%</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-4" data-expected="%">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "%"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Sucursal": np.random.choice(["CABA","Rosario","Córdoba"], 100),
+    "Monto": np.random.normal(15000, 5000, 100).astype(int)
+})
+
+# Participación % por sucursal
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["totales = df.groupby(\"Sucursal\")[\"Monto\"].sum()","pct = round(totales / totales.sum() * 100, 1)","for s, p in pct.items(): print(f\"{s}: {p}%\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Modelo estrella — crear dimensiones</h4>
+  <p>Creá una tabla de dimensión de sucursales y hacé merge con la tabla de hechos. Debe incluir <code>Zona</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-5" data-expected="Zona">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Zona"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+hechos = pd.DataFrame({
+    "Txn_ID": range(1, 11),
+    "Suc_ID": np.random.choice([1,2,3], 10),
+    "Monto": np.random.randint(5000, 25000, 10)
+})
+
+# Crear dim_sucursales con Suc_ID, Nombre, Zona
+# Hacer merge
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["dim = pd.DataFrame({\"Suc_ID\":[1,2,3],\"Nombre\":[\"CABA\",\"Rosario\",\"Córdoba\"],\"Zona\":[\"Centro\",\"Litoral\",\"Interior\"]})","resultado = pd.merge(hechos, dim, on=\"Suc_ID\")","print(resultado)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Simular CALCULATE de DAX</h4>
+  <p>Calculá la suma de Monto solo para Sucursal="CABA" (equivalente a DAX CALCULATE). Debe incluir un número.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-6" data-expected="0">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir un número</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Sucursal": np.random.choice(["CABA","Rosario","Córdoba"], 50),
+    "Monto": np.random.randint(5000, 30000, 50)
+})
+
+# CALCULATE(SUM(Monto), Sucursal="CABA")
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["total_caba = df[df[\"Sucursal\"]==\"CABA\"][\"Monto\"].sum()","print(f\"CALCULATE CABA: ${total_caba:,}\")","print(f\"Total global: ${df[\\\"Monto\\\"].sum():,}\")","print(f\"Participación: {total_caba/df[\\\"Monto\\\"].sum()*100:.1f}%\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Acumulado YTD (Year-to-Date)</h4>
+  <p>Calculá la facturación mensual y el acumulado YTD con <code>.cumsum()</code>. Debe incluir <code>YTD</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-7" data-expected="YTD">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "YTD"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Fecha": pd.date_range("2024-01-01", periods=180, freq="D"),
+    "Monto": np.random.normal(15000, 5000, 180).astype(int)
+})
+df["Mes"] = df["Fecha"].dt.to_period("M")
+
+# Mensual + YTD acumulado
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["mensual = df.groupby(\"Mes\")[\"Monto\"].sum()","ytd = mensual.cumsum()","for m, (v, a) in enumerate(zip(mensual, ytd)):","    print(f\"Mes {m+1}: ${v:>8,} | YTD: ${a:>10,}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Tabla resumen para heatmap BI</h4>
+  <p>Creá una pivot_table Sucursal × Mes que un heatmap de Power BI usaría. Imprimí la tabla. Debe incluir <code>Enero</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-8" data-expected="Enero">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Enero"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Sucursal": np.random.choice(["CABA","Rosario","Córdoba"], 90),
+    "Mes": np.random.choice(["Enero","Febrero","Marzo"], 90),
+    "Monto": np.random.randint(5000, 30000, 90)
+})
+
+# Pivot table: Sucursal × Mes
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["tabla = pd.pivot_table(df, values=\"Monto\", index=\"Sucursal\", columns=\"Mes\", aggfunc=\"sum\", fill_value=0)","print(tabla)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Variación mes a mes (%)</h4>
+  <p>Calculá el crecimiento porcentual mes a mes. Imprimí la variación. Debe incluir <code>var</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-9" data-expected="var">
+    <div name="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "var"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+mensual = pd.Series([45000, 52000, 48000, 61000, 58000, 72000],
+                    index=["Ene","Feb","Mar","Abr","May","Jun"])
+
+# pct_change() para variación %
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["variacion = mensual.pct_change() * 100","for mes, var in variacion.items():","    if pd.notna(var): print(f\"{mes}: var {var:+.1f}%\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Dashboard mock con 4 gráficos</h4>
+  <p>Creá un dashboard de 4 subplots simulando un dashboard de BI: KPI card, tendencia, barras y torta. Imprimí <code>Dashboard BI</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-10" data-expected="Dashboard BI">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Dashboard BI"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+meses = ["Ene","Feb","Mar","Abr","May","Jun"]
+sucursales = ["CABA","Rosario","Córdoba"]
+datos = {s: np.random.randint(30000, 80000, 6) for s in sucursales}
+
+# fig, axes = plt.subplots(2, 2, figsize=(12, 9))
+# KPI card + tendencia + barras + torta
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 9))","axes[0,0].axis(\"off\"); axes[0,0].text(0.5,0.5,\"$1.2M\",ha=\"center\",fontsize=28,fontweight=\"bold\")","for s in sucursales: axes[0,1].plot(meses, datos[s], \"o-\", label=s)","axes[0,1].legend(); plt.tight_layout(); plt.show(); print(\"Dashboard BI\")"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li><strong>Power BI</strong> (Microsoft) y <strong>Tableau</strong> (Salesforce) son las herramientas de BI líderes para crear dashboards interactivos.</li>
+  <li>Python prepara los datos; BI los presenta. Son <strong>complementarios</strong>, no competidores.</li>
+  <li>Conceptos clave: <strong>KPIs</strong>, <strong>slicers</strong>, <strong>drill-down</strong>, <strong>modelo estrella</strong>, <strong>DAX</strong>.</li>
+  <li>Todo lo que hiciste en pandas (groupby, pivot, merge) se traduce directamente a conceptos de BI.</li>
+  <li>El mercado laboral valora <strong>Python + herramienta de BI</strong>. Si estás en LATAM, priorizá Power BI.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>17 · Integración SQL + Python</strong>) vas a aprender a conectar Python directamente con bases de datos SQL — el puente entre los dos mundos que ya dominás.</p>
+
+<div class="footer-nav">
+  <a href="/data-analysis/15-regresion-clasificacion.html">← Regresión y clasificación</a>
+  <a class="next" href="/data-analysis/17-sql-python-integracion.html">Integración SQL + Python →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
