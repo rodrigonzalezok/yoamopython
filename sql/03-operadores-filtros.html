@@ -317,7 +317,9 @@ INSERT INTO clientes VALUES (4,'Sosa',590,45000,NULL);
 
 <script type="module">
 import { renderSidebar } from '/js/nav.js';
+import { initTheme } from '/js/theme.js';
 import { mountEditors } from '/js/editor.js';
+initTheme();
 renderSidebar(location.pathname);
 mountEditors();
 window.addEventListener('progress-updated', () => renderSidebar(location.pathname));

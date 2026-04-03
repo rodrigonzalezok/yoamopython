@@ -637,7 +637,9 @@ y = (X[:, 0] * 2 + X[:, 1] - X[:, 2] > 1.5).astype(int)
 
 <script type="module">
 import { renderSidebar } from '/js/nav.js';
+import { initTheme } from '/js/theme.js';
 import { mountEditors } from '/js/editor.js';
+initTheme();
 renderSidebar(location.pathname);
 mountEditors();
 window.addEventListener('progress-updated', () => renderSidebar(location.pathname));

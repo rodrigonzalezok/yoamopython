@@ -83,10 +83,6 @@ export function mountEditors() {
       if (outImage) {
         const img = document.createElement('img');
         img.src = 'data:image/png;base64,' + outImage;
-        img.style.marginTop = '15px';
-        img.style.display = 'block';
-        img.style.maxWidth = '100%';
-        img.style.borderRadius = '4px';
         output.appendChild(img);
       }
 

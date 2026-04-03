@@ -175,6 +175,8 @@
 <script type="module">
 import { CATALOG } from '/js/nav.js';
 import { computeStats } from '/js/progress.js';
+import { initTheme } from '/js/theme.js';
+initTheme();
 const s = computeStats(CATALOG);
 document.getElementById('global-progress-fill').style.width = `${s.pct}%`;
 document.getElementById('global-progress-text').textContent = `${s.completedLessons}/${s.totalLessons} lecciones`;

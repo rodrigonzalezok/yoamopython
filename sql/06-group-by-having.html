@@ -376,7 +376,9 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1),(2,'López
 
 <script type="module">
 import { renderSidebar } from '/js/nav.js';
+import { initTheme } from '/js/theme.js';
 import { mountEditors } from '/js/editor.js';
+initTheme();
 renderSidebar(location.pathname);
 mountEditors();
 window.addEventListener('progress-updated', () => renderSidebar(location.pathname));

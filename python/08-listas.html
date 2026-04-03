@@ -502,7 +502,9 @@ saldos = [150000, 320000, 45000, 890000, 72000]
 
 <script type="module">
 import { renderSidebar } from '/js/nav.js';
+import { initTheme } from '/js/theme.js';
 import { mountEditors } from '/js/editor.js';
+initTheme();
 renderSidebar(location.pathname);
 mountEditors();
 window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
