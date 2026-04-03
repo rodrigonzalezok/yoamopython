@@ -68,18 +68,21 @@ crear_ficha(nombre="García", score=720, ciudad="BsAs")
 # kwargs = {"nombre": "García", "score": 720, "ciudad": "BsAs"}</pre>
 
       <p>Podés combinar ambos con parámetros normales. El orden obligatorio es:
-        <code>def f(normales, *args, **kwargs)</code>.</p>
+        <code>def f(normales, *args, **kwargs)</code>.
+      </p>
 
       <div class="concept"><strong>¿Dónde se usan en la práctica?</strong> Los ves constantemente en librerías:
         <code>print(*args)</code> acepta cualquier cantidad de valores. <code>pd.read_csv(path, **kwargs)</code> acepta
         docenas de parámetros opcionales. <code>dict(**kwargs)</code> crea diccionarios. Entender *args/**kwargs te
-        permite leer el código fuente de pandas y scikit-learn.</div>
+        permite leer el código fuente de pandas y scikit-learn.
+      </div>
 
       <h3>Lambda — funciones anónimas</h3>
 
       <p>Una <code>lambda</code> es una función sin nombre, definida en una sola línea. Se usa cuando necesitás una
         función simple y descartable — típicamente como argumento de <code>sorted()</code>, <code>map()</code>,
-        <code>filter()</code> o <code>df.apply()</code>.</p>
+        <code>filter()</code> o <code>df.apply()</code>.
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Función normal
 def doble(x):
@@ -158,7 +161,8 @@ for mes, interes, saldo in generar_cuotas(100000, 0.05, 6):
       <div class="realworld"><strong>En pandas/ML:</strong> <code>pd.read_csv(chunksize=1000)</code> devuelve un
         generator que lee 1000 filas por vez. <code>sklearn</code> usa generators internamente para datasets grandes.
         Lambda se usa en <code>df.apply(lambda x: ...)</code> constantemente.
-        <code>sorted(df, key=lambda x: x["col"])</code> es el patrón más común de lambda.</div>
+        <code>sorted(df, key=lambda x: x["col"])</code> es el patrón más común de lambda.
+      </div>
 
       <div class="tip"><strong>Tip profesional:</strong> no necesitás dominar todo esto el día uno. Las prioridades son:
         (1) lambda para sorted/map/apply — lo usás todos los días, (2) *args/**kwargs para leer código de librerías, (3)
@@ -521,7 +525,8 @@ print(sumar(10, 20, 30, 40, 50))</textarea>
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 3: **kwargs para crear registros</h4>
         <p>Creá <code>crear_registro(**datos)</code> que devuelva un diccionario. Probá creando un cliente. Debe incluir
-          <code>García</code>.</p>
+          <code>García</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-3" data-expected="García">
           <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "García"</span></div>
           <div class="editor-area">
@@ -589,7 +594,8 @@ print(f"USD 1,000 = ${a_pesos(1000):,.0f}")</textarea>
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 6: Función como argumento</h4>
         <p>Creá <code>procesar_lista(datos, func)</code> que aplique <code>func</code> a cada elemento. Probá con
-          <code>str.upper</code> y con una lambda. Debe incluir <code>GARCÍA</code>.</p>
+          <code>str.upper</code> y con una lambda. Debe incluir <code>GARCÍA</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-6" data-expected="GARCÍA">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "GARCÍA"</span></div>
           <div class="editor-area">
@@ -660,7 +666,8 @@ print(f"Resultado: {resultado}")</textarea>
         <h4>Ejercicio 9: Dispatch con dict de funciones</h4>
         <p>Creá un dict <code>operaciones</code> donde las claves son strings ("sumar","restar","multiplicar") y los
           valores son lambdas. Usalo para ejecutar <code>"multiplicar"</code> con (15, 8). Debe incluir
-          <code>120</code>.</p>
+          <code>120</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-19" data-exercise="ex-9" data-expected="120">
           <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "120"</span></div>
           <div class="editor-area">
@@ -751,8 +758,9 @@ print(f"Resultado del pipeline: {resultado}")
         <a class="next" href="/python/20-modulos-stdlib.html">Módulos de la stdlib →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

@@ -88,7 +88,8 @@
       <h3>NaN: El fantasma de pandas</h3>
 
       <p><code>NaN</code> (Not a Number) es la representación universal de "dato faltante" en pandas. Viene del módulo
-        <code>numpy</code>. Tiene un comportamiento especial que causa bugs silenciosos si no lo conocés:</p>
+        <code>numpy</code>. Tiene un comportamiento especial que causa bugs silenciosos si no lo conocés:
+      </p>
 
       <ul>
         <li><code>NaN == NaN</code> da <code>False</code> (¡un NaN nunca es igual a sí mismo!)</li>
@@ -99,7 +100,8 @@
       <div class="warning"><strong>El bug silencioso más peligroso:</strong> si calculás un promedio y tu columna tiene
         NaN, pandas los ignora automáticamente en <code>.mean()</code>. Esto puede ser bueno o malo: si el 40% de tus
         datos son nulos, tu promedio se basa en el 60% restante y puede no ser representativo. Siempre revisá
-        <code>isna().sum()</code> antes de calcular estadísticas.</div>
+        <code>isna().sum()</code> antes de calcular estadísticas.
+      </div>
 
       <h3>Estrategias para manejar nulos</h3>
 
@@ -258,7 +260,8 @@ print(df_unico_dni)</textarea>
 
       <h3>Ejemplo 4: Corregir tipos de datos</h3>
       <p>Un clásico: el campo "Saldo" vino como texto porque el CSV lo exportaron mal. Si no convertís,
-        <code>sum()</code> concatena strings en vez de sumar números.</p>
+        <code>sum()</code> concatena strings en vez de sumar números.
+      </p>
 
       <div class="editor" data-mode="python">
         <div class="editor-top"><span>ejemplo_04_tipos.py</span><span>Python</span></div>
@@ -294,7 +297,8 @@ print(f"\nSuma de 'Saldo' (numérico): {df['Saldo'].sum():,}")  # Ahora sí suma
 
       <h3>Ejemplo 5: Limpiar strings sucios</h3>
       <p>Los nombres de ciudades escritos de 10 formas distintas son el dolor de cabeza de todo analista. El accessor
-        <code>.str</code> de pandas permite operaciones de limpieza vectorizadas sobre columnas de texto.</p>
+        <code>.str</code> de pandas permite operaciones de limpieza vectorizadas sobre columnas de texto.
+      </p>
 
       <div class="editor" data-mode="python">
         <div class="editor-top"><span>ejemplo_05_strings.py</span><span>Python</span></div>
@@ -431,7 +435,8 @@ df = pd.DataFrame({
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 2: Eliminar filas con nulos</h4>
         <p>Usá <code>.dropna()</code> para quedarte solo con filas completas. Imprimí cuántas filas quedan usando
-          <code>len()</code>. Deben quedar <code>2</code>.</p>
+          <code>len()</code>. Deben quedar <code>2</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-05" data-exercise="ex-2" data-expected="2">
           <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "2"</span></div>
           <div class="editor-area">
@@ -706,8 +711,9 @@ df = pd.DataFrame({
         <a class="next" href="/data-analysis/06-pandas-transformaciones.html">pandas: transformaciones →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

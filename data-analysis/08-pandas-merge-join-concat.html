@@ -126,7 +126,8 @@
         realmente vinieron. <em>Inner</em>: solo los que están en ambas listas (vinieron y estaban invitados).
         <em>Left</em>: todos los invitados, marcando quién vino y quién no. <em>Right</em>: todos los que vinieron,
         marcando quién estaba invitado. <em>Outer</em>: la unión de todos — invitados que no vinieron Y colados que no
-        estaban invitados.</div>
+        estaban invitados.
+      </div>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Sintaxis de merge
 pd.merge(
@@ -153,12 +154,14 @@ pd.concat([df1, df2], axis=1)</pre>
       <div class="warning"><strong>¡Cuidado con los índices!</strong> Si no usás <code>ignore_index=True</code>,
         <code>concat()</code> conserva los índices originales de cada DataFrame. Esto significa que puedes terminar con
         un DataFrame donde el índice dice 0, 1, 2, 0, 1, 2 (repetidos). Siempre usá <code>ignore_index=True</code> al
-        concatenar verticalmente.</div>
+        concatenar verticalmente.
+      </div>
 
       <div class="realworld"><strong>En el trabajo real:</strong> el 80% de tus análisis van a requerir al menos un
         merge. Ejemplo típico: la tabla de transacciones tiene un <code>cliente_id</code> pero no tiene el nombre ni la
         ciudad. La tabla de clientes tiene <code>cliente_id</code> con nombre, ciudad y segmento. Necesitás hacer
-        <code>merge</code> para cruzarlas. Esto pasa en cualquier empresa con base de datos relacional.</div>
+        <code>merge</code> para cruzarlas. Esto pasa en cualquier empresa con base de datos relacional.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -442,7 +445,8 @@ print(resultado.groupby("Zona")["Monto"].sum())</textarea>
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 1: Inner merge simple</h4>
         <p>Cruzá la tabla de pedidos con la de productos usando <code>Prod_ID</code>. Imprimí el resultado. Debe incluir
-          <code>Notebook</code>.</p>
+          <code>Notebook</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-1"
           data-expected="Notebook">
           <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div>
@@ -532,7 +536,8 @@ febrero = pd.DataFrame({"Producto": ["A","B","C"], "Ventas": [120,180,170]})
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 4: Merge con claves distintas</h4>
         <p>Las tablas tienen la clave con distinto nombre (<code>cod_cli</code> vs <code>ID_Cliente</code>). Usá
-          <code>left_on</code> y <code>right_on</code>. Debe incluir <code>García</code>.</p>
+          <code>left_on</code> y <code>right_on</code>. Debe incluir <code>García</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-4"
           data-expected="García">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "García"</span></div>
@@ -566,7 +571,8 @@ clientes = pd.DataFrame({
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 5: Merge + indicator</h4>
         <p>Hacé un OUTER merge con <code>indicator=True</code>. Contá cuántas filas son <code>"both"</code>. Debe dar
-          <code>2</code>.</p>
+          <code>2</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-5" data-expected="2">
           <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "2"</span></div>
           <div class="editor-area">
@@ -658,7 +664,8 @@ clientes = pd.DataFrame({
         <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 8: Merge encadenado (3 tablas)</h4>
         <p>Cruzá transacciones → clientes → ciudades. Imprimí las columnas del resultado. Debe incluir
-          <code>Zona</code>.</p>
+          <code>Zona</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-08" data-exercise="ex-8" data-expected="Zona">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Zona"</span></div>
           <div class="editor-area">
@@ -765,8 +772,9 @@ clientes = pd.DataFrame({
         <a class="next" href="/data-analysis/09-estadistica-descriptiva.html">Estadística descriptiva →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

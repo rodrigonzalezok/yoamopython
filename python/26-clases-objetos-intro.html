@@ -150,7 +150,8 @@ print(c1)               # "Cliente(García, score=720)"</pre>
 
             <p>Desde Python 3.7, <code>@dataclass</code> genera automáticamente <code>__init__</code>,
                 <code>__repr__</code>, <code>__eq__</code> y más. Ideal para clases que son básicamente "contenedores de
-                datos":</p>
+                datos":
+            </p>
 
             <pre
                 style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">from dataclasses import dataclass
@@ -171,7 +172,8 @@ class Transaccion:
                 clase <code>pd.DataFrame</code>. <code>.head()</code>, <code>.describe()</code>, <code>.groupby()</code>
                 son métodos. <code>.shape</code>, <code>.columns</code> son atributos. Un modelo de scikit-learn
                 (<code>RandomForestClassifier()</code>) es un objeto con métodos <code>.fit()</code> y
-                <code>.predict()</code>. Entender OOP te permite usar estas librerías con confianza.</div>
+                <code>.predict()</code>. Entender OOP te permite usar estas librerías con confianza.
+            </div>
 
             <div class="section-num">02</div>
             <h2>Ejemplos explicados paso a paso</h2>
@@ -560,7 +562,8 @@ print(f"Con IVA: ${p.con_iva():,.0f}")</textarea>
             <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
                 <h4>Ejercicio 3: Clase CuentaSimple</h4>
                 <p>Creá <code>CuentaSimple</code> con titular y saldo. Métodos <code>depositar()</code> y
-                    <code>extraer()</code>. Debe incluir <code>120000</code>.</p>
+                    <code>extraer()</code>. Debe incluir <code>120000</code>.
+                </p>
                 <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-3"
                     data-expected="120000">
                     <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "120000"</span></div>
@@ -616,7 +619,8 @@ clientes = [
             <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
                 <h4>Ejercicio 5: Herencia básica</h4>
                 <p>Creá <code>CuentaAhorro(Cuenta)</code> que herede de una Cuenta base y agregue método
-                    <code>aplicar_interes(tasa)</code>. Debe incluir <code>103000</code>.</p>
+                    <code>aplicar_interes(tasa)</code>. Debe incluir <code>103000</code>.
+                </p>
                 <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-5"
                     data-expected="103000">
                     <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "103000"</span></div>
@@ -697,7 +701,8 @@ except ValueError as e:
             <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
                 <h4>Ejercicio 8: __len__ y __str__ custom</h4>
                 <p>Creá clase <code>Cartera</code> que guarde cuentas en una lista. Implementá <code>__len__</code> y
-                    <code>__str__</code>. Debe incluir <code>3 cuentas</code>.</p>
+                    <code>__str__</code>. Debe incluir <code>3 cuentas</code>.
+                </p>
                 <div class="editor" data-mode="python" data-lesson="python-26" data-exercise="ex-8"
                     data-expected="3 cuentas">
                     <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "3 cuentas"</span></div>
@@ -778,7 +783,8 @@ print("=== BANCO ===")
                 <li>Una clase es un molde (<code>class</code>), un objeto es una instancia con datos reales.</li>
                 <li><code>__init__</code> inicializa atributos. <code>self</code> referencia al objeto actual.</li>
                 <li><code>__str__</code> define cómo se muestra con <code>print()</code>. <code>__len__</code> para
-                    <code>len()</code>.</li>
+                    <code>len()</code>.
+                </li>
                 <li>Herencia (<code>class Hija(Padre)</code>) permite reutilizar y extender. <code>super()</code> llama
                     al padre.</li>
                 <li><code>@dataclass</code> genera constructores y repr automáticos para clases de datos.</li>
@@ -797,9 +803,10 @@ print("=== BANCO ===")
                 <a class="next" href="/python/27-proyecto-integrador-python.html">Proyecto integrador →</a>
             </div>
 
-        
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
-    </main>
+
+            <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri
+                    Gonzalez</a></p>
+        </main>
     </div>
 
     <script type="module">

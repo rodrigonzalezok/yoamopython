@@ -78,7 +78,8 @@ base.update(nuevos)
 # base = {"nombre": "García", "score": 735, "ciudad": "BsAs"}</pre>
 
       <p>Desde Python 3.9, también podés usar el operador <code>|</code> para merge (devuelve nuevo dict) y
-        <code>|=</code> para merge in-place:</p>
+        <code>|=</code> para merge in-place:
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Python 3.9+
 combinado = base | nuevos      # nuevo dict (no modifica base)
@@ -90,7 +91,8 @@ base |= nuevos                 # modifica base in-place (como update)</pre>
         <li><code>.pop(clave, default)</code> — elimina la clave y devuelve su valor. Si la clave no existe y no pasás
           default, da <code>KeyError</code>. Si pasás default, lo devuelve sin error.</li>
         <li><code>.popitem()</code> — elimina y devuelve el <b>último par</b> insertado como tupla
-          <code>(clave, valor)</code>. Útil para procesar un dict como cola LIFO.</li>
+          <code>(clave, valor)</code>. Útil para procesar un dict como cola LIFO.
+        </li>
       </ul>
 
       <h3>Patrón: contador de frecuencias</h3>
@@ -128,7 +130,8 @@ freq = Counter(datos)</pre>
 
       <div class="warning"><strong>Cuidado con defaultdict:</strong> como crea la clave al acceder, un simple
         <code>d["clave_inexistente"]</code> (incluso sin asignar nada) agrega esa clave al diccionario. Esto puede
-        generar entradas "fantasma" si no tenés cuidado. Usalo solo cuando realmente necesitás la auto-creación.</div>
+        generar entradas "fantasma" si no tenés cuidado. Usalo solo cuando realmente necesitás la auto-creación.
+      </div>
 
       <h3>Counter — el arma secreta para frecuencias</h3>
 
@@ -143,7 +146,8 @@ print(freq.most_common(2))  # [("GGAL", 3), ("YPF", 2)]</pre>
 
       <div class="realworld"><strong>En pandas:</strong> <code>Counter</code> es el equivalente manual de
         <code>df["columna"].value_counts()</code>. Cuando no tenés pandas disponible (scripts simples, lambdas en AWS,
-        exámenes técnicos), Counter es tu mejor amigo.</div>
+        exámenes técnicos), Counter es tu mejor amigo.
+      </div>
 
       <h3>Dict comprehensions avanzadas</h3>
 
@@ -160,7 +164,8 @@ print(freq.most_common(2))  # [("GGAL", 3), ("YPF", 2)]</pre>
 
       <div class="tip"><strong>Tip profesional:</strong> cuando necesitás "agrupar por" sin pandas, el patrón
         <code>defaultdict(list)</code> + loop es tu herramienta. Es exactamente lo que hace
-        <code>df.groupby("columna")</code> por debajo.</div>
+        <code>df.groupby("columna")</code> por debajo.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -494,7 +499,8 @@ print(f"Categorizados: {categorizado}")</textarea>
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 1: .get() con default</h4>
         <p>Dado <code>prod = {"nombre": "Notebook", "precio": 920000}</code>, usá <code>.get()</code> para acceder a
-          <code>"stock"</code> con default <code>0</code>. Imprimí el resultado. Debe incluir <code>Stock: 0</code>.</p>
+          <code>"stock"</code> con default <code>0</code>. Imprimí el resultado. Debe incluir <code>Stock: 0</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-1" data-expected="Stock: 0">
           <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Stock: 0"</span></div>
           <div class="editor-area">
@@ -517,7 +523,8 @@ print(f"Categorizados: {categorizado}")</textarea>
         <h4>Ejercicio 2: .update() para merge</h4>
         <p>Tenés <code>base = {"nombre": "García", "score": 700}</code> y
           <code>nuevo = {"score": 735, "ciudad": "BsAs"}</code>. Mergealos con <code>.update()</code>. El score debe
-          quedar en 735. Debe incluir <code>735</code>.</p>
+          quedar en 735. Debe incluir <code>735</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-2" data-expected="735">
           <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "735"</span></div>
           <div class="editor-area">
@@ -585,7 +592,8 @@ freq = {}
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 5: Counter con most_common</h4>
         <p>Dada la lista de tickers <code>["GGAL","YPF","GGAL","PAMP","GGAL","YPF","MELI","PAMP","GGAL"]</code>, usá
-          <code>Counter</code> para encontrar los 2 más operados. Debe incluir <code>GGAL</code>.</p>
+          <code>Counter</code> para encontrar los 2 más operados. Debe incluir <code>GGAL</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-5" data-expected="GGAL">
           <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "GGAL"</span></div>
           <div class="editor-area">
@@ -631,7 +639,8 @@ tickers = ["GGAL", "YPF", "GGAL", "PAMP", "GGAL", "YPF", "MELI", "PAMP", "GGAL"]
         <h4>Ejercicio 7: defaultdict(list) para agrupar</h4>
         <p>Agrupá estas transacciones por tipo usando <code>defaultdict(list)</code>:
           <code>[("compra",1500), ("venta",800), ("compra",3200), ("venta",2100), ("compra",950)]</code>. Imprimí el
-          total por tipo. Debe incluir <code>5650</code>.</p>
+          total por tipo. Debe incluir <code>5650</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-7" data-expected="5650">
           <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "5650"</span></div>
           <div class="editor-area">
@@ -679,7 +688,8 @@ transacciones = [("compra", 1500), ("venta", 800), ("compra", 3200),
         <h4>Ejercicio 9: Pipeline merge + transform</h4>
         <p>Tenés <code>precios_q3 = {"GGAL": 4800, "YPF": 25000}</code> y
           <code>precios_q4 = {"GGAL": 5200, "PAMP": 3100}</code>. Mergealos (Q4 sobreescribe), después creá un nuevo
-          dict aplicando +10% a cada precio. Debe incluir <code>5720</code> (GGAL con 10%).</p>
+          dict aplicando +10% a cada precio. Debe incluir <code>5720</code> (GGAL con 10%).
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-14" data-exercise="ex-9" data-expected="5720">
           <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "5720"</span></div>
           <div class="editor-area">
@@ -761,8 +771,9 @@ print("=== REPORTE DE VENTAS ===")
         <a class="next" href="/python/15-anidacion.html">Anidación →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

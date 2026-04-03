@@ -64,7 +64,8 @@
       <h3>Tipos de comentarios en Python</h3>
 
       <p><strong>Comentario de una línea:</strong> empieza con <code>#</code>. Todo lo que viene después del
-        <code>#</code> en esa línea es ignorado por Python.</p>
+        <code>#</code> en esa línea es ignorado por Python.
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Esto es un comentario completo en una línea
 saldo = 50000  # También podés comentar al final de una línea de código</pre>
@@ -72,7 +73,8 @@ saldo = 50000  # También podés comentar al final de una línea de código</pre
       <p><strong>Docstrings (documentación):</strong> son strings de triple comilla (<code>"""..."""</code> o
         <code>'''...'''</code>) que documentan funciones, clases y módulos. A diferencia de los comentarios comunes, los
         docstrings se almacenan en memoria y se pueden acceder con <code>help()</code> o <code>.__doc__</code>. Son la
-        forma oficial de documentar en Python.</p>
+        forma oficial de documentar en Python.
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def calcular_iva(precio, tasa=0.21):
     """
@@ -135,7 +137,8 @@ saldo = 50000  # También podés comentar al final de una línea de código</pre
       <p>En la mayoría de lenguajes (Java, C++, JavaScript), los bloques de código se delimitan con llaves
         <code>{}</code>. En Python, los bloques se delimitan con <strong>indentación</strong> (espacios al inicio de la
         línea). Esto NO es una preferencia estética — es <b>parte de la sintaxis del lenguaje</b>. Si indentás mal, tu
-        programa hace otra cosa o directamente da error.</p>
+        programa hace otra cosa o directamente da error.
+      </p>
 
       <p>La convención universal es usar <strong>4 espacios</strong> por nivel de indentación. No 2, no 3, no tabs — 4
         espacios. Esto está documentado en PEP 8 y es lo que usan el 99% de los proyectos Python del mundo.</p>
@@ -174,7 +177,8 @@ print("Esto siempre se ejecuta")</pre>
       <div class="realworld"><strong>En el trabajo real:</strong> los equipos profesionales usan herramientas
         automáticas para forzar PEP 8: <code>black</code> (formateador automático), <code>flake8</code> o
         <code>pylint</code> (verificadores de estilo), y los configuran en CI/CD para que el código que no cumple ni
-        siquiera se pueda mergear. Aprender PEP 8 ahora te ahorra conflictos después.</div>
+        siquiera se pueda mergear. Aprender PEP 8 ahora te ahorra conflictos después.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -672,7 +676,8 @@ else:print("negativo")</textarea>
         <h4>Ejercicio 10: Refactoring completo — de código ilegible a profesional</h4>
         <p>Reescribí este código para que sea 100% PEP 8 compliant: nombres descriptivos, comentarios útiles,
           indentación correcta, docstrings. El output numérico debe ser el mismo. Debe incluir
-          <code>Neto: 655500</code>.</p>
+          <code>Neto: 655500</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-07" data-exercise="ex-10"
           data-expected="Neto: 655500">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Neto: 655500"</span></div>
@@ -725,8 +730,9 @@ print(h)
         <a class="next" href="/python/08-listas.html">Listas →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

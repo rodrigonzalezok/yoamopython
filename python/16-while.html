@@ -63,7 +63,8 @@
 
       <div class="concept"><strong>Diferencia con if:</strong> un <code>if</code> evalúa la condición UNA vez. Un
         <code>while</code> la evalúa MUCHAS veces, ejecutando el bloque en cada iteración. El <code>while</code> es como
-        un <code>if</code> que se repite automáticamente hasta que la condición cambie.</div>
+        un <code>if</code> que se repite automáticamente hasta que la condición cambie.
+      </div>
 
       <h3>El peligro del loop infinito</h3>
 
@@ -111,7 +112,8 @@ while x > 0:
 
       <ul>
         <li><b>Contador:</b> una variable que cuenta cuántas veces pasó algo. Empieza en 0 y se incrementa con
-          <code>+= 1</code>.</li>
+          <code>+= 1</code>.
+        </li>
         <li><b>Acumulador:</b> una variable que acumula un total. Empieza en 0 y se incrementa con el valor de cada
           iteración (<code>+= monto</code>).</li>
       </ul>
@@ -119,7 +121,8 @@ while x > 0:
       <div class="analogy"><strong>Analogía bancaria:</strong> un cajero automático usa while internamente:
         <code>while intentos < 3 and not pin_correcto:</code> → le pide el PIN al usuario, cuenta los intentos, y si
         falla 3 veces o acertó, sale del loop. El contador (<code>intentos</code>) controla el límite y la condición
-        booleana (<code>pin_correcto</code>) controla el éxito.</div>
+        booleana (<code>pin_correcto</code>) controla el éxito.
+      </div>
 
       <h3>¿Cuándo while vs for?</h3>
 
@@ -159,7 +162,8 @@ while x > 0:
       <div class="tip"><strong>Tip profesional:</strong> en Python, el 80% de las iteraciones se hacen con
         <code>for</code> (recorrer datos). El <code>while</code> se reserva para los casos donde la cantidad de
         repeticiones depende de una condición dinámica. Si te encontrás usando while para recorrer una lista con un
-        índice manual, probablemente deberías usar for.</div>
+        índice manual, probablemente deberías usar for.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -472,7 +476,8 @@ print("  Cola vacía ✅")</textarea>
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 1: Cuenta regresiva desde 10</h4>
         <p>Imprimí los números del 10 al 1 con while y después <code>¡Despegue!</code>. Debe incluir
-          <code>¡Despegue!</code>.</p>
+          <code>¡Despegue!</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-1" data-expected="¡Despegue!">
           <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "¡Despegue!"</span></div>
           <div class="editor-area">
@@ -590,7 +595,8 @@ mes = 0
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 6: break para buscar primer match</h4>
         <p>Dada una lista de scores, encontrá el primero que supere 750 usando while + break. Debe incluir
-          <code>810</code>.</p>
+          <code>810</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-6" data-expected="810">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "810"</span></div>
           <div class="editor-area">
@@ -641,7 +647,8 @@ mes = 0
         <h4>Ejercicio 8: Amortización de deuda</h4>
         <p>Deuda de <code>$300,000</code> al <code>5%</code> mensual. Pagás <code>$25,000/mes</code>. ¿En cuántos meses
           saldás? Si la cuota no cubre el interés, imprimí <code>Deuda impagable</code>. Debe incluir
-          <code>meses</code>.</p>
+          <code>meses</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-8" data-expected="meses">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "meses"</span></div>
           <div class="editor-area">
@@ -691,7 +698,8 @@ secuencia = []
         <p>Simulá 24 meses de una cuenta: saldo inicial <code>$500,000</code>. Cada mes: sumá sueldo
           <code>$350,000</code>, restá gastos <code>$280,000</code>, aplicá rendimiento <code>0.2%</code> sobre saldo
           positivo. Si el saldo baja de 0, imprimí alerta y break. Al final imprimí un resumen con saldo final y meses
-          transcurridos. Debe incluir <code>RESUMEN</code>.</p>
+          transcurridos. Debe incluir <code>RESUMEN</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-16" data-exercise="ex-10" data-expected="RESUMEN">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "RESUMEN"</span></div>
           <div class="editor-area">
@@ -745,8 +753,9 @@ print(f"\n=== RESUMEN ===")
         <a class="next" href="/python/17-for.html">For →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

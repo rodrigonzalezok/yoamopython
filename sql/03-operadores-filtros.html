@@ -114,7 +114,8 @@ FROM clientes;</pre>
 
       <div class="warning"><strong>División entera en SQLite:</strong> <code>5 / 2</code> da <code>2</code> (no 2.5)
         porque ambos son enteros. Para obtener decimal, multiplicá por <code>1.0</code>: <code>5 * 1.0 / 2</code> da
-        <code>2.5</code>. O usá <code>CAST(5 AS REAL) / 2</code>.</div>
+        <code>2.5</code>. O usá <code>CAST(5 AS REAL) / 2</code>.
+      </div>
 
       <div class="realworld"><strong>En el trabajo:</strong> CASE WHEN es probablemente la herramienta SQL que más usás
         después de WHERE. "Clasificá los clientes por segmento", "marcá las transacciones sospechosas", "categorizá la
@@ -359,7 +360,8 @@ INSERT INTO productos VALUES (1,'Notebook',920000),(2,'Mouse',23000),(3,'Teclado
       <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 4: CASE WHEN con múltiples niveles</h4>
         <p>Clasificá scores en 4 categorías: Excelente (>=800), Bueno (>=700), Regular (>=600), Bajo. Debe incluir
-          <code>Excelente</code>.</p>
+          <code>Excelente</code>.
+        </p>
         <div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-4" data-expected="Excelente">
           <div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "Excelente"</span></div>
           <div class="editor-area">
@@ -541,8 +543,9 @@ INSERT INTO clientes VALUES (4,'Sosa',590,45000,NULL);
         <a class="next" href="/sql/04-order-limit-distinct.html">ORDER BY, LIMIT, DISTINCT →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

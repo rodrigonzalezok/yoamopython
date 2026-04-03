@@ -49,7 +49,8 @@
             <h3>open() y el context manager with</h3>
 
             <p>La función <code>open()</code> abre un archivo y devuelve un objeto que podés leer o escribir. El patrón
-                <code>with</code> garantiza que el archivo se cierre correctamente incluso si hay un error:</p>
+                <code>with</code> garantiza que el archivo se cierre correctamente incluso si hay un error:
+            </p>
 
             <pre
                 style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># ✅ SIEMPRE usá with (cierra automáticamente)
@@ -128,7 +129,8 @@ with open("datos.txt", "r", encoding="utf-8") as f:
 
             <p>CSV (Comma-Separated Values) es el formato más común en análisis de datos. Python tiene un módulo
                 <code>csv</code> incorporado, pero en la práctica casi siempre usás <code>pandas.read_csv()</code> que
-                es más poderoso.</p>
+                es más poderoso.
+            </p>
 
             <pre
                 style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">import csv
@@ -159,7 +161,8 @@ with open("resultado.json", "w") as f:
             <h3>pathlib — manejo moderno de rutas</h3>
 
             <p><code>pathlib</code> es la forma moderna y recomendada de trabajar con rutas de archivos (reemplaza
-                <code>os.path</code>):</p>
+                <code>os.path</code>):
+            </p>
 
             <pre
                 style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">from pathlib import Path
@@ -175,12 +178,14 @@ list(Path(".").glob("*.py"))  # todos los .py en directorio actual</pre>
                 carpeta, (2) limpiar y procesar con pandas, (3) guardar resultados en CSV/JSON/Excel. Con
                 <code>pathlib</code> manejás las rutas, con <code>open()</code> los archivos de texto, con
                 <code>pandas</code> los DataFrames. Entender archivos "a mano" con open/csv/json te da control total
-                cuando pandas no alcanza.</div>
+                cuando pandas no alcanza.
+            </div>
 
             <div class="tip"><strong>Encoding para datos argentinos:</strong> siempre especificá
                 <code>encoding="utf-8"</code> al abrir archivos. Si falla (UnicodeDecodeError), probá
                 <code>encoding="latin-1"</code>. Los exports de sistemas bancarios legacy, MERCAP y SINENSUP suelen
-                venir en Latin-1.</div>
+                venir en Latin-1.
+            </div>
 
             <div class="section-num">02</div>
             <h2>Ejemplos explicados paso a paso</h2>
@@ -464,7 +469,8 @@ print(f"  Total general: ${total_general:,}")</textarea>
             <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
                 <h4>Ejercicio 1: Escribir y leer texto</h4>
                 <p>Escribí 3 líneas en <code>saludo.txt</code> y después leé e imprimí el contenido. Debe incluir
-                    <code>Hola</code>.</p>
+                    <code>Hola</code>.
+                </p>
                 <div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-1"
                     data-expected="Hola">
                     <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Hola"</span></div>
@@ -525,7 +531,8 @@ cliente = {"nombre": "García", "score": 720}
             <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
                 <h4>Ejercicio 4: CSV con DictWriter y DictReader</h4>
                 <p>Escribí 3 clientes en un CSV y después leelos e imprimí el total de saldos. Debe incluir
-                    <code>515000</code>.</p>
+                    <code>515000</code>.
+                </p>
                 <div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-4"
                     data-expected="515000">
                     <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "515000"</span></div>
@@ -582,7 +589,8 @@ with open("app.log") as f:
             <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
                 <h4>Ejercicio 6: pathlib para listar archivos</h4>
                 <p>Creá 3 archivos .txt en un directorio y después listalos con <code>Path.glob()</code>. Debe incluir
-                    <code>.txt</code>.</p>
+                    <code>.txt</code>.
+                </p>
                 <div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-6"
                     data-expected=".txt">
                     <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir ".txt"</span></div>
@@ -691,7 +699,8 @@ datos_dir.mkdir(exist_ok=True)
                 <h4>Ejercicio 10: Sistema de persistencia completo</h4>
                 <p>Creá un mini sistema CRUD que guarde clientes en un JSON: funciones <code>cargar()</code>,
                     <code>guardar()</code>, <code>agregar_cliente()</code>, <code>listar()</code>. Los datos deben
-                    persistir entre llamadas. Debe incluir <code>PERSISTENCIA</code>.</p>
+                    persistir entre llamadas. Debe incluir <code>PERSISTENCIA</code>.
+                </p>
                 <div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-10"
                     data-expected="PERSISTENCIA">
                     <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "PERSISTENCIA"</span>
@@ -756,9 +765,10 @@ for c in datos:
                 <a class="next" href="/python/25-excepciones-errores.html">Excepciones y errores →</a>
             </div>
 
-        
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
-    </main>
+
+            <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri
+                    Gonzalez</a></p>
+        </main>
     </div>
 
     <script type="module">

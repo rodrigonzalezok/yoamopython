@@ -56,7 +56,8 @@
         <li><strong>Split (dividir):</strong> pandas divide el DataFrame en grupos según los valores de una columna.
           Ejemplo: todas las filas de "CABA" en un grupo, todas las de "Rosario" en otro.</li>
         <li><strong>Apply (aplicar):</strong> se aplica una función de agregación (<code>sum</code>, <code>mean</code>,
-          <code>count</code>, etc.) a cada grupo por separado.</li>
+          <code>count</code>, etc.) a cada grupo por separado.
+        </li>
         <li><strong>Combine (combinar):</strong> los resultados de cada grupo se combinan en un nuevo DataFrame o Serie.
         </li>
       </ol>
@@ -64,7 +65,8 @@
       <div class="analogy"><strong>Analogía del profesor:</strong> tenés 100 exámenes desordenados. El paso
         <em>Split</em> es apilarlos por materia (Matemáticas, Historia, Lengua). El paso <em>Apply</em> es calcular el
         promedio de cada pila. El paso <em>Combine</em> es escribir en un cuadro: "Matemáticas: 7.2, Historia: 6.8,
-        Lengua: 8.1". Eso es <code>groupby</code>.</div>
+        Lengua: 8.1". Eso es <code>groupby</code>.
+      </div>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Sintaxis básica
 df.groupby("columna_para_agrupar")["columna_para_calcular"].funcion()
@@ -129,7 +131,8 @@ df.groupby("Sucursal")["Ventas"].sum()
 
       <p>El método más poderoso: <code>.agg()</code> te permite aplicar <strong>diferentes funciones a diferentes
           columnas</strong> en una sola operación. Es como escribir un
-        <code>SELECT SUM(ventas), AVG(margen), COUNT(*) FROM ... GROUP BY ...</code> en SQL.</p>
+        <code>SELECT SUM(ventas), AVG(margen), COUNT(*) FROM ... GROUP BY ...</code> en SQL.
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># .agg() con diccionario: columna → funciones
 df.groupby("Sucursal").agg(
@@ -140,7 +143,8 @@ df.groupby("Sucursal").agg(
 
       <div class="concept"><strong>Named aggregations:</strong> la sintaxis <code>Nombre = ("columna", "funcion")</code>
         te deja ponerle nombre a cada columna resultante directamente. Es más limpio que
-        <code>.agg({"col": ["sum", "mean"]})</code> que genera MultiIndex en las columnas (difícil de manejar).</div>
+        <code>.agg({"col": ["sum", "mean"]})</code> que genera MultiIndex en las columnas (difícil de manejar).
+      </div>
 
       <h3>Pivot Tables: la tabla dinámica</h3>
 
@@ -449,7 +453,8 @@ df = pd.DataFrame({
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 2: groupby + mean</h4>
         <p>Calculá el ticket promedio por <code>Canal</code>. Imprimí el promedio de "Web" redondeado. Debe incluir
-          <code>25000</code>.</p>
+          <code>25000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-2"
           data-expected="25000">
           <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "25000"</span></div>
@@ -529,7 +534,8 @@ df = pd.DataFrame({
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 5: .agg() con named aggregations</h4>
         <p>Por cada <code>Ciudad</code>, calculá: venta total, ticket promedio y cantidad de operaciones usando
-          <code>.agg()</code>. Debe incluir <code>40000</code> (Rosario total).</p>
+          <code>.agg()</code>. Debe incluir <code>40000</code> (Rosario total).
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-5"
           data-expected="40000">
           <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "40000"</span></div>
@@ -557,7 +563,8 @@ df = pd.DataFrame({
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 6: pivot_table básica</h4>
         <p>Creá una <code>pivot_table</code> con filas = <code>Ciudad</code>, columnas = <code>Canal</code>, valores =
-          <code>Monto</code> (suma). Debe incluir <code>55000</code>.</p>
+          <code>Monto</code> (suma). Debe incluir <code>55000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-6"
           data-expected="55000">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "55000"</span></div>
@@ -641,7 +648,8 @@ df = pd.DataFrame({
         <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 9: pivot_table con margins</h4>
         <p>Creá una pivot_table con <code>margins=True</code> de ventas por Sucursal × Mes. Debe incluir la palabra
-          <code>All</code> (la fila/columna de totales).</p>
+          <code>All</code> (la fila/columna de totales).
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-07" data-exercise="ex-9" data-expected="All">
           <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "All"</span></div>
           <div class="editor-area">
@@ -723,8 +731,9 @@ df = pd.DataFrame({
         <a class="next" href="/data-analysis/08-pandas-merge-join-concat.html">pandas: merge/join/concat →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

@@ -137,7 +137,8 @@ vacio_set = set()    # esto es un set vacío</pre>
 
       <p>Los sets normales son <b>mutables</b>: podés agregar con <code>.add()</code> y eliminar con
         <code>.remove()</code> o <code>.discard()</code>. La diferencia entre <code>remove</code> y
-        <code>discard</code>: <code>remove</code> da error si el elemento no existe; <code>discard</code> no.</p>
+        <code>discard</code>: <code>remove</code> da error si el elemento no existe; <code>discard</code> no.
+      </p>
 
       <p><code>frozenset</code> es la versión inmutable: una vez creado, no se puede modificar. Se puede usar como clave
         de diccionario o como elemento de otro set.</p>
@@ -479,7 +480,8 @@ print(f"\nValores no reconocidos: {no_reconocidos}")</textarea>
         <h4>Ejercicio 3: Intersección de dos sets</h4>
         <p>Dados <code>equipo_a = {"García", "López", "Pérez"}</code> y
           <code>equipo_b = {"López", "Sosa", "García"}</code>, encontrá los que están en ambos equipos. Debe incluir
-          <code>López</code>.</p>
+          <code>López</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-3" data-expected="García">
           <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "García"</span></div>
           <div class="editor-area">
@@ -502,7 +504,8 @@ equipo_b = {"López", "Sosa", "García"}
         <h4>Ejercicio 4: Diferencia — encontrar exclusivos</h4>
         <p>Clientes con tarjeta: <code>{"García","López","Pérez","Sosa"}</code>. Con préstamo:
           <code>{"López","Luna","Pérez"}</code>. Encontrá los que tienen tarjeta pero NO préstamo (oportunidad de
-          cross-sell). Debe incluir <code>Sosa</code>.</p>
+          cross-sell). Debe incluir <code>Sosa</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-4" data-expected="Sosa">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Sosa"</span></div>
           <div class="editor-area">
@@ -526,7 +529,8 @@ prestamo = {"López", "Luna", "Pérez"}
         <h4>Ejercicio 5: Valores únicos y conteo</h4>
         <p>Dada
           <code>operaciones = ["compra","venta","compra","compra","transferencia","venta","compra","retiro"]</code>,
-          encontrá cuántos tipos distintos de operación hay y cuáles son. Debe incluir <code>4</code>.</p>
+          encontrá cuántos tipos distintos de operación hay y cuáles son. Debe incluir <code>4</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-5" data-expected="4">
           <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "4"</span></div>
           <div class="editor-area">
@@ -574,7 +578,8 @@ rosario = {"A", "E", "F"}
         <h4>Ejercicio 7: Validar datos con set de permitidos</h4>
         <p>Tenés <code>MONEDAS_VALIDAS = {"ARS","USD","EUR","BRL"}</code>. Validá estas transacciones:
           <code>["ARS","USD","GBP","ARS","JPY","EUR"]</code>. Imprimí cuáles son inválidas. Debe incluir
-          <code>GBP</code>.</p>
+          <code>GBP</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-7" data-expected="GBP">
           <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "GBP"</span></div>
           <div class="editor-area">
@@ -598,7 +603,8 @@ transacciones = ["ARS", "USD", "GBP", "ARS", "JPY", "EUR"]
         <h4>Ejercicio 8: Análisis de productos por cliente</h4>
         <p>Creá un diccionario donde las claves son nombres de clientes y los valores son sets de productos. Encontrá
           quién tiene más productos y cuál es el producto más popular (el que tiene más clientes). Debe incluir
-          <code>popular</code>.</p>
+          <code>popular</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-11" data-exercise="ex-8" data-expected="popular">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "popular"</span></div>
           <div class="editor-area">
@@ -676,7 +682,8 @@ print("=== REPORTE CROSS-SELL ===")
 
       <ul>
         <li>Los sets guardan elementos <b>únicos</b> y <b>desordenados</b>. Se crean con <code>{}</code> o
-          <code>set()</code>.</li>
+          <code>set()</code>.
+        </li>
         <li><code>set()</code> para vacío — <code>{}</code> crea un dict, no un set.</li>
         <li>Deduplicar: <code>set(lista)</code>. Contar únicos: <code>len(set(lista))</code>.</li>
         <li>Operaciones de conjuntos: <code>|</code> (unión), <code>&</code> (intersección), <code>-</code>
@@ -698,8 +705,9 @@ print("=== REPORTE CROSS-SELL ===")
         <a class="next" href="/python/12-metodos-strings.html">Métodos de strings →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

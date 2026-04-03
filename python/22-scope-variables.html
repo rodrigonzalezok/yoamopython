@@ -61,7 +61,8 @@
         <li><b>E — Enclosing:</b> variables de funciones externas (en funciones anidadas / closures)</li>
         <li><b>G — Global:</b> variables definidas a nivel del módulo (fuera de toda función)</li>
         <li><b>B — Built-in:</b> nombres integrados de Python (<code>print</code>, <code>len</code>, <code>range</code>,
-          <code>True</code>)</li>
+          <code>True</code>)
+        </li>
       </ol>
 
       <div class="concept"><strong>Regla de oro:</strong> Python SIEMPRE busca de adentro hacia afuera: L → E → G → B.
@@ -445,7 +446,8 @@ print(f"Resultado: {resultado}")      # nueva lista
       <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 1: Identificar scopes</h4>
         <p>Dado el código, predecí qué imprime ANTES de ejecutar. Después ejecutá para verificar. Debe incluir
-          <code>local</code>.</p>
+          <code>local</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-1" data-expected="local">
           <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "local"</span></div>
           <div class="editor-area">
@@ -574,7 +576,8 @@ print(acc(200))</textarea>
       <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 6: Evitar sobreescribir built-ins</h4>
         <p>Corregí este código que sobreescribe <code>list</code> y <code>sum</code>. Después usá los verdaderos
-          <code>list()</code> y <code>sum()</code>. Debe incluir <code>15</code>.</p>
+          <code>list()</code> y <code>sum()</code>. Debe incluir <code>15</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-6" data-expected="15">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "15"</span></div>
           <div class="editor-area">
@@ -624,7 +627,8 @@ print(aplicar_descuento(10000))</textarea>
         <h4>Ejercicio 8: Scope en comprehensions</h4>
         <p>Las variables de for en list comprehensions tienen scope local (Python 3+). Demostralo: creá
           <code>x = "global"</code>, después <code>resultado = [x for x in range(5)]</code>, e imprimí <code>x</code>
-          para ver que sigue siendo "global". Debe incluir <code>global</code>.</p>
+          para ver que sigue siendo "global". Debe incluir <code>global</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-8" data-expected="global">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "global"</span></div>
           <div class="editor-area">
@@ -676,7 +680,8 @@ print(f"> $500K: {filtro_500k(saldos)}")</textarea>
         <h4>Ejercicio 10: Mini sistema bancario con closures</h4>
         <p>Creá <code>crear_cuenta(titular, saldo_inicial)</code> que devuelva 3 funciones:
           <code>depositar(monto)</code>, <code>extraer(monto)</code> y <code>consultar()</code>. Usá
-          <code>nonlocal</code> para manejar el saldo. Probá con operaciones. Debe incluir <code>Saldo:</code>.</p>
+          <code>nonlocal</code> para manejar el saldo. Probá con operaciones. Debe incluir <code>Saldo:</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-10" data-expected="Saldo:">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Saldo:"</span></div>
           <div class="editor-area">
@@ -709,12 +714,14 @@ print(consultar())</textarea>
         <li><code>global</code> permite modificar una global desde una función. Evitalo siempre que puedas.</li>
         <li><code>nonlocal</code> permite modificar variables del scope Enclosing (closures).</li>
         <li>NUNCA sobreescribas built-ins (<code>list</code>, <code>dict</code>, <code>type</code>, <code>id</code>,
-          <code>sum</code>).</li>
+          <code>sum</code>).
+        </li>
         <li>Funciones puras (parámetro → return) son más seguras que funciones que mutan globales.</li>
       </ul>
 
       <p>En la siguiente lección (<strong>23 · Strings avanzado</strong>) vas a profundizar en slicing, regex con
-        <code>re</code>, encoding UTF-8 y patrones avanzados de procesamiento de texto.</p>
+        <code>re</code>, encoding UTF-8 y patrones avanzados de procesamiento de texto.
+      </p>
 
       <p><strong>Recursos:</strong> <a
           href="https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces" target="_blank">Python
@@ -725,8 +732,9 @@ print(consultar())</textarea>
         <a class="next" href="/python/23-strings-avanzado.html">Strings avanzado →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

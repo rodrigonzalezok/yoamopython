@@ -49,7 +49,8 @@
       <h3>Slicing profundo de strings</h3>
 
       <p>Los strings en Python son secuencias de caracteres y soportan el mismo slicing que las listas:
-        <code>string[inicio:fin:paso]</code>. Algunos patrones útiles que no vimos antes:</p>
+        <code>string[inicio:fin:paso]</code>. Algunos patrones útiles que no vimos antes:
+      </p>
 
       <div class="table-wrap">
         <table>
@@ -128,7 +129,8 @@ regex = r"\d{2}-\d{8}-\d"     # patrón de CUIT sin escapar</pre>
       <div class="warning"><strong>Error clásico de encoding:</strong> <code>UnicodeDecodeError</code> al leer un CSV.
         Esto pasa cuando el archivo está en Latin-1 pero Python intenta leerlo como UTF-8. Solución:
         <code>pd.read_csv("archivo.csv", encoding="latin-1")</code>. En datos argentinos, esto pasa MUY seguido con
-        exports de MERCAP, SINENSUP y sistemas bancarios legacy.</div>
+        exports de MERCAP, SINENSUP y sistemas bancarios legacy.
+      </div>
 
       <h3>Expresiones regulares (regex) con el módulo re</h3>
 
@@ -217,12 +219,14 @@ regex = r"\d{2}-\d{8}-\d"     # patrón de CUIT sin escapar</pre>
 
       <div class="concept"><strong>Siempre usá raw strings para regex:</strong> <code>r"\d{2}-\d{8}-\d"</code>. Sin el
         <code>r</code>, Python interpreta <code>\d</code> como un escape (que no existe) y puede dar resultados
-        inesperados. Con <code>r</code>, el patrón llega intacto al motor de regex.</div>
+        inesperados. Con <code>r</code>, el patrón llega intacto al motor de regex.
+      </div>
 
       <div class="realworld"><strong>En análisis de datos:</strong> regex es indispensable para: (1) extraer CUITs,
         teléfonos, emails de texto libre, (2) limpiar montos con formatos mixtos ($1.500,00 vs 1500.00 vs $1,500), (3)
         validar formatos de datos, (4) parsear logs y archivos semi-estructurados. En pandas:
-        <code>df["col"].str.extract(r"patron")</code> usa regex directamente.</div>
+        <code>df["col"].str.extract(r"patron")</code> usa regex directamente.
+      </div>
 
       <div class="tip"><strong>Tip:</strong> no necesitás memorizar toda la sintaxis de regex. Lo que necesitás es saber
         que existe, y usar <a href="https://regex101.com/" target="_blank">regex101.com</a> para construir y testear
@@ -611,7 +615,8 @@ texto = "Ventas: $1500, $3200, $800"
         <h4>Ejercicio 4: Validar CUIT con regex</h4>
         <p>Creá una función <code>validar_cuit(cuit)</code> que use regex para verificar formato
           <code>XX-XXXXXXXX-X</code>. Probá con "20-30123456-9" (válido) y "abc-123-x" (inválido). Debe incluir
-          <code>True</code>.</p>
+          <code>True</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-4" data-expected="True">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "True"</span></div>
           <div class="editor-area">
@@ -678,7 +683,8 @@ texto = "Contactar a garcia@banco.com, info@empresa.com.ar o soporte@mail.net"
       <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 7: Regex con grupos para parsear CUIT</h4>
         <p>Usá grupos de captura <code>(\d{2})-(\d{8})-(\d)</code> para extraer las 3 partes de
-          <code>"20-30123456-9"</code>. Debe incluir <code>30123456</code>.</p>
+          <code>"20-30123456-9"</code>. Debe incluir <code>30123456</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-7" data-expected="30123456">
           <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "30123456"</span></div>
           <div class="editor-area">
@@ -795,8 +801,9 @@ print(f"=== {len(texto.strip().splitlines())} registros ===")
         <a class="next" href="/python/24-archivos.html">Archivos →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

@@ -36,7 +36,8 @@
         <h1>pandas: Series y DataFrames</h1>
         <p>En el mundo real, no trabajás con <em>bases de datos</em> en abstracto. En Python trabajás con
           <strong>DataFrames</strong> y <strong>Series</strong>. Entender la diferencia entre ambos es la clave para no
-          trabarte cuando intentes aplicar funciones avanzadas más adelante.</p>
+          trabarte cuando intentes aplicar funciones avanzadas más adelante.
+        </p>
         <div class="badges">
           <span class="badge">60–90 min</span>
           <span class="badge">Prerrequisitos: Lección 01</span>
@@ -67,7 +68,8 @@
         <strong>el índice</strong> (<em>Index</em>). En las listas de Python (<code>[10, 20, 30]</code>) la posición 0,
         1, 2 está implícita. En pandas, el índice es una capa visible al lado de la tabla que dice exactamente quién es
         esa fila. Puede ser un número <code>0, 1, 2</code>, pero ¡también puede ser una fecha <code>2024-01-01</code> o
-        un ID de Cliente <code>CLI-892</code>!</p>
+        un ID de Cliente <code>CLI-892</code>!
+      </p>
 
       <div class="section-num">02</div>
       <h2>Series en profundidad</h2>
@@ -125,7 +127,8 @@ print("Precio de GGAL:", cartera["GGAL"])</textarea>
 
       <div class="tip"><strong>Tip estructural:</strong> Si armás la Serie desde un diccionario (ej:
         <code>{'YPFD': 1200, 'GGAL': 3450}</code>), pandas automáticamente usa las claves como índices y los valores
-        como la data. Es una construcción súper ágil.</div>
+        como la data. Es una construcción súper ágil.
+      </div>
 
 
       <div class="section-num">03</div>
@@ -169,7 +172,8 @@ print(f"Tipos de dato por columna:\n{df.dtypes}")</textarea>
 
       <h3>Extrayendo partes de un DataFrame</h3>
       <p>Acá es donde conectás ambos conceptos. Cuando extraés una sola columna de un DataFrame, pandas evalúa:
-        <em>"¿Una columna? Eso es un arreglo unidimensional"</em> y **automáticamente te devuelve una Serie**.</p>
+        <em>"¿Una columna? Eso es un arreglo unidimensional"</em> y **automáticamente te devuelve una Serie**.
+      </p>
 
       <div class="editor" data-mode="python">
         <div class="editor-top"><span>extrayendo_series.py</span><span>Python</span></div>
@@ -232,7 +236,8 @@ print("\n¿Qué sos?:", type(columna_precios))
         <p>Utilizá las listas proporcionadas para armar el DataFrame de Clientes. El diccionario debe llamarse
           <code>datos</code> y tener las llaves <code>"Usuario"</code>, <code>"Edad"</code>, <code>"Activo"</code>.
           Luego instancialo como dataframe en la variable <code>df</code>. Por último, imprimí <strong>exclusivamente la
-            forma del DataFrame</strong> usando la propiedad correspondiente. Tiene que decir <code>(3, 3)</code>.</p>
+            forma del DataFrame</strong> usando la propiedad correspondiente. Tiene que decir <code>(3, 3)</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-02" data-exercise="ex-2"
           data-expected="(3, 3)">
           <div class="editor-top"><span>ejercicio_02_dataframe.py</span><span>Debe imprimir "(3, 3)"</span></div>
@@ -262,7 +267,8 @@ activos = [True, True, False]
         <h4>Ejercicio 3: Extrayendo una Serie desde un Dataframe y calculando max()</h4>
         <p>Dado el DataFrame listo de métricas de marketing, extraé usando corchetes <code>["columna"]</code> la columna
           "CTR" (Click Through Rate) para tener la <strong>Serie</strong> individual, y luego usá sobre ella el método
-          <code>.max()</code>. Modificalo en un print de forma que el resultado contenga el número `15.5`.</p>
+          <code>.max()</code>. Modificalo en un print de forma que el resultado contenga el número `15.5`.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-02" data-exercise="ex-3" data-expected="15.5">
           <div class="editor-top"><span>ejercicio_03_combinado.py</span><span>Debe evaluar e imprimir "15.5"</span>
           </div>
@@ -303,8 +309,9 @@ df_mkt = pd.DataFrame({
         <a class="next" href="/data-analysis/03-pandas-lectura-datos.html">Lectura de datos I/O →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

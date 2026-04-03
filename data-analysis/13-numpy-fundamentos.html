@@ -155,12 +155,14 @@
       <div class="warning"><strong>Diferencia mortal con listas:</strong> las operaciones aritméticas funcionan
         distinto. <code>[1,2,3] * 3</code> en Python da <code>[1,2,3,1,2,3,1,2,3]</code> (repetición).
         <code>np.array([1,2,3]) * 3</code> da <code>[3, 6, 9]</code> (multiplicación elemento a elemento). Esto es
-        fundamental y fuente de bugs cuando mezclas listas y arrays.</div>
+        fundamental y fuente de bugs cuando mezclas listas y arrays.
+      </div>
 
       <div class="realworld"><strong>En el trabajo real:</strong> aunque trabajes principalmente con pandas, NumPy
         aparece constantemente: cuando usás <code>np.where()</code>, <code>np.random</code> para simulaciones,
         <code>np.log()</code> para transformaciones, o cuando un modelo de scikit-learn te devuelve un array de
-        predicciones. Entender NumPy te hace más eficiente con todas estas herramientas.</div>
+        predicciones. Entender NumPy te hace más eficiente con todas estas herramientas.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -470,7 +472,8 @@ print("\nBroadcasting expandió el vector [0.10, 0.15, 0.20] a cada fila")</text
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 2: Operaciones vectorizadas</h4>
         <p>Calculá el total de ventas (<code>precios * cantidades</code>) y la suma total. Debe incluir
-          <code>2300</code>.</p>
+          <code>2300</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-2" data-expected="2300">
           <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "2300"</span></div>
           <div class="editor-area">
@@ -543,7 +546,8 @@ ventas = np.array([[10, 20, 30, 40],
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 5: np.where() — IF vectorizado</h4>
         <p>Usá <code>np.where()</code> para clasificar notas en "Aprobado" (≥60) o "Desaprobado". Debe incluir
-          <code>Aprobado</code>.</p>
+          <code>Aprobado</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-5"
           data-expected="Aprobado">
           <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Aprobado"</span></div>
@@ -567,7 +571,8 @@ notas = np.array([85, 42, 91, 55, 60, 38, 73])
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 6: Broadcasting — aplicar IVA</h4>
         <p>Multiplicá un array de precios por 1.21 (IVA). Imprimí el primer precio con IVA. Debe incluir
-          <code>121.0</code>.</p>
+          <code>121.0</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-13" data-exercise="ex-6"
           data-expected="121.0">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "121.0"</span></div>
@@ -714,8 +719,9 @@ np.random.seed(42)
         <a class="next" href="/data-analysis/14-intro-machine-learning.html">Intro a Machine Learning →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

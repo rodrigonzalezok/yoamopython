@@ -97,7 +97,8 @@
       <div class="concept"><strong>COUNT(*) vs COUNT(col):</strong> esta diferencia es CRÍTICA y aparece en entrevistas
         técnicas. <code>COUNT(*)</code> cuenta TODAS las filas sin importar nada. <code>COUNT(email)</code> cuenta solo
         las filas donde email NO es NULL. Si tenés 5 clientes y 2 no tienen email: <code>COUNT(*) = 5</code>,
-        <code>COUNT(email) = 3</code>.</div>
+        <code>COUNT(email) = 3</code>.
+      </div>
 
       <div class="warning"><strong>AVG y los NULLs:</strong> <code>AVG()</code> ignora los NULLs, no los trata como 0.
         Esto es importante: si tenés saldos [100, NULL, 200], <code>AVG(saldo) = 150</code> (promedia solo los 2 valores
@@ -485,7 +486,8 @@ INSERT INTO clientes VALUES (5,'Sosa','Buenos Aires',210000,1);
       <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 7: COUNT(DISTINCT)</h4>
         <p>De una tabla de transacciones, contá transacciones totales, clientes únicos y tipos únicos. Debe incluir
-          <code>3</code> (clientes).</p>
+          <code>3</code> (clientes).
+        </p>
         <div class="editor" data-mode="sql" data-lesson="sql-05" data-exercise="ex-7" data-expected="3">
           <div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "3"</span></div>
           <div class="editor-area">
@@ -599,8 +601,9 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1),(2,'López
         <a class="next" href="/sql/06-group-by-having.html">GROUP BY y HAVING →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

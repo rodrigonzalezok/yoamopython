@@ -179,11 +179,13 @@ FROM tabla;</pre>
       <p>Esto dice: "traeme estas columnas de esta tabla". Así de simple. El punto y coma (<code>;</code>) marca el
         final de la sentencia. SQL no distingue mayúsculas de minúsculas en las palabras clave (<code>SELECT</code> =
         <code>select</code>), pero por convención se escriben en MAYÚSCULAS para distinguirlas de los nombres de tablas
-        y columnas.</p>
+        y columnas.
+      </p>
 
       <div class="tip"><strong>En este editor:</strong> cada vez que ejecutás una consulta, se crea una base de datos
         fresca con tablas de ejemplo. Los datos se definen al inicio del código SQL con <code>CREATE TABLE</code> e
-        <code>INSERT</code>. En tu trabajo, las tablas ya existen — solo hacés SELECT.</div>
+        <code>INSERT</code>. En tu trabajo, las tablas ya existen — solo hacés SELECT.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -525,7 +527,8 @@ INSERT INTO clientes VALUES (5,'Fernández','Mendoza',645,72000);
       <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 7: SELECT con alias AS</h4>
         <p>Traé nombre (como "cliente") y saldo (como "balance") de todos los clientes. Debe incluir
-          <code>cliente</code>.</p>
+          <code>cliente</code>.
+        </p>
         <div class="editor" data-mode="sql" data-lesson="sql-01" data-exercise="ex-7" data-expected="cliente">
           <div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "cliente"</span></div>
           <div class="editor-area">
@@ -650,8 +653,9 @@ SELECT nombre, score, saldo FROM clientes WHERE ciudad = 'Buenos Aires';
         <a class="next" href="/sql/02-select-from-where.html">SELECT, FROM, WHERE →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

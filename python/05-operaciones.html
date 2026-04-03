@@ -124,7 +124,8 @@
       <div class="concept"><strong>Punto clave: la división (/) siempre devuelve float.</strong> Incluso
         <code>10 / 2</code> devuelve <code>5.0</code>, no <code>5</code>. Si necesitás un entero, usá <code>//</code>
         (división entera) o <code>int()</code>. Esto importa cuando construís IDs, índices o contadores que deben ser
-        enteros.</div>
+        enteros.
+      </div>
 
       <p>El operador <code>%</code> (módulo) merece atención especial. Devuelve el <strong>resto</strong> de una
         división. Sus usos más comunes en análisis de datos:</p>
@@ -132,7 +133,8 @@
         <li><b>Verificar paridad:</b> <code>n % 2 == 0</code> → el número es par</li>
         <li><b>Verificar múltiplos:</b> <code>n % 12 == 0</code> → el número es múltiplo de 12 (útil para meses)</li>
         <li><b>Distribuir sobrantes:</b> si tenés $17,000 para repartir entre 5 personas, cada uno recibe
-          <code>17000 // 5 = $3,400</code> y sobran <code>17000 % 5 = $0</code></li>
+          <code>17000 // 5 = $3,400</code> y sobran <code>17000 % 5 = $0</code>
+        </li>
         <li><b>Ciclos:</b> <code>i % 3</code> genera la secuencia 0, 1, 2, 0, 1, 2... ideal para alternar colores o
           categorías</li>
       </ul>
@@ -145,7 +147,8 @@
 
       <div class="warning"><strong>Error común: confundir / con //.</strong> Si calculás <code>7 / 2</code> esperando
         <code>3</code>, vas a obtener <code>3.5</code>. Si calculás <code>7 // 2</code> esperando <code>3.5</code>, vas
-        a obtener <code>3</code>. Siempre pensá cuál necesitás antes de escribir la línea.</div>
+        a obtener <code>3</code>. Siempre pensá cuál necesitás antes de escribir la línea.
+      </div>
 
       <h3>Precedencia de operadores (orden de evaluación)</h3>
 
@@ -158,12 +161,14 @@
       <p>Si hay empate de nivel, se evalúa de <strong>izquierda a derecha</strong> (excepto <code>**</code> que va de
         derecha a izquierda). Cuando tengas dudas, <strong>usá paréntesis</strong>. No es solo por claridad — es por
         supervivencia. <code>(precio * cantidad) * (1 + iva)</code> es inequívoco;
-        <code>precio * cantidad * 1 + iva</code> da un resultado completamente distinto.</p>
+        <code>precio * cantidad * 1 + iva</code> da un resultado completamente distinto.
+      </p>
 
       <div class="tip"><strong>Tip profesional:</strong> en código de producción, preferí siempre paréntesis explícitos
         aunque no sean necesarios. Tu yo del futuro (y tus compañeros de equipo) te lo van a agradecer.
         <code>resultado = (base * tasa) + comision</code> es más claro que
-        <code>resultado = base * tasa + comision</code>, aunque den lo mismo.</div>
+        <code>resultado = base * tasa + comision</code>, aunque den lo mismo.
+      </div>
 
       <h3>Operadores de comparación</h3>
 
@@ -219,11 +224,13 @@
 
       <div class="warning"><strong>Error clásico: usar <code>=</code> en vez de <code>==</code>.</strong> <code>=</code>
         es asignación (guardar un valor), <code>==</code> es comparación (preguntar si son iguales). Escribir
-        <code>if saldo = 0</code> es un error de sintaxis en Python. Lo correcto es <code>if saldo == 0</code>.</div>
+        <code>if saldo = 0</code> es un error de sintaxis en Python. Lo correcto es <code>if saldo == 0</code>.
+      </div>
 
       <p>Python permite <strong>comparaciones encadenadas</strong>, algo que otros lenguajes no soportan:
         <code>18 <= edad <= 65</code> verifica que la edad esté en ese rango. Es equivalente a
-        <code>edad >= 18 and edad <= 65</code> pero mucho más legible.</p>
+        <code>edad >= 18 and edad <= 65</code> pero mucho más legible.
+      </p>
 
       <h3>Operadores lógicos</h3>
 
@@ -238,12 +245,14 @@
 
       <div class="realworld"><strong>Caso de negocio:</strong> para aprobar un crédito en un banco, la regla podría ser:
         <code>(score >= 650) and (ingreso >= 80000) and (not tiene_deuda_vencida)</code>. Las tres condiciones deben
-        cumplirse. Si alguna falla, se rechaza. Eso es un <code>and</code> encadenado con un <code>not</code>.</div>
+        cumplirse. Si alguna falla, se rechaza. Eso es un <code>and</code> encadenado con un <code>not</code>.
+      </div>
 
       <p>Python evalúa <code>and</code>/<code>or</code> con <strong>evaluación de cortocircuito</strong>: si la primera
         condición de un <code>and</code> es <code>False</code>, ni siquiera mira la segunda (ya sabe que el resultado es
         <code>False</code>). Esto importa para eficiencia y para evitar errores: <code>if lista and lista[0] > 10</code>
-        es seguro porque si <code>lista</code> está vacía (falsy), no intenta acceder a <code>lista[0]</code>.</p>
+        es seguro porque si <code>lista</code> está vacía (falsy), no intenta acceder a <code>lista[0]</code>.
+      </p>
 
       <h3>Operadores de asignación compuesta</h3>
 
@@ -296,7 +305,8 @@
 
       <div class="analogy"><strong>Analogía bancaria:</strong> <code>saldo += deposito</code> es como cuando el cajero
         le suma un depósito a tu saldo. <code>saldo -= extraccion</code> es cuando retirás plata.
-        <code>saldo *= 1.03</code> es cuando el banco te acredita el interés mensual del plazo fijo.</div>
+        <code>saldo *= 1.03</code> es cuando el banco te acredita el interés mensual del plazo fijo.
+      </div>
 
       <!-- ═══════════════════════════════════════════════ -->
       <!-- SECCIÓN 2: EJEMPLOS -->
@@ -397,7 +407,8 @@ print(f"Rendimiento:      {rendimiento_pct:.1f}%")</textarea>
 
       <h3>Ejemplo 4: Comparaciones y lógicos en evaluación crediticia</h3>
       <p>Así funciona un motor de decisión simplificado: combina condiciones con
-        <code>and</code>/<code>or</code>/<code>not</code>.</p>
+        <code>and</code>/<code>or</code>/<code>not</code>.
+      </p>
 
       <div class="editor" data-mode="python">
         <div class="editor-top"><span>ejemplo_04_scoring.py</span><span>Python</span></div>
@@ -568,7 +579,8 @@ b = 7
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 2: Precio con IVA</h4>
         <p>Un producto cuesta <code>$8,500</code>. Calculá el precio con IVA (21%) e imprimilo como
-          <code>Con IVA: 10285.0</code>.</p>
+          <code>Con IVA: 10285.0</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-2" data-expected="10285">
           <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "10285"</span></div>
           <div class="editor-area">
@@ -617,7 +629,8 @@ iva = 0.21
         <p>Capital: <code>$1,200,000</code>, tasa anual: <code>65%</code>, plazo: <code>12</code> meses. Calculá el
           interés total (<code>capital × tasa</code>), el monto total (<code>capital + interés</code>) y la cuota
           mensual (<code>total / plazo</code>). Imprimí la cuota redondeada a 2 decimales. El output debe incluir
-          <code>165000</code>.</p>
+          <code>165000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-4" data-expected="165000">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "165000"</span></div>
           <div class="editor-area">
@@ -669,7 +682,8 @@ deuda_vencida = True
         <h4>Ejercicio 6: Distribuir un bono entre empleados</h4>
         <p>Tenés <code>$2,350,000</code> para repartir equitativamente entre <code>7</code> empleados. Calculá cuánto
           recibe cada uno (entero, sin centavos) y cuánto sobra. Imprimí ambos valores. El output debe incluir
-          <code>Sobrante: 4</code>.</p>
+          <code>Sobrante: 4</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-6" data-expected="Sobrante: 4">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "Sobrante: 4"</span></div>
           <div class="editor-area">
@@ -720,7 +734,8 @@ meses = 3
         <h4>Ejercicio 8: Ratio cuota/ingreso con decisión</h4>
         <p>Un cliente gana <code>$420,000</code>. La cuota del préstamo sería <code>$155,000</code>. Calculá el ratio
           cuota/ingreso en porcentaje. Si supera 30%, imprimí <code>RECHAZADO - ratio XX.X%</code>. Si no,
-          <code>APROBADO - ratio XX.X%</code>.</p>
+          <code>APROBADO - ratio XX.X%</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-8" data-expected="RECHAZADO">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "RECHAZADO"</span></div>
           <div class="editor-area">
@@ -769,11 +784,13 @@ cuota = 155000
         <h4>Ejercicio 10: Motor de evaluación crediticia completo</h4>
         <p>Evaluá a este cliente: <code>edad=45</code>, <code>ingreso=280000</code>, <code>score=695</code>,
           <code>deuda_vencida=False</code>, <code>antiguedad=8</code> años. La cuota del crédito sería
-          <code>$72,000</code>.</p>
+          <code>$72,000</code>.
+        </p>
         <p>Reglas: (1) Edad entre 18-65, (2) Ingreso >= 100000, (3) Score >= 650, (4) Sin deuda vencida, (5) Antigüedad
           >= 2 años, (6) Ratio cuota/ingreso < 35%.</p>
             <p>Imprimí cada validación con ✓ o ✗, el ratio en porcentaje, y si el crédito está <code>APROBADO</code> o
-              <code>RECHAZADO</code>.</p>
+              <code>RECHAZADO</code>.
+            </p>
             <div class="editor" data-mode="python" data-lesson="python-05" data-exercise="ex-10"
               data-expected="APROBADO">
               <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "APROBADO"</span></div>
@@ -806,7 +823,8 @@ cuota = 72000
       <ul>
         <li>Dominás los 4 grupos de operadores: aritméticos, comparación, lógicos y asignación compuesta.</li>
         <li>Sabés que <code>/</code> siempre devuelve float, <code>//</code> trunca, <code>%</code> devuelve el resto y
-          <code>**</code> calcula potencias.</li>
+          <code>**</code> calcula potencias.
+        </li>
         <li>Entendés precedencia y por qué los paréntesis explícitos te salvan bugs.</li>
         <li>Podés construir reglas de negocio combinando <code>and</code>, <code>or</code> y <code>not</code>.</li>
         <li>Usás asignación compuesta (<code>+=</code>, <code>*=</code>) para simular movimientos de cuenta.</li>
@@ -815,7 +833,8 @@ cuota = 72000
       <p>En la siguiente lección (<strong>06 · Condicionales</strong>) vas a aprender a usar
         <code>if</code>/<code>elif</code>/<code>else</code> para que tu código tome decisiones basadas en estas
         comparaciones. Todo lo que practicaste acá de <code>True</code>/<code>False</code> es la base para los
-        condicionales.</p>
+        condicionales.
+      </p>
 
       <p><strong>Recursos:</strong> <a
           href="https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex"
@@ -828,8 +847,9 @@ cuota = 72000
         <a class="next" href="/python/06-condicionales.html">Condicionales (if/elif/else) →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

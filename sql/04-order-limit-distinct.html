@@ -71,7 +71,8 @@ SELECT * FROM clientes ORDER BY ciudad ASC, saldo DESC;</pre>
       <h3>LIMIT y OFFSET — paginación</h3>
 
       <p><code>LIMIT n</code> devuelve como máximo <code>n</code> filas. <code>OFFSET m</code> salta las primeras
-        <code>m</code> filas. Juntos permiten paginación:</p>
+        <code>m</code> filas. Juntos permiten paginación:
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Top 5 clientes por saldo
 SELECT * FROM clientes ORDER BY saldo DESC LIMIT 5;
@@ -89,7 +90,8 @@ SELECT nombre, score FROM clientes ORDER BY score DESC LIMIT 3;</pre>
       <h3>DISTINCT — valores únicos</h3>
 
       <p><code>DISTINCT</code> elimina filas duplicadas del resultado. Es el equivalente de <code>.unique()</code> o
-        <code>.drop_duplicates()</code> en pandas:</p>
+        <code>.drop_duplicates()</code> en pandas:
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">-- Todas las ciudades (con repetidas)
 SELECT ciudad FROM clientes;
@@ -299,7 +301,8 @@ LIMIT 3;</textarea>
           </tr>
           <tr>
             <td><code>SELECT</code> → <code>FROM</code> → <code>WHERE</code> → <code>ORDER BY</code> →
-              <code>LIMIT</code></td>
+              <code>LIMIT</code>
+            </td>
           </tr>
         </table>
       </div>
@@ -465,7 +468,8 @@ INSERT INTO clientes VALUES (1,'García',720,150000,1),(2,'López',680,320000,1)
       <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 8: Paginación con OFFSET</h4>
         <p>Simulá paginación: traé la "página 2" (registros 4-6) de clientes ordenados por nombre. Debe incluir
-          <code>Pérez</code>.</p>
+          <code>Pérez</code>.
+        </p>
         <div class="editor" data-mode="sql" data-lesson="sql-04" data-exercise="ex-8" data-expected="Pérez">
           <div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "Pérez"</span></div>
           <div class="editor-area">
@@ -553,8 +557,9 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1),(2,'López
         <a class="next" href="/sql/05-funciones-agregacion.html">Funciones de agregación →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

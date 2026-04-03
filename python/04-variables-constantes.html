@@ -50,7 +50,8 @@
       <p>Una <strong>variable</strong> es un nombre que le asignás a un valor para poder usarlo después. Internamente,
         Python crea un objeto en memoria con el valor y hace que el nombre "apunte" a ese objeto. Cuando escribís
         <code>edad = 28</code>, Python reserva espacio para el número 28 y asocia el nombre <code>edad</code> a esa
-        ubicación de memoria.</p>
+        ubicación de memoria.
+      </p>
 
       <p>A diferencia de lenguajes como Java o C++ donde declarás el tipo explícitamente (<code>int edad = 28;</code>),
         Python usa <strong>tipado dinámico</strong>: el tipo se infiere automáticamente del valor que asignás. Esto
@@ -70,7 +71,8 @@ x = [1, 2, 3]   # ahora x es list — sigue sin quejarse</pre>
 
       <p>Crear una variable es simplísimo: <code>nombre = valor</code>. El signo <code>=</code> es el operador de
         <strong>asignación</strong> — NO significa "es igual a" (eso es <code>==</code>). Significa "guardá este valor
-        con este nombre".</p>
+        con este nombre".
+      </p>
 
       <p>Python ofrece algunas formas avanzadas de asignación que son muy útiles:</p>
 
@@ -131,16 +133,19 @@ x = [1, 2, 3]   # ahora x es list — sigue sin quejarse</pre>
         <li><b>Variables y funciones:</b> <code>snake_case</code> — todo en minúsculas, palabras separadas por guión
           bajo. Ejemplo: <code>saldo_cuenta</code>, <code>ingreso_mensual</code>, <code>calcular_cuota</code></li>
         <li><b>Constantes:</b> <code>UPPER_SNAKE_CASE</code> — todo en mayúsculas. Ejemplo: <code>IVA</code>,
-          <code>DOLAR_OFICIAL</code>, <code>MAX_INTENTOS</code></li>
+          <code>DOLAR_OFICIAL</code>, <code>MAX_INTENTOS</code>
+        </li>
         <li><b>Clases:</b> <code>PascalCase</code> — cada palabra empieza en mayúscula. Ejemplo:
-          <code>CuentaBancaria</code>, <code>ClientePremium</code></li>
+          <code>CuentaBancaria</code>, <code>ClientePremium</code>
+        </li>
         <li><b>Variables privadas:</b> empiezan con <code>_</code>. Ejemplo: <code>_cache_interno</code></li>
       </ul>
 
       <div class="warning"><strong>Error común: usar nombres genéricos.</strong> Variables como <code>x</code>,
         <code>data</code>, <code>temp</code>, <code>valor</code> no dicen nada. ¿<code>x</code> es un precio, un score,
         una edad? Nadie lo sabe sin leer todo el contexto. Usá nombres descriptivos: <code>precio_unitario</code>,
-        <code>score_crediticio</code>, <code>edad_cliente</code>. Tu yo de dentro de 3 meses te lo va a agradecer.</div>
+        <code>score_crediticio</code>, <code>edad_cliente</code>. Tu yo de dentro de 3 meses te lo va a agradecer.
+      </div>
 
       <h3>Constantes (por convención)</h3>
 
@@ -160,7 +165,8 @@ x = [1, 2, 3]   # ahora x es list — sigue sin quejarse</pre>
 
       <p>Los <strong>f-strings</strong> (format strings) son la forma moderna y preferida de incluir variables dentro de
         texto. Se escriben con una <code>f</code> antes de las comillas y las variables van entre llaves
-        <code>{}</code>:</p>
+        <code>{}</code>:
+      </p>
 
       <p><code>print(f"Hola, {nombre}. Tenés {edad} años.")</code></p>
 
@@ -564,7 +570,8 @@ print(f"Cuota mensual: ${cuota_mensual:,.0f}")
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 4: Sueldo neto con constantes</h4>
         <p>Definí constantes <code>JUBILACION = 0.11</code> y <code>GANANCIAS = 0.17</code>. Con
-          <code>sueldo_bruto = 750000</code>, calculá e imprimí el neto. Debe incluir <code>540000</code>.</p>
+          <code>sueldo_bruto = 750000</code>, calculá e imprimí el neto. Debe incluir <code>540000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-4" data-expected="540000">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "540000"</span></div>
           <div class="editor-area">
@@ -629,7 +636,8 @@ print(f"Cuota mensual: ${cuota_mensual:,.0f}")
         <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 7: Tabla formateada con f-strings</h4>
         <p>Imprimí esta tabla alineada usando f-strings con <code>:<20</code> y <code>:>10</code>. Debe incluir
-          <code>Total</code>.</p>
+          <code>Total</code>.
+        </p>
         <pre style="color:var(--t2);font-size:.82rem;background:var(--bg3);padding:10px;border-radius:6px;margin:8px 0">Concepto              Monto
 ──────────────────────────────
 Sueldo               $450,000
@@ -657,7 +665,8 @@ Total                $333,000</pre>
         <h4>Ejercicio 8: Conversión de moneda con constantes</h4>
         <p>Definí <code>DOLAR_OFICIAL = 1150</code> y <code>DOLAR_MEP = 1280</code>. Dado
           <code>ahorro_usd = 3500</code>, imprimí cuánto es en pesos con cada tipo de cambio y la diferencia (brecha).
-          Debe incluir <code>Brecha</code>.</p>
+          Debe incluir <code>Brecha</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-04" data-exercise="ex-8" data-expected="Brecha">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Brecha"</span></div>
           <div class="editor-area">
@@ -739,7 +748,8 @@ sueldo_bruto = 1200000
         <li>Podés hacer asignación múltiple (<code>a, b = 1, 2</code>), swap (<code>a, b = b, a</code>) y desempaquetado
           en una línea.</li>
         <li>Convención PEP 8: variables en <code>snake_case</code>, constantes en <code>UPPER_CASE</code>, clases en
-          <code>PascalCase</code>.</li>
+          <code>PascalCase</code>.
+        </li>
         <li>Los f-strings (<code>f"..."</code>) son la forma moderna de formatear texto. Usá <code>:,.2f</code> para
           moneda y <code>:.1%</code> para porcentajes.</li>
         <li>Nombres descriptivos (<code>saldo_cuenta</code>) valen 100 veces más que nombres genéricos (<code>x</code>).
@@ -760,8 +770,9 @@ sueldo_bruto = 1200000
         <a class="next" href="/python/05-operaciones.html">Operaciones básicas →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

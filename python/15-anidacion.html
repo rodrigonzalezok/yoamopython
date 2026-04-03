@@ -55,11 +55,14 @@
       <ol>
         <li><b>Lista de listas</b> — una matriz o tabla: <code>[[1,2],[3,4],[5,6]]</code></li>
         <li><b>Lista de diccionarios</b> — registros/filas de una tabla:
-          <code>[{"nombre": "García", "score": 720}, ...]</code></li>
+          <code>[{"nombre": "García", "score": 720}, ...]</code>
+        </li>
         <li><b>Diccionario de diccionarios</b> — datos jerárquicos / JSON:
-          <code>{"cliente": {"nombre": "García", "scoring": {"valor": 720}}}</code></li>
+          <code>{"cliente": {"nombre": "García", "scoring": {"valor": 720}}}</code>
+        </li>
         <li><b>Diccionario de listas</b> — columnas de una tabla:
-          <code>{"nombre": ["García","López"], "score": [720,680]}</code></li>
+          <code>{"nombre": ["García","López"], "score": [720,680]}</code>
+        </li>
       </ol>
 
       <div class="concept"><strong>¿Por qué esto importa tanto?</strong> Porque un DataFrame de pandas es internamente
@@ -85,7 +88,8 @@ print(tabla[2][2])   # 590       (fila 2, columna 2)</pre>
 
       <p>El problema de las listas de listas es que tenés que recordar qué posición es cada campo.
         <code>tabla[1][3]</code> no dice nada — ¿es el saldo? ¿la edad? Por eso, para datos con campos nombrados, se
-        prefiere la lista de diccionarios.</p>
+        prefiere la lista de diccionarios.
+      </p>
 
       <h3>Lista de diccionarios — la "base de datos en memoria"</h3>
 
@@ -104,7 +108,8 @@ print(clientes[1]["saldo"])   # 320000</pre>
       <div class="analogy"><strong>Analogía exacta:</strong> una lista de diccionarios es literalmente una tabla de base
         de datos. Cada diccionario es una fila, cada clave es un nombre de columna. Cuando hagas
         <code>pd.DataFrame(clientes)</code>, pandas la convierte en una tabla perfecta automáticamente. Y cuando hagas
-        <code>df.to_dict("records")</code>, obtenés de vuelta esta misma estructura.</div>
+        <code>df.to_dict("records")</code>, obtenés de vuelta esta misma estructura.
+      </div>
 
       <h3>Diccionario de diccionarios — datos jerárquicos (JSON)</h3>
 
@@ -131,7 +136,8 @@ print(cliente["cuentas"][0]["saldo"])    # 150000</pre>
       <div class="warning"><strong>Peligro de acceso directo:</strong> si alguna clave intermedia no existe, toda la
         cadena explota con <code>KeyError</code>. Para acceso seguro, usá <code>.get()</code> encadenado:
         <code>cliente.get("scoring", {}).get("valor", 0)</code>. Si "scoring" no existe, el <code>{}</code> evita que el
-        segundo <code>.get()</code> falle.</div>
+        segundo <code>.get()</code> falle.
+      </div>
 
       <h3>Diccionario de listas — formato columnar</h3>
 
@@ -600,7 +606,8 @@ print(f"\nTotal por cliente: {totales}")</textarea>
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 5: Filtrar lista de dicts con comprehension</h4>
         <p>De la misma lista, filtrá los clientes con saldo > $100K e imprimí sus nombres. Debe incluir
-          <code>Pérez</code>.</p>
+          <code>Pérez</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-15" data-exercise="ex-5" data-expected="Pérez">
           <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Pérez"</span></div>
           <div class="editor-area">
@@ -681,7 +688,8 @@ print(f"Email: {email}")</textarea>
         <h4>Ejercicio 8: Construir lista de dicts desde datos planos</h4>
         <p>Dados <code>nombres = ["García","López","Pérez"]</code>, <code>scores = [720,680,810]</code>,
           <code>saldos = [150000,320000,890000]</code>, construí una lista de diccionarios con campos nombre, score,
-          saldo. Debe incluir <code>810</code>.</p>
+          saldo. Debe incluir <code>810</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-15" data-exercise="ex-8" data-expected="810">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "810"</span></div>
           <div class="editor-area">
@@ -731,7 +739,8 @@ saldos = [150000, 320000, 890000]
         <h4>Ejercicio 10: Reporte completo desde API simulada</h4>
         <p>Procesá esta respuesta de API simulada: extraé el nombre del cliente, su score, listá todas las cuentas con
           su saldo, calculá el saldo total, y verificá si el uso de tarjeta supera el 80% del límite. Debe incluir
-          <code>REPORTE</code>.</p>
+          <code>REPORTE</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-15" data-exercise="ex-10" data-expected="REPORTE">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "REPORTE"</span></div>
           <div class="editor-area">
@@ -795,8 +804,9 @@ print("=== REPORTE ===")
         <a class="next" href="/python/16-while.html">While →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

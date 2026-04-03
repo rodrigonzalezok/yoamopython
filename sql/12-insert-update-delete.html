@@ -79,7 +79,8 @@ UPDATE cuentas SET saldo = saldo * 1.05 WHERE tipo = 'PF';  -- +5% a plazos fijo
         <code>UPDATE clientes SET score = 0;</code> sin WHERE modifica TODOS los registros. Es el error más destructivo
         en SQL. <b>SIEMPRE verificá tu WHERE con un SELECT primero:</b>
         <code>SELECT * FROM clientes WHERE condicion;</code> → si las filas son las correctas, convertí el SELECT en
-        UPDATE.</div>
+        UPDATE.
+      </div>
 
       <h3>DELETE FROM — eliminar registros</h3>
 
@@ -450,7 +451,8 @@ SELECT nombre, score, categoria FROM clientes ORDER BY score DESC;</textarea>
       <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 7: Patrón SELECT → DELETE</h4>
         <p>Primero mostrá los inactivos que vas a borrar, después borralos, después verificá. Debe incluir
-          <code>quedan</code>.</p>
+          <code>quedan</code>.
+        </p>
         <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-7" data-expected="quedan">
           <div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "quedan"</span></div>
           <div class="editor-area">
@@ -477,7 +479,8 @@ SELECT 'quedan' AS estado, nombre FROM clientes;</textarea>
       <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 8: INSERT múltiple + UPDATE masivo</h4>
         <p>Insertá 5 clientes, después actualizá el saldo de todos aplicando rendimiento 3%. Debe incluir
-          <code>154500</code>.</p>
+          <code>154500</code>.
+        </p>
         <div class="editor" data-mode="sql" data-lesson="sql-12" data-exercise="ex-8" data-expected="154500">
           <div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "154500"</span></div>
           <div class="editor-area">
@@ -576,8 +579,9 @@ SELECT nombre, score, saldo, categoria FROM clientes ORDER BY score DESC;
         <a class="next" href="/sql/13-create-table-tipos.html">CREATE TABLE y tipos →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

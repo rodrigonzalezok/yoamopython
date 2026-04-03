@@ -53,7 +53,8 @@
       <ul>
         <li><code><b>lista.sort()</b></code> — ordena la lista <b>in-place</b> (modifica la original) y devuelve
           <code>None</code>. Si hacés <code>resultado = lista.sort()</code>, resultado es <code>None</code> y tu lista
-          original cambió.</li>
+          original cambió.
+        </li>
         <li><code><b>sorted(lista)</b></code> — devuelve una <b>nueva lista</b> ordenada sin modificar la original. Esto
           es lo que querés el 90% de las veces.</li>
       </ul>
@@ -63,7 +64,8 @@
 
       <div class="warning"><strong>Bug clásico:</strong> <code>lista_ordenada = mi_lista.sort()</code> →
         <code>lista_ordenada</code> es <code>None</code> y <code>mi_lista</code> ya se modificó. Si querés una copia
-        ordenada sin tocar la original, usá <code>sorted(mi_lista)</code>.</div>
+        ordenada sin tocar la original, usá <code>sorted(mi_lista)</code>.
+      </div>
 
       <h3>Métodos de modificación</h3>
 
@@ -129,7 +131,8 @@
       <div class="concept"><strong>Regla mnemotécnica:</strong> los métodos que MODIFICAN la lista devuelven
         <code>None</code> (append, sort, reverse, remove, insert, extend, clear). Los que NO modifican devuelven un
         valor (index, count, copy). Esta es una decisión de diseño de Python para evitar que encadenes operaciones
-        destructivas.</div>
+        destructivas.
+      </div>
 
       <h3>Métodos de consulta</h3>
 
@@ -162,7 +165,8 @@
 
       <p>Cuando hacés <code>b = a</code> con listas, <code>b</code> no es una copia — es una <b>referencia</b> a la
         misma lista. Si modificás <code>b</code>, <code>a</code> también cambia. Para una copia independiente necesitás
-        <code>.copy()</code> o <code>list(a)</code>.</p>
+        <code>.copy()</code> o <code>list(a)</code>.
+      </p>
 
       <p>Pero cuidado: <code>.copy()</code> es <b>superficial</b> (shallow). Si la lista contiene listas anidadas, los
         elementos internos siguen siendo referencias. Para una copia 100% independiente de estructuras anidadas,
@@ -174,7 +178,8 @@
 
       <ul>
         <li><code><b>enumerate(lista, start=0)</b></code> — devuelve pares (índice, elemento). Reemplaza el anti-patrón
-          <code>for i in range(len(lista))</code>.</li>
+          <code>for i in range(len(lista))</code>.
+        </li>
         <li><code><b>zip(lista1, lista2)</b></code> — recorre dos listas en paralelo. Esencial para combinar datos
           relacionados.</li>
         <li><code><b>map(función, lista)</b></code> — aplica una función a cada elemento. Similar a comprehension pero
@@ -184,7 +189,8 @@
 
       <div class="tip"><strong>Tip profesional:</strong> <code>enumerate()</code> es la forma pythónica de obtener
         índice + valor. NUNCA escribas <code>for i in range(len(lista)): elemento = lista[i]</code>. Escribí
-        <code>for i, elemento in enumerate(lista):</code>. Es más legible, más seguro y más rápido.</div>
+        <code>for i, elemento in enumerate(lista):</code>. Es más legible, más seguro y más rápido.
+      </div>
 
       <h3>List comprehensions avanzadas</h3>
 
@@ -201,7 +207,8 @@
       <div class="realworld"><strong>En pandas:</strong> <code>df.apply(lambda x: ...)</code> es la versión DataFrame de
         <code>map()</code>. <code>df[df["col"] > 100]</code> es la versión de <code>filter()</code>.
         <code>df.reset_index()</code> te da algo similar a <code>enumerate()</code>. Todo lo que aprendés acá se
-        traslada directamente.</div>
+        traslada directamente.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -673,7 +680,8 @@ saldos = [150000, 320000, 890000]
         <h4>Ejercicio 9: Reporte con enumerate + zip + f-strings</h4>
         <p>Combina <code>clientes = ["García","López","Pérez"]</code>, <code>scores = [720,680,810]</code> y
           <code>saldos = [150000,320000,890000]</code> en un reporte numerado con emojis (🟢 score>=700, 🔴 si no). Debe
-          incluir <code>Total:</code>.</p>
+          incluir <code>Total:</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-9" data-expected="Total:">
           <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Total:"</span></div>
           <div class="editor-area">
@@ -699,7 +707,8 @@ saldos = [150000, 320000, 890000]
         <p>Tenés datos crudos de un CSV:
           <code>registros = ["García|720|$150,000", "López|680|$320,000", "Martínez|590|$45,000", "Pérez|810|$890,000"]</code>.
           Procesá cada uno: (1) split, (2) convertir tipos, (3) crear lista de tuplas (nombre, score_int, saldo_float),
-          (4) ordená por saldo descendente, (5) imprimí top 3 con formato. Debe incluir <code>Top 3</code>.</p>
+          (4) ordená por saldo descendente, (5) imprimí top 3 con formato. Debe incluir <code>Top 3</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-13" data-exercise="ex-10" data-expected="Top 3">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Top 3"</span></div>
           <div class="editor-area">
@@ -736,7 +745,8 @@ print("=== Top 3 por saldo ===")
         <li><code>map()</code> transforma, <code>filter()</code> filtra — pero las comprehensions son más pythónicas.
         </li>
         <li>Comprehensions avanzadas: <code>[expr if cond else expr for x in lista]</code> y
-          <code>[x for sub in lista for x in sub]</code>.</li>
+          <code>[x for sub in lista for x in sub]</code>.
+        </li>
         <li>Cuidado con las referencias: <code>b = a</code> NO copia la lista. Usá <code>.copy()</code>.</li>
       </ul>
 
@@ -753,8 +763,9 @@ print("=== Top 3 por saldo ===")
         <a class="next" href="/python/14-metodos-diccionarios.html">Métodos de diccionarios →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

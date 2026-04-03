@@ -415,7 +415,8 @@ print("arrastrando una columna sobre otra en el Model View.")</textarea>
       <div class="tip"><strong>Tip profesional — Modelo Estrella:</strong> es el estándar de la industria de BI. Una
         tabla central de <strong>hechos</strong> (transacciones, ventas, eventos) rodeada de tablas de
         <strong>dimensiones</strong> (clientes, productos, fechas, sucursales). Las dimensiones enriquecen los hechos.
-        Cada relación es 1-a-muchos: un producto tiene muchas transacciones.</div>
+        Cada relación es 1-a-muchos: un producto tiene muchas transacciones.
+      </div>
 
       <h3>Ejemplo 4: Simular cálculos DAX con pandas</h3>
 
@@ -584,7 +585,8 @@ df = pd.DataFrame({"Ciudad": [" caba ", "ROSARIO", " córdoba", "Caba", "rosario
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 2: Crear columnas de fecha</h4>
         <p>A partir de una columna de fecha, extraé año, mes y trimestre. Imprimí las columnas. Debe incluir
-          <code>Trimestre</code>.</p>
+          <code>Trimestre</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-2"
           data-expected="Trimestre">
           <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "Trimestre"</span></div>
@@ -663,7 +665,8 @@ df = pd.DataFrame({
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 5: Modelo estrella — crear dimensiones</h4>
         <p>Creá una tabla de dimensión de sucursales y hacé merge con la tabla de hechos. Debe incluir
-          <code>Zona</code>.</p>
+          <code>Zona</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-5" data-expected="Zona">
           <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Zona"</span></div>
           <div class="editor-area">
@@ -752,7 +755,8 @@ df["Mes"] = df["Fecha"].dt.to_period("M")
         <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 8: Tabla resumen para heatmap BI</h4>
         <p>Creá una pivot_table Sucursal × Mes que un heatmap de Power BI usaría. Imprimí la tabla. Debe incluir
-          <code>Enero</code>.</p>
+          <code>Enero</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-8"
           data-expected="Enero">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Enero"</span></div>
@@ -809,7 +813,8 @@ mensual = pd.Series([45000, 52000, 48000, 61000, 58000, 72000],
         <span class="exercise-level challenge">Nivel 4 · Desafío</span>
         <h4>Ejercicio 10: Dashboard mock con 4 gráficos</h4>
         <p>Creá un dashboard de 4 subplots simulando un dashboard de BI: KPI card, tendencia, barras y torta. Imprimí
-          <code>Dashboard BI</code>.</p>
+          <code>Dashboard BI</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-16" data-exercise="ex-10"
           data-expected="Dashboard BI">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Dashboard BI"</span></div>
@@ -846,7 +851,8 @@ datos = {s: np.random.randint(30000, 80000, 6) for s in sucursales}
           líderes para crear dashboards interactivos.</li>
         <li>Python prepara los datos; BI los presenta. Son <strong>complementarios</strong>, no competidores.</li>
         <li>Conceptos clave: <strong>KPIs</strong>, <strong>slicers</strong>, <strong>drill-down</strong>,
-          <strong>modelo estrella</strong>, <strong>DAX</strong>.</li>
+          <strong>modelo estrella</strong>, <strong>DAX</strong>.
+        </li>
         <li>Todo lo que hiciste en pandas (groupby, pivot, merge) se traduce directamente a conceptos de BI.</li>
         <li>El mercado laboral valora <strong>Python + herramienta de BI</strong>. Si estás en LATAM, priorizá Power BI.
         </li>
@@ -860,8 +866,9 @@ datos = {s: np.random.randint(30000, 80000, 6) for s in sucursales}
         <a class="next" href="/data-analysis/17-sql-python-integracion.html">Integración SQL + Python →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

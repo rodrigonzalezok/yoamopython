@@ -101,7 +101,8 @@
 
       <div class="warning"><strong>Error común:</strong> <code>range(1, 5)</code> genera 1, 2, 3, 4 — NO incluye el 5.
         El límite superior siempre está excluido, igual que en slicing. Si querés 1 a 5 inclusive, usá
-        <code>range(1, 6)</code>.</div>
+        <code>range(1, 6)</code>.
+      </div>
 
       <h3>For sobre distintos iterables</h3>
 
@@ -122,7 +123,8 @@
 
       <ul>
         <li><code><b>enumerate(iterable, start=0)</b></code> — te da (índice, elemento) en cada iteración. NUNCA uses
-          <code>for i in range(len(lista)):</code> cuando podés usar enumerate.</li>
+          <code>for i in range(len(lista)):</code> cuando podés usar enumerate.
+        </li>
         <li><code><b>zip(iter1, iter2, ...)</b></code> — recorre múltiples iterables en paralelo. Para cuando los datos
           están repartidos en listas separadas.</li>
         <li><b>Unpacking en for:</b> <code>for nombre, score in lista_de_tuplas:</code> — desempaquetá directamente en
@@ -132,7 +134,8 @@
       <h3>break, continue y for/else</h3>
 
       <p><code>break</code> y <code>continue</code> funcionan igual que en while. Pero for tiene un extra exclusivo:
-        <code>else</code>.</p>
+        <code>else</code>.
+      </p>
 
       <p><code><b>for/else</b></code>: el bloque <code>else</code> se ejecuta solo si el for terminó <b>sin break</b>.
         Si hubo break, else NO se ejecuta. Es útil para búsquedas: "si encontré algo, break; si no encontré nada, el
@@ -576,7 +579,8 @@ precios = [5200, 28000, 3100]
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 6: for sobre diccionario</h4>
         <p>Dado <code>saldos = {"García": 150000, "López": 320000, "Pérez": 890000}</code>, recorrelo con
-          <code>.items()</code> e imprimí cada cliente con formato de moneda. Debe incluir <code>890,000</code>.</p>
+          <code>.items()</code> e imprimí cada cliente con formato de moneda. Debe incluir <code>890,000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-6" data-expected="890,000">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "890,000"</span></div>
           <div class="editor-area">
@@ -675,7 +679,8 @@ total_general = 0
         <h4>Ejercicio 10: Pipeline completo de procesamiento</h4>
         <p>Tenés registros crudos. Para cada uno: (1) split por |, (2) convertir tipos, (3) clasificar score en
           Alto/Medio/Bajo, (4) acumular estadísticas. Imprimí tabla formateada + resumen. Debe incluir
-          <code>RESUMEN</code>.</p>
+          <code>RESUMEN</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-17" data-exercise="ex-10" data-expected="RESUMEN">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "RESUMEN"</span></div>
           <div class="editor-area">
@@ -734,8 +739,9 @@ print(f"\n=== RESUMEN ===")
         <a class="next" href="/python/18-funciones-basicas.html">Funciones básicas →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

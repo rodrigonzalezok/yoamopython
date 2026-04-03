@@ -61,7 +61,8 @@ vacia = ()                               # tupla vacía</pre>
 
       <div class="warning"><strong>Trampa clásica: la tupla de un elemento.</strong> <code>(42)</code> NO es una tupla —
         es el número 42 entre paréntesis (como en matemáticas). Para una tupla de un elemento necesitás la coma:
-        <code>(42,)</code>. Esto confunde al 100% de los principiantes al menos una vez.</div>
+        <code>(42,)</code>. Esto confunde al 100% de los principiantes al menos una vez.
+      </div>
 
       <h3>¿Por qué usar algo que no se puede modificar?</h3>
 
@@ -86,16 +87,19 @@ vacia = ()                               # tupla vacía</pre>
 
       <p><strong>Packing</strong> es cuando Python empaqueta varios valores en una tupla automáticamente:</p>
       <p><code>datos = "García", 35, "Buenos Aires"</code> → Python crea la tupla
-        <code>("García", 35, "Buenos Aires")</code></p>
+        <code>("García", 35, "Buenos Aires")</code>
+      </p>
 
       <p><strong>Unpacking</strong> es lo contrario: extraer los valores de una tupla a variables individuales:</p>
       <p><code>nombre, edad, ciudad = datos</code> → <code>nombre = "García"</code>, <code>edad = 35</code>,
-        <code>ciudad = "Buenos Aires"</code></p>
+        <code>ciudad = "Buenos Aires"</code>
+      </p>
 
       <p>El unpacking es increíblemente versátil:</p>
       <ul>
         <li><b>Parcial con *:</b> <code>primero, *resto = (1, 2, 3, 4, 5)</code> → <code>primero = 1</code>,
-          <code>resto = [2, 3, 4, 5]</code></li>
+          <code>resto = [2, 3, 4, 5]</code>
+        </li>
         <li><b>Ignorar con _:</b> <code>nombre, _, ciudad = datos</code> → la edad se descarta</li>
         <li><b>Swap de variables:</b> <code>a, b = b, a</code> es en realidad packing + unpacking de tuplas</li>
         <li><b>Retorno múltiple de funciones:</b> <code>return total, promedio</code> devuelve una tupla que podés
@@ -122,7 +126,8 @@ print(c.score)   # 720</pre>
       <div class="realworld"><strong>En análisis de datos:</strong> las tuplas aparecen por todos lados. Un
         <code>DataFrame.shape</code> devuelve una tupla <code>(filas, columnas)</code>.
         <code>DataFrame.iterrows()</code> devuelve tuplas <code>(índice, fila)</code>. <code>.groupby().agg()</code> con
-        multi-index devuelve tuplas como claves. Si dominás tuplas, pandas se entiende mejor.</div>
+        multi-index devuelve tuplas como claves. Si dominás tuplas, pandas se entiende mejor.
+      </div>
 
       <h3>Cuándo usar tupla vs lista</h3>
 
@@ -489,7 +494,8 @@ print(f"Min/Max: {min(t1)}, {max(t1)}")</textarea>
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 3: Unpacking básico</h4>
         <p>Dada <code>persona = ("Fernández", 30, "Mendoza")</code>, desempaquetá en <code>nombre</code>,
-          <code>edad</code>, <code>ciudad</code> e imprimí con f-string. Debe incluir <code>Mendoza</code>.</p>
+          <code>edad</code>, <code>ciudad</code> e imprimí con f-string. Debe incluir <code>Mendoza</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-09" data-exercise="ex-3" data-expected="Mendoza">
           <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Mendoza"</span></div>
           <div class="editor-area">
@@ -512,7 +518,8 @@ print(f"Min/Max: {min(t1)}, {max(t1)}")</textarea>
         <h4>Ejercicio 4: Función con retorno múltiple</h4>
         <p>Creá una función <code>estadisticas(numeros)</code> que devuelva una tupla con
           <code>(minimo, maximo, promedio)</code>. Probala con <code>[45000, 72000, 38000, 91000]</code>. Debe incluir
-          <code>61500</code>.</p>
+          <code>61500</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-09" data-exercise="ex-4" data-expected="61500">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "61500"</span></div>
           <div class="editor-area">
@@ -538,7 +545,8 @@ print(f"Min: {mi}, Max: {ma}, Promedio: {pr}")</textarea>
         <h4>Ejercicio 5: Unpacking parcial con *</h4>
         <p>Dada <code>ranking = ("Pérez", "García", "López", "Martínez", "Sosa")</code>, usá unpacking para extraer el
           primero, el último, y el resto en una variable <code>medio</code>. Imprimí los tres. Debe incluir
-          <code>Pérez</code>.</p>
+          <code>Pérez</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-09" data-exercise="ex-5" data-expected="Sosa">
           <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Sosa"</span></div>
           <div class="editor-area">
@@ -560,7 +568,8 @@ print(f"Min: {mi}, Max: {ma}, Promedio: {pr}")</textarea>
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 6: Ordenar lista de tuplas</h4>
         <p>Dada esta lista de tuplas (nombre, saldo), ordenalas por saldo descendente e imprimí el ranking. Debe incluir
-          <code>890000</code>.</p>
+          <code>890000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-09" data-exercise="ex-6" data-expected="890000">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "890000"</span></div>
           <div class="editor-area">
@@ -614,7 +623,8 @@ precios = {
         <h4>Ejercicio 8: namedtuple para datos de clientes</h4>
         <p>Creá un <code>namedtuple</code> llamado <code>Cuenta</code> con campos <code>titular</code>,
           <code>tipo</code>, <code>saldo</code>. Creá 3 cuentas y calculá el saldo total. Debe incluir
-          <code>Total:</code>.</p>
+          <code>Total:</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-09" data-exercise="ex-8" data-expected="Total:">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Total:"</span></div>
           <div class="editor-area">
@@ -638,7 +648,8 @@ precios = {
         <p>Dada una lista de tuplas
           <code>operaciones = [("Compra", 15000), ("Venta", 8000), ("Compra", 22000), ("Venta", 5000)]</code>, recorrela
           con <code>enumerate</code> y unpacking para imprimir cada operación numerada. Calculá el balance final
-          (compras positivas, ventas negativas). Debe incluir <code>Balance: 24000</code>.</p>
+          (compras positivas, ventas negativas). Debe incluir <code>Balance: 24000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-09" data-exercise="ex-9"
           data-expected="Balance: 24000">
           <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Balance: 24000"</span></div>
@@ -663,7 +674,8 @@ precios = {
         <p>Tenés cotizaciones como tuplas <code>(moneda, compra, venta)</code>. Creá una lista con al menos 4
           cotizaciones (USD oficial, USD MEP, EUR, BRL). Convertí USD 1000 a pesos con la cotización de venta del dólar
           MEP. Imprimí una tabla formateada con todas las cotizaciones y la brecha porcentual compra-venta. Debe incluir
-          <code>Brecha</code>.</p>
+          <code>Brecha</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-09" data-exercise="ex-10" data-expected="Brecha">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Brecha"</span></div>
           <div class="editor-area">
@@ -712,8 +724,9 @@ cotizaciones = [
         <a class="next" href="/python/10-diccionarios.html">Diccionarios →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

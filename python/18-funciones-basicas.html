@@ -50,7 +50,8 @@
 
       <p>Una <strong>función</strong> es un bloque de código con nombre que recibe datos (parámetros), los procesa y
         opcionalmente devuelve un resultado (return). Definís la función una vez con <code>def</code> y después la
-        <b>llamás</b> cuantas veces quieras pasándole distintos datos.</p>
+        <b>llamás</b> cuantas veces quieras pasándole distintos datos.
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0">def nombre_funcion(parametro1, parametro2):
     """Docstring: qué hace la función."""
@@ -72,17 +73,20 @@ x = nombre_funcion(10, 20)  # x = 30</pre>
         <li><b>Nombre:</b> en <code>snake_case</code>, descriptivo. <code>calcular_iva</code>, no <code>f1</code></li>
         <li><b>Parámetros:</b> variables que la función recibe entre paréntesis. Puede ser 0, 1 o muchos</li>
         <li><b>Docstring:</b> texto entre <code>"""triple comillas"""</code> que documenta qué hace. Accesible con
-          <code>help(funcion)</code></li>
+          <code>help(funcion)</code>
+        </li>
         <li><b>Cuerpo:</b> el código indentado que se ejecuta cuando llamás la función</li>
         <li><code><b>return</b></code> — devuelve un valor al llamador. Sin return, la función devuelve
-          <code>None</code></li>
+          <code>None</code>
+        </li>
       </ul>
 
       <h3>Parámetros vs argumentos</h3>
 
       <p>Técnicamente: los <b>parámetros</b> son los nombres en la definición (<code>def f(x, y)</code>); los
         <b>argumentos</b> son los valores que pasás al llamar (<code>f(10, 20)</code>). En la práctica, la gente usa
-        ambos términos indistintamente.</p>
+        ambos términos indistintamente.
+      </p>
 
       <p>Python soporta dos formas de pasar argumentos:</p>
 
@@ -107,7 +111,8 @@ calcular_iva(1000, 0.105)    # usa tasa=0.105 → 1105.0</pre>
 
       <div class="warning"><strong>Trampa peligrosa:</strong> NUNCA uses un objeto mutable (lista, dict) como valor por
         defecto. <code>def f(datos=[])</code> es un bug clásico: la lista se comparte entre todas las llamadas. Usá
-        <code>def f(datos=None): if datos is None: datos = []</code>.</div>
+        <code>def f(datos=None): if datos is None: datos = []</code>.
+      </div>
 
       <h3>Return: devolver valores</h3>
 
@@ -135,12 +140,14 @@ calcular_iva(1000, 0.105)    # usa tasa=0.105 → 1105.0</pre>
       <div class="realworld"><strong>En el trabajo real:</strong> en equipos profesionales, las funciones son la unidad
         básica de organización del código. Un pipeline de datos se estructura como una cadena de funciones:
         <code>leer_csv() → limpiar_datos() → calcular_metricas() → generar_reporte()</code>. Cada función hace UNA cosa
-        bien (principio de responsabilidad única).</div>
+        bien (principio de responsabilidad única).
+      </div>
 
       <div class="tip"><strong>Tip de naming:</strong> las funciones hacen algo, así que nombralas con verbos:
         <code>calcular_iva()</code>, <code>filtrar_clientes()</code>, <code>generar_reporte()</code>. Las variables son
         sustantivos: <code>saldo</code>, <code>cliente</code>, <code>tasa</code>. Verbos para funciones, sustantivos
-        para datos.</div>
+        para datos.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -469,7 +476,8 @@ print(f"  {'TOTAL':<12} ${total:>10,.0f}")
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 1: Función con IVA</h4>
         <p>Creá <code>con_iva(precio)</code> que devuelva el precio + 21%. Probá con $10,000. Debe incluir
-          <code>12100</code>.</p>
+          <code>12100</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-1" data-expected="12100">
           <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "12100"</span></div>
           <div class="editor-area">
@@ -514,7 +522,8 @@ saludar("López", "Buenos días")</textarea>
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 3: Return múltiple</h4>
         <p>Creá <code>min_max(numeros)</code> que devuelva el mínimo y máximo como tupla. Probá con
-          <code>[45, 72, 38, 91, 55]</code>. Debe incluir <code>38</code>.</p>
+          <code>[45, 72, 38, 91, 55]</code>. Debe incluir <code>38</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-3" data-expected="38">
           <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "38"</span></div>
           <div class="editor-area">
@@ -537,7 +546,8 @@ print(f"Min: {mi}, Max: {ma}")</textarea>
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 4: Sueldo neto con función</h4>
         <p>Creá <code>sueldo_neto(bruto, jub=0.11, os=0.03, gan=0.17)</code>. Calculá el neto de $750,000. Debe incluir
-          <code>517500</code>.</p>
+          <code>517500</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-4" data-expected="517500">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "517500"</span></div>
           <div class="editor-area">
@@ -624,7 +634,8 @@ print(f"Total: {sum(limpios)}")</textarea>
         <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 8: Función que devuelve diccionario</h4>
         <p>Creá <code>analizar(saldos)</code> que devuelva un dict con total, promedio, min, max, cantidad. Debe incluir
-          <code>promedio</code>.</p>
+          <code>promedio</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-8" data-expected="promedio">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "promedio"</span></div>
           <div class="editor-area">
@@ -649,7 +660,8 @@ for k, v in resultado.items():
         <h4>Ejercicio 9: Funciones como pipeline</h4>
         <p>Creá 3 funciones: <code>limpiar(texto)</code> que stripee y titlece, <code>validar(nombre)</code> que
           verifique que tiene al menos 2 caracteres, y <code>formatear(nombre, i)</code> que devuelva
-          <code>"N. Nombre"</code>. Aplicá las 3 a una lista sucia. Debe incluir <code>García</code>.</p>
+          <code>"N. Nombre"</code>. Aplicá las 3 a una lista sucia. Debe incluir <code>García</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-9" data-expected="García">
           <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "García"</span></div>
           <div class="editor-area">
@@ -675,7 +687,8 @@ nombres_sucios = ["  GARCÍA  ", "", "  lópez  ", " a ", "  PÉREZ  "]
         <p>Creá un mini motor de crédito con funciones: <code>validar_edad(e)</code>, <code>validar_ingreso(i)</code>,
           <code>validar_score(s)</code>, <code>calcular_ratio(cuota, ingreso)</code>, y
           <code>evaluar_cliente(nombre, edad, ingreso, score, cuota)</code> que las use todas. Probá con 3 clientes.
-          Debe incluir <code>EVALUACIÓN</code>.</p>
+          Debe incluir <code>EVALUACIÓN</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-18" data-exercise="ex-10" data-expected="EVALUACIÓN">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "EVALUACIÓN"</span></div>
           <div class="editor-area">
@@ -728,8 +741,9 @@ print("=== EVALUACIÓN CREDITICIA ===")
         <a class="next" href="/python/19-funciones-avanzadas.html">Funciones avanzadas →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

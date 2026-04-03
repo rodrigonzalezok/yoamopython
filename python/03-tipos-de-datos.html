@@ -58,11 +58,13 @@
         Simplemente escribís <code>edad = 35</code> y Python infiere automáticamente que es un entero. Si después hacés
         <code>edad = "treinta y cinco"</code>, la variable ahora apunta a un string sin quejarse. Esta flexibilidad
         acelera el desarrollo pero te exige criterio: si mezclás tipos sin querer, tu código va a fallar o, peor, va a
-        dar resultados incorrectos sin que te des cuenta.</p>
+        dar resultados incorrectos sin que te des cuenta.
+      </p>
 
       <div class="concept"><strong>Punto clave:</strong> una variable en Python no "contiene" un valor — referencia un
         objeto en memoria que tiene tipo, valor e identidad. Podés verificar el tipo de cualquier valor con
-        <code>type(valor)</code>.</div>
+        <code>type(valor)</code>.
+      </div>
 
       <h3>int — Enteros</h3>
 
@@ -140,7 +142,8 @@
       <ul>
         <li><code>False</code>, <code>0</code>, <code>0.0</code>, <code>0j</code></li>
         <li><code>""</code> (string vacío), <code>[]</code> (lista vacía), <code>()</code> (tupla vacía),
-          <code>{}</code> (dict vacío), <code>set()</code></li>
+          <code>{}</code> (dict vacío), <code>set()</code>
+        </li>
         <li><code>None</code></li>
       </ul>
       <p><strong>Todo lo demás es truthy</strong> (evalúa como <code>True</code>). Esto incluye: <code>"0"</code>
@@ -160,7 +163,8 @@
       <p>Para comparar con None, usá <code>is None</code> en vez de <code>== None</code>. <code>is</code> verifica
         identidad (es el mismo objeto en memoria), mientras que <code>==</code> verifica igualdad de valor.
         <code>None</code> es un singleton — solo existe UNA instancia — por eso <code>is</code> es más correcto y más
-        rápido.</p>
+        rápido.
+      </p>
 
       <h3>Conversión entre tipos (casting)</h3>
 
@@ -470,13 +474,15 @@ print(f"¿Score alto? {score >= 700}")</textarea>
           </tr>
           <tr>
             <td><code>0</code>, <code>0.0</code>, <code>""</code>, <code>[]</code>, <code>{}</code>, <code>None</code>,
-              <code>False</code></td>
+              <code>False</code>
+            </td>
             <td><code>False</code></td>
             <td>Falsy</td>
           </tr>
           <tr>
             <td>Todo lo demás (<code>1</code>, <code>"0"</code>, <code>[0]</code>, <code>-1</code>,
-              <code>"False"</code>)</td>
+              <code>"False"</code>)
+            </td>
             <td><code>True</code></td>
             <td>Truthy</td>
           </tr>
@@ -490,7 +496,8 @@ print(f"¿Score alto? {score >= 700}")</textarea>
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 1: Crear variables y verificar tipos</h4>
         <p>Creá 5 variables (una de cada tipo: int, float, str, bool, None) e imprimí cada una con su tipo usando
-          <code>type().__name__</code>. El output debe incluir <code>NoneType</code>.</p>
+          <code>type().__name__</code>. El output debe incluir <code>NoneType</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-1" data-expected="NoneType">
           <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "NoneType"</span></div>
           <div class="editor-area">
@@ -696,7 +703,8 @@ analizar([1, 2, 3])</textarea>
         <h4>Ejercicio 10: Parsear registro completo a diccionario tipado</h4>
         <p>Dado <code>"López|42|Córdoba|680|$185,000.00|False"</code>, parseá cada campo al tipo correcto y creá un
           diccionario con claves <code>nombre</code>, <code>edad</code>, <code>ciudad</code>, <code>score</code>,
-          <code>ingreso</code>, <code>activo</code>. Imprimí el diccionario. Debe incluir <code>ingreso</code>.</p>
+          <code>ingreso</code>, <code>activo</code>. Imprimí el diccionario. Debe incluir <code>ingreso</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-03" data-exercise="ex-10" data-expected="ingreso">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "ingreso"</span></div>
           <div class="editor-area">
@@ -719,11 +727,13 @@ analizar([1, 2, 3])</textarea>
 
       <ul>
         <li>Python tiene 5 tipos fundamentales: <code>int</code> (sin límite), <code>float</code> (impreciso),
-          <code>str</code> (inmutable), <code>bool</code> (True/False), <code>None</code> (ausencia).</li>
+          <code>str</code> (inmutable), <code>bool</code> (True/False), <code>None</code> (ausencia).
+        </li>
         <li>Python tiene tipado dinámico: infiere el tipo automáticamente del valor asignado.</li>
         <li>Los float tienen problemas de precisión (0.1+0.2 ≠ 0.3). Para finanzas, usá <code>Decimal</code>.</li>
         <li>Todo valor tiene un comportamiento truthy/falsy. Los "falsy" son: <code>0</code>, <code>""</code>,
-          <code>[]</code>, <code>None</code>, <code>False</code>.</li>
+          <code>[]</code>, <code>None</code>, <code>False</code>.
+        </li>
         <li>Comparar con None se hace con <code>is None</code>, no con <code>== None</code>.</li>
         <li>Los datos reales vienen como strings — siempre necesitás limpiar y convertir antes de operar.</li>
       </ul>
@@ -741,8 +751,9 @@ analizar([1, 2, 3])</textarea>
         <a class="next" href="/python/04-variables-constantes.html">Variables y constantes →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

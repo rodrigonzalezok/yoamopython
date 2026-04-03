@@ -63,12 +63,14 @@
 
       <p>A diferencia de las listas (que accedés por posición numérica), en los diccionarios accedés por
         <strong>clave</strong>: <code>cliente["nombre"]</code> devuelve <code>"García"</code>. Esto es mucho más legible
-        y mantenible que <code>cliente[0]</code>.</p>
+        y mantenible que <code>cliente[0]</code>.
+      </p>
 
       <div class="concept"><strong>Punto clave:</strong> un diccionario es la versión Python de un registro (fila) de
         una base de datos. Cuando trabajés con pandas, cada fila de un DataFrame es convertible a diccionario con
         <code>.to_dict()</code>. Y cuando leas un JSON de una API, lo que recibís es un diccionario (o lista de
-        diccionarios).</div>
+        diccionarios).
+      </div>
 
       <h3>Características de los diccionarios</h3>
 
@@ -97,13 +99,15 @@
         <li><code>dict["clave"]</code> — devuelve el valor. Si la clave NO existe, lanza <code>KeyError</code> (error).
         </li>
         <li><code>dict.get("clave", default)</code> — devuelve el valor. Si la clave no existe, devuelve
-          <code>default</code> (en vez de error). Si no pasás default, devuelve <code>None</code>.</li>
+          <code>default</code> (en vez de error). Si no pasás default, devuelve <code>None</code>.
+        </li>
       </ul>
 
       <div class="warning"><strong>Regla profesional:</strong> usá <code>.get()</code> siempre que no estés 100% seguro
         de que la clave existe. En datos del mundo real, nunca sabés si un campo viene completo. Un
         <code>KeyError</code> en producción a las 3 AM te arruina el fin de semana. Un <code>.get("score", 0)</code> te
-        devuelve un valor seguro.</div>
+        devuelve un valor seguro.
+      </div>
 
       <h3>Agregar, modificar y eliminar</h3>
 
@@ -111,7 +115,8 @@
         Si existe, la sobreescribe.</p>
 
       <p>Para eliminar: <code>del dict["clave"]</code> (lanza error si no existe) o
-        <code>dict.pop("clave", default)</code> (seguro, devuelve el valor eliminado).</p>
+        <code>dict.pop("clave", default)</code> (seguro, devuelve el valor eliminado).
+      </p>
 
       <h3>Recorrer diccionarios</h3>
 
@@ -119,7 +124,8 @@
 
       <ul>
         <li><code>.keys()</code> — devuelve las claves. <code>for k in dict.keys():</code> (o simplemente
-          <code>for k in dict:</code>)</li>
+          <code>for k in dict:</code>)
+        </li>
         <li><code>.values()</code> — devuelve los valores. <code>for v in dict.values():</code></li>
         <li><code>.items()</code> — devuelve pares (clave, valor). <code>for k, v in dict.items():</code> — el más
           usado.</li>
@@ -145,7 +151,8 @@ print(cliente["cuentas"][0]["saldo"])   # 150000</pre>
       <div class="realworld"><strong>En el trabajo real:</strong> el 90% de los datos que vas a consumir vienen como
         JSON (APIs) o como DataFrames (pandas). Ambos son, en esencia, diccionarios o listas de diccionarios. Cada vez
         que hagas <code>df.to_dict('records')</code>, obtenés una lista de dicts. Cada vez que hagas
-        <code>requests.get(url).json()</code>, obtenés un dict.</div>
+        <code>requests.get(url).json()</code>, obtenés un dict.
+      </div>
 
       <h3>Dict comprehensions</h3>
 
@@ -244,7 +251,8 @@ print(f"¿Tiene nombre? {'nombre' in cliente}")</textarea>
 
       <h3>Ejemplo 3: Lista de diccionarios — la "base de datos en memoria"</h3>
       <p>Este es el patrón más importante del curso. Una lista de diccionarios es exactamente lo que devuelve
-        <code>df.to_dict('records')</code> en pandas.</p>
+        <code>df.to_dict('records')</code> en pandas.
+      </p>
 
       <div class="editor" data-mode="python">
         <div class="editor-top"><span>ejemplo_03_tabla.py</span><span>Python</span></div>
@@ -472,7 +480,8 @@ print(f"\nEmail: {email}")</textarea>
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 1: Crear y acceder</h4>
         <p>Creá un diccionario <code>producto</code> con claves <code>nombre</code>, <code>precio</code> y
-          <code>stock</code>. Imprimí cada valor. Debe incluir el nombre del producto.</p>
+          <code>stock</code>. Imprimí cada valor. Debe incluir el nombre del producto.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-1" data-expected="Notebook">
           <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div>
           <div class="editor-area">
@@ -496,7 +505,8 @@ producto = {
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 2: .get() seguro</h4>
         <p>Dado un diccionario de cliente sin campo "email", usá <code>.get()</code> para acceder al email con default
-          <code>"No informado"</code>. Debe incluir <code>No informado</code>.</p>
+          <code>"No informado"</code>. Debe incluir <code>No informado</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-2"
           data-expected="No informado">
           <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "No informado"</span></div>
@@ -519,7 +529,8 @@ producto = {
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 3: Recorrer con .items()</h4>
         <p>Dado <code>moneda = {"nombre": "Dólar", "código": "USD", "cotización": 1150}</code>, recorrelo con
-          <code>.items()</code> e imprimí cada par. Debe incluir <code>USD</code>.</p>
+          <code>.items()</code> e imprimí cada par. Debe incluir <code>USD</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-3" data-expected="USD">
           <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "USD"</span></div>
           <div class="editor-area">
@@ -589,7 +600,8 @@ precios = [5200, 28000, 3100]
         <p>Dada
           <code>transacciones = ["compra", "venta", "compra", "compra", "venta", "transferencia", "compra"]</code>,
           contá cuántas veces aparece cada tipo usando un diccionario. Debe incluir <code>compra</code> y
-          <code>4</code>.</p>
+          <code>4</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-6" data-expected="4">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "4"</span></div>
           <div class="editor-area">
@@ -639,7 +651,8 @@ precios = [5200, 28000, 3100]
         <h4>Ejercicio 8: Diccionario anidado</h4>
         <p>Creá un diccionario <code>sucursal</code> con <code>"nombre"</code>, <code>"ciudad"</code> y
           <code>"empleados"</code> (lista de dicts con nombre y cargo). Imprimí el nombre del primer empleado accediendo
-          a la estructura anidada. Debe incluir <code>Gerente</code>.</p>
+          a la estructura anidada. Debe incluir <code>Gerente</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-8" data-expected="Gerente">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Gerente"</span></div>
           <div class="editor-area">
@@ -663,7 +676,8 @@ sucursal = {
         <h4>Ejercicio 9: Transformar dict con comprehension</h4>
         <p>Dado <code>precios_ars = {"Notebook": 920000, "Mouse": 23000, "Teclado": 46000}</code> y
           <code>DOLAR = 1150</code>, creá un nuevo diccionario con los precios en USD (dividir por DOLAR, redondear a 2
-          decimales). Debe incluir <code>USD</code>.</p>
+          decimales). Debe incluir <code>USD</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-10" data-exercise="ex-9" data-expected="USD">
           <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "USD"</span></div>
           <div class="editor-area">
@@ -737,8 +751,9 @@ print("=== REPORTE DE CARTERA ===")
         <a class="next" href="/python/11-sets.html">Sets →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

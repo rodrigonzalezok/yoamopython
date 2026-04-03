@@ -173,12 +173,14 @@ WHERE ciudad IN ('BsAs', 'Córdoba', 'Rosario')</pre>
 
       <div class="warning"><strong>NUNCA uses <code>= NULL</code>.</strong> En SQL, NULL no es un valor — es la ausencia
         de valor. La comparación <code>columna = NULL</code> SIEMPRE da NULL (ni True ni False). Tenés que usar
-        <code>IS NULL</code> o <code>IS NOT NULL</code>.</div>
+        <code>IS NULL</code> o <code>IS NOT NULL</code>.
+      </div>
 
       <div class="concept"><strong>NULL en análisis de datos:</strong> NULL es el equivalente al NaN de pandas.
         Representa "dato faltante" y tiene comportamiento especial: cualquier operación con NULL da NULL.
         <code>5 + NULL = NULL</code>, <code>NULL = NULL</code> es NULL (no True). Por eso existe IS NULL como operador
-        especial.</div>
+        especial.
+      </div>
 
       <div class="realworld"><strong>En el trabajo:</strong> el 80% de tus consultas SQL van a tener WHERE. Saber
         filtrar eficientemente es la habilidad #1. "Dame los clientes activos de Buenos Aires con score entre 650 y 800
@@ -554,7 +556,8 @@ INSERT INTO clientes VALUES (5,'Sosa',750,'sosa@mail.com',1);
       <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 8: OR con paréntesis</h4>
         <p>Traé clientes que: (sean de BsAs Y tengan score > 700) O (tengan saldo > 300000). Debe incluir
-          <code>López</code>.</p>
+          <code>López</code>.
+        </p>
         <div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-8" data-expected="López">
           <div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "López"</span></div>
           <div class="editor-area">
@@ -579,7 +582,8 @@ INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810,890000);
       <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 9: LIKE + IN + IS NOT NULL</h4>
         <p>Traé clientes con nombre que termine en 'ez', de BsAs o Córdoba, que tengan email. Debe incluir
-          <code>Pérez</code> o <code>López</code>.</p>
+          <code>Pérez</code> o <code>López</code>.
+        </p>
         <div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-9" data-expected="ez">
           <div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "ez"</span></div>
           <div class="editor-area">
@@ -605,7 +609,8 @@ INSERT INTO clientes VALUES (5,'Gómez','Córdoba','gomez@mail.com');
       <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span>
         <h4>Ejercicio 10: Consulta de análisis completa</h4>
         <p>Contá cuántos clientes activos de Buenos Aires tienen score >= 700 y email registrado. Debe incluir
-          <code>2</code>.</p>
+          <code>2</code>.
+        </p>
         <div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-10" data-expected="2">
           <div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "2"</span></div>
           <div class="editor-area">
@@ -652,8 +657,9 @@ INSERT INTO clientes VALUES (6,'Luna','Mendoza',700,'luna@mail.com',1);
         <a class="next" href="/sql/03-operadores-filtros.html">Operadores y filtros →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

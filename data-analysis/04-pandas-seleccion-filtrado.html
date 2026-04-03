@@ -36,7 +36,8 @@
         <h1>pandas: Selección y Filtrado</h1>
         <p>Cuando un gerente te dice <em>"Dame los clientes de CABA con más de $500K de saldo"</em>, necesitás extraer
           filas y columnas específicas de una tabla de millones de registros. Esa capacidad de consultar datos se llama
-          <strong>selección y filtrado</strong>, y es lo que más vas a hacer en tu día a día como Data Analyst.</p>
+          <strong>selección y filtrado</strong>, y es lo que más vas a hacer en tu día a día como Data Analyst.
+        </p>
         <div class="badges">
           <span class="badge">90–120 min</span>
           <span class="badge">Prerrequisitos: Lección 03 (Lectura de datos)</span>
@@ -88,7 +89,8 @@
       <h3>Selección de columnas</h3>
 
       <p>La operación más básica. Podés seleccionar <strong>una columna</strong> (te devuelve una Serie) o
-        <strong>varias columnas</strong> (te devuelve un DataFrame).</p>
+        <strong>varias columnas</strong> (te devuelve un DataFrame).
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># Una columna → Serie
 df["Nombre"]
@@ -99,7 +101,8 @@ df[["Nombre", "Saldo"]]</pre>
       <div class="warning"><strong>Error clásico: dobles corchetes.</strong> <code>df["Nombre", "Saldo"]</code> da
         <code>KeyError</code>. Para varias columnas necesitás pasar una <em>lista</em> dentro de los corchetes:
         <code>df[["Nombre", "Saldo"]]</code>. Los corchetes exteriores son del DataFrame, los interiores son de la lista
-        Python.</div>
+        Python.
+      </div>
 
       <h3>Filtrado con máscaras booleanas</h3>
 
@@ -124,7 +127,8 @@ resultado = df[df["Saldo"] > 500000]</pre>
 
       <p>Para filtros complejos combinás condiciones. <strong>Atención:</strong> en pandas se usan <code>&</code> y
         <code>|</code> (operadores bitwise), NO <code>and</code> y <code>or</code> (operadores lógicos de Python). Y
-        cada condición debe ir entre paréntesis obligatoriamente.</p>
+        cada condición debe ir entre paréntesis obligatoriamente.
+      </p>
 
       <pre style="color:var(--t2);font-size:.85rem;background:var(--bg3);padding:14px;border-radius:8px;margin:12px 0"># AND: ambas condiciones deben ser True
 df[(df["Saldo"] > 500000) & (df["Ciudad"] == "CABA")]
@@ -137,11 +141,13 @@ df[~(df["Estado"] == "Inactivo")]</pre>
 
       <div class="warning"><strong>Error mortal: olvidar los paréntesis.</strong>
         <code>df[df["Saldo"] > 500000 & df["Ciudad"] == "CABA"]</code> explota porque <code>&</code> tiene mayor
-        precedencia que <code>></code> y <code>==</code>. Siempre encerrá cada condición entre paréntesis.</div>
+        precedencia que <code>></code> y <code>==</code>. Siempre encerrá cada condición entre paréntesis.
+      </div>
 
       <div class="realworld"><strong>En el trabajo real:</strong> cuando el área de Marketing te pide "clientes activos
         de CABA con saldo mayor a 500K que compraron en los últimos 30 días", estás combinando 4 filtros con
-        <code>&</code>. Dominar esta sintaxis es el 80% del trabajo diario de un analista.</div>
+        <code>&</code>. Dominar esta sintaxis es el 80% del trabajo diario de un analista.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -303,7 +309,8 @@ print(df.iloc[1:4])</textarea>
 
       <h3>Ejemplo 5: Filtro + selección de columnas (query compuesta)</h3>
       <p>El patrón más potente: filtrar filas Y seleccionar solo las columnas que necesitás. Es el equivalente al
-        <code>SELECT col1, col2 FROM tabla WHERE condicion</code> de SQL.</p>
+        <code>SELECT col1, col2 FROM tabla WHERE condicion</code> de SQL.
+      </p>
 
       <div class="editor" data-mode="python">
         <div class="editor-top"><span>ejemplo_05_query_compuesta.py</span><span>Python</span></div>
@@ -412,7 +419,8 @@ print(resultado.sort_values("Saldo", ascending=False))</textarea>
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 1: Seleccionar una columna</h4>
         <p>Del DataFrame provisto, extraé la columna <code>"Producto"</code> e imprimila. El output debe contener
-          <code>Galletas</code>.</p>
+          <code>Galletas</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-1"
           data-expected="Galletas">
           <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Galletas"</span></div>
@@ -467,7 +475,8 @@ df = pd.DataFrame({
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 3: Filtro simple con una condición</h4>
         <p>Filtrá los productos con <code>Precio > 500</code> e imprimí el resultado. Debe mostrar <code>Vino</code> y
-          <code>Detergente</code>. Tu output debe incluir <code>Detergente</code>.</p>
+          <code>Detergente</code>. Tu output debe incluir <code>Detergente</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-3"
           data-expected="Detergente">
           <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "Detergente"</span></div>
@@ -495,7 +504,8 @@ df = pd.DataFrame({
         <h4>Ejercicio 4: Filtro con dos condiciones AND</h4>
         <p>Del dataset de clientes, filtrá los que sean de <code>"CABA"</code> <strong>Y</strong> tengan
           <code>Saldo > 500000</code>. Imprimí solo las columnas <code>Cliente</code> y <code>Saldo</code>. Debe incluir
-          <code>García</code>.</p>
+          <code>García</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-4"
           data-expected="García">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "García"</span></div>
@@ -610,7 +620,8 @@ df = pd.DataFrame({
         <h4>Ejercicio 8: Query compuesta con loc</h4>
         <p>Usando <code>.loc</code>, filtrá clientes activos con saldo > 300K y seleccioná solo las columnas
           <code>Cliente</code> y <code>Saldo</code>. Imprimí el saldo promedio de ese segmento con <code>.mean()</code>.
-          Debe incluir <code>613333</code>.</p>
+          Debe incluir <code>613333</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-04" data-exercise="ex-8"
           data-expected="613333">
           <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "613333"</span></div>
@@ -724,8 +735,9 @@ df = pd.DataFrame({
         <a class="next" href="/data-analysis/05-pandas-limpieza.html">pandas: limpieza →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

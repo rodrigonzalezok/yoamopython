@@ -63,7 +63,8 @@
         <strong>vectorizadas</strong>. Esto significa que cuando escribís <code>df["Precio"] * 1.21</code>, pandas
         aplica el cálculo a TODAS las filas simultáneamente, en una sola operación. No necesitás un bucle
         <code>for</code>. Esto es miles de veces más rápido y es la razón por la que pandas puede procesar millones de
-        filas en segundos.</div>
+        filas en segundos.
+      </div>
 
       <h3>Crear columnas nuevas</h3>
 
@@ -120,7 +121,8 @@ df["Total"] = df["Monto"] + df["IVA"]</pre>
       <div class="warning"><strong>Performance:</strong> <code>apply()</code> es la más lenta de las tres porque ejecuta
         la función fila por fila en Python puro. Siempre intentá usar operaciones vectorizadas (<code>+</code>,
         <code>*</code>, <code>np.where</code>) antes de recurrir a <code>apply()</code>. En datasets de millones de
-        filas, la diferencia puede ser de segundos vs minutos.</div>
+        filas, la diferencia puede ser de segundos vs minutos.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -647,7 +649,8 @@ df = pd.DataFrame({
         <h4>Ejercicio 10: Pipeline de transformación completo</h4>
         <p>A partir del dataset: (1) Creá columna <code>"Ganancia"</code> = Ingreso - Costo, (2) Creá
           <code>"Margen_%"</code> = Ganancia/Ingreso*100, (3) Clasificá con np.where: margen >= 30 → "Rentable", else
-          "Ajustar", (4) Imprimí solo Producto + Margen_% + Clasificación. Debe incluir <code>Rentable</code>.</p>
+          "Ajustar", (4) Imprimí solo Producto + Margen_% + Clasificación. Debe incluir <code>Rentable</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-06" data-exercise="ex-10"
           data-expected="Rentable">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Rentable"</span></div>
@@ -679,7 +682,8 @@ df = pd.DataFrame({
       <ul>
         <li>Crear columnas es tan simple como <code>df["nueva"] = expresión</code>.</li>
         <li>Las operaciones vectorizadas (<code>+</code>, <code>*</code>, etc.) son rapidísimas — no uses
-          <code>for</code>.</li>
+          <code>for</code>.
+        </li>
         <li><code>map(dict)</code> traduce códigos a nombres legibles, 1 a 1.</li>
         <li><code>np.where(cond, si, no)</code> es el if/else vectorizado más rápido.</li>
         <li><code>apply(func, axis=1)</code> permite lógica compleja accediendo a varias columnas por fila.</li>
@@ -698,8 +702,9 @@ df = pd.DataFrame({
         <a class="next" href="/data-analysis/07-pandas-groupby-pivot.html">pandas: groupby y pivot →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

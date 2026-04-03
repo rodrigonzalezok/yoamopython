@@ -99,17 +99,20 @@ anidada = [[1, 2], [3, 4], [5, 6]]      # lista de listas</pre>
 
       <p>Los <strong>índices negativos</strong> cuentan desde el final: <code>-1</code> es el último elemento,
         <code>-2</code> el anteúltimo, etc. Son extremadamente útiles cuando querés acceder al final sin saber cuántos
-        elementos hay.</p>
+        elementos hay.
+      </p>
 
       <div class="warning"><strong>Error clásico: IndexError.</strong> Si intentás acceder a un índice que no existe
         (<code>lista[10]</code> en una lista de 5 elementos), Python da
         <code>IndexError: list index out of range</code>. Siempre verificá con <code>len(lista)</code> antes de acceder
-        a índices variables.</div>
+        a índices variables.
+      </div>
 
       <h3>Slicing: extraer sublistas</h3>
 
       <p>El <strong>slicing</strong> permite extraer una porción de la lista con la sintaxis
-        <code>lista[inicio:fin:paso]</code>:</p>
+        <code>lista[inicio:fin:paso]</code>:
+      </p>
 
       <ul>
         <li><code>inicio</code> — índice donde empieza (incluido). Default: <code>0</code></li>
@@ -229,12 +232,14 @@ anidada = [[1, 2], [3, 4], [5, 6]]      # lista de listas</pre>
 
       <div class="tip"><strong>Tip:</strong> <code>sorted()</code> devuelve una NUEVA lista sin modificar la original.
         <code>lista.sort()</code> modifica la lista in-place y devuelve <code>None</code>. Es una diferencia crucial que
-        genera bugs si no la entendés.</div>
+        genera bugs si no la entendés.
+      </div>
 
       <div class="realworld"><strong>En análisis de datos:</strong> cuando trabajás con pandas, un DataFrame tiene
         columnas que son Series (similares a listas). Las operaciones de slicing, filtrado y funciones como
         <code>sum()</code>, <code>min()</code>, <code>max()</code> que aprendés acá se trasladan directamente a pandas.
-        Dominá listas y pandas va a ser natural.</div>
+        Dominá listas y pandas va a ser natural.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -584,7 +589,8 @@ print(f"Total: ${sum(montos_num):,.0f}")</textarea>
         <h4>Ejercicio 4: Append y extend</h4>
         <p>Empezá con <code>cartera = [100000, 250000]</code>. Agregá <code>180000</code> con append, después extendé
           con <code>[50000, 320000]</code>. Imprimí la lista final y su longitud. Debe incluir la longitud
-          <code>5</code>.</p>
+          <code>5</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-4" data-expected="5">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "5"</span></div>
           <div class="editor-area">
@@ -606,7 +612,8 @@ print(f"Total: ${sum(montos_num):,.0f}")</textarea>
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 5: Ordenar y top N</h4>
         <p>Dada <code>scores = [720, 590, 810, 645, 680, 750, 520]</code>, imprimí los 3 scores más altos (top 3) usando
-          <code>sorted()</code> con <code>reverse=True</code> y slicing. Debe incluir <code>[810, 750, 720]</code>.</p>
+          <code>sorted()</code> con <code>reverse=True</code> y slicing. Debe incluir <code>[810, 750, 720]</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-5"
           data-expected="[810, 750, 720]">
           <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "[810, 750, 720]"</span></div>
@@ -629,7 +636,8 @@ print(f"Total: ${sum(montos_num):,.0f}")</textarea>
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 6: List comprehension — filtrar</h4>
         <p>Dada <code>montos = [12000, 3500, 45000, 800, 67000, 2100, 91000]</code>, creá una nueva lista
-          <code>grandes</code> con solo los montos > 10000 e imprimí su suma. Debe incluir <code>215000</code>.</p>
+          <code>grandes</code> con solo los montos > 10000 e imprimí su suma. Debe incluir <code>215000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-6" data-expected="215000">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "215000"</span></div>
           <div class="editor-area">
@@ -698,7 +706,8 @@ print(f"Total: {sum(saldos)}")</textarea>
         <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 9: Clasificar con comprehension y ternario</h4>
         <p>Dada <code>edades = [15, 22, 17, 30, 12, 45, 16, 28]</code>, creá una lista que tenga <code>"Mayor"</code> o
-          <code>"Menor"</code> para cada edad. Contá cuántos son mayores. Debe incluir <code>Mayores: 4</code>.</p>
+          <code>"Menor"</code> para cada edad. Contá cuántos son mayores. Debe incluir <code>Mayores: 4</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-9" data-expected="Mayores: 4">
           <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Mayores: 4"</span></div>
           <div class="editor-area">
@@ -722,7 +731,8 @@ print(f"Total: {sum(saldos)}")</textarea>
         <p>Tenés <code>clientes = ["García","López","Martínez","Pérez","Fernández"]</code> y
           <code>saldos = [150000, 320000, 45000, 890000, 72000]</code>. Imprimí: (1) cada cliente con su saldo y un
           emoji 🟢 si > promedio, 🔴 si no, (2) el promedio, (3) los nombres de clientes sobre el promedio, (4) el Top
-          1. Debe incluir <code>Promedio: 295400</code>.</p>
+          1. Debe incluir <code>Promedio: 295400</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="python-08" data-exercise="ex-10"
           data-expected="Promedio: 295400">
           <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Promedio: 295400"</span></div>
@@ -750,9 +760,11 @@ saldos = [150000, 320000, 45000, 890000, 72000]
         <li>Los índices empiezan en <code>0</code>. Los negativos (<code>-1</code>) cuentan desde el final.</li>
         <li>Slicing (<code>[inicio:fin:paso]</code>) extrae sublistas. Nunca da IndexError.</li>
         <li>Métodos de modificación: <code>append</code>, <code>insert</code>, <code>extend</code>, <code>remove</code>,
-          <code>pop</code>, <code>sort</code>, <code>reverse</code>.</li>
+          <code>pop</code>, <code>sort</code>, <code>reverse</code>.
+        </li>
         <li>Funciones estadísticas: <code>len</code>, <code>sum</code>, <code>min</code>, <code>max</code>,
-          <code>sorted</code>.</li>
+          <code>sorted</code>.
+        </li>
         <li>List comprehensions (<code>[x for x in lista if cond]</code>) son la herramienta más poderosa para
           transformar datos.</li>
       </ul>
@@ -771,8 +783,9 @@ saldos = [150000, 320000, 45000, 890000, 72000]
         <a class="next" href="/python/09-tuplas.html">Tuplas →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

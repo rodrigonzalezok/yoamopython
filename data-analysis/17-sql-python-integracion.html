@@ -36,7 +36,8 @@
         <h1>Integración SQL + Python</h1>
         <p>Ya dominás SQL para consultar bases de datos y Python/pandas para analizar datos. Ahora aprendé a
           <strong>conectar ambos mundos</strong>: ejecutar queries SQL desde Python, cargar resultados directamente en
-          DataFrames y escribir pipelines automatizados que combinen lo mejor de cada tecnología.</p>
+          DataFrames y escribir pipelines automatizados que combinen lo mejor de cada tecnología.
+        </p>
         <div class="badges">
           <span class="badge">90–120 min</span>
           <span class="badge">Prerrequisitos: SQL (sección completa) + pandas</span>
@@ -155,7 +156,8 @@
       <div class="warning"><strong>Regla de oro:</strong> filtrá y agregá en SQL lo que puedas, y traé a Python solo los
         datos que vas a analizar. Si tu base tiene 50 millones de filas, <em>no hagas</em>
         <code>pd.read_sql("SELECT * FROM tabla", conn)</code>. Hacé <code>SELECT</code> con <code>WHERE</code>,
-        <code>GROUP BY</code> y <code>LIMIT</code> para traer lo necesario.</div>
+        <code>GROUP BY</code> y <code>LIMIT</code> para traer lo necesario.
+      </div>
 
       <div class="realworld"><strong>En el trabajo real:</strong> el día a día de un Data Analyst es: (1) abrir Jupyter
         Notebook, (2) conectarse al data warehouse con <code>sqlalchemy + psycopg2</code>, (3) ejecutar queries, (4)
@@ -339,7 +341,8 @@ conn.close()</textarea>
 
       <div class="tip"><strong>Tip pro — queries parametrizadas:</strong> nunca concatená variables en un string SQL
         (<code>f"WHERE id = {id}"</code>) — es vulnerable a SQL injection. Usá parámetros:
-        <code>pd.read_sql("SELECT * FROM t WHERE id = ?", conn, params=[id])</code>.</div>
+        <code>pd.read_sql("SELECT * FROM t WHERE id = ?", conn, params=[id])</code>.
+      </div>
 
       <h3>Ejemplo 4: Guardar resultados de vuelta en SQL</h3>
       <p>Después de procesar datos en pandas, podés guardar los resultados en una tabla SQL para que otros los consuman.
@@ -601,7 +604,8 @@ pd.DataFrame({
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 4: JOIN en SQL → DataFrame</h4>
         <p>Hacé un JOIN entre clientes y transacciones. Imprimí el DataFrame resultante. Debe incluir
-          <code>ciudad</code>.</p>
+          <code>ciudad</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-4"
           data-expected="ciudad">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "ciudad"</span></div>
@@ -664,7 +668,8 @@ pd.DataFrame({
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 6: Guardar resultados con to_sql</h4>
         <p>Calculá un resumen en pandas y guardálo como nueva tabla SQL. Verificá leyéndolo. Debe incluir
-          <code>resumen</code>.</p>
+          <code>resumen</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-6"
           data-expected="resumen">
           <div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "resumen"</span></div>
@@ -698,7 +703,8 @@ pd.DataFrame({
         <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
         <h4>Ejercicio 7: Query parametrizada</h4>
         <p>Usá una query con parámetro <code>?</code> para filtrar por una ciudad específica. Debe incluir
-          <code>Córdoba</code>.</p>
+          <code>Córdoba</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-17" data-exercise="ex-7"
           data-expected="Córdoba">
           <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "Córdoba"</span></div>
@@ -857,8 +863,9 @@ pd.DataFrame({
         <a class="next" href="/data-analysis/18-portfolio-proyecto-final.html">Portfolio y proyecto final →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 

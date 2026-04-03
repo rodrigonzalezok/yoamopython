@@ -53,7 +53,8 @@
       <p>La programación tradicional funciona así: le das <strong>reglas</strong> + <strong>datos</strong> → la
         computadora produce <strong>respuestas</strong>. Machine Learning invierte el proceso: le das
         <strong>datos</strong> + <strong>respuestas correctas</strong> → la computadora descubre las
-        <strong>reglas</strong> sola.</p>
+        <strong>reglas</strong> sola.
+      </p>
 
       <div class="analogy"><strong>Analogía del médico:</strong> un médico no memoriza "si temperatura > 38°C y tos seca
         → gripe". Después de ver miles de pacientes (datos) con sus diagnósticos (respuestas), su cerebro aprende
@@ -554,7 +555,8 @@ df = pd.DataFrame({
             <span class="exercise-level basic">Nivel 1 · Básico</span>
             <h4>Ejercicio 2: Train/Test split</h4>
             <p>Dividí el dataset en 80% train y 20% test. Imprimí cuántas filas tiene el train. Debe incluir
-              <code>160</code>.</p>
+              <code>160</code>.
+            </p>
             <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-2"
               data-expected="160">
               <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "160"</span></div>
@@ -589,7 +591,8 @@ y = df["Compra"]
             <span class="exercise-level basic">Nivel 1 · Básico</span>
             <h4>Ejercicio 3: Entrenar y predecir</h4>
             <p>Entrenáun <code>DecisionTreeClassifier</code> y hacé predicciones. Imprimí la accuracy. Debe incluir
-              <code>%</code>.</p>
+              <code>%</code>.
+            </p>
             <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-3"
               data-expected="%">
               <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "%"</span></div>
@@ -620,7 +623,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
             <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
             <h4>Ejercicio 4: Matriz de confusión</h4>
             <p>Entrenáun modelo y mostrásu matriz de confusión. Imprimí cuántos Falsos Negativos hay. Debe incluir
-              <code>FN</code>.</p>
+              <code>FN</code>.
+            </p>
             <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-4"
               data-expected="FN">
               <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "FN"</span></div>
@@ -774,7 +778,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
             <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
             <h4>Ejercicio 9: Feature importance</h4>
             <p>Después de entrenar un árbol, imprimí qué features son más importantes con
-              <code>modelo.feature_importances_</code>. Debe incluir <code>Importancia</code>.</p>
+              <code>modelo.feature_importances_</code>. Debe incluir <code>Importancia</code>.
+            </p>
             <div class="editor" data-mode="python" data-lesson="data-analysis-14" data-exercise="ex-9"
               data-expected="Importancia">
               <div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Importancia"</span></div>
@@ -867,8 +872,9 @@ y = (X[:, 0] * 2 + X[:, 1] - X[:, 2] > 1.5).astype(int)
             <a class="next" href="/data-analysis/15-regresion-clasificacion.html">Regresión y clasificación →</a>
           </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+          <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri
+              Gonzalez</a></p>
     </main>
   </div>
 

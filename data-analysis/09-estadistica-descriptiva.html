@@ -94,7 +94,8 @@
       <div class="concept"><strong>¿Cuándo la media miente?</strong> Si en una sala hay 9 personas ganando $100K y 1
         persona ganando $10M, la media es $1.09M — un número que no representa a nadie. La mediana es $100K, que
         describe al 90% del grupo. Por eso, para ingresos, precios de propiedades y salarios, siempre se usa la
-        <strong>mediana</strong>.</div>
+        <strong>mediana</strong>.
+      </div>
 
       <div class="analogy"><strong>Analogía:</strong> Jeff Bezos entra a un bar. La media de ingresos de los presentes
         sube a $1 mil millones. La mediana apenas se mueve. La media es sensible a valores extremos; la mediana es
@@ -170,7 +171,8 @@
       <div class="realworld"><strong>En el trabajo real:</strong> cuando un líder te da un dataset nuevo y te dice
         "fijate qué hay acá", lo primero que hacés es: <code>df.shape</code> (tamaño), <code>df.dtypes</code> (tipos),
         <code>df.isna().sum()</code> (nulos), <code>df.describe()</code> (estadísticas). Con esas 4 líneas ya sabés el
-        80% de lo que necesitás saber.</div>
+        80% de lo que necesitás saber.
+      </div>
 
       <div class="section-num">02</div>
       <h2>Ejemplos explicados paso a paso</h2>
@@ -443,7 +445,8 @@ print(f"Segmento más heterogéneo (mayor σ): {reporte['Saldo_Std'].idxmax()}")
         <span class="exercise-level basic">Nivel 1 · Básico</span>
         <h4>Ejercicio 1: Media y mediana</h4>
         <p>Calculá la media y la mediana de la columna <code>"Saldo"</code>. Imprimí la mediana. Debe incluir
-          <code>400000</code>.</p>
+          <code>400000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-1"
           data-expected="400000">
           <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "400000"</span></div>
@@ -521,7 +524,8 @@ df = pd.DataFrame({
         <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
         <h4>Ejercicio 4: Calcular cuantiles</h4>
         <p>Calculá Q1 (25%), mediana (50%) y Q3 (75%) de la columna <code>"Ingreso"</code>. Imprimí Q3. Debe incluir
-          <code>480000</code>.</p>
+          <code>480000</code>.
+        </p>
         <div class="editor" data-mode="python" data-lesson="data-analysis-09" data-exercise="ex-4"
           data-expected="480000">
           <div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "480000"</span></div>
@@ -714,7 +718,8 @@ df = pd.DataFrame({
 
       <ul>
         <li><strong>Tendencia central:</strong> usá la <strong>media</strong> para datos simétricos y la
-          <strong>mediana</strong> cuando hay outliers o asimetría.</li>
+          <strong>mediana</strong> cuando hay outliers o asimetría.
+        </li>
         <li><strong>Dispersión:</strong> la desviación estándar (<code>σ</code>) te dice qué tan "ancho" es tu dataset.
           Alto σ = mucha variabilidad.</li>
         <li><strong>.describe()</strong> es tu primera línea de defensa: te da el panorama en 1 segundo.</li>
@@ -738,8 +743,9 @@ df = pd.DataFrame({
         <a class="next" href="/data-analysis/10-matplotlib-basico.html">Matplotlib básico →</a>
       </div>
 
-    
-      <p class="footer-text">Â©Rodri Gonzalez Â· Hecho con â¤ï¸ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a></p>
+
+      <p class="footer-text">Hecho con ❤️ por <a href="https://rodrigonzalez.com.ar" target="_blank">Rodri Gonzalez</a>
+      </p>
     </main>
   </div>
 
