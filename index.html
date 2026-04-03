@@ -535,7 +535,8 @@
       <p>Diseño métricas, modelos y flujos de datos para inversiones. Este proyecto nació como
         <strong>@yoamopython</strong> en redes y fue evolucionando hasta convertirse en QuieroProgramar: una plataforma
         pensada para formar analistas de datos con criterio profesional, desde lo más básico hasta lo que realmente te
-        piden en una entrevista.</p>
+        piden en una entrevista.
+      </p>
       <p>Si llegaste acá desde <a href="https://rodrigonzalez.com.ar" target="_blank">rodrigonzalez.com.ar</a>, ya sabés
         que todo lo que hago apunta a lo mismo: datos, finanzas y automatización. Este es el recurso educativo que me
         hubiese gustado tener cuando arranqué.</p>
@@ -549,7 +550,7 @@
       </div>
     </div>
 
-    <p class="footer-text">© Rodri Gonzalez · QuieroProgramar · Hecho en Argentina</p>
+    <p class="footer-text">©Rodri Gonzalez · Hecho con ❤️ por Rodri Gonzalez</p>
 
   </main>
 
@@ -558,15 +559,15 @@
     import { getDashboardProps, exportProgress, importProgress } from '/js/progress.js';
     import { initTheme } from '/js/theme.js';
     initTheme();
-    
+
     const dashProps = getDashboardProps(CATALOG);
-    
+
     // Topbar
     document.getElementById('global-progress-fill').style.width = `${dashProps.stats.pct}%`;
     document.getElementById('global-progress-text').textContent = `${dashProps.stats.completedLessons}/${dashProps.stats.totalLessons} lecciones`;
 
     // Dashboard HTML
-    const dashHTML = \`
+    const dashHTML = `
       <div class="dashboard">
         <div class="dashboard-main">
           <div class="dash-card continue-card">
@@ -620,7 +621,7 @@
           </div>
         </div>
       </div>
-    \`;
+    `;
 
     document.getElementById('dashboard-mount').innerHTML = dashHTML;
 
@@ -628,10 +629,10 @@
     document.getElementById('btn-export').addEventListener('click', exportProgress);
     document.getElementById('btn-import').addEventListener('change', (e) => {
       const file = e.target.files[0];
-      if(file) {
+      if (file) {
         const reader = new FileReader();
         reader.onload = (re) => {
-          if(importProgress(re.target.result)) {
+          if (importProgress(re.target.result)) {
             alert('Progreso cargado con éxito. Refrescando la página...');
             location.reload();
           } else {
