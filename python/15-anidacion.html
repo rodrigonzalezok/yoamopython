@@ -27,7 +27,7 @@
   <h1>Anidación de estructuras</h1>
   <p>En el mundo real los datos no vienen planos: vienen como listas dentro de listas, diccionarios dentro de diccionarios, listas de diccionarios con listas adentro. Esta lección te enseña a construir, navegar y transformar cualquier estructura anidada — la habilidad que necesitás para trabajar con JSON y pandas.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: 08 Listas, 10 Diccionarios, 14 Métodos de dicts</span>
   </div>
 </div>
@@ -411,7 +411,7 @@ print(f"\nTotal por cliente: {totales}")</textarea></div>
 
 # Recorré e imprimí:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["for fila in tabla:","    print(f\"{fila[0]}: ${fila[1]:,}\")","O con unpacking: for ticker, precio in tabla:"]'></div>
@@ -430,7 +430,7 @@ print(f"\nTotal por cliente: {totales}")</textarea></div>
 
 # Recorré e imprimí:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["for c in clientes:","    print(f\"{c[\\\"nombre\\\"]}: {c[\\\"score\\\"]}\")","Cada c es un diccionario"]'></div>
@@ -446,7 +446,7 @@ print(f"\nTotal por cliente: {totales}")</textarea></div>
 
 # Accedé al nombre y al score:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["data[\"cliente\"][\"nombre\"]","data[\"cliente\"][\"scoring\"][\"valor\"]","Cada [] navega un nivel más profundo"]'></div>
@@ -468,7 +468,7 @@ print(f"\nTotal por cliente: {totales}")</textarea></div>
 
 # Extraé saldos y sumá:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["saldos = [c[\"saldo\"] for c in clientes]","print(sum(saldos))","150000+320000+45000+890000+72000 = 1477000"]'></div>
@@ -490,7 +490,7 @@ print(f"\nTotal por cliente: {totales}")</textarea></div>
 
 # Filtrá > $100K:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["grandes = [c for c in clientes if c[\"saldo\"] > 100000]","for c in grandes: print(c[\"nombre\"])","García, López y Pérez superan $100K"]'></div>
@@ -506,7 +506,7 @@ print(f"\nTotal por cliente: {totales}")</textarea></div>
 
 # Aplana y sumá:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["plana = [s for subcuenta in cuentas for s in subcuenta]","print(sum(plana))","150000+500000+320000+890000+5000+12000 = 1877000"]'></div>
@@ -529,7 +529,7 @@ score = # accedé al scoring valor con default 0
 email = # accedé a contacto > email con default "No informado"
 print(f"Score: {score}")
 print(f"Email: {email}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["score = cliente.get(\"scoring\", {}).get(\"valor\", 0)","email = cliente.get(\"contacto\", {}).get(\"email\", \"No informado\")","Si \"contacto\" no existe, {} evita el KeyError"]'></div>
@@ -547,7 +547,7 @@ saldos = [150000, 320000, 890000]
 
 # Construí la lista de dicts:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["Usá zip: for n, s, sal in zip(nombres, scores, saldos):","O comprehension: [{\"nombre\":n,\"score\":s,\"saldo\":sal} for n,s,sal in zip(...)]","print(clientes) para ver el resultado"]'></div>
@@ -566,7 +566,7 @@ saldos = [150000, 320000, 890000]
 
 # Extraé todas las cuentas como (nombre, tipo, saldo):
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["[(c[\"nombre\"], cta[\"tipo\"], cta[\"saldo\"]) for c in clientes for cta in c[\"cuentas\"]]","El doble for: primero clientes, después cuentas de cada cliente","Imprimí cada tupla para ver el resultado"]'></div>
@@ -600,7 +600,7 @@ saldos = [150000, 320000, 890000]
 # Procesá y generá reporte:
 print("=== REPORTE ===")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["nombre = api_response[\"data\"][\"cliente\"][\"nombre\"]","score = api_response[\"data\"][\"cliente\"][\"scoring\"][\"valor\"]","Para tarjetas: uso_pct = t[\"consumo\"]/t[\"limite\"]*100, alertar si > 80%"]'></div>

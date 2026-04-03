@@ -27,7 +27,7 @@
   <h1>pandas: Selección y Filtrado</h1>
   <p>Cuando un gerente te dice <em>"Dame los clientes de CABA con más de $500K de saldo"</em>, necesitás extraer filas y columnas específicas de una tabla de millones de registros. Esa capacidad de consultar datos se llama <strong>selección y filtrado</strong>, y es lo que más vas a hacer en tu día a día como Data Analyst.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: Lección 03 (Lectura de datos)</span>
   </div>
 </div>
@@ -307,7 +307,7 @@ df = pd.DataFrame({
 
 # Extraé la columna Producto e imprimila
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["print(df[\"Producto\"])"]'></div>
@@ -329,7 +329,7 @@ df = pd.DataFrame({
 
 # Seleccioná Producto y Precio (doble corchete [[ ]])
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["print(df[[\"Producto\", \"Precio\"]])","Recordá: los corchetes externos son del df, los internos son la lista"]'></div>
@@ -351,7 +351,7 @@ df = pd.DataFrame({
 
 # Filtrá donde Precio > 500
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["caros = df[df[\"Precio\"] > 500]","print(caros)"]'></div>
@@ -374,7 +374,7 @@ df = pd.DataFrame({
 
 # Filtrá CABA AND Saldo > 500K, mostrá solo Cliente y Saldo
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["filtro = (df[\"Ciudad\"] == \"CABA\") & (df[\"Saldo\"] > 500000)","resultado = df.loc[filtro, [\"Cliente\", \"Saldo\"]]","print(resultado)"]'></div>
@@ -396,7 +396,7 @@ df = pd.DataFrame({
 
 # Usá .isin() para filtrar CABA y Rosario, imprimí len()
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["filtro = df[\"Ciudad\"].isin([\"CABA\", \"Rosario\"])","resultado = df[filtro]","print(len(resultado))"]'></div>
@@ -418,7 +418,7 @@ df = pd.DataFrame({
 
 # iloc filas 1:4, columnas 0:2
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["print(df.iloc[1:4, 0:2])","iloc excluye el extremo final: 1:4 = filas 1,2,3"]'></div>
@@ -440,7 +440,7 @@ df = pd.DataFrame({
 
 # Filtrá los que NO son de CABA con ~ e imprimí solo la columna Cliente
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["no_caba = df[~(df[\"Ciudad\"] == \"CABA\")]","print(no_caba[\"Cliente\"])"]'></div>
@@ -463,7 +463,7 @@ df = pd.DataFrame({
 
 # Filtrá activos con saldo > 300K, mostrá Cliente y Saldo, calculá promedio
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["filtro = (df[\"Activo\"]) & (df[\"Saldo\"] > 300000)","segmento = df.loc[filtro, [\"Cliente\", \"Saldo\"]]","print(round(segmento[\"Saldo\"].mean()))"]'></div>
@@ -486,7 +486,7 @@ df = pd.DataFrame({
 
 # Filtrar activos, ordenar por Saldo desc, top 2
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["activos = df[df[\"Activo\"]]","top2 = activos.sort_values(\"Saldo\", ascending=False).head(2)","print(top2)"]'></div>
@@ -511,7 +511,7 @@ df = pd.DataFrame({
 # 2. Clientes activos
 # 3. Saldo promedio de activos de CABA (García 850K + Sosa 670K) / 2 = 760K
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["caba = df[df[\"Ciudad\"] == \"CABA\"]","activos_caba = df[(df[\"Ciudad\"] == \"CABA\") & (df[\"Activo\"])]","print(round(activos_caba[\"Saldo\"].mean()))"]'></div>

@@ -22,7 +22,7 @@
   <h1>Window Functions</h1>
   <p>Las funciones de ventana calculan valores sobre un conjunto de filas relacionadas SIN colapsar el resultado (a diferencia de GROUP BY). Podés agregar un ranking, comparar con la fila anterior, o calcular totales acumulados — manteniendo cada fila individual visible.</p>
   <div class="badges">
-    <span class="badge">⏱ 100–120 min</span>
+    <span class="badge">100–120 min</span>
     <span class="badge">Prerrequisitos: SQL 10</span>
   </div>
 </div>
@@ -198,38 +198,38 @@ FROM ventas_mensuales;</textarea></div>
 INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000);
 
 -- ROW_NUMBER por saldo DESC:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["ROW_NUMBER() OVER (ORDER BY saldo DESC) AS ranking","Pérez saldo 890K → ranking 1","Cada fila mantiene su detalle"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["ROW_NUMBER() OVER (ORDER BY saldo DESC) AS ranking","Pérez saldo 890K → ranking 1","Cada fila mantiene su detalle"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: SUM OVER — total acumulado</h4><p>Mostrá ventas mensuales con total acumulado. Debe incluir <code>acumulado</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-11" data-exercise="ex-2" data-expected="acumulado"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "acumulado"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE ventas (mes TEXT, monto REAL);
 INSERT INTO ventas VALUES ('2025-01',100000),('2025-02',150000),('2025-03',120000);
 
 -- Total acumulado:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["SUM(monto) OVER (ORDER BY mes) AS acumulado","Ene: 100K, Feb: 250K, Mar: 370K","ORDER BY en OVER define la dirección del acumulado"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["SUM(monto) OVER (ORDER BY mes) AS acumulado","Ene: 100K, Feb: 250K, Mar: 370K","ORDER BY en OVER define la dirección del acumulado"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: AVG OVER — promedio junto a cada fila</h4><p>Mostrá cada cliente con el promedio general de saldo al lado. Debe incluir <code>promedio</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-11" data-exercise="ex-3" data-expected="promedio"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "promedio"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000);
 
 -- AVG OVER():
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["ROUND(AVG(saldo) OVER (), 0) AS promedio","OVER () sin parámetros = toda la tabla","El promedio aparece en CADA fila"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["ROUND(AVG(saldo) OVER (), 0) AS promedio","OVER () sin parámetros = toda la tabla","El promedio aparece en CADA fila"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: PARTITION BY — ranking por ciudad</h4><p>Ranking de saldo dentro de cada ciudad. Debe incluir <code>ranking_ciudad</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-11" data-exercise="ex-4" data-expected="ranking_ciudad"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "ranking_ciudad"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
 (3,'Pérez','Buenos Aires',890000),(4,'Fernández','Córdoba',72000),(5,'Sosa','Buenos Aires',210000);
 
 -- Ranking dentro de cada ciudad:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["ROW_NUMBER() OVER (PARTITION BY ciudad ORDER BY saldo DESC) AS ranking_ciudad","Cada ciudad tiene su propio ranking 1, 2, 3...","BsAs: Pérez 1, Sosa 2, García 3"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["ROW_NUMBER() OVER (PARTITION BY ciudad ORDER BY saldo DESC) AS ranking_ciudad","Cada ciudad tiene su propio ranking 1, 2, 3...","BsAs: Pérez 1, Sosa 2, García 3"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: LAG — mes anterior</h4><p>Mostrá ventas con el valor del mes anterior y la diferencia. Debe incluir <code>anterior</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-11" data-exercise="ex-5" data-expected="anterior"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "anterior"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE ventas (mes TEXT, monto REAL);
 INSERT INTO ventas VALUES ('2025-01',100000),('2025-02',150000),('2025-03',120000),('2025-04',180000);
 
 -- LAG para comparar con mes anterior:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["LAG(monto, 1) OVER (ORDER BY mes) AS anterior","monto - LAG(monto, 1) OVER (ORDER BY mes) AS variacion","Enero no tiene anterior → NULL"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["LAG(monto, 1) OVER (ORDER BY mes) AS anterior","monto - LAG(monto, 1) OVER (ORDER BY mes) AS variacion","Enero no tiene anterior → NULL"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: % del total con SUM OVER</h4><p>Mostrá cada cliente con su % del saldo total. Debe incluir <code>pct</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-11" data-exercise="ex-6" data-expected="pct"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "pct"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',150000),(2,'López',320000),(3,'Pérez',890000),(4,'Sosa',45000);
 
 -- % del total con OVER:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["ROUND(saldo * 100.0 / SUM(saldo) OVER (), 1) AS pct","SUM(saldo) OVER () calcula el total en cada fila","Más elegante que subconsulta"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["ROUND(saldo * 100.0 / SUM(saldo) OVER (), 1) AS pct","SUM(saldo) OVER () calcula el total en cada fila","Más elegante que subconsulta"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Top N por grupo con PARTITION BY</h4><p>Top 2 clientes por ciudad usando ROW_NUMBER + PARTITION BY en una CTE. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-11" data-exercise="ex-7" data-expected="Pérez"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
@@ -237,20 +237,20 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Có
 (5,'Sosa','Buenos Aires',210000),(6,'Luna','Córdoba',180000);
 
 -- Top 2 por ciudad (CTE + ROW_NUMBER):
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["WITH ranked AS (SELECT *, ROW_NUMBER() OVER (PARTITION BY ciudad ORDER BY saldo DESC) AS rn ...)","SELECT * FROM ranked WHERE rn <= 2","BsAs: Pérez, Sosa. Cba: López, Luna"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["WITH ranked AS (SELECT *, ROW_NUMBER() OVER (PARTITION BY ciudad ORDER BY saldo DESC) AS rn ...)","SELECT * FROM ranked WHERE rn <= 2","BsAs: Pérez, Sosa. Cba: López, Luna"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Variación % mes a mes</h4><p>Calculá la variación porcentual mes a mes con LAG. Debe incluir <code>variacion_pct</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-11" data-exercise="ex-8" data-expected="variacion_pct"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "variacion_pct"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE ventas (mes TEXT, monto REAL);
 INSERT INTO ventas VALUES ('2025-01',1200000),('2025-02',1350000),('2025-03',1100000),('2025-04',1500000);
 
 -- Variación %:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["LAG(monto,1) OVER (ORDER BY mes) AS anterior","ROUND((monto - LAG(monto,1) OVER (ORDER BY mes)) * 100.0 / LAG(monto,1) OVER (ORDER BY mes), 1) AS variacion_pct","Feb vs Ene: (1350-1200)/1200 = 12.5%"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["LAG(monto,1) OVER (ORDER BY mes) AS anterior","ROUND((monto - LAG(monto,1) OVER (ORDER BY mes)) * 100.0 / LAG(monto,1) OVER (ORDER BY mes), 1) AS variacion_pct","Feb vs Ene: (1350-1200)/1200 = 12.5%"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Promedio móvil</h4><p>Calculá el promedio de saldo por ciudad junto a cada cliente (PARTITION BY sin ORDER BY). Debe incluir <code>prom_ciudad</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-11" data-exercise="ex-9" data-expected="prom_ciudad"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "prom_ciudad"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
 (3,'Pérez','Buenos Aires',890000),(4,'Fernández','Córdoba',72000),(5,'Sosa','Buenos Aires',210000);
 
 -- Promedio por ciudad junto a cada fila:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["ROUND(AVG(saldo) OVER (PARTITION BY ciudad), 0) AS prom_ciudad","BsAs prom: (150K+890K+210K)/3 junto a cada fila de BsAs","Córdoba prom: (320K+72K)/2 junto a cada fila de Córdoba"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["ROUND(AVG(saldo) OVER (PARTITION BY ciudad), 0) AS prom_ciudad","BsAs prom: (150K+890K+210K)/3 junto a cada fila de BsAs","Córdoba prom: (320K+72K)/2 junto a cada fila de Córdoba"]'></div></div>
 
 <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Dashboard analítico completo</h4><p>Para cada cliente mostrá: ranking general, ranking por ciudad, saldo, promedio general, promedio de su ciudad, diferencia vs promedio, y % del total. Debe incluir <code>ranking</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-11" data-exercise="ex-10" data-expected="ranking"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "ranking"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
@@ -258,7 +258,7 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Có
 (5,'Sosa','Buenos Aires',210000),(6,'Luna','Córdoba',180000);
 
 -- Dashboard con múltiples window functions:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["ROW_NUMBER() OVER (ORDER BY saldo DESC) AS ranking","ROW_NUMBER() OVER (PARTITION BY ciudad ORDER BY saldo DESC) AS ranking_ciudad","AVG(saldo) OVER () AS prom_general, AVG(saldo) OVER (PARTITION BY ciudad) AS prom_ciudad"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["ROW_NUMBER() OVER (ORDER BY saldo DESC) AS ranking","ROW_NUMBER() OVER (PARTITION BY ciudad ORDER BY saldo DESC) AS ranking_ciudad","AVG(saldo) OVER () AS prom_general, AVG(saldo) OVER (PARTITION BY ciudad) AS prom_ciudad"]'></div></div>
 
 <div class="section-num">05</div>
 <h2>Resumen y conexión</h2>

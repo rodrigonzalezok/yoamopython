@@ -22,7 +22,7 @@
   <h1>INNER JOIN</h1>
   <p>En el mundo real, los datos NO están en una sola tabla. Los clientes están en una tabla, sus cuentas en otra, las transacciones en otra. JOIN es la operación que las conecta usando una columna en común (típicamente un ID). Es la habilidad SQL más importante después de SELECT.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">90–110 min</span>
     <span class="badge">Prerrequisitos: SQL 06</span>
   </div>
 </div>
@@ -238,7 +238,7 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires'),(2,'López','Córdoba')
 INSERT INTO cuentas VALUES (101,1,'CA$',150000),(102,2,'CA$',320000);
 
 -- JOIN clientes con cuentas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT c.nombre, cu.saldo FROM clientes c","INNER JOIN cuentas cu ON c.id = cu.cliente_id;","ON conecta c.id con cu.cliente_id"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT c.nombre, cu.saldo FROM clientes c","INNER JOIN cuentas cu ON c.id = cu.cliente_id;","ON conecta c.id con cu.cliente_id"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: JOIN con WHERE</h4><p>Mostrá solo las cuentas de clientes de Buenos Aires. Debe incluir <code>890000</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-07" data-exercise="ex-2" data-expected="890000"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "890000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, ciudad TEXT);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, tipo TEXT, saldo REAL);
@@ -246,7 +246,7 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires'),(2,'López','Córdoba')
 INSERT INTO cuentas VALUES (101,1,'CA$',150000),(102,2,'CA$',320000),(103,3,'CA$',890000);
 
 -- JOIN + WHERE ciudad BsAs:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["INNER JOIN cuentas cu ON c.id = cu.cliente_id","WHERE c.ciudad = \\x27Buenos Aires\\x27","García y Pérez son de BsAs"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["INNER JOIN cuentas cu ON c.id = cu.cliente_id","WHERE c.ciudad = \\x27Buenos Aires\\x27","García y Pérez son de BsAs"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: JOIN con alias y ORDER BY</h4><p>Uní clientes y cuentas, ordená por saldo DESC. Debe incluir <code>Pérez</code> primero.</p><div class="editor" data-mode="sql" data-lesson="sql-07" data-exercise="ex-3" data-expected="Pérez"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, saldo REAL);
@@ -254,7 +254,7 @@ INSERT INTO clientes VALUES (1,'García'),(2,'López'),(3,'Pérez');
 INSERT INTO cuentas VALUES (101,1,150000),(102,2,320000),(103,3,890000);
 
 -- JOIN ordenado por saldo:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["SELECT c.nombre, cu.saldo FROM clientes c","INNER JOIN cuentas cu ON c.id = cu.cliente_id","ORDER BY cu.saldo DESC"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["SELECT c.nombre, cu.saldo FROM clientes c","INNER JOIN cuentas cu ON c.id = cu.cliente_id","ORDER BY cu.saldo DESC"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Saldo total por cliente</h4><p>Un cliente puede tener varias cuentas. Calculá el saldo total de cada uno con GROUP BY. Debe incluir <code>655000</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-07" data-exercise="ex-4" data-expected="655000"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "655000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, tipo TEXT, saldo REAL);
@@ -263,7 +263,7 @@ INSERT INTO cuentas VALUES (101,1,'CA$',150000),(102,1,'PF',500000),(103,1,'CA U
 (104,2,'CA$',320000),(105,3,'CA$',890000);
 
 -- Saldo total por cliente:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["SELECT c.nombre, SUM(cu.saldo) AS total","GROUP BY c.id, c.nombre","García: 150000+500000+5000 = 655000"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["SELECT c.nombre, SUM(cu.saldo) AS total","GROUP BY c.id, c.nombre","García: 150000+500000+5000 = 655000"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Conteo de cuentas por cliente</h4><p>¿Cuántas cuentas tiene cada cliente? Debe incluir <code>3</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-07" data-exercise="ex-5" data-expected="3"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "3"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, tipo TEXT);
@@ -272,7 +272,7 @@ INSERT INTO cuentas VALUES (101,1,'CA$'),(102,1,'PF'),(103,1,'CA USD'),
 (104,2,'CA$'),(105,3,'CA$'),(106,3,'PF');
 
 -- Cuentas por cliente:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["SELECT c.nombre, COUNT(cu.id) AS num_cuentas","GROUP BY c.id, c.nombre ORDER BY num_cuentas DESC","García tiene 3 cuentas"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["SELECT c.nombre, COUNT(cu.id) AS num_cuentas","GROUP BY c.id, c.nombre ORDER BY num_cuentas DESC","García tiene 3 cuentas"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: JOIN de 3 tablas</h4><p>Uní clientes → cuentas → transacciones. Mostrá nombre, tipo de operación y monto. Debe incluir <code>depósito</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-07" data-exercise="ex-6" data-expected="depósito"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "depósito"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);
 CREATE TABLE cuentas (id INTEGER PRIMARY KEY, cliente_id INTEGER, tipo TEXT);
@@ -282,7 +282,7 @@ INSERT INTO cuentas VALUES (101,1,'CA$'),(102,2,'CA$');
 INSERT INTO transacciones VALUES (1,101,'depósito',50000),(2,101,'extracción',20000),(3,102,'depósito',80000);
 
 -- 3 tablas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["FROM clientes c INNER JOIN cuentas cu ON c.id = cu.cliente_id","INNER JOIN transacciones t ON cu.id = t.cuenta_id","Encadenás los JOINs uno tras otro"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["FROM clientes c INNER JOIN cuentas cu ON c.id = cu.cliente_id","INNER JOIN transacciones t ON cu.id = t.cuenta_id","Encadenás los JOINs uno tras otro"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: JOIN + GROUP BY por ciudad</h4><p>Saldo total y promedio por ciudad usando JOIN de clientes+cuentas. Debe incluir <code>Buenos Aires</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-07" data-exercise="ex-7" data-expected="Buenos Aires"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "Buenos Aires"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, ciudad TEXT);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, saldo REAL);
@@ -290,7 +290,7 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires'),(2,'López','Córdoba')
 INSERT INTO cuentas VALUES (101,1,150000),(102,2,320000),(103,3,890000),(104,1,500000);
 
 -- Saldo total y promedio por ciudad:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["SELECT c.ciudad, SUM(cu.saldo), ROUND(AVG(cu.saldo),0)","GROUP BY c.ciudad","BsAs: 150K+890K+500K = 1540000"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["SELECT c.ciudad, SUM(cu.saldo), ROUND(AVG(cu.saldo),0)","GROUP BY c.ciudad","BsAs: 150K+890K+500K = 1540000"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: JOIN + HAVING</h4><p>Mostrá solo clientes con saldo total > $500K. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-07" data-exercise="ex-8" data-expected="Pérez"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, saldo REAL);
@@ -298,7 +298,7 @@ INSERT INTO clientes VALUES (1,'García'),(2,'López'),(3,'Pérez');
 INSERT INTO cuentas VALUES (101,1,150000),(102,1,500000),(103,2,320000),(104,3,890000);
 
 -- Solo clientes con total > 500K:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["GROUP BY c.id, c.nombre HAVING SUM(cu.saldo) > 500000","García: 650K ✅, Pérez: 890K ✅, López: 320K ❌","HAVING filtra después de agrupar"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["GROUP BY c.id, c.nombre HAVING SUM(cu.saldo) > 500000","García: 650K ✅, Pérez: 890K ✅, López: 320K ❌","HAVING filtra después de agrupar"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: JOIN + CASE WHEN + categoría</h4><p>Uní clientes con cuentas, clasificá por saldo total (Alto > 500K, Medio > 200K, Bajo). Debe incluir <code>Alto</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-07" data-exercise="ex-9" data-expected="Alto"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "Alto"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, score INTEGER);
 CREATE TABLE cuentas (id INTEGER, cliente_id INTEGER, saldo REAL);
@@ -306,7 +306,7 @@ INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Pérez',810);
 INSERT INTO cuentas VALUES (101,1,150000),(102,1,500000),(103,2,320000),(104,3,890000);
 
 -- JOIN + CASE WHEN sobre saldo total:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["SELECT c.nombre, SUM(cu.saldo) AS total,","CASE WHEN SUM(cu.saldo)>500000 THEN \\x27Alto\\x27 ... END AS segmento","GROUP BY c.id, c.nombre"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["SELECT c.nombre, SUM(cu.saldo) AS total,","CASE WHEN SUM(cu.saldo)>500000 THEN \\x27Alto\\x27 ... END AS segmento","GROUP BY c.id, c.nombre"]'></div></div>
 
 <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Reporte ejecutivo multi-tabla</h4><p>Uní 3 tablas (clientes, cuentas, transacciones). Mostrá por cada cliente: nombre, ciudad, saldo total de cuentas, cantidad de transacciones y monto total transaccionado. Debe incluir <code>total_transaccionado</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-07" data-exercise="ex-10" data-expected="total_transaccionado"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "total_transaccionado"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, ciudad TEXT);
 CREATE TABLE cuentas (id INTEGER PRIMARY KEY, cliente_id INTEGER, tipo TEXT, saldo REAL);
@@ -316,7 +316,7 @@ INSERT INTO cuentas VALUES (101,1,'CA$',150000),(102,2,'CA$',320000);
 INSERT INTO transacciones VALUES (1,101,50000),(2,101,20000),(3,101,35000),(4,102,80000);
 
 -- Reporte multi-tabla:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["FROM clientes c JOIN cuentas cu ON ... JOIN transacciones t ON ...","COUNT(t.id) AS num_trans, SUM(t.monto) AS total_transaccionado","GROUP BY c.id, c.nombre, c.ciudad"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["FROM clientes c JOIN cuentas cu ON ... JOIN transacciones t ON ...","COUNT(t.id) AS num_trans, SUM(t.monto) AS total_transaccionado","GROUP BY c.id, c.nombre, c.ciudad"]'></div></div>
 
 <div class="section-num">05</div>
 <h2>Resumen y conexión</h2>

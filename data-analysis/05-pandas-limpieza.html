@@ -27,7 +27,7 @@
   <h1>pandas: Limpieza de Datos</h1>
   <p>En el mundo de fantasía, los datos llegan perfectos. En el mundo real, llegan <em>sucios, incompletos, duplicados y llenos de formatos inconsistentes</em>. La limpieza consume el <strong>60-80% del tiempo</strong> de un Data Analyst. Si no limpiás, tu análisis es basura — <em>"garbage in, garbage out"</em>.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: Lección 04 (Selección y filtrado)</span>
   </div>
 </div>
@@ -292,7 +292,7 @@ df = pd.DataFrame({
 
 # Contá nulos por columna
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["print(df.isna().sum())"]'></div>
@@ -315,7 +315,7 @@ df = pd.DataFrame({
 
 # Eliminá filas con nulos e imprimí cuántas quedan
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["limpio = df.dropna()","print(len(limpio))"]'></div>
@@ -337,7 +337,7 @@ df = pd.DataFrame({
 
 # Rellená los nulos de Saldo con 0 y sumá
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["df[\"Saldo\"] = df[\"Saldo\"].fillna(0)","print(int(df[\"Saldo\"].sum()))"]'></div>
@@ -359,7 +359,7 @@ df = pd.DataFrame({
 
 # Contá duplicados
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["print(df.duplicated().sum())"]'></div>
@@ -381,7 +381,7 @@ df = pd.DataFrame({
 
 # Eliminá duplicados por DNI e imprimí cantidad de filas
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["df_unico = df.drop_duplicates(subset=\"DNI\")","print(len(df_unico))"]'></div>
@@ -404,7 +404,7 @@ print("Tipo antes:", df["Monto"].dtype)
 
 # Convertí a int y sumá
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["df[\"Monto\"] = df[\"Monto\"].astype(int)","print(df[\"Monto\"].sum())"]'></div>
@@ -424,7 +424,7 @@ df = pd.DataFrame({
 
 # Limpiá y contá cuántos son CABA
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["df[\"Ciudad\"] = df[\"Ciudad\"].str.strip().str.upper()","caba = df[df[\"Ciudad\"] == \"CABA\"]","print(len(caba))"]'></div>
@@ -445,7 +445,7 @@ df = pd.DataFrame({
 
 # Limpiá $ y comas, convertí a float, sumá
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["df[\"Precio_Limpio\"] = df[\"Precio\"].str.replace(\"$\",\"\", regex=False).str.replace(\",\",\"\", regex=False).astype(float)","print(df[\"Precio_Limpio\"].sum())"]'></div>
@@ -470,7 +470,7 @@ df = pd.DataFrame({
 # 2. Eliminá duplicados por DNI
 # 3. Imprimí la suma de Saldo
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["La media de Saldo es (850000+850000+670000)/3 = 790000","df[\"Saldo\"] = df[\"Saldo\"].fillna(df[\"Saldo\"].mean())","df = df.drop_duplicates(subset=\"DNI\") → García(850K), López(790K), Pérez(670K) = no... revisar cálculos"]'></div>
@@ -493,7 +493,7 @@ df = pd.DataFrame({
 
 # Imprimí un reporte completo de diagnóstico
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["print(f\"Filas: {len(df)}\")","print(f\"Nulos:\\n{df.isna().sum()}\")","print(f\"Tipos:\\n{df.dtypes}\")"]'></div>

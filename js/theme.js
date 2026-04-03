@@ -17,7 +17,7 @@ export function applyTheme(theme) {
 
   // Update toggle button icon if it exists
   const btn = document.querySelector('.theme-toggle');
-  if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  if (btn) btn.textContent = theme === 'dark' ? 'Light' : 'Dark';
 }
 
 export function initTheme() {
@@ -30,7 +30,7 @@ export function initTheme() {
     const btn = document.createElement('button');
     btn.className = 'theme-toggle';
     btn.title = 'Cambiar tema';
-    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    btn.textContent = theme === 'dark' ? 'Light' : 'Dark';
     btn.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme') || 'dark';
       applyTheme(current === 'dark' ? 'light' : 'dark');

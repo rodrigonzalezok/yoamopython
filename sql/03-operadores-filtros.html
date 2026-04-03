@@ -22,7 +22,7 @@
   <h1>Operadores y filtros avanzados</h1>
   <p>CASE WHEN te permite crear columnas condicionales (como if/else de Python). COALESCE reemplaza NULLs. CAST convierte tipos. Estas herramientas transforman datos directamente en la consulta, sin necesidad de programar fuera de SQL.</p>
   <div class="badges">
-    <span class="badge">⏱ 80–100 min</span>
+    <span class="badge">80–100 min</span>
     <span class="badge">Prerrequisitos: SQL 02</span>
   </div>
 </div>
@@ -224,7 +224,7 @@ FROM productos;</textarea></div>
 INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Pérez',810);
 
 -- CASE WHEN:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT nombre, CASE WHEN score >= 700 THEN \\x27Premium\\x27 ELSE \\x27Estándar\\x27 END AS cat","No olvides END al final del CASE","García y Pérez son Premium"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT nombre, CASE WHEN score >= 700 THEN \\x27Premium\\x27 ELSE \\x27Estándar\\x27 END AS cat","No olvides END al final del CASE","García y Pérez son Premium"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: COALESCE</h4><p>Reemplazá NULLs de email por 'no registrado'. Debe incluir <code>no registrado</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-2" data-expected="no registrado"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "no registrado"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT);
 INSERT INTO clientes VALUES (1,'García','garcia@mail.com');
@@ -232,19 +232,19 @@ INSERT INTO clientes VALUES (2,'López',NULL);
 INSERT INTO clientes VALUES (3,'Pérez','perez@mail.com');
 
 -- COALESCE:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["SELECT nombre, COALESCE(email, \\x27no registrado\\x27) AS email FROM clientes;","COALESCE devuelve el primer valor no-NULL","López muestra \\x27no registrado\\x27"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["SELECT nombre, COALESCE(email, \\x27no registrado\\x27) AS email FROM clientes;","COALESCE devuelve el primer valor no-NULL","López muestra \\x27no registrado\\x27"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: Columna calculada</h4><p>Mostrá cada producto con su precio con IVA (precio * 1.21). Debe incluir <code>1113200</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-3" data-expected="1113200"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "1113200"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE productos (id INTEGER, nombre TEXT, precio REAL);
 INSERT INTO productos VALUES (1,'Notebook',920000),(2,'Mouse',23000),(3,'Teclado',46000);
 
 -- Precio con IVA:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["SELECT nombre, precio, precio * 1.21 AS con_iva FROM productos;","920000 * 1.21 = 1113200","Usá ROUND() si querés redondear"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["SELECT nombre, precio, precio * 1.21 AS con_iva FROM productos;","920000 * 1.21 = 1113200","Usá ROUND() si querés redondear"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: CASE WHEN con múltiples niveles</h4><p>Clasificá scores en 4 categorías: Excelente (>=800), Bueno (>=700), Regular (>=600), Bajo. Debe incluir <code>Excelente</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-4" data-expected="Excelente"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "Excelente"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Martínez',590),(4,'Pérez',810),(5,'Fernández',645);
 
 -- CASE WHEN con 4 niveles:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["CASE WHEN score >= 800 THEN \\x27Excelente\\x27 WHEN score >= 700 THEN \\x27Bueno\\x27...","WHEN score >= 600 THEN \\x27Regular\\x27 ELSE \\x27Bajo\\x27 END","Pérez es Excelente, García es Bueno"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["CASE WHEN score >= 800 THEN \\x27Excelente\\x27 WHEN score >= 700 THEN \\x27Bueno\\x27...","WHEN score >= 600 THEN \\x27Regular\\x27 ELSE \\x27Bajo\\x27 END","Pérez es Excelente, García es Bueno"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Ratio cuota/ingreso con ROUND</h4><p>Calculá el ratio cuota/ingreso en porcentaje con 1 decimal. Debe incluir <code>12.0</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-5" data-expected="12.0"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "12.0"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE prestamos (id INTEGER, cliente TEXT, cuota REAL, ingreso REAL);
 INSERT INTO prestamos VALUES (1,'García',42000,350000);
@@ -252,7 +252,7 @@ INSERT INTO prestamos VALUES (2,'López',28000,250000);
 INSERT INTO prestamos VALUES (3,'Pérez',65000,500000);
 
 -- Ratio en porcentaje:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["ROUND(cuota * 100.0 / ingreso, 1) AS ratio_pct","García: 42000*100/350000 = 12.0%","No olvides multiplicar por 100.0 (con .0 para obtener decimal)"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["ROUND(cuota * 100.0 / ingreso, 1) AS ratio_pct","García: 42000*100/350000 = 12.0%","No olvides multiplicar por 100.0 (con .0 para obtener decimal)"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: NULLIF para evitar /0</h4><p>Calculá rotación (ventas/stock) evitando división por cero con NULLIF. Debe incluir <code>8.0</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-6" data-expected="8.0"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "8.0"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE productos (id INTEGER, nombre TEXT, ventas INTEGER, stock INTEGER);
 INSERT INTO productos VALUES (1,'Notebook',120,15);
@@ -260,13 +260,13 @@ INSERT INTO productos VALUES (2,'Mouse',0,150);
 INSERT INTO productos VALUES (3,'Teclado',80,0);
 
 -- Rotación sin error de división:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["ROUND(ventas * 1.0 / NULLIF(stock, 0), 1) AS rotacion","Teclado tiene stock 0 → NULLIF lo convierte a NULL → resultado NULL","Notebook: 120/15 = 8.0"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["ROUND(ventas * 1.0 / NULLIF(stock, 0), 1) AS rotacion","Teclado tiene stock 0 → NULLIF lo convierte a NULL → resultado NULL","Notebook: 120/15 = 8.0"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: SUM + CASE para contar categorías</h4><p>Contá cuántos clientes son Premium (score>=700) y cuántos no, en una sola fila. Debe incluir <code>3</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-7" data-expected="3"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "3"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García',720),(2,'López',680),(3,'Martínez',590),(4,'Pérez',810),(5,'Sosa',750);
 
 -- SUM + CASE para contar:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["SUM(CASE WHEN score >= 700 THEN 1 ELSE 0 END) AS premium","SUM(CASE WHEN score < 700 THEN 1 ELSE 0 END) AS estandar","García, Pérez, Sosa = 3 premium"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["SUM(CASE WHEN score >= 700 THEN 1 ELSE 0 END) AS premium","SUM(CASE WHEN score < 700 THEN 1 ELSE 0 END) AS estandar","García, Pérez, Sosa = 3 premium"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: CASE WHEN + COALESCE combinados</h4><p>Creá columna "contacto" que use email si existe, teléfono si no, o "SIN CONTACTO" si ninguno. Clasificá clientes según si tienen contacto o no. Debe incluir <code>SIN CONTACTO</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-8" data-expected="SIN CONTACTO"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "SIN CONTACTO"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT, telefono TEXT);
 INSERT INTO clientes VALUES (1,'García','garcia@mail.com',NULL);
@@ -274,7 +274,7 @@ INSERT INTO clientes VALUES (2,'López',NULL,'+5411234567');
 INSERT INTO clientes VALUES (3,'Pérez',NULL,NULL);
 
 -- COALESCE + CASE:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["COALESCE(email, telefono, \\x27SIN CONTACTO\\x27) AS contacto","Pérez no tiene ni email ni teléfono → SIN CONTACTO","Podés agregar un CASE para clasificar"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["COALESCE(email, telefono, \\x27SIN CONTACTO\\x27) AS contacto","Pérez no tiene ni email ni teléfono → SIN CONTACTO","Podés agregar un CASE para clasificar"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Ratio + CASE para decisión de crédito</h4><p>Calculá ratio cuota/ingreso y clasificá en APROBADO (<=30%) o RECHAZADO (>30%). Debe incluir <code>APROBADO</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-9" data-expected="APROBADO"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "APROBADO"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE solicitudes (id INTEGER, cliente TEXT, cuota REAL, ingreso REAL, score INTEGER);
 INSERT INTO solicitudes VALUES (1,'García',42000,350000,720);
@@ -282,7 +282,7 @@ INSERT INTO solicitudes VALUES (2,'López',95000,250000,680);
 INSERT INTO solicitudes VALUES (3,'Pérez',65000,500000,810);
 
 -- Ratio + decisión:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["ROUND(cuota*100.0/ingreso, 1) AS ratio","CASE WHEN cuota*100.0/ingreso <= 30 THEN \\x27APROBADO\\x27 ELSE \\x27RECHAZADO\\x27 END","García 12% y Pérez 13% → APROBADO, López 38% → RECHAZADO"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["ROUND(cuota*100.0/ingreso, 1) AS ratio","CASE WHEN cuota*100.0/ingreso <= 30 THEN \\x27APROBADO\\x27 ELSE \\x27RECHAZADO\\x27 END","García 12% y Pérez 13% → APROBADO, López 38% → RECHAZADO"]'></div></div>
 
 <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Reporte completo con todas las herramientas</h4><p>Generá un reporte que muestre: nombre, score, categoría (CASE WHEN 4 niveles), email limpio (COALESCE), saldo con IVA, y el % que cada saldo representa del total. Debe incluir <code>Excelente</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-03" data-exercise="ex-10" data-expected="Excelente"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "Excelente"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL, email TEXT);
 INSERT INTO clientes VALUES (1,'García',720,150000,'garcia@mail.com');
@@ -291,7 +291,7 @@ INSERT INTO clientes VALUES (3,'Pérez',810,890000,'perez@mail.com');
 INSERT INTO clientes VALUES (4,'Sosa',590,45000,NULL);
 
 -- Reporte completo:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["SELECT nombre, score, CASE WHEN ... END AS categoria","COALESCE(email, \\x27sin email\\x27), ROUND(saldo * 1.21) AS con_iva","ROUND(saldo * 100.0 / (SELECT SUM(saldo) FROM clientes), 1) AS pct"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["SELECT nombre, score, CASE WHEN ... END AS categoria","COALESCE(email, \\x27sin email\\x27), ROUND(saldo * 1.21) AS con_iva","ROUND(saldo * 100.0 / (SELECT SUM(saldo) FROM clientes), 1) AS pct"]'></div></div>
 
 <div class="section-num">05</div>
 <h2>Resumen y conexión</h2>

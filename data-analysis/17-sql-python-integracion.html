@@ -27,7 +27,7 @@
   <h1>Integración SQL + Python</h1>
   <p>Ya dominás SQL para consultar bases de datos y Python/pandas para analizar datos. Ahora aprendé a <strong>conectar ambos mundos</strong>: ejecutar queries SQL desde Python, cargar resultados directamente en DataFrames y escribir pipelines automatizados que combinen lo mejor de cada tecnología.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: SQL (sección completa) + pandas</span>
   </div>
 </div>
@@ -399,7 +399,7 @@ df = pd.DataFrame({
 conn = sqlite3.connect(":memory:")
 # Guardar en SQL y leer de vuelta
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["df.to_sql(\"personas\", conn, index=False)","resultado = pd.read_sql(\"SELECT * FROM personas\", conn)","print(resultado); conn.close()"]'></div>
@@ -425,7 +425,7 @@ df.to_sql("clientes", conn, index=False)
 
 # SELECT WHERE ciudad = 'Rosario'
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["ros = pd.read_sql(\"SELECT * FROM clientes WHERE ciudad = \\\"Rosario\\\"\", conn)","print(ros); conn.close()"]'></div>
@@ -449,7 +449,7 @@ pd.DataFrame({
 
 # COUNT y SUM con SQL
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["result = pd.read_sql(\"SELECT COUNT(*) as cantidad, SUM(monto) as total FROM ventas\", conn)","print(result); conn.close()"]'></div>
@@ -474,7 +474,7 @@ txn.to_sql("transacciones", conn, index=False)
 
 # JOIN
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT t.*, c.nombre, c.ciudad FROM transacciones t JOIN clientes c ON t.cliente_id = c.id\", conn)","print(df); conn.close()"]'></div>
@@ -499,7 +499,7 @@ pd.DataFrame({
 
 # SQL: GROUP BY ciudad → pandas: agregar %
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT ciudad, SUM(monto) as total FROM ventas GROUP BY ciudad\", conn)","df[\"pct\"] = round(df[\"total\"] / df[\"total\"].sum() * 100, 1)","print(df); print(f\"Total: ${df[\\\"total\\\"].sum():,}\"); conn.close()"]'></div>
@@ -526,7 +526,7 @@ pd.DataFrame({
 # 2. to_sql como "resumen_productos"
 # 3. Verificar con read_sql
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT * FROM ventas\", conn)","res = df.groupby(\"producto\").agg(total=(\"monto\",\"sum\")).reset_index()","res.to_sql(\"resumen\", conn, index=False)","print(pd.read_sql(\"SELECT * FROM resumen\", conn)); conn.close()"]'></div>
@@ -553,7 +553,7 @@ ciudad_buscada = "Córdoba"
 
 # Query con parámetro ? (no f-string!)
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT * FROM clientes WHERE ciudad = ?\", conn, params=[ciudad_buscada])","print(df); conn.close()"]'></div>
@@ -577,7 +577,7 @@ pd.DataFrame({
 
 # SQL: extraer → pandas: estadísticas avanzadas
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT monto FROM ventas\", conn)","print(f\"Media: ${df[\\\"monto\\\"].mean():,.0f}\")","print(f\"Mediana: ${df[\\\"monto\\\"].median():,.0f}\")","print(f\"P90: ${df[\\\"monto\\\"].quantile(0.9):,.0f}\"); conn.close()"]'></div>
@@ -605,7 +605,7 @@ pd.DataFrame({
 
 # SQL: agrupar por mes → pandas: gráfico de línea
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT substr(fecha,1,7) as mes, SUM(monto) as total FROM ventas GROUP BY mes\", conn)","plt.figure(figsize=(8,4)); plt.plot(df[\\\"mes\\\"], df[\\\"total\\\"], \\\"o-\\\")","plt.title(\\\"Tendencia Mensual\\\"); plt.xticks(rotation=45); plt.tight_layout(); plt.show(); print(\\\"Pipeline OK\\\"); conn.close()"]'></div>
@@ -640,7 +640,7 @@ pd.DataFrame({
 # 3. to_sql como "resumen_segmentos"
 # 4. Verificar + imprimir "Pipeline completo"
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT c.segmento, v.monto FROM ventas v JOIN clientes c ON v.cliente_id = c.id\", conn)","res = df.groupby(\"segmento\").agg(total=(\"monto\",\"sum\"),promedio=(\"monto\",\"mean\")).round(0).reset_index()","res.to_sql(\"resumen_segmentos\", conn, index=False)","print(pd.read_sql(\"SELECT * FROM resumen_segmentos\", conn))","print(\"Pipeline completo\"); conn.close()"]'></div>

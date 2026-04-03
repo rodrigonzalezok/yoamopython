@@ -27,7 +27,7 @@
   <h1>Diccionarios</h1>
   <p>Los diccionarios son la estructura de datos más importante para representar datos del mundo real. Cada fila de una base de datos, cada registro JSON de una API y cada fila de un CSV es esencialmente un diccionario: pares de clave y valor.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: 08 Listas, 09 Tuplas</span>
   </div>
 </div>
@@ -359,7 +359,7 @@ producto = {
     # completá
 }
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["Agregá \"precio\": 850000, \"stock\": 15","print(producto[\"nombre\"])","print(f\"${producto[\\\"precio\\\"]:,}\")"]'></div>
@@ -375,7 +375,7 @@ producto = {
 
 # Accedé al email de forma segura:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["email = cliente.get(\"email\", \"No informado\")","print(f\"Email: {email}\")","El default se devuelve porque \"email\" no existe en el dict"]'></div>
@@ -391,7 +391,7 @@ producto = {
 
 # Recorré con .items():
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["for clave, valor in moneda.items():","    print(f\"{clave}: {valor}\")","código: USD va a aparecer en el output"]'></div>
@@ -407,7 +407,7 @@ producto = {
 
 # Agregá, modificá, eliminá:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["cliente[\"ciudad\"] = \"Córdoba\" → agrega","cliente[\"saldo\"] = 150000 → modifica","cliente.pop(\"ciudad\") → elimina. print(cliente)"]'></div>
@@ -424,7 +424,7 @@ precios = [5200, 28000, 3100]
 
 # Dict comprehension:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["cotizaciones = {t: p for t, p in zip(tickers, precios)}","print(cotizaciones)","Da: {\"GGAL\": 5200, \"YPF\": 28000, \"PAMP\": 3100}"]'></div>
@@ -440,7 +440,7 @@ precios = [5200, 28000, 3100]
 
 # Contá frecuencias:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["freq = {} → diccionario vacío","for t in transacciones: freq[t] = freq.get(t, 0) + 1","compra aparece 4 veces"]'></div>
@@ -461,7 +461,7 @@ precios = [5200, 28000, 3100]
 
 # Filtrá score >= 650 y calculá promedio de saldos:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["buenos = [c for c in clientes if c[\"score\"] >= 650]","prom = sum(c[\"saldo\"] for c in buenos) / len(buenos)","print(f\"Promedio: ${prom:,.0f}\")"]'></div>
@@ -478,7 +478,7 @@ sucursal = {
     # completá
 }
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["\"empleados\": [{\"nombre\": \"García\", \"cargo\": \"Gerente\"}, ...]","print(sucursal[\"empleados\"][0][\"cargo\"])","Accedés: dict → lista (índice) → dict → clave"]'></div>
@@ -495,7 +495,7 @@ DOLAR = 1150
 
 # Convertí a USD con dict comprehension:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["precios_usd = {k: round(v/DOLAR, 2) for k, v in precios_ars.items()}","print(\"Precios en USD:\", precios_usd)","Notebook: 920000/1150 ≈ 800.0"]'></div>
@@ -518,7 +518,7 @@ DOLAR = 1150
 # Generá el reporte completo:
 print("=== REPORTE DE CARTERA ===")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["Para la tabla: for c in clientes: print(f\"{c[nombre]}...\")","Para agrupar por ciudad: recorré y acumulá saldos por ciudad en un dict","Top: max(clientes, key=lambda c: c[\"saldo\"])"]'></div>

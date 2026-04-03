@@ -27,7 +27,7 @@
   <h1>Módulos externos (pip)</h1>
   <p>La biblioteca estándar cubre lo básico, pero el verdadero poder de Python viene de su ecosistema: más de 400,000 paquetes en PyPI que instalás con <code>pip</code>. Esta lección cubre pip, entornos virtuales y los paquetes que necesitás como Data Analyst.</p>
   <div class="badges">
-    <span class="badge">⏱ 70–90 min</span>
+    <span class="badge">70–90 min</span>
     <span class="badge">Prerrequisitos: 20 Módulos stdlib</span>
   </div>
 </div>
@@ -336,19 +336,19 @@ print(f"\nMódulos cargados: {len(sys.modules)}")</textarea></div>
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Crear DataFrame</h4><p>Creá un DataFrame con 3 productos (nombre, precio, stock) e imprimilo. Debe incluir <code>Notebook</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-1" data-expected="Notebook"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Notebook"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
 
 # Creá el DataFrame:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["datos = [{\"nombre\":\"Notebook\",\"precio\":920000,\"stock\":15}, ...]","df = pd.DataFrame(datos)","print(df)"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["datos = [{\"nombre\":\"Notebook\",\"precio\":920000,\"stock\":15}, ...]","df = pd.DataFrame(datos)","print(df)"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Array de numpy</h4><p>Creá un array <code>np.array([100, 200, 300, 400, 500])</code> y multiplicalo por 1.21 (IVA). Debe incluir <code>121</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-2" data-expected="121"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "121"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
 precios = np.array([100, 200, 300, 400, 500])
 
 # Multiplicá por 1.21:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["con_iva = precios * 1.21","print(con_iva)","[121. 242. 363. 484. 605.]"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["con_iva = precios * 1.21","print(con_iva)","[121. 242. 363. 484. 605.]"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: Estadísticas con numpy</h4><p>Dado <code>np.array([150000,320000,45000,890000,72000])</code>, calculá media, mediana y desvío. Debe incluir <code>295400</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-3" data-expected="295400"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "295400"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
 saldos = np.array([150000, 320000, 45000, 890000, 72000])
 
 # Calculá estadísticas:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["print(f\"Media: {np.mean(saldos):.0f}\")","np.mean([150000,320000,45000,890000,72000]) = 295400","np.median, np.std para mediana y desvío"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["print(f\"Media: {np.mean(saldos):.0f}\")","np.mean([150000,320000,45000,890000,72000]) = 295400","np.median, np.std para mediana y desvío"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: DataFrame con filtrado</h4><p>Creá un DataFrame de 5 clientes, filtrá los que tienen score >= 700 e imprimí solo sus nombres. Debe incluir <code>Premium</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-4" data-expected="Premium"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "Premium"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
@@ -360,14 +360,14 @@ df = pd.DataFrame({
 
 # Filtrá y clasificá:
 df["categoria"] = np.where(df["score"] >= 700, "Premium", "Estándar")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["premium = df[df[\"categoria\"] == \"Premium\"]","print(premium)","García, Pérez y Sosa son Premium"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["premium = df[df[\"categoria\"] == \"Premium\"]","print(premium)","García, Pérez y Sosa son Premium"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: describe() del DataFrame</h4><p>Generá un DataFrame con 50 valores aleatorios de score (400-900) usando numpy. Mostrá <code>describe()</code>. Debe incluir <code>mean</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-5" data-expected="mean"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "mean"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
 np.random.seed(42)
 
 # Generá DataFrame con 50 scores aleatorios:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400, 900, 50)})","print(df.describe())","describe() muestra count, mean, std, min, 25%, 50%, 75%, max"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400, 900, 50)})","print(df.describe())","describe() muestra count, mean, std, min, 25%, 50%, 75%, max"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: value_counts()</h4><p>Creá un DataFrame con 20 transacciones de tipo aleatorio ("compra","venta","transferencia"). Mostrá <code>value_counts()</code>. Debe incluir <code>compra</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-6" data-expected="compra"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "compra"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
@@ -376,7 +376,7 @@ np.random.seed(42)
 tipos = ["compra", "venta", "transferencia"]
 
 # Generá 20 transacciones aleatorias:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["df = pd.DataFrame({\"tipo\": np.random.choice(tipos, 20)})","print(df[\"tipo\"].value_counts())","value_counts() cuenta frecuencias automáticamente"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["df = pd.DataFrame({\"tipo\": np.random.choice(tipos, 20)})","print(df[\"tipo\"].value_counts())","value_counts() cuenta frecuencias automáticamente"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: groupby básico</h4><p>Creá un DataFrame con clientes, ciudad y saldo. Agrupá por ciudad y mostrá el saldo promedio. Debe incluir <code>BsAs</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-7" data-expected="BsAs"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "BsAs"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
 
@@ -387,7 +387,7 @@ df = pd.DataFrame({
 })
 
 # Agrupá por ciudad:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["print(df.groupby(\"ciudad\")[\"saldo\"].mean())","O: print(df.groupby(\"ciudad\").agg({\"saldo\": [\"sum\",\"mean\",\"count\"]}))","BsAs promedio: (150000+45000+890000)/3"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["print(df.groupby(\"ciudad\")[\"saldo\"].mean())","O: print(df.groupby(\"ciudad\").agg({\"saldo\": [\"sum\",\"mean\",\"count\"]}))","BsAs promedio: (150000+45000+890000)/3"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Operaciones vectorizadas</h4><p>Creá un array de 10 precios con numpy. Aplicá descuento 15% vectorizado y calculá el ahorro total. Debe incluir <code>Ahorro</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-8" data-expected="Ahorro"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Ahorro"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import numpy as np
 np.random.seed(42)
@@ -395,7 +395,7 @@ np.random.seed(42)
 precios = np.random.uniform(1000, 50000, 10).round(0)
 
 # Aplicá descuento 15% y calculá ahorro:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["con_descuento = precios * 0.85","ahorro = np.sum(precios - con_descuento)","print(f\"Ahorro total: ${ahorro:,.0f}\")"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["con_descuento = precios * 0.85","ahorro = np.sum(precios - con_descuento)","print(f\"Ahorro total: ${ahorro:,.0f}\")"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Escribir y leer requirements.txt simulado</h4><p>Creá una lista de paquetes con versiones y generá un string con formato requirements.txt. Debe incluir <code>pandas</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-9" data-expected="pandas"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "pandas"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">paquetes = [
     ("pandas", "2.1.4"),
@@ -405,7 +405,7 @@ precios = np.random.uniform(1000, 50000, 10).round(0)
 ]
 
 # Generá requirements.txt como string:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["lineas = [f\"{pkg}=={ver}\" for pkg, ver in paquetes]","req = \"\\n\".join(lineas)","print(req)"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["lineas = [f\"{pkg}=={ver}\" for pkg, ver in paquetes]","req = \"\\n\".join(lineas)","print(req)"]'></div></div>
 
 <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Pipeline con pandas + numpy</h4><p>Generá un DataFrame de 100 clientes (seed 42) con score, ingreso y ciudad aleatorios. Agregá columna "categoria" (Premium/Estándar), agrupá por ciudad y mostrá estadísticas. Debe incluir <code>PIPELINE</code>.</p><div class="editor" data-mode="python" data-lesson="python-21" data-exercise="ex-10" data-expected="PIPELINE"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "PIPELINE"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
 import numpy as np
@@ -415,7 +415,7 @@ ciudades = ["BsAs", "Córdoba", "Rosario", "Mendoza"]
 
 # Generá 100 clientes y procesá:
 print("=== PIPELINE DE DATOS ===")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400,900,100), ...})","\"ciudad\": np.random.choice(ciudades, 100)","df.groupby(\"ciudad\").agg({\"score\":\"mean\", \"ingreso\":\"sum\"})"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["df = pd.DataFrame({\"score\": np.random.randint(400,900,100), ...})","\"ciudad\": np.random.choice(ciudades, 100)","df.groupby(\"ciudad\").agg({\"score\":\"mean\", \"ingreso\":\"sum\"})"]'></div></div>
 
 <div class="section-num">05</div>
 <h2>Resumen y conexión</h2>

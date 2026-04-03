@@ -27,7 +27,7 @@
   <h1>Lectura de Datos (I/O)</h1>
   <p>En el trabajo corporativo no creamos diccionarios a mano: abrimos bases crudas de miles o millones de filas. Estas bases suelen ser archivos CSV o respuestas SQL. Aquí dominarás <code>read_csv()</code>, la función estrella para ingerir datos.</p>
   <div class="badges">
-    <span class="badge">⏱ 50–70 min</span>
+    <span class="badge">50–70 min</span>
     <span class="badge">Prerrequisitos: Series y DataFrames</span>
   </div>
 </div>
@@ -175,7 +175,7 @@ buffer = io.StringIO(rrhh_data)
 
 
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["df_empleados = pd.read_csv(buffer)","print(df_empleados)"]'></div>
@@ -202,7 +202,7 @@ df_banco = pd.read_csv(buffer) # Corregir acá
 # Calcula e imprime el promedio de Saldo_Nominal
 
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["df_banco = pd.read_csv(buffer, sep=\"&\")","prom = df_banco[\"Saldo_Nominal\"].mean()","print(prom)"]'></div>
@@ -230,7 +230,7 @@ df_acciones = pd.read_csv(buffer)
 # Mostrá únicamente las 2 primeras filas utilizando head
 
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["print(df_acciones.head(2))"]'></div>

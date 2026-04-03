@@ -27,7 +27,7 @@
   <h1>pandas: groupby y pivot</h1>
   <p>Cuando el director comercial pregunta <em>"¿cuánto factura cada sucursal por mes?"</em>, necesitás agrupar miles de transacciones por categoría y calcular totales. <code>groupby</code> es la herramienta que convierte datos transaccionales en reportes ejecutivos. Es el equivalente exacto del <code>GROUP BY</code> de SQL, pero con la potencia de Python.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: Lección 06 (Transformaciones)</span>
   </div>
 </div>
@@ -316,7 +316,7 @@ df = pd.DataFrame({
 
 # groupby Ciudad, suma de Ventas
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["print(df.groupby(\"Ciudad\")[\"Ventas\"].sum())"]'></div>
@@ -337,7 +337,7 @@ df = pd.DataFrame({
 
 # Promedio por canal
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["promedios = df.groupby(\"Canal\")[\"Monto\"].mean()","print(round(promedios))"]'></div>
@@ -358,7 +358,7 @@ df = pd.DataFrame({
 
 # Conteo de operaciones por ciudad
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["print(df.groupby(\"Ciudad\")[\"Ventas\"].count())"]'></div>
@@ -380,7 +380,7 @@ df = pd.DataFrame({
 
 # Agrupá por Ciudad + Canal
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["print(df.groupby([\"Ciudad\", \"Canal\"])[\"Monto\"].sum())"]'></div>
@@ -401,7 +401,7 @@ df = pd.DataFrame({
 
 # .agg() con named aggregations
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["reporte = df.groupby(\"Ciudad\").agg(Total=(\"Monto\",\"sum\"), Promedio=(\"Monto\",\"mean\"), Ops=(\"Monto\",\"count\"))","print(reporte)"]'></div>
@@ -423,7 +423,7 @@ df = pd.DataFrame({
 
 # pivot_table
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["tabla = pd.pivot_table(df, values=\"Monto\", index=\"Ciudad\", columns=\"Canal\", aggfunc=\"sum\", fill_value=0)","print(tabla)"]'></div>
@@ -444,7 +444,7 @@ df = pd.DataFrame({
 
 # Ranking de vendedores
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["ranking = df.groupby(\"Vendedor\")[\"Monto\"].sum().sort_values(ascending=False)","print(f\"Vendedor #1: {ranking.index[0]}\")","print(ranking)"]'></div>
@@ -466,7 +466,7 @@ df = pd.DataFrame({
 
 # Calculá % de participación dentro de cada ciudad
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["df[\"Total_Ciudad\"] = df.groupby(\"Ciudad\")[\"Monto\"].transform(\"sum\")","df[\"Part_%\"] = round(df[\"Monto\"] / df[\"Total_Ciudad\"] * 100, 1)","print(df[[\"Ciudad\",\"Vendedor\",\"Monto\",\"Part_%\"]])"]'></div>
@@ -488,7 +488,7 @@ df = pd.DataFrame({
 
 # pivot_table con margins
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["tabla = pd.pivot_table(df, values=\"Ventas\", index=\"Sucursal\", columns=\"Mes\", aggfunc=\"sum\", margins=True)","print(tabla)"]'></div>
@@ -513,7 +513,7 @@ df = pd.DataFrame({
 
 # Reporte ejecutivo completo
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["res = df.groupby(\"Sucursal\").agg(Total=(\"Monto\",\"sum\"), Ops=(\"Monto\",\"count\"))","res[\"Part_%\"] = round(res[\"Total\"]/res[\"Total\"].sum()*100,1)","print(f\"Líder: {res[\\\"Total\\\"].idxmax()}\")"]'></div>

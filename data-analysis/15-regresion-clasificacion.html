@@ -27,7 +27,7 @@
   <h1>Regresión y Clasificación</h1>
   <p>En la lección anterior vimos el panorama general de Machine Learning. Ahora vamos a profundizar en los <strong>4 algoritmos más usados</strong> en la industria: regresión lineal, regresión logística, árboles de decisión y K-Nearest Neighbors. Para cada uno vas a entender cómo funciona, cuándo usarlo, y cómo interpretar sus resultados.</p>
   <div class="badges">
-    <span class="badge">⏱ 120–150 min</span>
+    <span class="badge">120–150 min</span>
     <span class="badge">Prerrequisitos: Lección 14 (Intro ML)</span>
   </div>
 </div>
@@ -402,7 +402,7 @@ precio = np.array([75000, 125000, 175000, 225000, 300000, 375000])
 
 # Entrenar e imprimir coeficiente
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["modelo = LinearRegression().fit(metros, precio)","print(f\"Coef: {modelo.coef_[0]:,.0f}\")","print(f\"Por cada m², el precio sube ${modelo.coef_[0]:,.0f}\")"]'></div>
@@ -424,7 +424,7 @@ modelo = LinearRegression().fit(metros, precio)
 
 # Predecí para 100 m²
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["pred = modelo.predict([[100]])","print(f\"Precio predicho 100m²: ${pred[0]:,.0f}\")"]'></div>
@@ -449,7 +449,7 @@ pred = modelo.predict(X)
 
 # Calculá e imprimí el R²
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["r2 = r2_score(y, pred)","print(f\"R² = {r2:.3f}\")","print(f\"El modelo explica {r2*100:.1f}% de la variación\")"]'></div>
@@ -472,7 +472,7 @@ X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Entrenar, predict_proba, imprimir P del primer caso
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["modelo = LogisticRegression(random_state=42).fit(X_tr, y_tr)","proba = modelo.predict_proba(X_te)[:, 1]","print(f\"P(clase=1) del primer caso: {proba[0]:.3f}\")"]'></div>
@@ -493,7 +493,7 @@ y = ((X[:, 0] > 0.5) & (X[:, 1] > 0.3)).astype(int)
 
 # Entrenar con max_depth=2, export_text
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=2, random_state=42).fit(X, y)","print(export_text(modelo, feature_names=[\"Feature_0\",\"Feature_1\"]))"]'></div>
@@ -517,7 +517,7 @@ X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Probar K = 1, 3, 5, 7, 9
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["for k in [1, 3, 5, 7, 9]:","    m = KNeighborsClassifier(n_neighbors=k).fit(X_tr, y_tr)","    acc = accuracy_score(y_te, m.predict(X_te))","    print(f\"k={k}: accuracy={acc*100:.1f}%\")"]'></div>
@@ -542,7 +542,7 @@ X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Entrenar, evaluar con MAE y R²
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["modelo = LinearRegression().fit(X_tr, y_tr)","pred = modelo.predict(X_te)","print(f\"MAE: ${mean_absolute_error(y_te,pred):,.0f}\")","print(f\"R²: {r2_score(y_te,pred):.3f}\")"]'></div>
@@ -566,7 +566,7 @@ y = X.ravel() * 35000 + 150000 + np.random.normal(0, 50000, 50)
 
 # Entrenar, graficar scatter + recta, imprimir "Gráfico OK"
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["modelo = LinearRegression().fit(X, y)","plt.scatter(X, y, alpha=0.6)","x_line = np.linspace(0, 22, 100).reshape(-1,1)","plt.plot(x_line, modelo.predict(x_line), color=\"red\"); plt.show(); print(\"Gráfico OK\")"]'></div>
@@ -589,7 +589,7 @@ features = ["Feature_A", "Feature_B", "Feature_C"]
 
 # Entrenar árbol, imprimir importancia ordenada
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["m = DecisionTreeClassifier(max_depth=3, random_state=42).fit(X, y)","pares = sorted(zip(features, m.feature_importances_), key=lambda x:-x[1])","for f, i in pares: print(f\"Importancia {f}: {i:.3f}\")"]'></div>
@@ -618,7 +618,7 @@ X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # 3 modelos → métricas → gráfico de barras comparativo
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["modelos = {\"Árbol\":DecisionTreeClassifier(max_depth=3,random_state=42),\"LogReg\":LogisticRegression(random_state=42),\"KNN\":KNeighborsClassifier(5)}","resultados = []","for n,m in modelos.items(): m.fit(X_tr,y_tr); p=m.predict(X_te); resultados.append((n,accuracy_score(y_te,p)))","print(\"Comparación completa\")"]'></div>

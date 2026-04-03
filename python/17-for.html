@@ -27,7 +27,7 @@
   <h1>For (bucle de iteración)</h1>
   <p>El bucle <code>for</code> es la estructura de repetición más usada en Python. Recorre cualquier colección — listas, strings, diccionarios, rangos — ejecutando un bloque para cada elemento. Es tu herramienta principal para procesar datos.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">90–110 min</span>
     <span class="badge">Prerrequisitos: 08 Listas, 10 Diccionarios, 16 While</span>
   </div>
 </div>
@@ -356,7 +356,7 @@ for i in range(1, 6):
 
 # Recorré e imprimí:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["for n in nombres:","    print(f\"Hola, {n}\")","Cada iteración n toma el siguiente nombre"]'></div>
@@ -373,7 +373,7 @@ total = 0
 
 # Sumá con for:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["for v in ventas: total += v","print(total)","45000+72000+38000+91000+55000 = 301000"]'></div>
@@ -387,7 +387,7 @@ total = 0
     <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "50"</span></div>
     <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Múltiplos de 5 del 5 al 50:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["for n in range(5, 51, 5):","    print(n)","range(5, 51, 5) genera 5, 10, 15, ..., 50"]'></div>
@@ -403,7 +403,7 @@ total = 0
 
 # Ordená desc e imprimí con enumerate:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["desc = sorted(scores, reverse=True)","for i, s in enumerate(desc, 1):","    print(f\"{i}. {s}\")"]'></div>
@@ -420,7 +420,7 @@ precios = [5200, 28000, 3100]
 
 # Tabla con zip y total:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["for t, p in zip(tickers, precios):","    print(f\"{t}: ${p:,}\")","print(f\"Total: ${sum(precios):,}\") → 36300"]'></div>
@@ -436,7 +436,7 @@ precios = [5200, 28000, 3100]
 
 # Recorré con .items():
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["for nombre, saldo in saldos.items():","    print(f\"{nombre}: ${saldo:,}\")","El formato :, agrega separador de miles"]'></div>
@@ -453,7 +453,7 @@ total = 0
 
 # Procesá con continue para saltar inválidos:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["for d in datos:","    if not d.startswith(\"$\"): continue","    total += float(d.replace(\"$\",\"\").replace(\",\",\"\"))"]'></div>
@@ -473,7 +473,7 @@ total = 0
 
 # Buscá score > 900 con for/else:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["for c in clientes:","    if c[\"score\"] > 900: print(c[\"nombre\"]); break","else: print(\"Ninguno encontrado\")"]'></div>
@@ -493,7 +493,7 @@ total = 0
 # Reporte con for anidado:
 total_general = 0
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["for suc in sucursales: print(suc[\"nombre\"])","    for s in suc[\"saldos\"]: total_general += s","Al final: print(f\"TOTAL: ${total_general:,}\")"]'></div>
@@ -522,7 +522,7 @@ for reg in registros:
 
 print(f"\n=== RESUMEN ===")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["campos = reg.split(\"|\"); nombre, score, saldo = campos","score = int(score); saldo = float(saldo.replace(\"$\",\"\").replace(\",\",\"\"))","cat = \"Alto\" if score>=700 else \"Medio\" if score>=600 else \"Bajo\"; categorias[cat] += 1"]'></div>

@@ -27,7 +27,7 @@
   <h1>Introducción a Machine Learning</h1>
   <p>Machine Learning (ML) es el campo de la inteligencia artificial donde <strong>las computadoras aprenden patrones a partir de datos</strong>, sin ser programadas explícitamente para cada caso. No necesitás un doctorado para entenderlo — los conceptos fundamentales son simples y poderosos. Como Data Analyst, no vas a construir modelos complejos de deep learning, pero <strong>sí necesitás entender cómo funcionan</strong> para colaborar con Data Scientists y evaluar resultados.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: Lección 13 (NumPy)</span>
   </div>
 </div>
@@ -377,7 +377,7 @@ df = pd.DataFrame({
 
 # Separá X (features) e y (target)
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["X = df[[\"Edad\", \"Ingreso\"]]","y = df[\"Compra\"]","print(f\"X shape: {X.shape}\")"]'></div>
@@ -405,7 +405,7 @@ y = df["Compra"]
 
 # train_test_split con test_size=0.2
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)","print(f\"Train: {len(X_train)} filas\")"]'></div>
@@ -429,7 +429,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Crear modelo, fit, predict, accuracy
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X_train, y_train)","pred = modelo.predict(X_test)","print(f\"Accuracy: {accuracy_score(y_test, pred)*100:.1f}%\")"]'></div>
@@ -453,7 +453,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Entrenar, predecir, confusion_matrix
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X_train, y_train); pred = modelo.predict(X_test)","cm = confusion_matrix(y_test, pred); print(f\"FN: {cm[1,0]}\")"]'></div>
@@ -477,7 +477,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Entrenar, predecir, precision, recall
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X_train, y_train); pred = modelo.predict(X_test)","print(f\"Precision: {precision_score(y_test,pred)*100:.1f}%\")","print(f\"Recall: {recall_score(y_test,pred)*100:.1f}%\")"]'></div>
@@ -501,7 +501,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # LogisticRegression → fit → predict → accuracy
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["modelo = LogisticRegression(random_state=42)","modelo.fit(X_train, y_train)","pred = modelo.predict(X_test)","print(f\"Accuracy: {accuracy_score(y_test,pred)*100:.1f}%\")"]'></div>
@@ -526,7 +526,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Entrenar ambos, comparar accuracy, imprimir ganador
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["arbol = DecisionTreeClassifier(max_depth=3, random_state=42).fit(X_train, y_train)","lr = LogisticRegression(random_state=42).fit(X_train, y_train)","a1 = accuracy_score(y_test, arbol.predict(X_test))","a2 = accuracy_score(y_test, lr.predict(X_test))","print(f\"Ganador: {\\\"Árbol\\\" if a1>a2 else \\\"Logística\\\"}\")"]'></div>
@@ -550,7 +550,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Probar depth 1 a 10
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["for d in range(1, 11):", "    m = DecisionTreeClassifier(max_depth=d, random_state=42).fit(X_train, y_train)", "    tr = accuracy_score(y_train, m.predict(X_train))", "    te = accuracy_score(y_test, m.predict(X_test))", "    print(f\"depth={d}: train={tr*100:.1f}%, test={te*100:.1f}%\")"]'></div>
@@ -580,7 +580,7 @@ y = df["Canceló"]
 
 # Entrenar y mostrar feature_importances_
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["modelo = DecisionTreeClassifier(max_depth=3, random_state=42)","modelo.fit(X, y)","for feat, imp in zip(X.columns, modelo.feature_importances_):","    print(f\"Importancia {feat}: {imp:.3f}\")"]'></div>
@@ -604,7 +604,7 @@ y = (X[:, 0] * 2 + X[:, 1] - X[:, 2] > 1.5).astype(int)
 
 # Pipeline completo: split → 2 modelos → métricas → ganador
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)","for nom,mod in [(\"Árbol\",DecisionTreeClassifier(max_depth=3,random_state=42)),(\"LogReg\",LogisticRegression(random_state=42))]:","    mod.fit(X_tr,y_tr); p=mod.predict(X_te); print(f\"{nom}: acc={accuracy_score(y_te,p)*100:.1f}%\")"]'></div>

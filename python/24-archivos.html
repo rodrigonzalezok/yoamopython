@@ -27,7 +27,7 @@
   <h1>Archivos</h1>
   <p>Hasta ahora tus datos vivían solo en memoria — al cerrar el programa, desaparecían. Con archivos, podés leer datos de CSVs y JSONs, guardar resultados, y construir pipelines que procesen datos reales del disco.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">90–110 min</span>
     <span class="badge">Prerrequisitos: 20 Módulos stdlib, 23 Strings avanzado</span>
   </div>
 </div>
@@ -339,16 +339,16 @@ print(f"  Total general: ${total_general:,}")</textarea></div>
 <h2>Ejercicios</h2>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Escribir y leer texto</h4><p>Escribí 3 líneas en <code>saludo.txt</code> y después leé e imprimí el contenido. Debe incluir <code>Hola</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-1" data-expected="Hola"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "Hola"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Escribí y después leé:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["with open(\"saludo.txt\", \"w\") as f: f.write(\"Hola\\n\")","with open(\"saludo.txt\", \"r\") as f: print(f.read())","Recordá usar encoding=\"utf-8\""]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["with open(\"saludo.txt\", \"w\") as f: f.write(\"Hola\\n\")","with open(\"saludo.txt\", \"r\") as f: print(f.read())","Recordá usar encoding=\"utf-8\""]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Contar líneas de un archivo</h4><p>Escribí 5 líneas en un archivo y después contá cuántas tiene con <code>readlines()</code>. Debe incluir <code>5</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-2" data-expected="5"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "5"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Escribí 5 líneas y contá:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["with open(\"test.txt\",\"w\") as f: for i in range(5): f.write(f\"Línea {i+1}\\n\")","with open(\"test.txt\") as f: lineas = f.readlines()","print(len(lineas)) → 5"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["with open(\"test.txt\",\"w\") as f: for i in range(5): f.write(f\"Línea {i+1}\\n\")","with open(\"test.txt\") as f: lineas = f.readlines()","print(len(lineas)) → 5"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: Escribir y leer JSON</h4><p>Guardá un diccionario como JSON y después leelo. Debe incluir <code>García</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-3" data-expected="García"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "García"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
 cliente = {"nombre": "García", "score": 720}
 
 # Guardá y leé:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["with open(\"c.json\",\"w\") as f: json.dump(cliente, f)","with open(\"c.json\") as f: datos = json.load(f)","print(datos[\"nombre\"]) → García"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["with open(\"c.json\",\"w\") as f: json.dump(cliente, f)","with open(\"c.json\") as f: datos = json.load(f)","print(datos[\"nombre\"]) → García"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: CSV con DictWriter y DictReader</h4><p>Escribí 3 clientes en un CSV y después leelos e imprimí el total de saldos. Debe incluir <code>515000</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-4" data-expected="515000"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "515000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import csv
 clientes = [
@@ -358,7 +358,7 @@ clientes = [
 ]
 
 # Escribí CSV, leé y sumá saldos:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["writer = csv.DictWriter(f, fieldnames=[\"nombre\",\"saldo\"])","Al leer: total = sum(int(r[\"saldo\"]) for r in reader)","150000+320000+45000 = 515000"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["writer = csv.DictWriter(f, fieldnames=[\"nombre\",\"saldo\"])","Al leer: total = sum(int(r[\"saldo\"]) for r in reader)","150000+320000+45000 = 515000"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Append al log</h4><p>Creá una función <code>log(mensaje)</code> que agregue al final de <code>app.log</code> con timestamp. Llamala 3 veces. Debe incluir <code>log</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-5" data-expected="registros"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "registros"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from datetime import datetime
 
@@ -371,7 +371,7 @@ log("3 registros procesados")
 
 # Leé e imprimí:
 with open("app.log") as f:
-    print(f.read())</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["with open(\"app.log\", \"a\") as f:","    f.write(f\"[{datetime.now()}] {mensaje}\\n\")","Cada llamada AGREGA al final sin borrar"]'></div></div>
+    print(f.read())</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["with open(\"app.log\", \"a\") as f:","    f.write(f\"[{datetime.now()}] {mensaje}\\n\")","Cada llamada AGREGA al final sin borrar"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: pathlib para listar archivos</h4><p>Creá 3 archivos .txt en un directorio y después listalos con <code>Path.glob()</code>. Debe incluir <code>.txt</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-6" data-expected=".txt"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir ".txt"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">from pathlib import Path
 
@@ -379,7 +379,7 @@ carpeta = Path("mis_datos")
 carpeta.mkdir(exist_ok=True)
 
 # Creá 3 archivos y listalos:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["for i in range(3): (carpeta/f\"archivo_{i}.txt\").write_text(f\"datos {i}\")","for a in carpeta.glob(\"*.txt\"): print(a)","Path tiene .write_text() como atajo de open+write"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["for i in range(3): (carpeta/f\"archivo_{i}.txt\").write_text(f\"datos {i}\")","for a in carpeta.glob(\"*.txt\"): print(a)","Path tiene .write_text() como atajo de open+write"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Pipeline leer CSV → procesar → guardar JSON</h4><p>Escribí un CSV de 4 clientes, leelo, filtrá score >= 650, y guardá los aprobados como JSON. Debe incluir <code>aprobados</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-7" data-expected="aprobados"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "aprobados"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import csv, json
 
@@ -391,7 +391,7 @@ clientes = [
 ]
 
 # CSV → filtrar → JSON:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["Escribí CSV, leé con DictReader, filtrá int(r[\"score\"]) >= 650","aprobados = [r for r in datos if int(r[\"score\"]) >= 650]","json.dump(aprobados, f, indent=2); print(f\"{len(aprobados)} aprobados\")"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["Escribí CSV, leé con DictReader, filtrá int(r[\"score\"]) >= 650","aprobados = [r for r in datos if int(r[\"score\"]) >= 650]","json.dump(aprobados, f, indent=2); print(f\"{len(aprobados)} aprobados\")"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Leer archivo línea por línea y procesar</h4><p>Creá un archivo con 1000 números (uno por línea), después leelo línea por línea calculando suma y promedio SIN cargar todo en memoria. Debe incluir <code>promedio</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-8" data-expected="promedio"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "promedio"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import random
 random.seed(42)
@@ -402,7 +402,7 @@ with open("numeros.txt", "w") as f:
         f.write(f"{random.randint(1, 100)}\n")
 
 # Leé línea por línea sin cargar todo:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["total = 0; count = 0","with open(\"numeros.txt\") as f: for linea in f: total += int(linea); count += 1","print(f\"promedio: {total/count:.1f}\")"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["total = 0; count = 0","with open(\"numeros.txt\") as f: for linea in f: total += int(linea); count += 1","print(f\"promedio: {total/count:.1f}\")"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Consolidar múltiples JSONs</h4><p>Creá 3 archivos JSON (uno por mes con lista de saldos). Después leé los 3 con <code>glob</code> y consolidá el total. Debe incluir <code>consolidado</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-9" data-expected="consolidado"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "consolidado"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
 from pathlib import Path
@@ -411,7 +411,7 @@ datos_dir = Path("consolidar")
 datos_dir.mkdir(exist_ok=True)
 
 # Creá 3 JSONs y consolidá:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["Creá: json.dump({\"mes\":\"ene\",\"saldos\":[100,200]}, open(path,\"w\"))","for arch in datos_dir.glob(\"*.json\"): datos = json.load(open(arch))","Sumá todos los saldos → print(f\"consolidado: ${total:,}\")"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["Creá: json.dump({\"mes\":\"ene\",\"saldos\":[100,200]}, open(path,\"w\"))","for arch in datos_dir.glob(\"*.json\"): datos = json.load(open(arch))","Sumá todos los saldos → print(f\"consolidado: ${total:,}\")"]'></div></div>
 
 <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Sistema de persistencia completo</h4><p>Creá un mini sistema CRUD que guarde clientes en un JSON: funciones <code>cargar()</code>, <code>guardar()</code>, <code>agregar_cliente()</code>, <code>listar()</code>. Los datos deben persistir entre llamadas. Debe incluir <code>PERSISTENCIA</code>.</p><div class="editor" data-mode="python" data-lesson="python-24" data-exercise="ex-10" data-expected="PERSISTENCIA"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "PERSISTENCIA"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import json
 ARCHIVO = "clientes_db.json"
@@ -436,7 +436,7 @@ datos = cargar()
 print(f"=== PERSISTENCIA ({len(datos)} clientes) ===")
 for c in datos:
     print(f"  {c['nombre']}: score {c['score']}")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["cargar: try open+json.load except: return []","guardar: open(\"w\")+json.dump","agregar: clientes = cargar(); clientes.append({...}); guardar(clientes)"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["cargar: try open+json.load except: return []","guardar: open(\"w\")+json.dump","agregar: clientes = cargar(); clientes.append({...}); guardar(clientes)"]'></div></div>
 
 <div class="section-num">05</div>
 <h2>Resumen y conexión</h2>

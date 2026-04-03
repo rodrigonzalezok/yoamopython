@@ -22,7 +22,7 @@
   <h1>GROUP BY y HAVING</h1>
   <p>GROUP BY es el equivalente SQL de <code>df.groupby()</code> en pandas. Agrupa filas por una columna y aplica funciones de agregación a cada grupo: total por ciudad, promedio por tipo, conteo por categoría. Es la herramienta más poderosa para análisis de datos.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">90–110 min</span>
     <span class="badge">Prerrequisitos: SQL 05</span>
   </div>
 </div>
@@ -280,28 +280,28 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires',720),(2,'López','Córdo
 (3,'Martínez','Rosario',590),(4,'Pérez','Buenos Aires',810),(5,'Fernández','Córdoba',645);
 
 -- Cantidad por ciudad:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT ciudad, COUNT(*) AS cantidad FROM clientes GROUP BY ciudad;","Buenos Aires: 2, Córdoba: 2, Rosario: 1","ciudad está en GROUP BY → OK en SELECT"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT ciudad, COUNT(*) AS cantidad FROM clientes GROUP BY ciudad;","Buenos Aires: 2, Córdoba: 2, Rosario: 1","ciudad está en GROUP BY → OK en SELECT"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: SUM por grupo</h4><p>Calculá el saldo total por ciudad. Debe incluir <code>1040000</code> (BsAs).</p><div class="editor" data-mode="sql" data-lesson="sql-06" data-exercise="ex-2" data-expected="1040000"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "1040000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000),(2,'López','Córdoba',320000),
 (3,'Martínez','Rosario',45000),(4,'Pérez','Buenos Aires',890000);
 
 -- Saldo total por ciudad:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["SELECT ciudad, SUM(saldo) AS total FROM clientes GROUP BY ciudad;","BsAs: 150000 + 890000 = 1040000","ORDER BY total DESC para ver el mayor primero"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["SELECT ciudad, SUM(saldo) AS total FROM clientes GROUP BY ciudad;","BsAs: 150000 + 890000 = 1040000","ORDER BY total DESC para ver el mayor primero"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: AVG por grupo</h4><p>Calculá el score promedio por ciudad (redondeado). Debe incluir <code>765</code> (BsAs).</p><div class="editor" data-mode="sql" data-lesson="sql-06" data-exercise="ex-3" data-expected="765"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "765"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720),(2,'López','Córdoba',680),
 (3,'Martínez','Rosario',590),(4,'Pérez','Buenos Aires',810),(5,'Fernández','Córdoba',645);
 
 -- Score promedio por ciudad:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["SELECT ciudad, ROUND(AVG(score), 0) AS prom FROM clientes GROUP BY ciudad;","BsAs: (720+810)/2 = 765","Córdoba: (680+645)/2 = 663"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["SELECT ciudad, ROUND(AVG(score), 0) AS prom FROM clientes GROUP BY ciudad;","BsAs: (720+810)/2 = 765","Córdoba: (680+645)/2 = 663"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: HAVING básico</h4><p>Mostrá solo ciudades con 2 o más clientes. Debe incluir <code>Córdoba</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-06" data-exercise="ex-4" data-expected="Córdoba"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "Córdoba"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720),(2,'López','Córdoba',680),
 (3,'Martínez','Rosario',590),(4,'Pérez','Buenos Aires',810),(5,'Fernández','Córdoba',645);
 
 -- Ciudades con 2+ clientes:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["GROUP BY ciudad HAVING COUNT(*) >= 2","Buenos Aires (2) y Córdoba (2) cumplen","Rosario (1) queda afuera"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["GROUP BY ciudad HAVING COUNT(*) >= 2","Buenos Aires (2) y Córdoba (2) cumplen","Rosario (1) queda afuera"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: WHERE + GROUP BY</h4><p>Contá clientes ACTIVOS por ciudad. Debe incluir <code>3</code> (BsAs activos).</p><div class="editor" data-mode="sql" data-lesson="sql-06" data-exercise="ex-5" data-expected="3"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "3"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',1),(2,'López','Córdoba',1),
@@ -309,21 +309,21 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires',1),(2,'López','Córdoba
 (5,'Fernández','Córdoba',1),(6,'Sosa','Buenos Aires',1);
 
 -- Activos por ciudad:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["WHERE activo = 1 GROUP BY ciudad","WHERE filtra ANTES de agrupar","BsAs: García, Pérez, Sosa = 3 activos"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["WHERE activo = 1 GROUP BY ciudad","WHERE filtra ANTES de agrupar","BsAs: García, Pérez, Sosa = 3 activos"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: Transacciones por tipo</h4><p>Agrupá transacciones por tipo: cantidad y monto total. Ordená por monto total DESC. Debe incluir <code>compra</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-06" data-exercise="ex-6" data-expected="compra"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "compra"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, tipo TEXT, monto REAL);
 INSERT INTO transacciones VALUES (1,'compra',15000),(2,'venta',8000),(3,'compra',32000),
 (4,'transferencia',50000),(5,'venta',21000),(6,'compra',9500);
 
 -- Por tipo, ordenado por total:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["SELECT tipo, COUNT(*) AS qty, SUM(monto) AS total","GROUP BY tipo ORDER BY total DESC","compra: 3 ops, 56500 total"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["SELECT tipo, COUNT(*) AS qty, SUM(monto) AS total","GROUP BY tipo ORDER BY total DESC","compra: 3 ops, 56500 total"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: GROUP BY múltiples columnas</h4><p>Agrupá transacciones por mes Y tipo. Debe incluir <code>2025-01</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-06" data-exercise="ex-7" data-expected="2025-01"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "2025-01"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE transacciones (id INTEGER, tipo TEXT, monto REAL, mes TEXT);
 INSERT INTO transacciones VALUES (1,'compra',15000,'2025-01'),(2,'venta',8000,'2025-01'),
 (3,'compra',32000,'2025-01'),(4,'compra',22000,'2025-02'),(5,'venta',12000,'2025-02');
 
 -- Por mes y tipo:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["GROUP BY mes, tipo","Crea un grupo por cada combinación mes+tipo","2025-01 compra: 2 ops, 2025-01 venta: 1 op, etc."]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["GROUP BY mes, tipo","Crea un grupo por cada combinación mes+tipo","2025-01 compra: 2 ops, 2025-01 venta: 1 op, etc."]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: WHERE + GROUP BY + HAVING + ORDER BY</h4><p>De clientes activos, agrupá por ciudad, mostrá solo ciudades con saldo total > $200K, ordená por saldo DESC. Debe incluir <code>Buenos Aires</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-06" data-exercise="ex-8" data-expected="Buenos Aires"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "Buenos Aires"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000,1),(2,'López','Córdoba',320000,1),
@@ -331,7 +331,7 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires',150000,1),(2,'López','C
 (5,'Fernández','Córdoba',72000,1),(6,'Sosa','Rosario',30000,1);
 
 -- El combo completo:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["WHERE activo = 1 GROUP BY ciudad HAVING SUM(saldo) > 200000","ORDER BY SUM(saldo) DESC","BsAs activos: 150K+890K=1040K, Cba: 320K+72K=392K"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["WHERE activo = 1 GROUP BY ciudad HAVING SUM(saldo) > 200000","ORDER BY SUM(saldo) DESC","BsAs activos: 150K+890K=1040K, Cba: 320K+72K=392K"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: GROUP BY con CASE WHEN</h4><p>Agrupá clientes por categoría de score (Excelente/Bueno/Regular/Bajo) y mostrá cantidad y saldo promedio por categoría. Debe incluir <code>Excelente</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-06" data-exercise="ex-9" data-expected="Excelente"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "Excelente"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),
@@ -339,7 +339,7 @@ INSERT INTO clientes VALUES (1,'García',720,150000),(2,'López',680,320000),
 (6,'Sosa',750,210000),(7,'Luna',520,30000);
 
 -- GROUP BY categoría calculada:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["SELECT CASE WHEN score>=800 THEN \\x27Excelente\\x27 ... END AS cat","GROUP BY el mismo CASE WHEN","Excelente (1), Bueno (3), Regular (2), Bajo (1)"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["SELECT CASE WHEN score>=800 THEN \\x27Excelente\\x27 ... END AS cat","GROUP BY el mismo CASE WHEN","Excelente (1), Bueno (3), Regular (2), Bajo (1)"]'></div></div>
 
 <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Reporte gerencial por ciudad</h4><p>Generá un reporte por ciudad con: cantidad de clientes, % del total, saldo total, saldo promedio, score promedio, y cantidad de premium (score>=700). Solo ciudades con 2+ clientes. Ordená por saldo total DESC. Debe incluir <code>premium</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-06" data-exercise="ex-10" data-expected="premium"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "premium"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1),(2,'López','Córdoba',680,320000,1),
@@ -348,7 +348,7 @@ INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000,1),(2,'López
 (7,'Luna','Córdoba',700,180000,1);
 
 -- Reporte gerencial:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["SELECT ciudad, COUNT(*), ROUND(COUNT(*)*100.0/(SELECT COUNT(*) FROM clientes),1) AS pct","SUM(saldo), ROUND(AVG(saldo)), SUM(CASE WHEN score>=700 THEN 1 ELSE 0 END) AS premium","GROUP BY ciudad HAVING COUNT(*)>=2 ORDER BY SUM(saldo) DESC"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["SELECT ciudad, COUNT(*), ROUND(COUNT(*)*100.0/(SELECT COUNT(*) FROM clientes),1) AS pct","SUM(saldo), ROUND(AVG(saldo)), SUM(CASE WHEN score>=700 THEN 1 ELSE 0 END) AS premium","GROUP BY ciudad HAVING COUNT(*)>=2 ORDER BY SUM(saldo) DESC"]'></div></div>
 
 <div class="section-num">05</div>
 <h2>Resumen y conexión</h2>

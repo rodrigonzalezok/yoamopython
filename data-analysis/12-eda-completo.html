@@ -27,7 +27,7 @@
   <h1>EDA Completo: Análisis Exploratorio de Datos</h1>
   <p>El <strong>Análisis Exploratorio de Datos (EDA)</strong> es el proceso sistemático de examinar un dataset antes de cualquier modelado o decisión de negocio. No es un paso — es <em>el</em> paso. Un EDA mal hecho lleva a conclusiones equivocadas. Uno bien hecho te da la intuición necesaria para hacer las preguntas correctas.</p>
   <div class="badges">
-    <span class="badge">⏱ 120–150 min</span>
+    <span class="badge">120–150 min</span>
     <span class="badge">Prerrequisitos: Lecciones 04-11</span>
   </div>
 </div>
@@ -143,16 +143,16 @@ print("=" * 50)
 # Nulos
 nulos = df.isna().sum()
 nulos_pct = round(df.isna().sum() / len(df) * 100, 1)
-print("\n📋 Nulos por columna:")
+print("\nNulos por columna:")
 for col in nulos[nulos > 0].index:
     print(f"  {col}: {nulos[col]} ({nulos_pct[col]}%)")
 
 # Duplicados
 dupes = df.duplicated().sum()
-print(f"\n📋 Duplicados: {dupes} filas ({round(dupes/len(df)*100, 1)}%)")
+print(f"\nDuplicados: {dupes} filas ({round(dupes/len(df)*100, 1)}%)")
 
 # Estadísticas básicas
-print(f"\n📋 Resumen estadístico:")
+print(f"\nResumen estadístico:")
 print(df.describe().round(0))</textarea></div>
   <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
   <pre class="output">Hacé clic en ▶ Ejecutar</pre>
@@ -353,7 +353,7 @@ df = pd.DataFrame({
 
 # Imprimí shape y dtypes
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["print(f\"Dimensiones: {df.shape}\")","print(df.dtypes)"]'></div>
@@ -377,7 +377,7 @@ df = pd.DataFrame({
 
 # Nulos por columna + duplicados
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["print(\"Nulos:\")\nprint(df.isna().sum())","print(f\"Duplicados: {df.duplicated().sum()}\")"]'></div>
@@ -401,7 +401,7 @@ df = pd.DataFrame({
 
 # describe()
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["print(df.describe())"]'></div>
@@ -425,7 +425,7 @@ df = pd.DataFrame({"Ingreso": np.random.normal(400000, 120000, 100).astype(int)}
 
 # Histograma + mediana + print
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["sns.histplot(data=df, x=\"Ingreso\", kde=True, bins=20)","plt.axvline(df[\"Ingreso\"].median(), color=\"red\", linestyle=\"--\")","plt.show(); print(\"Univariado OK\")"]'></div>
@@ -447,7 +447,7 @@ df = pd.DataFrame({
 
 # value_counts normalizado (porcentajes)
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["print(df[\"Segmento\"].value_counts(normalize=True).round(2))"]'></div>
@@ -474,7 +474,7 @@ df = pd.DataFrame({
 
 # Boxplot por segmento
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["sns.boxplot(data=df, x=\"Segmento\", y=\"Ingreso\", palette=\"Set2\")","plt.title(\"Ingreso por Segmento\"); plt.show(); print(\"Bivariado OK\")"]'></div>
@@ -503,7 +503,7 @@ df = pd.DataFrame({
 
 # Correlación + heatmap + print
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["corr = df.corr()","sns.heatmap(corr, annot=True, cmap=\"RdYlBu_r\"); plt.show()","print(f\"Corr Ant-Ing: {corr.loc[\\\"Antigüedad\\\",\\\"Ingreso\\\"]:.2f}\")"]'></div>
@@ -528,7 +528,7 @@ df = pd.DataFrame({
 # 2. drop_duplicates por ID
 # 3. Imprimí "Limpio" + media + mediana
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["df[\"Saldo\"] = df[\"Saldo\"].fillna(df[\"Saldo\"].median())","df = df.drop_duplicates(subset=\"ID\")","print(f\"Limpio: media={df[\\\"Saldo\\\"].mean():.0f}, mediana={df[\\\"Saldo\\\"].median():.0f}\")"]'></div>
@@ -557,7 +557,7 @@ df = pd.DataFrame({
 # fig, axes = plt.subplots(2, 2, ...)
 # 4 gráficos del EDA
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 10))","sns.histplot(data=df, x=\"Ingreso\", kde=True, ax=axes[0,0])","sns.countplot(data=df, x=\"Segmento\", ax=axes[0,1]); sns.boxplot(data=df, x=\"Segmento\", y=\"Ingreso\", ax=axes[1,0]); sns.regplot(data=df, x=\"Antigüedad\", y=\"Ingreso\", ax=axes[1,1]); plt.tight_layout(); plt.show(); print(\"EDA dashboard\")"]'></div>
@@ -588,7 +588,7 @@ df.loc[np.random.choice(n, 5, replace=False), "Ingreso"] = np.nan
 
 # Reporte EDA completo con insights
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["print(f\"Dimensiones: {df.shape}\")","print(f\"Nulos: {df.isna().sum().sum()} ({df.isna().sum().sum()/df.size*100:.1f}%)\")","reporte = df.groupby(\"Segmento\").agg(Media=(\"Ingreso\",\"mean\"), Productos=(\"Productos\",\"mean\")); print(reporte.round(0)); print(\"Hallazgo: Premium tiene más productos y mayor ingreso\")"]'></div>

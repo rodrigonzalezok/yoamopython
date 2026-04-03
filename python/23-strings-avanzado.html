@@ -27,7 +27,7 @@
   <h1>Strings avanzado</h1>
   <p>En la lección 12 cubrimos los métodos básicos. Ahora vamos al nivel avanzado: slicing profundo, expresiones regulares con <code>re</code>, encoding, raw strings y f-strings con expresiones complejas. Estas herramientas son las que usás para limpiar datos realmente sucios.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">90–110 min</span>
     <span class="badge">Prerrequisitos: 12 Métodos de strings, 18 Funciones</span>
   </div>
 </div>
@@ -364,18 +364,18 @@ print(reporte)</textarea></div>
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 1: Invertir un string</h4><p>Dado <code>texto = "Python"</code>, invertilo con slicing. Debe incluir <code>nohtyP</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-1" data-expected="nohtyP"><div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "nohtyP"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">texto = "Python"
 
 # Invertí:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["print(texto[::-1])","[::-1] invierte cualquier secuencia","\"Python\"[::-1] = \"nohtyP\""]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["print(texto[::-1])","[::-1] invierte cualquier secuencia","\"Python\"[::-1] = \"nohtyP\""]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Extraer partes de un CBU</h4><p>Dado <code>cbu = "2850590940090418135201"</code>, extraé los 3 primeros dígitos (banco), los siguientes 4 (sucursal) y el último (verificador). Debe incluir <code>285</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-2" data-expected="285"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "285"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">cbu = "2850590940090418135201"
 
 # Extraé con slicing:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["banco = cbu[:3] → \"285\"","sucursal = cbu[3:7]","verificador = cbu[-1]"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["banco = cbu[:3] → \"285\"","sucursal = cbu[3:7]","verificador = cbu[-1]"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: re.findall para extraer números</h4><p>Dado <code>"Ventas: $1500, $3200, $800"</code>, extraé todos los números con <code>re.findall()</code>. Debe incluir <code>3200</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-3" data-expected="3200"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "3200"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
 texto = "Ventas: $1500, $3200, $800"
 
 # Extraé números:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["nums = re.findall(r\"\\d+\", texto)","print(nums)","[\"1500\", \"3200\", \"800\"]"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["nums = re.findall(r\"\\d+\", texto)","print(nums)","[\"1500\", \"3200\", \"800\"]"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Validar CUIT con regex</h4><p>Creá una función <code>validar_cuit(cuit)</code> que use regex para verificar formato <code>XX-XXXXXXXX-X</code>. Probá con "20-30123456-9" (válido) y "abc-123-x" (inválido). Debe incluir <code>True</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-4" data-expected="True"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "True"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
 
@@ -383,37 +383,37 @@ def validar_cuit(cuit):
     pass  # usá re.match con un patrón
 
 print(validar_cuit("20-30123456-9"))
-print(validar_cuit("abc-123-x"))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["patron = r\"^\\d{2}-\\d{8}-\\d$\"","return bool(re.match(patron, cuit))","^ y $ aseguran que matchee TODO el string"]'></div></div>
+print(validar_cuit("abc-123-x"))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["patron = r\"^\\d{2}-\\d{8}-\\d$\"","return bool(re.match(patron, cuit))","^ y $ aseguran que matchee TODO el string"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: re.sub para limpiar montos</h4><p>Dado <code>"$1,250,000.50"</code>, usá <code>re.sub()</code> para eliminar todo excepto dígitos y punto. Convertí a float. Debe incluir <code>1250000.5</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-5" data-expected="1250000.5"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "1250000.5"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
 monto = "$1,250,000.50"
 
 # Limpiá con re.sub:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["limpio = re.sub(r\"[^0-9.]\", \"\", monto)","[^0-9.] = todo lo que NO sea dígito o punto","float(limpio) → 1250000.5"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["limpio = re.sub(r\"[^0-9.]\", \"\", monto)","[^0-9.] = todo lo que NO sea dígito o punto","float(limpio) → 1250000.5"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: Extraer emails con regex</h4><p>Dado un texto con 3 emails, extraelos todos con <code>re.findall()</code>. Debe incluir <code>@</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-6" data-expected="@"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "@"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
 texto = "Contactar a garcia@banco.com, info@empresa.com.ar o soporte@mail.net"
 
 # Extraé emails:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["patron = r\"[\\w.+-]+@[\\w.-]+\\.\\w+\"","emails = re.findall(patron, texto)","print(emails)"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["patron = r\"[\\w.+-]+@[\\w.-]+\\.\\w+\"","emails = re.findall(patron, texto)","print(emails)"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Regex con grupos para parsear CUIT</h4><p>Usá grupos de captura <code>(\d{2})-(\d{8})-(\d)</code> para extraer las 3 partes de <code>"20-30123456-9"</code>. Debe incluir <code>30123456</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-7" data-expected="30123456"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "30123456"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
 cuit = "20-30123456-9"
 
 # Extraé las partes con grupos:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["match = re.match(r\"(\\d{2})-(\\d{8})-(\\d)\", cuit)","prefijo, cuerpo, verif = match.groups()","print(f\"Cuerpo: {cuerpo}\") → 30123456"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["match = re.match(r\"(\\d{2})-(\\d{8})-(\\d)\", cuit)","prefijo, cuerpo, verif = match.groups()","print(f\"Cuerpo: {cuerpo}\") → 30123456"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Ocultar datos sensibles con re.sub</h4><p>Dado <code>"DNI 30123456, Tel +54-11-4567-8901"</code>, ocultar el DNI con X y los últimos 4 dígitos del teléfono con *. Debe incluir <code>XXXXXXXX</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-8" data-expected="XXXXXXXX"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "XXXXXXXX"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
 texto = "DNI 30123456, Tel +54-11-4567-8901"
 
 # Ocultar datos sensibles:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["oculto = re.sub(r\"\\b\\d{8}\\b\", \"XXXXXXXX\", texto)","\\b marca límites de palabra","Para el teléfono podés usar otro re.sub"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["oculto = re.sub(r\"\\b\\d{8}\\b\", \"XXXXXXXX\", texto)","\\b marca límites de palabra","Para el teléfono podés usar otro re.sub"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Limpiar lista de montos con formatos mixtos</h4><p>Tenés <code>["$1,500.00", "AR$23.450", "1500", "$-200", "N/A"]</code>. Usá regex para extraer el valor numérico de cada uno, ignorando los inválidos. Debe incluir <code>Total</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-9" data-expected="Total"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "Total"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
 montos_crudos = ["$1,500.00", "AR$23.450", "1500", "$-200", "N/A"]
 
 # Limpiá y sumá:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["Para cada m: limpio = re.sub(r\"[^0-9.-]\", \"\", m)","if limpio and limpio != \"-\": float(limpio)","Sumá los válidos y print(f\"Total: ${total:,.0f}\")"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["Para cada m: limpio = re.sub(r\"[^0-9.-]\", \"\", m)","if limpio and limpio != \"-\": float(limpio)","Sumá los válidos y print(f\"Total: ${total:,.0f}\")"]'></div></div>
 
 <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Parser de registros con regex completo</h4><p>Dado un texto con registros semi-estructurados, extraé nombre, CUIT y monto de cada línea usando regex con grupos. Armá una lista de diccionarios. Debe incluir <code>registros</code>.</p><div class="editor" data-mode="python" data-lesson="python-23" data-exercise="ex-10" data-expected="registros"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "registros"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">import re
 
@@ -425,7 +425,7 @@ Cliente: Pérez, CUIT: 20-40123456-7, Monto: $890,000
 
 # Parseá cada línea con regex:
 print(f"=== {len(texto.strip().splitlines())} registros ===")
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["patron = r\"Cliente: (\\w+), CUIT: ([\\d-]+), Monto: \\$([\\d,]+)\"","matches = re.findall(patron, texto)","registros = [{\"nombre\":m[0], \"cuit\":m[1], \"monto\":m[2]} for m in matches]"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["patron = r\"Cliente: (\\w+), CUIT: ([\\d-]+), Monto: \\$([\\d,]+)\"","matches = re.findall(patron, texto)","registros = [{\"nombre\":m[0], \"cuit\":m[1], \"monto\":m[2]} for m in matches]"]'></div></div>
 
 <div class="section-num">05</div>
 <h2>Resumen y conexión</h2>

@@ -27,7 +27,7 @@
   <h1>Métodos de listas</h1>
   <p>En la lección 08 aprendiste a crear y acceder a listas. Ahora vas a dominar TODOS los métodos para modificarlas, ordenarlas, buscar en ellas y transformarlas con comprehensions avanzadas, enumerate, zip, map y filter.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">90–110 min</span>
     <span class="badge">Prerrequisitos: 08 Listas, 12 Métodos de strings</span>
   </div>
 </div>
@@ -330,7 +330,7 @@ print(f"\nPremium: {scoring}")</textarea></div>
 
 # Ordená descendente sin modificar la original:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["desc = sorted(ventas, reverse=True)","print(desc)","Verificá que ventas siga igual: print(ventas)"]'></div>
@@ -346,7 +346,7 @@ print(f"\nPremium: {scoring}")</textarea></div>
 
 # Recorré 1 a 20 y appendeá los pares:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["for n in range(1, 21):","    if n % 2 == 0: pares.append(n)","print(pares) → [2, 4, 6, ..., 20]"]'></div>
@@ -362,7 +362,7 @@ print(f"\nPremium: {scoring}")</textarea></div>
 
 # Enumerá desde 1:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["for i, prod in enumerate(productos, start=1):","    print(f\"{i}. {prod}\")","enumerate(lista, start=1) arranca en 1"]'></div>
@@ -379,7 +379,7 @@ saldos = [150000, 320000, 890000]
 
 # Creá dict con zip:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["cartera = dict(zip(nombres, saldos))","print(cartera)","Da: {\"García\": 150000, \"López\": 320000, \"Pérez\": 890000}"]'></div>
@@ -395,7 +395,7 @@ saldos = [150000, 320000, 890000]
 
 # Comprehension con if/else:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["[\"Alto\" if s>=700 else \"Medio\" if s>=600 else \"Bajo\" for s in scores]","520 es < 600 → Bajo","print(categorias)"]'></div>
@@ -411,7 +411,7 @@ saldos = [150000, 320000, 890000]
 
 # Ordená por score descendente:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["sorted(clientes, key=lambda c: c[1], reverse=True)","El primero es (\"Pérez\", 810)","print(f\"Top: {ordenados[0][0]}\")"]'></div>
@@ -427,7 +427,7 @@ saldos = [150000, 320000, 890000]
 
 # Aplana y sumá:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["plana = [s for subcuenta in cuentas for s in subcuenta]","print(sum(plana))","150000+5000+320000+45000+890000+72000 = 1482000"]'></div>
@@ -443,7 +443,7 @@ saldos = [150000, 320000, 890000]
 
 # Limpiá, convertí, filtrá y sumá:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["nums = [float(m.replace(\"$\",\"\").replace(\",\",\"\")) for m in montos_str]","grandes = [n for n in nums if n > 1000]","1500+3200+12000 = 16700"]'></div>
@@ -461,7 +461,7 @@ saldos = [150000, 320000, 890000]
 
 # Reporte con enumerate + zip:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["for i, (n, s, sal) in enumerate(zip(clientes, scores, saldos), 1):","emoji = \"🟢\" if s >= 700 else \"🔴\"","Al final: print(f\"Total: ${sum(saldos):,}\")"]'></div>
@@ -483,7 +483,7 @@ saldos = [150000, 320000, 890000]
 # Procesá, ordená e imprimí:
 print("=== Top 3 por saldo ===")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["Para cada r: campos = r.split(\"|\")","nombre, score, saldo = campos[0], int(campos[1]), float(campos[2].replace(\"$\",\"\").replace(\",\",\"\"))","sorted(datos, key=lambda x: x[2], reverse=True)[:3]"]'></div>

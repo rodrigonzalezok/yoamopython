@@ -27,7 +27,7 @@
   <h1>Módulos de la biblioteca estándar</h1>
   <p>Python viene con "baterías incluidas": una colección enorme de módulos listos para usar sin instalar nada. Esta lección cubre los 6 que vas a usar todos los días como analista: math, datetime, random, json, os y collections.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: 18 Funciones básicas</span>
   </div>
 </div>
@@ -367,7 +367,7 @@ cuotas = 6
 
 # Calculá y redondeá:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["cuota = capital / cuotas → 26166.666...","math.ceil(cuota) → 26167","Siempre redondeás para arriba en cuotas"]'></div>
@@ -383,7 +383,7 @@ cuotas = 6
 
 # Imprimí fecha actual dd/mm/yyyy:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["ahora = datetime.now()","print(ahora.strftime(\"%d/%m/%Y\"))","El formato usa %d día, %m mes, %Y año"]'></div>
@@ -401,7 +401,7 @@ tickers = ["GGAL", "YPF", "PAMP", "MELI"]
 
 # Elegí uno al azar:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["elegido = random.choice(tickers)","print(f\"Elegido: {elegido}\")","Con seed(42) siempre sale el mismo"]'></div>
@@ -419,7 +419,7 @@ fecha_alta_str = "15/03/2020"
 
 # Parseá y calculá antigüedad:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["alta = datetime.strptime(fecha_alta_str, \"%d/%m/%Y\")","diff = datetime.now() - alta","print(f\"Antigüedad: {diff.days} días\")"]'></div>
@@ -440,7 +440,7 @@ cotizacion = {
 
 # Convertí a JSON e imprimí:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["Agregá: \"precio\": 5200, \"volumen\": 1500000, \"fecha\": \"2025-03-15\"","print(json.dumps(cotizacion, indent=2))","JSON usa comillas dobles para las claves"]'></div>
@@ -458,7 +458,7 @@ primera_cuota = date(2025, 1, 10)
 
 # Generá 6 vencimientos:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["for i in range(6):","    venc = primera_cuota + timedelta(days=30 * i)","    print(venc.strftime(\"%d/%m/%Y\"))"]'></div>
@@ -476,7 +476,7 @@ capital = 100000
 
 # Simulá 12 meses:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["saldo = capital","for _ in range(12): saldo *= (1 + random.gauss(0.005, 0.02))","print(f\"Final: ${saldo:,.0f}\")"]'></div>
@@ -494,7 +494,7 @@ json_str = '[{"ticker":"GGAL","cantidad":100,"precio":5200},{"ticker":"YPF","can
 
 # Parseá y calculá valor total:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["cartera = json.loads(json_str)","total = sum(a[\"cantidad\"] * a[\"precio\"] for a in cartera)","100*5200 + 50*28000 = 520000 + 1600000 = 2120000"]'></div>
@@ -512,7 +512,7 @@ nombres = ["García", "López", "Martínez", "Pérez", "Fernández"]
 
 # Generá 5 clientes aleatorios:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["for _ in range(5): cliente = {\"nombre\": random.choice(nombres), ...}","\"score\": random.randint(400, 900)","\"saldo\": round(random.uniform(10000, 500000), 2)"]'></div>
@@ -535,7 +535,7 @@ base = datetime(2025, 1, 1)
 # Generá 10 transacciones y armá reporte:
 print("=== REPORTE DE TRANSACCIONES ===")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["fecha = base + timedelta(days=random.randint(0,90))","tipo = random.choice(tipos); monto = round(random.uniform(1000, 50000))","Counter([t[\"tipo\"] for t in transacciones]).most_common()"]'></div>

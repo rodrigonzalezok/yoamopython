@@ -27,7 +27,7 @@
   <h1>Seaborn: Visualización Estadística</h1>
   <p>Seaborn es una biblioteca construida <strong>sobre Matplotlib</strong> que automatiza la creación de gráficos estadísticos complejos. Lo que en Matplotlib requiere 15 líneas de código, en Seaborn se hace en 1. Está diseñada para trabajar directamente con DataFrames de pandas, lo que la convierte en la herramienta de visualización favorita de los Data Analysts.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: Lección 10 (Matplotlib básico)</span>
   </div>
 </div>
@@ -316,7 +316,7 @@ df = pd.DataFrame({
 
 # sns.boxplot + show + print
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["sns.boxplot(data=df, x=\"Segmento\", y=\"Saldo\")","plt.show(); print(\"Boxplot OK\")"]'></div>
@@ -340,7 +340,7 @@ df = pd.DataFrame({"Ingreso": np.random.normal(400000, 100000, 100)})
 
 # sns.histplot con kde=True
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["sns.histplot(data=df, x=\"Ingreso\", kde=True, bins=20)","plt.title(\"Distribución\"); plt.show(); print(\"Histograma Seaborn OK\")"]'></div>
@@ -364,7 +364,7 @@ df = pd.DataFrame({
 
 # sns.countplot
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["sns.countplot(data=df, x=\"Canal\", palette=\"Set2\")","plt.title(\"Clientes por Canal\"); plt.show(); print(\"Conteo OK\")"]'></div>
@@ -390,7 +390,7 @@ df = pd.DataFrame({
 
 # Correlación + heatmap
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["corr = df.corr()","sns.heatmap(corr, annot=True, cmap=\"RdYlBu_r\", center=0)","plt.title(\"Correlaciones\"); plt.show(); print(\"Heatmap OK\")"]'></div>
@@ -415,7 +415,7 @@ df = pd.DataFrame({
 
 # sns.regplot + correlación
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["sns.regplot(data=df, x=\"Edad\", y=\"Ingreso\")","plt.show()","print(f\"Correlación: {df[\\\"Edad\\\"].corr(df[\\\"Ingreso\\\"]):.2f}\")"]'></div>
@@ -440,7 +440,7 @@ df = pd.DataFrame({
 
 # sns.barplot con errorbar
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["sns.barplot(data=df, x=\"Segmento\", y=\"Monto\", errorbar=\"sd\", palette=\"Set2\")","plt.title(\"Monto por Segmento\"); plt.show(); print(\"Barplot Seaborn OK\")"]'></div>
@@ -471,7 +471,7 @@ df = pd.DataFrame({
 
 # Boxplot profesional completo
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["plt.figure(figsize=(8,5))","sns.boxplot(data=df, x=\"Ciudad\", y=\"Ingreso\", palette=\"Set2\")","plt.title(\"Ingreso por Ciudad\", fontweight=\"bold\"); plt.ylabel(\"Ingreso ($)\"); plt.show(); print(\"Box profesional\")"]'></div>
@@ -501,7 +501,7 @@ df = pd.DataFrame({
 
 # histplot con hue para comparar distribuciones
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["sns.histplot(data=df, x=\"Saldo\", hue=\"Segmento\", kde=True, bins=15)","plt.title(\"Distribución por Segmento\"); plt.show()","print(\"Histograma comparativo OK\")"]'></div>
@@ -527,7 +527,7 @@ df = pd.DataFrame({
 
 # pivot_table + heatmap
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["tabla = pd.pivot_table(df, values=\"Monto\", index=\"Sucursal\", columns=\"Canal\", aggfunc=\"sum\")","sns.heatmap(tabla, annot=True, fmt=\",.0f\", cmap=\"YlOrRd\")","plt.title(\"Ventas\"); plt.show(); print(\"Pivot heatmap OK\")"]'></div>
@@ -556,7 +556,7 @@ df = pd.DataFrame({
 # fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 # 4 gráficos Seaborn en una sola figura
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 10))","sns.boxplot(data=df, x=\"Segmento\", y=\"Monto\", ax=axes[0,0])","sns.histplot(data=df, x=\"Monto\", kde=True, ax=axes[0,1]); sns.countplot(data=df, x=\"Canal\", ax=axes[1,0]); sns.barplot(data=df, x=\"Segmento\", y=\"Monto\", ax=axes[1,1]); plt.tight_layout(); plt.show(); print(\"Dashboard completo\")"]'></div>

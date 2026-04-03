@@ -27,7 +27,7 @@
   <h1>Estadística Descriptiva</h1>
   <p>La estadística descriptiva es el <strong>lenguaje universal</strong> del análisis de datos. Cuando decís "el ingreso mediano es $350K con una desviación de $120K", cualquier analista del mundo entiende exactamente qué significa. Sin estadística, estás mirando números sin contexto. Con ella, estás contando la historia detrás de los datos.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: Lección 08 (merge/join/concat)</span>
   </div>
 </div>
@@ -313,7 +313,7 @@ df = pd.DataFrame({
 
 # Calculá media y mediana del Saldo
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["print(f\"Media: {df[\\\"Saldo\\\"].mean()}\")","print(f\"Mediana: {df[\\\"Saldo\\\"].median()}\")"]'></div>
@@ -334,7 +334,7 @@ df = pd.DataFrame({
 
 # Calculá la desviación estándar (redondeada)
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["print(round(df[\"Saldo\"].std()))"]'></div>
@@ -355,7 +355,7 @@ df = pd.DataFrame({
 
 # Imprimí el describe
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["print(df.describe())"]'></div>
@@ -376,7 +376,7 @@ df = pd.DataFrame({
 
 # Calculá Q1, mediana, Q3
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["Q1 = df[\"Ingreso\"].quantile(0.25)","Q3 = df[\"Ingreso\"].quantile(0.75)","print(f\"Q3: {Q3}\")"]'></div>
@@ -394,7 +394,7 @@ saldos = pd.Series([100, 200, 250, 300, 350, 400, 450, 500, 2000])
 
 # Calculá Q1, Q3, IQR, límites, contá outliers
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["Q1 = saldos.quantile(0.25); Q3 = saldos.quantile(0.75)","IQR = Q3 - Q1; lim_sup = Q3 + 1.5 * IQR","outliers = saldos[saldos > lim_sup]; print(len(outliers))"]'></div>
@@ -416,7 +416,7 @@ df = pd.DataFrame({
 
 # value_counts del segmento
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["print(df[\"Segmento\"].value_counts())"]'></div>
@@ -435,7 +435,7 @@ salarios = pd.Series([150000, 200000, 250000, 300000, 350000,
 
 # Calculá media, mediana, e interpretá la asimetría
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["media = salarios.mean(); mediana = salarios.median()","tipo = \"positiva\" if media > mediana else \"negativa\"","print(f\"Asimetría {tipo}\")"]'></div>
@@ -456,7 +456,7 @@ df = pd.DataFrame({
 
 # agg con media y std por segmento
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["reporte = df.groupby(\"Segmento\").agg(Media=(\"Saldo\",\"mean\"), Std=(\"Saldo\",\"std\")).round(0)","print(reporte)"]'></div>
@@ -477,7 +477,7 @@ df = pd.DataFrame({
 
 # Calculá la correlación entre las dos columnas
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["corr = df[\"Antiguedad\"].corr(df[\"Ingreso\"])","print(round(corr, 2))"]'></div>
@@ -504,7 +504,7 @@ df = pd.DataFrame({
 # 3. Media con y sin outliers
 # 4. value_counts() del segmento
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["print(df[\"Saldo\"].describe())","Q1 = df[\"Saldo\"].quantile(.25); Q3 = df[\"Saldo\"].quantile(.75); IQR = Q3-Q1","outliers = df[df[\"Saldo\"] > Q3+1.5*IQR]; print(f\"{len(outliers)} outlier(s)\")"]'></div>

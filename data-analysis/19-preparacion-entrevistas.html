@@ -27,7 +27,7 @@
   <h1>Preparación para Entrevistas</h1>
   <p>Sabés Python, SQL, pandas, visualización y ML. Ahora viene la parte que define si conseguís el puesto: <strong>la entrevista</strong>. Esta lección te prepara con las preguntas reales que hacen en entrevistas de Data Analyst, ejercicios de live coding, casos de negocio y estrategias para destacarte.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Lección final del track</span>
   </div>
 </div>
@@ -386,7 +386,7 @@ pd.DataFrame({
 
 # SQL: total por producto
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT producto, SUM(monto) as total FROM ventas GROUP BY producto ORDER BY total DESC\", conn)","print(df); conn.close()"]'></div>
@@ -408,7 +408,7 @@ df = pd.DataFrame({
 
 # Strip+title, drop_duplicates, contar nulos
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["df[\"Ciudad\"] = df[\"Ciudad\"].str.strip().str.title()","df = df.drop_duplicates()","print(f\"Nulos: {df.isna().sum().sum()}\")","print(f\"Filas: {len(df)}\"); print(\"Limpio\")"]'></div>
@@ -428,7 +428,7 @@ sueldos = np.array([80, 85, 90, 75, 95, 82, 88, 78, 500, 1200])
 
 # Calculá media y mediana, decidí cuál es más representativa
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["print(f\"Media: ${np.mean(sueldos):,.0f}K\")","print(f\"Mediana: ${np.median(sueldos):,.0f}K\")","print(\"La mediana es más representativa porque hay outliers\")"]'></div>
@@ -451,7 +451,7 @@ pd.DataFrame({"cliente_id": np.random.choice([1,2,3,4,5], 20), "monto": np.rando
 
 # SQL: JOIN + GROUP BY + HAVING > 3
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT c.nombre, COUNT(*) as operaciones, SUM(t.monto) as total FROM txn t JOIN clientes c ON t.cliente_id=c.id GROUP BY c.nombre HAVING COUNT(*)>3 ORDER BY operaciones DESC\", conn)","print(df); conn.close()"]'></div>
@@ -474,7 +474,7 @@ df = pd.DataFrame({
 
 # groupby + agg(mean, median, count)
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["res = df.groupby(\"Segmento\")[\"Monto\"].agg([\"mean\",\"median\",\"count\"]).round(0)","print(res)"]'></div>
@@ -496,7 +496,7 @@ ahogamientos = temperatura * 2 + np.random.normal(0, 5, 100)
 
 # Correlación + explicación
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["corr = np.corrcoef(helados, ahogamientos)[0,1]","print(f\"Correlación helados-ahogamientos: {corr:.2f}\")","print(\"¿Causalidad? No. Ambos dependen de la temperatura (variable confusora).\")"]'></div>
@@ -521,7 +521,7 @@ pd.DataFrame({
 
 # SQL: agrupar por canal → pandas: % participación → insight
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["df = pd.read_sql(\"SELECT canal, SUM(monto) as total FROM ventas GROUP BY canal\", conn)","df[\"pct\"] = round(df[\"total\"]/df[\"total\"].sum()*100, 1)","print(df)","top = df.loc[df[\"total\"].idxmax()]","print(f\"Insight: {top[\\\"canal\\\"]} lidera con {top[\\\"pct\\\"]}% del total\"); conn.close()"]'></div>
@@ -545,7 +545,7 @@ X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)
 
 # Entrenar + métricas + interpretación de negocio
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["m = DecisionTreeClassifier(max_depth=3,random_state=42).fit(X_tr,y_tr); p=m.predict(X_te)","rec = recall_score(y_te,p)","print(f\"Recall: {rec*100:.0f}% → capturamos {rec*100:.0f}% de los churners\")","print(f\"Negocio: de cada 100 clientes en riesgo, identificamos {rec*100:.0f}\")"]'></div>
@@ -573,7 +573,7 @@ df = pd.DataFrame({
 
 # Segmentar la caída: ¿dónde se concentra?
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["pivot = df.pivot_table(values=\"Monto\", index=\"Canal\", columns=\"Mes\", aggfunc=\"sum\")","pivot[\"Var_%\"] = round((pivot[\"Marzo\"]/pivot[\"Febrero\"]-1)*100,1)","print(pivot)","canal_peor = pivot[\"Var_%\"].idxmin()","print(f\"La caída se concentra en el canal {canal_peor}\")"]'></div>
@@ -602,7 +602,7 @@ df.loc[np.random.choice(100, 5), "Monto"] = np.nan
 
 # Mini entrevista: limpiar → EDA → gráfico → insight → recomendación
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["df[\"Canal\"]=df[\"Canal\"].str.strip().str.title(); df[\"Monto\"]=df[\"Monto\"].fillna(df[\"Monto\"].median())","res = df.groupby(\"Canal\").agg(Monto_Prom=(\"Monto\",\"mean\"),Satisf=(\"Satisfaccion\",\"mean\")).round(1)","print(res)","peor = res[\"Satisf\"].idxmin()","print(f\"Recomiendo: mejorar la experiencia de {peor} (satisfacción más baja)\")"]'></div>
@@ -638,7 +638,7 @@ df.loc[np.random.choice(100, 5), "Monto"] = np.nan
   <li>Mantené tu LinkedIn actualizado y compartí tus proyectos.</li>
 </ul>
 
-<p><strong>🎓 ¡Éxitos en tu carrera como Data Analyst!</strong></p>
+<p><strong>¡Éxitos en tu carrera como Data Analyst!</strong></p>
 
 <p><strong>Recursos:</strong> <a href="https://www.kaggle.com/" target="_blank">Kaggle</a> · <a href="https://leetcode.com/problemset/database/" target="_blank">LeetCode SQL</a> · <a href="https://github.com/" target="_blank">GitHub</a> · <a href="https://powerbi.microsoft.com/" target="_blank">Power BI</a></p>
 

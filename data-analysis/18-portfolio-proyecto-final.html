@@ -27,7 +27,7 @@
   <h1>Portfolio y Proyecto Final</h1>
   <p>Llegó el momento de <strong>integrar todo</strong>. En esta lección vas a construir un proyecto completo de Data Analysis de principio a fin, siguiendo la metodología profesional que usarías en un trabajo real. Este proyecto es tu carta de presentación — tu <strong>portfolio</strong> — para demostrar a reclutadores y empleadores lo que sabés hacer.</p>
   <div class="badges">
-    <span class="badge">⏱ 180–240 min</span>
+    <span class="badge">180–240 min</span>
     <span class="badge">Prerrequisitos: Todas las lecciones anteriores</span>
   </div>
 </div>
@@ -127,10 +127,10 @@ for col in ["Saldo","Ingreso"]:
 print("=" * 60)
 print("PROYECTO: ANÁLISIS DE CHURN BANCARIO")
 print("=" * 60)
-print(f"\n📋 Pregunta de negocio:")
+print(f"\nPregunta de negocio:")
 print(f"   ¿Qué características tienen los clientes que cancelan?")
 print(f"   ¿Podemos predecir quiénes están en riesgo?")
-print(f"\n📊 Dataset: {df.shape[0]} clientes × {df.shape[1]} variables")
+print(f"\nDataset: {df.shape[0]} clientes × {df.shape[1]} variables")
 print(f"   Tasa de churn: {df['Churn'].mean()*100:.1f}%")
 print(f"\n{df.head()}")</textarea></div>
   <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
@@ -163,13 +163,13 @@ print("PASO 2: CALIDAD DE DATOS")
 print("=" * 50)
 
 # Nulos
-print("\n📋 Nulos:")
+print("\nNulos:")
 nulos = df.isna().sum()
 for col in nulos[nulos > 0].index:
     print(f"  {col}: {nulos[col]} ({nulos[col]/len(df)*100:.1f}%)")
 
 # Estrategia de imputación
-print("\n🔧 Imputación: mediana por segmento")
+print("\nImputación: mediana por segmento")
 for col in ["Saldo","Ingreso"]:
     before = df[col].isna().sum()
     df[col] = df.groupby("Segmento")[col].transform(lambda x: x.fillna(x.median()))
@@ -177,7 +177,7 @@ for col in ["Saldo","Ingreso"]:
     print(f"  {col}: {before} nulos → {after} nulos")
 
 # Resumen estadístico
-print(f"\n📊 Estadísticas post-limpieza:")
+print(f"\nEstadísticas post-limpieza:")
 print(df.describe().round(0))</textarea></div>
   <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
   <pre class="output">Hacé clic en ▶ Ejecutar</pre>
@@ -290,7 +290,7 @@ for nombre, mod in modelos.items():
     if rec > mejor_recall:
         mejor_recall, mejor_modelo, mejor_nombre = rec, mod, nombre
 
-print(f"\n🏆 Mejor modelo (por recall): {mejor_nombre}")
+print(f"\nMejor modelo (por recall): {mejor_nombre}")
 print(f"   Recall = {mejor_recall*100:.1f}% → captura el {mejor_recall*100:.0f}% de los churners")</textarea></div>
   <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
   <pre class="output">Hacé clic en ▶ Ejecutar</pre>
@@ -305,7 +305,7 @@ print("CONCLUSIONES Y RECOMENDACIONES DE NEGOCIO")
 print("=" * 60)
 
 print("""
-📊 HALLAZGOS PRINCIPALES:
+HALLAZGOS PRINCIPALES:
 
 1. PERFIL DE RIESGO: los clientes que cancelan tienden a tener:
    • Menor antigüedad (< 5 años)
@@ -386,7 +386,7 @@ print(estructura)
 readme = """
 === EJEMPLO DE README.md ===
 
-# 📊 Análisis de Churn Bancario
+# Análisis de Churn Bancario
 
 ## Objetivo
 Identificar los factores que predicen la cancelación de clientes
@@ -438,7 +438,7 @@ df.loc[np.random.choice(100, 5), "Saldo"] = np.nan
 
 # Diagnóstico: shape, dtypes, nulos
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["print(f\"shape: {df.shape}\")","print(f\"\\nTipos:\\n{df.dtypes}\")","print(f\"\\nNulos:\\n{df.isna().sum()}\")"]'></div>
@@ -460,7 +460,7 @@ df = pd.DataFrame({
 
 # Tasa de churn
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["tasa = df[\"Churn\"].mean() * 100","print(f\"Tasa de churn: {tasa:.1f}%\")","print(f\"Cancelaron: {df[\\\"Churn\\\"].sum()} de {len(df)}\")"]'></div>
@@ -484,7 +484,7 @@ df = pd.DataFrame({
 
 # groupby Churn → media
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["print(df.groupby(\"Churn\")[[\"Productos\",\"Saldo\"]].mean().round(0))"]'></div>
@@ -510,7 +510,7 @@ df = pd.DataFrame({
 
 # Tasa de churn por segmento → barplot
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["tasa = df.groupby(\"Segmento\")[\"Churn\"].mean()*100","tasa.plot(kind=\"bar\", color=[\"#4CAF50\",\"#FF9800\",\"#F44336\"])","plt.title(\"Tasa churn por segmento\"); plt.ylabel(\"%\"); plt.show(); print(\"Gráfico churn OK\")"]'></div>
@@ -535,7 +535,7 @@ print(f"Antes: {df['Saldo'].isna().sum()} nulos")
 
 # fillna con mediana por segmento
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["df[\"Saldo\"] = df.groupby(\"Segmento\")[\"Saldo\"].transform(lambda x: x.fillna(x.median()))","print(f\"Después: {df[\\\"Saldo\\\"].isna().sum()} nulos\")"]'></div>
@@ -564,7 +564,7 @@ y[ruido] = 1 - y[ruido]
 
 # Split + entrenar + accuracy
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)","m = DecisionTreeClassifier(max_depth=3, random_state=42).fit(X_tr, y_tr)","print(f\"Accuracy: {accuracy_score(y_te, m.predict(X_te))*100:.1f}%\")"]'></div>
@@ -596,7 +596,7 @@ df = pd.DataFrame({
 # fig, axes = plt.subplots(2, 2, figsize=(12, 9))
 # 4 gráficos profesionales
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 9))","sns.boxplot(data=df, x=\"Churn\", y=\"Antigüedad\", ax=axes[0,0])","sns.histplot(data=df, x=\"Productos\", hue=\"Churn\", ax=axes[0,1])","sns.countplot(data=df, x=\"Segmento\", ax=axes[1,0]); sns.heatmap(df.select_dtypes(\"number\").corr(), annot=True, ax=axes[1,1])","plt.tight_layout(); plt.show(); print(\"EDA completo\")"]'></div>
@@ -621,7 +621,7 @@ X_tr,X_te,y_tr,y_te = train_test_split(X,y,test_size=0.2,random_state=42)
 
 # 2 modelos, 3 métricas cada uno
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["for n,m in [(\"Árbol\",DecisionTreeClassifier(max_depth=3,random_state=42)),(\"LogReg\",LogisticRegression(random_state=42))]:","    m.fit(X_tr,y_tr); p=m.predict(X_te)","    print(f\"{n}: Acc={accuracy_score(y_te,p)*100:.1f}% Prec={precision_score(y_te,p)*100:.1f}% Recall={recall_score(y_te,p)*100:.1f}%\")"]'></div>
@@ -647,7 +647,7 @@ df = pd.DataFrame({
 # Analizar datos + imprimir recomendaciones
 # Tip: calculá tasa churn por antigüedad (<3 vs >=3) y por productos (<2 vs >=2)
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["churn_nuevo = df[df[\"Antigüedad\"]<3][\"Churn\"].mean()","churn_viejo = df[df[\"Antigüedad\"]>=3][\"Churn\"].mean()","print(f\"Churn nuevos: {churn_nuevo*100:.0f}% vs antiguos: {churn_viejo*100:.0f}%\")","print(\"Recomendación 1: Programa de retención para clientes < 3 años\")","print(\"Recomendación 2: Cross-selling temprano\")","print(\"Recomendación 3: Scoring mensual automático\")"]'></div>
@@ -675,7 +675,7 @@ n = 200
 # 4. Modelo + accuracy + recall
 # 5. print("Proyecto finalizado")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["df = pd.DataFrame({\"Ant\":np.random.randint(0,20,n).astype(float),\"Prod\":np.random.randint(1,6,n).astype(float),\"Churn\":np.random.choice([0,1],n,p=[0.75,0.25])})","df.loc[np.random.choice(n,10),:]=np.nan; df=df.fillna(df.median())","X=df[[\"Ant\",\"Prod\"]].values; y=df[\"Churn\"].astype(int).values","X_tr,X_te,y_tr,y_te=train_test_split(X,y,test_size=0.2,random_state=42)","m=DecisionTreeClassifier(max_depth=3,random_state=42).fit(X_tr,y_tr); p=m.predict(X_te)","print(f\"Acc: {accuracy_score(y_te,p)*100:.1f}% Recall: {recall_score(y_te,p,zero_division=0)*100:.1f}%\")","print(\"Proyecto finalizado\")"]'></div>

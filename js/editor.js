@@ -50,8 +50,8 @@ export function mountEditors() {
     // Run button
     runBtn.addEventListener('click', async () => {
       runBtn.disabled = true;
-      runBtn.textContent = '⏳...';
-      output.textContent = '⏳ Ejecutando...';
+      runBtn.textContent = 'Cargando...';
+      output.textContent = 'Ejecutando...';
       output.style.color = '';
 
       const mode = el.dataset.mode;
@@ -64,7 +64,7 @@ export function mountEditors() {
       output.textContent = outText;
 
       // Color output on error
-      if (outText.startsWith('❌')) {
+      if (outText.startsWith('Error:')) {
         output.style.color = 'var(--red)';
       } else {
         output.style.color = '';
@@ -73,7 +73,7 @@ export function mountEditors() {
       // Validate exercise
       const expected = el.dataset.expected;
       if (expected && outText.includes(expected)) {
-        output.textContent += '\n\n🎉 ¡Correcto!';
+        output.textContent += '\n\n\u2714 \u00a1Correcto!';
         const lesson = el.dataset.lesson;
         const exercise = el.dataset.exercise;
         if (lesson && exercise) markExerciseDone(lesson, exercise);
@@ -110,10 +110,10 @@ export function mountEditors() {
       try {
         const hints = JSON.parse(box.dataset.hints);
         box.style.display = 'block';
-        box.textContent = `💡 Pista ${Math.min(step, hints.length)}/${hints.length}: ${hints[Math.min(step - 1, hints.length - 1)]}`;
+        box.textContent = `Pista ${Math.min(step, hints.length)}/${hints.length}: ${hints[Math.min(step - 1, hints.length - 1)]}`;
       } catch (e) {
         box.style.display = 'block';
-        box.textContent = '💡 No hay pistas disponibles.';
+        box.textContent = 'No hay pistas disponibles.';
       }
     });
   });

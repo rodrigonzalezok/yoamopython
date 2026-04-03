@@ -42,7 +42,7 @@ export async function runPython(code) {
   try {
     py = await ensurePyodide();
   } catch (err) {
-    return { text: '⏳ El motor Python aún se está cargando. Esperá unos segundos e intentá de nuevo.', image: null };
+    return { text: 'El motor Python aún se está cargando. Esperá unos segundos e intentá de nuevo.', image: null };
   }
   // Load optional heavy packages only if user code references them
   await ensureOptionalPackages(code, py);
@@ -69,7 +69,7 @@ if 'matplotlib.pyplot' in sys.modules:
 `;
     py.runPython(renderCode);
 
-    const outText = py.runPython('_buf.getvalue()') || '✅ Ejecutado sin salida';
+    const outText = py.runPython('_buf.getvalue()') || 'Ejecutado sin salida.';
     const outImg = py.runPython('_b64');
     
     return { text: outText, image: outImg };
@@ -77,7 +77,7 @@ if 'matplotlib.pyplot' in sys.modules:
     const msg = String(err.message || err);
     // Clean up Pyodide internals from error message
     const lines = msg.split('\n').filter(l => !l.includes('pyodide') && !l.includes('wasm'));
-    return { text: `❌ ${lines.join('\n') || msg}`, image: null };
+    return { text: `Error: ${lines.join('\n') || msg}`, image: null };
   } finally {
     py.runPython('sys.stdout = sys.__stdout__\nsys.stderr = sys.__stderr__');
   }
@@ -97,7 +97,7 @@ export async function runSql(query) {
   try {
     SQL = await ensureSql();
   } catch (err) {
-    return '⏳ El motor SQL aún se está cargando. Esperá unos segundos.';
+    return 'El motor SQL aún se está cargando. Esperá unos segundos.';
   }
   // Create fresh DB for each run so CREATE TABLE doesn't conflict
   const db = new SQL.Database();
@@ -124,13 +124,13 @@ export async function runSql(query) {
         }
       } catch (e) {
         if (output) output += '\n';
-        output += `❌ ${e.message}`;
+        output += `Error: ${e.message}`;
       }
     }
     db.close();
-    return output || '✅ Query ejecutada (sin filas devueltas)';
+    return output || 'Query ejecutada (sin filas devueltas).';
   } catch (err) {
     db.close();
-    return `❌ ${err.message}`;
+    return `Error: ${err.message}`;
   }
 }

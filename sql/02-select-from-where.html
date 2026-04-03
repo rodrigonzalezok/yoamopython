@@ -27,7 +27,7 @@
   <h1>SELECT, FROM y WHERE en profundidad</h1>
   <p>WHERE es donde ocurre la magia del filtrado. En esta lección dominás todas las formas de filtrar datos: rangos, listas, patrones de texto, valores nulos y combinaciones lógicas.</p>
   <div class="badges">
-    <span class="badge">⏱ 80–100 min</span>
+    <span class="badge">80–100 min</span>
     <span class="badge">Prerrequisitos: SQL 01</span>
   </div>
 </div>
@@ -251,7 +251,7 @@ INSERT INTO clientes VALUES (4,'Pérez',810,890000);
 INSERT INTO clientes VALUES (5,'Fernández',645,72000);
 
 -- Score entre 650 y 750:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT * FROM clientes WHERE score BETWEEN 650 AND 750;","García (720), López (680), Fernández (645) caen en el rango","BETWEEN incluye ambos extremos"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["SELECT * FROM clientes WHERE score BETWEEN 650 AND 750;","García (720), López (680), Fernández (645) caen en el rango","BETWEEN incluye ambos extremos"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: IN</h4><p>Traé clientes de Buenos Aires, Córdoba o Rosario usando IN. Debe incluir <code>Martínez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-2" data-expected="Martínez"><div class="editor-top"><span>ejercicio_02.sql</span><span>Debe incluir "Martínez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720);
@@ -261,7 +261,7 @@ INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810);
 INSERT INTO clientes VALUES (5,'Fernández','Mendoza',645);
 
 -- Usando IN:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["WHERE ciudad IN (\\x27Buenos Aires\\x27, \\x27Córdoba\\x27, \\x27Rosario\\x27)","IN reemplaza múltiples OR","Fernández (Mendoza) queda afuera"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["WHERE ciudad IN (\\x27Buenos Aires\\x27, \\x27Córdoba\\x27, \\x27Rosario\\x27)","IN reemplaza múltiples OR","Fernández (Mendoza) queda afuera"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: LIKE con %</h4><p>Traé clientes cuyo nombre empiece con 'P'. Debe incluir <code>Pérez</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-3" data-expected="Pérez"><div class="editor-top"><span>ejercicio_03.sql</span><span>Debe incluir "Pérez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García',720);
@@ -271,7 +271,7 @@ INSERT INTO clientes VALUES (4,'Pérez',810);
 INSERT INTO clientes VALUES (5,'Palacios',700);
 
 -- Nombres que empiezan con P:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["WHERE nombre LIKE \\x27P%\\x27","% significa cualquier cantidad de caracteres después","Pérez y Palacios matchean"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["WHERE nombre LIKE \\x27P%\\x27","% significa cualquier cantidad de caracteres después","Pérez y Palacios matchean"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: IS NULL</h4><p>Traé clientes que NO tengan email. Debe incluir <code>López</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-4" data-expected="López"><div class="editor-top"><span>ejercicio_04.sql</span><span>Debe incluir "López"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García','garcia@mail.com',720);
@@ -280,7 +280,7 @@ INSERT INTO clientes VALUES (3,'Martínez','martinez@mail.com',590);
 INSERT INTO clientes VALUES (4,'Pérez',NULL,810);
 
 -- Sin email:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["WHERE email IS NULL","NUNCA uses = NULL, siempre IS NULL","López y Pérez no tienen email"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["WHERE email IS NULL","NUNCA uses = NULL, siempre IS NULL","López y Pérez no tienen email"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: NOT IN</h4><p>Traé clientes que NO sean de Buenos Aires ni de Córdoba. Debe incluir <code>Fernández</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-5" data-expected="Fernández"><div class="editor-top"><span>ejercicio_05.sql</span><span>Debe incluir "Fernández"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720);
@@ -290,7 +290,7 @@ INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810);
 INSERT INTO clientes VALUES (5,'Fernández','Mendoza',645);
 
 -- NOT IN:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["WHERE ciudad NOT IN (\\x27Buenos Aires\\x27, \\x27Córdoba\\x27)","Martínez (Rosario) y Fernández (Mendoza) quedan","NOT IN excluye los que están en la lista"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["WHERE ciudad NOT IN (\\x27Buenos Aires\\x27, \\x27Córdoba\\x27)","Martínez (Rosario) y Fernández (Mendoza) quedan","NOT IN excluye los que están en la lista"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: LIKE con % al inicio y final</h4><p>Traé clientes cuyo email contenga "banco". Debe incluir <code>garcia</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-6" data-expected="garcia"><div class="editor-top"><span>ejercicio_06.sql</span><span>Debe incluir "garcia"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, email TEXT);
 INSERT INTO clientes VALUES (1,'García','garcia@banco.com');
@@ -299,7 +299,7 @@ INSERT INTO clientes VALUES (3,'Pérez','perez@banco.com.ar');
 INSERT INTO clientes VALUES (4,'Sosa','sosa@yahoo.com');
 
 -- Emails que contienen "banco":
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["WHERE email LIKE \\x27%banco%\\x27","% al inicio y final = contiene en cualquier posición","García y Pérez tienen banco en su email"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["WHERE email LIKE \\x27%banco%\\x27","% al inicio y final = contiene en cualquier posición","García y Pérez tienen banco en su email"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Combinación AND + BETWEEN + IS NOT NULL</h4><p>Traé clientes activos con score entre 600 y 800 que tengan email. Debe incluir <code>Sosa</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-7" data-expected="Sosa"><div class="editor-top"><span>ejercicio_07.sql</span><span>Debe incluir "Sosa"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, score INTEGER, email TEXT, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García',720,'garcia@mail.com',1);
@@ -309,7 +309,7 @@ INSERT INTO clientes VALUES (4,'Pérez',810,NULL,1);
 INSERT INTO clientes VALUES (5,'Sosa',750,'sosa@mail.com',1);
 
 -- Combiná condiciones:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["WHERE activo = 1 AND score BETWEEN 600 AND 800 AND email IS NOT NULL","García (720, email, activo) y Sosa (750, email, activo)","3 condiciones con AND"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["WHERE activo = 1 AND score BETWEEN 600 AND 800 AND email IS NOT NULL","García (720, email, activo) y Sosa (750, email, activo)","3 condiciones con AND"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: OR con paréntesis</h4><p>Traé clientes que: (sean de BsAs Y tengan score > 700) O (tengan saldo > 300000). Debe incluir <code>López</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-8" data-expected="López"><div class="editor-top"><span>ejercicio_08.sql</span><span>Debe incluir "López"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, saldo REAL);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,150000);
@@ -318,7 +318,7 @@ INSERT INTO clientes VALUES (3,'Martínez','Rosario',590,45000);
 INSERT INTO clientes VALUES (4,'Pérez','Buenos Aires',810,890000);
 
 -- Usá paréntesis:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["WHERE (ciudad = \\x27Buenos Aires\\x27 AND score > 700) OR saldo > 300000","Sin paréntesis, AND se evalúa antes que OR","García, López y Pérez cumplen"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["WHERE (ciudad = \\x27Buenos Aires\\x27 AND score > 700) OR saldo > 300000","Sin paréntesis, AND se evalúa antes que OR","García, López y Pérez cumplen"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: LIKE + IN + IS NOT NULL</h4><p>Traé clientes con nombre que termine en 'ez', de BsAs o Córdoba, que tengan email. Debe incluir <code>Pérez</code> o <code>López</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-9" data-expected="ez"><div class="editor-top"><span>ejercicio_09.sql</span><span>Debe incluir "ez"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, email TEXT);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires','garcia@mail.com');
@@ -328,7 +328,7 @@ INSERT INTO clientes VALUES (4,'Martínez','Rosario','martinez@mail.com');
 INSERT INTO clientes VALUES (5,'Gómez','Córdoba','gomez@mail.com');
 
 -- LIKE + IN + IS NOT NULL:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["WHERE nombre LIKE \\x27%ez\\x27 AND ciudad IN (\\x27Buenos Aires\\x27, \\x27Córdoba\\x27) AND email IS NOT NULL","López (Cba, email) y Gómez (Cba, email) cumplen","Pérez no tiene email → excluido"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["WHERE nombre LIKE \\x27%ez\\x27 AND ciudad IN (\\x27Buenos Aires\\x27, \\x27Córdoba\\x27) AND email IS NOT NULL","López (Cba, email) y Gómez (Cba, email) cumplen","Pérez no tiene email → excluido"]'></div></div>
 
 <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Consulta de análisis completa</h4><p>Contá cuántos clientes activos de Buenos Aires tienen score >= 700 y email registrado. Debe incluir <code>2</code>.</p><div class="editor" data-mode="sql" data-lesson="sql-02" data-exercise="ex-10" data-expected="2"><div class="editor-top"><span>ejercicio_10.sql</span><span>Debe incluir "2"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">CREATE TABLE clientes (id INTEGER, nombre TEXT, ciudad TEXT, score INTEGER, email TEXT, activo INTEGER);
 INSERT INTO clientes VALUES (1,'García','Buenos Aires',720,'garcia@mail.com',1);
@@ -339,7 +339,7 @@ INSERT INTO clientes VALUES (5,'Sosa','Buenos Aires',750,'sosa@mail.com',1);
 INSERT INTO clientes VALUES (6,'Luna','Mendoza',700,'luna@mail.com',1);
 
 -- COUNT con múltiples filtros:
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["SELECT COUNT(*) FROM clientes WHERE activo = 1 AND ciudad = \\x27Buenos Aires\\x27 AND score >= 700 AND email IS NOT NULL","García (720, email, activo, BsAs) y Sosa (750, email, activo, BsAs)","Pérez tiene score 810 pero NO tiene email"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["SELECT COUNT(*) FROM clientes WHERE activo = 1 AND ciudad = \\x27Buenos Aires\\x27 AND score >= 700 AND email IS NOT NULL","García (720, email, activo, BsAs) y Sosa (750, email, activo, BsAs)","Pérez tiene score 810 pero NO tiene email"]'></div></div>
 
 <div class="section-num">05</div>
 <h2>Resumen y conexión</h2>

@@ -4,10 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QuieroProgramar · De cero a Data Analyst</title>
-<meta name="description" content="Plataforma educativa gratuita para aprender Python, SQL y Análisis de Datos desde cero. Por Rodrigo González Doldán.">
+<meta name="description" content="Plataforma educativa gratuita para aprender Python, SQL y Análisis de Datos desde cero. 61 lecciones, 610+ ejercicios interactivos con validación automática. Por Rodrigo González Doldán.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/styles.css">
+<style>
+  /* Landing-specific styles */
+  .landing-main { margin-left: 0; max-width: 960px; }
+
+  .hero-landing { padding: 72px 0 48px; max-width: 680px; }
+  .hero-landing h1 {
+    font-family: var(--fs); font-size: clamp(2rem, 5vw, 3.2rem);
+    letter-spacing: -1.5px; margin: 0 0 18px; line-height: 1.1; font-weight: 800;
+  }
+  .hero-landing h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent), #d90429);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-landing .lead {
+    font-size: 1.05rem; color: var(--t2); line-height: 1.8; margin: 0 0 24px; max-width: 580px;
+  }
+  .hero-landing .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+  .hero-landing .cta {
+    display: inline-flex; align-items: center; gap: 6px; padding: 12px 28px;
+    border-radius: var(--radius-sm); font-family: var(--fm); font-size: .82rem;
+    font-weight: 600; text-decoration: none; transition: all .2s;
+  }
+  .cta-primary { background: var(--accent); color: #fff; box-shadow: 0 2px 12px rgba(230,57,70,.2); }
+  .cta-primary:hover { background: var(--accent2); color: #fff; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(230,57,70,.3); }
+  .cta-secondary { background: transparent; color: var(--t2); border: 1px solid var(--b2); }
+  .cta-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 12px 0 0; }
+  .feature-item { display: flex; align-items: baseline; gap: 8px; font-size: .82rem; color: var(--t2); }
+  .feature-item .num { font-family: var(--fm); font-weight: 700; font-size: .88rem; color: var(--accent); }
+
+  /* How it works */
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
+  .step-card {
+    background: var(--surface); border: 1px solid var(--b1); border-radius: var(--radius);
+    padding: 24px 20px; position: relative; transition: all .25s;
+  }
+  .step-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .step-num {
+    font-family: var(--fs); font-size: 2rem; font-weight: 800; color: var(--b1);
+    line-height: 1; margin-bottom: 8px;
+  }
+  .step-card h4 { margin: 0 0 6px; font-size: .9rem; color: var(--t1); }
+  .step-card p { margin: 0; font-size: .82rem; color: var(--t3); line-height: 1.6; }
+
+  /* Stack section */
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 16px; }
+  .stack-item {
+    background: var(--surface); border: 1px solid var(--b1); border-radius: var(--radius);
+    padding: 16px 18px; font-size: .82rem; transition: all .2s;
+  }
+  .stack-item:hover { border-color: var(--accent); }
+  .stack-item strong { display: block; color: var(--t1); margin-bottom: 2px; font-size: .86rem; }
+  .stack-item span { color: var(--t3); font-size: .78rem; }
+
+  /* Author section */
+  .author-section { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--b1); }
+  .author-section p { max-width: 640px; }
+  .author-links-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+  .author-links-row a {
+    font-family: var(--fm); font-size: .72rem; color: var(--t3);
+    border: 1px solid var(--b1); padding: 6px 14px; border-radius: 100px;
+    transition: all .15s; text-decoration: none;
+  }
+  .author-links-row a:hover { border-color: var(--accent); color: var(--accent); }
+
+  .footer-text { text-align: center; color: var(--t3); font-size: .72rem; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--b1); }
+
+  @media (max-width: 640px) {
+    .features { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
@@ -17,21 +92,29 @@
   <div id="global-progress-text" class="top-stats"></div>
 </div>
 
-<main class="main" style="margin-left:0; max-width:960px">
+<main class="main landing-main">
 
 <!-- ── HERO ── -->
-<section class="landing-hero">
+<section class="hero-landing">
   <h1>Aprendé <em>Python</em>, <em>SQL</em> y Análisis de Datos desde cero.</h1>
-  <p>61 lecciones con explicaciones profundas, IDEs interactivos con Python y SQL corriendo en tu navegador, y ejercicios progresivos con validación automática. Todo gratis.</p>
-  <div class="badges">
-    <span class="badge">🐍 27 lecciones de Python</span>
-    <span class="badge">🗄️ 15 lecciones de SQL</span>
-    <span class="badge">📊 19 lecciones de Data Analysis</span>
-    <span class="badge">🏋️ 610+ ejercicios</span>
+  <p class="lead">Plataforma gratuita con 61 lecciones, IDEs interactivos corriendo en tu navegador y más de 610 ejercicios con validación automática. Sin instalaciones, sin costos, sin excusas.</p>
+
+  <div class="features">
+    <div class="feature-item"><span class="num">27</span> lecciones de Python</div>
+    <div class="feature-item"><span class="num">15</span> lecciones de SQL</div>
+    <div class="feature-item"><span class="num">19</span> lecciones de Data Analysis</div>
+    <div class="feature-item"><span class="num">610+</span> ejercicios</div>
+    <div class="feature-item"><span class="num">100%</span> gratuito</div>
+    <div class="feature-item"><span class="num">0</span> instalaciones</div>
+  </div>
+
+  <div class="cta-row">
+    <a href="/python/01-que-es-python.html" class="cta cta-primary">Empezar ahora</a>
+    <a href="#roadmap" class="cta cta-secondary">Ver el temario</a>
   </div>
 </section>
 
-<!-- ── 01 · STATS ── -->
+<!-- ── 01 · TU PROGRESO ── -->
 <div class="section-num">01</div>
 <h2>Tu progreso</h2>
 <div class="stat-grid" id="stats-mount">
@@ -41,15 +124,43 @@
   <div class="stat-card"><div class="num" id="st-pct">0%</div><div class="label">Completado</div></div>
 </div>
 
-<!-- ── 02 · ROADMAP ── -->
+<!-- ── 02 · CÓMO FUNCIONA ── -->
 <div class="section-num">02</div>
-<h2>Roadmap completo</h2>
-<p>Seguí el camino en orden o saltá al tema que necesites. Cada lección tiene teoría profunda, múltiples ejemplos y 10 ejercicios progresivos.</p>
+<h2>Cómo funciona</h2>
+<p>Cada lección sigue un flujo diseñado para que aprendas haciendo, no solo leyendo.</p>
+
+<div class="steps-grid">
+  <div class="step-card">
+    <div class="step-num">01</div>
+    <h4>Teoría clara</h4>
+    <p>Explicaciones profundas con analogías, tablas de referencia y contexto profesional.</p>
+  </div>
+  <div class="step-card">
+    <div class="step-num">02</div>
+    <h4>Ejemplos interactivos</h4>
+    <p>5 ejemplos por lección con código editable que podés ejecutar directo en el navegador.</p>
+  </div>
+  <div class="step-card">
+    <div class="step-num">03</div>
+    <h4>Ejercicios progresivos</h4>
+    <p>10 ejercicios por lección con dificultad creciente y validación automática instantánea.</p>
+  </div>
+  <div class="step-card">
+    <div class="step-num">04</div>
+    <h4>Sin instalaciones</h4>
+    <p>Python y SQL corren directo en tu navegador con Pyodide y sql.js. Abrís y programás.</p>
+  </div>
+</div>
+
+<!-- ── 03 · TEMARIO ── -->
+<div class="section-num" id="roadmap">03</div>
+<h2>Temario completo</h2>
+<p>Seguí el camino en orden o saltá al tema que necesites. Cada lección tiene teoría, ejemplos y 10 ejercicios progresivos.</p>
 
 <div class="roadmap">
   <!-- PYTHON -->
   <div class="roadmap-card python">
-    <h3>🐍 Python desde Cero</h3>
+    <h3>Python desde Cero</h3>
     <p style="font-size:.82rem;color:var(--t3)">27 lecciones · ~20 horas</p>
     <ul class="node-list">
       <li><a href="/python/01-que-es-python.html">01. Qué es Python / Lenguajes</a></li>
@@ -84,7 +195,7 @@
 
   <!-- SQL -->
   <div class="roadmap-card sql">
-    <h3>🗄️ SQL desde Cero</h3>
+    <h3>SQL desde Cero</h3>
     <p style="font-size:.82rem;color:var(--t3)">15 lecciones · ~12 horas</p>
     <ul class="node-list">
       <li><a href="/sql/01-que-es-sql.html">01. Qué es SQL</a></li>
@@ -107,7 +218,7 @@
 
   <!-- DATA ANALYSIS -->
   <div class="roadmap-card data">
-    <h3>📊 Análisis de Datos</h3>
+    <h3>Análisis de Datos</h3>
     <p style="font-size:.82rem;color:var(--t3)">19 lecciones · ~18 horas</p>
     <ul class="node-list">
       <li><a href="/data-analysis/01-que-es-data-analysis.html">01. Qué es Data Analysis</a></li>
@@ -133,42 +244,56 @@
   </div>
 </div>
 
-<!-- ── 03 · DESPUÉS ── -->
-<div class="section-num">03</div>
-<h2>¿Qué podés hacer después?</h2>
-<div class="card">
-  <p>Cuando completes las 3 rutas, vas a tener el stack técnico que piden el 90% de los puestos de <strong>Data Analyst</strong> en Argentina y LATAM. Tu camino después de acá:</p>
-  <ul>
-    <li><strong>Python básico + intermedio</strong> — variables, funciones, módulos, archivos, OOP intro ✓</li>
-    <li><strong>SQL profesional</strong> — JOINs, CTEs, Window Functions, DDL/DML ✓</li>
-    <li><strong>pandas + análisis exploratorio</strong> — limpieza, transformación, EDA, estadística ✓</li>
-    <li>→ <strong>Visualización</strong> — matplotlib, seaborn, y después Power BI o Tableau</li>
-    <li>→ <strong>Machine Learning básico</strong> — scikit-learn, regresión, clasificación, métricas</li>
-    <li>→ <strong>Portfolio de proyectos</strong> — 3-5 proyectos en GitHub con README y resultados</li>
-    <li>→ <strong>Entrevistas técnicas</strong> — SQL challenges, live coding con pandas, preguntas de negocio</li>
-  </ul>
-</div>
-
-<!-- ── 04 · SOBRE EL AUTOR ── -->
+<!-- ── 04 · QUÉ VAS A SABER HACER ── -->
 <div class="section-num">04</div>
-<h2>Sobre el autor</h2>
-<div class="author-card">
-  <div class="author-avatar">RG</div>
-  <div class="author-info">
-    <strong>Rodrigo González Doldán</strong>
-    <span>Analista Financiero Sr · Python Developer · Data Analyst</span>
-    <p style="margin:8px 0 0;font-size:.84rem;color:var(--t2)">Financista de profesión, programador circunstancial y comediante frustrado. Diseño métricas, modelos y flujos de datos para inversiones. Este proyecto nació en @yoamopython y evoluciona como QuieroProgramar para formar analistas de datos con criterio profesional.</p>
-    <div class="author-links">
-      <a href="https://rodrigonzalez.com.ar" target="_blank">🌐 Portfolio</a>
-      <a href="https://instagram.com/yoamopython" target="_blank">📸 @YoAmoPython</a>
-      <a href="https://tiktok.com/@rodrigonzlez" target="_blank">🎵 TikTok</a>
-      <a href="https://linkedin.com/in/rodrigonzalezok" target="_blank">💼 LinkedIn</a>
-      <a href="https://github.com/rodrigonzalezok" target="_blank">🐙 GitHub</a>
-    </div>
+<h2>¿Qué vas a saber hacer?</h2>
+<p>Al completar las 3 rutas, vas a tener el stack técnico que piden el 90% de los puestos de <strong>Data Analyst</strong> en Argentina y LATAM.</p>
+
+<div class="stack-grid">
+  <div class="stack-item">
+    <strong>Python básico + intermedio</strong>
+    <span>Variables, funciones, módulos, archivos, OOP intro</span>
+  </div>
+  <div class="stack-item">
+    <strong>SQL profesional</strong>
+    <span>JOINs, CTEs, Window Functions, DDL/DML</span>
+  </div>
+  <div class="stack-item">
+    <strong>pandas + EDA</strong>
+    <span>Limpieza, transformación, análisis exploratorio</span>
+  </div>
+  <div class="stack-item">
+    <strong>Visualización</strong>
+    <span>matplotlib, seaborn, dashboards con Power BI</span>
+  </div>
+  <div class="stack-item">
+    <strong>Machine Learning básico</strong>
+    <span>scikit-learn, regresión, clasificación, métricas</span>
+  </div>
+  <div class="stack-item">
+    <strong>Portfolio y entrevistas</strong>
+    <span>Proyectos en GitHub, preparación técnica</span>
   </div>
 </div>
 
-<p style="text-align:center;color:var(--t3);font-size:.75rem;margin-top:40px">© Rodrigo González Doldán · QuieroProgramar · Hecho con ❤️ en Argentina</p>
+<!-- ── 05 · SOBRE MÍ ── -->
+<div class="section-num">05</div>
+<h2>Sobre mí</h2>
+<div class="author-section">
+  <p>Soy <strong>Rodrigo González Doldán</strong> — Analista Financiero Sr, Python Developer y Data Analyst. Financista de profesión, programador circunstancial y comediante frustrado.</p>
+  <p>Diseño métricas, modelos y flujos de datos para inversiones. Este proyecto nació como <strong>@yoamopython</strong> en redes y fue evolucionando hasta convertirse en QuieroProgramar: una plataforma pensada para formar analistas de datos con criterio profesional, desde lo más básico hasta lo que realmente te piden en una entrevista.</p>
+  <p>Si llegaste acá desde <a href="https://rodrigonzalez.com.ar" target="_blank">rodrigonzalez.com.ar</a>, ya sabés que todo lo que hago apunta a lo mismo: datos, finanzas y automatización. Este es el recurso educativo que me hubiese gustado tener cuando arranqué.</p>
+
+  <div class="author-links-row">
+    <a href="https://rodrigonzalez.com.ar" target="_blank">Portfolio</a>
+    <a href="https://instagram.com/yoamopython" target="_blank">@YoAmoPython</a>
+    <a href="https://tiktok.com/@rodrigonzlez" target="_blank">TikTok</a>
+    <a href="https://linkedin.com/in/rodrigonzalezok" target="_blank">LinkedIn</a>
+    <a href="https://github.com/rodrigonzalezok" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<p class="footer-text">© Rodrigo González Doldán · QuieroProgramar · Hecho en Argentina</p>
 
 </main>
 

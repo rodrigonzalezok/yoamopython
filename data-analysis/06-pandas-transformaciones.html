@@ -27,7 +27,7 @@
   <h1>pandas: Transformaciones</h1>
   <p>Los datos limpios todavía no responden preguntas de negocio. Necesitás <strong>transformarlos</strong>: crear columnas nuevas, calcular métricas, categorizar clientes, aplicar reglas. Transformar datos es el momento en que dejás de ser un técnico y empezás a generar valor para la empresa.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: Lección 05 (Limpieza)</span>
   </div>
 </div>
@@ -304,7 +304,7 @@ df = pd.DataFrame({
 
 # Creá la columna Total y sumá
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["df[\"Total\"] = df[\"Precio\"] * df[\"Cantidad\"]","print(df[\"Total\"].sum())"]'></div>
@@ -325,7 +325,7 @@ df = pd.DataFrame({
 
 # Creá IVA y Precio_Final, imprimí el primer Precio_Final
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["df[\"IVA\"] = df[\"Precio\"] * 0.21","df[\"Precio_Final\"] = df[\"Precio\"] + df[\"IVA\"]","print(df[\"Precio_Final\"].iloc[0])"]'></div>
@@ -346,7 +346,7 @@ df = pd.DataFrame({
 
 # Usá map() para crear columna "Cargo"
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["df[\"Cargo\"] = df[\"Nivel\"].map({1: \"Junior\", 2: \"Semi\", 3: \"Senior\"})","print(df)"]'></div>
@@ -368,7 +368,7 @@ df = pd.DataFrame({
 
 # Usá np.where para crear "Rango" y contá los "Alto"
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["df[\"Rango\"] = np.where(df[\"Saldo\"] >= 500000, \"Alto\", \"Bajo\")","print((df[\"Rango\"] == \"Alto\").sum())"]'></div>
@@ -390,7 +390,7 @@ df = pd.DataFrame({
 
 # Calculá Ratio_Cuota (%) e imprimí el máximo redondeado
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["df[\"Ratio_Cuota\"] = df[\"Cuota\"] / df[\"Ingreso\"] * 100","print(round(df[\"Ratio_Cuota\"].max()))"]'></div>
@@ -412,7 +412,7 @@ df = pd.DataFrame({
 
 # Renombrá, eliminá tmp, imprimí
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["df = df.rename(columns={\"cli_nom\": \"Nombre\", \"cli_sal\": \"Saldo\"})","df = df.drop(columns=[\"tmp\"])","print(df)"]'></div>
@@ -433,7 +433,7 @@ df = pd.DataFrame({
 
 # Definí la función y aplicala con apply
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["def clasificar_saldo(s): return \"VIP\" if s >= 1000000 else \"Premium\" if s >= 500000 else \"Estándar\"","df[\"Categoria\"] = df[\"Saldo\"].apply(clasificar_saldo)","print(df)"]'></div>
@@ -456,7 +456,7 @@ df = pd.DataFrame({
 
 # Función que recibe una FILA (axis=1) y evalúa
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["def evaluar(fila): ratio = fila[\"Cuota\"]/fila[\"Ingreso\"]*100; return \"✅ Aprobado\" if fila[\"Score\"]>=650 and ratio<=35 else \"❌ Rechazado\"","df[\"Decision\"] = df.apply(evaluar, axis=1)","print(df[[\"Cliente\",\"Decision\"]])"]'></div>
@@ -478,7 +478,7 @@ df = pd.DataFrame({
 
 # np.where anidado para 3 niveles
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["df[\"Nivel\"] = np.where(df[\"Saldo\"]>=800000, \"Alto\", np.where(df[\"Saldo\"]>=300000, \"Medio\", \"Bajo\"))","print(df[\"Nivel\"].value_counts())"]'></div>
@@ -501,7 +501,7 @@ df = pd.DataFrame({
 
 # Pipeline completo: Ganancia → Margen → Clasificación → Reporte
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["df[\"Ganancia\"] = df[\"Ingreso\"] - df[\"Costo\"]","df[\"Margen_%\"] = round(df[\"Ganancia\"]/df[\"Ingreso\"]*100, 1)","df[\"Estado\"] = np.where(df[\"Margen_%\"]>=30, \"Rentable\", \"Ajustar\")"]'></div>

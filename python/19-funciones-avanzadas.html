@@ -27,7 +27,7 @@
   <h1>Funciones avanzadas</h1>
   <p>Lambda, *args/**kwargs, funciones como objetos, closures, decoradores y generators. Estas herramientas convierten código funcional en código elegante y profesional. Son las que aparecen en entrevistas técnicas y en el código de pandas y scikit-learn.</p>
   <div class="badges">
-    <span class="badge">⏱ 100–120 min</span>
+    <span class="badge">100–120 min</span>
     <span class="badge">Prerrequisitos: 18 Funciones básicas</span>
   </div>
 </div>
@@ -309,7 +309,7 @@ def medir_tiempo(func):
         inicio = time.time()
         resultado = func(*args, **kwargs)
         duracion = time.time() - inicio
-        print(f"  ⏱ {func.__name__} tardó {duracion:.4f}s")
+        print(f"  {func.__name__} tardó {duracion:.4f}s")
         return resultado
     return wrapper
 
@@ -385,7 +385,7 @@ print(f"Total intereses: ${total_intereses:,}")</textarea></div>
 
 print(sumar(10, 20, 30))
 print(sumar(10, 20, 30, 40, 50))</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["def sumar(*numeros):","    return sum(numeros)","10+20+30+40+50 = 150"]'></div>
@@ -401,7 +401,7 @@ print(sumar(10, 20, 30, 40, 50))</textarea></div>
 
 # Ordená por precio desc con lambda:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["sorted(acciones, key=lambda a: a[1], reverse=True)","El primero será (\"YPF\", 28000)","lambda a: a[1] extrae el precio (segundo elemento)"]'></div>
@@ -417,7 +417,7 @@ print(sumar(10, 20, 30, 40, 50))</textarea></div>
 
 cliente = crear_registro(nombre="García", score=720, ciudad="BsAs")
 print(cliente)</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["def crear_registro(**datos):","    return datos","kwargs ya es un diccionario"]'></div>
@@ -433,7 +433,7 @@ print(cliente)</textarea></div>
 
 # filter positivos + map IVA:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["positivos = filter(lambda m: m > 0, montos)","con_iva = list(map(lambda m: round(m * 1.21), positivos))","1815 + 3872 + 4961 = 10648"]'></div>
@@ -452,7 +452,7 @@ a_pesos = crear_convertidor(1150)
 
 print(f"$1,150,000 = USD {a_dolares(1150000):,.0f}")
 print(f"USD 1,000 = ${a_pesos(1000):,.0f}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["def crear_convertidor(tasa):","    def convertir(monto): return monto * tasa","    return convertir"]'></div>
@@ -468,7 +468,7 @@ print(f"USD 1,000 = ${a_pesos(1000):,.0f}")</textarea></div>
 
 nombres = ["garcía", "lópez", "pérez"]
 print(procesar_lista(nombres, str.upper))</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["def procesar_lista(datos, func):","    return [func(d) for d in datos]","str.upper se pasa sin paréntesis (es la función, no el resultado)"]'></div>
@@ -484,7 +484,7 @@ print(procesar_lista(nombres, str.upper))</textarea></div>
 
 for mes, monto in cuotas(120000, 6):
     print(f"Mes {mes}: ${monto:,}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["def cuotas(capital, n):","    monto = capital / n","    for mes in range(1, n+1): yield mes, monto"]'></div>
@@ -504,7 +504,7 @@ def sumar(a, b):
 
 resultado = sumar(10, 20)
 print(f"Resultado: {resultado}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["def log(func):","    def wrapper(*args, **kwargs):","        print(f\"Llamando a {func.__name__}...\"); return func(*args, **kwargs)"]'></div>
@@ -523,7 +523,7 @@ operaciones = {
 
 op = "multiplicar"
 print(f"{op}(15, 8) = {operaciones[op](15, 8)}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["\"sumar\": lambda a, b: a + b","\"multiplicar\": lambda a, b: a * b","15 * 8 = 120"]'></div>
@@ -560,7 +560,7 @@ def ejecutar_pipeline(dato, pasos):
 resultado = ejecutar_pipeline("  $1,500.00  ", pasos)
 print(f"Resultado del pipeline: {resultado}")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["def ejecutar_pipeline(dato, pasos):","    for paso in pasos: dato = paso(dato)","    return dato"]'></div>

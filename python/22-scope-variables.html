@@ -27,7 +27,7 @@
   <h1>Scope de variables</h1>
   <p>Cuando escribís <code>x = 10</code> dentro de una función, ¿es la misma <code>x</code> que la de afuera? No. Python tiene reglas estrictas sobre dónde "vive" cada variable. Entender el scope te evita bugs invisibles y te permite escribir funciones seguras.</p>
   <div class="badges">
-    <span class="badge">⏱ 60–80 min</span>
+    <span class="badge">60–80 min</span>
     <span class="badge">Prerrequisitos: 18-19 Funciones</span>
   </div>
 </div>
@@ -345,7 +345,7 @@ def f():
     print(x)
 
 f()
-print(x)</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["Dentro de f(), x = \"local\" crea una LOCAL","f() imprime \"local\"","Afuera, x sigue siendo \"global\""]'></div></div>
+print(x)</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h1" class="hint-box" data-hints='["Dentro de f(), x = \"local\" crea una LOCAL","f() imprime \"local\"","Afuera, x sigue siendo \"global\""]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 2: Leer global desde función</h4><p>Definí <code>IVA = 0.21</code> como global. Creá una función <code>con_iva(precio)</code> que la USE (sin global). Debe incluir <code>12100</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-2" data-expected="12100"><div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "12100"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">IVA = 0.21
 
@@ -353,7 +353,7 @@ def con_iva(precio):
     # Usá IVA (se lee desde global):
     pass
 
-print(con_iva(10000))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["return precio * (1 + IVA)","Python busca IVA: no está en L, va a G y la encuentra","10000 * 1.21 = 12100"]'></div></div>
+print(con_iva(10000))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h2" class="hint-box" data-hints='["return precio * (1 + IVA)","Python busca IVA: no está en L, va a G y la encuentra","10000 * 1.21 = 12100"]'></div></div>
 
 <div class="exercise"><span class="exercise-level basic">Nivel 1 · Básico</span><h4>Ejercicio 3: UnboundLocalError</h4><p>Reproducí el error <code>UnboundLocalError</code> y después arreglalo pasando el valor como parámetro. Debe incluir <code>150000</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-3" data-expected="150000"><div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "150000"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">saldo = 100000
 
@@ -366,7 +366,7 @@ print(con_iva(10000))</textarea></div><div class="editor-actions"><button data-r
 def depositar(saldo_actual, monto):
     pass  # completá
 
-print(depositar(100000, 50000))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["return saldo_actual + monto","Pasar como parámetro evita el error de scope","100000 + 50000 = 150000"]'></div></div>
+print(depositar(100000, 50000))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h3" class="hint-box" data-hints='["return saldo_actual + monto","Pasar como parámetro evita el error de scope","100000 + 50000 = 150000"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 4: Global keyword</h4><p>Creá un contador global <code>operaciones = 0</code> y una función <code>registrar()</code> que lo incremente con <code>global</code>. Llamala 5 veces e imprimí. Debe incluir <code>5</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-4" data-expected="5"><div class="editor-top"><span>ejercicio_04.py</span><span>Debe incluir "5"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">operaciones = 0
 
@@ -376,7 +376,7 @@ def registrar():
 for _ in range(5):
     registrar()
 
-print(f"Operaciones: {operaciones}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["global operaciones dentro de la función","operaciones += 1","Después de 5 llamadas: operaciones = 5"]'></div></div>
+print(f"Operaciones: {operaciones}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h4" class="hint-box" data-hints='["global operaciones dentro de la función","operaciones += 1","Después de 5 llamadas: operaciones = 5"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 5: Nonlocal en closure</h4><p>Creá un closure <code>crear_acumulador()</code> que devuelva una función <code>agregar(monto)</code> que acumule un total con <code>nonlocal</code>. Debe incluir <code>300</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-5" data-expected="300"><div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "300"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">def crear_acumulador():
     total = 0
@@ -386,7 +386,7 @@ print(f"Operaciones: {operaciones}")</textarea></div><div class="editor-actions"
 
 acc = crear_acumulador()
 print(acc(100))
-print(acc(200))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["nonlocal total","total += monto","return total → 100 la primera vez, 300 la segunda"]'></div></div>
+print(acc(200))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h5" class="hint-box" data-hints='["nonlocal total","total += monto","return total → 100 la primera vez, 300 la segunda"]'></div></div>
 
 <div class="exercise"><span class="exercise-level intermediate">Nivel 2 · Intermedio</span><h4>Ejercicio 6: Evitar sobreescribir built-ins</h4><p>Corregí este código que sobreescribe <code>list</code> y <code>sum</code>. Después usá los verdaderos <code>list()</code> y <code>sum()</code>. Debe incluir <code>15</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-6" data-expected="15"><div class="editor-top"><span>ejercicio_06.py</span><span>Debe incluir "15"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># ❌ Corregí estos nombres:
 # list = [1, 2, 3, 4, 5]
@@ -396,13 +396,13 @@ print(acc(200))</textarea></div><div class="editor-actions"><button data-run>▶
 # print(sum)
 
 # ✅ Versión correcta (sin sobreescribir built-ins):
-</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["numeros = [1, 2, 3, 4, 5] en vez de list = ...","total = sum(numeros) en vez de calcular manualmente","print(total) → 15"]'></div></div>
+</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h6" class="hint-box" data-hints='["numeros = [1, 2, 3, 4, 5] en vez de list = ...","total = sum(numeros) en vez de calcular manualmente","print(total) → 15"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 7: Función pura vs impura</h4><p>Creá una versión "impura" (modifica global) y una "pura" (parámetro + return) de una función que aplique descuento a un precio. La pura debe devolver el resultado sin modificar nada. Debe incluir <code>8500</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-7" data-expected="8500"><div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "8500"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Versión PURA (solo parámetros y return):
 def aplicar_descuento(precio, descuento=0.15):
     pass  # completá
 
-print(aplicar_descuento(10000))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["return precio * (1 - descuento)","10000 * (1 - 0.15) = 8500","No toca ninguna variable externa = pura"]'></div></div>
+print(aplicar_descuento(10000))</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h7" class="hint-box" data-hints='["return precio * (1 - descuento)","10000 * (1 - 0.15) = 8500","No toca ninguna variable externa = pura"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 8: Scope en comprehensions</h4><p>Las variables de for en list comprehensions tienen scope local (Python 3+). Demostralo: creá <code>x = "global"</code>, después <code>resultado = [x for x in range(5)]</code>, e imprimí <code>x</code> para ver que sigue siendo "global". Debe incluir <code>global</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-8" data-expected="global"><div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "global"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">x = "global"
 
@@ -410,7 +410,7 @@ print(aplicar_descuento(10000))</textarea></div><div class="editor-actions"><but
 resultado = [x for x in range(5)]
 
 print(f"resultado: {resultado}")
-print(f"x: {x}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["El comprehension crea su propio scope en Python 3","x de afuera sigue siendo \"global\"","En Python 2 esto NO era así (la x se sobreescribía)"]'></div></div>
+print(f"x: {x}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h8" class="hint-box" data-hints='["El comprehension crea su propio scope en Python 3","x de afuera sigue siendo \"global\"","En Python 2 esto NO era así (la x se sobreescribía)"]'></div></div>
 
 <div class="exercise"><span class="exercise-level advanced">Nivel 3 · Avanzado</span><h4>Ejercicio 9: Closure con scope aislado</h4><p>Creá una fábrica de funciones <code>crear_filtro(umbral)</code> que devuelva una función que filtre elementos mayores al umbral de una lista. Creá dos filtros con umbrales distintos. Debe incluir <code>[890000]</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-9" data-expected="[890000]"><div class="editor-top"><span>ejercicio_09.py</span><span>Debe incluir "[890000]"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code">def crear_filtro(umbral):
     pass  # completá
@@ -420,7 +420,7 @@ filtro_500k = crear_filtro(500000)
 
 saldos = [150000, 320000, 45000, 890000, 72000]
 print(f"> $100K: {filtro_100k(saldos)}")
-print(f"> $500K: {filtro_500k(saldos)}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["def crear_filtro(umbral):","    def filtrar(datos): return [d for d in datos if d > umbral]","    return filtrar"]'></div></div>
+print(f"> $500K: {filtro_500k(saldos)}")</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h9" class="hint-box" data-hints='["def crear_filtro(umbral):","    def filtrar(datos): return [d for d in datos if d > umbral]","    return filtrar"]'></div></div>
 
 <div class="exercise"><span class="exercise-level challenge">Nivel 4 · Desafío</span><h4>Ejercicio 10: Mini sistema bancario con closures</h4><p>Creá <code>crear_cuenta(titular, saldo_inicial)</code> que devuelva 3 funciones: <code>depositar(monto)</code>, <code>extraer(monto)</code> y <code>consultar()</code>. Usá <code>nonlocal</code> para manejar el saldo. Probá con operaciones. Debe incluir <code>Saldo:</code>.</p><div class="editor" data-mode="python" data-lesson="python-22" data-exercise="ex-10" data-expected="Saldo:"><div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Saldo:"</span></div><div class="editor-area"><pre class="lines"></pre><textarea class="code"># Creá el sistema:
 def crear_cuenta(titular, saldo_inicial):
@@ -431,7 +431,7 @@ depositar, extraer, consultar = crear_cuenta("García", 100000)
 depositar(50000)
 extraer(20000)
 depositar(80000)
-print(consultar())</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["saldo = saldo_inicial dentro de crear_cuenta","def depositar(m): nonlocal saldo; saldo += m","def consultar(): return f\"Saldo: ${saldo:,}\""]'></div></div>
+print(consultar())</textarea></div><div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div><pre class="output">Hacé clic en ▶ Ejecutar</pre></div><div id="h10" class="hint-box" data-hints='["saldo = saldo_inicial dentro de crear_cuenta","def depositar(m): nonlocal saldo; saldo += m","def consultar(): return f\"Saldo: ${saldo:,}\""]'></div></div>
 
 <div class="section-num">05</div>
 <h2>Resumen y conexión</h2>

@@ -27,7 +27,7 @@
   <h1>pandas: merge, join y concat</h1>
   <p>Los datos reales nunca viven en una sola tabla. Los clientes están en una tabla, las transacciones en otra, las sucursales en otra. Para analizar necesitás <strong>cruzar tablas</strong> — exactamente como los JOINs de SQL pero con la sintaxis de pandas. Si ya dominás SQL JOINs (lecciones SQL 07 y 08), esto te va a resultar familiar.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: Lección 07 (groupby y pivot)</span>
   </div>
 </div>
@@ -327,7 +327,7 @@ productos = pd.DataFrame({
 
 # Inner merge por Prod_ID
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["resultado = pd.merge(pedidos, productos, on=\"Prod_ID\")","print(resultado)"]'></div>
@@ -354,7 +354,7 @@ productos = pd.DataFrame({
 
 # Left merge
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["resultado = pd.merge(pedidos, productos, on=\"Prod_ID\", how=\"left\")","print(resultado)"]'></div>
@@ -373,7 +373,7 @@ febrero = pd.DataFrame({"Producto": ["A","B","C"], "Ventas": [120,180,170]})
 
 # Concatená e imprimí cantidad de filas
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["total = pd.concat([enero, febrero], ignore_index=True)","print(len(total))"]'></div>
@@ -400,7 +400,7 @@ clientes = pd.DataFrame({
 
 # Merge con claves de distinto nombre
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["res = pd.merge(ventas, clientes, left_on=\"cod_cli\", right_on=\"ID_Cliente\")","print(res)"]'></div>
@@ -419,7 +419,7 @@ der = pd.DataFrame({"Key": [2, 3, 4], "Val_B": ["x", "y", "z"]})
 
 # Outer merge con indicator, contá "both"
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["res = pd.merge(izq, der, on=\"Key\", how=\"outer\", indicator=True)","print((res[\"_merge\"] == \"both\").sum())"]'></div>
@@ -446,7 +446,7 @@ precios = pd.DataFrame({
 
 # Merge + calcular Total + sumar
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["df = pd.merge(pedidos, precios, on=\"Prod_ID\")","df[\"Total\"] = df[\"Cantidad\"] * df[\"Precio\"]","print(df[\"Total\"].sum())"]'></div>
@@ -473,7 +473,7 @@ clientes = pd.DataFrame({
 
 # Left merge y contar los que tienen NaN en Nombre
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["res = pd.merge(txn, clientes, on=\"Cliente_ID\", how=\"left\")","huerfanas = res[\"Nombre\"].isna().sum()","print(huerfanas)"]'></div>
@@ -493,7 +493,7 @@ ciudades = pd.DataFrame({"Ciudad_ID": [1,2], "Ciudad": ["CABA","Rosario"], "Zona
 
 # Merge encadenado: txn → clientes → ciudades
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["res = txn.merge(clientes, on=\"Cli_ID\").merge(ciudades, on=\"Ciudad_ID\")","print(res)"]'></div>
@@ -513,7 +513,7 @@ q3 = pd.DataFrame({"Producto": ["A","B"], "Ventas": [100, 220]})
 
 # Concatená los 3, groupby Producto, sumá Ventas
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["anual = pd.concat([q1,q2,q3], ignore_index=True)","print(anual.groupby(\"Producto\")[\"Ventas\"].sum())"]'></div>
@@ -540,7 +540,7 @@ clientes = pd.DataFrame({
 
 # Pipeline: merge → fillna → groupby → participación
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["df = pd.merge(txn, clientes, on=\"Cliente_ID\", how=\"left\")","df[\"Segmento\"] = df[\"Segmento\"].fillna(\"Desconocido\")","reporte = df.groupby(\"Segmento\")[\"Monto\"].sum()","reporte_pct = round(reporte / reporte.sum() * 100, 1)"]'></div>

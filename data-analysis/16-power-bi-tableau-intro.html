@@ -27,7 +27,7 @@
   <h1>Power BI y Tableau: Introducción</h1>
   <p>Python es la navaja suiza del análisis — flexible, potente, programable. Pero en el mundo corporativo, los gerentes y directores no van a abrir un Jupyter Notebook. Necesitan <strong>dashboards interactivos</strong> que puedan explorar solos, filtrar por región y mes, y compartir con un clic. Para eso existen <strong>Power BI</strong> y <strong>Tableau</strong>, las herramientas de Business Intelligence (BI) más usadas del planeta.</p>
   <div class="badges">
-    <span class="badge">⏱ 60–90 min</span>
+    <span class="badge">60–90 min</span>
     <span class="badge">Prerrequisitos: Lección 15 (Regresión y clasificación)</span>
   </div>
 </div>
@@ -242,11 +242,11 @@ fact_txn = pd.DataFrame({
 })
 
 print("=== MODELO ESTRELLA para BI ===")
-print(f"\n📊 Tabla de Hechos: fact_txn ({len(fact_txn)} filas)")
+print(f"\nTabla de Hechos: fact_txn ({len(fact_txn)} filas)")
 print(fact_txn.head())
-print(f"\n📋 Dimensión Sucursales ({len(dim_sucursales)} filas)")
+print(f"\nDimensión Sucursales ({len(dim_sucursales)} filas)")
 print(dim_sucursales)
-print(f"\n📋 Dimensión Productos ({len(dim_productos)} filas)")
+print(f"\nDimensión Productos ({len(dim_productos)} filas)")
 print(dim_productos)
 
 # Relaciones (en BI se configuran con drag & drop)
@@ -383,7 +383,7 @@ df = pd.DataFrame({"Ciudad": [" caba ", "ROSARIO", " córdoba", "Caba", "rosario
 
 # Normalizar y mostrar únicos
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["df[\"Ciudad\"] = df[\"Ciudad\"].str.strip().str.title()","print(df[\"Ciudad\"].unique())"]'></div>
@@ -401,7 +401,7 @@ df = pd.DataFrame({"Fecha": pd.date_range("2024-01-01", periods=10, freq="M")})
 
 # Crear: Anio, Mes, Trimestre
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["df[\"Anio\"] = df[\"Fecha\"].dt.year","df[\"Mes\"] = df[\"Fecha\"].dt.month","df[\"Trimestre\"] = df[\"Fecha\"].dt.quarter","print(df)"]'></div>
@@ -421,7 +421,7 @@ df = pd.DataFrame({"Monto": np.random.normal(15000, 5000, 100).astype(int)})
 
 # 3 KPIs
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["print(f\"Total: ${df[\\\"Monto\\\"].sum():,}\")","print(f\"Ticket promedio: ${df[\\\"Monto\\\"].mean():,.0f}\")","print(f\"Operaciones: {len(df)}\")"]'></div>
@@ -444,7 +444,7 @@ df = pd.DataFrame({
 
 # Participación % por sucursal
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["totales = df.groupby(\"Sucursal\")[\"Monto\"].sum()","pct = round(totales / totales.sum() * 100, 1)","for s, p in pct.items(): print(f\"{s}: {p}%\")"]'></div>
@@ -469,7 +469,7 @@ hechos = pd.DataFrame({
 # Crear dim_sucursales con Suc_ID, Nombre, Zona
 # Hacer merge
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["dim = pd.DataFrame({\"Suc_ID\":[1,2,3],\"Nombre\":[\"CABA\",\"Rosario\",\"Córdoba\"],\"Zona\":[\"Centro\",\"Litoral\",\"Interior\"]})","resultado = pd.merge(hechos, dim, on=\"Suc_ID\")","print(resultado)"]'></div>
@@ -492,7 +492,7 @@ df = pd.DataFrame({
 
 # CALCULATE(SUM(Monto), Sucursal="CABA")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["total_caba = df[df[\"Sucursal\"]==\"CABA\"][\"Monto\"].sum()","print(f\"CALCULATE CABA: ${total_caba:,}\")","print(f\"Total global: ${df[\\\"Monto\\\"].sum():,}\")","print(f\"Participación: {total_caba/df[\\\"Monto\\\"].sum()*100:.1f}%\")"]'></div>
@@ -516,7 +516,7 @@ df["Mes"] = df["Fecha"].dt.to_period("M")
 
 # Mensual + YTD acumulado
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["mensual = df.groupby(\"Mes\")[\"Monto\"].sum()","ytd = mensual.cumsum()","for m, (v, a) in enumerate(zip(mensual, ytd)):","    print(f\"Mes {m+1}: ${v:>8,} | YTD: ${a:>10,}\")"]'></div>
@@ -540,7 +540,7 @@ df = pd.DataFrame({
 
 # Pivot table: Sucursal × Mes
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["tabla = pd.pivot_table(df, values=\"Monto\", index=\"Sucursal\", columns=\"Mes\", aggfunc=\"sum\", fill_value=0)","print(tabla)"]'></div>
@@ -561,7 +561,7 @@ mensual = pd.Series([45000, 52000, 48000, 61000, 58000, 72000],
 
 # pct_change() para variación %
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["variacion = mensual.pct_change() * 100","for mes, var in variacion.items():","    if pd.notna(var): print(f\"{mes}: var {var:+.1f}%\")"]'></div>
@@ -587,7 +587,7 @@ datos = {s: np.random.randint(30000, 80000, 6) for s in sucursales}
 # fig, axes = plt.subplots(2, 2, figsize=(12, 9))
 # KPI card + tendencia + barras + torta
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 9))","axes[0,0].axis(\"off\"); axes[0,0].text(0.5,0.5,\"$1.2M\",ha=\"center\",fontsize=28,fontweight=\"bold\")","for s in sucursales: axes[0,1].plot(meses, datos[s], \"o-\", label=s)","axes[0,1].legend(); plt.tight_layout(); plt.show(); print(\"Dashboard BI\")"]'></div>

@@ -27,7 +27,7 @@
   <h1>Funciones básicas</h1>
   <p>Las funciones te permiten encapsular lógica reutilizable bajo un nombre descriptivo. En vez de copiar y pegar código, lo definís una vez y lo llamás cuantas veces quieras. Es el salto de "scripts sueltos" a "código profesional".</p>
   <div class="badges">
-    <span class="badge">⏱ 90–110 min</span>
+    <span class="badge">90–110 min</span>
     <span class="badge">Prerrequisitos: 06 Condicionales, 16-17 Bucles</span>
   </div>
 </div>
@@ -365,7 +365,7 @@ print(f"  {'TOTAL':<12} ${total:>10,.0f}")
 
 # Probá:
 print(con_iva(10000))</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["def con_iva(precio):","    return precio * 1.21","10000 * 1.21 = 12100.0"]'></div>
@@ -382,7 +382,7 @@ print(con_iva(10000))</textarea></div>
 # Probá:
 saludar("García")
 saludar("López", "Buenos días")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["def saludar(nombre, saludo=\"Hola\"):","    print(f\"{saludo}, {nombre}!\")","Sin segundo arg usa \"Hola\" por defecto"]'></div>
@@ -399,7 +399,7 @@ saludar("López", "Buenos días")</textarea></div>
 datos = [45, 72, 38, 91, 55]
 mi, ma = min_max(datos)
 print(f"Min: {mi}, Max: {ma}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["def min_max(numeros):","    return min(numeros), max(numeros)","Devuelve una tupla que desempaquetás"]'></div>
@@ -414,7 +414,7 @@ print(f"Min: {mi}, Max: {ma}")</textarea></div>
     <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí sueldo_neto():
 
 print(sueldo_neto(750000))</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["def sueldo_neto(bruto, jub=0.11, os=0.03, gan=0.17):","    return bruto * (1 - jub - os - gan)","750000 * 0.69 = 517500"]'></div>
@@ -429,7 +429,7 @@ print(sueldo_neto(750000))</textarea></div>
     <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí con docstring completo:
 
 print(interes_simple(200000, 0.05, 6))</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["def interes_simple(capital, tasa, meses):","    \"\"\"Calcula interés simple. Args: capital, tasa, meses. Returns: float.\"\"\"","    return capital * tasa * meses → 200000*0.05*6 = 60000"]'></div>
@@ -444,7 +444,7 @@ print(interes_simple(200000, 0.05, 6))</textarea></div>
     <div class="editor-area"><pre class="lines"></pre><textarea class="code"># Definí clasificar_score():
 
 print(clasificar_score(720))</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["if score >= 800: return \"Excelente\"","elif score >= 700: return \"Bueno\"","elif score >= 600: return \"Regular\" else: return \"Malo\""]'></div>
@@ -462,7 +462,7 @@ datos = ["$1,500", "N/A", "$3,200", "", "$-100"]
 limpios = limpiar_montos(datos)
 print(f"Limpios: {limpios}")
 print(f"Total: {sum(limpios)}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["Recorré la lista, si empieza con $ limpiá y convertí","Usá continue para saltar N/A y vacíos","1500 + 3200 = 4700 (sin el negativo si lo filtrás)"]'></div>
@@ -480,7 +480,7 @@ datos = [150000, 320000, 45000, 890000]
 resultado = analizar(datos)
 for k, v in resultado.items():
     print(f"  {k}: {v:,.0f}" if isinstance(v, float) else f"  {k}: {v}")</textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["return {\"total\": sum(s), \"promedio\": sum(s)/len(s), ...}","Incluí min, max, cantidad","Los valores se acceden como resultado[\"promedio\"]"]'></div>
@@ -498,7 +498,7 @@ nombres_sucios = ["  GARCÍA  ", "", "  lópez  ", " a ", "  PÉREZ  "]
 
 # Aplicá el pipeline:
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["def limpiar(t): return t.strip().title()","def validar(n): return len(n) >= 2","for i, n in enumerate(nombres_sucios, 1): limpio = limpiar(n); if validar(limpio): print(formatear(limpio, i))"]'></div>
@@ -522,7 +522,7 @@ clientes = [
 ]
 print("=== EVALUACIÓN CREDITICIA ===")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["def validar_edad(e): return 18 <= e <= 65","def calcular_ratio(cuota, ingreso): return cuota/ingreso*100","evaluar_cliente usa todas y devuelve dict con resultado"]'></div>

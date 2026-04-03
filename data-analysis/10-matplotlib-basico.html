@@ -27,7 +27,7 @@
   <h1>Matplotlib Básico</h1>
   <p>Un gráfico bien hecho comunica en <strong>2 segundos</strong> lo que una tabla de números tarda 2 minutos. Matplotlib es la biblioteca de visualización más importante de Python — todo lo que ves en Seaborn, pandas plots, y la mayoría de gráficos científicos está construido sobre ella. Dominar Matplotlib es dominar la comunicación visual de datos.</p>
   <div class="badges">
-    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">90–120 min</span>
     <span class="badge">Prerrequisitos: Lección 09 (Estadística descriptiva)</span>
   </div>
 </div>
@@ -316,7 +316,7 @@ ventas = [30000, 45000, 38000, 52000]
 # Graficá con plt.plot(), agregá título, xlabel, ylabel
 # Usá plt.show() y print("Gráfico generado")
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h1" class="hint-box" data-hints='["plt.plot(meses, ventas, marker=\"o\")","plt.title(\"Ventas\"); plt.xlabel(\"Mes\"); plt.ylabel(\"$\")","plt.show(); print(\"Gráfico generado\")"]'></div>
@@ -337,7 +337,7 @@ ventas = [95000, 72000, 58000]
 
 # plt.bar(), título, show(), print
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h2" class="hint-box" data-hints='["plt.bar(ciudades, ventas, color=\"#2196F3\")","plt.title(\"Ventas por Ciudad\"); plt.show()","print(\"Barras OK\")"]'></div>
@@ -358,7 +358,7 @@ saldos = [100, 200, 250, 300, 350, 400, 450, 500, 600, 800,
 
 # plt.hist() con bins=10, título, show(), print
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h3" class="hint-box" data-hints='["plt.hist(saldos, bins=10, color=\"#00BCD4\", edgecolor=\"white\")","plt.title(\"Distribución de Saldos\"); plt.show()","print(\"Histograma listo\")"]'></div>
@@ -379,7 +379,7 @@ ganancia = [50000, 15000, -8000, 3000]
 
 # Barras con color verde si > 0, rojo si < 0
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h4" class="hint-box" data-hints='["colores = [\"#4CAF50\" if g > 0 else \"#F44336\" for g in ganancia]","plt.bar(productos, ganancia, color=colores)","plt.title(\"Ganancia\"); plt.show(); print(\"Colores aplicados\")"]'></div>
@@ -400,7 +400,7 @@ ingreso = [150, 250, 380, 520, 700, 850, 950]
 
 # plt.scatter(), título, xlabel, ylabel, grid, show, print
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h5" class="hint-box" data-hints='["plt.scatter(antiguedad, ingreso, c=\"#9C27B0\", s=80)","plt.title(\"Antigüedad vs Ingreso\"); plt.grid(True, alpha=0.3)","plt.show(); print(\"Scatter OK\")"]'></div>
@@ -422,7 +422,7 @@ gastos = [30000, 35000, 32000, 38000]
 
 # Dos líneas + leyenda
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h6" class="hint-box" data-hints='["plt.plot(meses, ventas, \"o-\", label=\"Ventas\")","plt.plot(meses, gastos, \"s--\", label=\"Gastos\")","plt.legend(); plt.show(); print(\"Doble serie OK\")"]'></div>
@@ -443,7 +443,7 @@ datos = [100, 200, 250, 350, 400, 400, 450, 500, 600, 800]
 
 # Histograma + axvline en la mediana + print mediana
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h7" class="hint-box" data-hints='["med = np.median(datos)","plt.hist(datos, bins=8); plt.axvline(med, color=\"red\", linestyle=\"--\")","plt.show(); print(f\"Mediana: {int(med)}\")"]'></div>
@@ -464,7 +464,7 @@ ventas = [60000, 45000, 72000, 38000, 55000]
 
 # Ordená y graficá horizontal con plt.barh()
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h8" class="hint-box" data-hints='["pares = sorted(zip(ventas, vendedores))","v_ord, n_ord = zip(*pares)","plt.barh(n_ord, v_ord); plt.show(); print(\"Ranking OK\")"]'></div>
@@ -485,7 +485,7 @@ porcentaje = [45, 35, 20]
 
 # Pie chart con autopct y colores
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h9" class="hint-box" data-hints='["plt.pie(porcentaje, labels=canales, autopct=\"%1.0f%%\", colors=[\"#2196F3\",\"#4CAF50\",\"#FF9800\"])","plt.title(\"Distribución por Canal\"); plt.show()","print(\"Torta lista\")"]'></div>
@@ -509,7 +509,7 @@ ventas_mes = [50000, 55000, 48000, 62000]
 # fig, axes = plt.subplots(1, 2, figsize=(10, 4))
 # Subplot 1: barras   Subplot 2: líneas
 </textarea></div>
-    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">Pista</button></div>
     <pre class="output">Hacé clic en ▶ Ejecutar</pre>
   </div>
   <div id="h10" class="hint-box" data-hints='["fig, axes = plt.subplots(1, 2, figsize=(10, 4))","axes[0].bar(ciudades, ventas_ciudad); axes[0].set_title(\"Por Ciudad\")","axes[1].plot(meses, ventas_mes, \"o-\"); axes[1].set_title(\"Tendencia\"); plt.tight_layout(); plt.show(); print(\"Dashboard OK\")"]'></div>
