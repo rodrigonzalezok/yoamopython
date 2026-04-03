@@ -1,221 +1,629 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 12</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 12</div><h1>Eda Completo</h1><p>Subtítulo: dominá eda completo desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 11</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 12</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Eda Completo</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Eda Completo</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de eda completo</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Eda Completo</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Eda Completo</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Eda Completo</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Eda Completo</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-12' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-12-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-12-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de eda completo con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/data-analysis/11-seaborn-visualizacion.html'>← Anterior</a><a class='badge' href='/data-analysis/13-numpy-fundamentos.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 12 · EDA Completo</title>
+<meta name="description" content="Realizá un Análisis Exploratorio de Datos (EDA) profesional de principio a fin. Combiná pandas, estadística, matplotlib y seaborn en un proceso estructurado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 12 de 19</span>
+  <h1>EDA Completo: Análisis Exploratorio de Datos</h1>
+  <p>El <strong>Análisis Exploratorio de Datos (EDA)</strong> es el proceso sistemático de examinar un dataset antes de cualquier modelado o decisión de negocio. No es un paso — es <em>el</em> paso. Un EDA mal hecho lleva a conclusiones equivocadas. Uno bien hecho te da la intuición necesaria para hacer las preguntas correctas.</p>
+  <div class="badges">
+    <span class="badge">⏱ 120–150 min</span>
+    <span class="badge">Prerrequisitos: Lecciones 04-11</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>¿Qué es el EDA y por qué importa?</h3>
+
+<p>El EDA fue formalizado por John Tukey en 1977 en su libro <em>"Exploratory Data Analysis"</em>. La idea central es: <strong>antes de hacer modelos o pruebas, mirá los datos</strong>. Suena obvio, pero en la práctica muchos analistas saltan directo a las conclusiones sin entender la estructura de los datos.</p>
+
+<div class="concept"><strong>El EDA responde 5 preguntas fundamentales:</strong>
+<br>1. ¿Qué forma tienen los datos? (dimensiones, tipos, estructura)
+<br>2. ¿Qué tan limpios están? (nulos, duplicados, inconsistencias)
+<br>3. ¿Cómo se distribuyen las variables numéricas? (centralidad, dispersión, outliers)
+<br>4. ¿Cómo se distribuyen las variables categóricas? (frecuencias, desbalances)
+<br>5. ¿Qué relaciones existen entre variables? (correlaciones, patrones)</div>
+
+<h3>Los 6 pasos del EDA profesional</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>#</th><th>Paso</th><th>Herramientas</th><th>Objetivo</th></tr>
+<tr><td>1</td><td><strong>Reconocimiento</strong></td><td><code>shape, dtypes, head, info</code></td><td>Entender la estructura básica</td></tr>
+<tr><td>2</td><td><strong>Calidad</strong></td><td><code>isna, duplicated, describe</code></td><td>Evaluar la salud de los datos</td></tr>
+<tr><td>3</td><td><strong>Univariado numérico</strong></td><td>Histogramas, box plots, estadísticas</td><td>Distribución de cada variable numérica</td></tr>
+<tr><td>4</td><td><strong>Univariado categórico</strong></td><td>value_counts, countplot</td><td>Distribución de cada variable categórica</td></tr>
+<tr><td>5</td><td><strong>Bivariado</strong></td><td>Scatter, heatmap de correlación, boxplot por grupo</td><td>Relaciones entre pares de variables</td></tr>
+<tr><td>6</td><td><strong>Insights</strong></td><td>Resumen escrito, visualización clave</td><td>Hallazgos accionables del negocio</td></tr>
+</table>
+</div>
+
+<div class="analogy"><strong>Analogía del detective:</strong> un detective no empieza un caso con una teoría preconcebida. Primero examina la escena del crimen (paso 1), recolecta evidencia (pasos 2-4), busca conexiones (paso 5) y finalmente formula hipótesis (paso 6). El EDA es exactamente eso: investigar sin sesgo, dejar que los datos hablen.</div>
+
+<div class="realworld"><strong>En el trabajo real:</strong> cuando recibís un dataset nuevo en tu primer día de trabajo, la expectativa es que en las primeras 2-4 horas entregues un EDA con las características principales de los datos, problemas de calidad detectados y 3-5 hallazgos preliminares. Es tu primera oportunidad de demostrar seniority analítico.</div>
+
+<div class="section-num">02</div>
+<h2>EDA paso a paso: caso práctico completo</h2>
+
+<h3>Paso 1: Reconocimiento del dataset</h3>
+<p>Lo primero siempre: ¿cuántas filas y columnas? ¿Qué tipo de datos hay? ¿Cómo se ven las primeras filas?</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>eda_paso01_reconocimiento.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+# Creamos un dataset realista de clientes bancarios
+np.random.seed(42)
+n = 200
+
+df = pd.DataFrame({
+    "Cliente_ID": range(1, n+1),
+    "Edad": np.random.randint(18, 70, n),
+    "Genero": np.random.choice(["M", "F"], n),
+    "Ciudad": np.random.choice(["CABA", "Rosario", "Córdoba", "Mendoza", "Tucumán"], n, p=[0.35, 0.25, 0.20, 0.12, 0.08]),
+    "Segmento": np.random.choice(["Premium", "Estándar", "Básico"], n, p=[0.15, 0.55, 0.30]),
+    "Antigüedad": np.random.randint(0, 25, n),
+    "Ingreso": np.abs(np.random.normal(400000, 180000, n)).astype(int),
+    "Saldo": np.abs(np.random.normal(300000, 200000, n)).astype(int),
+    "Productos": np.random.randint(1, 8, n),
+    "Activo": np.random.choice([0, 1], n, p=[0.2, 0.8])
+})
+
+# Inyectar problemas realistas
+df.loc[np.random.choice(n, 15, replace=False), "Ingreso"] = np.nan
+df.loc[np.random.choice(n, 8, replace=False), "Saldo"] = np.nan
+idx_dup = np.random.choice(n, 5, replace=False)
+df = pd.concat([df, df.iloc[idx_dup]], ignore_index=True)
+
+# === PASO 1: RECONOCIMIENTO ===
+print(f"Dimensiones: {df.shape[0]} filas × {df.shape[1]} columnas")
+print(f"\n=== Primeras 5 filas ===")
+print(df.head())
+print(f"\n=== Tipos de datos ===")
+print(df.dtypes)
+print(f"\n=== Info general ===")
+print(f"Columnas numéricas: {list(df.select_dtypes('number').columns)}")
+print(f"Columnas categóricas: {list(df.select_dtypes('object').columns)}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Paso 2: Evaluación de calidad</h3>
+<p>¿Cuántos nulos? ¿Duplicados? ¿Valores atípicos? Este paso decide si podemos confiar en las métricas que calculemos después.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>eda_paso02_calidad.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+n = 200
+df = pd.DataFrame({
+    "Cliente_ID": range(1, n+1),
+    "Edad": np.random.randint(18, 70, n),
+    "Ciudad": np.random.choice(["CABA", "Rosario", "Córdoba", "Mendoza"], n),
+    "Segmento": np.random.choice(["Premium", "Estándar", "Básico"], n),
+    "Ingreso": np.abs(np.random.normal(400000, 180000, n)).astype(int),
+    "Saldo": np.abs(np.random.normal(300000, 200000, n)).astype(int),
+    "Activo": np.random.choice([0, 1], n, p=[0.2, 0.8])
+})
+df.loc[np.random.choice(n, 15, replace=False), "Ingreso"] = np.nan
+df.loc[np.random.choice(n, 8, replace=False), "Saldo"] = np.nan
+idx_dup = np.random.choice(n, 5, replace=False)
+df = pd.concat([df, df.iloc[idx_dup]], ignore_index=True)
+
+# === PASO 2: CALIDAD ===
+print("=" * 50)
+print("REPORTE DE CALIDAD DE DATOS")
+print("=" * 50)
+
+# Nulos
+nulos = df.isna().sum()
+nulos_pct = round(df.isna().sum() / len(df) * 100, 1)
+print("\n📋 Nulos por columna:")
+for col in nulos[nulos > 0].index:
+    print(f"  {col}: {nulos[col]} ({nulos_pct[col]}%)")
+
+# Duplicados
+dupes = df.duplicated().sum()
+print(f"\n📋 Duplicados: {dupes} filas ({round(dupes/len(df)*100, 1)}%)")
+
+# Estadísticas básicas
+print(f"\n📋 Resumen estadístico:")
+print(df.describe().round(0))</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Paso 3: Análisis univariado numérico</h3>
+<p>Distribuir cada variable numérica: histogramas, box plots, estadísticas. Detectar asimetrías y outliers.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>eda_paso03_univariado_num.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+n = 200
+df = pd.DataFrame({
+    "Edad": np.random.randint(18, 70, n),
+    "Ingreso": np.abs(np.random.normal(400000, 180000, n)).astype(int),
+    "Saldo": np.abs(np.random.normal(300000, 200000, n)).astype(int),
+    "Productos": np.random.randint(1, 8, n)
+})
+
+num_cols = ["Edad", "Ingreso", "Saldo", "Productos"]
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+
+for i, col in enumerate(num_cols):
+    ax = axes[i // 2, i % 2]
+    sns.histplot(data=df, x=col, kde=True, bins=20, ax=ax, color="#2196F3")
+    media = df[col].mean()
+    mediana = df[col].median()
+    ax.axvline(mediana, color="#FF5722", linestyle="--", linewidth=1.5, label=f"Mediana: {mediana:,.0f}")
+    ax.set_title(f"Distribución: {col}", fontweight="bold")
+    ax.legend(fontsize=8)
+
+fig.suptitle("Análisis Univariado — Variables Numéricas", fontsize=14, fontweight="bold", y=1.01)
+plt.tight_layout()
+plt.show()
+
+# Tabla resumen
+for col in num_cols:
+    s = df[col]
+    asimetria = "→ derecha" if s.mean() > s.median() else "← izquierda" if s.mean() < s.median() else "simétrica"
+    print(f"{col:12s}: media={s.mean():>10,.0f}  mediana={s.median():>10,.0f}  std={s.std():>10,.0f}  {asimetria}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Paso 4: Análisis univariado categórico</h3>
+<p>¿Cómo se distribuyen las categorías? ¿Hay desbalances? Las frecuencias categóricas revelan sesgos en la muestra.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>eda_paso04_univariado_cat.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+n = 200
+df = pd.DataFrame({
+    "Ciudad": np.random.choice(["CABA", "Rosario", "Córdoba", "Mendoza", "Tucumán"], n, p=[0.35, 0.25, 0.20, 0.12, 0.08]),
+    "Segmento": np.random.choice(["Premium", "Estándar", "Básico"], n, p=[0.15, 0.55, 0.30]),
+    "Activo": np.random.choice(["Sí", "No"], n, p=[0.80, 0.20])
+})
+
+cat_cols = ["Ciudad", "Segmento", "Activo"]
+
+fig, axes = plt.subplots(1, 3, figsize=(14, 5))
+
+for i, col in enumerate(cat_cols):
+    order = df[col].value_counts().index
+    sns.countplot(data=df, x=col, ax=axes[i], palette="Set2", order=order)
+    axes[i].set_title(f"Distribución: {col}", fontweight="bold")
+    axes[i].tick_params(axis='x', rotation=30)
+    # Agregar porcentaje sobre cada barra
+    total = len(df)
+    for p in axes[i].patches:
+        pct = f"{p.get_height()/total*100:.0f}%"
+        axes[i].annotate(pct, (p.get_x() + p.get_width()/2, p.get_height()),
+                         ha='center', va='bottom', fontsize=9, fontweight='bold')
+
+fig.suptitle("Análisis Univariado — Variables Categóricas", fontsize=14, fontweight="bold", y=1.01)
+plt.tight_layout()
+plt.show()
+
+for col in cat_cols:
+    print(f"\n{col}:")
+    for val, cnt in df[col].value_counts().items():
+        print(f"  {val}: {cnt} ({cnt/len(df)*100:.0f}%)")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Paso 5: Análisis bivariado — Relaciones entre variables</h3>
+<p>¿Qué variables se relacionan? Correlaciones entre numéricas, distribuciones numéricas segmentadas por categóricas.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>eda_paso05_bivariado.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+n = 200
+antiguedad = np.random.randint(0, 25, n)
+ingreso = antiguedad * 25000 + np.abs(np.random.normal(150000, 80000, n))
+
+df = pd.DataFrame({
+    "Antigüedad": antiguedad,
+    "Ingreso": ingreso.astype(int),
+    "Saldo": (ingreso * 0.5 + np.random.normal(0, 50000, n)).astype(int),
+    "Segmento": np.random.choice(["Premium", "Estándar", "Básico"], n, p=[0.15, 0.55, 0.30]),
+    "Productos": np.clip(antiguedad * 0.3 + np.random.normal(2, 1, n), 1, 7).astype(int)
+})
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+
+# 1. Heatmap de correlación
+corr = df.select_dtypes("number").corr()
+sns.heatmap(corr, annot=True, cmap="RdYlBu_r", center=0, fmt=".2f",
+            ax=axes[0, 0], square=True)
+axes[0, 0].set_title("Correlaciones", fontweight="bold")
+
+# 2. Scatter: Antigüedad vs Ingreso
+sns.regplot(data=df, x="Antigüedad", y="Ingreso", ax=axes[0, 1],
+            scatter_kws={"alpha": 0.4, "s": 20}, line_kws={"color": "#E91E63"})
+axes[0, 1].set_title("Antigüedad vs Ingreso", fontweight="bold")
+
+# 3. Boxplot: Ingreso por Segmento
+sns.boxplot(data=df, x="Segmento", y="Ingreso", ax=axes[1, 0],
+            palette="Set2", order=["Premium", "Estándar", "Básico"])
+axes[1, 0].set_title("Ingreso por Segmento", fontweight="bold")
+
+# 4. Barplot: Productos promedio por Segmento
+sns.barplot(data=df, x="Segmento", y="Productos", ax=axes[1, 1],
+            palette="Set2", order=["Premium", "Estándar", "Básico"], errorbar="sd")
+axes[1, 1].set_title("Productos por Segmento", fontweight="bold")
+
+fig.suptitle("Análisis Bivariado", fontsize=14, fontweight="bold", y=1.01)
+plt.tight_layout()
+plt.show()
+
+print("Hallazgos clave:")
+print(f"  Corr(Antigüedad, Ingreso) = {corr.loc['Antigüedad','Ingreso']:.2f}")
+print(f"  Corr(Ingreso, Saldo) = {corr.loc['Ingreso','Saldo']:.2f}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida — Checklist de EDA</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Paso</th><th>Código clave</th><th>¿Qué buscás?</th></tr>
+<tr><td>Dimensiones</td><td><code>df.shape</code></td><td>Filas × columnas</td></tr>
+<tr><td>Tipos</td><td><code>df.dtypes</code></td><td>¿object donde debería ser number?</td></tr>
+<tr><td>Head</td><td><code>df.head()</code></td><td>¿Los datos tienen sentido?</td></tr>
+<tr><td>Nulos</td><td><code>df.isna().sum()</code></td><td>¿Cuántos y dónde?</td></tr>
+<tr><td>Duplicados</td><td><code>df.duplicated().sum()</code></td><td>¿Filas repetidas?</td></tr>
+<tr><td>Describe</td><td><code>df.describe()</code></td><td>Estadísticas rápidas</td></tr>
+<tr><td>Distribución num</td><td><code>sns.histplot(kde=True)</code></td><td>Forma, asimetría</td></tr>
+<tr><td>Distribución cat</td><td><code>df["col"].value_counts()</code></td><td>Desbalances</td></tr>
+<tr><td>Outliers</td><td><code>sns.boxplot()</code></td><td>Valores atípicos</td></tr>
+<tr><td>Correlaciones</td><td><code>sns.heatmap(df.corr())</code></td><td>Relaciones lineales</td></tr>
+<tr><td>Relación num-cat</td><td><code>sns.boxplot(x=cat, y=num)</code></td><td>¿La distribución varía por grupo?</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Reconocimiento con shape y dtypes</h4>
+  <p>Imprimí las dimensiones del DataFrame y los tipos de datos. Debe incluir la palabra <code>int</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-1" data-expected="int">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe incluir "int"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Edad": np.random.randint(18, 65, 50),
+    "Ingreso": np.random.normal(400000, 100000, 50).astype(int),
+    "Ciudad": np.random.choice(["CABA","Rosario","Córdoba"], 50)
+})
+
+# Imprimí shape y dtypes
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["print(f\"Dimensiones: {df.shape}\")","print(df.dtypes)"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Reporte de nulos y duplicados</h4>
+  <p>Imprimí la cantidad de nulos por columna y el total de duplicados. Debe incluir el número <code>0</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-2" data-expected="0">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe incluir "0"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Nombre": ["Ana","Luis","Pedro","Ana","María"],
+    "Edad": [25, 30, np.nan, 25, 28],
+    "Saldo": [500, np.nan, 300, 500, 400]
+})
+
+# Nulos por columna + duplicados
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["print(\"Nulos:\")\nprint(df.isna().sum())","print(f\"Duplicados: {df.duplicated().sum()}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: describe()</h4>
+  <p>Ejecutá <code>describe()</code> sobre el DataFrame. Debe incluir <code>mean</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-3" data-expected="mean">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe incluir "mean"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Edad": np.random.randint(18, 65, 30),
+    "Ingreso": np.random.normal(400000, 100000, 30).astype(int),
+    "Productos": np.random.randint(1, 8, 30)
+})
+
+# describe()
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["print(df.describe())"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Histograma con mediana</h4>
+  <p>Graficá la distribución de Ingreso con <code>sns.histplot(kde=True)</code> y agregá una línea en la mediana. Imprimí <code>Univariado OK</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-4" data-expected="Univariado OK">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe imprimir "Univariado OK"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({"Ingreso": np.random.normal(400000, 120000, 100).astype(int)})
+
+# Histograma + mediana + print
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["sns.histplot(data=df, x=\"Ingreso\", kde=True, bins=20)","plt.axvline(df[\"Ingreso\"].median(), color=\"red\", linestyle=\"--\")","plt.show(); print(\"Univariado OK\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: value_counts con porcentaje</h4>
+  <p>Imprimí el <code>value_counts(normalize=True)</code> de Segmento para ver porcentajes. Debe incluir la palabra <code>Estándar</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-5" data-expected="Estándar">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe incluir "Estándar"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Segmento": np.random.choice(["Premium","Estándar","Básico"], 100, p=[0.15,0.55,0.30])
+})
+
+# value_counts normalizado (porcentajes)
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["print(df[\"Segmento\"].value_counts(normalize=True).round(2))"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Boxplot por categoría</h4>
+  <p>Graficá un boxplot de Ingreso por Segmento. Imprimí <code>Bivariado OK</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-6" data-expected="Bivariado OK">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe imprimir "Bivariado OK"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Segmento": np.random.choice(["Premium","Estándar","Básico"], 90),
+    "Ingreso": np.random.normal(400000, 120000, 90).astype(int)
+})
+
+# Boxplot por segmento
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["sns.boxplot(data=df, x=\"Segmento\", y=\"Ingreso\", palette=\"Set2\")","plt.title(\"Ingreso por Segmento\"); plt.show(); print(\"Bivariado OK\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Heatmap de correlaciones</h4>
+  <p>Calculá la matriz de correlación y graficála con heatmap. Imprimí la correlación entre Antigüedad e Ingreso. Debe incluir un número decimal (ej: <code>0.</code>).</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-7" data-expected="0.">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "0."</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+ant = np.random.randint(1, 20, 50)
+df = pd.DataFrame({
+    "Antigüedad": ant,
+    "Ingreso": (ant * 30000 + np.random.normal(0, 50000, 50)).astype(int),
+    "Saldo": np.random.normal(300000, 100000, 50).astype(int)
+})
+
+# Correlación + heatmap + print
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["corr = df.corr()","sns.heatmap(corr, annot=True, cmap=\"RdYlBu_r\"); plt.show()","print(f\"Corr Ant-Ing: {corr.loc[\\\"Antigüedad\\\",\\\"Ingreso\\\"]:.2f}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Limpieza + análisis</h4>
+  <p>El dataset tiene nulos y duplicados. Limpiálo (<code>fillna</code> con mediana, <code>drop_duplicates</code>), después imprimí media y mediana del saldo. Debe incluir <code>Limpio</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-8" data-expected="Limpio">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe incluir "Limpio"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "ID": [1,2,3,4,5,1,2],
+    "Saldo": [500, np.nan, 300, 800, np.nan, 500, np.nan]
+})
+
+# 1. fillna con mediana
+# 2. drop_duplicates por ID
+# 3. Imprimí "Limpio" + media + mediana
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["df[\"Saldo\"] = df[\"Saldo\"].fillna(df[\"Saldo\"].median())","df = df.drop_duplicates(subset=\"ID\")","print(f\"Limpio: media={df[\\\"Saldo\\\"].mean():.0f}, mediana={df[\\\"Saldo\\\"].median():.0f}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Dashboard EDA de 4 gráficos</h4>
+  <p>Creá 4 subplots: histograma de Ingreso, countplot de Segmento, boxplot Ingreso×Segmento, scatter Antigüedad×Ingreso. Imprimí <code>EDA dashboard</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-9" data-expected="EDA dashboard">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe imprimir "EDA dashboard"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+df = pd.DataFrame({
+    "Segmento": np.random.choice(["Premium","Estándar","Básico"], 60),
+    "Antigüedad": np.random.randint(1, 20, 60),
+    "Ingreso": np.random.normal(400000, 120000, 60).astype(int)
+})
+
+# fig, axes = plt.subplots(2, 2, ...)
+# 4 gráficos del EDA
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["fig, axes = plt.subplots(2, 2, figsize=(12, 10))","sns.histplot(data=df, x=\"Ingreso\", kde=True, ax=axes[0,0])","sns.countplot(data=df, x=\"Segmento\", ax=axes[0,1]); sns.boxplot(data=df, x=\"Segmento\", y=\"Ingreso\", ax=axes[1,0]); sns.regplot(data=df, x=\"Antigüedad\", y=\"Ingreso\", ax=axes[1,1]); plt.tight_layout(); plt.show(); print(\"EDA dashboard\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Reporte EDA con insights escritos</h4>
+  <p>Generá un reporte EDA completo: (1) dimensiones, (2) nulos %, (3) estadísticas por segmento, (4) un hallazgo clave. Debe incluir la palabra <code>Hallazgo</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-12" data-exercise="ex-10" data-expected="Hallazgo">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe incluir "Hallazgo"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import pandas as pd
+import numpy as np
+np.random.seed(42)
+
+n = 100
+seg = np.random.choice(["Premium","Estándar","Básico"], n, p=[0.15, 0.55, 0.30])
+df = pd.DataFrame({
+    "Segmento": seg,
+    "Ingreso": np.where(seg=="Premium", np.random.normal(800000,100000,n),
+               np.where(seg=="Estándar", np.random.normal(400000,80000,n),
+                        np.random.normal(150000,50000,n))).astype(int),
+    "Productos": np.where(seg=="Premium", np.random.randint(4,8,n),
+                 np.where(seg=="Estándar", np.random.randint(2,5,n),
+                          np.random.randint(1,3,n)))
+})
+df.loc[np.random.choice(n, 5, replace=False), "Ingreso"] = np.nan
+
+# Reporte EDA completo con insights
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["print(f\"Dimensiones: {df.shape}\")","print(f\"Nulos: {df.isna().sum().sum()} ({df.isna().sum().sum()/df.size*100:.1f}%)\")","reporte = df.groupby(\"Segmento\").agg(Media=(\"Ingreso\",\"mean\"), Productos=(\"Productos\",\"mean\")); print(reporte.round(0)); print(\"Hallazgo: Premium tiene más productos y mayor ingreso\")"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>El EDA sigue 6 pasos: reconocimiento → calidad → univariado numérico → univariado categórico → bivariado → insights.</li>
+  <li>Las primeras 4 líneas de cualquier EDA: <code>shape</code>, <code>dtypes</code>, <code>isna().sum()</code>, <code>describe()</code>.</li>
+  <li>Los histogramas revelan la <strong>forma</strong> de los datos (simétricos, sesgados, bimodales).</li>
+  <li>Los box plots detectan <strong>outliers</strong> automáticamente y comparan distribuciones por categoría.</li>
+  <li>El heatmap de correlaciones identifica <strong>relaciones lineales</strong> entre todas las variables numéricas.</li>
+  <li>Siempre terminá con <strong>insights escritos</strong> — los gráficos sin interpretación no generan valor.</li>
+</ul>
+
+<p>En la siguiente lección (<strong>13 · NumPy fundamentos</strong>) vas a profundizar en la biblioteca que está debajo de pandas: arrays de alto rendimiento, operaciones vectorizadas y álgebra lineal básica.</p>
+
+<p><strong>Recursos:</strong> <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html" target="_blank">pandas — Calculate statistics</a> · <a href="https://seaborn.pydata.org/tutorial.html" target="_blank">Seaborn Tutorial</a></p>
+
+<div class="footer-nav">
+  <a href="/data-analysis/11-seaborn-visualizacion.html">← Seaborn: visualización</a>
+  <a class="next" href="/data-analysis/13-numpy-fundamentos.html">NumPy fundamentos →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>

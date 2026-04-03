@@ -1,221 +1,550 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=1.0'/><title>Quiero Programar · Data-Analysis 10</title><link rel='preconnect' href='https://fonts.googleapis.com'/><link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap' rel='stylesheet'/><link rel='stylesheet' href='/css/styles.css'/><script src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script></head><body>
-<div class='topbar'><div class='brand'>Quiero Programar <small>por Rodrigo González Doldán</small></div><div class='progress-shell'><div id='global-progress-fill' class='progress-fill'></div></div><div id='global-progress-text' class='top-stats'></div></div>
-<div class='layout'><aside class='sidebar' id='sidebar-mount'></aside><main class='main'>
-<div class='hero'><div class='badge'>Track: Data-Analysis · Lección 10</div><h1>Matplotlib Basico</h1><p>Subtítulo: dominá matplotlib basico desde cero para aplicarlo a problemas reales de análisis de datos.</p><div class='badges'><span class='badge'>Tiempo estimado: 65-90 min</span><span class='badge'>Prerrequisito: Lección 09</span><span class='badge'>Breadcrumb: Data-Analysis > Lección 10</span></div></div>
-<section><h2>1) Concepto teórico profundo</h2>
-    <p>En esta lección trabajamos <strong>Matplotlib Basico</strong> con enfoque 100% aplicado a Data Analyst. La meta no es solo que te salga el código: buscamos que puedas justificar decisiones técnicas frente a negocio, auditar resultados y construir confianza con datos.</p>
-    <p>Cuando una empresa (banco, fintech, pyme o área comercial) pide un análisis, casi nunca pide “hacer código”. Pide respuesta a una pregunta concreta: dónde perdemos clientes, qué segmento deja más margen, qué riesgo de mora tiene cada cartera, qué canal convierte mejor. Para responder eso, necesitás dominar este tema con precisión.</p>
-    <div class='realworld'><strong>¿Por qué esto importa?</strong> porque una métrica mal construida puede terminar en una decisión de millones de pesos mal asignados.</div>
-    <p>En Argentina, además, los datos suelen venir sucios: formatos mixtos, montos con símbolos, duplicados, fechas inconsistentes y reglas que cambian por inflación o por normativa. Dominar <strong>Matplotlib Basico</strong> te da una base robusta para no improvisar.</p>
-    <div class='warning'><strong>Error común:</strong> pensar que una solución que “corre” ya está bien. Si no podés explicar supuestos, límites y validación, todavía no está lista.</div>
-    <div class='tip'><strong>Tip profesional:</strong> cada vez que resuelvas un ejercicio, agregá una mini nota: qué asumiste, qué verificaste y qué podría fallar en producción.</div>
-    <p>Durante esta clase vas a ver ejemplos progresivos: empezamos simple para fijar mecánica, avanzamos a combinaciones intermedias y cerramos con un caso laboral real. Luego vas a practicar 10 ejercicios por niveles para consolidar autonomía técnica.</p>
-    </section>
-<section><h2>2) Ejemplos explicados paso a paso</h2>
-      <article class='card'>
-        <h3>Ejemplo 1: Base de matplotlib basico</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Matplotlib Basico</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 1</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto_base = 125000
-ajuste = 1.08
-monto_final = monto_base * ajuste
-print("Monto final AR$", round(monto_final, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 2: Caso intermedio combinando conceptos previos</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Matplotlib Basico</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 2</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>clientes = ["García", "Pérez", "Sosa", "Luna"]
-ingresos = [250000, 180000, 310000, 120000]
-for c, i in zip(clientes, ingresos):
-    print(c, "=>", i)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      
-      <article class='card'>
-        <h3>Ejemplo 3: Caso real laboral (banca/finanzas Argentina)</h3>
-        <p>Antes de ejecutar, leé esta guía línea por línea para entender el razonamiento y no solamente copiar:</p>
-        <ol>
-          <li><strong>Línea 1:</strong> definimos el contexto del problema y los datos de entrada.</li>
-          <li><strong>Líneas 2-3:</strong> aplicamos la transformación central del tema <em>Matplotlib Basico</em>.</li>
-          <li><strong>Línea 4+:</strong> devolvemos una salida que podría ir a un reporte para negocio.</li>
-        </ol>
-        <div class='analogy'><strong>Lectura de negocio:</strong> imaginá que esto responde una pregunta de un gerente comercial antes del cierre mensual.</div>
-        <div class='editor' data-mode='python'>
-          <div class='editor-top'><span>Ejemplo 3</span><span>Python</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>operaciones = [
-    {"empresa": "YPF", "monto": 1500000, "tipo": "bono"},
-    {"empresa": "Galicia", "monto": 780000, "tipo": "acciones"},
-    {"empresa": "Pampa Energía", "monto": 450000, "tipo": "ceDEAR"},
-]
-total = sum(x["monto"] for x in operaciones)
-print("Total cartera:", total)</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button></div>
-          <pre class='output'>Motor pendiente...</pre>
-        </div>
-      </article>
-      </section>
-<section><h2>3) Referencia rápida</h2><div class='table-wrap'><table><thead><tr><th>Elemento</th><th>Qué revisás</th><th>Checklist profesional</th></tr></thead><tbody><tr><td>Entrada</td><td>Tipo, formato y calidad de dato</td><td>¿Viene limpio y completo?</td></tr><tr><td>Transformación</td><td>Regla de negocio aplicada</td><td>¿Es reproducible y trazable?</td></tr><tr><td>Salida</td><td>Métrica/tabla final</td><td>¿Sirve para decidir algo?</td></tr></tbody></table></div></section>
-<section><h2>4) Ejercicios (10)</h2>
-      <div class='exercise'>
-        <h4>Ejercicio 1 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-1' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-1'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-1' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 2 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-2' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-2'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-2' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 3 — Nivel Básico</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-3' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>print("ok")</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-3'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-3' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 4 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-4' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-4'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-4' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 5 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-5' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-5'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-5' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 6 — Nivel Intermedio</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-6' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>monto = 150000
-print(round(monto*1.21, 2))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-6'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-6' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 7 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-7' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-7'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-7' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 8 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-8' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-8'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-8' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 9 — Nivel Avanzado</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-9' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-9'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-9' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      
-      <div class='exercise'>
-        <h4>Ejercicio 10 — Nivel Desafío</h4>
-        <p><strong>Contexto:</strong> aplicá <em>Matplotlib Basico</em> para resolver un mini caso realista (clientes argentinos, montos en AR$, foco en análisis).</p>
-        <p><strong>Objetivo puntual:</strong> producir un resultado verificable y explicar qué decisión de negocio permite tomar.</p>
-        <div class='editor' data-mode='python' data-lesson='data-analysis-10' data-exercise='ex-10' data-expected='ok'>
-          <div class='editor-top'><span>Starter</span><span>Validación automática</span></div>
-          <div class='editor-area'><pre class='lines'></pre><textarea class='code'>datos = [120000, 150000, 98000, 201000]
-print(max(datos))</textarea></div>
-          <div class='editor-actions'><button data-run>Ejecutar</button><button class='secondary' data-reset>Reset</button><button class='hint' data-hint-btn='hint-data-analysis-10-10'>💡 Pista</button></div>
-          <pre class='output'>Esperando ejecución...</pre>
-        </div>
-        <div id='hint-data-analysis-10-10' class='hint-box' data-hints='["Pista 1: identificá primero la entrada y salida esperada.","Pista 2: dividí tu solución en pasos cortos (limpieza, cálculo, output).","Pista 3: agregá al final una salida que incluya la palabra ok para validar y luego mejorala."]'></div>
-      </div>
-      </section>
-<section><h2>5) Resumen y conexión</h2><ul><li>Consolidaste la base conceptual de matplotlib basico con criterio profesional.</li><li>Practicaste escenarios de negocio argentino con feedback inmediato.</li><li>Entrenaste un flujo reusable: entender problema → codificar → validar → explicar.</li></ul><p>En la siguiente lección vas a ampliar esta base con más complejidad y combinaciones entre temas.</p></section>
-<div class='footer-nav'><a class='badge' href='/data-analysis/09-estadistica-descriptiva.html'>← Anterior</a><a class='badge' href='/data-analysis/11-seaborn-visualizacion.html'>Siguiente →</a></div>
-</main></div>
-<script type='module'>import {renderSidebar} from '/js/nav.js';import {mountEditors} from '/js/editor.js';renderSidebar(location.pathname);mountEditors();window.addEventListener('progress-updated',()=>renderSidebar(location.pathname));</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroProgramar · Data Analysis 10 · Matplotlib básico</title>
+<meta name="description" content="Aprendé a crear gráficos profesionales con Matplotlib. Dominá line plots, bar charts, scatter plots, histogramas y pie charts con personalización completa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <button class="ham-btn" onclick="document.getElementById('sidebar-mount').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('on')">☰</button>
+  <div class="brand"><a href="/">QuieroProgramar</a> <small>por Rodrigo González Doldán</small></div>
+  <div class="progress-shell"><div id="global-progress-fill" class="progress-fill"></div></div>
+  <div id="global-progress-text" class="top-stats"></div>
+</div>
+<div id="sb-overlay" class="sidebar-overlay" onclick="document.getElementById('sidebar-mount').classList.remove('open');this.classList.remove('on')"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar-mount"></aside>
+<main class="main">
+
+<div class="hero">
+  <span class="track-label data">Data Analysis · Lección 10 de 19</span>
+  <h1>Matplotlib Básico</h1>
+  <p>Un gráfico bien hecho comunica en <strong>2 segundos</strong> lo que una tabla de números tarda 2 minutos. Matplotlib es la biblioteca de visualización más importante de Python — todo lo que ves en Seaborn, pandas plots, y la mayoría de gráficos científicos está construido sobre ella. Dominar Matplotlib es dominar la comunicación visual de datos.</p>
+  <div class="badges">
+    <span class="badge">⏱ 90–120 min</span>
+    <span class="badge">Prerrequisitos: Lección 09 (Estadística descriptiva)</span>
+  </div>
+</div>
+
+<div class="section-num">01</div>
+<h2>Concepto teórico</h2>
+
+<h3>La anatomía de un gráfico Matplotlib</h3>
+
+<p>Cada gráfico de Matplotlib tiene una estructura jerárquica que necesitás entender para poder personalizar cualquier aspecto:</p>
+
+<ul>
+  <li><strong>Figure</strong> (la ventana): el contenedor principal. Pensalo como el "lienzo" o la "hoja" completa.</li>
+  <li><strong>Axes</strong> (el gráfico): el área donde se dibujan los datos. Una Figure puede tener múltiples Axes (subplots).</li>
+  <li><strong>Axis</strong> (los ejes X e Y): las líneas con marcas numéricas y etiquetas.</li>
+  <li><strong>Artistas</strong>: todo lo visible — barras, líneas, puntos, texto, leyendas, títulos.</li>
+</ul>
+
+<div class="warning"><strong>Atención: Axes ≠ Axis.</strong> <code>Axes</code> (con 'e') es el gráfico completo (¡nombre confuso, pero así lo llama Matplotlib!). <code>Axis</code> (sin 'e') es un eje específico (X o Y). Si leés documentación, esta distinción es crítica.</div>
+
+<h3>Las dos interfaces de Matplotlib</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Interfaz</th><th>Estilo</th><th>Cuándo usarla</th><th>Ejemplo</th></tr>
+<tr><td><strong>pyplot</strong> (plt.)</td><td>Simple, imperativo</td><td>Gráficos rápidos, exploración</td><td><code>plt.plot(x, y)</code></td></tr>
+<tr><td><strong>OO</strong> (fig, ax)</td><td>Explícito, control total</td><td>Gráficos complejos, subplots, personalización</td><td><code>fig, ax = plt.subplots()</code></td></tr>
+</table>
+</div>
+
+<div class="concept"><strong>¿Cuál usar?</strong> Para aprender y explorar, <code>plt.plot()</code> es más rápido. Para gráficos de producción y reportes, la interfaz OO (<code>fig, ax</code>) te da control total. En esta lección usaremos <code>plt</code> para arrancar rápido, y la interfaz OO cuando necesitemos más control.</div>
+
+<h3>Los 5 gráficos esenciales</h3>
+
+<div class="table-wrap">
+<table>
+<tr><th>Tipo</th><th>Método</th><th>Uso</th></tr>
+<tr><td><strong>Líneas</strong></td><td><code>plt.plot()</code></td><td>Tendencias temporales (ventas por mes)</td></tr>
+<tr><td><strong>Barras</strong></td><td><code>plt.bar()</code></td><td>Comparar categorías (ventas por sucursal)</td></tr>
+<tr><td><strong>Dispersión</strong></td><td><code>plt.scatter()</code></td><td>Relación entre 2 variables (ingreso vs gasto)</td></tr>
+<tr><td><strong>Histograma</strong></td><td><code>plt.hist()</code></td><td>Distribución de datos (distribución de edades)</td></tr>
+<tr><td><strong>Torta</strong></td><td><code>plt.pie()</code></td><td>Composición porcentual (market share)</td></tr>
+</table>
+</div>
+
+<div class="analogy"><strong>Analogía del periodista:</strong> un periodista elige si escribe una noticia, una crónica o una entrevista según el tipo de historia que quiere contar. Un analista elige el tipo de gráfico según el tipo de pregunta que quiere responder. Las líneas cuentan "cómo evolucionó algo en el tiempo". Las barras responden "quién vendió más". El scatter pregunta "¿están relacionadas estas dos cosas?".</div>
+
+<div class="realworld"><strong>En el trabajo real:</strong> un dashboard ejecutivo típico tiene 4-6 gráficos: un line chart para la tendencia de ventas, un bar chart de ranking de sucursales, un pie chart de composición de cartera, y un scatter de riesgo vs retorno. Esos 5 tipos cubren el 90% de las visualizaciones que vas a necesitar.</div>
+
+<div class="section-num">02</div>
+<h2>Ejemplos explicados paso a paso</h2>
+
+<h3>Ejemplo 1: Gráfico de líneas — Ventas mensuales</h3>
+<p>El gráfico más clásico para mostrar tendencias en el tiempo. Incluye título, labels y grid.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_01_lineas.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun']
+ventas = [45000, 52000, 48000, 61000, 58000, 72000]
+
+plt.figure(figsize=(8, 4))
+plt.plot(meses, ventas, marker='o', color='#2196F3',
+         linewidth=2, markersize=8, label='Ventas 2024')
+plt.fill_between(range(len(meses)), ventas, alpha=0.1, color='#2196F3')
+
+plt.title('Ventas Mensuales 2024', fontsize=14, fontweight='bold')
+plt.xlabel('Mes')
+plt.ylabel('Ventas ($)')
+plt.grid(True, alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+print(f"Tendencia: de ${ventas[0]:,} a ${ventas[-1]:,}")
+print(f"Crecimiento: {(ventas[-1]/ventas[0]-1)*100:.0f}%")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 2: Gráfico de barras — Ranking de sucursales</h3>
+<p>Perfecto para comparar categorías. Agregamos colores condicionales y etiquetas de valor sobre cada barra.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_02_barras.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+sucursales = ['CABA', 'Rosario', 'Córdoba', 'Mendoza', 'Tucumán']
+ventas = [95000, 72000, 58000, 45000, 32000]
+
+# Color condicional: verde si > 60K, naranja si no
+colores = ['#4CAF50' if v > 60000 else '#FF9800' for v in ventas]
+
+plt.figure(figsize=(8, 4))
+barras = plt.bar(sucursales, ventas, color=colores, edgecolor='white', width=0.6)
+
+# Etiquetas de valor sobre cada barra
+for bar, val in zip(barras, ventas):
+    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1500,
+             f'${val:,}', ha='center', fontsize=9, fontweight='bold')
+
+plt.title('Ranking de Ventas por Sucursal', fontsize=14, fontweight='bold')
+plt.ylabel('Ventas ($)')
+plt.ylim(0, max(ventas) * 1.15)
+plt.grid(axis='y', alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+print("🟢 Verde = Sobre objetivo ($60K)  🟠 Naranja = Bajo objetivo")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 3: Scatter plot — Relación entre variables</h3>
+<p>¿Existe relación entre ingreso y gasto? El scatter plot muestra la distribución de puntos y permite detectar patrones.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_03_scatter.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import numpy as np
+
+np.random.seed(42)
+ingresos = np.random.normal(400000, 120000, 50)
+gastos = ingresos * 0.6 + np.random.normal(0, 30000, 50)
+
+plt.figure(figsize=(7, 5))
+plt.scatter(ingresos, gastos, alpha=0.6, c='#9C27B0',
+            edgecolors='white', s=60)
+
+# Línea de tendencia
+z = np.polyfit(ingresos, gastos, 1)
+p = np.poly1d(z)
+x_line = np.linspace(ingresos.min(), ingresos.max(), 100)
+plt.plot(x_line, p(x_line), '--', color='#E91E63', linewidth=2,
+         label=f'Tendencia (pendiente={z[0]:.2f})')
+
+plt.title('Relación Ingreso vs Gasto', fontsize=14, fontweight='bold')
+plt.xlabel('Ingreso ($)')
+plt.ylabel('Gasto ($)')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+corr = np.corrcoef(ingresos, gastos)[0, 1]
+print(f"Correlación: {corr:.2f} → relación {'fuerte' if abs(corr)>0.7 else 'moderada'}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<h3>Ejemplo 4: Histograma — Distribución de datos</h3>
+<p>¿Los saldos se concentran en un rango o están dispersos? El histograma te muestra la forma de la distribución.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_04_histograma.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import numpy as np
+
+np.random.seed(42)
+saldos = np.concatenate([
+    np.random.normal(300000, 80000, 200),
+    np.random.normal(800000, 150000, 50)
+])
+
+plt.figure(figsize=(8, 4))
+n, bins, patches = plt.hist(saldos, bins=25, color='#00BCD4',
+                             edgecolor='white', alpha=0.8)
+
+# Línea vertical en la mediana
+mediana = np.median(saldos)
+media = np.mean(saldos)
+plt.axvline(mediana, color='#FF5722', linestyle='--', linewidth=2,
+            label=f'Mediana: ${mediana:,.0f}')
+plt.axvline(media, color='#FFC107', linestyle='--', linewidth=2,
+            label=f'Media: ${media:,.0f}')
+
+plt.title('Distribución de Saldos de Clientes', fontsize=14, fontweight='bold')
+plt.xlabel('Saldo ($)')
+plt.ylabel('Frecuencia')
+plt.legend()
+plt.grid(axis='y', alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+print(f"Media > Mediana → distribución con cola a la derecha (clientes VIP)")
+print(f"Total clientes: {len(saldos)}")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="tip"><strong>Tip profesional — ¿cuántos bins?</strong> Demasiados bins crean ruido y el patrón desaparece. Muy pocos ocultan detalles. La regla de Sturges dice <code>bins = 1 + log2(n)</code>. Para 250 datos ≈ 9 bins. Sin embargo, entre 20 y 30 bins suele funcionar bien en la práctica. Experimentá con el valor.</div>
+
+<h3>Ejemplo 5: Subplots — Múltiples gráficos en una figura</h3>
+<p>Un dashboard típico tiene varios gráficos lado a lado. La interfaz OO (<code>fig, ax</code>) te permite crearlos con <code>subplots()</code>.</p>
+
+<div class="editor" data-mode="python">
+  <div class="editor-top"><span>ejemplo_05_subplots.py</span><span>Python</span></div>
+  <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun']
+ventas = [45000, 52000, 48000, 61000, 58000, 72000]
+gastos = [30000, 35000, 32000, 38000, 40000, 42000]
+ganancia = [v - g for v, g in zip(ventas, gastos)]
+
+fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+
+# Subplot 1: Líneas (tendencia)
+axes[0].plot(meses, ventas, 'o-', color='#2196F3', label='Ventas')
+axes[0].plot(meses, gastos, 's--', color='#F44336', label='Gastos')
+axes[0].set_title('Ventas vs Gastos')
+axes[0].legend(fontsize=8)
+axes[0].grid(True, alpha=0.3)
+axes[0].tick_params(axis='x', rotation=45)
+
+# Subplot 2: Barras (ganancia)
+colores = ['#4CAF50' if g > 0 else '#F44336' for g in ganancia]
+axes[1].bar(meses, ganancia, color=colores)
+axes[1].set_title('Ganancia Mensual')
+axes[1].grid(axis='y', alpha=0.3)
+axes[1].tick_params(axis='x', rotation=45)
+
+# Subplot 3: Torta (composición último mes)
+axes[2].pie([ventas[-1], gastos[-1]],
+            labels=['Ventas', 'Gastos'],
+            colors=['#2196F3', '#F44336'],
+            autopct='%1.0f%%', startangle=90)
+axes[2].set_title(f'Composición {meses[-1]}')
+
+fig.suptitle('Dashboard Financiero', fontsize=14, fontweight='bold', y=1.02)
+plt.tight_layout()
+plt.show()
+
+print("Dashboard con 3 subplots: tendencia + ganancia + composición")</textarea></div>
+  <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button></div>
+  <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+</div>
+
+<div class="section-num">03</div>
+<h2>Referencia rápida</h2>
+
+<div class="table-wrap">
+<table>
+<tr><th>Elemento</th><th>Código</th><th>Qué hace</th></tr>
+<tr><td>Crear figura</td><td><code>plt.figure(figsize=(8,4))</code></td><td>Tamaño del lienzo</td></tr>
+<tr><td>Líneas</td><td><code>plt.plot(x, y)</code></td><td>Gráfico de líneas</td></tr>
+<tr><td>Barras</td><td><code>plt.bar(x, y)</code></td><td>Barras verticales</td></tr>
+<tr><td>Dispersión</td><td><code>plt.scatter(x, y)</code></td><td>Nube de puntos</td></tr>
+<tr><td>Histograma</td><td><code>plt.hist(data, bins=20)</code></td><td>Distribución</td></tr>
+<tr><td>Torta</td><td><code>plt.pie(vals, labels=...)</code></td><td>Composición %</td></tr>
+<tr><td>Título</td><td><code>plt.title("Texto")</code></td><td>Título del gráfico</td></tr>
+<tr><td>Ejes</td><td><code>plt.xlabel() / ylabel()</code></td><td>Labels de ejes</td></tr>
+<tr><td>Grilla</td><td><code>plt.grid(True, alpha=0.3)</code></td><td>Líneas de referencia</td></tr>
+<tr><td>Leyenda</td><td><code>plt.legend()</code></td><td>Identificar series</td></tr>
+<tr><td>Subplots</td><td><code>fig, ax = plt.subplots(r,c)</code></td><td>Múltiples gráficos</td></tr>
+<tr><td>Mostrar</td><td><code>plt.show()</code></td><td>Renderizar el gráfico</td></tr>
+</table>
+</div>
+
+<div class="section-num">04</div>
+<h2>Ejercicios</h2>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 1: Gráfico de líneas simple</h4>
+  <p>Graficá las ventas mensuales con <code>plt.plot()</code>. Agregá título y labels de ejes. Imprimí <code>Gráfico generado</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-1" data-expected="Gráfico generado">
+    <div class="editor-top"><span>ejercicio_01.py</span><span>Debe imprimir "Gráfico generado"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+meses = ['Ene', 'Feb', 'Mar', 'Abr']
+ventas = [30000, 45000, 38000, 52000]
+
+# Graficá con plt.plot(), agregá título, xlabel, ylabel
+# Usá plt.show() y print("Gráfico generado")
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h1">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h1" class="hint-box" data-hints='["plt.plot(meses, ventas, marker=\"o\")","plt.title(\"Ventas\"); plt.xlabel(\"Mes\"); plt.ylabel(\"$\")","plt.show(); print(\"Gráfico generado\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 2: Gráfico de barras</h4>
+  <p>Creá un gráfico de barras con las ventas por ciudad. Imprimí <code>Barras OK</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-2" data-expected="Barras OK">
+    <div class="editor-top"><span>ejercicio_02.py</span><span>Debe imprimir "Barras OK"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+ciudades = ['CABA', 'Rosario', 'Córdoba']
+ventas = [95000, 72000, 58000]
+
+# plt.bar(), título, show(), print
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h2">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h2" class="hint-box" data-hints='["plt.bar(ciudades, ventas, color=\"#2196F3\")","plt.title(\"Ventas por Ciudad\"); plt.show()","print(\"Barras OK\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level basic">Nivel 1 · Básico</span>
+  <h4>Ejercicio 3: Histograma</h4>
+  <p>Generá un histograma de los saldos con 10 bins. Imprimí <code>Histograma listo</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-3" data-expected="Histograma listo">
+    <div class="editor-top"><span>ejercicio_03.py</span><span>Debe imprimir "Histograma listo"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+saldos = [100, 200, 250, 300, 350, 400, 450, 500, 600, 800,
+          150, 280, 320, 380, 420, 470, 510, 550, 650, 900]
+
+# plt.hist() con bins=10, título, show(), print
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h3">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h3" class="hint-box" data-hints='["plt.hist(saldos, bins=10, color=\"#00BCD4\", edgecolor=\"white\")","plt.title(\"Distribución de Saldos\"); plt.show()","print(\"Histograma listo\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 4: Barras con colores condicionales</h4>
+  <p>Graficá las ganancias. Si la ganancia es positiva, color verde. Si es negativa, color rojo. Imprimí <code>Colores aplicados</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-4" data-expected="Colores aplicados">
+    <div class="editor-top"><span>ejercicio_04.py</span><span>Debe imprimir "Colores aplicados"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+productos = ['Notebook', 'Mouse', 'Monitor', 'Cable']
+ganancia = [50000, 15000, -8000, 3000]
+
+# Barras con color verde si > 0, rojo si < 0
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h4">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h4" class="hint-box" data-hints='["colores = [\"#4CAF50\" if g > 0 else \"#F44336\" for g in ganancia]","plt.bar(productos, ganancia, color=colores)","plt.title(\"Ganancia\"); plt.show(); print(\"Colores aplicados\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 5: Scatter plot con título y grid</h4>
+  <p>Graficá la relación entre antigüedad e ingreso con <code>plt.scatter()</code>. Incluí título, labels, grid. Imprimí <code>Scatter OK</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-5" data-expected="Scatter OK">
+    <div class="editor-top"><span>ejercicio_05.py</span><span>Debe imprimir "Scatter OK"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+antiguedad = [1, 3, 5, 8, 12, 15, 20]
+ingreso = [150, 250, 380, 520, 700, 850, 950]
+
+# plt.scatter(), título, xlabel, ylabel, grid, show, print
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h5">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h5" class="hint-box" data-hints='["plt.scatter(antiguedad, ingreso, c=\"#9C27B0\", s=80)","plt.title(\"Antigüedad vs Ingreso\"); plt.grid(True, alpha=0.3)","plt.show(); print(\"Scatter OK\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level intermediate">Nivel 2 · Intermedio</span>
+  <h4>Ejercicio 6: Dos series en un mismo gráfico</h4>
+  <p>Graficá ventas y gastos en el mismo gráfico de líneas. Usá leyenda para diferenciarlas. Imprimí <code>Doble serie OK</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-6" data-expected="Doble serie OK">
+    <div class="editor-top"><span>ejercicio_06.py</span><span>Debe imprimir "Doble serie OK"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+meses = ['Ene', 'Feb', 'Mar', 'Abr']
+ventas = [50000, 55000, 48000, 62000]
+gastos = [30000, 35000, 32000, 38000]
+
+# Dos líneas + leyenda
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h6">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h6" class="hint-box" data-hints='["plt.plot(meses, ventas, \"o-\", label=\"Ventas\")","plt.plot(meses, gastos, \"s--\", label=\"Gastos\")","plt.legend(); plt.show(); print(\"Doble serie OK\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 7: Histograma con mediana</h4>
+  <p>Generá un histograma y agregá una línea vertical roja punteada en la mediana con <code>plt.axvline()</code>. Imprimí la mediana. Debe incluir <code>400</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-7" data-expected="400">
+    <div class="editor-top"><span>ejercicio_07.py</span><span>Debe incluir "400"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import numpy as np
+
+datos = [100, 200, 250, 350, 400, 400, 450, 500, 600, 800]
+
+# Histograma + axvline en la mediana + print mediana
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h7">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h7" class="hint-box" data-hints='["med = np.median(datos)","plt.hist(datos, bins=8); plt.axvline(med, color=\"red\", linestyle=\"--\")","plt.show(); print(f\"Mediana: {int(med)}\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 8: Barras horizontales ordenadas</h4>
+  <p>Creá un <code>plt.barh()</code> horizontal con los vendedores ordenados de mayor a menor venta. Imprimí <code>Ranking OK</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-8" data-expected="Ranking OK">
+    <div class="editor-top"><span>ejercicio_08.py</span><span>Debe imprimir "Ranking OK"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+vendedores = ['Ana', 'Luis', 'Pedro', 'María', 'Carlos']
+ventas = [60000, 45000, 72000, 38000, 55000]
+
+# Ordená y graficá horizontal con plt.barh()
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h8">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h8" class="hint-box" data-hints='["pares = sorted(zip(ventas, vendedores))","v_ord, n_ord = zip(*pares)","plt.barh(n_ord, v_ord); plt.show(); print(\"Ranking OK\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level advanced">Nivel 3 · Avanzado</span>
+  <h4>Ejercicio 9: Gráfico de torta con autopct</h4>
+  <p>Creá un pie chart con distribución de canales. Usá <code>autopct='%1.0f%%'</code>. Imprimí <code>Torta lista</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-9" data-expected="Torta lista">
+    <div class="editor-top"><span>ejercicio_09.py</span><span>Debe imprimir "Torta lista"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+canales = ['Web', 'App', 'Sucursal']
+porcentaje = [45, 35, 20]
+
+# Pie chart con autopct y colores
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h9">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h9" class="hint-box" data-hints='["plt.pie(porcentaje, labels=canales, autopct=\"%1.0f%%\", colors=[\"#2196F3\",\"#4CAF50\",\"#FF9800\"])","plt.title(\"Distribución por Canal\"); plt.show()","print(\"Torta lista\")"]'></div>
+</div>
+
+<div class="exercise">
+  <span class="exercise-level challenge">Nivel 4 · Desafío</span>
+  <h4>Ejercicio 10: Mini dashboard con subplots</h4>
+  <p>Creá una figura con 2 subplots lado a lado: (1) barras de ventas por ciudad, (2) líneas de tendencia mensual. Imprimí <code>Dashboard OK</code>.</p>
+  <div class="editor" data-mode="python" data-lesson="data-analysis-10" data-exercise="ex-10" data-expected="Dashboard OK">
+    <div class="editor-top"><span>ejercicio_10_desafio.py</span><span>Debe imprimir "Dashboard OK"</span></div>
+    <div class="editor-area"><pre class="lines"></pre><textarea class="code">import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+ciudades = ['CABA', 'Rosario', 'Córdoba']
+ventas_ciudad = [95000, 72000, 58000]
+meses = ['Ene', 'Feb', 'Mar', 'Abr']
+ventas_mes = [50000, 55000, 48000, 62000]
+
+# fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+# Subplot 1: barras   Subplot 2: líneas
+</textarea></div>
+    <div class="editor-actions"><button data-run>▶ Ejecutar</button><button class="secondary" data-reset>Reset</button><button class="hint" data-hint-btn="h10">💡 Pista</button></div>
+    <pre class="output">Hacé clic en ▶ Ejecutar</pre>
+  </div>
+  <div id="h10" class="hint-box" data-hints='["fig, axes = plt.subplots(1, 2, figsize=(10, 4))","axes[0].bar(ciudades, ventas_ciudad); axes[0].set_title(\"Por Ciudad\")","axes[1].plot(meses, ventas_mes, \"o-\"); axes[1].set_title(\"Tendencia\"); plt.tight_layout(); plt.show(); print(\"Dashboard OK\")"]'></div>
+</div>
+
+<div class="section-num">05</div>
+<h2>Resumen y conexión</h2>
+
+<ul>
+  <li>Matplotlib tiene dos interfaces: <code>plt.</code> (rápido) y <code>fig, ax</code> (control total).</li>
+  <li><strong>Líneas</strong> para tendencias temporales, <strong>barras</strong> para comparar categorías, <strong>scatter</strong> para relaciones, <strong>histograma</strong> para distribuciones, <strong>pie</strong> para composición.</li>
+  <li>Siempre incluí <strong>título</strong>, <strong>labels de ejes</strong> y <strong>leyenda</strong> — un gráfico sin contexto no comunica nada.</li>
+  <li><code>plt.subplots(filas, cols)</code> crea dashboards con múltiples gráficos.</li>
+  <li><code>plt.tight_layout()</code> evita que los labels se superpongan.</li>
+  <li>Usá <code>matplotlib.use('Agg')</code> al inicio para renderizado sin ventana (headless).</li>
+</ul>
+
+<p>En la siguiente lección (<strong>11 · Seaborn: visualización estadística</strong>) vas a aprender a crear gráficos estadísticos avanzados con mucho menos código. Seaborn se construye sobre Matplotlib y automatiza la mayoría de la personalización.</p>
+
+<p><strong>Recursos:</strong> <a href="https://matplotlib.org/stable/tutorials/introductory/quick_start.html" target="_blank">Matplotlib Quick Start</a> · <a href="https://matplotlib.org/stable/gallery/index.html" target="_blank">Galería de ejemplos</a></p>
+
+<div class="footer-nav">
+  <a href="/data-analysis/09-estadistica-descriptiva.html">← Estadística descriptiva</a>
+  <a class="next" href="/data-analysis/11-seaborn-visualizacion.html">Seaborn: visualización →</a>
+</div>
+
+</main>
+</div>
+
+<script type="module">
+import { renderSidebar } from '/js/nav.js';
+import { mountEditors } from '/js/editor.js';
+renderSidebar(location.pathname);
+mountEditors();
+window.addEventListener('progress-updated', () => renderSidebar(location.pathname));
+</script>
+</body>
+</html>
