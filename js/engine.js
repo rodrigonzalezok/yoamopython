@@ -102,7 +102,7 @@ export async function runSql(query) {
   // Create fresh DB for each run so CREATE TABLE doesn't conflict
   const db = new SQL.Database();
   try {
-    const statements = query.split(';').filter(s => s.trim() && !s.trim().startsWith('--'));
+    const statements = query.split(';').filter(s => s.trim());
     let output = '';
     for (const stmt of statements) {
       const trimmed = stmt.trim();
